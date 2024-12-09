@@ -1,9 +1,11 @@
 #include "VSMainNIpch.h"
 #include "VSMainInternal.h"
 
-VSMainInternal::VSMainInternal()
+#include "../../Include/VSMain/VSMainInitData.h"
+
+VSMainInternal::VSMainInternal(const VSMainInitData& initData)
 {
-	stump = 0;
+	stump = initData.stump;
 }
 
 VSMainInternal::~VSMainInternal()

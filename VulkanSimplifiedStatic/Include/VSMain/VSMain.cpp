@@ -3,9 +3,11 @@
 
 #include "../../NoInclude/VSMain/VSMainInternal.h"
 
-VSMain::VSMain()
+#include "VSMainInitData.h"
+
+VSMain::VSMain(const VSMainInitData& initData)
 {
-	_internal = std::make_unique<VSMainInternal>();
+	_internal = std::make_unique<VSMainInternal>(initData);
 }
 
 VSMain::~VSMain()

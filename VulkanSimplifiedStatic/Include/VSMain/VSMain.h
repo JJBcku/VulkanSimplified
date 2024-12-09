@@ -3,11 +3,12 @@
 #include <memory>
 
 class VSMainInternal;
+struct VSMainInitData;
 
 class VSMain
 {
 public:
-	VSMain();
+	VSMain(const VSMainInitData& initData);
 	~VSMain();
 
 private:

@@ -1,9 +1,11 @@
 #pragma once
 
+struct VSMainInitData;
+
 class VSMainInternal
 {
 public:
-	VSMainInternal();
+	VSMainInternal(const VSMainInitData& initData);
 	~VSMainInternal();
 
 private:
