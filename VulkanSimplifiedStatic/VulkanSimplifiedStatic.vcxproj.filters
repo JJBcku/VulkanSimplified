@@ -13,20 +13,50 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\NoInclude">
+      <UniqueIdentifier>{e77d37e0-edbd-40d8-8afc-c19e0eddb7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NoInclude">
+      <UniqueIdentifier>{e75163e6-260e-42ab-a487-b25cc969ecd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\NoInclude\Main">
+      <UniqueIdentifier>{d212def4-c21c-4d8c-b4d9-bff1a9e0b14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NoInclude\Main">
+      <UniqueIdentifier>{f7e08345-1cc7-416b-b0f1-f0e93c78e2d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="NoInclude\VSMain\VSMainNIframework.h">
+      <Filter>Header Files\NoInclude</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSMain\VSMainNIpch.h">
+      <Filter>Header Files\NoInclude</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSMain\VSMainInternal.h">
+      <Filter>Header Files\NoInclude\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\VSMainIframework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Include\VSMain\VSMainIpch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\VSMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="VulkanSimplifiedStatic.cpp">
+    <ClCompile Include="NoInclude\VSMain\VSMainNIpch.cpp">
+      <Filter>Source Files\NoInclude</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSMain\VSMainInternal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Include\VSMain\VSMainIpch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\VSMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
