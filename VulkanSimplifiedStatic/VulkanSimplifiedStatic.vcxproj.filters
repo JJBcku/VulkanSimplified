@@ -132,6 +132,9 @@
     <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerTypedefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSMain\VSMain.cpp">

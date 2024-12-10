@@ -3,20 +3,23 @@
 
 #include "../../Include/VSMain/VSMainInitData.h"
 
-VSMainInternal::VSMainInternal(const VSMainInitData& initData) : _eventHandler(initData.eventHandlerData), stump(initData.stump)
+namespace VulkanSimplifiedInternal
 {
-}
+	VSMainInternal::VSMainInternal(const VulkanSimplified::VSMainInitData& initData) : _eventHandler(initData.eventHandlerData), stump(initData.stump)
+	{
+	}
 
-VSMainInternal::~VSMainInternal()
-{
-}
+	VSMainInternal::~VSMainInternal()
+	{
+	}
 
-SdlEventHandlerInternal& VSMainInternal::GetSdlEventHandler()
-{
-	return _eventHandler;
-}
+	SdlEventHandlerInternal& VSMainInternal::GetSdlEventHandler()
+	{
+		return _eventHandler;
+	}
 
-const SdlEventHandlerInternal& VSMainInternal::GetSdlEventHandler() const
-{
-	return _eventHandler;
+	const SdlEventHandlerInternal& VSMainInternal::GetSdlEventHandler() const
+	{
+		return _eventHandler;
+	}
 }

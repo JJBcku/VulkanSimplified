@@ -1,11 +1,14 @@
 #include "SdlEhIpch.h"
 #include "SdlQuitEventData.h"
 
-SdlQuitEventData::SdlQuitEventData(const SDL_QuitEvent& eventData)
+namespace VulkanSimplified
 {
-	timestamp = eventData.timestamp;
-}
+	SdlQuitEventData::SdlQuitEventData(const SDL_QuitEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlQuitEventData::~SdlQuitEventData()
-{
+	SdlQuitEventData::~SdlQuitEventData()
+	{
+	}
 }

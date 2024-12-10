@@ -20,7 +20,7 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 {
 	data.basicData = std::make_unique<VulkanBasicData>();
 	
-	VSMainInitData basicInit;
+	VulkanSimplified::VSMainInitData basicInit;
 
 	data.basicData->vsmain.emplace(basicInit);
 	auto& main = data.basicData->vsmain.value();

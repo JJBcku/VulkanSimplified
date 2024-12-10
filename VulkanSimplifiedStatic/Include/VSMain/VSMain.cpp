@@ -7,21 +7,24 @@
 
 #include "EventHandler/SdlEventHandler.h"
 
-VSMain::VSMain(const VSMainInitData& initData)
+namespace VulkanSimplified
 {
-	_internal = std::make_unique<VSMainInternal>(initData);
-}
+	VSMain::VSMain(const VSMainInitData& initData)
+	{
+		_internal = std::make_unique<VulkanSimplifiedInternal::VSMainInternal>(initData);
+	}
 
-VSMain::~VSMain()
-{
-}
+	VSMain::~VSMain()
+	{
+	}
 
-SdlEventHandler VSMain::GetSdlEventHandler()
-{
-	return _internal->GetSdlEventHandler();
-}
+	SdlEventHandler VSMain::GetSdlEventHandler()
+	{
+		return _internal->GetSdlEventHandler();
+	}
 
-const SdlEventHandler VSMain::GetSdlEventHandler() const
-{
-	return _internal->GetSdlEventHandler();
+	const SdlEventHandler VSMain::GetSdlEventHandler() const
+	{
+		return _internal->GetSdlEventHandler();
+	}
 }

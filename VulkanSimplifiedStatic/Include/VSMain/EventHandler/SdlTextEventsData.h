@@ -1,40 +1,47 @@
 #pragma once
 
-constexpr uint32_t SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE = 32;
+struct SDL_TextEditingEvent;
+struct SDL_TextEditingExtEvent;
+struct SDL_TextInputEvent;
 
-struct SdlTextEditingEventData
+namespace VulkanSimplified
 {
-    uint32_t timestamp;                           /**< In milliseconds, populated using SDL_GetTicks() */
-    uint32_t windowID;                            /**< The window with keyboard focus, if any */
-    char text[SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE];  /**< The editing text */
-    int32_t start;                               /**< The start cursor of selected editing text */
-    int32_t length;                              /**< The length of selected editing text */
+    constexpr uint32_t SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE = 32;
 
-    SdlTextEditingEventData(const SDL_TextEditingEvent& eventData);
-    ~SdlTextEditingEventData();
-};
+    struct SdlTextEditingEventData
+    {
+        uint32_t timestamp;                           /**< In milliseconds, populated using SDL_GetTicks() */
+        uint32_t windowID;                            /**< The window with keyboard focus, if any */
+        char text[SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE];  /**< The editing text */
+        int32_t start;                               /**< The start cursor of selected editing text */
+        int32_t length;                              /**< The length of selected editing text */
 
-struct SdlTextEditingExtendedEventData
-{
-    uint32_t timestamp;                           /**< In milliseconds, populated using SDL_GetTicks() */
-    uint32_t windowID;                            /**< The window with keyboard focus, if any */
-    char* text;                                 /**< The editing text, which should be freed with SDL_free(), and will not be NULL */
-    void* vpadding;
-    int32_t start;                               /**< The start cursor of selected editing text */
-    int32_t length;
+        SdlTextEditingEventData(const SDL_TextEditingEvent& eventData);
+        ~SdlTextEditingEventData();
+    };
 
-    SdlTextEditingExtendedEventData(const SDL_TextEditingExtEvent& eventData);
-    ~SdlTextEditingExtendedEventData();
-};
+    struct SdlTextEditingExtendedEventData
+    {
+        uint32_t timestamp;                           /**< In milliseconds, populated using SDL_GetTicks() */
+        uint32_t windowID;                            /**< The window with keyboard focus, if any */
+        char* text;                                 /**< The editing text, which should be freed with SDL_free(), and will not be NULL */
+        void* vpadding;
+        int32_t start;                               /**< The start cursor of selected editing text */
+        int32_t length;
 
-constexpr uint32_t SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE = 32;
+        SdlTextEditingExtendedEventData(const SDL_TextEditingExtEvent& eventData);
+        ~SdlTextEditingExtendedEventData();
+    };
 
-struct SdlTextInputEventData
-{
-    uint32_t timestamp;                         /**< In milliseconds, populated using SDL_GetTicks() */
-    uint32_t windowID;                          /**< The window with keyboard focus, if any */
-    char text[SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE];  /**< The input text */
+    constexpr uint32_t SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE = 32;
 
-    SdlTextInputEventData(const SDL_TextInputEvent& eventData);
-    ~SdlTextInputEventData();
-};
+    struct SdlTextInputEventData
+    {
+        uint32_t timestamp;                         /**< In milliseconds, populated using SDL_GetTicks() */
+        uint32_t windowID;                          /**< The window with keyboard focus, if any */
+        char text[SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE];  /**< The input text */
+
+        SdlTextInputEventData(const SDL_TextInputEvent& eventData);
+        ~SdlTextInputEventData();
+    };
+}

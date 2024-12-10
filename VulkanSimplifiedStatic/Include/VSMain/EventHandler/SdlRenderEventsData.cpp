@@ -1,20 +1,23 @@
 #include "SdlEhIpch.h"
 #include "SdlRenderEventsData.h"
 
-SdlRenderTargetsResetEventData::SdlRenderTargetsResetEventData(const SDL_CommonEvent& eventData)
+namespace VulkanSimplified
 {
-	timestamp = eventData.timestamp;
-}
+	SdlRenderTargetsResetEventData::SdlRenderTargetsResetEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlRenderTargetsResetEventData::~SdlRenderTargetsResetEventData()
-{
-}
+	SdlRenderTargetsResetEventData::~SdlRenderTargetsResetEventData()
+	{
+	}
 
-SdlRenderDeviceResetEventData::SdlRenderDeviceResetEventData(const SDL_CommonEvent& eventData)
-{
-	timestamp = eventData.timestamp;
-}
+	SdlRenderDeviceResetEventData::SdlRenderDeviceResetEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlRenderDeviceResetEventData::~SdlRenderDeviceResetEventData()
-{
+	SdlRenderDeviceResetEventData::~SdlRenderDeviceResetEventData()
+	{
+	}
 }

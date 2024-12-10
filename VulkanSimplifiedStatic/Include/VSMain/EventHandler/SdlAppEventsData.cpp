@@ -1,56 +1,59 @@
 #include "SdlEhIpch.h"
 #include "SdlAppEventsData.h"
 
-SdlAppTerminatingEventData::SdlAppTerminatingEventData(const SDL_CommonEvent& eventData)
+namespace VulkanSimplified
 {
-	timestamp = eventData.timestamp;
-}
+	SdlAppTerminatingEventData::SdlAppTerminatingEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlAppTerminatingEventData::~SdlAppTerminatingEventData()
-{
-}
+	SdlAppTerminatingEventData::~SdlAppTerminatingEventData()
+	{
+	}
 
-SdlAppLowMemoryEventData::SdlAppLowMemoryEventData(const SDL_CommonEvent& eventData)
-{
-	timestamp = eventData.timestamp;
-}
+	SdlAppLowMemoryEventData::SdlAppLowMemoryEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlAppLowMemoryEventData::~SdlAppLowMemoryEventData()
-{
-}
+	SdlAppLowMemoryEventData::~SdlAppLowMemoryEventData()
+	{
+	}
 
-SdlAppWillEnterBackgroundEventData::SdlAppWillEnterBackgroundEventData(const SDL_CommonEvent& eventData)
-{
-	timestamp = eventData.timestamp;
-}
+	SdlAppWillEnterBackgroundEventData::SdlAppWillEnterBackgroundEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlAppWillEnterBackgroundEventData::~SdlAppWillEnterBackgroundEventData()
-{
-}
+	SdlAppWillEnterBackgroundEventData::~SdlAppWillEnterBackgroundEventData()
+	{
+	}
 
-SdlAppDidEnterBackgroundEventData::SdlAppDidEnterBackgroundEventData(const SDL_CommonEvent& eventData)
-{
-	timestamp = eventData.timestamp;
-}
+	SdlAppDidEnterBackgroundEventData::SdlAppDidEnterBackgroundEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlAppDidEnterBackgroundEventData::~SdlAppDidEnterBackgroundEventData()
-{
-}
+	SdlAppDidEnterBackgroundEventData::~SdlAppDidEnterBackgroundEventData()
+	{
+	}
 
-SdlAppWillEnterForegroundEventData::SdlAppWillEnterForegroundEventData(const SDL_CommonEvent& eventData)
-{
-	timestamp = eventData.timestamp;
-}
+	SdlAppWillEnterForegroundEventData::SdlAppWillEnterForegroundEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlAppWillEnterForegroundEventData::~SdlAppWillEnterForegroundEventData()
-{
-}
+	SdlAppWillEnterForegroundEventData::~SdlAppWillEnterForegroundEventData()
+	{
+	}
 
-SdlAppDidEnterForegroundEventData::SdlAppDidEnterForegroundEventData(const SDL_CommonEvent& eventData)
-{
-	timestamp = eventData.timestamp;
-}
+	SdlAppDidEnterForegroundEventData::SdlAppDidEnterForegroundEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlAppDidEnterForegroundEventData::~SdlAppDidEnterForegroundEventData()
-{
+	SdlAppDidEnterForegroundEventData::~SdlAppDidEnterForegroundEventData()
+	{
+	}
 }

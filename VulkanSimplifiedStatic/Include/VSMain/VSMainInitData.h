@@ -2,11 +2,14 @@
 
 #include "EventHandler/SdlEventHandlerInitData.h"
 
-struct VSMainInitData
+namespace VulkanSimplified
 {
-	SdlEventHandlerInitData eventHandlerData;
-	uint64_t stump;
+	struct VSMainInitData
+	{
+		SdlEventHandlerInitData eventHandlerData;
+		uint64_t stump;
 
-	VSMainInitData();
-	~VSMainInitData();
-};
+		VSMainInitData();
+		~VSMainInitData();
+	};
+}

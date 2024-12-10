@@ -1,55 +1,58 @@
 #include "SdlEhIpch.h"
 #include "SdlEventHandlerInitData.h"
 
-SdlEventHandlerInitData::SdlEventHandlerInitData(size_t commonReserveSize)
+namespace VulkanSimplified
 {
-	quitEventFunctionListInitialCapacity = commonReserveSize;
+	SdlEventHandlerInitData::SdlEventHandlerInitData(size_t commonReserveSize)
+	{
+		quitEventFunctionListInitialCapacity = commonReserveSize;
 
-	appTerminatingEventFunctionListInitialCapacity = commonReserveSize;
-	appLowMemoryEventFunctionListInitialCapacity = commonReserveSize;
-	appWillEnterBackgroundEventFunctionListInitialCapacity = commonReserveSize;
-	appDidEnterBackgroundEventFunctionListInitialCapacity = commonReserveSize;
-	appWillEnterForegroundEventFunctionListInitialCapacity = commonReserveSize;
-	appDidEnterForegroundEventFunctionListInitialCapacity = commonReserveSize;
+		appTerminatingEventFunctionListInitialCapacity = commonReserveSize;
+		appLowMemoryEventFunctionListInitialCapacity = commonReserveSize;
+		appWillEnterBackgroundEventFunctionListInitialCapacity = commonReserveSize;
+		appDidEnterBackgroundEventFunctionListInitialCapacity = commonReserveSize;
+		appWillEnterForegroundEventFunctionListInitialCapacity = commonReserveSize;
+		appDidEnterForegroundEventFunctionListInitialCapacity = commonReserveSize;
 
-	localeChangedEventFunctionListInitialCapacity = commonReserveSize;
+		localeChangedEventFunctionListInitialCapacity = commonReserveSize;
 
-	displayEventFunctionListInitialCapacity = commonReserveSize;
-	windowEventFunctionListInitialCapacity = commonReserveSize;
+		displayEventFunctionListInitialCapacity = commonReserveSize;
+		windowEventFunctionListInitialCapacity = commonReserveSize;
 
-	keyboardEventFunctionListInitialCapacity = commonReserveSize;
-	keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
-	textEditingEventFunctionListInitialCapacity = commonReserveSize;
-	textEditingExtendedEventFunctionListInitialCapacity = commonReserveSize;
-	textInputEventFunctionListInitialCapacity = commonReserveSize;
+		keyboardEventFunctionListInitialCapacity = commonReserveSize;
+		keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
+		textEditingEventFunctionListInitialCapacity = commonReserveSize;
+		textEditingExtendedEventFunctionListInitialCapacity = commonReserveSize;
+		textInputEventFunctionListInitialCapacity = commonReserveSize;
 
-	mouseMotionEventFunctionListInitialCapacity = commonReserveSize;
-	mouseButtonEventFunctionListInitialCapacity = commonReserveSize;
-	mouseWheelEventFunctionListInitialCapacity = commonReserveSize;
+		mouseMotionEventFunctionListInitialCapacity = commonReserveSize;
+		mouseButtonEventFunctionListInitialCapacity = commonReserveSize;
+		mouseWheelEventFunctionListInitialCapacity = commonReserveSize;
 
-	joyAxisEventFunctionListInitialCapacity = commonReserveSize;
-	joyBallEventFunctionListInitialCapacity = commonReserveSize;
-	joyHatEventFunctionListInitialCapacity = commonReserveSize;
-	joyButtonEventFunctionListInitialCapacity = commonReserveSize;
-	joyDeviceEventFunctionListInitialCapacity = commonReserveSize;
-	joyBatteryEventFunctionListInitialCapacity = commonReserveSize;
+		joyAxisEventFunctionListInitialCapacity = commonReserveSize;
+		joyBallEventFunctionListInitialCapacity = commonReserveSize;
+		joyHatEventFunctionListInitialCapacity = commonReserveSize;
+		joyButtonEventFunctionListInitialCapacity = commonReserveSize;
+		joyDeviceEventFunctionListInitialCapacity = commonReserveSize;
+		joyBatteryEventFunctionListInitialCapacity = commonReserveSize;
 
-	controllerAxisEventFunctionListInitialCapacity = commonReserveSize;
-	controllerButtonEventFunctionListInitialCapacity = commonReserveSize;
-	controllerDeviceEventFunctionListInitialCapacity = commonReserveSize;
-	controllerTouchpadEventFunctionListInitialCapacity = commonReserveSize;
-	controllerSensorEventFunctionListInitialCapacity = commonReserveSize;
+		controllerAxisEventFunctionListInitialCapacity = commonReserveSize;
+		controllerButtonEventFunctionListInitialCapacity = commonReserveSize;
+		controllerDeviceEventFunctionListInitialCapacity = commonReserveSize;
+		controllerTouchpadEventFunctionListInitialCapacity = commonReserveSize;
+		controllerSensorEventFunctionListInitialCapacity = commonReserveSize;
 
-	audioDeviceEventFunctionListInitialCapacity = commonReserveSize;
-	touchFingerEventFunctionListInitialCapacity = commonReserveSize;
-	multiGestureEventFunctionListInitialCapacity = commonReserveSize;
-	dollarGestureEventFunctionListInitialCapacity = commonReserveSize;
-	clipboardEventFunctionListInitialCapacity = commonReserveSize;
+		audioDeviceEventFunctionListInitialCapacity = commonReserveSize;
+		touchFingerEventFunctionListInitialCapacity = commonReserveSize;
+		multiGestureEventFunctionListInitialCapacity = commonReserveSize;
+		dollarGestureEventFunctionListInitialCapacity = commonReserveSize;
+		clipboardEventFunctionListInitialCapacity = commonReserveSize;
 
-	dropEventFunctionListInitialCapacity = commonReserveSize;
-	sensorEventFunctionListInitialCapacity = commonReserveSize;
-	userEventFunctionListInitialCapacity = commonReserveSize;
+		dropEventFunctionListInitialCapacity = commonReserveSize;
+		sensorEventFunctionListInitialCapacity = commonReserveSize;
+		userEventFunctionListInitialCapacity = commonReserveSize;
 
-	renderTargetsResetEventFunctionListInitialCapacity = commonReserveSize;
-	renderDeviceResetEventFunctionListInitialCapacity = commonReserveSize;
+		renderTargetsResetEventFunctionListInitialCapacity = commonReserveSize;
+		renderDeviceResetEventFunctionListInitialCapacity = commonReserveSize;
+	}
 }

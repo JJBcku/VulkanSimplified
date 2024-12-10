@@ -2,10 +2,13 @@
 
 struct SDL_QuitEvent;
 
-struct SdlQuitEventData
+namespace VulkanSimplified
 {
-	uint32_t timestamp;
+	struct SdlQuitEventData
+	{
+		uint32_t timestamp;
 
-	SdlQuitEventData(const SDL_QuitEvent& eventData);
-	~SdlQuitEventData();
-};
+		SdlQuitEventData(const SDL_QuitEvent& eventData);
+		~SdlQuitEventData();
+	};
+}

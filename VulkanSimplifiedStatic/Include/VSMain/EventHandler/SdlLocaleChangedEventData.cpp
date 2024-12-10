@@ -1,11 +1,14 @@
 #include "SdlEhIpch.h"
 #include "SdlLocaleChangedEventData.h"
 
-SdlLocaleChangeEventData::SdlLocaleChangeEventData(const SDL_CommonEvent& eventData)
+namespace VulkanSimplified
 {
-	timestamp = eventData.timestamp;
-}
+	SdlLocaleChangeEventData::SdlLocaleChangeEventData(const SDL_CommonEvent& eventData)
+	{
+		timestamp = eventData.timestamp;
+	}
 
-SdlLocaleChangeEventData::~SdlLocaleChangeEventData()
-{
+	SdlLocaleChangeEventData::~SdlLocaleChangeEventData()
+	{
+	}
 }

@@ -2,20 +2,26 @@
 
 #include "EventHandler/SdlEventHandlerInternal.h"
 
-struct VSMainInitData;
-
-class VSMainInternal
+namespace VulkanSimplified
 {
-public:
-	VSMainInternal(const VSMainInitData& initData);
-	~VSMainInternal();
+	struct VSMainInitData;
+}
 
-	SdlEventHandlerInternal& GetSdlEventHandler();
+namespace VulkanSimplifiedInternal
+{
+	class VSMainInternal
+	{
+	public:
+		VSMainInternal(const VulkanSimplified::VSMainInitData& initData);
+		~VSMainInternal();
 
-	const SdlEventHandlerInternal& GetSdlEventHandler() const;
+		SdlEventHandlerInternal& GetSdlEventHandler();
 
-private:
-	SdlEventHandlerInternal _eventHandler;
+		const SdlEventHandlerInternal& GetSdlEventHandler() const;
 
-	uint64_t stump;
-};
+	private:
+		SdlEventHandlerInternal _eventHandler;
+
+		uint64_t stump;
+	};
+}

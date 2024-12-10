@@ -1,9 +1,14 @@
 #pragma once
 
-struct SdlLocaleChangeEventData
-{
-	uint32_t timestamp;
+struct SDL_CommonEvent;
 
-	SdlLocaleChangeEventData(const SDL_CommonEvent& eventData);
-	~SdlLocaleChangeEventData();
-};
+namespace VulkanSimplified
+{
+	struct SdlLocaleChangeEventData
+	{
+		uint32_t timestamp;
+
+		SdlLocaleChangeEventData(const SDL_CommonEvent& eventData);
+		~SdlLocaleChangeEventData();
+	};
+}

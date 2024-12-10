@@ -116,6 +116,7 @@
     <ClInclude Include="Include\VSMain\EventHandler\SdlEhIpch.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandler.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerInitData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerTypedefs.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlJoyEventsData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlKeyboardEventsData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlLocaleChangedEventData.h" />

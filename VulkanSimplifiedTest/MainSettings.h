@@ -1,6 +1,9 @@
 #pragma once
 
-struct SdlQuitEventData;
+namespace VulkanSimplified
+{
+	struct SdlQuitEventData;
+}
 
 class MainSettings
 {
@@ -14,7 +17,7 @@ public:
 
 	bool IsClosingRequested() const;
 
-	static bool QuitEventCallback(const SdlQuitEventData&, void* instance);
+	static bool QuitEventCallback(const VulkanSimplified::SdlQuitEventData&, void* instance);
 
 private:
 	bool _quit;

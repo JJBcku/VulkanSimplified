@@ -2,21 +2,28 @@
 
 #include <memory>
 
-class VSMainInternal;
-struct VSMainInitData;
-
-class SdlEventHandler;
-
-class VSMain
+namespace VulkanSimplifiedInternal
 {
-public:
-	VSMain(const VSMainInitData& initData);
-	~VSMain();
+	class VSMainInternal;
+}
 
-	SdlEventHandler GetSdlEventHandler();
+namespace VulkanSimplified
+{
+	struct VSMainInitData;
 
-	const SdlEventHandler GetSdlEventHandler() const;
+	class SdlEventHandler;
 
-private:
-	std::unique_ptr<VSMainInternal> _internal;
-};
+	class VSMain
+	{
+	public:
+		VSMain(const VSMainInitData& initData);
+		~VSMain();
+
+		SdlEventHandler GetSdlEventHandler();
+
+		const SdlEventHandler GetSdlEventHandler() const;
+
+	private:
+		std::unique_ptr<VulkanSimplifiedInternal::VSMainInternal> _internal;
+	};
+}
