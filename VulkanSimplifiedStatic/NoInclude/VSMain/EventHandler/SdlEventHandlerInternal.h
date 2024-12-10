@@ -7,6 +7,8 @@
 #include <functional>
 #include <utility>
 
+union SDL_Event;
+
 namespace VulkanSimplifiedInternal
 {
 	class SdlEventHandlerInternal
