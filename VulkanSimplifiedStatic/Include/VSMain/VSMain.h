@@ -13,6 +13,8 @@ namespace VulkanSimplified
 
 	class SdlEventHandler;
 
+	class VulkanVersionData;
+
 	class VSMain
 	{
 	public:
@@ -22,6 +24,9 @@ namespace VulkanSimplified
 		SdlEventHandler GetSdlEventHandler();
 
 		const SdlEventHandler GetSdlEventHandler() const;
+
+		VulkanVersionData GetAppVersion() const;
+		VulkanVersionData GetMaxAvailableVulkanVersion() const;
 
 	private:
 		std::unique_ptr<VulkanSimplifiedInternal::VSMainInternal> _internal;

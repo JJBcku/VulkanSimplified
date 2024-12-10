@@ -108,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="Include\VSCommon\VsCommonIframework.h" />
     <ClInclude Include="Include\VSCommon\VsCommonIpch.h" />
+    <ClInclude Include="Include\VSCommon\VulkanVersionData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlAppEventsData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlAudioDeviceEventData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlClipboardEventData.h" />
@@ -148,6 +149,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VsCommonIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VsCommonIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VsCommonIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VulkanVersionData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VsCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VsCommonIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VsCommonIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VsCommonIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSMain\EventHandler\SdlAppEventsData.cpp">

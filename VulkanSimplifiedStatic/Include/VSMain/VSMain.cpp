@@ -27,4 +27,15 @@ namespace VulkanSimplified
 	{
 		return _internal->GetSdlEventHandler();
 	}
+
+	VulkanVersionData VSMain::GetAppVersion() const
+	{
+		return _internal->GetAppVersion();
+	}
+
+	VulkanVersionData VSMain::GetMaxAvailableVulkanVersion() const
+	{
+		return _internal->GetMaxAvailableVulkanVersion();
+	}
+
 }
