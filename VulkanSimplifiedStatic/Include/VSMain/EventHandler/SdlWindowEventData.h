@@ -1,7 +1,5 @@
 #pragma once
 
-struct SDL_WindowEvent;
-
 namespace VulkanSimplified
 {
     enum SdlWindowEventID : std::uint8_t
@@ -44,7 +42,7 @@ namespace VulkanSimplified
         std::int32_t data2;       /**< event dependent data */
         std::int32_t padding;       /**< event dependent data */
 
-        SdlWindowEventData(const SDL_WindowEvent& eventData);
+        SdlWindowEventData();
         ~SdlWindowEventData();
     };
 }

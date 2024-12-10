@@ -1,11 +1,5 @@
 #pragma once
 
-struct SDL_ControllerAxisEvent;
-struct SDL_ControllerButtonEvent;
-struct SDL_ControllerDeviceEvent;
-struct SDL_ControllerTouchpadEvent;
-struct SDL_ControllerSensorEvent;
-
 namespace VulkanSimplified
 {
     enum SdlGameControllerAxis : uint8_t
@@ -31,7 +25,7 @@ namespace VulkanSimplified
         int16_t value;       /**< The axis value (range: -32768 to 32767) */
         uint16_t padding4;
 
-        SdlControllerAxisEventData(const SDL_ControllerAxisEvent& eventData);
+        SdlControllerAxisEventData();
         ~SdlControllerAxisEventData();
     };
 
@@ -72,7 +66,7 @@ namespace VulkanSimplified
         uint8_t padding2;
         uint32_t padding3;
 
-        SdlControllerButtonEventData(const SDL_ControllerButtonEvent& eventData);
+        SdlControllerButtonEventData();
         ~SdlControllerButtonEventData();
     };
 
@@ -90,7 +84,7 @@ namespace VulkanSimplified
         int32_t which;       /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
         uint32_t padding;
 
-        SdlControllerDeviceEventData(const SDL_ControllerDeviceEvent& eventData);
+        SdlControllerDeviceEventData();
         ~SdlControllerDeviceEventData();
     };
 
@@ -112,7 +106,7 @@ namespace VulkanSimplified
         float y;            /**< Normalized in the range 0...1 with 0 being at the top */
         float pressure;     /**< Normalized in the range 0...1 */
 
-        SdlControllerTouchpadEventData(const SDL_ControllerTouchpadEvent& eventData);
+        SdlControllerTouchpadEventData();
         ~SdlControllerTouchpadEventData();
     };
 
@@ -124,7 +118,7 @@ namespace VulkanSimplified
         float data[3];      /**< Up to 3 values from the sensor, as defined in SDL_sensor.h */
         uint64_t timestamp_us; /**< The timestamp of the sensor reading in microseconds, if the hardware provides this information. */
 
-        SdlControllerSensorEventData(const SDL_ControllerSensorEvent& eventData);
+        SdlControllerSensorEventData();
         ~SdlControllerSensorEventData();
     };
 }

@@ -1,9 +1,5 @@
 #pragma once
 
-struct SDL_MouseMotionEvent;
-struct SDL_MouseButtonEvent;
-struct SDL_MouseWheelEvent;
-
 namespace VulkanSimplified
 {
     enum SdlMouseButtonIndex : uint8_t
@@ -92,7 +88,7 @@ namespace VulkanSimplified
         int32_t xrel;        /**< The relative motion in the X direction */
         int32_t yrel;        /**< The relative motion in the Y direction */
 
-        SdlMouseMotionEventData(const SDL_MouseMotionEvent& eventData);
+        SdlMouseMotionEventData();
         ~SdlMouseMotionEventData();
     };
 
@@ -108,7 +104,7 @@ namespace VulkanSimplified
         int32_t x;           /**< X coordinate, relative to window */
         int32_t y;           /**< Y coordinate, relative to window */
 
-        SdlMouseButtonEventData(const SDL_MouseButtonEvent& eventData);
+        SdlMouseButtonEventData();
         ~SdlMouseButtonEventData();
     };
 
@@ -131,7 +127,7 @@ namespace VulkanSimplified
         int32_t mouseX;      /**< X coordinate, relative to window */
         int32_t mouseY;      /**< Y coordinate, relative to window */
 
-        SdlMouseWheelEventData(const SDL_MouseWheelEvent& eventData);
+        SdlMouseWheelEventData();
         ~SdlMouseWheelEventData();
     };
 }

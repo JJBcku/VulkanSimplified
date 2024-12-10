@@ -3,17 +3,17 @@
 
 namespace VulkanSimplified
 {
-	SdlSensorEventData::SdlSensorEventData(const SDL_SensorEvent& eventData)
+	SdlSensorEventData::SdlSensorEventData()
 	{
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		data[0] = eventData.data[0];
-		data[1] = eventData.data[1];
-		data[2] = eventData.data[2];
-		data[3] = eventData.data[3];
-		data[4] = eventData.data[4];
-		data[5] = eventData.data[5];
-		timestamp_us = eventData.timestamp_us;
+		timestamp = 0;
+		which = 0;
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 0;
+		data[4] = 0;
+		data[5] = 0;
+		timestamp_us = 0;
 	}
 
 	SdlSensorEventData::~SdlSensorEventData()

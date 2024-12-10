@@ -1,9 +1,5 @@
 #pragma once
 
-struct SDL_Keysym;
-struct SdlKeyboardEventData;
-struct SDL_CommonEvent;
-
 namespace VulkanSimplified
 {
     enum SdlScancode : int32_t
@@ -716,7 +712,7 @@ namespace VulkanSimplified
         uint16_t padding;
         uint32_t unused;
 
-        SdlKeysymData(const SDL_Keysym& keyData);
+        SdlKeysymData();
         ~SdlKeysymData();
     };
 
@@ -731,7 +727,7 @@ namespace VulkanSimplified
         uint32_t padding;
         SdlKeysymData keysym;  /**< The key that was pressed or released */
 
-        SdlKeyboardEventData(const SDL_KeyboardEvent& eventData);
+        SdlKeyboardEventData();
         ~SdlKeyboardEventData();
     };
 
@@ -739,7 +735,7 @@ namespace VulkanSimplified
     {
         uint32_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
 
-        SdlKeymapChangedEventData(const SDL_CommonEvent& eventData);
+        SdlKeymapChangedEventData();
         ~SdlKeymapChangedEventData();
     };
 }

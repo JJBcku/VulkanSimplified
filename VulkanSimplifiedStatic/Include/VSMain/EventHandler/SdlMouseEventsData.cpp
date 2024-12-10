@@ -3,51 +3,51 @@
 
 namespace VulkanSimplified
 {
-	SdlMouseMotionEventData::SdlMouseMotionEventData(const SDL_MouseMotionEvent& eventData)
+	SdlMouseMotionEventData::SdlMouseMotionEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
-		which = eventData.which;
-		state = eventData.state;
-		x = eventData.x;
-		y = eventData.y;
-		xrel = eventData.xrel;
-		yrel = eventData.yrel;
+		timestamp = 0;
+		windowID = 0;
+		which = 0;
+		state = 0;
+		x = 0;
+		y = 0;
+		xrel = 0;
+		yrel = 0;
 	}
 
 	SdlMouseMotionEventData::~SdlMouseMotionEventData()
 	{
 	}
 
-	SdlMouseButtonEventData::SdlMouseButtonEventData(const SDL_MouseButtonEvent& eventData)
+	SdlMouseButtonEventData::SdlMouseButtonEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
-		which = eventData.which;
-		button = eventData.button;
-		state = eventData.state;
-		clicks = eventData.clicks;
-		padding1 = eventData.padding1;
-		x = eventData.x;
-		y = eventData.y;
+		timestamp = 0;
+		windowID = 0;
+		which = 0;
+		button = 0;
+		state = 0;
+		clicks = 0;
+		padding1 = 0;
+		x = 0;
+		y = 0;
 	}
 
 	SdlMouseButtonEventData::~SdlMouseButtonEventData()
 	{
 	}
 
-	SdlMouseWheelEventData::SdlMouseWheelEventData(const SDL_MouseWheelEvent& eventData)
+	SdlMouseWheelEventData::SdlMouseWheelEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
-		which = eventData.which;
-		x = eventData.x;
-		y = eventData.y;
-		direction = eventData.direction;
-		preciseX = eventData.preciseX;
-		preciseY = eventData.preciseY;
-		mouseX = eventData.mouseX;
-		mouseY = eventData.mouseY;
+		timestamp = 0;
+		windowID = 0;
+		which = 0;
+		x = 0;
+		y = 0;
+		direction = 0;
+		preciseX = 0;
+		preciseY = 0;
+		mouseX = 0;
+		mouseY = 0;
 	}
 
 	SdlMouseWheelEventData::~SdlMouseWheelEventData()

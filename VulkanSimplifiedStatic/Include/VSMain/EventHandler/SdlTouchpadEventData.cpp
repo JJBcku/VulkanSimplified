@@ -3,49 +3,36 @@
 
 namespace VulkanSimplified
 {
-	SdlTouchFingerEventData::SdlTouchFingerEventData(const SDL_TouchFingerEvent& eventData)
+	SdlTouchFingerEventData::SdlTouchFingerEventData()
 	{
-		switch (eventData.type)
-		{
-		case SDL_FINGERDOWN:
-			type = SdlTouchFingerEventType::FINGER_DOWN;
-			break;
-		case SDL_FINGERUP:
-			type = SdlTouchFingerEventType::FINGER_UP;
-			break;
-		case SDL_FINGERMOTION:
-			type = SdlTouchFingerEventType::FINGER_MOTION;
-			break;
-		default:
-			throw std::runtime_error("SdlTouchFingerEventData error: Program was given wrong type of SDL event!");
-		}
+		type = static_cast<SdlTouchFingerEventType>(std::numeric_limits<uint32_t>::max());
 
-		timestamp = eventData.timestamp;
-		touchId = eventData.touchId;
-		fingerId = eventData.fingerId;
-		x = eventData.x;
-		y = eventData.y;
-		dx = eventData.dx;
-		dy = eventData.dy;
-		pressure = eventData.pressure;
-		windowID = eventData.windowID;
+		timestamp = 0;
+		touchId = 0;
+		fingerId = 0;
+		x = 0;
+		y = 0;
+		dx = 0;
+		dy = 0;
+		pressure = 0;
+		windowID = 0;
 	}
 
 	SdlTouchFingerEventData::~SdlTouchFingerEventData()
 	{
 	}
 
-	SdlMultiGestureEventData::SdlMultiGestureEventData(const SDL_MultiGestureEvent& eventData)
+	SdlMultiGestureEventData::SdlMultiGestureEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 		padding2 = 0;
-		touchId = eventData.touchId;
-		dTheta = eventData.dTheta;
-		dDist = eventData.dDist;
-		x = eventData.x;
-		y = eventData.y;
-		numFingers = eventData.numFingers;
-		padding = eventData.padding;
+		touchId = 0;
+		dTheta = 0;
+		dDist = 0;
+		x = 0;
+		y = 0;
+		numFingers = 0;
+		padding = 0;
 		padding3 = 0;
 	}
 
@@ -53,20 +40,16 @@ namespace VulkanSimplified
 	{
 	}
 
-	SdlDollarGestureEventData::SdlDollarGestureEventData(const SDL_DollarGestureEvent& eventData)
+	SdlDollarGestureEventData::SdlDollarGestureEventData()
 	{
-		if (eventData.type == SDL_DOLLARGESTURE)
-			type = 1;
-		else
-			type = 0;
-
-		timestamp = eventData.timestamp;
-		touchId = eventData.touchId;
-		gestureId = eventData.gestureId;
-		numFingers = eventData.numFingers;
-		error = eventData.error;
-		x = eventData.x;
-		y = eventData.y;
+		type = 0;
+		timestamp = 0;
+		touchId = 0;
+		gestureId = 0;
+		numFingers = 0;
+		error = 0;
+		x = 0;
+		y = 0;
 	}
 
 	SdlDollarGestureEventData::~SdlDollarGestureEventData()

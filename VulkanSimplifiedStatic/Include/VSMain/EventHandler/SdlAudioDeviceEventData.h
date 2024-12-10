@@ -1,7 +1,5 @@
 #pragma once
 
-struct SDL_AudioDeviceEvent;
-
 namespace VulkanSimplified
 {
     struct SdlAudioDeviceEventData
@@ -14,7 +12,7 @@ namespace VulkanSimplified
         uint8_t padding2;
         uint8_t padding3;
 
-        SdlAudioDeviceEventData(const SDL_AudioDeviceEvent& eventData);
+        SdlAudioDeviceEventData();
         ~SdlAudioDeviceEventData();
     };
 }

@@ -1,12 +1,5 @@
 #pragma once
 
-struct SDL_JoyAxisEvent;
-struct SDL_JoyBallEvent;
-struct SDL_JoyHatEvent;
-struct SDL_JoyButtonEvent;
-struct SDL_JoyDeviceEvent;
-struct SDL_JoyBatteryEvent;
-
 namespace VulkanSimplified
 {
     struct SdlJoyAxisEventData
@@ -20,7 +13,7 @@ namespace VulkanSimplified
         int16_t value;       /**< The axis value (range: -32768 to 32767) */
         uint16_t padding4;
 
-        SdlJoyAxisEventData(const SDL_JoyAxisEvent& eventData);
+        SdlJoyAxisEventData();
         ~SdlJoyAxisEventData();
     };
 
@@ -35,7 +28,7 @@ namespace VulkanSimplified
         int16_t xrel;        /**< The relative motion in the X direction */
         int16_t yrel;        /**< The relative motion in the Y direction */
 
-        SdlJoyBallEventData(const SDL_JoyBallEvent& eventData);
+        SdlJoyBallEventData();
         ~SdlJoyBallEventData();
     };
 
@@ -68,7 +61,7 @@ namespace VulkanSimplified
         uint8_t padding2;
         uint32_t padding3;
 
-        SdlJoyHatEventData(const SDL_JoyHatEvent& eventData);
+        SdlJoyHatEventData();
         ~SdlJoyHatEventData();
     };
 
@@ -82,7 +75,7 @@ namespace VulkanSimplified
         uint8_t padding2;
         uint32_t padding3;
 
-        SdlJoyButtonEventData(const SDL_JoyButtonEvent& eventData);
+        SdlJoyButtonEventData();
     };
 
     struct SdlJoyDeviceEventData
@@ -91,7 +84,7 @@ namespace VulkanSimplified
         uint32_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
         int32_t which;       /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
 
-        SdlJoyDeviceEventData(const SDL_JoyDeviceEvent& eventData);
+        SdlJoyDeviceEventData();
         ~SdlJoyDeviceEventData();
     };
 
@@ -112,7 +105,7 @@ namespace VulkanSimplified
         int32_t which; /**< The joystick instance id */
         SdlJoystickPowerLevel level; /**< The joystick battery level */
 
-        SdlJoyBatteryEventData(const SDL_JoyBatteryEvent& eventData);
+        SdlJoyBatteryEventData();
         ~SdlJoyBatteryEventData();
     };
 }

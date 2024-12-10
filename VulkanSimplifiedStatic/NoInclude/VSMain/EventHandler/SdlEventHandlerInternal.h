@@ -174,56 +174,56 @@ namespace VulkanSimplifiedInternal
 		OrderIndependentDeletionStack<std::pair<VulkanSimplified::RenderTargetsResetEventFunction, void*>> _renderTargetsResetEventFunctions;
 		OrderIndependentDeletionStack<std::pair<VulkanSimplified::RenderDeviceResetEventFunction, void*>> _renderDeviceResetEventFunctions;
 
-		void HandleEvent(SDL_Event& event);
+		void HandleEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlQuitEventData event);
+		void HandleQuitEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlAppTerminatingEventData event);
-		void HandleEvent(VulkanSimplified::SdlAppLowMemoryEventData event);
-		void HandleEvent(VulkanSimplified::SdlAppWillEnterBackgroundEventData event);
-		void HandleEvent(VulkanSimplified::SdlAppDidEnterBackgroundEventData event);
-		void HandleEvent(VulkanSimplified::SdlAppWillEnterForegroundEventData event);
-		void HandleEvent(VulkanSimplified::SdlAppDidEnterForegroundEventData event);
+		void HandleAppTerminatingEvent(const SDL_Event& event);
+		void HandleAppLowMemoryEvent(const SDL_Event& event);
+		void HandleAppWillEnterBackgroundEvent(const SDL_Event& event);
+		void HandleAppDidEnterBackgroundEvent(const SDL_Event& event);
+		void HandleAppWillEnterForegroundEvent(const SDL_Event& event);
+		void HandleAppDidEnterForegroundEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlLocaleChangeEventData event);
+		void HandleLocaleChangeEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlDisplayEventData event);
-		void HandleEvent(VulkanSimplified::SdlWindowEventData event);
+		void HandleDisplayEvent(const SDL_Event& event);
+		void HandleWindowEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlKeyboardEventData event);
-		void HandleEvent(VulkanSimplified::SdlKeymapChangedEventData event);
-		void HandleEvent(VulkanSimplified::SdlTextEditingEventData event);
-		void HandleEvent(VulkanSimplified::SdlTextEditingExtendedEventData event);
-		void HandleEvent(VulkanSimplified::SdlTextInputEventData event);
+		void HandleKeyboardEvent(const SDL_Event& event);
+		void HandleKeymapChangedEvent(const SDL_Event& event);
+		void HandleTextEditingEvent(const SDL_Event& event);
+		void HandleTextEditingExtendedEvent(const SDL_Event& event);
+		void HandleTextInputEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlMouseMotionEventData event);
-		void HandleEvent(VulkanSimplified::SdlMouseButtonEventData event);
-		void HandleEvent(VulkanSimplified::SdlMouseWheelEventData event);
+		void HandleMouseMotionEvent(const SDL_Event& event);
+		void HandleMouseButtonEvent(const SDL_Event& event);
+		void HandleMouseWheelEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlJoyAxisEventData event);
-		void HandleEvent(VulkanSimplified::SdlJoyBallEventData event);
-		void HandleEvent(VulkanSimplified::SdlJoyHatEventData event);
-		void HandleEvent(VulkanSimplified::SdlJoyButtonEventData event);
-		void HandleEvent(VulkanSimplified::SdlJoyDeviceEventData event);
-		void HandleEvent(VulkanSimplified::SdlJoyBatteryEventData event);
+		void HandleJoyAxisEvent(const SDL_Event& event);
+		void HandleJoyBallEvent(const SDL_Event& event);
+		void HandleJoyHatEvent(const SDL_Event& event);
+		void HandleJoyButtonEvent(const SDL_Event& event);
+		void HandleJoyDeviceEvent(const SDL_Event& event);
+		void HandleJoyBatteryEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlControllerAxisEventData event);
-		void HandleEvent(VulkanSimplified::SdlControllerButtonEventData event);
-		void HandleEvent(VulkanSimplified::SdlControllerDeviceEventData event);
-		void HandleEvent(VulkanSimplified::SdlControllerTouchpadEventData event);
-		void HandleEvent(VulkanSimplified::SdlControllerSensorEventData event);
+		void HandleControllerAxisEvent(const SDL_Event& event);
+		void HandleControllerButtonEvent(const SDL_Event& event);
+		void HandleControllerDeviceEvent(const SDL_Event& event);
+		void HandleControllerTouchpadEvent(const SDL_Event& event);
+		void HandleControllerSensorEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlAudioDeviceEventData event);
-		void HandleEvent(VulkanSimplified::SdlTouchFingerEventData event);
-		void HandleEvent(VulkanSimplified::SdlMultiGestureEventData event);
-		void HandleEvent(VulkanSimplified::SdlDollarGestureEventData event);
-		void HandleEvent(VulkanSimplified::SdlClipboardEventData event);
+		void HandleAudioDeviceEvent(const SDL_Event& event);
+		void HandleTouchFingerEvent(const SDL_Event& event);
+		void HandleMultiGestureEvent(const SDL_Event& event);
+		void HandleDollarGestureEvent(const SDL_Event& event);
+		void HandleClipboardEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlDropEventData event);
-		void HandleEvent(VulkanSimplified::SdlSensorEventData event);
-		void HandleEvent(VulkanSimplified::SdlUserEventData event);
+		void HandleDropEvent(const SDL_Event& event);
+		void HandleSensorEvent(const SDL_Event& event);
+		void HandleUserEvent(const SDL_Event& event);
 
-		void HandleEvent(VulkanSimplified::SdlRenderTargetsResetEventData event);
-		void HandleEvent(VulkanSimplified::SdlRenderDeviceResetEventData event);
+		void HandleRenderTargetsResetEvent(const SDL_Event& event);
+		void HandleRenderDeviceResetEvent(const SDL_Event& event);
 	};
 }

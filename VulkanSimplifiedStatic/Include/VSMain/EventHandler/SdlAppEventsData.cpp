@@ -3,54 +3,54 @@
 
 namespace VulkanSimplified
 {
-	SdlAppTerminatingEventData::SdlAppTerminatingEventData(const SDL_CommonEvent& eventData)
+	SdlAppTerminatingEventData::SdlAppTerminatingEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlAppTerminatingEventData::~SdlAppTerminatingEventData()
 	{
 	}
 
-	SdlAppLowMemoryEventData::SdlAppLowMemoryEventData(const SDL_CommonEvent& eventData)
+	SdlAppLowMemoryEventData::SdlAppLowMemoryEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlAppLowMemoryEventData::~SdlAppLowMemoryEventData()
 	{
 	}
 
-	SdlAppWillEnterBackgroundEventData::SdlAppWillEnterBackgroundEventData(const SDL_CommonEvent& eventData)
+	SdlAppWillEnterBackgroundEventData::SdlAppWillEnterBackgroundEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlAppWillEnterBackgroundEventData::~SdlAppWillEnterBackgroundEventData()
 	{
 	}
 
-	SdlAppDidEnterBackgroundEventData::SdlAppDidEnterBackgroundEventData(const SDL_CommonEvent& eventData)
+	SdlAppDidEnterBackgroundEventData::SdlAppDidEnterBackgroundEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlAppDidEnterBackgroundEventData::~SdlAppDidEnterBackgroundEventData()
 	{
 	}
 
-	SdlAppWillEnterForegroundEventData::SdlAppWillEnterForegroundEventData(const SDL_CommonEvent& eventData)
+	SdlAppWillEnterForegroundEventData::SdlAppWillEnterForegroundEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlAppWillEnterForegroundEventData::~SdlAppWillEnterForegroundEventData()
 	{
 	}
 
-	SdlAppDidEnterForegroundEventData::SdlAppDidEnterForegroundEventData(const SDL_CommonEvent& eventData)
+	SdlAppDidEnterForegroundEventData::SdlAppDidEnterForegroundEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlAppDidEnterForegroundEventData::~SdlAppDidEnterForegroundEventData()

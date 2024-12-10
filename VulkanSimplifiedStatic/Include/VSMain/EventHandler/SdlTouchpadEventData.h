@@ -1,9 +1,5 @@
 #pragma once
 
-struct SDL_TouchFingerEvent;
-struct SDL_MultiGestureEvent;
-struct SDL_DollarGestureEvent;
-
 namespace VulkanSimplified
 {
     enum class SdlTouchFingerEventType : uint32_t
@@ -26,7 +22,7 @@ namespace VulkanSimplified
         float pressure;     /**< Normalized in the range 0...1 */
         uint32_t windowID;    /**< The window underneath the finger, if any */
 
-        SdlTouchFingerEventData(const SDL_TouchFingerEvent& eventData);
+        SdlTouchFingerEventData();
         ~SdlTouchFingerEventData();
     };
 
@@ -43,7 +39,7 @@ namespace VulkanSimplified
         uint16_t padding;
         uint32_t padding3;
 
-        SdlMultiGestureEventData(const SDL_MultiGestureEvent& eventData);
+        SdlMultiGestureEventData();
         ~SdlMultiGestureEventData();
     };
 
@@ -58,7 +54,7 @@ namespace VulkanSimplified
         float x;            /**< Normalized center of gesture */
         float y;            /**< Normalized center of gesture */
 
-        SdlDollarGestureEventData(const SDL_DollarGestureEvent& eventData);
+        SdlDollarGestureEventData();
         ~SdlDollarGestureEventData();
     };
 }

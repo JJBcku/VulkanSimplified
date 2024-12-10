@@ -3,9 +3,9 @@
 
 namespace VulkanSimplified
 {
-	SdlQuitEventData::SdlQuitEventData(const SDL_QuitEvent& eventData)
+	SdlQuitEventData::SdlQuitEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlQuitEventData::~SdlQuitEventData()

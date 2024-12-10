@@ -23,7 +23,7 @@ namespace VulkanSimplified
         uint8_t padding3;
         int32_t data1;       /**< event dependent data */
 
-        SdlDisplayEventData(const SDL_DisplayEvent& eventData);
+        SdlDisplayEventData();
         ~SdlDisplayEventData();
     };
 }

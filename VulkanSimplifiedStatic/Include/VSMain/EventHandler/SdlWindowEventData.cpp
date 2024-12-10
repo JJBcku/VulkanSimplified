@@ -3,16 +3,16 @@
 
 namespace VulkanSimplified
 {
-	SdlWindowEventData::SdlWindowEventData(const SDL_WindowEvent& eventData)
+	SdlWindowEventData::SdlWindowEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
-		event = eventData.event;
-		padding1 = eventData.padding1;
-		padding2 = eventData.padding2;
-		padding3 = eventData.padding3;
-		data1 = eventData.data1;
-		data2 = eventData.data2;
+		timestamp = 0;
+		windowID = 0;
+		event = 0;
+		padding1 = 0;
+		padding2 = 0;
+		padding3 = 0;
+		data1 = 0;
+		data2 = 0;
 		padding = 0;
 	}
 

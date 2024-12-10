@@ -1,7 +1,5 @@
 #pragma once
 
-struct SDL_UserEvent;
-
 namespace VulkanSimplified
 {
     struct SdlUserEventData
@@ -13,7 +11,7 @@ namespace VulkanSimplified
         void* data1;        /**< User defined data pointer */
         void* data2;        /**< User defined data pointer */
 
-        SdlUserEventData(const SDL_UserEvent& eventData);
+        SdlUserEventData();
         ~SdlUserEventData();
     };
 }

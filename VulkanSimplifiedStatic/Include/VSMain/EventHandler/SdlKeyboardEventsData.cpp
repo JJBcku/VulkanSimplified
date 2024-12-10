@@ -3,27 +3,27 @@
 
 namespace VulkanSimplified
 {
-	SdlKeysymData::SdlKeysymData(const SDL_Keysym& keyData)
+	SdlKeysymData::SdlKeysymData()
 	{
-		scancode = static_cast<SdlScancode>(keyData.scancode);
-		sym = static_cast<SdlKeycode>(keyData.sym);
-		mod = keyData.mod;
+		scancode = static_cast<SdlScancode>(0);
+		sym = static_cast<SdlKeycode>(0);
+		mod = 0;
 		padding = 0;
-		unused = keyData.unused;
+		unused = 0;
 	}
 
 	SdlKeysymData::~SdlKeysymData()
 	{
 	}
 
-	SdlKeyboardEventData::SdlKeyboardEventData(const SDL_KeyboardEvent& eventData) : keysym(eventData.keysym)
+	SdlKeyboardEventData::SdlKeyboardEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
-		state = eventData.state;
-		repeat = eventData.repeat;
-		padding2 = eventData.padding2;
-		padding3 = eventData.padding3;
+		timestamp = 0;
+		windowID = 0;
+		state = 0;
+		repeat = 0;
+		padding2 = 0;
+		padding3 = 0;
 		padding = 0;
 	}
 
@@ -31,9 +31,9 @@ namespace VulkanSimplified
 	{
 	}
 
-	SdlKeymapChangedEventData::SdlKeymapChangedEventData(const SDL_CommonEvent& eventData)
+	SdlKeymapChangedEventData::SdlKeymapChangedEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlKeymapChangedEventData::~SdlKeymapChangedEventData()

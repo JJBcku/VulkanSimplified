@@ -3,40 +3,39 @@
 
 namespace VulkanSimplified
 {
-	SdlTextEditingEventData::SdlTextEditingEventData(const SDL_TextEditingEvent& eventData)
+	SdlTextEditingEventData::SdlTextEditingEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
+		timestamp = 0;
+		windowID = 0;
 		for (size_t i = 0; i < SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE; i++)
-			text[i] = eventData.text[i];
-		start = eventData.start;
-		length = eventData.length;
+			text[i] = 0;
+		start = 0;
+		length = 0;
 	}
 
 	SdlTextEditingEventData::~SdlTextEditingEventData()
 	{
 	}
 
-	SdlTextEditingExtendedEventData::SdlTextEditingExtendedEventData(const SDL_TextEditingExtEvent& eventData)
+	SdlTextEditingExtendedEventData::SdlTextEditingExtendedEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
-		text = eventData.text;
-		vpadding = nullptr;
-		start = eventData.start;
-		length = eventData.length;
+		timestamp = 0;
+		windowID = 0;
+		text = nullptr;
+		start = 0;
+		length = 0;
 	}
 
 	SdlTextEditingExtendedEventData::~SdlTextEditingExtendedEventData()
 	{
 	}
 
-	SdlTextInputEventData::SdlTextInputEventData(const SDL_TextInputEvent& eventData)
+	SdlTextInputEventData::SdlTextInputEventData()
 	{
-		timestamp = eventData.timestamp;
-		windowID = eventData.windowID;
+		timestamp = 0;
+		windowID = 0;
 		for (size_t i = 0; i < SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE; i++)
-			text[i] = eventData.text[i];
+			text[i] = 0;
 	}
 
 	SdlTextInputEventData::~SdlTextInputEventData()

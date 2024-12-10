@@ -453,7 +453,7 @@ namespace VulkanSimplifiedInternal
 		return _renderDeviceResetEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(SDL_Event& event)
+	void SdlEventHandlerInternal::HandleEvent(const SDL_Event& event)
 	{
 		auto& type = event.type;
 
@@ -462,139 +462,139 @@ namespace VulkanSimplifiedInternal
 		case SDL_FIRSTEVENT:
 			break;
 		case SDL_QUIT:
-			HandleEvent(VulkanSimplified::SdlQuitEventData(event.quit));
+			HandleQuitEvent(event);
 			break;
 		case SDL_APP_TERMINATING:
-			HandleEvent(VulkanSimplified::SdlAppTerminatingEventData(event.common));
+			HandleAppTerminatingEvent(event);
 			break;
 		case SDL_APP_LOWMEMORY:
-			HandleEvent(VulkanSimplified::SdlAppLowMemoryEventData(event.common));
+			HandleAppLowMemoryEvent(event);
 			break;
 		case SDL_APP_WILLENTERBACKGROUND:
-			HandleEvent(VulkanSimplified::SdlAppWillEnterBackgroundEventData(event.common));
+			HandleAppWillEnterBackgroundEvent(event);
 			break;
 		case SDL_APP_DIDENTERBACKGROUND:
-			HandleEvent(VulkanSimplified::SdlAppDidEnterBackgroundEventData(event.common));
+			HandleAppDidEnterBackgroundEvent(event);
 			break;
 		case SDL_APP_WILLENTERFOREGROUND:
-			HandleEvent(VulkanSimplified::SdlAppWillEnterForegroundEventData(event.common));
+			HandleAppWillEnterForegroundEvent(event);
 			break;
 		case SDL_APP_DIDENTERFOREGROUND:
-			HandleEvent(VulkanSimplified::SdlAppDidEnterForegroundEventData(event.common));
+			HandleAppDidEnterForegroundEvent(event);
 			break;
 		case SDL_LOCALECHANGED:
-			HandleEvent(VulkanSimplified::SdlLocaleChangeEventData(event.common));
+			HandleLocaleChangeEvent(event);
 			break;
 		case SDL_DISPLAYEVENT:
-			HandleEvent(event.display);
+			HandleDisplayEvent(event);
 			break;
 		case SDL_WINDOWEVENT:
-			HandleEvent(event.window);
+			HandleWindowEvent(event);
 			break;
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			HandleEvent(event.key);
+			HandleKeyboardEvent(event);
 			break;
 		case SDL_TEXTEDITING:
-			HandleEvent(event.edit);
+			HandleTextEditingEvent(event);
 			break;
 		case SDL_TEXTINPUT:
-			HandleEvent(event.text);
+			HandleTextInputEvent(event);
 			break;
 		case SDL_KEYMAPCHANGED:
-			HandleEvent(VulkanSimplified::SdlKeymapChangedEventData(event.common));
+			HandleKeymapChangedEvent(event);
 			break;
 		case SDL_TEXTEDITING_EXT:
-			HandleEvent(event.editExt);
+			HandleTextEditingExtendedEvent(event);
 			break;
 		case SDL_MOUSEMOTION:
-			HandleEvent(event.motion);
+			HandleMouseMotionEvent(event);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
-			HandleEvent(event.button);
+			HandleMouseButtonEvent(event);
 			break;
 		case SDL_MOUSEWHEEL:
-			HandleEvent(event.wheel);
+			HandleMouseWheelEvent(event);
 			break;
 		case SDL_JOYAXISMOTION:
-			HandleEvent(event.jaxis);
+			HandleJoyAxisEvent(event);
 			break;
 		case SDL_JOYBALLMOTION:
-			HandleEvent(event.jball);
+			HandleJoyBallEvent(event);
 			break;
 		case SDL_JOYHATMOTION:
-			HandleEvent(event.jhat);
+			HandleJoyHatEvent(event);
 			break;
 		case SDL_JOYBUTTONDOWN:
 		case SDL_JOYBUTTONUP:
-			HandleEvent(event.jbutton);
+			HandleJoyButtonEvent(event);
 			break;
 		case SDL_JOYDEVICEADDED:
 		case SDL_JOYDEVICEREMOVED:
-			HandleEvent(event.jdevice);
+			HandleJoyDeviceEvent(event);
 			break;
 		case SDL_JOYBATTERYUPDATED:
-			HandleEvent(event.jbattery);
+			HandleJoyBatteryEvent(event);
 			break;
 		case SDL_CONTROLLERAXISMOTION:
-			HandleEvent(event.caxis);
+			HandleControllerAxisEvent(event);
 			break;
 		case SDL_CONTROLLERBUTTONDOWN:
 		case SDL_CONTROLLERBUTTONUP:
-			HandleEvent(event.cbutton);
+			HandleControllerButtonEvent(event);
 			break;
 		case SDL_CONTROLLERDEVICEADDED:
 		case SDL_CONTROLLERDEVICEREMOVED:
 		case SDL_CONTROLLERDEVICEREMAPPED:
-			HandleEvent(event.cdevice);
+			HandleControllerDeviceEvent(event);
 			break;
 		case SDL_CONTROLLERTOUCHPADDOWN:
 		case SDL_CONTROLLERTOUCHPADMOTION:
 		case SDL_CONTROLLERTOUCHPADUP:
-			HandleEvent(event.ctouchpad);
+			HandleControllerTouchpadEvent(event);
 			break;
 		case SDL_CONTROLLERSENSORUPDATE:
-			HandleEvent(event.csensor);
+			HandleControllerSensorEvent(event);
 			break;
 		case SDL_FINGERDOWN:
 		case SDL_FINGERUP:
 		case SDL_FINGERMOTION:
-			HandleEvent(event.tfinger);
+			HandleTouchFingerEvent(event);
 			break;
 		case SDL_DOLLARGESTURE:
 		case SDL_DOLLARRECORD:
-			HandleEvent(event.dgesture);
+			HandleDollarGestureEvent(event);
 			break;
 		case SDL_MULTIGESTURE:
-			HandleEvent(event.mgesture);
+			HandleMultiGestureEvent(event);
 			break;
 		case SDL_CLIPBOARDUPDATE:
-			HandleEvent(VulkanSimplified::SdlClipboardEventData(event.common));
+			HandleClipboardEvent(event);
 			break;
 		case SDL_DROPFILE:
 		case SDL_DROPTEXT:
 		case SDL_DROPBEGIN:
 		case SDL_DROPCOMPLETE:
-			HandleEvent(event.drop);
+			HandleDropEvent(event);
 			break;
 		case SDL_AUDIODEVICEADDED:
 		case SDL_AUDIODEVICEREMOVED:
-			HandleEvent(event.adevice);
+			HandleAudioDeviceEvent(event);
 			break;
 		case SDL_SENSORUPDATE:
-			HandleEvent(event.sensor);
+			HandleSensorEvent(event);
 			break;
 		case SDL_RENDER_TARGETS_RESET:
-			HandleEvent(VulkanSimplified::SdlRenderTargetsResetEventData(event.common));
+			HandleRenderTargetsResetEvent(event);
 			break;
 		case SDL_RENDER_DEVICE_RESET:
-			HandleEvent(VulkanSimplified::SdlRenderDeviceResetEventData(event.common));
+			HandleRenderDeviceResetEvent(event);
 			break;
 		case SDL_POLLSENTINEL:
 			break;
 		case SDL_USEREVENT:
-			HandleEvent(event.user);
+			HandleUserEvent(event);
 			break;
 		case SDL_LASTEVENT:
 			break;
@@ -603,8 +603,11 @@ namespace VulkanSimplifiedInternal
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlQuitEventData event)
+	void SdlEventHandlerInternal::HandleQuitEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlQuitEventData eventData;
+		eventData.timestamp = event.quit.timestamp;
+
 		auto size = _quitEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -617,12 +620,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _quitEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAppTerminatingEventData event)
+	void SdlEventHandlerInternal::HandleAppTerminatingEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAppTerminatingEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _appTerminatingEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -635,12 +641,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _appTerminatingEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAppLowMemoryEventData event)
+	void SdlEventHandlerInternal::HandleAppLowMemoryEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAppLowMemoryEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _appLowMemoryEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -653,12 +662,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _appLowMemoryEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAppWillEnterBackgroundEventData event)
+	void SdlEventHandlerInternal::HandleAppWillEnterBackgroundEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAppWillEnterBackgroundEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _appWillEnterBackgroundEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -671,12 +683,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _appWillEnterBackgroundEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAppDidEnterBackgroundEventData event)
+	void SdlEventHandlerInternal::HandleAppDidEnterBackgroundEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAppDidEnterBackgroundEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _appDidEnterBackgroundEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -689,12 +704,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _appDidEnterBackgroundEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAppWillEnterForegroundEventData event)
+	void SdlEventHandlerInternal::HandleAppWillEnterForegroundEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAppWillEnterForegroundEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _appWillEnterForegroundEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -707,12 +725,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _appWillEnterForegroundEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAppDidEnterForegroundEventData event)
+	void SdlEventHandlerInternal::HandleAppDidEnterForegroundEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAppDidEnterForegroundEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _appDidEnterForegroundEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -725,12 +746,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _appDidEnterForegroundEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlLocaleChangeEventData event)
+	void SdlEventHandlerInternal::HandleLocaleChangeEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlLocaleChangeEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _localeChangedEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -743,12 +767,42 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _localeChangedEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlDisplayEventData event)
+	void SdlEventHandlerInternal::HandleDisplayEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlDisplayEventData eventData;
+		eventData.timestamp = event.display.timestamp;
+		eventData.display = event.display.display;
+
+		switch (event.display.event)
+		{
+		case SDL_DisplayEventID::SDL_DISPLAYEVENT_NONE:
+			eventData.event = VulkanSimplified::SDL_DATA_DISPLAYEVENT_NONE;
+			break;
+		case SDL_DisplayEventID::SDL_DISPLAYEVENT_ORIENTATION:
+			eventData.event = VulkanSimplified::SDL_DATA_DISPLAYEVENT_ORIENTATION;
+			break;
+		case SDL_DisplayEventID::SDL_DISPLAYEVENT_CONNECTED:
+			eventData.event = VulkanSimplified::SDL_DATA_DISPLAYEVENT_CONNECTED;
+			break;
+		case SDL_DisplayEventID::SDL_DISPLAYEVENT_DISCONNECTED:
+			eventData.event = VulkanSimplified::SDL_DATA_DISPLAYEVENT_DISCONNECTED;
+			break;
+		case SDL_DisplayEventID::SDL_DISPLAYEVENT_MOVED:
+			eventData.event = VulkanSimplified::SDL_DATA_DISPLAYEVENT_MOVED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleDisplayEvent Error: Wrong display event subtype was passed to the function!");
+		}
+
+		eventData.padding1 = event.display.padding1;
+		eventData.padding2 = event.display.padding2;
+		eventData.padding3 = event.display.padding3;
+		eventData.data1 = event.display.data1;
+
 		auto size = _displayEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -761,12 +815,23 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _displayEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlWindowEventData event)
+	void SdlEventHandlerInternal::HandleWindowEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlWindowEventData eventData;
+		eventData.timestamp = event.window.timestamp;
+		eventData.windowID = event.window.windowID;
+		eventData.event = event.window.event;
+		eventData.padding1 = event.window.padding1;
+		eventData.padding2 = event.window.padding2;
+		eventData.padding3 = event.window.padding3;
+		eventData.data1 = event.window.data1;
+		eventData.data2 = event.window.data2;
+		eventData.padding = 0;
+
 		auto size = _windowEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -779,12 +844,27 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _windowEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlKeyboardEventData event)
+	void SdlEventHandlerInternal::HandleKeyboardEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlKeyboardEventData eventData;
+		eventData.timestamp = event.key.timestamp;
+		eventData.windowID = event.key.windowID;
+		eventData.state = event.key.state;
+		eventData.repeat = event.key.repeat;
+		eventData.padding2 = event.key.padding2;
+		eventData.padding3 = event.key.padding3;
+		eventData.padding = 0;
+
+		eventData.keysym.scancode = static_cast<VulkanSimplified::SdlScancode>(event.key.keysym.scancode);
+		eventData.keysym.sym = static_cast<VulkanSimplified::SdlKeycode>(event.key.keysym.sym);
+		eventData.keysym.mod = event.key.keysym.mod;
+		eventData.keysym.padding = 0;
+		eventData.keysym.unused = event.key.keysym.unused;
+
 		auto size = _keyboardEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -797,12 +877,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _keyboardEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlKeymapChangedEventData event)
+	void SdlEventHandlerInternal::HandleKeymapChangedEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlKeymapChangedEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _keymapChangedEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -815,12 +898,20 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _keymapChangedEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlTextEditingEventData event)
+	void SdlEventHandlerInternal::HandleTextEditingEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlTextEditingEventData eventData;
+		eventData.timestamp = event.edit.timestamp;
+		eventData.windowID = event.edit.windowID;
+		for (size_t i = 0; i < VulkanSimplified::SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE; i++)
+			eventData.text[i] = event.edit.text[i];
+		eventData.start = event.edit.start;
+		eventData.length = event.edit.length;
+
 		auto size = _textEditingEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -833,12 +924,19 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _textEditingEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlTextEditingExtendedEventData event)
+	void SdlEventHandlerInternal::HandleTextEditingExtendedEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlTextEditingExtendedEventData eventData;
+		eventData.timestamp = event.editExt.timestamp;
+		eventData.windowID = event.editExt.windowID;
+		eventData.text = event.editExt.text;
+		eventData.start = event.editExt.start;
+		eventData.length = event.editExt.length;
+
 		auto size = _textEditingExtendedEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -851,12 +949,18 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _textEditingExtendedEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlTextInputEventData event)
+	void SdlEventHandlerInternal::HandleTextInputEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlTextInputEventData eventData;
+		eventData.timestamp = event.text.timestamp;
+		eventData.windowID = event.text.windowID;
+		for (size_t i = 0; i < VulkanSimplified::SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE; i++)
+			eventData.text[i] = event.text.text[i];
+
 		auto size = _textInputEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -869,12 +973,22 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _textInputEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlMouseMotionEventData event)
+	void SdlEventHandlerInternal::HandleMouseMotionEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlMouseMotionEventData eventData;
+		eventData.timestamp = event.motion.timestamp;
+		eventData.windowID = event.motion.windowID;
+		eventData.which = event.motion.which;
+		eventData.state = event.motion.state;
+		eventData.x = event.motion.x;
+		eventData.y = event.motion.y;
+		eventData.xrel = event.motion.xrel;
+		eventData.yrel = event.motion.yrel;
+
 		auto size = _mouseMotionEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -887,12 +1001,23 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _mouseMotionEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlMouseButtonEventData event)
+	void SdlEventHandlerInternal::HandleMouseButtonEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlMouseButtonEventData eventData;
+		eventData.timestamp = event.button.timestamp;
+		eventData.windowID = event.button.windowID;
+		eventData.which = event.button.which;
+		eventData.button = event.button.button;
+		eventData.state = event.button.state;
+		eventData.clicks = event.button.clicks;
+		eventData.padding1 = event.button.padding1;
+		eventData.x = event.button.x;
+		eventData.y = event.button.y;
+
 		auto size = _mouseButtonEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -905,12 +1030,24 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _mouseButtonEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlMouseWheelEventData event)
+	void SdlEventHandlerInternal::HandleMouseWheelEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlMouseWheelEventData eventData;
+		eventData.timestamp = event.wheel.timestamp;
+		eventData.windowID = event.wheel.windowID;
+		eventData.which = event.wheel.which;
+		eventData.x = event.wheel.x;
+		eventData.y = event.wheel.y;
+		eventData.direction = event.wheel.direction;
+		eventData.preciseX = event.wheel.preciseX;
+		eventData.preciseY = event.wheel.preciseY;
+		eventData.mouseX = event.wheel.mouseX;
+		eventData.mouseY = event.wheel.mouseY;
+
 		auto size = _mouseWheelEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -923,12 +1060,22 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _mouseWheelEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlJoyAxisEventData event)
+	void SdlEventHandlerInternal::HandleJoyAxisEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlJoyAxisEventData eventData;
+		eventData.timestamp = event.jaxis.timestamp;
+		eventData.which = event.jaxis.which;
+		eventData.axis = event.jaxis.axis;
+		eventData.padding1 = event.jaxis.padding1;
+		eventData.padding2 = event.jaxis.padding2;
+		eventData.padding3 = event.jaxis.padding3;
+		eventData.value = event.jaxis.value;
+		eventData.padding4 = 0;
+
 		auto size = _joyAxisEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -941,12 +1088,22 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _joyAxisEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlJoyBallEventData event)
+	void SdlEventHandlerInternal::HandleJoyBallEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlJoyBallEventData eventData;
+		eventData.timestamp = event.jball.timestamp;
+		eventData.which = event.jball.which;
+		eventData.ball = event.jball.ball;
+		eventData.padding1 = event.jball.padding1;
+		eventData.padding2 = event.jball.padding2;
+		eventData.padding3 = event.jball.padding3;
+		eventData.xrel = event.jball.xrel;
+		eventData.yrel = event.jball.yrel;
+
 		auto size = _joyBallEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -959,12 +1116,21 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _joyBallEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlJoyHatEventData event)
+	void SdlEventHandlerInternal::HandleJoyHatEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlJoyHatEventData eventData;
+		eventData.timestamp = event.jhat.timestamp;
+		eventData.which = event.jhat.which;
+		eventData.hat = event.jhat.hat;
+		eventData.value = event.jhat.value;
+		eventData.padding1 = event.jhat.padding1;
+		eventData.padding2 = event.jhat.padding2;
+		eventData.padding3 = 0;
+
 		auto size = _joyHatEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -977,12 +1143,21 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _joyHatEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlJoyButtonEventData event)
+	void SdlEventHandlerInternal::HandleJoyButtonEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlJoyButtonEventData eventData;
+		eventData.timestamp = event.jbutton.timestamp;
+		eventData.which = event.jbutton.which;
+		eventData.button = event.jbutton.button;
+		eventData.state = event.jbutton.state;
+		eventData.padding1 = event.jbutton.padding1;
+		eventData.padding2 = event.jbutton.padding2;
+		eventData.padding3 = 0;
+
 		auto size = _joyButtonEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -995,12 +1170,22 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _joyButtonEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlJoyDeviceEventData event)
+	void SdlEventHandlerInternal::HandleJoyDeviceEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlJoyDeviceEventData eventData;
+
+		if (event.type == static_cast<std::uint32_t>(SDL_EventType::SDL_JOYDEVICEADDED))
+			eventData.type = 1;
+		else
+			eventData.type = 0;
+
+		eventData.timestamp = event.jdevice.timestamp;
+		eventData.which = event.jdevice.which;
+
 		auto size = _joyDeviceEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1013,12 +1198,17 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _joyDeviceEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlJoyBatteryEventData event)
+	void SdlEventHandlerInternal::HandleJoyBatteryEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlJoyBatteryEventData eventData;
+		eventData.timestamp = event.jbattery.timestamp;
+		eventData.which = event.jbattery.which;
+		eventData.level = static_cast<VulkanSimplified::SdlJoystickPowerLevel>(event.jbattery.level);
+
 		auto size = _joyBatteryEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1031,12 +1221,22 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _joyBatteryEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlControllerAxisEventData event)
+	void SdlEventHandlerInternal::HandleControllerAxisEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlControllerAxisEventData eventData;
+		eventData.timestamp = event.caxis.timestamp;
+		eventData.which = event.caxis.which;
+		eventData.axis = event.caxis.axis;
+		eventData.padding1 = event.caxis.padding1;
+		eventData.padding2 = event.caxis.padding2;
+		eventData.padding3 = event.caxis.padding3;
+		eventData.value = event.caxis.value;
+		eventData.padding4 = 0;
+
 		auto size = _controllerAxisEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1049,12 +1249,21 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _controllerAxisEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlControllerButtonEventData event)
+	void SdlEventHandlerInternal::HandleControllerButtonEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlControllerButtonEventData eventData;
+		eventData.timestamp = event.cbutton.timestamp;
+		eventData.which = event.cbutton.which;
+		eventData.button = event.cbutton.button;
+		eventData.state = event.cbutton.state;
+		eventData.padding1 = event.cbutton.padding1;
+		eventData.padding2 = event.cbutton.padding2;
+		eventData.padding3 = 0;
+
 		auto size = _controllerButtonEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1067,12 +1276,31 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _controllerButtonEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlControllerDeviceEventData event)
+	void SdlEventHandlerInternal::HandleControllerDeviceEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlControllerDeviceEventData eventData;
+		switch (event.type)
+		{
+		case SDL_CONTROLLERDEVICEADDED:
+			eventData.type = VulkanSimplified::SdlControllerDeviceEventType::DEVICE_ADDED;
+			break;
+		case SDL_CONTROLLERDEVICEREMOVED:
+			eventData.type = VulkanSimplified::SdlControllerDeviceEventType::DEVICE_REMOVED;
+			break;
+		case SDL_CONTROLLERDEVICEREMAPPED:
+			eventData.type = VulkanSimplified::SdlControllerDeviceEventType::DEVICE_REMMAPED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleControllerDeviceEvent error: Wrong event type was passed to the function!");
+		}
+		eventData.timestamp = event.cdevice.timestamp;
+		eventData.which = event.cdevice.which;
+		eventData.padding = 0;
+
 		auto size = _controllerDeviceEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1085,12 +1313,37 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _controllerDeviceEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlControllerTouchpadEventData event)
+	void SdlEventHandlerInternal::HandleControllerTouchpadEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlControllerTouchpadEventData eventData;
+
+		switch (event.type)
+		{
+		case SDL_CONTROLLERTOUCHPADDOWN:
+			eventData.type = VulkanSimplified::SdlControllerTouchpadEventType::TOUCHPAD_DOWN;
+			break;
+		case SDL_CONTROLLERTOUCHPADMOTION:
+			eventData.type = VulkanSimplified::SdlControllerTouchpadEventType::TOUCHPAD_MOTION;
+			break;
+		case SDL_CONTROLLERTOUCHPADUP:
+			eventData.type = VulkanSimplified::SdlControllerTouchpadEventType::TOUCHPAD_DOWN;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleControllerTouchpadEvent Error: Wrong event type was passed to the function!");
+		}
+
+		eventData.timestamp = event.ctouchpad.timestamp;
+		eventData.which = event.ctouchpad.which;
+		eventData.touchpad = event.ctouchpad.touchpad;
+		eventData.finger = event.ctouchpad.finger;
+		eventData.x = event.ctouchpad.x;
+		eventData.y = event.ctouchpad.y;
+		eventData.pressure = event.ctouchpad.pressure;
+
 		auto size = _controllerTouchpadEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1103,12 +1356,21 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _controllerTouchpadEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlControllerSensorEventData event)
+	void SdlEventHandlerInternal::HandleControllerSensorEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlControllerSensorEventData eventData;
+		eventData.timestamp = event.csensor.timestamp;
+		eventData.which = event.csensor.which;
+		eventData.sensor = event.csensor.sensor;
+		eventData.data[0] = event.csensor.data[0];
+		eventData.data[1] = event.csensor.data[1];
+		eventData.data[2] = event.csensor.data[2];
+		eventData.timestamp_us = event.csensor.timestamp_us;
+
 		auto size = _controllerSensorEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1121,12 +1383,25 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _controllerSensorEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlAudioDeviceEventData event)
+	void SdlEventHandlerInternal::HandleAudioDeviceEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlAudioDeviceEventData eventData;
+		if (event.type == SDL_AUDIODEVICEADDED)
+			eventData.type = 1;
+		else
+			eventData.type = 0;
+
+		eventData.timestamp = event.adevice.timestamp;
+		eventData.which = event.adevice.which;
+		eventData.iscapture = event.adevice.iscapture;
+		eventData.padding1 = event.adevice.padding1;
+		eventData.padding2 = event.adevice.padding2;
+		eventData.padding3 = event.adevice.padding3;
+
 		auto size = _audioDeviceEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1139,12 +1414,39 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _audioDeviceEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlTouchFingerEventData event)
+	void SdlEventHandlerInternal::HandleTouchFingerEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlTouchFingerEventData eventData;
+
+		switch (event.type)
+		{
+		case SDL_FINGERDOWN:
+			eventData.type = VulkanSimplified::SdlTouchFingerEventType::FINGER_DOWN;
+			break;
+		case SDL_FINGERUP:
+			eventData.type = VulkanSimplified::SdlTouchFingerEventType::FINGER_UP;
+			break;
+		case SDL_FINGERMOTION:
+			eventData.type = VulkanSimplified::SdlTouchFingerEventType::FINGER_MOTION;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleTouchFingerEvent Error: Wrong event type was passed to the function!");
+		}
+
+		eventData.timestamp = event.tfinger.timestamp;
+		eventData.touchId = event.tfinger.touchId;
+		eventData.fingerId = event.tfinger.fingerId;
+		eventData.x = event.tfinger.x;
+		eventData.y = event.tfinger.y;
+		eventData.dx = event.tfinger.dx;
+		eventData.dy = event.tfinger.dy;
+		eventData.pressure = event.tfinger.pressure;
+		eventData.windowID = event.tfinger.windowID;
+
 		auto size = _touchFingerEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1157,12 +1459,24 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _touchFingerEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlMultiGestureEventData event)
+	void SdlEventHandlerInternal::HandleMultiGestureEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlMultiGestureEventData eventData;
+		eventData.timestamp = event.mgesture.timestamp;
+		eventData.padding2 = 0;
+		eventData.touchId = event.mgesture.touchId;
+		eventData.dTheta = event.mgesture.dTheta;
+		eventData.dDist = event.mgesture.dDist;
+		eventData.x = event.mgesture.x;
+		eventData.y = event.mgesture.y;
+		eventData.numFingers = event.mgesture.numFingers;
+		eventData.padding = event.mgesture.padding;
+		eventData.padding3 = 0;
+
 		auto size = _multiGestureEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1175,12 +1489,27 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _multiGestureEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlDollarGestureEventData event)
+	void SdlEventHandlerInternal::HandleDollarGestureEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlDollarGestureEventData eventData;
+
+		if (event.type == SDL_DOLLARGESTURE)
+			eventData.type = 1;
+		else
+			eventData.type = 0;
+
+		eventData.timestamp = event.dgesture.timestamp;
+		eventData.touchId = event.dgesture.touchId;
+		eventData.gestureId = event.dgesture.gestureId;
+		eventData.numFingers = event.dgesture.numFingers;
+		eventData.error = event.dgesture.error;
+		eventData.x = event.dgesture.x;
+		eventData.y = event.dgesture.y;
+
 		auto size = _dollarGestureEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1193,12 +1522,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _dollarGestureEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlClipboardEventData event)
+	void SdlEventHandlerInternal::HandleClipboardEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlClipboardEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _clipboardEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1211,12 +1543,37 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _clipboardEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlDropEventData event)
+	void SdlEventHandlerInternal::HandleDropEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlDropEventData eventData;
+
+		switch (event.type)
+		{
+		case SDL_DROPBEGIN:
+			eventData.type = VulkanSimplified::SdlDropEventType::DROPEVENT_BEGIN;
+			break;
+		case SDL_DROPFILE:
+			eventData.type = VulkanSimplified::SdlDropEventType::DROPEVENT_FILE;
+			break;
+		case SDL_DROPTEXT:
+			eventData.type = VulkanSimplified::SdlDropEventType::DROPEVENT_TEXT;
+			break;
+		case SDL_DROPCOMPLETE:
+			eventData.type = VulkanSimplified::SdlDropEventType::DROPEVENT_COMPLETE;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleDropEvent Error: Wrong event type was passed to the function!");
+		}
+
+		eventData.timestamp = event.drop.timestamp;
+		eventData.file = event.drop.file;
+		eventData.windowID = event.drop.windowID;
+		eventData.padding = 0;
+
 		auto size = _dropEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1229,12 +1586,26 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _dropEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
+
+		if (eventData.file != nullptr)
+			SDL_free(eventData.file);
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlSensorEventData event)
+	void SdlEventHandlerInternal::HandleSensorEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlSensorEventData eventData;
+		eventData.timestamp = event.sensor.timestamp;
+		eventData.which = event.sensor.which;
+		eventData.data[0] = event.sensor.data[0];
+		eventData.data[1] = event.sensor.data[1];
+		eventData.data[2] = event.sensor.data[2];
+		eventData.data[3] = event.sensor.data[3];
+		eventData.data[4] = event.sensor.data[4];
+		eventData.data[5] = event.sensor.data[5];
+		eventData.timestamp_us = event.sensor.timestamp_us;
+
 		auto size = _sensorEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1247,12 +1618,20 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _sensorEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlUserEventData event)
+	void SdlEventHandlerInternal::HandleUserEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlUserEventData eventData;
+		eventData.timestamp = event.user.timestamp;
+		eventData.windowID = event.user.windowID;
+		eventData.code = event.user.code;
+		eventData.padding = 0;
+		eventData.data1 = event.user.data1;
+		eventData.data2 = event.user.data2;
+
 		auto size = _userEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1265,12 +1644,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _userEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlRenderTargetsResetEventData event)
+	void SdlEventHandlerInternal::HandleRenderTargetsResetEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlRenderTargetsResetEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _renderTargetsResetEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1283,12 +1665,15 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _renderTargetsResetEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleEvent(VulkanSimplified::SdlRenderDeviceResetEventData event)
+	void SdlEventHandlerInternal::HandleRenderDeviceResetEvent(const SDL_Event& event)
 	{
+		VulkanSimplified::SdlRenderDeviceResetEventData eventData;
+		eventData.timestamp = event.common.timestamp;
+
 		auto size = _renderDeviceResetEventFunctions.GetUsedSize();
 		size_t current = 0;
 
@@ -1301,7 +1686,7 @@ namespace VulkanSimplifiedInternal
 
 			auto& functiondata = _renderDeviceResetEventFunctions.GetConstObject(current++);
 
-			fallthrough = functiondata.first(event, functiondata.second);
+			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 }

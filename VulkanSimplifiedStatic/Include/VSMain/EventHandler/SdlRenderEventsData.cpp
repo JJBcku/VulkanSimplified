@@ -3,18 +3,18 @@
 
 namespace VulkanSimplified
 {
-	SdlRenderTargetsResetEventData::SdlRenderTargetsResetEventData(const SDL_CommonEvent& eventData)
+	SdlRenderTargetsResetEventData::SdlRenderTargetsResetEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlRenderTargetsResetEventData::~SdlRenderTargetsResetEventData()
 	{
 	}
 
-	SdlRenderDeviceResetEventData::SdlRenderDeviceResetEventData(const SDL_CommonEvent& eventData)
+	SdlRenderDeviceResetEventData::SdlRenderDeviceResetEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlRenderDeviceResetEventData::~SdlRenderDeviceResetEventData()

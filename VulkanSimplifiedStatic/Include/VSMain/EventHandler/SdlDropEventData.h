@@ -1,7 +1,5 @@
 #pragma once
 
-struct SDL_DropEvent;
-
 namespace VulkanSimplified
 {
 	enum class SdlDropEventType : uint32_t
@@ -20,13 +18,7 @@ namespace VulkanSimplified
 		uint32_t windowID;    /**< The window that was dropped on, if any */
 		uint32_t padding;
 
-		SdlDropEventData(const SDL_DropEvent& eventData);
+		SdlDropEventData();
 		~SdlDropEventData();
-
-		SdlDropEventData(const SdlDropEventData&) noexcept = delete;
-		SdlDropEventData(SdlDropEventData&& rhs) noexcept;
-
-		SdlDropEventData& operator=(const SdlDropEventData&) noexcept = delete;
-		SdlDropEventData& operator=(SdlDropEventData&& rhs) noexcept;
 	};
 }

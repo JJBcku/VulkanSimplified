@@ -3,15 +3,15 @@
 
 namespace VulkanSimplified
 {
-	SdlJoyAxisEventData::SdlJoyAxisEventData(const SDL_JoyAxisEvent& eventData)
+	SdlJoyAxisEventData::SdlJoyAxisEventData()
 	{
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		axis = eventData.axis;
-		padding1 = eventData.padding1;
-		padding2 = eventData.padding2;
-		padding3 = eventData.padding3;
-		value = eventData.value;
+		timestamp = 0;
+		which = 0;
+		axis = 0;
+		padding1 = 0;
+		padding2 = 0;
+		padding3 = 0;
+		value = 0;
 		padding4 = 0;
 	}
 
@@ -19,30 +19,30 @@ namespace VulkanSimplified
 	{
 	}
 
-	SdlJoyBallEventData::SdlJoyBallEventData(const SDL_JoyBallEvent& eventData)
+	SdlJoyBallEventData::SdlJoyBallEventData()
 	{
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		ball = eventData.ball;
-		padding1 = eventData.padding1;
-		padding2 = eventData.padding2;
-		padding3 = eventData.padding3;
-		xrel = eventData.xrel;
-		yrel = eventData.yrel;
+		timestamp = 0;
+		which = 0;
+		ball = 0;
+		padding1 = 0;
+		padding2 = 0;
+		padding3 = 0;
+		xrel = 0;
+		yrel = 0;
 	}
 
 	SdlJoyBallEventData::~SdlJoyBallEventData()
 	{
 	}
 
-	SdlJoyHatEventData::SdlJoyHatEventData(const SDL_JoyHatEvent& eventData)
+	SdlJoyHatEventData::SdlJoyHatEventData()
 	{
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		hat = eventData.hat;
-		value = eventData.value;
-		padding1 = eventData.padding1;
-		padding2 = eventData.padding2;
+		timestamp = 0;
+		which = 0;
+		hat = 0;
+		value = 0;
+		padding1 = 0;
+		padding2 = 0;
 		padding3 = 0;
 	}
 
@@ -50,37 +50,33 @@ namespace VulkanSimplified
 	{
 	}
 
-	SdlJoyButtonEventData::SdlJoyButtonEventData(const SDL_JoyButtonEvent& eventData)
+	SdlJoyButtonEventData::SdlJoyButtonEventData()
 	{
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		button = eventData.button;
-		state = eventData.state;
-		padding1 = eventData.padding1;
-		padding2 = eventData.padding2;
+		timestamp = 0;
+		which = 0;
+		button = 0;
+		state = 0;
+		padding1 = 0;
+		padding2 = 0;
 		padding3 = 0;
 	}
 
-	SdlJoyDeviceEventData::SdlJoyDeviceEventData(const SDL_JoyDeviceEvent& eventData)
+	SdlJoyDeviceEventData::SdlJoyDeviceEventData()
 	{
-		if (eventData.type == static_cast<std::uint32_t>(SDL_EventType::SDL_JOYDEVICEADDED))
-			type = 1;
-		else
-			type = 0;
-
-		timestamp = eventData.timestamp;
-		which = eventData.which;
+		type = 0;
+		timestamp = 0;
+		which = 0;
 	}
 
 	SdlJoyDeviceEventData::~SdlJoyDeviceEventData()
 	{
 	}
 
-	SdlJoyBatteryEventData::SdlJoyBatteryEventData(const SDL_JoyBatteryEvent& eventData)
+	SdlJoyBatteryEventData::SdlJoyBatteryEventData()
 	{
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		level = static_cast<SdlJoystickPowerLevel>(eventData.level);
+		timestamp = 0;
+		which = 0;
+		level = static_cast<SdlJoystickPowerLevel>(0);
 	}
 
 	SdlJoyBatteryEventData::~SdlJoyBatteryEventData()

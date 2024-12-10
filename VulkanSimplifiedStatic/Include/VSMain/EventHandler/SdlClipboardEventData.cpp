@@ -3,9 +3,9 @@
 
 namespace VulkanSimplified
 {
-	SdlClipboardEventData::SdlClipboardEventData(const SDL_CommonEvent& eventData)
+	SdlClipboardEventData::SdlClipboardEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlClipboardEventData::~SdlClipboardEventData()

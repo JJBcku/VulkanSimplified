@@ -1,7 +1,5 @@
 #pragma once
 
-struct SDL_SensorEvent;
-
 namespace VulkanSimplified
 {
     struct SdlSensorEventData
@@ -11,7 +9,7 @@ namespace VulkanSimplified
         float data[6];      /**< Up to 6 values from the sensor - additional values can be queried using SDL_SensorGetData() */
         uint64_t timestamp_us; /**< The timestamp of the sensor reading in microseconds, if the hardware provides this information. */
 
-        SdlSensorEventData(const SDL_SensorEvent& eventData);
+        SdlSensorEventData();
         ~SdlSensorEventData();
     };
 }

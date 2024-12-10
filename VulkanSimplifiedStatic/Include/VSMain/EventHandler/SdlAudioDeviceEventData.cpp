@@ -3,19 +3,15 @@
 
 namespace VulkanSimplified
 {
-	SdlAudioDeviceEventData::SdlAudioDeviceEventData(const SDL_AudioDeviceEvent& eventData)
+	SdlAudioDeviceEventData::SdlAudioDeviceEventData()
 	{
-		if (eventData.type == SDL_AUDIODEVICEADDED)
-			type = 1;
-		else
-			type = 0;
-
-		timestamp = eventData.timestamp;
-		which = eventData.which;
-		iscapture = eventData.iscapture;
-		padding1 = eventData.padding1;
-		padding2 = eventData.padding2;
-		padding3 = eventData.padding3;
+		type = 0;
+		timestamp = 0;
+		which = 0;
+		iscapture = 0;
+		padding1 = 0;
+		padding2 = 0;
+		padding3 = 0;
 	}
 
 	SdlAudioDeviceEventData::~SdlAudioDeviceEventData()

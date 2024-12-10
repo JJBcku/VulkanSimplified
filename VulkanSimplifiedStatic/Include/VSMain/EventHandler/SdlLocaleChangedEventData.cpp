@@ -3,9 +3,9 @@
 
 namespace VulkanSimplified
 {
-	SdlLocaleChangeEventData::SdlLocaleChangeEventData(const SDL_CommonEvent& eventData)
+	SdlLocaleChangeEventData::SdlLocaleChangeEventData()
 	{
-		timestamp = eventData.timestamp;
+		timestamp = 0;
 	}
 
 	SdlLocaleChangeEventData::~SdlLocaleChangeEventData()

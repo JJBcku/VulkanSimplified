@@ -1,14 +1,12 @@
 #pragma once
 
-struct SDL_CommonEvent;
-
 namespace VulkanSimplified
 {
 	struct SdlAppTerminatingEventData
 	{
 		uint32_t timestamp;
 
-		SdlAppTerminatingEventData(const SDL_CommonEvent& eventData);
+		SdlAppTerminatingEventData();
 		~SdlAppTerminatingEventData();
 	};
 
@@ -16,7 +14,7 @@ namespace VulkanSimplified
 	{
 		uint32_t timestamp;
 
-		SdlAppLowMemoryEventData(const SDL_CommonEvent& eventData);
+		SdlAppLowMemoryEventData();
 		~SdlAppLowMemoryEventData();
 	};
 
@@ -24,7 +22,7 @@ namespace VulkanSimplified
 	{
 		uint32_t timestamp;
 
-		SdlAppWillEnterBackgroundEventData(const SDL_CommonEvent& eventData);
+		SdlAppWillEnterBackgroundEventData();
 		~SdlAppWillEnterBackgroundEventData();
 	};
 
@@ -32,7 +30,7 @@ namespace VulkanSimplified
 	{
 		uint32_t timestamp;
 
-		SdlAppDidEnterBackgroundEventData(const SDL_CommonEvent& eventData);
+		SdlAppDidEnterBackgroundEventData();
 		~SdlAppDidEnterBackgroundEventData();
 	};
 
@@ -40,7 +38,7 @@ namespace VulkanSimplified
 	{
 		uint32_t timestamp;
 
-		SdlAppWillEnterForegroundEventData(const SDL_CommonEvent& eventData);
+		SdlAppWillEnterForegroundEventData();
 		~SdlAppWillEnterForegroundEventData();
 	};
 
@@ -48,7 +46,7 @@ namespace VulkanSimplified
 	{
 		uint32_t timestamp;
 
-		SdlAppDidEnterForegroundEventData(const SDL_CommonEvent& eventData);
+		SdlAppDidEnterForegroundEventData();
 		~SdlAppDidEnterForegroundEventData();
 	};
 }
