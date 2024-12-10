@@ -5,6 +5,8 @@
 
 #include "VSMainInitData.h"
 
+#include "EventHandler/SdlEventHandler.h"
+
 VSMain::VSMain(const VSMainInitData& initData)
 {
 	_internal = std::make_unique<VSMainInternal>(initData);
@@ -12,4 +14,14 @@ VSMain::VSMain(const VSMainInitData& initData)
 
 VSMain::~VSMain()
 {
+}
+
+SdlEventHandler VSMain::GetSdlEventHandler()
+{
+	return _internal->GetSdlEventHandler();
+}
+
+const SdlEventHandler VSMain::GetSdlEventHandler() const
+{
+	return _internal->GetSdlEventHandler();
 }

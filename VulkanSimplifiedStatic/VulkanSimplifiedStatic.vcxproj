@@ -71,6 +71,9 @@
       <AdditionalDependencies>SDL2d.lib;vulkan-1.lib;CustomLists.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>"$(SolutionDir)\ExternalLibs\CustomLists\x64 Debug";$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -98,17 +101,126 @@
       <AdditionalDependencies>SDL2.lib;vulkan-1.lib;CustomLists.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>"$(SolutionDir)\ExternalLibs\CustomLists\x64 Release";$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlAppEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlAudioDeviceEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlClipboardEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlControllerEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlDisplayEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlDropEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEhIframework.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEhIpch.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandler.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerInitData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlJoyEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlKeyboardEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlLocaleChangedEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlMouseEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlQuitEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlRenderEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlSensorEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlTextEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlTouchpadEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlUserEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlWindowEventData.h" />
     <ClInclude Include="Include\VSMain\VSMain.h" />
     <ClInclude Include="Include\VSMain\VSMainIframework.h" />
     <ClInclude Include="Include\VSMain\VSMainInitData.h" />
     <ClInclude Include="Include\VSMain\VSMainIpch.h" />
+    <ClInclude Include="NoInclude\VSMain\EventHandler\SdlEhNIframework.h" />
+    <ClInclude Include="NoInclude\VSMain\EventHandler\SdlEhNIpch.h" />
+    <ClInclude Include="NoInclude\VSMain\EventHandler\SdlEventHandlerInternal.h" />
     <ClInclude Include="NoInclude\VSMain\VSMainNIframework.h" />
     <ClInclude Include="NoInclude\VSMain\VSMainInternal.h" />
     <ClInclude Include="NoInclude\VSMain\VSMainNIpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlAppEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlAudioDeviceEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlClipboardEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlControllerEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlDisplayEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlDropEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlEhIpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlEventHandler.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlEventHandlerInitData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlJoyEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlKeyboardEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlLocaleChangedEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlMouseEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlQuitEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlRenderEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlSensorEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlTextEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlTouchpadEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlUserEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlWindowEventData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Include\VSMain\VSMain.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMainIpch.h</PrecompiledHeaderFile>
@@ -122,6 +234,16 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMainIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSMain\EventHandler\SdlEhNIpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhNIpch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSMain\EventHandler\SdlEventHandlerInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhNipch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhNipch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="NoInclude\VSMain\VSMainInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainNIpch.h</PrecompiledHeaderFile>

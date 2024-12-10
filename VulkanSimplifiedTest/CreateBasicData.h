@@ -2,4 +2,6 @@
 
 struct VulkanData;
 
-void CreateBasicData(VulkanData& data);
+class MainSettings;
+
+void CreateBasicData(VulkanData& data, MainSettings& settings);

@@ -1,9 +1,8 @@
 #include "VSMainIpch.h"
 #include "VSMainInitData.h"
 
-VSMainInitData::VSMainInitData()
+VSMainInitData::VSMainInitData() : eventHandlerData(4), stump(2)
 {
-	stump = 3;
 }
 
 VSMainInitData::~VSMainInitData()
