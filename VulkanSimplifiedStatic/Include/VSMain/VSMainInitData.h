@@ -7,7 +7,7 @@
 
 namespace VulkanSimplified
 {
-	struct VSMainInitData
+	struct MainInitData
 	{
 		std::string appName;
 		std::string appVariantName;
@@ -17,7 +17,7 @@ namespace VulkanSimplified
 
 		SdlEventHandlerInitData eventHandlerData;
 
-		VSMainInitData();
-		~VSMainInitData();
+		MainInitData();
+		~MainInitData();
 	};
 }

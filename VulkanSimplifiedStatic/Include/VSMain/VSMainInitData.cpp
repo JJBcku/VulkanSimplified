@@ -3,11 +3,11 @@
 
 namespace VulkanSimplified
 {
-	VSMainInitData::VSMainInitData() : eventHandlerData(0)
+	MainInitData::MainInitData() : eventHandlerData(0)
 	{
 	}
 
-	VSMainInitData::~VSMainInitData()
+	MainInitData::~MainInitData()
 	{
 	}
 }

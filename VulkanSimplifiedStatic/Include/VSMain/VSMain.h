@@ -4,22 +4,24 @@
 
 namespace VulkanSimplifiedInternal
 {
-	class VSMainInternal;
+	class MainInternal;
 }
 
 namespace VulkanSimplified
 {
-	struct VSMainInitData;
+	struct MainInitData;
+	struct InstanceExtensionPacksList;
+	struct InstanceLayerPacksList;
 
 	class SdlEventHandler;
 
 	class VulkanVersionData;
 
-	class VSMain
+	class Main
 	{
 	public:
-		VSMain(const VSMainInitData& initData);
-		~VSMain();
+		Main(const MainInitData& initData);
+		~Main();
 
 		SdlEventHandler GetSdlEventHandler();
 
@@ -28,7 +30,10 @@ namespace VulkanSimplified
 		VulkanVersionData GetAppVersion() const;
 		VulkanVersionData GetMaxAvailableVulkanVersion() const;
 
+		InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
+		InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
+
 	private:
-		std::unique_ptr<VulkanSimplifiedInternal::VSMainInternal> _internal;
+		std::unique_ptr<VulkanSimplifiedInternal::MainInternal> _internal;
 	};
 }

@@ -44,10 +44,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicIncludeDirectories>Include\VSMain</PublicIncludeDirectories>
+    <PublicIncludeDirectories>Include/VSMain;Include/VSMain/EventHandler;Include/VSCommon</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PublicIncludeDirectories>Include\VSMain</PublicIncludeDirectories>
+    <PublicIncludeDirectories>Include/VSMain;Include/VSMain/EventHandler;Include/VSCommon</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -131,6 +131,8 @@
     <ClInclude Include="Include\VSMain\EventHandler\SdlTouchpadEventData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlUserEventData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlWindowEventData.h" />
+    <ClInclude Include="Include\VSMain\VSInstanceExtensionPacksList.h" />
+    <ClInclude Include="Include\VSMain\VSInstanceLayerPacksList.h" />
     <ClInclude Include="Include\VSMain\VSMain.h" />
     <ClInclude Include="Include\VSMain\VSMainIframework.h" />
     <ClInclude Include="Include\VSMain\VSMainInitData.h" />
@@ -278,6 +280,18 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\VSInstanceExtensionPacksList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSMainIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMainIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSMainIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\VSInstanceLayerPacksList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSMainIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMainIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSMainIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSMain\VSMain.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainIpch.h</PrecompiledHeaderFile>

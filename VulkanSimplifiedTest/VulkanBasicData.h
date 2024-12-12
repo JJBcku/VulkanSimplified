@@ -6,7 +6,7 @@
 
 struct VulkanBasicData
 {
-	std::optional<VulkanSimplified::VSMain> vsmain;
+	std::optional<VulkanSimplified::Main> vsmain;
 
 	VulkanBasicData();
 	~VulkanBasicData();

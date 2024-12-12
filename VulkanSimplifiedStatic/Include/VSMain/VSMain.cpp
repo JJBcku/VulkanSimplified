@@ -9,33 +9,43 @@
 
 namespace VulkanSimplified
 {
-	VSMain::VSMain(const VSMainInitData& initData)
+	Main::Main(const MainInitData& initData)
 	{
-		_internal = std::make_unique<VulkanSimplifiedInternal::VSMainInternal>(initData);
+		_internal = std::make_unique<VulkanSimplifiedInternal::MainInternal>(initData);
 	}
 
-	VSMain::~VSMain()
+	Main::~Main()
 	{
 	}
 
-	SdlEventHandler VSMain::GetSdlEventHandler()
-	{
-		return _internal->GetSdlEventHandler();
-	}
-
-	const SdlEventHandler VSMain::GetSdlEventHandler() const
+	SdlEventHandler Main::GetSdlEventHandler()
 	{
 		return _internal->GetSdlEventHandler();
 	}
 
-	VulkanVersionData VSMain::GetAppVersion() const
+	const SdlEventHandler Main::GetSdlEventHandler() const
+	{
+		return _internal->GetSdlEventHandler();
+	}
+
+	VulkanVersionData Main::GetAppVersion() const
 	{
 		return _internal->GetAppVersion();
 	}
 
-	VulkanVersionData VSMain::GetMaxAvailableVulkanVersion() const
+	VulkanVersionData Main::GetMaxAvailableVulkanVersion() const
 	{
 		return _internal->GetMaxAvailableVulkanVersion();
+	}
+
+	InstanceExtensionPacksList Main::GetAvailableInstanceExtensionPacks() const
+	{
+		return _internal->GetAvailableInstanceExtensionPacks();
+	}
+
+	InstanceLayerPacksList Main::GetAvailableInstanceLayerPacks() const
+	{
+		return _internal->GetAvailableInstanceLayerPacks();
 	}
 
 }

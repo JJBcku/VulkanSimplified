@@ -5,21 +5,21 @@
 #include <string>
 
 #include "../../Include/VSCommon/VulkanVersionData.h"
+#include "../../Include/VSMain/VSInstanceExtensionPacksList.h"
+#include "../../Include/VSMain/VSInstanceLayerPacksList.h"
 
 namespace VulkanSimplified
 {
-	struct VSMainInitData;
-
-	class VulkanVersionData;
+	struct MainInitData;
 }
 
 namespace VulkanSimplifiedInternal
 {
-	class VSMainInternal
+	class MainInternal
 	{
 	public:
-		VSMainInternal(const VulkanSimplified::VSMainInitData& initData);
-		~VSMainInternal();
+		MainInternal(const VulkanSimplified::MainInitData& initData);
+		~MainInternal();
 
 		SdlEventHandlerInternal& GetSdlEventHandler();
 
@@ -27,7 +27,8 @@ namespace VulkanSimplifiedInternal
 
 		VulkanSimplified::VulkanVersionData GetAppVersion() const;
 		VulkanSimplified::VulkanVersionData GetMaxAvailableVulkanVersion() const;
-		//InstanceExtensionList GetAvailableInstanceExtensions() const;
+		VulkanSimplified::InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
+		VulkanSimplified::InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
 
 	private:
 		std::string _appName;
@@ -37,9 +38,14 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::VulkanVersionData _engineVersion;
 
 		VulkanSimplified::VulkanVersionData _maxApiVersion;
+		VulkanSimplified::InstanceExtensionPacksList _availableExtensionPacksList;
+		VulkanSimplified::InstanceLayerPacksList _availableLayerPacksList;
 
 		SdlEventHandlerInternal _eventHandler;
 
 		uint32_t FindMaximumAvailableVulkanVersion() const;
+
+		VulkanSimplified::InstanceExtensionPacksList CompileAvailableInstanceExtensionPacks() const;
+		VulkanSimplified::InstanceLayerPacksList CompileAvailableInstanceLayerPacks() const;
 	};
 }
