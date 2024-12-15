@@ -6,6 +6,9 @@
 #include "VSMainInitData.h"
 
 #include "EventHandler/SdlEventHandler.h"
+#include "../VSInstance/VSInstance.h"
+
+#include "../VSInstance/VSInstanceInitData.h"
 
 namespace VulkanSimplified
 {
@@ -18,9 +21,30 @@ namespace VulkanSimplified
 	{
 	}
 
+	Main::Main(Main&& rhs) noexcept : _internal(std::move(rhs._internal))
+	{
+	}
+
+	Main& Main::operator=(Main&& rhs) noexcept
+	{
+		_internal = std::move(rhs._internal);
+		return *this;
+	}
+
+	void Main::CreateInstance(const InstanceInitData& instanceInit)
+	{
+		assert(_internal);
+		_internal->CreateInstance(instanceInit);
+	}
+
 	SdlEventHandler Main::GetSdlEventHandler()
 	{
 		return _internal->GetSdlEventHandler();
+	}
+
+	Instance Main::GetInstance()
+	{
+		return _internal->GetInstance();
 	}
 
 	const SdlEventHandler Main::GetSdlEventHandler() const
@@ -28,12 +52,17 @@ namespace VulkanSimplified
 		return _internal->GetSdlEventHandler();
 	}
 
-	VulkanVersionData Main::GetAppVersion() const
+	const Instance Main::GetInstance() const
+	{
+		return _internal->GetInstance();
+	}
+
+	VersionData Main::GetAppVersion() const
 	{
 		return _internal->GetAppVersion();
 	}
 
-	VulkanVersionData Main::GetMaxAvailableVulkanVersion() const
+	VersionData Main::GetMaxAvailableVulkanVersion() const
 	{
 		return _internal->GetMaxAvailableVulkanVersion();
 	}

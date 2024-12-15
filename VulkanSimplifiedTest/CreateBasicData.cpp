@@ -15,6 +15,9 @@
 #include "VSInstanceExtensionPacksList.h"
 #include "VSInstanceLayerPacksList.h"
 
+#include "VSInstanceInitData.h"
+#include "VSInstance.h"
+
 #include "CustomLists/IDObject.h"
 
 #include <functional>
@@ -49,4 +52,18 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 	auto eventHandler = main.GetSdlEventHandler();
 
 	eventHandler.RegisterQuitEventCallback(MainSettings::QuitEventCallback, &settings, 1);
+
+	VulkanSimplified::InstanceInitData instanceInit;
+	instanceInit.usedVulkanApiVersion = main.GetMaxAvailableVulkanVersion();
+	instanceInit.enabledExtensionPacks.sdlRequiredExtensions = true;
+
+#if defined(_DEBUG) || defined(DEBUG) || defined(DEBUG_UTILS)
+	instanceInit.enabledExtensionPacks.debugUtils = true;
+
+	instanceInit.enabledLayerPacks.debugUtils = true;
+#endif
+
+	main.CreateInstance(instanceInit);
+
+	auto instance = main.GetInstance();
 }

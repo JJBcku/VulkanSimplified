@@ -55,15 +55,27 @@
     <Filter Include="Source Files\Include\Common">
       <UniqueIdentifier>{638d1e8e-65b2-49de-85ea-9ae8062593d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Include\Instance">
+      <UniqueIdentifier>{d668984a-877e-462c-9aba-201822ffdee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\NoInclude\Instance">
+      <UniqueIdentifier>{05c85ff0-1702-4154-994f-94d0d842cd8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Include\Instance">
+      <UniqueIdentifier>{fdb45629-5436-426c-a083-1dbf292d3f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NoInclude\Instance">
+      <UniqueIdentifier>{7eca6af5-fb01-4e4c-8b3d-4c8cba91bd71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\VSCommon\VsCommonIframework.h">
+    <ClInclude Include="Include\VSCommon\VSCommonIframework.h">
       <Filter>Header Files\Include\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSCommon\VsCommonIpch.h">
+    <ClInclude Include="Include\VSCommon\VSCommonIpch.h">
       <Filter>Header Files\Include\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSCommon\VulkanVersionData.h">
+    <ClInclude Include="Include\VSCommon\VSVersionData.h">
       <Filter>Header Files\Include\Common</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSMain\EventHandler\SdlAppEventsData.h">
@@ -168,9 +180,36 @@
     <ClInclude Include="NoInclude\VSMain\VSMainNIpch.h">
       <Filter>Header Files\NoInclude\Main</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSInstance.h">
+      <Filter>Header Files\Include\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSInstanceInitData.h">
+      <Filter>Header Files\Include\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSInstanceIpch.h">
+      <Filter>Header Files\Include\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSInstanceIframework.h">
+      <Filter>Header Files\Include\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSInstance\VSDebugCallback.h">
+      <Filter>Header Files\NoInclude\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSInstance\VSInstanceInitDataInternal.h">
+      <Filter>Header Files\NoInclude\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSInstance\VSInstanceInternal.h">
+      <Filter>Header Files\NoInclude\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSInstance\VSInstanceNIframework.h">
+      <Filter>Header Files\NoInclude\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSInstance\VSInstanceNIpch.h">
+      <Filter>Header Files\NoInclude\Instance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Include\VSCommon\VsCommonIpch.cpp">
+    <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
       <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSMain\EventHandler\SdlAppEventsData.cpp">
@@ -245,7 +284,7 @@
     <ClCompile Include="Include\VSMain\VSInstanceLayerPacksList.cpp">
       <Filter>Source Files\Include\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSCommon\VulkanVersionData.cpp">
+    <ClCompile Include="Include\VSCommon\VSVersionData.cpp">
       <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSMain\VSMain.cpp">
@@ -262,6 +301,27 @@
     </ClCompile>
     <ClCompile Include="NoInclude\VSMain\VSMainNIpch.cpp">
       <Filter>Source Files\NoInclude\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSInstance\VSInstance.cpp">
+      <Filter>Source Files\Include\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSInstance\VSInstanceInitData.cpp">
+      <Filter>Source Files\Include\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSInstance\VSInstanceIpch.cpp">
+      <Filter>Source Files\Include\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSInstance\VSDebugCallback.cpp">
+      <Filter>Source Files\NoInclude\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSInstance\VSInstanceInitDataInternal.cpp">
+      <Filter>Source Files\NoInclude\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSInstance\VSInstanceInternal.cpp">
+      <Filter>Source Files\NoInclude\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSInstance\VSInstanceNIpch.cpp">
+      <Filter>Source Files\NoInclude\Instance</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

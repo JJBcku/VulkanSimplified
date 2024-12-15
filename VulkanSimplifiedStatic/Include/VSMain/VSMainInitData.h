@@ -1,7 +1,7 @@
 #pragma once
 
 #include "EventHandler/SdlEventHandlerInitData.h"
-#include "../VSCommon/VulkanVersionData.h"
+#include "../VSCommon/VSVersionData.h"
 
 #include <string>
 
@@ -11,9 +11,9 @@ namespace VulkanSimplified
 	{
 		std::string appName;
 		std::string appVariantName;
-		VulkanVersionData appVersion;
+		VersionData appVersion;
 		std::string engineName;
-		VulkanVersionData engineVersion;
+		VersionData engineVersion;
 
 		SdlEventHandlerInitData eventHandlerData;
 

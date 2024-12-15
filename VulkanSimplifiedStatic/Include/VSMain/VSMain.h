@@ -13,9 +13,12 @@ namespace VulkanSimplified
 	struct InstanceExtensionPacksList;
 	struct InstanceLayerPacksList;
 
-	class SdlEventHandler;
+	struct InstanceInitData;
 
-	class VulkanVersionData;
+	class SdlEventHandler;
+	class Instance;
+
+	class VersionData;
 
 	class Main
 	{
@@ -23,12 +26,22 @@ namespace VulkanSimplified
 		Main(const MainInitData& initData);
 		~Main();
 
+		Main(const Main&) noexcept = delete;
+		Main(Main&& rhs) noexcept;
+
+		Main& operator=(const Main&) noexcept = delete;
+		Main& operator=(Main&& rhs) noexcept;
+
+		void CreateInstance(const InstanceInitData& instanceInit);
+
 		SdlEventHandler GetSdlEventHandler();
+		Instance GetInstance();
 
 		const SdlEventHandler GetSdlEventHandler() const;
+		const Instance GetInstance() const;
 
-		VulkanVersionData GetAppVersion() const;
-		VulkanVersionData GetMaxAvailableVulkanVersion() const;
+		VersionData GetAppVersion() const;
+		VersionData GetMaxAvailableVulkanVersion() const;
 
 		InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
 		InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
