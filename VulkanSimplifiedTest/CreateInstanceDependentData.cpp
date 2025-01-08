@@ -446,4 +446,9 @@ void CreateInstanceDependentData(VulkanData& data)
 
 	auto graphicQueueData = PickGraphicQueueFamily(physicalDevice);
 	auto transferOnly = TryToFindTransferOnlyQueue(physicalDevice);
+
+	if (!graphicQueueData.second)
+	{
+		auto presentingQueue = FindPresentingQueue(physicalDevice.GetVulkanQueueFamiliesData());
+	}
 }
