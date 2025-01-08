@@ -21,7 +21,6 @@
 #include "CustomLists/IDObject.h"
 
 #include <functional>
-#include <stdexcept>
 
 void CreateBasicData(VulkanData& data, MainSettings& settings)
 {
@@ -64,6 +63,4 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 #endif
 
 	main.CreateInstance(instanceInit);
-
-	auto instance = main.GetInstance();
 }

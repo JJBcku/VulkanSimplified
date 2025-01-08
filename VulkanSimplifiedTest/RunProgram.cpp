@@ -5,6 +5,7 @@
 #include "MainSettings.h"
 
 #include "CreateBasicData.h"
+#include "CreateInstanceDependentData.h"
 
 void RunProgram()
 {
@@ -12,4 +13,5 @@ void RunProgram()
 	MainSettings settings;
 
 	CreateBasicData(data, settings);
+	CreateInstanceDependentData(data);
 }

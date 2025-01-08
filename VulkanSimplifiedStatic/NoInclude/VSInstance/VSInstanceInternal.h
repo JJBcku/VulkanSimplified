@@ -7,6 +7,8 @@ namespace VulkanSimplifiedInternal
 {
 	struct InstanceInitDataInternal;
 
+	class PhysicalDeviceDataInternal;
+
 	class InstanceInternal
 	{
 	public:
@@ -19,11 +21,21 @@ namespace VulkanSimplifiedInternal
 		InstanceInternal& operator=(const InstanceInternal&) noexcept = delete;
 		InstanceInternal& operator=(InstanceInternal&&) noexcept = delete;
 
+		size_t GetAvailableDevicesCount() const;
+
+		PhysicalDeviceDataInternal& GetPhysicalDeviceData(size_t deviceIndex);
+
+		const PhysicalDeviceDataInternal& GetPhysicalDeviceData(size_t deviceIndex) const;
+
 	private:
 		VkInstance _instance;
 		VkDebugUtilsMessengerEXT _debugMessenger;
 
 		VulkanSimplified::InstanceExtensionPacksList _enabledExtensionPacksList;
 		VulkanSimplified::InstanceLayerPacksList _enabledLayerPacksList;
+
+		std::vector<PhysicalDeviceDataInternal> _availableDevices;
+
+		void EnumerateDevices();
 	};
 }

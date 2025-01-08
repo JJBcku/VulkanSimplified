@@ -4,6 +4,8 @@
 #include "VSInstanceInitDataInternal.h"
 #include "VSDebugCallback.h"
 
+#include "VSPhysicalDeviceDataInternal.h"
+
 namespace VulkanSimplifiedInternal
 {
 	InstanceInternal::InstanceInternal(const InstanceInitDataInternal& initData)
@@ -65,6 +67,8 @@ namespace VulkanSimplifiedInternal
 
 		_enabledExtensionPacksList = initData.enabledExtensionPacksList;
 		_enabledLayerPacksList = initData.enabledLayerPacksList;
+
+		EnumerateDevices();
 	}
 
 	InstanceInternal::~InstanceInternal()
@@ -84,6 +88,77 @@ namespace VulkanSimplifiedInternal
 		{
 			vkDestroyInstance(_instance, nullptr);
 		}
+	}
+
+	void InstanceInternal::EnumerateDevices()
+	{
+		std::uint32_t size = 0;
+		std::vector<VkPhysicalDevice> physicalDevices;
+
+		auto result = vkEnumeratePhysicalDevices(_instance, &size, nullptr);
+
+		if (result == VK_SUCCESS && size > 0)
+		{
+			physicalDevices.resize(size);
+			_availableDevices.reserve(size);
+
+			result = vkEnumeratePhysicalDevices(_instance, &size, physicalDevices.data());
+
+			if (result != VK_SUCCESS)
+				throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to enumerate physical devices!");
+
+			VkSurfaceKHR testSurface = VK_NULL_HANDLE;
+			SDL_Window* testWindow = nullptr;
+
+			if (_enabledExtensionPacksList.sdlRequiredExtensions)
+			{
+				Uint32 windowFlags = SDL_WINDOW_VULKAN | SDL_WINDOW_HIDDEN | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS;
+
+				testWindow = SDL_CreateWindow("Device Enumeration Window!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 800, windowFlags);
+
+				if (testWindow == nullptr)
+					throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to create a window!");
+
+				if (SDL_Vulkan_CreateSurface(testWindow, _instance, &testSurface) != SDL_TRUE)
+					throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to create a window's surface!");
+			}
+
+			for (auto& device : physicalDevices)
+			{
+				_availableDevices.emplace_back(device, testSurface);
+			}
+
+			if (testSurface != VK_NULL_HANDLE)
+			{
+				vkDestroySurfaceKHR(_instance, testSurface, nullptr);
+				SDL_DestroyWindow(testWindow);
+			}
+		}
+		else
+		{
+			throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to find any Vulkan compatible devices!");
+		}
+	}
+
+	size_t InstanceInternal::GetAvailableDevicesCount() const
+	{
+		return _availableDevices.size();
+	}
+
+	PhysicalDeviceDataInternal& InstanceInternal::GetPhysicalDeviceData(size_t deviceIndex)
+	{
+		if (deviceIndex >= _availableDevices.size())
+			throw std::runtime_error("InstanceInternal::GetPhysicalDeviceData Error: Program tried to read past the end of the list");
+
+		return _availableDevices[deviceIndex];
+	}
+
+	const PhysicalDeviceDataInternal& InstanceInternal::GetPhysicalDeviceData(size_t deviceIndex) const
+	{
+		if (deviceIndex >= _availableDevices.size())
+			throw std::runtime_error("InstanceInternal::GetPhysicalDeviceData Const Error: Program tried to read past the end of the list");
+
+		return _availableDevices[deviceIndex];
 	}
 
 }

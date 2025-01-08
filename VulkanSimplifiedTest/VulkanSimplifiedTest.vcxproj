@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreateBasicData.cpp" />
+    <ClCompile Include="CreateInstanceDependentData.cpp" />
     <ClCompile Include="MainSettings.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreateBasicData.h" />
+    <ClInclude Include="CreateInstanceDependentData.h" />
     <ClInclude Include="MainSettings.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RunProgram.h" />

@@ -7,6 +7,8 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
+	class PhysicalDeviceData;
+
 	class Instance
 	{
 	public:
@@ -14,6 +16,12 @@ namespace VulkanSimplified
 		~Instance();
 
 		Instance& operator=(const Instance&) noexcept = delete;
+
+		size_t GetAvailableDevicesCount() const;
+
+		PhysicalDeviceData GetPhysicalDeviceData(size_t deviceIndex);
+
+		const PhysicalDeviceData GetPhysicalDeviceData(size_t deviceIndex) const;
 
 	private:
 		VulkanSimplifiedInternal::InstanceInternal& _internal;
