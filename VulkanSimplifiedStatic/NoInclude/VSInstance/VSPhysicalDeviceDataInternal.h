@@ -18,6 +18,8 @@ namespace VulkanSimplifiedInternal
 		PhysicalDeviceDataInternal(VkPhysicalDevice device, VkSurfaceKHR testSurface);
 		~PhysicalDeviceDataInternal();
 
+		PhysicalDeviceDataInternal(const PhysicalDeviceDataInternal& rhs) noexcept = default;
+
 		const VulkanSimplified::DeviceVulkan10Properties& GetVulkan10Properties() const;
 		const VulkanSimplified::DeviceVulkan10FeatureFlags& GetVulkan10Features() const;
 		const VulkanSimplified::DeviceExtensionPacksList& GetDeviceExtensionPacks() const;
@@ -25,6 +27,11 @@ namespace VulkanSimplifiedInternal
 		const VulkanSimplified::FormatsSupportedFeatures& GetFormatsSupportedFeatures() const;
 		const VulkanSimplified::MemoryDataList& GetAvailableMemoryDataList() const;
 		const std::optional<VulkanSimplified::SurfaceSupportData>& GetSurfaceSupport() const;
+
+		VkPhysicalDevice GetPhysicalDevice() const;
+
+		static std::vector<const char*> CompileDevicesRequestedExtensionList(const VulkanSimplified::DeviceExtensionPacksList& extensionPacksList);
+		static VkPhysicalDeviceFeatures CompileDevicesRequestedVulkan10Features(const VulkanSimplified::DeviceVulkan10FeatureFlags& requestedFeatures);
 
 	private:
 		VkPhysicalDevice _device;
@@ -60,5 +67,7 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::MemoryHeapProperties GetMemoryHeapProperties(VkMemoryHeapFlags propertyFlags) const;
 
 		std::optional<VulkanSimplified::SurfaceSupportData> CompileSurfaceSupport(VkSurfaceKHR testSurface) const;
+
+		static void AddToConstCharVector(std::vector<const char*>& vector, const char* addedObject);
 	};
 }

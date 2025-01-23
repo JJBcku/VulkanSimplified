@@ -1,9 +1,9 @@
 #include "VSInstanceNIpch.h"
-#include "VSInstanceInitDataInternal.h"
+#include "VSInstanceInternalCreationData.h"
 
 namespace VulkanSimplifiedInternal
 {
-	VulkanSimplifiedInternal::InstanceInitDataInternal::InstanceInitDataInternal()
+	InstanceInternalCreationData::InstanceInternalCreationData()
 	{
 		appName = "Unknown";
 		appVersion = 0;

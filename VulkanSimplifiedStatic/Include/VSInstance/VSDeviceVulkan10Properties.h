@@ -15,10 +15,10 @@ namespace VulkanSimplified
 
 	struct DeviceVulkan10Properties
 	{
-		std::uint32_t apiMaxSupportedVersion;
-		std::uint32_t driverVersion;
-		std::uint32_t vendorID;
-		std::uint32_t deviceID;
+		uint32_t apiMaxSupportedVersion;
+		uint32_t driverVersion;
+		uint32_t vendorID;
+		uint32_t deviceID;
 		DeviceType deviceType;
 		std::string deviceName;
 		std::array<std::uint8_t, 16> pipelineCacheUUID;

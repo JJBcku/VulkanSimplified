@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSDeviceVulkan10FeatureFlags.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t DeviceVulkan10FeatureFlags;
-
 	enum DeviceVulkan10FeaturesFlagBits : DeviceVulkan10FeatureFlags
 	{
 		DEVICE_VULKAN10_FEATURE_FULL_DRAW_INDEX_UINT32 = 0x1,

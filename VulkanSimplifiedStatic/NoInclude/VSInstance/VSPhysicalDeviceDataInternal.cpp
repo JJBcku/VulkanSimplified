@@ -3,6 +3,8 @@
 
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
 
+#include "../VSCommon/VSCStringsComparison.h"
+
 namespace VulkanSimplifiedInternal
 {
 
@@ -58,6 +60,73 @@ namespace VulkanSimplifiedInternal
 	const std::optional<VulkanSimplified::SurfaceSupportData>& PhysicalDeviceDataInternal::GetSurfaceSupport() const
 	{
 		return _surfaceSupport;
+	}
+
+	VkPhysicalDevice PhysicalDeviceDataInternal::GetPhysicalDevice() const
+	{
+		return _device;
+	}
+
+	std::vector<const char*> PhysicalDeviceDataInternal::CompileDevicesRequestedExtensionList(const VulkanSimplified::DeviceExtensionPacksList& extensionPacksList)
+	{
+		std::vector<const char*> ret;
+		ret.reserve(16);
+
+		if (extensionPacksList.swapchainBase)
+		{
+			ret.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+		}
+
+		if (!ret.empty())
+		{
+			std::stable_sort(ret.begin(), ret.end(), &ISFirstCStringLesser);
+			ret.erase(std::unique(ret.begin(), ret.end(), &AreCStringEqual), ret.end());
+		}
+
+		return ret;
+	}
+
+	VkPhysicalDeviceFeatures PhysicalDeviceDataInternal::CompileDevicesRequestedVulkan10Features(const VulkanSimplified::DeviceVulkan10FeatureFlags& requestedFeatures)
+	{
+		VkPhysicalDeviceFeatures ret{};
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_FULL_DRAW_INDEX_UINT32) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_FULL_DRAW_INDEX_UINT32)
+			ret.fullDrawIndexUint32 = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_INDEPENDENT_BLEND) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_INDEPENDENT_BLEND)
+			ret.independentBlend = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_FILL_MODE_NONSOLID) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_FILL_MODE_NONSOLID)
+			ret.fillModeNonSolid = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY)
+			ret.samplerAnisotropy = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_TEXTURE_COMPRESSION_ETC2) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_TEXTURE_COMPRESSION_ETC2)
+			ret.textureCompressionETC2 = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_TEXTURE_COMPRESSION_ASTC_LDR) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_TEXTURE_COMPRESSION_ASTC_LDR)
+			ret.textureCompressionASTC_LDR = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_TEXTURE_COMPRESSION_BC) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_TEXTURE_COMPRESSION_BC)
+			ret.textureCompressionBC = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_FLOAT64) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_FLOAT64)
+			ret.shaderFloat64 = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_INT64) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_INT64)
+			ret.shaderInt64 = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_INT16) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_INT16)
+			ret.shaderInt16 = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_RESIDENCY) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_RESIDENCY)
+			ret.shaderResourceResidency = VK_TRUE;
+
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_MINIMUM_LOD) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_MINIMUM_LOD)
+			ret.shaderResourceMinLod = VK_TRUE;
+
+		return ret;
 	}
 
 	VulkanSimplified::DeviceVulkan10Properties PhysicalDeviceDataInternal::CompileVulkan10Properties() const
@@ -1396,6 +1465,28 @@ namespace VulkanSimplifiedInternal
 		}
 
 		return ret;
+	}
+
+	void PhysicalDeviceDataInternal::AddToConstCharVector(std::vector<const char*>& vector, const char* addedObject)
+	{
+		size_t vectorsNewCapacity = vector.capacity() << 1;
+
+		if (vectorsNewCapacity == 0)
+		{
+			vector.reserve(16);
+		}
+		else if (vector.size() == vector.capacity() && vectorsNewCapacity > vector.capacity() && vectorsNewCapacity <= vector.max_size())
+		{
+			vector.reserve(vectorsNewCapacity);
+		}
+		else if (vector.capacity() != vector.max_size())
+		{
+			vector.reserve(vector.max_size());
+		}
+		else
+			throw std::runtime_error("PhysicalDeviceDataInternal::AddToConstCharVector Error: Program needs more than vectors max capacity!");
+		
+		vector.push_back(addedObject);
 	}
 
 }

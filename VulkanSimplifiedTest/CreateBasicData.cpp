@@ -15,7 +15,7 @@
 #include "VSInstanceExtensionPacksList.h"
 #include "VSInstanceLayerPacksList.h"
 
-#include "VSInstanceInitData.h"
+#include "VSInstanceCreationData.h"
 #include "VSInstance.h"
 
 #include "CustomLists/IDObject.h"
@@ -52,7 +52,7 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 
 	eventHandler.RegisterQuitEventCallback(MainSettings::QuitEventCallback, &settings, 1);
 
-	VulkanSimplified::InstanceInitData instanceInit;
+	VulkanSimplified::InstanceCreationData instanceInit;
 	instanceInit.usedVulkanApiVersion = main.GetMaxAvailableVulkanVersion();
 	instanceInit.enabledExtensionPacks.sdlRequiredExtensions = true;
 

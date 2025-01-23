@@ -6,12 +6,12 @@
 
 namespace VulkanSimplified
 {
-	struct InstanceInitData
+	struct InstanceCreationData
 	{
 		VersionData usedVulkanApiVersion;
 		InstanceExtensionPacksList enabledExtensionPacks;
 		InstanceLayerPacksList enabledLayerPacks;
 
-		InstanceInitData() = default;
+		InstanceCreationData() = default;
 	};
 }

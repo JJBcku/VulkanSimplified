@@ -13,7 +13,7 @@
 namespace VulkanSimplified
 {
 	struct MainInitData;
-	struct InstanceInitData;
+	struct InstanceCreationData;
 }
 
 namespace VulkanSimplifiedInternal
@@ -32,7 +32,7 @@ namespace VulkanSimplifiedInternal
 		MainInternal& operator=(const MainInternal&) noexcept = delete;
 		MainInternal& operator=(MainInternal&&) noexcept = delete;
 
-		void CreateInstance(const VulkanSimplified::InstanceInitData& instanceInit);
+		void CreateInstance(const VulkanSimplified::InstanceCreationData& instanceInit);
 
 		SdlEventHandlerInternal& GetSdlEventHandler();
 		InstanceInternal& GetInstance();
@@ -60,9 +60,6 @@ namespace VulkanSimplifiedInternal
 
 		SdlEventHandlerInternal _eventHandler;
 		std::optional<InstanceInternal> _instance;
-
-		static bool CompareCStringPointers(const char* str1, const char* str2);
-		static bool AreCStringPointersEqual(const char* str1, const char* str2);
 
 		uint32_t FindMaximumAvailableVulkanVersion() const;
 

@@ -96,6 +96,7 @@
     <ClCompile Include="RunProgram.cpp" />
     <ClCompile Include="VulkanBasicData.cpp" />
     <ClCompile Include="VulkanData.cpp" />
+    <ClCompile Include="VulkanInstanceData.cpp" />
     <ClCompile Include="VulkanSimplifiedTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +107,7 @@
     <ClInclude Include="RunProgram.h" />
     <ClInclude Include="VulkanBasicData.h" />
     <ClInclude Include="VulkanData.h" />
+    <ClInclude Include="VulkanInstanceData.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VulkanSimplifiedStatic\VulkanSimplifiedStatic.vcxproj">

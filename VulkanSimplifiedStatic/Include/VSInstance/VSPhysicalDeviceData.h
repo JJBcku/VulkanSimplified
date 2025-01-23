@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VSDeviceVulkan10FeatureFlags.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class PhysicalDeviceDataInternal;
@@ -7,8 +9,6 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	typedef uint64_t DeviceVulkan10FeatureFlags;
-
 	struct DeviceVulkan10Properties;
 	struct QueueFamilyData;
 	struct FormatsSupportedFeatures;

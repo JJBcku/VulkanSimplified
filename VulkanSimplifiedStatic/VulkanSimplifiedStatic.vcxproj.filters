@@ -183,7 +183,7 @@
     <ClInclude Include="Include\VSInstance\VSInstance.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSInstance\VSInstanceInitData.h">
+    <ClInclude Include="Include\VSInstance\VSInstanceCreationData.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSInstance\VSInstanceIpch.h">
@@ -195,7 +195,7 @@
     <ClInclude Include="NoInclude\VSInstance\VSDebugCallback.h">
       <Filter>Header Files\NoInclude\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="NoInclude\VSInstance\VSInstanceInitDataInternal.h">
+    <ClInclude Include="NoInclude\VSInstance\VSInstanceInternalCreationData.h">
       <Filter>Header Files\NoInclude\Instance</Filter>
     </ClInclude>
     <ClInclude Include="NoInclude\VSInstance\VSInstanceInternal.h">
@@ -253,6 +253,42 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSInstance\VSDeviceSwapchainSupportData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSLogicalDeviceCreateInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSDeviceVulkan10FeatureFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSInstance\VsLogicalDeviceInternalCreationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSDevice\VSDeviceNIframework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSDevice\VSDeviceNIpch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSDevice\VSDeviceCoreInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSDevice\VSDeviceMainInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceIframework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceIpch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoInclude\VSCommon\VSCStringsComparison.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -353,7 +389,7 @@
     <ClCompile Include="Include\VSInstance\VSInstance.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSInstance\VSInstanceInitData.cpp">
+    <ClCompile Include="Include\VSInstance\VSInstanceCreationData.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSInstanceIpch.cpp">
@@ -362,7 +398,7 @@
     <ClCompile Include="NoInclude\VSInstance\VSDebugCallback.cpp">
       <Filter>Source Files\NoInclude\Instance</Filter>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VSInstanceInitDataInternal.cpp">
+    <ClCompile Include="NoInclude\VSInstance\VSInstanceInternalCreationData.cpp">
       <Filter>Source Files\NoInclude\Instance</Filter>
     </ClCompile>
     <ClCompile Include="NoInclude\VSInstance\VSInstanceInternal.cpp">
@@ -414,6 +450,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSDeviceSwapchainSupportData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSInstance\VSLogicalDeviceCreateInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSInstance\VsLogicalDeviceInternalCreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSDevice\VSDeviceNIpch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSDevice\VSDeviceCoreInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSDevice\VSDeviceMainInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceIpch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoInclude\VSCommon\VSCStringsComparison.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

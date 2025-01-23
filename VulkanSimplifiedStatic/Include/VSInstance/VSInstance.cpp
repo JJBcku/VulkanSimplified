@@ -4,7 +4,7 @@
 #include "../../NoInclude/VSInstance/VSInstanceInternal.h"
 
 #include "VSPhysicalDeviceData.h"
-#include "../../NoInclude/VSInstance/VSPhysicalDeviceDataInternal.h"
+#include "../VSDevice/VSDeviceMain.h"
 
 namespace VulkanSimplified
 {
@@ -26,9 +26,24 @@ namespace VulkanSimplified
 		return _internal.GetPhysicalDeviceData(deviceIndex);
 	}
 
+	DeviceMain Instance::GetChoosenDevicesMainClass()
+	{
+		return _internal.GetChoosenDevicesMainClass();
+	}
+
 	const PhysicalDeviceData Instance::GetPhysicalDeviceData(size_t deviceIndex) const
 	{
 		return _internal.GetPhysicalDeviceData(deviceIndex);
+	}
+
+	const DeviceMain Instance::GetChoosenDevicesMainClass() const
+	{
+		return _internal.GetChoosenDevicesMainClass();
+	}
+
+	void Instance::CreateLogicalDevice(const LogicalDeviceCreationData& creationData)
+	{
+		_internal.CreateLogicalDevice(creationData);
 	}
 
 }

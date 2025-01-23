@@ -6,4 +6,6 @@
 #include <vector>
 #include <array>
 
+#include <optional>
+
 #endif //PCH_H

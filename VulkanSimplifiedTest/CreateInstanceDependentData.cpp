@@ -3,17 +3,19 @@
 
 #include "VulkanData.h"
 #include "VulkanBasicData.h"
+#include "VulkanInstanceData.h"
 
-#include "VSDevicesSupportedFormats.h"
-#include "VSDeviceSwapchainSupportData.h"
+#include <VSDevicesSupportedFormats.h>
+#include <VSDeviceSwapchainSupportData.h>
 
-#include "VSMain.h"
-#include "VSInstance.h"
+#include <VSMain.h>
+#include <VSInstance.h>
 
-#include "VSPhysicalDeviceData.h"
-#include "VSDeviceVulkan10Properties.h"
-#include "VSDeviceExtensionPacksList.h"
-#include "VSDeviceQueueFamilyData.h"
+#include <VSPhysicalDeviceData.h>
+#include <VSDeviceVulkan10Properties.h>
+#include <VSDeviceExtensionPacksList.h>
+#include <VSDeviceQueueFamilyData.h>
+#include <VSLogicalDeviceCreateInfo.h>
 
 static bool CheckFormatSupport(const VulkanSimplified::FormatsSupportedImageFeaturesList& supportedImageFormats,
 	const VulkanSimplified::SurfaceSupportedColorspaceFormatsLists& surfaceColorspace, const VulkanSimplified::DataFormatSetIndependentID& formatID)
@@ -279,7 +281,7 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::P
 	return choosenFamily;
 }
 
-static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueue(const VulkanSimplified::PhysicalDeviceData& physicalDevice)
+static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueFamily(const VulkanSimplified::PhysicalDeviceData& physicalDevice)
 {
 	std::optional<std::pair<std::uint32_t, bool>> choosenFamily;
 
@@ -416,7 +418,7 @@ static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueue(
 	return choosenFamily;
 }
 
-static std::uint32_t FindPresentingQueue(const std::vector<VulkanSimplified::QueueFamilyData> queueData)
+static std::uint32_t FindPresentingQueueFamily(const std::vector<VulkanSimplified::QueueFamilyData> queueData)
 {
 	std::uint32_t ret = std::numeric_limits<std::uint32_t>::max();
 
@@ -440,15 +442,58 @@ void CreateInstanceDependentData(VulkanData& data)
 	auto& main = data.basicData->vsmain.value();
 	auto instance = main.GetInstance();
 
-	size_t choosenGPU = ChooseGPU(instance);
-	auto physicalDevice = instance.GetPhysicalDeviceData(choosenGPU);
-	auto& deviceProperties = physicalDevice.GetVulkan10Properties();
+	data.instanceData = std::make_unique<VulkanInstanceData>();
+	auto& instanceData = *data.instanceData;
 
-	auto graphicQueueData = PickGraphicQueueFamily(physicalDevice);
-	auto transferOnly = TryToFindTransferOnlyQueue(physicalDevice);
+	instanceData.physicalDevicesIndex = ChooseGPU(instance);
+	auto physicalDevice = instance.GetPhysicalDeviceData(instanceData.physicalDevicesIndex);
+	//auto& deviceProperties = physicalDevice.GetVulkan10Properties();
 
-	if (!graphicQueueData.second)
+	VulkanSimplified::LogicalDeviceCreationData deviceCreationData;
+	deviceCreationData.physicalGPUIndex = instanceData.physicalDevicesIndex;
+	deviceCreationData.queuesCreationInfo.reserve(3);
+
+	VulkanSimplified::QueueCreationData queueCreationData;
+	queueCreationData.queuesPriorities.push_back(std::numeric_limits<uint16_t>::max());
+
+	auto graphicQueueFamily = PickGraphicQueueFamily(physicalDevice);
+	queueCreationData.queuesFamily = graphicQueueFamily.first;
+	instanceData.graphicsQueueIndex = deviceCreationData.queuesCreationInfo.size();
+	instanceData.graphicsQueueFamily = queueCreationData.queuesFamily;
+	deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
+
+	auto transferOnlyFamily = TryToFindTransferOnlyQueueFamily(physicalDevice);
+	if (transferOnlyFamily.has_value())
 	{
-		auto presentingQueue = FindPresentingQueue(physicalDevice.GetVulkanQueueFamiliesData());
+		queueCreationData.queuesFamily = transferOnlyFamily.value().first;
+		instanceData.transferOnlyQueueIndex = deviceCreationData.queuesCreationInfo.size();
+		instanceData.transferOnlyQueueFamily = queueCreationData.queuesFamily;
+		deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
 	}
+
+	if (!graphicQueueFamily.second && (!transferOnlyFamily.has_value() || !transferOnlyFamily.value().second))
+	{
+		auto presentingQueueFamily = FindPresentingQueueFamily(physicalDevice.GetVulkanQueueFamiliesData());
+		queueCreationData.queuesFamily = presentingQueueFamily;
+		instanceData.presentingQueueIndex = deviceCreationData.queuesCreationInfo.size();
+		instanceData.presentingQueueFamily = queueCreationData.queuesFamily;
+		deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
+	}
+	else
+	{
+		if (graphicQueueFamily.second)
+		{
+			instanceData.presentingQueueIndex = instanceData.graphicsQueueIndex;
+			instanceData.presentingQueueFamily = instanceData.graphicsQueueFamily;
+		}
+		else
+		{
+			instanceData.presentingQueueIndex = instanceData.transferOnlyQueueIndex.value();
+			instanceData.presentingQueueFamily = instanceData.transferOnlyQueueFamily.value();
+		}
+	}
+
+	deviceCreationData.requestedExtensionPacks.swapchainBase = true;
+
+	instance.CreateLogicalDevice(deviceCreationData);
 }

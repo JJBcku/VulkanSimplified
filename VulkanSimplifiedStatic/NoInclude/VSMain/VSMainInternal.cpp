@@ -3,8 +3,10 @@
 
 #include "../../Include/VSMain/VSMainInitData.h"
 
-#include "../VSInstance/VSInstanceInitDataInternal.h"
-#include "../../Include/VSInstance/VSInstanceInitData.h"
+#include "../VSInstance/VSInstanceInternalCreationData.h"
+#include "../../Include/VSInstance/VSInstanceCreationData.h"
+
+#include "../VSCommon/VSCStringsComparison.h"
 
 namespace VulkanSimplifiedInternal
 {
@@ -56,12 +58,12 @@ namespace VulkanSimplifiedInternal
 		SDL_Quit();
 	}
 
-	void MainInternal::CreateInstance(const VulkanSimplified::InstanceInitData& instanceInit)
+	void MainInternal::CreateInstance(const VulkanSimplified::InstanceCreationData& instanceInit)
 	{
 		if (_instance.has_value())
 			throw std::runtime_error("MainInternal::CreateInstance Error: Program tried to create the instance class twice!");
 
-		InstanceInitDataInternal init;
+		InstanceInternalCreationData init;
 		init.appName = _appName + _appVariantName;
 		init.appVersion = _appVersion.GetVulkanApiCompatibleVersion();
 		init.engineName = _engineName;
@@ -119,44 +121,6 @@ namespace VulkanSimplifiedInternal
 	VulkanSimplified::InstanceLayerPacksList MainInternal::GetAvailableInstanceLayerPacks() const
 	{
 		return _availableLayerPacksList;
-	}
-
-	bool MainInternal::CompareCStringPointers(const char* str1, const char* str2)
-	{
-		if (str1 == nullptr)
-		{
-			if (str2 == nullptr)
-				return false;
-			else
-				return true;
-		}
-		else
-		{
-			if (str2 == nullptr)
-				return false;
-			else
-			{
-				int comp = std::strcmp(str1, str2);
-
-				if (comp < 0)
-					return true;
-				else
-					return false;
-			}
-		}
-	}
-
-	bool MainInternal::AreCStringPointersEqual(const char* str1, const char* str2)
-	{
-		if (str1 == str2)
-			return true;
-		else
-		{
-			if (str1 == nullptr || str2 == nullptr)
-				return false;
-			else
-				return std::strcmp(str1, str2) == 0;
-		}
 	}
 
 	uint32_t MainInternal::FindMaximumAvailableVulkanVersion() const
@@ -290,8 +254,8 @@ namespace VulkanSimplifiedInternal
 				throw std::runtime_error("MainInternal::CompileUsedInstanceExtensions Error: Program requested debug utils extensions while they were not available!");
 		}
 
-		std::stable_sort(ret.begin(), ret.end(), &MainInternal::CompareCStringPointers);
-		ret.erase(std::unique(ret.begin(), ret.end(), &MainInternal::AreCStringPointersEqual), ret.cend());
+		std::stable_sort(ret.begin(), ret.end(), &ISFirstCStringLesser);
+		ret.erase(std::unique(ret.begin(), ret.end(), &AreCStringEqual), ret.cend());
 
 		ret.shrink_to_fit();
 		return ret;
@@ -311,8 +275,8 @@ namespace VulkanSimplifiedInternal
 				throw std::runtime_error("MainInternal::CompileUsedInstanceExtensions Error: Program requested debug utils layers while they were not available!");
 		}
 
-		std::stable_sort(ret.begin(), ret.end(), &MainInternal::CompareCStringPointers);
-		ret.erase(std::unique(ret.begin(), ret.end(), &MainInternal::AreCStringPointersEqual), ret.cend());
+		std::stable_sort(ret.begin(), ret.end(), &ISFirstCStringLesser);
+		ret.erase(std::unique(ret.begin(), ret.end(), &AreCStringEqual), ret.cend());
 
 		ret.shrink_to_fit();
 		return ret;

@@ -5,7 +5,7 @@
 
 namespace VulkanSimplifiedInternal
 {
-	struct InstanceInitDataInternal
+	struct InstanceInternalCreationData
 	{
 		std::string appName;
 		uint32_t appVersion;
@@ -19,6 +19,6 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::InstanceExtensionPacksList enabledExtensionPacksList;
 		VulkanSimplified::InstanceLayerPacksList enabledLayerPacksList;
 
-		InstanceInitDataInternal();
+		InstanceInternalCreationData();
 	};
 }

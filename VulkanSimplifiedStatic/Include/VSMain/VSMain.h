@@ -13,7 +13,7 @@ namespace VulkanSimplified
 	struct InstanceExtensionPacksList;
 	struct InstanceLayerPacksList;
 
-	struct InstanceInitData;
+	struct InstanceCreationData;
 
 	class SdlEventHandler;
 	class Instance;
@@ -32,7 +32,7 @@ namespace VulkanSimplified
 		Main& operator=(const Main&) noexcept = delete;
 		Main& operator=(Main&& rhs) noexcept;
 
-		void CreateInstance(const InstanceInitData& instanceInit);
+		void CreateInstance(const InstanceCreationData& instanceInit);
 
 		SdlEventHandler GetSdlEventHandler();
 		Instance GetInstance();

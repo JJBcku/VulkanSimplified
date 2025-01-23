@@ -8,7 +8,7 @@
 #include "EventHandler/SdlEventHandler.h"
 #include "../VSInstance/VSInstance.h"
 
-#include "../VSInstance/VSInstanceInitData.h"
+#include "../VSInstance/VSInstanceCreationData.h"
 
 namespace VulkanSimplified
 {
@@ -31,7 +31,7 @@ namespace VulkanSimplified
 		return *this;
 	}
 
-	void Main::CreateInstance(const InstanceInitData& instanceInit)
+	void Main::CreateInstance(const InstanceCreationData& instanceInit)
 	{
 		assert(_internal);
 		_internal->CreateInstance(instanceInit);
