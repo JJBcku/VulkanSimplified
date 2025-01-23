@@ -1,7 +1,7 @@
 #include "VSMainIpch.h"
 #include "VSMain.h"
 
-#include "../../NoInclude/VSMain/VSMainInternal.h"
+#include "../../DoNotInclude/VSMain/VSMainInternal.h"
 
 #include "VSMainInitData.h"
 

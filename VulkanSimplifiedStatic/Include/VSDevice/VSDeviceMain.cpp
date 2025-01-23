@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "VSDeviceMain.h"
 
-#include "../../NoInclude/VSDevice/VSDeviceMainInternal.h"
+#include "../../DoNotInclude/VSDevice/VSDeviceMainInternal.h"
 
 #include "VSDeviceCore.h"
 

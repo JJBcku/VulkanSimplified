@@ -163,27 +163,27 @@
     <ClInclude Include="Include\VSMain\VSMainInitData.h" />
     <ClInclude Include="Include\VSMain\VSMainIpch.h" />
     <ClInclude Include="Include\VSInstance\VSDeviceVulkan10Properties.h" />
-    <ClInclude Include="NoInclude\VSCommon\VSCommonNIframework.h" />
-    <ClInclude Include="NoInclude\VSCommon\VSCommonNIpch.h" />
-    <ClInclude Include="NoInclude\VSCommon\VSCStringsComparison.h" />
-    <ClInclude Include="NoInclude\VSCommon\VSDataFormatFlagsInternal.h" />
-    <ClInclude Include="NoInclude\VSDevice\VSDeviceCoreInternal.h" />
-    <ClInclude Include="NoInclude\VSDevice\VSDeviceMainInternal.h" />
-    <ClInclude Include="NoInclude\VSDevice\VSDeviceNIframework.h" />
-    <ClInclude Include="NoInclude\VSDevice\VSDeviceNIpch.h" />
-    <ClInclude Include="NoInclude\VSInstance\VSDebugCallback.h" />
-    <ClInclude Include="NoInclude\VSInstance\VSInstanceInternalCreationData.h" />
-    <ClInclude Include="NoInclude\VSInstance\VSInstanceInternal.h" />
-    <ClInclude Include="NoInclude\VSInstance\VSInstanceNIframework.h" />
-    <ClInclude Include="NoInclude\VSInstance\VSInstanceNIpch.h" />
-    <ClInclude Include="NoInclude\VSInstance\VsLogicalDeviceInternalCreationData.h" />
-    <ClInclude Include="NoInclude\VSInstance\VSPhysicalDeviceDataInternal.h" />
-    <ClInclude Include="NoInclude\VSMain\EventHandler\SdlEhNIframework.h" />
-    <ClInclude Include="NoInclude\VSMain\EventHandler\SdlEhNIpch.h" />
-    <ClInclude Include="NoInclude\VSMain\EventHandler\SdlEventHandlerInternal.h" />
-    <ClInclude Include="NoInclude\VSMain\VSMainNIframework.h" />
-    <ClInclude Include="NoInclude\VSMain\VSMainInternal.h" />
-    <ClInclude Include="NoInclude\VSMain\VSMainNIpch.h" />
+    <ClInclude Include="DoNotInclude\VSCommon\VSCommonNIframework.h" />
+    <ClInclude Include="DoNotInclude\VSCommon\VSCommonNIpch.h" />
+    <ClInclude Include="DoNotInclude\VSCommon\VSCStringsComparison.h" />
+    <ClInclude Include="DoNotInclude\VSCommon\VSDataFormatFlagsInternal.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceCoreInternal.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceMainInternal.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceNIframework.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceNIpch.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VSDebugCallback.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceInternalCreationData.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceInternal.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceNIframework.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceNIpch.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VsLogicalDeviceInternalCreationData.h" />
+    <ClInclude Include="DoNotInclude\VSInstance\VSPhysicalDeviceDataInternal.h" />
+    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEhNIframework.h" />
+    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEhNIpch.h" />
+    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEventHandlerInternal.h" />
+    <ClInclude Include="DoNotInclude\VSMain\VSMainNIframework.h" />
+    <ClInclude Include="DoNotInclude\VSMain\VSMainInternal.h" />
+    <ClInclude Include="DoNotInclude\VSMain\VSMainNIpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSImageUsageFlags.cpp">
@@ -466,7 +466,7 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSMainIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSMainIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSCommon\VSCommonNIpch.cpp">
+    <ClCompile Include="DoNotInclude\VSCommon\VSCommonNIpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonNIpch.pch</PrecompiledHeaderOutputFile>
@@ -474,31 +474,31 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSCommon\VSCStringsComparison.cpp">
+    <ClCompile Include="DoNotInclude\VSCommon\VSCStringsComparison.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSCommon\VSDataFormatFlagsInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSCommon\VSDataFormatFlagsInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSDevice\VSDeviceCoreInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSDevice\VSDeviceCoreInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSDevice\VSDeviceMainInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSDevice\VSDeviceMainInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSDevice\VSDeviceNIpch.cpp">
+    <ClCompile Include="DoNotInclude\VSDevice\VSDeviceNIpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
@@ -506,7 +506,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VSDebugCallback.cpp">
+    <ClCompile Include="DoNotInclude\VSInstance\VSDebugCallback.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
@@ -518,19 +518,19 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VSInstanceInternalCreationData.cpp">
+    <ClCompile Include="DoNotInclude\VSInstance\VSInstanceInternalCreationData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VSInstanceInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSInstance\VSInstanceInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VSInstanceNIpch.cpp">
+    <ClCompile Include="DoNotInclude\VSInstance\VSInstanceNIpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
@@ -538,19 +538,19 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VsLogicalDeviceInternalCreationData.cpp">
+    <ClCompile Include="DoNotInclude\VSInstance\VsLogicalDeviceInternalCreationData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSInstance\VSPhysicalDeviceDataInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSInstance\VSPhysicalDeviceDataInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSMain\EventHandler\SdlEhNIpch.cpp">
+    <ClCompile Include="DoNotInclude\VSMain\EventHandler\SdlEhNIpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -558,19 +558,19 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)SdlEhNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)SdlEhNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSMain\EventHandler\SdlEventHandlerInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSMain\EventHandler\SdlEventHandlerInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhNipch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhNipch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)SdlEhNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)SdlEhNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSMain\VSMainInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSMain\VSMainInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMainNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSMainNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSMainNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="NoInclude\VSMain\VSMainNIpch.cpp">
+    <ClCompile Include="DoNotInclude\VSMain\VSMainNIpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMainNIpch.h</PrecompiledHeaderFile>

@@ -1,7 +1,7 @@
 #include "VSInstanceIpch.h"
 #include "VSInstance.h"
 
-#include "../../NoInclude/VSInstance/VSInstanceInternal.h"
+#include "../../DoNotInclude/VSInstance/VSInstanceInternal.h"
 
 #include "VSPhysicalDeviceData.h"
 #include "../VSDevice/VSDeviceMain.h"
