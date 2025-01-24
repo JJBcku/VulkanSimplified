@@ -49,7 +49,7 @@ public:
 	void ReplaceValue(const IDSubobject<T>& objectID, const T& object)
 	{
 		if (_object.has_value())
-			throw std::runtime_error("ListObjectTemplate Error: Program tried to replace existing value with const object!");
+			throw std::runtime_error("ListObjectTemplate::ReplaceValue Error: Program tried to replace existing value with const object!");
 
 		_object = object;
 		_objectID = objectID;
@@ -58,7 +58,7 @@ public:
 	void ReplaceValue(const IDSubobject<T>& objectID, T&& object)
 	{
 		if (_object.has_value())
-			throw std::runtime_error("ListObjectTemplate Error: Program tried to replace existing value with non const object!");
+			throw std::runtime_error("ListObjectTemplate::ReplaceValue Error: Program tried to replace existing value with non const object!");
 
 		_object = std::move(object);
 		_objectID = objectID;

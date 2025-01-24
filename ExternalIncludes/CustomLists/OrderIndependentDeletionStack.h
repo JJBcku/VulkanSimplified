@@ -15,6 +15,15 @@ public:
 
 		if (initialCapacity != 0)
 		{
+			if (initialCapacity > _list.max_size())
+				throw std::runtime_error("OrderIndependentDeletionStack::OrderIndependentDeletionStack Error: Initial capacity is above data list's maximum size!");
+
+			if (initialCapacity > _deletedList.max_size())
+				throw std::runtime_error("OrderIndependentDeletionStack::OrderIndependentDeletionStack Error: Initial capacity is above freed indexes list's maximum size!");
+
+			if (initialCapacity > _additionOrder.max_size())
+				throw std::runtime_error("OrderIndependentDeletionStack::OrderIndependentDeletionStack Error: Initial capacity is above order of additions list's maximum size!");
+
 			_list.reserve(initialCapacity);
 			_deletedList.reserve(initialCapacity);
 			_additionOrder.reserve(initialCapacity);
@@ -151,7 +160,7 @@ public:
 		if (it == _list.cend())
 		{
 			if (throwOnIDNotFound)
-				throw std::runtime_error("OrderIndependentDeletionStack: Program tried to delete a non-existent entry in a list!");
+				throw std::runtime_error("OrderIndependentDeletionStack::RemoveObject Error: Program tried to delete a non-existent entry in a list!");
 			else
 				return false;
 		}
@@ -171,7 +180,7 @@ public:
 			}
 			else if (throwOnIDNotFound)
 			{
-				throw std::runtime_error("OrderIndependentDeletionStack: Program tried to delete a non-existent entry in an additon order list!");
+				throw std::runtime_error("OrderIndependentDeletionStack::RemoveObject Error: Program tried to delete a non-existent entry in an additon order list!");
 			}
 
 			return true;
@@ -198,7 +207,7 @@ public:
 			size_t fullres = GetUsedSize() + changeToCapacity;
 
 			if (fullres < changeToCapacity)
-				throw std::runtime_error("UnsortedList ShrinkToFit Error: reservation amount overflowed!");
+				throw std::runtime_error("UnsortedList::ShrinkToFit Error: reservation amount overflowed!");
 
 			tempList.reserve(fullres);
 		}
@@ -256,7 +265,7 @@ public:
 	T& GetObject(size_t position)
 	{
 		if (position >= _additionOrder.size())
-			throw std::runtime_error("OrderIndependentDeletionStack GetObject Error: Program tried to read data from outside the addition order list!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetObject Error: Program tried to read data from outside the addition order list!");
 
 		auto& ID = _additionOrder[(_additionOrder.size() - position) - 1];
 
@@ -268,14 +277,14 @@ public:
 		}
 		else
 		{
-			throw std::runtime_error("OrderIndependentDeletionStack GetObject Error: An ID from the addition list does not exist in the object list!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetObject Error: An ID from the addition list does not exist in the object list!");
 		}
 	}
 
 	const T& GetConstObject(size_t position) const
 	{
 		if (position >= _additionOrder.size())
-			throw std::runtime_error("OrderIndependentDeletionStack GetConstObject Error: Program tried to read data from outside the addition order list!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetConstObject Error: Program tried to read data from outside the addition order list!");
 
 		auto& ID = _additionOrder[(_additionOrder.size() - position) - 1];
 
@@ -287,14 +296,14 @@ public:
 		}
 		else
 		{
-			throw std::runtime_error("OrderIndependentDeletionStack GetConstObject Error: An ID from the addition list does not exist in the object list!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetConstObject Error: An ID from the addition list does not exist in the object list!");
 		}
 	}
 
 	T GetObjectCopy(size_t position)
 	{
 		if (position >= _additionOrder.size())
-			throw std::runtime_error("OrderIndependentDeletionStack GetObjectCopy Error: Program tried to read data from outside the addition order list!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetObjectCopy Error: Program tried to read data from outside the addition order list!");
 
 		auto& ID = _additionOrder[(_additionOrder.size() - position) - 1];
 
@@ -306,7 +315,7 @@ public:
 		}
 		else
 		{
-			throw std::runtime_error("OrderIndependentDeletionStack GetObjectCopy Error: An ID from the addition list does not exist in the object list!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetObjectCopy Error: An ID from the addition list does not exist in the object list!");
 		}
 	}
 
@@ -353,7 +362,7 @@ private:
 	{
 		IDType ret = _nextID;
 		if (_nextID == std::numeric_limits<IDType>::max())
-			throw std::runtime_error("OrderIndependentDeletionStack Error: Id system overflowed!");
+			throw std::runtime_error("OrderIndependentDeletionStack::GetNextId Error: Id system overflowed!");
 
 		_nextID++;
 		return ret;
@@ -361,11 +370,28 @@ private:
 
 	void ReserveAdditional(size_t addToCapacity)
 	{
-		auto size = _list.capacity();
+		size_t reserved = _list.capacity() + addToCapacity;
 
-		_list.reserve(size + addToCapacity);
-		_deletedList.reserve(size + addToCapacity);
-		_additionOrder.reserve(size + addToCapacity);
+		if (reserved < addToCapacity)
+			throw std::runtime_error("OrderIndependentDeletionStack::ReserveAdditional Error: Reserved amount overflowed!");
+
+		if (reserved > _list.max_size() || reserved > _deletedList.max_size() || reserved > _additionOrder.max_size())
+		{
+			reserved = std::min(_list.max_size(), std::min(_deletedList.max_size(), _additionOrder.max_size()));
+
+			if (_list.capacity() == reserved)
+				throw std::runtime_error("OrderIndependentDeletionStack::ReserveAdditional Error: Program tried to expand data list vector when it's already at maximum size!");
+
+			if (_deletedList.capacity() == reserved)
+				throw std::runtime_error("OrderIndependentDeletionStack::ReserveAdditional Error: Program tried to expand freed indexes vector when it's already at maximum size!");
+
+			if (_additionOrder.capacity() == reserved)
+				throw std::runtime_error("OrderIndependentDeletionStack::ReserveAdditional Error: Program tried to expand addition order vector when it's already at maximum size!");
+		}
+
+		_list.reserve(reserved);
+		_deletedList.reserve(reserved);
+		_additionOrder.reserve(reserved);
 	}
 
 	void CheckCapacity(size_t addOnReserve)
