@@ -1,5 +1,4 @@
-#ifndef MainIPCH_H
-#define MainIPCH_H
+#pragma once
 
 #include "VSMainIframework.h"
 
@@ -8,5 +7,3 @@
 #include <vulkan/vulkan.hpp>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
-
-#endif
