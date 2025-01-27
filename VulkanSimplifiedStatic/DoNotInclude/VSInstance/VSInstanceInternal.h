@@ -8,6 +8,7 @@
 namespace VulkanSimplified
 {
 	struct LogicalDeviceCreationData;
+	struct DeviceInitialCapacitiesList;
 }
 
 namespace VulkanSimplifiedInternal
@@ -36,7 +37,7 @@ namespace VulkanSimplifiedInternal
 		const PhysicalDeviceDataInternal& GetPhysicalDeviceData(size_t deviceIndex) const;
 		const DeviceMainInternal& GetChoosenDevicesMainClass() const;
 
-		void CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData);
+		void CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities);
 
 	private:
 		VkInstance _instance;

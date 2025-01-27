@@ -44,10 +44,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicIncludeDirectories>Include/VSCommon;Include/VSInstance;Include/VSMain;Include/VSMain/EventHandler</PublicIncludeDirectories>
+    <PublicIncludeDirectories>Include/VSCommon;Include/VSDevice;Include/VSInstance;Include/VSMain;Include/VSMain/EventHandler</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PublicIncludeDirectories>Include/VSCommon;Include/VSInstance;Include/VSMain;Include/VSMain/EventHandler</PublicIncludeDirectories>
+    <PublicIncludeDirectories>Include/VSCommon;Include/VSDevice;Include/VSInstance;Include/VSMain;Include/VSMain/EventHandler</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,6 +110,8 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\VSDevice\VSWindowList.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSWindowListInternal.h" />
     <ClInclude Include="Include\VSCommon\VSImageUsageFlags.h" />
     <ClInclude Include="Include\VSCommon\VSBool64.h" />
     <ClInclude Include="Include\VSCommon\VSCommonIframework.h" />
@@ -118,8 +120,10 @@
     <ClInclude Include="Include\VSCommon\VSMemoryData.h" />
     <ClInclude Include="Include\VSDevice\VSDeviceCore.h" />
     <ClInclude Include="Include\VSDevice\VSDeviceIframework.h" />
+    <ClInclude Include="Include\VSDevice\VSDeviceInitialCapacitiesList.h" />
     <ClInclude Include="Include\VSDevice\VSDeviceIpch.h" />
     <ClInclude Include="Include\VSDevice\VSDeviceMain.h" />
+    <ClInclude Include="Include\VSDevice\VSDeviceWindowListInitialCapacities.h" />
     <ClInclude Include="Include\VSInstance\VSDeviceVulkan10FeatureFlags.h" />
     <ClInclude Include="Include\VSInstance\VSDeviceExtensionPacksList.h" />
     <ClInclude Include="Include\VSInstance\VSDevicesSupportedFormats.h" />
@@ -186,6 +190,18 @@
     <ClInclude Include="DoNotInclude\VSMain\VSMainNIpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Include\VSDevice\VSWindowList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSWindowListInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSCommon\VSImageUsageFlags.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
@@ -224,6 +240,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceInitialCapacitiesList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDeviceIpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
@@ -233,6 +255,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDeviceMain.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceWindowListInitialCapacities.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>

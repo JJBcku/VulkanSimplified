@@ -8,6 +8,7 @@ namespace VulkanSimplifiedInternal
 namespace VulkanSimplified
 {
 	class DeviceCore;
+	class WindowList;
 
 	class DeviceMain
 	{
@@ -16,8 +17,10 @@ namespace VulkanSimplified
 		~DeviceMain();
 
 		DeviceCore GetDeviceCore();
+		WindowList GetWindowList();
 
 		const DeviceCore GetDeviceCore() const;
+		const WindowList GetWindowList() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;

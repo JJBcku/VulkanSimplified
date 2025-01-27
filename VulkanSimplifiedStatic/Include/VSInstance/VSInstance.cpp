@@ -6,6 +6,8 @@
 #include "VSPhysicalDeviceData.h"
 #include "../VSDevice/VSDeviceMain.h"
 
+#include "../VSDevice/VSDeviceInitialCapacitiesList.h"
+
 namespace VulkanSimplified
 {
 	Instance::Instance(VulkanSimplifiedInternal::InstanceInternal& ref) : _internal(ref)
@@ -41,9 +43,9 @@ namespace VulkanSimplified
 		return _internal.GetChoosenDevicesMainClass();
 	}
 
-	void Instance::CreateLogicalDevice(const LogicalDeviceCreationData& creationData)
+	void Instance::CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities)
 	{
-		_internal.CreateLogicalDevice(creationData);
+		_internal.CreateLogicalDevice(creationData, initialCapacities);
 	}
 
 }

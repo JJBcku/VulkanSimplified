@@ -17,6 +17,8 @@
 #include <VSDeviceQueueFamilyData.h>
 #include <VSLogicalDeviceCreateInfo.h>
 
+#include "VSDeviceInitialCapacitiesList.h"
+
 static bool CheckFormatSupport(const VulkanSimplified::FormatsSupportedImageFeaturesList& supportedImageFormats,
 	const VulkanSimplified::SurfaceSupportedColorspaceFormatsLists& surfaceColorspace, const VulkanSimplified::DataFormatSetIndependentID& formatID)
 {
@@ -495,5 +497,5 @@ void CreateInstanceDependentData(VulkanData& data)
 
 	deviceCreationData.requestedExtensionPacks.swapchainBase = true;
 
-	instance.CreateLogicalDevice(deviceCreationData);
+	instance.CreateLogicalDevice(deviceCreationData, {});
 }

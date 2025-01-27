@@ -9,6 +9,8 @@
 #include "../../Include/VSInstance/VSLogicalDeviceCreateInfo.h"
 #include "VsLogicalDeviceInternalCreationData.h"
 
+#include "../../Include/VSDevice/VSDeviceInitialCapacitiesList.h"
+
 namespace VulkanSimplifiedInternal
 {
 	InstanceInternal::InstanceInternal(const InstanceInternalCreationData& initData)
@@ -189,7 +191,7 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("InstanceInternal::GetChoosenDevicesMainClass Const Error: Program tried to access a non-existent logical devices main class!");
 	}
 
-	void InstanceInternal::CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData)
+	void InstanceInternal::CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities)
 	{
 		if (_usedDevice.has_value())
 			throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Program support only up to one logical device at one time!");
@@ -259,7 +261,7 @@ namespace VulkanSimplifiedInternal
 		internalCreationData.vulkan10EnabledFeatures = creationData.vulkan10EnabledFeatures;
 		internalCreationData.requestedExtensionPacks = creationData.requestedExtensionPacks;
 
-		_usedDevice.emplace(_instance, internalCreationData, physicalDeviceData);
+		_usedDevice.emplace(_instance, internalCreationData, physicalDeviceData, initialCapacities);
 	}
 
 }

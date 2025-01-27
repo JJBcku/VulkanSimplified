@@ -11,6 +11,7 @@ namespace VulkanSimplified
 	class DeviceMain;
 
 	struct LogicalDeviceCreationData;
+	struct DeviceInitialCapacitiesList;
 
 	class Instance
 	{
@@ -28,7 +29,7 @@ namespace VulkanSimplified
 		const PhysicalDeviceData GetPhysicalDeviceData(size_t deviceIndex) const;
 		const DeviceMain GetChoosenDevicesMainClass() const;
 
-		void CreateLogicalDevice(const LogicalDeviceCreationData& creationData);
+		void CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities);
 
 	private:
 		VulkanSimplifiedInternal::InstanceInternal& _internal;

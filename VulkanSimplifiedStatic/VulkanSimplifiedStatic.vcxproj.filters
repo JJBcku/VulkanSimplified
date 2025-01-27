@@ -309,6 +309,18 @@
     <ClInclude Include="DoNotInclude\VSInstance\VSPhysicalDeviceDataInternal.h">
       <Filter>Header Files\DoNotInclude\Instance</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceInitialCapacitiesList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceWindowListInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSWindowList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSWindowListInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -496,6 +508,18 @@
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSInstance\VSPhysicalDeviceDataInternal.cpp">
       <Filter>Source Files\DoNotInclude\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSWindowListInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceInitialCapacitiesList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceWindowListInitialCapacities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSWindowList.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
