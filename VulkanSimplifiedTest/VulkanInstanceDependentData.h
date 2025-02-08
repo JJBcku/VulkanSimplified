@@ -1,6 +1,6 @@
 #pragma once
 
-struct VulkanInstanceData
+struct VulkanInstanceDependentData
 {
 	size_t physicalDevicesIndex;
 
@@ -11,5 +11,5 @@ struct VulkanInstanceData
 	size_t presentingQueueIndex;
 	size_t presentingQueueFamily;
 
-	VulkanInstanceData();
+	VulkanInstanceDependentData();
 };

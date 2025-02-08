@@ -3,7 +3,7 @@
 
 #include "VulkanData.h"
 #include "VulkanBasicData.h"
-#include "VulkanInstanceData.h"
+#include "VulkanInstanceDependentData.h"
 
 #include <VSDevicesSupportedFormats.h>
 #include <VSDeviceSwapchainSupportData.h>
@@ -444,8 +444,8 @@ void CreateInstanceDependentData(VulkanData& data)
 	auto& main = data.basicData->vsmain.value();
 	auto instance = main.GetInstance();
 
-	data.instanceData = std::make_unique<VulkanInstanceData>();
-	auto& instanceData = *data.instanceData;
+	data.instanceDependentData = std::make_unique<VulkanInstanceDependentData>();
+	auto& instanceData = *data.instanceDependentData;
 
 	instanceData.physicalDevicesIndex = ChooseGPU(instance);
 	auto physicalDevice = instance.GetPhysicalDeviceData(instanceData.physicalDevicesIndex);

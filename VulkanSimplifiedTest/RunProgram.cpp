@@ -6,6 +6,11 @@
 
 #include "CreateBasicData.h"
 #include "CreateInstanceDependentData.h"
+#include "CreateDeviceDependentData.h"
+
+#include "MiscFunctions.h"
+
+#include <thread>
 
 void RunProgram()
 {
@@ -14,4 +19,14 @@ void RunProgram()
 
 	CreateBasicData(data, settings);
 	CreateInstanceDependentData(data);
+	CreateDeviceDependentData(data);
+
+	while (!settings.IsClosingRequested())
+	{
+		HandleEvents(data);
+
+		std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(10));
+	}
+
+	WaitIdle(data);
 }

@@ -2,9 +2,10 @@
 #include "VulkanData.h"
 
 #include "VulkanBasicData.h"
-#include "VulkanInstanceData.h"
+#include "VulkanInstanceDependentData.h"
+#include "VulkanDeviceDependentData.h"
 
-VulkanData::VulkanData() : basicData(), instanceData()
+VulkanData::VulkanData() : basicData(), instanceDependentData(), deviceDependentData()
 {
 }
 

@@ -27,7 +27,8 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 	data.basicData = std::make_unique<VulkanBasicData>();
 	
 	VulkanSimplified::MainInitData basicInit;
-	basicInit.engineVersion.SetVulkanPatchVersion(2);
+	basicInit.engineVersion.SetVulkanPatchVersion(0);
+	basicInit.engineVersion.SetVulkanMinorVersion(2);
 
 	basicInit.appVersion = basicInit.engineVersion;
 

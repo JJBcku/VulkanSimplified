@@ -2,6 +2,4 @@
 
 struct VulkanData;
 
-class MainSettings;
-
 void CreateInstanceDependentData(VulkanData& data);

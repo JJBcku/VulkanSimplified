@@ -33,6 +33,8 @@ namespace VulkanSimplified
 
 		const PhysicalDeviceData GetDevicesPhysicalData() const;
 
+		void WaitIdle() const;
+
 	private:
 		VulkanSimplifiedInternal::DeviceCoreInternal& _internal;
 	};

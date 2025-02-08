@@ -8,7 +8,8 @@
 namespace VulkanSimplifiedInternal
 {
 	DeviceMainInternal::DeviceMainInternal(VkInstance instance, const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
-		const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _core(instance, creationData, physicalDeviceData), _windowList(initialCapacities.windowList)
+		const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _core(instance, creationData, physicalDeviceData),
+		_windowList(instance, _core.GetDevice(), initialCapacities.windowList)
 	{
 	}
 

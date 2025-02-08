@@ -321,6 +321,12 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSWindowListInternal.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSWindowCreationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSWindowInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -519,6 +525,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSWindowList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSWindowCreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSWindowInternal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

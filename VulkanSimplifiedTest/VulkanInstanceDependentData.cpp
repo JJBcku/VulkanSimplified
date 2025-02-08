@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "VulkanInstanceData.h"
+#include "VulkanInstanceDependentData.h"
 
-VulkanInstanceData::VulkanInstanceData()
+VulkanInstanceDependentData::VulkanInstanceDependentData()
 {
 	physicalDevicesIndex = std::numeric_limits<size_t>::max();
 

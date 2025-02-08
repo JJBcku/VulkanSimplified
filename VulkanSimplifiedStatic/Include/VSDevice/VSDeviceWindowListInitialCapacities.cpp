@@ -5,6 +5,6 @@ namespace VulkanSimplified
 {
 	WindowListInitialCapacities::WindowListInitialCapacities()
 	{
-		stump = 0;
+		windowListInitialCapacity = 0;
 	}
 }

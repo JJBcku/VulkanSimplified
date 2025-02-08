@@ -39,7 +39,16 @@
     <ClCompile Include="CreateInstanceDependentData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanInstanceData.cpp">
+    <ClCompile Include="VulkanInstanceDependentData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanDeviceDependentData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateDeviceDependentData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiscFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +74,16 @@
     <ClInclude Include="CreateInstanceDependentData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VulkanInstanceData.h">
+    <ClInclude Include="VulkanInstanceDependentData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanDeviceDependentData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateDeviceDependentData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiscFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

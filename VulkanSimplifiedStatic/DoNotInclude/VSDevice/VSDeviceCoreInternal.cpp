@@ -123,4 +123,10 @@ namespace VulkanSimplifiedInternal
 		return _physicalDeviceData;
 	}
 
+	void DeviceCoreInternal::WaitIdle() const
+	{
+		if (vkDeviceWaitIdle(_device) != VK_SUCCESS)
+			throw std::runtime_error("DeviceCoreInternal::WaitIdle Error: Program failed to wait on a logical device to go idle!");
+	}
+
 }

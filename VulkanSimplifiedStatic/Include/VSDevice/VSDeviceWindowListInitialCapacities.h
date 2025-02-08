@@ -4,7 +4,7 @@ namespace VulkanSimplified
 {
 	struct WindowListInitialCapacities
 	{
-		size_t stump;
+		size_t windowListInitialCapacity;
 
 		WindowListInitialCapacities();
 	};

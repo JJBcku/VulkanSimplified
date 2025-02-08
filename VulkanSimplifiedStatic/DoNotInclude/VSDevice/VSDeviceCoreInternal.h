@@ -34,6 +34,8 @@ namespace VulkanSimplifiedInternal
 
 		const PhysicalDeviceDataInternal& GetDevicesPhysicalData() const;
 
+		void WaitIdle() const;
+
 	private:
 		VkInstance _instance;
 		VkDevice _device;

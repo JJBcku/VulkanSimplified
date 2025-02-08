@@ -48,4 +48,9 @@ namespace VulkanSimplified
 		return _internal.GetDevicesPhysicalData();
 	}
 
+	void DeviceCore::WaitIdle() const
+	{
+		_internal.WaitIdle();
+	}
+
 }
