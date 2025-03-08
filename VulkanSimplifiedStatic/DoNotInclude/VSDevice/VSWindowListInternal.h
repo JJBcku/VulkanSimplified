@@ -2,6 +2,8 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
+#include "../../Include/VSDevice/VSWindowPointer.h"
+
 namespace VulkanSimplified
 {
 	struct WindowListInitialCapacities;
@@ -10,20 +12,29 @@ namespace VulkanSimplified
 
 namespace VulkanSimplifiedInternal
 {
+	class DeviceCoreInternal;
 	class WindowInternal;
 
 	class WindowListInternal
 	{
 	public:
-		WindowListInternal(VkInstance instance, VkDevice device, const VulkanSimplified::WindowListInitialCapacities& initalCapacities);
+		WindowListInternal(DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
+			const VulkanSimplified::WindowListInitialCapacities& initalCapacities);
 		~WindowListInternal();
 
-		IDObject<WindowInternal> CreateWindow(const VulkanSimplified::WindowCreationData& creationData, size_t addOnReserving);
+		IDObject<VulkanSimplified::WindowPointer> CreateWindow(const VulkanSimplified::WindowCreationData& creationData, size_t addOnReserving);
+
+		WindowInternal& GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID);
+
+		const WindowInternal& GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID) const;
 
 	private:
+		DeviceCoreInternal& _core;
+
 		VkInstance _instance;
+		VkPhysicalDevice _physicalDevice;
 		VkDevice _device;
 
-		UnsortedIDVector<WindowInternal> _windowList;
+		UnsortedIDVector<VulkanSimplified::WindowPointer> _windowList;
 	};
 }

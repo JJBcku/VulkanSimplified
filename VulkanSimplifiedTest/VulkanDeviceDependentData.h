@@ -1,6 +1,7 @@
 #pragma once
 
 #include <CustomLists/IDObject.h>
+#include <VSWindowPointer.h>
 
 namespace VulkanSimplifiedInternal
 {
@@ -9,7 +10,7 @@ namespace VulkanSimplifiedInternal
 
 struct VulkanDeviceDependentData
 {
-	IDObject<VulkanSimplifiedInternal::WindowInternal> windowID;
+	IDObject<VulkanSimplified::WindowPointer> windowID;
 
 	VulkanDeviceDependentData();
 	~VulkanDeviceDependentData();

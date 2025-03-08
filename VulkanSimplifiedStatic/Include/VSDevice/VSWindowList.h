@@ -1,17 +1,19 @@
 #pragma once
 
+#include "VSWindowPointer.h"
+
 template<class T>
 class IDObject;
 
 namespace VulkanSimplifiedInternal
 {
 	class WindowListInternal;
-	class WindowInternal;
 }
 
 namespace VulkanSimplified
 {
 	struct WindowCreationData;
+	class Window;
 
 	class WindowList
 	{
@@ -19,7 +21,11 @@ namespace VulkanSimplified
 		WindowList(VulkanSimplifiedInternal::WindowListInternal& ref);
 		~WindowList();
 
-		IDObject<VulkanSimplifiedInternal::WindowInternal> CreateWindow(const WindowCreationData& creationData, size_t addOnReserving = 0);
+		IDObject<WindowPointer> CreateWindow(const WindowCreationData& creationData, size_t addOnReserving = 0);
+
+		Window GetWindow(IDObject<WindowPointer> windowID);
+
+		const Window GetWindow(IDObject<WindowPointer> windowID) const;
 
 	private:
 		VulkanSimplifiedInternal::WindowListInternal& _internal;

@@ -1,8 +1,14 @@
 #pragma once
 
+#include <VSDataFormatFlags.h>
+
 struct VulkanInstanceDependentData
 {
 	size_t physicalDevicesIndex;
+
+	VulkanSimplified::DataFormatSetIndependentID supportedFormat;
+	uint32_t minSwapchainImageAmount;
+	uint32_t maxSwapchainImageAmount;
 
 	size_t graphicsQueueIndex;
 	size_t graphicsQueueFamily;

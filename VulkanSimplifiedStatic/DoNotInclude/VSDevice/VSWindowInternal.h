@@ -1,26 +1,36 @@
 #pragma once
 
+#include "../../Include/VSCommon/VSSurfacePresentModes.h"
+
 namespace VulkanSimplified
 {
 	struct WindowCreationData;
+	struct SwapchainCreationData;
 }
 
 namespace VulkanSimplifiedInternal
 {
+	class DeviceCoreInternal;
+
 	class WindowInternal
 	{
 	public:
-		WindowInternal(VkInstance instance, VkDevice device, const VulkanSimplified::WindowCreationData& creationData);
+		WindowInternal(DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const VulkanSimplified::WindowCreationData& creationData);
 		~WindowInternal();
 
 		WindowInternal(const WindowInternal& rhs) noexcept = delete;
-		WindowInternal(WindowInternal&& rhs) noexcept;
+		WindowInternal(WindowInternal&& rhs) noexcept = delete;
 
 		WindowInternal& operator=(const WindowInternal& rhs) noexcept = delete;
-		WindowInternal& operator=(WindowInternal&& rhs) noexcept;
+		WindowInternal& operator=(WindowInternal&& rhs) noexcept = delete;
+
+		void CreateSwapchain(const VulkanSimplified::SwapchainCreationData& creationData, bool throwOnSwapchainExist);
 
 	private:
+		DeviceCoreInternal& _core;
+
 		VkInstance _instance;
+		VkPhysicalDevice _physicalDevice;
 		VkDevice _device;
 
 		SDL_Window* _window;
@@ -30,9 +40,23 @@ namespace VulkanSimplifiedInternal
 		uint32_t _height;
 
 		VkSurfaceKHR _surface;
+		VkSurfaceCapabilitiesKHR _surfaceCapabilities;
+
+		VkPresentModeKHR _presentMode;
+		VkFormat _format;
+		VkSwapchainCreateFlagsKHR _swapchainFlags;
+		uint32_t _imageAmount;
+
+		std::vector<uint32_t> _queueFamilies;
 
 		VkSwapchainKHR _swapchain;
+		std::vector<VkImage> _swapchainImages;
 
 		void DestroyWindow();
+
+		void ReCreateSwapchain();
+		void DestroySwapchain();
+
+		VkPresentModeKHR TranslateToPresentMode(VulkanSimplified::SurfacePresentModeBits presentMode);
 	};
 }

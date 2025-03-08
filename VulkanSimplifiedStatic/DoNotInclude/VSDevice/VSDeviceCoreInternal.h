@@ -26,6 +26,7 @@ namespace VulkanSimplifiedInternal
 
 		VkQueue GetQueue(size_t queueIndex) const;
 		uint32_t GetQueuesFamily(size_t queueIndex) const;
+		std::vector<uint32_t> GetQueuesFamilies(const std::vector<size_t>& queueIndex) const;
 
 		VulkanSimplified::DeviceVulkan10FeatureFlags GetVulkan10EnabledFeatures() const;
 		const VulkanSimplified::DeviceExtensionPacksList& GetDevicesEnabledExtensionPacks() const;

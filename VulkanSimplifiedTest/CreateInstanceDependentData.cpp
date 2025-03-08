@@ -451,6 +451,24 @@ void CreateInstanceDependentData(VulkanData& data)
 	auto physicalDevice = instance.GetPhysicalDeviceData(instanceData.physicalDevicesIndex);
 	//auto& deviceProperties = physicalDevice.GetVulkan10Properties();
 
+	auto deviceInfo = instance.GetPhysicalDeviceData(instanceData.physicalDevicesIndex);
+	auto& deviceSurfaceSupport = deviceInfo.GetSurfaceSupport().value();
+
+	auto& surfaceSupport = deviceSurfaceSupport.surfaceSupportedSwapchainFormats;
+	auto& supportedFormats = deviceInfo.GetFormatsSupportedFeatures();
+	auto& imageSupport = supportedFormats.formatFeaturesOptimalImageSupport;
+
+	bool bgraSupported = CheckFormatSupport(imageSupport, surfaceSupport, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM) &&
+		CheckFormatSupport(imageSupport.colorAttachment, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM);
+
+	if (bgraSupported)
+		instanceData.supportedFormat = VulkanSimplified::DATA_FORMAT_BGRA8_UNORM;
+	else
+		instanceData.supportedFormat = VulkanSimplified::DATA_FORMAT_RGBA8_UNORM;
+
+	instanceData.minSwapchainImageAmount = deviceSurfaceSupport.minImageCount;
+	instanceData.maxSwapchainImageAmount = deviceSurfaceSupport.maxImageCount;
+
 	VulkanSimplified::LogicalDeviceCreationData deviceCreationData;
 	deviceCreationData.physicalGPUIndex = instanceData.physicalDevicesIndex;
 	deviceCreationData.queuesCreationInfo.reserve(3);

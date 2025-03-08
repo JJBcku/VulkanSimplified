@@ -7,6 +7,7 @@
 #include <array>
 
 #include <optional>
+#include <memory>
 #include <assert.h>
 
 #endif //PCH_H

@@ -103,6 +103,22 @@ namespace VulkanSimplifiedInternal
 		return _queues[queueIndex].second;
 	}
 
+	std::vector<uint32_t> DeviceCoreInternal::GetQueuesFamilies(const std::vector<size_t>& queueIndexes) const
+	{
+		std::vector<uint32_t> ret;
+		ret.reserve(queueIndexes.size());
+
+		for (size_t i = 0; i < queueIndexes.size(); ++i)
+		{
+			if (queueIndexes[i] >= _queues.size())
+				throw std::runtime_error("DeviceCoreInternal::GetQueuesFamilies Error: Program tried to read past the end of queue data vector!");
+
+			ret.push_back(_queues[queueIndexes[i]].second);
+		}
+
+		return ret;
+	}
+
 	VulkanSimplified::DeviceVulkan10FeatureFlags DeviceCoreInternal::GetVulkan10EnabledFeatures() const
 	{
 		return _vulkan10EnabledFeatures;
