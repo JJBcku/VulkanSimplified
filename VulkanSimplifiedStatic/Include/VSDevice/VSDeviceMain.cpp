@@ -3,9 +3,11 @@
 
 #include "../../DoNotInclude/VSDevice/VSDeviceMainInternal.h"
 #include "../../DoNotInclude/VSDevice/VSWindowListInternal.h"
+#include "../../DoNotInclude/VSDevice/VSShaderListsInternal.h"
 
 #include "VSDeviceCore.h"
 #include "VSWindowList.h"
+#include "VSShaderLists.h"
 
 namespace VulkanSimplified
 {
@@ -27,6 +29,11 @@ namespace VulkanSimplified
 		return _internal.GetWindowList();
 	}
 
+	ShaderLists DeviceMain::GetShaderLists()
+	{
+		return _internal.GetShaderLists();
+	}
+
 	const DeviceCore DeviceMain::GetDeviceCore() const
 	{
 		return _internal.GetDeviceCore();
@@ -35,6 +42,11 @@ namespace VulkanSimplified
 	const WindowList DeviceMain::GetWindowList() const
 	{
 		return _internal.GetWindowList();
+	}
+
+	const ShaderLists DeviceMain::GetShaderLists() const
+	{
+		return _internal.GetShaderLists();
 	}
 
 }

@@ -9,7 +9,8 @@ namespace VulkanSimplifiedInternal
 {
 	DeviceMainInternal::DeviceMainInternal(VkInstance instance, const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
 		const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _core(instance, creationData, physicalDeviceData),
-		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList)
+		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
+		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists)
 	{
 	}
 
@@ -27,6 +28,11 @@ namespace VulkanSimplifiedInternal
 		return _windowList;
 	}
 
+	ShaderListsInternal& DeviceMainInternal::GetShaderLists()
+	{
+		return _shaderLists;
+	}
+
 	const DeviceCoreInternal& DeviceMainInternal::GetDeviceCore() const
 	{
 		return _core;
@@ -35,6 +41,11 @@ namespace VulkanSimplifiedInternal
 	const WindowListInternal& DeviceMainInternal::GetWindowList() const
 	{
 		return _windowList;
+	}
+
+	const ShaderListsInternal& DeviceMainInternal::GetShaderLists() const
+	{
+		return _shaderLists;
 	}
 
 }

@@ -2,6 +2,7 @@
 
 #include "VSDeviceCoreInternal.h"
 #include "VSWindowListInternal.h"
+#include "VSShaderListsInternal.h"
 
 namespace VulkanSimplified
 {
@@ -22,12 +23,15 @@ namespace VulkanSimplifiedInternal
 
 		DeviceCoreInternal& GetDeviceCore();
 		WindowListInternal& GetWindowList();
+		ShaderListsInternal& GetShaderLists();
 
 		const DeviceCoreInternal& GetDeviceCore() const;
 		const WindowListInternal& GetWindowList() const;
+		const ShaderListsInternal& GetShaderLists() const;
 
 	private:
 		DeviceCoreInternal _core;
 		WindowListInternal _windowList;
+		ShaderListsInternal _shaderLists;
 	};
 }

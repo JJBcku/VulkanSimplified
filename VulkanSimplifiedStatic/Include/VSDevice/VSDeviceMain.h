@@ -9,6 +9,7 @@ namespace VulkanSimplified
 {
 	class DeviceCore;
 	class WindowList;
+	class ShaderLists;
 
 	class DeviceMain
 	{
@@ -18,9 +19,11 @@ namespace VulkanSimplified
 
 		DeviceCore GetDeviceCore();
 		WindowList GetWindowList();
+		ShaderLists GetShaderLists();
 
 		const DeviceCore GetDeviceCore() const;
 		const WindowList GetWindowList() const;
+		const ShaderLists GetShaderLists() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;
