@@ -6,6 +6,7 @@
 #include "VSMainInitData.h"
 
 #include "EventHandler/SdlEventHandler.h"
+#include "../VSSharedData/VSSharedDataMainList.h"
 #include "../VSInstance/VSInstance.h"
 
 #include "../VSInstance/VSInstanceCreationData.h"
@@ -42,6 +43,11 @@ namespace VulkanSimplified
 		return _internal->GetSdlEventHandler();
 	}
 
+	SharedDataMainList Main::GetSharedDataMainList()
+	{
+		return _internal->GetSharedDataMainList();
+	}
+
 	Instance Main::GetInstance()
 	{
 		return _internal->GetInstance();
@@ -50,6 +56,11 @@ namespace VulkanSimplified
 	const SdlEventHandler Main::GetSdlEventHandler() const
 	{
 		return _internal->GetSdlEventHandler();
+	}
+
+	const SharedDataMainList Main::GetSharedDataMainList() const
+	{
+		return _internal->GetSharedDataMainList();
 	}
 
 	const Instance Main::GetInstance() const

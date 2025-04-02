@@ -15,6 +15,7 @@ namespace VulkanSimplified
 
 	struct InstanceCreationData;
 
+	class SharedDataMainList;
 	class SdlEventHandler;
 	class Instance;
 
@@ -35,9 +36,11 @@ namespace VulkanSimplified
 		void CreateInstance(const InstanceCreationData& instanceInit);
 
 		SdlEventHandler GetSdlEventHandler();
+		SharedDataMainList GetSharedDataMainList();
 		Instance GetInstance();
 
 		const SdlEventHandler GetSdlEventHandler() const;
+		const SharedDataMainList GetSharedDataMainList() const;
 		const Instance GetInstance() const;
 
 		VersionData GetAppVersion() const;

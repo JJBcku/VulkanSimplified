@@ -8,6 +8,7 @@
 #include "../../Include/VSMain/VSInstanceExtensionPacksList.h"
 #include "../../Include/VSMain/VSInstanceLayerPacksList.h"
 
+#include "../VSSharedData/VSSharedDataMainListInternal.h"
 #include "../VSInstance/VSInstanceInternal.h"
 
 namespace VulkanSimplified
@@ -35,9 +36,11 @@ namespace VulkanSimplifiedInternal
 		void CreateInstance(const VulkanSimplified::InstanceCreationData& instanceInit);
 
 		SdlEventHandlerInternal& GetSdlEventHandler();
+		SharedDataMainListInternal& GetSharedDataMainList();
 		InstanceInternal& GetInstance();
 
 		const SdlEventHandlerInternal& GetSdlEventHandler() const;
+		const SharedDataMainListInternal& GetSharedDataMainList() const;
 		const InstanceInternal& GetInstance() const;
 
 		VulkanSimplified::VersionData GetAppVersion() const;
@@ -59,6 +62,7 @@ namespace VulkanSimplifiedInternal
 		std::vector<const char*> _sdlRequired;
 
 		SdlEventHandlerInternal _eventHandler;
+		SharedDataMainListInternal _sharedData;
 		std::optional<InstanceInternal> _instance;
 
 		uint32_t FindMaximumAvailableVulkanVersion() const;

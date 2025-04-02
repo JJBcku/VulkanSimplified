@@ -10,7 +10,7 @@
 
 namespace VulkanSimplifiedInternal
 {
-	MainInternal::MainInternal(const VulkanSimplified::MainInitData& initData) : _eventHandler(initData.eventHandlerData)
+	MainInternal::MainInternal(const VulkanSimplified::MainInitData& initData) : _eventHandler(initData.eventHandlerData),  _sharedData(initData.sharedDataCapabilities)
 	{
 		int result = SDL_Init(SDL_INIT_VIDEO);
 
@@ -86,6 +86,11 @@ namespace VulkanSimplifiedInternal
 		return _eventHandler;
 	}
 
+	SharedDataMainListInternal& MainInternal::GetSharedDataMainList()
+	{
+		return _sharedData;
+	}
+
 	InstanceInternal& MainInternal::GetInstance()
 	{
 		assert(_instance.has_value());
@@ -95,6 +100,11 @@ namespace VulkanSimplifiedInternal
 	const SdlEventHandlerInternal& MainInternal::GetSdlEventHandler() const
 	{
 		return _eventHandler;
+	}
+
+	const SharedDataMainListInternal& MainInternal::GetSharedDataMainList() const
+	{
+		return _sharedData;
 	}
 
 	const InstanceInternal& MainInternal::GetInstance() const

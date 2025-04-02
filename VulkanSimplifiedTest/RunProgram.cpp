@@ -7,6 +7,7 @@
 #include "CreateBasicData.h"
 #include "CreateInstanceDependentData.h"
 #include "CreateDeviceDependentData.h"
+#include "CreateSharedData.h"
 
 #include "MiscFunctions.h"
 
@@ -18,6 +19,7 @@ void RunProgram()
 	MainSettings settings;
 
 	CreateBasicData(data, settings);
+	CreateSharedData(data);
 	CreateInstanceDependentData(data);
 	CreateDeviceDependentData(data);
 
