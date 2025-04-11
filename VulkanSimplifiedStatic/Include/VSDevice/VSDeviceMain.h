@@ -10,6 +10,7 @@ namespace VulkanSimplified
 	class DeviceCore;
 	class WindowList;
 	class ShaderLists;
+	class DescriptorDataList;
 
 	class DeviceMain
 	{
@@ -21,9 +22,13 @@ namespace VulkanSimplified
 		WindowList GetWindowList();
 		ShaderLists GetShaderLists();
 
+		DescriptorDataList GetDescriptorDataLists();
+
 		const DeviceCore GetDeviceCore() const;
 		const WindowList GetWindowList() const;
 		const ShaderLists GetShaderLists() const;
+
+		const DescriptorDataList GetDescriptorDataLists() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;

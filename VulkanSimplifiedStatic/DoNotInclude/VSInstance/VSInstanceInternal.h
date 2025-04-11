@@ -16,11 +16,12 @@ namespace VulkanSimplifiedInternal
 	struct InstanceInternalCreationData;
 
 	class PhysicalDeviceDataInternal;
+	class SharedDataMainListInternal;
 
 	class InstanceInternal
 	{
 	public:
-		InstanceInternal(const InstanceInternalCreationData& initData);
+		InstanceInternal(const SharedDataMainListInternal& sharedDataMain, const InstanceInternalCreationData& initData);
 		~InstanceInternal();
 
 		InstanceInternal(const InstanceInternal&) noexcept = delete;
@@ -40,6 +41,8 @@ namespace VulkanSimplifiedInternal
 		void CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities);
 
 	private:
+		const SharedDataMainListInternal& _sharedDataMain;
+
 		VkInstance _instance;
 		VkDebugUtilsMessengerEXT _debugMessenger;
 

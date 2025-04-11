@@ -2,6 +2,7 @@
 
 #include "VSDeviceWindowListInitialCapacities.h"
 #include "VSShaderListsInitialCapacitiesList.h"
+#include "VSDescriptorListsInitialCapacities.h"
 
 namespace VulkanSimplified
 {
@@ -9,6 +10,7 @@ namespace VulkanSimplified
 	{
 		WindowListInitialCapacities windowList;
 		ShaderListsInitialCapacitiesList shaderLists;
+		DescriptorListsInitialCapacities descriptorLists;
 
 		DeviceInitialCapacitiesList() = default;
 	};

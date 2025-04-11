@@ -489,6 +489,18 @@
     <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlagsDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSetLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDescriptorListsInitialCapacities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -807,6 +819,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSetLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDescriptorListsInitialCapacities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDescriptorDataList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

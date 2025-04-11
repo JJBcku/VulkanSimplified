@@ -5,12 +5,15 @@
 
 #include "../../Include/VSDevice/VSDeviceInitialCapacitiesList.h"
 
+#include  "../VSSharedData/VSSharedDataMainListInternal.h"
+
 namespace VulkanSimplifiedInternal
 {
-	DeviceMainInternal::DeviceMainInternal(VkInstance instance, const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
-		const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _core(instance, creationData, physicalDeviceData),
+	DeviceMainInternal::DeviceMainInternal(const SharedDataMainListInternal& sharedDataMain, VkInstance instance, const LogicalDeviceInternalCreationData& creationData,
+		const PhysicalDeviceDataInternal& physicalDeviceData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _sharedDataMain(sharedDataMain),
+		_core(instance, creationData, physicalDeviceData),
 		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
-		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists)
+		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists), _descriptorLists(_sharedDataMain.GetDescriptorDataList(), _core.GetDevice(), initialCapacities.descriptorLists)
 	{
 	}
 
@@ -33,6 +36,11 @@ namespace VulkanSimplifiedInternal
 		return _shaderLists;
 	}
 
+	DescriptorDataListInternal& DeviceMainInternal::GetDescriptorDataLists()
+	{
+		return _descriptorLists;
+	}
+
 	const DeviceCoreInternal& DeviceMainInternal::GetDeviceCore() const
 	{
 		return _core;
@@ -46,6 +54,11 @@ namespace VulkanSimplifiedInternal
 	const ShaderListsInternal& DeviceMainInternal::GetShaderLists() const
 	{
 		return _shaderLists;
+	}
+
+	const DescriptorDataListInternal& DeviceMainInternal::GetDescriptorDataLists() const
+	{
+		return _descriptorLists;
 	}
 
 }
