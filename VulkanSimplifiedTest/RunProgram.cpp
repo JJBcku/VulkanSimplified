@@ -8,6 +8,7 @@
 #include "CreateInstanceDependentData.h"
 #include "CreateDeviceDependentData.h"
 #include "CreateSharedData.h"
+#include "CreateRenderPassData.h"
 
 #include "MiscFunctions.h"
 
@@ -22,6 +23,7 @@ void RunProgram()
 	CreateSharedData(data);
 	CreateInstanceDependentData(data);
 	CreateDeviceDependentData(data);
+	CreateRenderPassData(data);
 
 	while (!settings.IsClosingRequested())
 	{

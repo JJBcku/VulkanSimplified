@@ -8,6 +8,7 @@ namespace VulkanSimplifiedInternal
 namespace VulkanSimplified
 {
 	class SharedDescriptorDataList;
+	class SharedRenderPassDataList;
 	class SharedPipelineDataList;
 
 	class SharedDataMainList
@@ -17,9 +18,11 @@ namespace VulkanSimplified
 		~SharedDataMainList();
 
 		SharedDescriptorDataList GetDescriptorDataList();
+		SharedRenderPassDataList GetRenderPassDataList();
 		SharedPipelineDataList GetSharedPipelineDataList();
 
 		const SharedDescriptorDataList GetDescriptorDataList() const;
+		const SharedRenderPassDataList GetRenderPassDataList() const;
 		const SharedPipelineDataList GetSharedPipelineDataList() const;
 
 	private:

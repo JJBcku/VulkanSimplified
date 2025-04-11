@@ -6,7 +6,7 @@
 namespace VulkanSimplifiedInternal
 {
 	SharedDataMainListInternal::SharedDataMainListInternal(const VulkanSimplified::SharedDataListsCapacities& initialCapabilities) :
-		_descriptorData(initialCapabilities.descriptorLists), _pipelineData(initialCapabilities.pipelineLists)
+		_descriptorData(initialCapabilities.descriptorLists), _renderPassData(initialCapabilities.renderPassLists), _pipelineData(initialCapabilities.pipelineLists)
 	{
 	}
 
@@ -19,6 +19,11 @@ namespace VulkanSimplifiedInternal
 		return _descriptorData;
 	}
 
+	SharedRenderPassDataListInternal& SharedDataMainListInternal::GetRenderPassDataList()
+	{
+		return _renderPassData;
+	}
+
 	SharedPipelineDataListInternal& SharedDataMainListInternal::GetPipelineDataList()
 	{
 		return _pipelineData;
@@ -27,6 +32,11 @@ namespace VulkanSimplifiedInternal
 	const SharedDescriptorDataListInternal& SharedDataMainListInternal::GetDescriptorDataList() const
 	{
 		return _descriptorData;
+	}
+
+	const SharedRenderPassDataListInternal& SharedDataMainListInternal::GetRenderPassDataList() const
+	{
+		return _renderPassData;
 	}
 
 	const SharedPipelineDataListInternal& SharedDataMainListInternal::GetPipelineDataList() const
