@@ -116,6 +116,14 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSShaderListsInternal.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSWindowInternal.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSPushConstantData.h" />
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.h" />
+    <ClInclude Include="Include\VSCommon\VSDataFormatFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlags.h" />
+    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSImageSampleFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSImageUsageFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h" />
     <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlags.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.h" />
     <ClInclude Include="Include\VSCommon\VSCompareOperationsType.h" />
@@ -137,9 +145,12 @@
     <ClInclude Include="DoNotInclude\VSSharedData\VSVertexBindingDescriptionData.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSVertexInputSharedPipelineData.h" />
     <ClInclude Include="Include\VSCommon\VSImageSampleFlags.h" />
+    <ClInclude Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.h" />
     <ClInclude Include="Include\VSSharedData\VSPipelinePolygonMode.h" />
     <ClInclude Include="Include\VSSharedData\VSPipelinePrimitiveTopology.h" />
     <ClInclude Include="Include\VSCommon\VSShaderTypeFlags.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataList.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.h" />
     <ClInclude Include="Include\VSSharedData\VSVertexBindingInputRate.h" />
     <ClInclude Include="Include\VSDevice\VSShaderLists.h" />
     <ClInclude Include="Include\VSDevice\VSShaderListsInitialCapacitiesList.h" />
@@ -271,6 +282,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSColorBlendingComponentFlags.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
@@ -363,18 +380,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSCompareOperationsType.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSImageSampleFlags.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSColorBlendingPreset.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
@@ -387,6 +392,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSPipelinePolygonMode.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
@@ -398,12 +409,6 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSShaderTypeFlags.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSShaderLists.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
@@ -446,12 +451,6 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSImageUsageFlags.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSCommon\VSBool64.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
@@ -864,6 +863,18 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSSharedDataMainList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>

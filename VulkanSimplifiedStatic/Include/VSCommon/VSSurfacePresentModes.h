@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSSurfacePresentModesDef.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t SurfacePresentModes;
-
 	enum SurfacePresentModeBits : SurfacePresentModes
 	{
 		PRESENT_MODE_IMMEDIATE = 0x1,

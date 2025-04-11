@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSDataFormatFlagsDef.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t DataFormatFlags;
-
 	enum DataFormatFirstFlagSetBits : DataFormatFlags
 	{
 		DATA_FORMAT_A1_RGB5_UNORM_PACK16 = 0x1,
@@ -251,7 +251,7 @@ namespace VulkanSimplified
 		DataFormatFullSetList();
 	};
 
-	enum class DataFormatSetEnum : DataFormatFlags
+	enum class DataFormatSetEnum : uint64_t
 	{
 		DATA_SET_UNKNOWN = 0x0,
 		DATA_SET_ONE = 0x1,
@@ -269,7 +269,6 @@ namespace VulkanSimplified
 		DataFormatFlags dataFormat;
 
 		DataFormatSetIndependentID();
-		DataFormatSetIndependentID(DataFormatSetEnum set, DataFormatFlags format);
 
 		DataFormatSetIndependentID(DataFormatFirstFlagSetBits format);
 		DataFormatSetIndependentID(DataFormatSecondFlagSetBits format);

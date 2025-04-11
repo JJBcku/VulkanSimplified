@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../VSCommon/VSImageUsageFlags.h"
+#include "../VSCommon/VSImageUsageFlagsDef.h"
 #include "../VSCommon/VSDataFormatFlags.h"
-#include "../VSCommon/VSSurfacePresentModes.h"
+#include "../VSCommon/VSSurfacePresentModesDef.h"
 
 namespace VulkanSimplified
 {

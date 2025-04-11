@@ -2,8 +2,9 @@
 #include "VSPhysicalDeviceDataInternal.h"
 
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
-
 #include "../VSCommon/VSCStringsComparison.h"
+#include "../../Include/VSCommon/VSImageUsageFlags.h"
+#include "../../Include/VSCommon/VSSurfacePresentModes.h"
 
 namespace VulkanSimplifiedInternal
 {

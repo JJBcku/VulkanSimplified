@@ -11,6 +11,9 @@
 #include <VSMain.h>
 #include <VSInstance.h>
 
+#include <VSImageUsageFlags.h>
+#include <VSSurfacePresentModes.h>
+
 #include <VSPhysicalDeviceData.h>
 #include <VSDeviceVulkan10Properties.h>
 #include <VSDeviceExtensionPacksList.h>

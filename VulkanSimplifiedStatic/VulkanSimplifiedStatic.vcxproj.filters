@@ -456,6 +456,39 @@
     <ClInclude Include="DoNotInclude\VSSharedData\VSPushConstantData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDataFormatFlagsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageSampleFlagsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageUsageFlagsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlagsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -605,9 +638,6 @@
     <ClCompile Include="DoNotInclude\VSDevice\VSDeviceNIpch.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSImageUsageFlags.cpp">
-      <Filter>Source Files\Include\Instance</Filter>
-    </ClCompile>
     <ClCompile Include="Include\VSInstance\VSDeviceExtensionPacksList.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
@@ -713,9 +743,6 @@
     <ClCompile Include="DoNotInclude\VSSharedData\VSShaderSpecializationElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSShaderTypeFlags.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSSharedData\VSSharedShaderPipelineData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -752,16 +779,10 @@
     <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineMultisampleData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSImageSampleFlags.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineDepthStencilStateData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSDepthUsage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSCompareOperationsType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.cpp">
@@ -774,6 +795,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSSharedData\VSPushConstantData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

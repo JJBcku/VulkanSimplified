@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSShaderTypeFlagsDef.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t ShaderTypeFlags;
-
 	enum ShaderTypeFlagBit : ShaderTypeFlags
 	{
 		SHADER_TYPE_FRAGMENT = 0x1,

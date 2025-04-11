@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../VSCommon/VSImageSampleFlagsDef.h"
+#include "../VSCommon/VSShaderTypeFlagsDef.h"
+
 template<class T>
 class IDObject;
 
@@ -28,8 +31,8 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	enum ShaderTypeFlagBit : uint64_t;
-	enum ImageSampleFlagBits : uint64_t;
+	enum ShaderTypeFlagBit : ShaderTypeFlags;
+	enum ImageSampleFlagBits : ImageSampleFlags;
 
 	typedef uint64_t ColorBlendingComponentFlags;
 

@@ -10,8 +10,8 @@ namespace VulkanSimplified
 		SurfacePresentModeBits surfacePresentMode;
 		DataFormatSetIndependentID format;
 
-		std::uint32_t imageAmount;
-		std::uint32_t padding;
+		uint32_t imageAmount;
+		uint32_t padding;
 
 		std::vector<size_t> queuesUsingSwapchain;
 

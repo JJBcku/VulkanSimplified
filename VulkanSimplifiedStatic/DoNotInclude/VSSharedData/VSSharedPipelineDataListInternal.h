@@ -4,11 +4,14 @@
 
 #include "VSSharedPipelineDataAllElementsInternal.h"
 
+#include "../../Include/VSCommon/VSImageSampleFlagsDef.h"
+#include "../../Include/VSCommon/VSShaderTypeFlagsDef.h"
+
 namespace VulkanSimplified
 {
 	struct SharedPipelineDataListsCapacities;
-	enum ShaderTypeFlagBit : uint64_t;
-	enum ImageSampleFlagBits : uint64_t;
+	enum ShaderTypeFlagBit : ShaderTypeFlags;
+	enum ImageSampleFlagBits : ImageSampleFlags;
 
 	typedef uint64_t ColorBlendingComponentFlags;
 

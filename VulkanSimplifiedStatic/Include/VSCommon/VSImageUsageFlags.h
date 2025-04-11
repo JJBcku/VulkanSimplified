@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSImageUsageFlagsDef.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t ImageUsageFlags;
-
 	enum ImageUsageFlagBits : ImageUsageFlags
 	{
 		IMAGE_USAGE_TRANSFER_SRC = 0x1,

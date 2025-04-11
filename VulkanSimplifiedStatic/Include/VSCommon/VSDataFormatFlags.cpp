@@ -20,12 +20,6 @@ namespace VulkanSimplified
 		dataFormat = 0;
 	}
 
-	DataFormatSetIndependentID::DataFormatSetIndependentID(DataFormatSetEnum set, DataFormatFlags format)
-	{
-		dataSet = set;
-		dataFormat = format;
-	}
-
 	DataFormatSetIndependentID::DataFormatSetIndependentID(DataFormatFirstFlagSetBits format)
 	{
 		dataSet = DataFormatSetEnum::DATA_SET_ONE;

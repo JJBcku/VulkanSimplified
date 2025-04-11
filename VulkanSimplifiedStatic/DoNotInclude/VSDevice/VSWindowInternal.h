@@ -1,11 +1,13 @@
 #pragma once
 
-#include "../../Include/VSCommon/VSSurfacePresentModes.h"
+#include "../../Include/VSCommon/VSSurfacePresentModesDef.h"
 
 namespace VulkanSimplified
 {
 	struct WindowCreationData;
 	struct SwapchainCreationData;
+
+	enum SurfacePresentModeBits : SurfacePresentModes;
 }
 
 namespace VulkanSimplifiedInternal

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSImageSampleFlagsDef.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t ImageSampleFlags;
-
 	enum ImageSampleFlagBits : ImageSampleFlags
 	{
 		SAMPLE_1 = 0x1,
