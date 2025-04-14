@@ -312,7 +312,7 @@
     <ClInclude Include="Include\VSDevice\VSDeviceInitialCapacitiesList.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDeviceWindowListInitialCapacities.h">
+    <ClInclude Include="Include\VSDevice\VSWindowListInitialCapacities.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSWindowList.h">
@@ -552,6 +552,27 @@
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSRenderPassDataListInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSRenderPassListInitialCapacities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSRenderPassDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSAttachmentReferenceDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -758,7 +779,7 @@
     <ClCompile Include="Include\VSDevice\VSDeviceInitialCapacitiesList.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDeviceWindowListInitialCapacities.cpp">
+    <ClCompile Include="Include\VSDevice\VSWindowListInitialCapacities.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSShaderLists.cpp">
@@ -909,6 +930,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSSharedRenderPassDataList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSRenderPassDataListInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSRenderPassListInitialCapacities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSRenderPassDataList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithResolving.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

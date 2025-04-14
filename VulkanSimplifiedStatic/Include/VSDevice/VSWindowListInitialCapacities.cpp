@@ -1,5 +1,5 @@
 #include "VSDeviceIpch.h"
-#include "VSDeviceWindowListInitialCapacities.h"
+#include "VSWindowListInitialCapacities.h"
 
 namespace VulkanSimplified
 {

@@ -3,6 +3,7 @@
 #include "VSDeviceCoreInternal.h"
 #include "VSWindowListInternal.h"
 #include "VSShaderListsInternal.h"
+#include "VSRenderPassDataListInternal.h"
 
 #include "VSDescriptorDataListInternal.h"
 
@@ -29,12 +30,14 @@ namespace VulkanSimplifiedInternal
 		ShaderListsInternal& GetShaderLists();
 
 		DescriptorDataListInternal& GetDescriptorDataLists();
+		RenderPassListInternal& GetRenderPassList();
 
 		const DeviceCoreInternal& GetDeviceCore() const;
 		const WindowListInternal& GetWindowList() const;
 		const ShaderListsInternal& GetShaderLists() const;
 
 		const DescriptorDataListInternal& GetDescriptorDataLists() const;
+		const RenderPassListInternal& GetRenderPassList() const;
 
 	private:
 		const SharedDataMainListInternal& _sharedDataMain;
@@ -42,6 +45,7 @@ namespace VulkanSimplifiedInternal
 		DeviceCoreInternal _core;
 		WindowListInternal _windowList;
 		ShaderListsInternal _shaderLists;
+		RenderPassListInternal _renderPassList;
 
 		DescriptorDataListInternal _descriptorLists;
 	};

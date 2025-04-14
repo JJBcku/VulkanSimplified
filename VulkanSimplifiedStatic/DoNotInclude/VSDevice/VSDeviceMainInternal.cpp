@@ -13,7 +13,8 @@ namespace VulkanSimplifiedInternal
 		const PhysicalDeviceDataInternal& physicalDeviceData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _sharedDataMain(sharedDataMain),
 		_core(instance, creationData, physicalDeviceData),
 		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
-		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists), _descriptorLists(_sharedDataMain.GetDescriptorDataList(), _core.GetDevice(), initialCapacities.descriptorLists)
+		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists), _descriptorLists(_sharedDataMain.GetDescriptorDataList(), _core.GetDevice(), initialCapacities.descriptorLists),
+		_renderPassList(_sharedDataMain.GetRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists)
 	{
 	}
 
@@ -41,6 +42,11 @@ namespace VulkanSimplifiedInternal
 		return _descriptorLists;
 	}
 
+	RenderPassListInternal& DeviceMainInternal::GetRenderPassList()
+	{
+		return _renderPassList;
+	}
+
 	const DeviceCoreInternal& DeviceMainInternal::GetDeviceCore() const
 	{
 		return _core;
@@ -59,6 +65,11 @@ namespace VulkanSimplifiedInternal
 	const DescriptorDataListInternal& DeviceMainInternal::GetDescriptorDataLists() const
 	{
 		return _descriptorLists;
+	}
+
+	const RenderPassListInternal& DeviceMainInternal::GetRenderPassList() const
+	{
+		return _renderPassList;
 	}
 
 }

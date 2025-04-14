@@ -1,8 +1,9 @@
 #pragma once
 
-#include "VSDeviceWindowListInitialCapacities.h"
+#include "VSWindowListInitialCapacities.h"
 #include "VSShaderListsInitialCapacitiesList.h"
 #include "VSDescriptorListsInitialCapacities.h"
+#include "VSRenderPassListInitialCapacities.h"
 
 namespace VulkanSimplified
 {
@@ -11,6 +12,7 @@ namespace VulkanSimplified
 		WindowListInitialCapacities windowList;
 		ShaderListsInitialCapacitiesList shaderLists;
 		DescriptorListsInitialCapacities descriptorLists;
+		RenderPassDataListsInitialCapacities renderPassLists;
 
 		DeviceInitialCapacitiesList() = default;
 	};

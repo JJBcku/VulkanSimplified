@@ -17,6 +17,11 @@
 #include <VSPipelineStageFlags.h>
 #include <VSAccessFlags.h>
 
+#include <VSInstance.h>
+#include <VSDeviceMain.h>
+#include <VSRenderPassDataList.h>
+#include <VSSubpassCreationDataWithoutResolving.h>
+
 void CreateRenderPassData(VulkanData& data)
 {
 	data.renderPassData = std::make_unique<VulkanRenderPassData>();
@@ -36,4 +41,16 @@ void CreateRenderPassData(VulkanData& data)
 	renderPassData.subpassDependency = sharedRenderPassData.AddSubpassDependency(VulkanSimplified::externalSubpass, 0,
 		VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0,
 		VulkanSimplified::AccessFlagBits::ACCESS_COLOR_WRITE);
+
+	renderPassData.clearValues.resize(1);
+	renderPassData.clearValues[0].emplace(sharedRenderPassData.AddFloatColorClearValue(0.0f, 0.0f, 0.0f, 0.0f));
+
+	auto instance = data.basicData->vsmain.value().GetInstance();
+	auto device = instance.GetChoosenDevicesMainClass();
+	auto deviceRenderPassData = device.GetRenderPassList();
+
+	VulkanSimplified::SubpassCreationDataWithoutResolving subpassData;
+	subpassData.colorAttachments.push_back(renderPassData.colorAttachmentReference);
+
+	renderPassData.renderPass = deviceRenderPassData.AddRenderPassWithoutResolveAttachments(renderPassData.renderPassAttachments, { subpassData }, { renderPassData.subpassDependency });
 }

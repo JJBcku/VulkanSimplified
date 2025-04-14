@@ -2,14 +2,12 @@
 #include "VSDeviceMain.h"
 
 #include "../../DoNotInclude/VSDevice/VSDeviceMainInternal.h"
-#include "../../DoNotInclude/VSDevice/VSWindowListInternal.h"
-#include "../../DoNotInclude/VSDevice/VSShaderListsInternal.h"
-#include "../../DoNotInclude/VSDevice/VSDescriptorDataListInternal.h"
 
 #include "VSDeviceCore.h"
 #include "VSWindowList.h"
 #include "VSShaderLists.h"
 #include "VSDescriptorDataList.h"
+#include "VSRenderPassDataList.h"
 
 namespace VulkanSimplified
 {
@@ -41,6 +39,11 @@ namespace VulkanSimplified
 		return _internal.GetDescriptorDataLists();
 	}
 
+	RenderPassList DeviceMain::GetRenderPassList()
+	{
+		return _internal.GetRenderPassList();
+	}
+
 	const DeviceCore DeviceMain::GetDeviceCore() const
 	{
 		return _internal.GetDeviceCore();
@@ -59,6 +62,11 @@ namespace VulkanSimplified
 	const DescriptorDataList DeviceMain::GetDescriptorDataLists() const
 	{
 		return _internal.GetDescriptorDataLists();
+	}
+
+	const RenderPassList DeviceMain::GetRenderPassList() const
+	{
+		return _internal.GetRenderPassList();
 	}
 
 }

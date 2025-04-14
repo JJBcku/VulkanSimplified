@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "VSWindowListInternal.h"
 
-#include "../../Include/VSDevice/VSDeviceWindowListInitialCapacities.h"
+#include "../../Include/VSDevice/VSWindowListInitialCapacities.h"
 #include "../../Include/VSDevice/VSWindowCreationData.h"
 
 #include "VSWindowInternal.h"
