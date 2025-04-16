@@ -8,6 +8,7 @@
 #include "VSShaderLists.h"
 #include "VSDescriptorDataList.h"
 #include "VSRenderPassDataList.h"
+#include "VSPipelineDataLists.h"
 
 namespace VulkanSimplified
 {
@@ -44,6 +45,11 @@ namespace VulkanSimplified
 		return _internal.GetRenderPassList();
 	}
 
+	PipelineDataLists DeviceMain::GetPipelineDataLists()
+	{
+		return _internal.GetPipelineDataLists();
+	}
+
 	const DeviceCore DeviceMain::GetDeviceCore() const
 	{
 		return _internal.GetDeviceCore();
@@ -67,6 +73,11 @@ namespace VulkanSimplified
 	const RenderPassList DeviceMain::GetRenderPassList() const
 	{
 		return _internal.GetRenderPassList();
+	}
+
+	const PipelineDataLists DeviceMain::GetPipelineDataLists() const
+	{
+		return _internal.GetPipelineDataLists();
 	}
 
 }

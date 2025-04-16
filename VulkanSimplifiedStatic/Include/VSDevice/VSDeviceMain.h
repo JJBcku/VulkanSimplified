@@ -12,6 +12,7 @@ namespace VulkanSimplified
 	class ShaderLists;
 	class DescriptorDataList;
 	class RenderPassList;
+	class PipelineDataLists;
 
 	class DeviceMain
 	{
@@ -25,6 +26,7 @@ namespace VulkanSimplified
 
 		DescriptorDataList GetDescriptorDataLists();
 		RenderPassList GetRenderPassList();
+		PipelineDataLists GetPipelineDataLists();
 
 		const DeviceCore GetDeviceCore() const;
 		const WindowList GetWindowList() const;
@@ -32,6 +34,7 @@ namespace VulkanSimplified
 
 		const DescriptorDataList GetDescriptorDataLists() const;
 		const RenderPassList GetRenderPassList() const;
+		const PipelineDataLists GetPipelineDataLists() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;

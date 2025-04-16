@@ -573,6 +573,24 @@
     <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupPipelineLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupGraphicsPipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSPipelineDataListsInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -948,6 +966,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithResolving.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupPipelineLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupGraphicsPipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSPipelineDataListsInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPipelineDataLists.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPipelineLayoutCreationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,21 @@
 #pragma once
 
 #include <CustomLists/IDObject.h>
-#include <VSSharedPipelineDataList.h>
+
+namespace VulkanSimplifiedInternal
+{
+	struct SharedShaderPipelineData;
+	struct VertexInputSharedPipelineData;
+
+	struct PipelineScissorData;
+	struct PipelineViewportData;
+
+	struct PipelineInputAssemblyData;
+	struct PipelineRasterizationData;
+	struct PipelineMultisampleData;
+	struct PipelineDepthStencilStateData;
+	struct PipelineColorBlendAttachment;
+}
 
 struct VulkanSharedData
 {

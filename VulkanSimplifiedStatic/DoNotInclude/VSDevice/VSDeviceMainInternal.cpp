@@ -14,7 +14,8 @@ namespace VulkanSimplifiedInternal
 		_core(instance, creationData, physicalDeviceData),
 		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
 		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists), _descriptorLists(_sharedDataMain.GetDescriptorDataList(), _core.GetDevice(), initialCapacities.descriptorLists),
-		_renderPassList(_sharedDataMain.GetRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists)
+		_renderPassList(_sharedDataMain.GetRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists),
+		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists)
 	{
 	}
 
@@ -47,6 +48,11 @@ namespace VulkanSimplifiedInternal
 		return _renderPassList;
 	}
 
+	PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists()
+	{
+		return _pipelineDataLists;
+	}
+
 	const DeviceCoreInternal& DeviceMainInternal::GetDeviceCore() const
 	{
 		return _core;
@@ -70,6 +76,11 @@ namespace VulkanSimplifiedInternal
 	const RenderPassListInternal& DeviceMainInternal::GetRenderPassList() const
 	{
 		return _renderPassList;
+	}
+
+	const PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists() const
+	{
+		return _pipelineDataLists;
 	}
 
 }

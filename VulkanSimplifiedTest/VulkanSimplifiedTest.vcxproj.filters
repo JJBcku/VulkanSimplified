@@ -63,6 +63,12 @@
     <ClCompile Include="CreateRenderPassData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanPipelineData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatePipelineData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -108,6 +114,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CreateRenderPassData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanPipelineData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatePipelineData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

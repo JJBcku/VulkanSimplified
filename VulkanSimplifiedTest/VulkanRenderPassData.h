@@ -5,6 +5,16 @@
 #include <VSRenderPassDataList.h>
 #include <VSRenderPassClearValueID.h>
 
+namespace VulkanSimplifiedInternal
+{
+	struct RenderPassAttachmentData;
+	struct RenderPassAttachmentReference;
+	struct SubpassDependencyData;
+
+	class RenderPassClearValueID;
+	class AutoCleanupRenderPass;
+}
+
 struct VulkanRenderPassData
 {
 	std::vector<IDObject<VulkanSimplifiedInternal::RenderPassAttachmentData>> renderPassAttachments;
