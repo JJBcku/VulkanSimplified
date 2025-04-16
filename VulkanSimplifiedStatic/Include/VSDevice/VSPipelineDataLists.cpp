@@ -18,4 +18,10 @@ namespace VulkanSimplified
 		return _internal.AddPipelineLayout(creationData, addOnReserving);
 	}
 
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupGraphicsPipeline>> PipelineDataLists::AddGraphicPipelines(
+		const std::vector<GraphicsPipelineCreationData>& creationDataList, size_t addOnReserving)
+	{
+		return _internal.AddGraphicPipelines(creationDataList, addOnReserving);
+	}
+
 }

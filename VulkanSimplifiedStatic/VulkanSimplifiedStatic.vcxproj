@@ -145,9 +145,13 @@
     <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOPDef.h" />
     <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h" />
+    <ClInclude Include="Include\VSDevice\VSArbitraryShaderID.h" />
+    <ClInclude Include="Include\VSDevice\VSGraphicsPipelineCreationData.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h" />
+    <ClInclude Include="Include\VSDevice\VSShaderTypeFlags.h" />
+    <ClInclude Include="Include\VSDevice\VSShaderTypeFlagsDef.h" />
     <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h" />
     <ClInclude Include="Include\VSDevice\VSAttachmentReferenceDef.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h" />
@@ -400,6 +404,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDescriptorDataList.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
@@ -407,6 +417,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDescriptorListsInitialCapacities.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSGraphicsPipelineCreationData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>

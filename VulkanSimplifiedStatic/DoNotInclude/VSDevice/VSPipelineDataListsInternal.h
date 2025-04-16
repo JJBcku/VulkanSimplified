@@ -6,6 +6,7 @@ namespace VulkanSimplified
 {
 	struct PipelineDataListsInitialCapacities;
 	struct PipelineLayoutCreationData;
+	struct GraphicsPipelineCreationData;
 }
 
 namespace VulkanSimplifiedInternal
@@ -26,6 +27,11 @@ namespace VulkanSimplifiedInternal
 		~PipelineDataListsInternal();
 
 		IDObject<AutoCleanupPipelineLayout> AddPipelineLayout(const VulkanSimplified::PipelineLayoutCreationData& creationData, size_t addOnReserving);
+		std::vector<IDObject<AutoCleanupGraphicsPipeline>> AddGraphicPipelines(const std::vector<VulkanSimplified::GraphicsPipelineCreationData>& creationDataList,
+			size_t addOnReserving);
+
+		VkPipelineLayout GetPipelineLayout(IDObject<AutoCleanupPipelineLayout> layoutID) const;
+		VkPipeline GetGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID) const;
 
 	private:
 		const SharedPipelineDataListInternal& _pipelineData;

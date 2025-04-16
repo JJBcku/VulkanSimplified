@@ -31,6 +31,11 @@ namespace VulkanSimplifiedInternal
 		return *this;
 	}
 
+	VkShaderModule AutoCleanupShaderModule::GetShaderModule() const
+	{
+		return _shader;
+	}
+
 	void AutoCleanupShaderModule::DestroyShader()
 	{
 		if (_shader != VK_NULL_HANDLE)

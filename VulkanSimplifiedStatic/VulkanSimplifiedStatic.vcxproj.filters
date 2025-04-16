@@ -591,6 +591,18 @@
     <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSGraphicsPipelineCreationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSArbitraryShaderID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSShaderTypeFlagsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSShaderTypeFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -984,6 +996,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSPipelineLayoutCreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSGraphicsPipelineCreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

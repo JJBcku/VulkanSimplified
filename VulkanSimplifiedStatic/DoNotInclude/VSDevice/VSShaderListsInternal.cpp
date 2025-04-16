@@ -2,6 +2,7 @@
 #include "VSShaderListsInternal.h"
 
 #include "../../Include/VSDevice/VSShaderListsInitialCapacitiesList.h"
+#include "../../Include/VSDevice/VSArbitraryShaderID.h"
 
 #include "VSAutoCleanupFragmentShaderModule.h"
 #include "VSAutoCleanupVertexShaderModule.h"
@@ -57,6 +58,35 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("ShaderListsInternal::CreateVertexShaderModule Error: Program failed to create shader module!");
 
 		return _vertexShaders.AddObject(AutoCleanupVertexShaderModule(_device, add), addOnReservation);
+	}
+
+	VkShaderModule ShaderListsInternal::GetShaderModule(VulkanSimplified::ArbitraryShaderID shaderID) const
+	{
+		VkShaderModule ret = VK_NULL_HANDLE;
+
+		switch (shaderID.type)
+		{
+		case VulkanSimplified::SHADER_TYPE_FRAGMENT:
+			ret = GetFragmentShader(shaderID.fragmentShader.fragmentShaderID);
+			break;
+		case VulkanSimplified::SHADER_TYPE_VERTEX:
+			ret = GetVertexShader(shaderID.vertexShader.vertexShaderID);
+			break;
+		default:
+			throw std::runtime_error("ShaderListsInternal::GetShaderModule Error: Program was given an erroneous shader id type!");
+		}
+
+		return ret;
+	}
+
+	VkShaderModule ShaderListsInternal::GetFragmentShader(IDObject<AutoCleanupFragmentShaderModule> shaderID) const
+	{
+		return _fragmentShaders.GetConstObject(shaderID).GetShaderModule();
+	}
+
+	VkShaderModule ShaderListsInternal::GetVertexShader(IDObject<AutoCleanupVertexShaderModule> shaderID) const
+	{
+		return _vertexShaders.GetConstObject(shaderID).GetShaderModule();
 	}
 
 }

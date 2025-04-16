@@ -14,6 +14,8 @@ namespace VulkanSimplifiedInternal
 		AutoCleanupShaderModule& operator=(const AutoCleanupShaderModule& rhs) noexcept = delete;
 		AutoCleanupShaderModule& operator=(AutoCleanupShaderModule&& rhs) noexcept;
 
+		VkShaderModule GetShaderModule() const;
+
 	private:
 		VkDevice _device;
 		VkShaderModule _shader;
