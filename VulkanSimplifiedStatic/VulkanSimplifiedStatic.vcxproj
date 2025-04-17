@@ -139,6 +139,14 @@
     <ClInclude Include="Include\VSCommon\VSImageLayoutFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSImageSampleFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSImageUsageFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryDataList.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapData.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapProperties.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapPropertiesDef.h" />
+    <ClInclude Include="Include\VSCommon\VSMemorySizeDef.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryTypeData.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryTypeProperties.h" />
+    <ClInclude Include="Include\VSCommon\VSMemoryTypePropertiesDef.h" />
     <ClInclude Include="Include\VSCommon\VSPipelineStageFlags.h" />
     <ClInclude Include="Include\VSCommon\VSPipelineStageFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOP.h" />
@@ -404,6 +412,24 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryDataList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryHeapData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryTypeData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
@@ -649,12 +675,6 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSCommon\VSDataFormatFlags.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSMemoryData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>

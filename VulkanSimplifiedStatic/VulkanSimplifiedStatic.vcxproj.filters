@@ -603,6 +603,30 @@
     <ClInclude Include="Include\VSDevice\VSShaderTypeFlags.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryTypePropertiesDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryTypeProperties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryTypeData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapPropertiesDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapProperties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemorySizeDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryDataList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -778,9 +802,6 @@
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSInstance\VsLogicalDeviceInternalCreationData.cpp">
       <Filter>Source Files\DoNotInclude\Instance</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSMemoryData.cpp">
-      <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSPhysicalDeviceData.cpp">
       <Filter>Source Files\Include\Instance</Filter>
@@ -1002,6 +1023,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryTypeData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryHeapData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryDataList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
