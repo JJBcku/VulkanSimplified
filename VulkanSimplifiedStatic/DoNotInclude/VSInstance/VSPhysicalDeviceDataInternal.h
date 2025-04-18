@@ -8,8 +8,6 @@
 #include "../../Include/VSInstance/VSDeviceSwapchainSupportData.h"
 #include "../../Include/VSCommon/VSMemoryData.h"
 
-#include <optional>
-
 namespace VulkanSimplifiedInternal
 {
 	class PhysicalDeviceDataInternal

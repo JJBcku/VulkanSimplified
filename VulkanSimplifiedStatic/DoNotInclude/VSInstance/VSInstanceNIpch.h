@@ -7,3 +7,4 @@
 #include <SDL2/SDL_vulkan.h>
 
 #include <stdint.h>
+#include <optional>
