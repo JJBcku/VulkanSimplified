@@ -38,8 +38,7 @@ namespace VulkanSimplifiedInternal
 		SDL_Window* _window;
 		uint64_t _windowID;
 		std::string _windowTitle;
-		uint32_t _width;
-		uint32_t _height;
+		double ratio;
 
 		VkSurfaceKHR _surface;
 		VkSurfaceCapabilitiesKHR _surfaceCapabilities;

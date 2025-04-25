@@ -19,8 +19,6 @@ namespace VulkanSimplifiedInternal
 
 		_window = nullptr;
 		_windowTitle = creationData.windowTitle;
-		_width = creationData.width;
-		_height = creationData.height;
 
 		_surface = VK_NULL_HANDLE;
 		_surfaceCapabilities = {};
@@ -51,7 +49,10 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("WindowInternal::WindowInternal Error: Erroneous window creation settings!");
 		}
 
-		_window = SDL_CreateWindow(_windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(_width), static_cast<int>(_height), flags);
+		ratio = static_cast<double>(std::min(creationData.width, creationData.height)) / static_cast<double>(std::max(creationData.width, creationData.height));
+
+		_window = SDL_CreateWindow(_windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(creationData.width), static_cast<int>(creationData.height),
+			flags);
 
 		if (_window == nullptr)
 			throw std::runtime_error(SDL_GetError());
@@ -92,76 +93,6 @@ namespace VulkanSimplifiedInternal
 
 		ReCreateSwapchain();
 	}
-
-	/*WindowInternal::WindowInternal(WindowInternal&& rhs) noexcept : _instance(rhs._instance), _device(rhs._device), _window(rhs._window), _windowID(rhs._windowID),
-		_windowTitle(std::move(rhs._windowTitle)), _width(rhs._width), _height(rhs._height), _surface(rhs._surface), _surfaceCapabilities(rhs._surfaceCapabilities),
-		_swapchain(rhs._swapchain)
-	{
-		rhs._instance = VK_NULL_HANDLE;
-		rhs._device = VK_NULL_HANDLE;
-
-		rhs._window = nullptr;
-		rhs._windowID = 0;
-		rhs._width = 0;
-		rhs._height = 0;
-
-		rhs._surface = VK_NULL_HANDLE;
-		rhs._surfaceCapabilities = {};
-
-		rhs._surfacePresentMode = VK_PRESENT_MODE_MAX_ENUM_KHR;
-		rhs._format = VK_FORMAT_MAX_ENUM;
-		rhs._swapchainFlags = VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR;
-		rhs._imageAmount = 0;
-
-		rhs._swapchain = VK_NULL_HANDLE;
-	}
-
-	WindowInternal& WindowInternal::operator=(WindowInternal&& rhs) noexcept
-	{
-		DestroyWindow();
-
-		_instance = rhs._instance;
-		_device = rhs._device;
-
-		_window = rhs._window;
-		_windowID = rhs._windowID;
-		_windowTitle = std::move(rhs._windowTitle);
-		_width = rhs._width;
-		_height = rhs._height;
-
-		_surface = rhs._surface;
-		_surfaceCapabilities = rhs._surfaceCapabilities;
-
-		_surfacePresentMode = rhs._surfacePresentMode;
-		_format = rhs._format;
-		_swapchainFlags = rhs._swapchainFlags;
-		_imageAmount = rhs._imageAmount;
-
-		_queueFamilies = std::move(rhs._queueFamilies);
-
-		_swapchain = rhs._swapchain;
-		_swapchainImages = std::move(rhs._swapchainImages);
-
-		rhs._instance = VK_NULL_HANDLE;
-		rhs._device = VK_NULL_HANDLE;
-
-		rhs._window = nullptr;
-		rhs._windowID = 0;
-		rhs._width = 0;
-		rhs._height = 0;
-
-		rhs._surface = VK_NULL_HANDLE;
-		rhs._surfaceCapabilities = {};
-
-		rhs._surfacePresentMode = VK_PRESENT_MODE_MAX_ENUM_KHR;
-		rhs._format = VK_FORMAT_MAX_ENUM;
-		rhs._swapchainFlags = VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR;
-		rhs._imageAmount = 0;
-
-		rhs._swapchain = VK_NULL_HANDLE;
-
-		return *this;
-	}*/
 
 	void WindowInternal::DestroyWindow()
 	{

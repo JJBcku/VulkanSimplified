@@ -5,6 +5,7 @@
 #include "VSDescriptorListsInitialCapacities.h"
 #include "VSRenderPassListInitialCapacities.h"
 #include "VSPipelineDataListsInitialCapacities.h"
+#include "VSMemoryObjectsListInitialCapacities.h"
 
 namespace VulkanSimplified
 {
@@ -15,6 +16,7 @@ namespace VulkanSimplified
 		DescriptorListsInitialCapacities descriptorLists;
 		RenderPassDataListsInitialCapacities renderPassLists;
 		PipelineDataListsInitialCapacities pipelineDataLists;
+		MemoryObjectsListInitialCapacities memoryObjectsList;
 
 		DeviceInitialCapacitiesList() = default;
 	};

@@ -15,7 +15,8 @@ namespace VulkanSimplifiedInternal
 		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
 		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists), _descriptorLists(_sharedDataMain.GetDescriptorDataList(), _core.GetDevice(), initialCapacities.descriptorLists),
 		_renderPassList(_sharedDataMain.GetRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists),
-		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists)
+		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists),
+		_memoryObjectsList(_core.GetDevice(), _core.GetDevicesPhysicalData().GetAvailableMemoryDataList(), initialCapacities.memoryObjectsList)
 	{
 	}
 
@@ -53,6 +54,11 @@ namespace VulkanSimplifiedInternal
 		return _pipelineDataLists;
 	}
 
+	MemoryObjectsListInternal& DeviceMainInternal::GetMemoryObjectsList()
+	{
+		return _memoryObjectsList;
+	}
+
 	const DeviceCoreInternal& DeviceMainInternal::GetDeviceCore() const
 	{
 		return _core;
@@ -81,6 +87,11 @@ namespace VulkanSimplifiedInternal
 	const PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists() const
 	{
 		return _pipelineDataLists;
+	}
+
+	const MemoryObjectsListInternal& DeviceMainInternal::GetMemoryObjectsList() const
+	{
+		return _memoryObjectsList;
 	}
 
 }

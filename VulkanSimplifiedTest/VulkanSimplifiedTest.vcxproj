@@ -119,6 +119,7 @@
     <ClInclude Include="MainSettings.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RunProgram.h" />
+    <ClInclude Include="SwapchainSizes.h" />
     <ClInclude Include="VulkanBasicData.h" />
     <ClInclude Include="VulkanData.h" />
     <ClInclude Include="VulkanDeviceDependentData.h" />

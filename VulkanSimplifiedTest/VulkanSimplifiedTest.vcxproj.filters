@@ -122,5 +122,8 @@
     <ClInclude Include="CreatePipelineData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SwapchainSizes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

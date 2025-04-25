@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CreateSharedData.h"
 
+#include "SwapchainSizes.h"
+
 #include "VulkanData.h"
 #include "VulkanBasicData.h"
 #include "VulkanSharedData.h"
@@ -27,8 +29,8 @@ void CreateSharedData(VulkanData& data)
 
 	sharedDataList.vertexInputData = pipelineData.AddVertexInputSharedPipelineData({});
 
-	sharedDataList.scissorData = pipelineData.AddPipelineScissorData(0, 0, 1920, 1080);
-	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, 1920, 1080, 0.0f, 1.0f);
+	sharedDataList.scissorData = pipelineData.AddPipelineScissorData(0, 0, width, height);
+	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);
 
 	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
 	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, true, true);

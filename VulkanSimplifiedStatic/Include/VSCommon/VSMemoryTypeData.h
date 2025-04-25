@@ -6,7 +6,7 @@ namespace VulkanSimplified
 {
 	struct MemoryTypeData
 	{
-		size_t memoryIndex;
+		uint32_t memoryIndex;
 		MemoryTypeProperties properties;
 
 		MemoryTypeData();

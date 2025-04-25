@@ -2,5 +2,5 @@
 
 namespace VulkanSimplified
 {
-	typedef uint64_t MemoryTypeProperties;
+	typedef uint32_t MemoryTypeProperties;
 }
