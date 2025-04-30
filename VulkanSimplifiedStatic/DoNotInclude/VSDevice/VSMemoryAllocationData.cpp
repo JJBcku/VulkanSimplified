@@ -163,7 +163,6 @@ namespace VulkanSimplifiedInternal
 					if (endSize >= size)
 					{
 						beggining = currentPoint;
-						i++;
 					}
 				}
 			}

@@ -3,11 +3,13 @@
 #include "VSDeviceCoreInternal.h"
 #include "VSWindowListInternal.h"
 #include "VSShaderListsInternal.h"
+
+#include "VSDescriptorDataListInternal.h"
 #include "VSRenderPassDataListInternal.h"
 #include "VSPipelineDataListsInternal.h"
 
-#include "VSDescriptorDataListInternal.h"
 #include "VSMemoryObjectsListInternal.h"
+#include "VSImageDataListsInternal.h"
 
 namespace VulkanSimplified
 {
@@ -36,6 +38,7 @@ namespace VulkanSimplifiedInternal
 		PipelineDataListsInternal& GetPipelineDataLists();
 
 		MemoryObjectsListInternal& GetMemoryObjectsList();
+		ImageDataListsInternal& GetImageDataLists();
 
 		const DeviceCoreInternal& GetDeviceCore() const;
 		const WindowListInternal& GetWindowList() const;
@@ -46,6 +49,7 @@ namespace VulkanSimplifiedInternal
 		const PipelineDataListsInternal& GetPipelineDataLists() const;
 
 		const MemoryObjectsListInternal& GetMemoryObjectsList() const;
+		const ImageDataListsInternal& GetImageDataLists() const;
 
 	private:
 		const SharedDataMainListInternal& _sharedDataMain;
@@ -59,5 +63,6 @@ namespace VulkanSimplifiedInternal
 		PipelineDataListsInternal _pipelineDataLists;
 
 		MemoryObjectsListInternal _memoryObjectsList;
+		ImageDataListsInternal _imageDataLists;
 	};
 }

@@ -10,6 +10,7 @@
 #include "VSRenderPassDataList.h"
 #include "VSPipelineDataLists.h"
 #include "VSMemoryObjectsList.h"
+#include "VSImageDataLists.h"
 
 namespace VulkanSimplified
 {
@@ -56,6 +57,11 @@ namespace VulkanSimplified
 		return _internal.GetMemoryObjectsList();
 	}
 
+	ImageDataLists DeviceMain::GetImageDataLists()
+	{
+		return _internal.GetImageDataLists();
+	}
+
 	const DeviceCore DeviceMain::GetDeviceCore() const
 	{
 		return _internal.GetDeviceCore();
@@ -89,6 +95,11 @@ namespace VulkanSimplified
 	const MemoryObjectsList DeviceMain::GetMemoryObjectsList() const
 	{
 		return _internal.GetMemoryObjectsList();
+	}
+
+	const ImageDataLists DeviceMain::GetImageDataLists() const
+	{
+		return _internal.GetImageDataLists();
 	}
 
 }

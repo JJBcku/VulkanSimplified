@@ -6,6 +6,7 @@
 #include "VSRenderPassListInitialCapacities.h"
 #include "VSPipelineDataListsInitialCapacities.h"
 #include "VSMemoryObjectsListInitialCapacities.h"
+#include "VSImageDataListsInitialCapacities.h"
 
 namespace VulkanSimplified
 {
@@ -17,6 +18,7 @@ namespace VulkanSimplified
 		RenderPassDataListsInitialCapacities renderPassLists;
 		PipelineDataListsInitialCapacities pipelineDataLists;
 		MemoryObjectsListInitialCapacities memoryObjectsList;
+		ImageDataListsInitialCapacities imageLists;
 
 		DeviceInitialCapacitiesList() = default;
 	};

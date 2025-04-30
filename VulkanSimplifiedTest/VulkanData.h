@@ -8,6 +8,7 @@ struct VulkanInstanceDependentData;
 struct VulkanDeviceDependentData;
 struct VulkanRenderPassData;
 struct VulkanPipelineData;
+struct VulkanMemoryData;
 
 struct VulkanData
 {
@@ -17,6 +18,7 @@ struct VulkanData
 	std::unique_ptr<VulkanDeviceDependentData> deviceDependentData;
 	std::unique_ptr<VulkanRenderPassData> renderPassData;
 	std::unique_ptr<VulkanPipelineData> pipelineData;
+	std::unique_ptr<VulkanMemoryData> memoryData;
 
 	VulkanData();
 	~VulkanData();

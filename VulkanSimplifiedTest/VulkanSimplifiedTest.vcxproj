@@ -89,6 +89,7 @@
     <ClCompile Include="CreateBasicData.cpp" />
     <ClCompile Include="CreateDeviceDependentData.cpp" />
     <ClCompile Include="CreateInstanceDependentData.cpp" />
+    <ClCompile Include="CreateMemoryData.cpp" />
     <ClCompile Include="CreatePipelineData.cpp" />
     <ClCompile Include="CreateRenderPassData.cpp" />
     <ClCompile Include="CreateSharedData.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="CreateBasicData.h" />
     <ClInclude Include="CreateDeviceDependentData.h" />
     <ClInclude Include="CreateInstanceDependentData.h" />
+    <ClInclude Include="CreateMemoryData.h" />
     <ClInclude Include="CreatePipelineData.h" />
     <ClInclude Include="CreateRenderPassData.h" />
     <ClInclude Include="CreateSharedData.h" />
@@ -124,6 +126,7 @@
     <ClInclude Include="VulkanData.h" />
     <ClInclude Include="VulkanDeviceDependentData.h" />
     <ClInclude Include="VulkanInstanceDependentData.h" />
+    <ClInclude Include="VulkanMemoryData.h" />
     <ClInclude Include="VulkanPipelineData.h" />
     <ClInclude Include="VulkanRenderPassData.h" />
     <ClInclude Include="VulkanSharedData.h" />

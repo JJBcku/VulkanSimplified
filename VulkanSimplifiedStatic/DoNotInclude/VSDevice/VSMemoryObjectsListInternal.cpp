@@ -24,7 +24,7 @@ namespace VulkanSimplifiedInternal
 		{
 			for (size_t j = 0; j < memoryHeapList.memoryHeaps[i].memoryTypeAmount; j++)
 			{
-				memoryTypeData[i].emplace(device,static_cast<std::uint32_t>(i), memoryHeapList.memoryHeaps[i].memoryTypes[j],
+				memoryTypeData[typeCount++].emplace(device, static_cast<std::uint32_t>(i), memoryHeapList.memoryHeaps[i].memoryTypes[j],
 					initialCapacities.initialCapacities[memoryHeapList.memoryHeaps[i].memoryTypes[j].memoryIndex]);
 			}
 		}
@@ -34,10 +34,10 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	VulkanSimplified::AllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+	VulkanSimplified::MemoryAllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve)
 	{
-		std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> ret;
+		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
 		assert(memorySize > 0);
 		assert(memoryTypeMask > 0);
 		assert(!acceptableMemoryTypesProperties.empty());
@@ -49,7 +49,7 @@ namespace VulkanSimplifiedInternal
 				if (acceptableMemoryTypesProperties[i] != memoryTypeData[j].value().GetProperties())
 					continue;
 
-				std::uint32_t memoryBit = 1U << j;
+				std::uint32_t memoryBit = 1U << memoryTypeData[j].value().GetTypeIndex();
 
 				if ((memoryTypeMask & memoryBit) != memoryBit)
 					continue;
@@ -71,10 +71,10 @@ namespace VulkanSimplifiedInternal
 		throw std::runtime_error("MemoryObjectsListInternal::AddMemoryAllocation Error: Program failed to allocate memory!");
 	}
 
-	std::optional<VulkanSimplified::AllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+	std::optional<VulkanSimplified::MemoryAllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserve)
 	{
-		std::optional<VulkanSimplified::AllocationFullID> ret;
+		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
 
 		assert(memorySize > 0);
 		assert(memoryTypeMask > 0);
@@ -87,7 +87,7 @@ namespace VulkanSimplifiedInternal
 				if (acceptableMemoryTypesProperties[i] != memoryTypeData[j].value().GetProperties())
 					continue;
 
-				uint32_t memoryBit = 1U << j;
+				uint32_t memoryBit = 1U << memoryTypeData[j].value().GetTypeIndex();
 
 				if ((memoryTypeMask & memoryBit) != memoryBit)
 					continue;
@@ -111,7 +111,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	size_t MemoryObjectsListInternal::BindImage(VulkanSimplified::AllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve)
+	size_t MemoryObjectsListInternal::BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve)
 	{
 		if (allocationID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::BindImage Error: Program tried to access a non-existent memory type!");
@@ -119,12 +119,12 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.second].value().BindImage(allocationID.first, image, size, aligment, addOnReserve);
 	}
 
-	bool MemoryObjectsListInternal::RemoveSuballocation(VulkanSimplified::AllocationFullID allocationID, size_t beggining, bool throwOnNotFound)
+	bool MemoryObjectsListInternal::RemoveSuballocation(VulkanSimplified::MemorySuballocationFullID allocationID, bool throwOnNotFound)
 	{
-		if (allocationID.second >= typeCount)
+		if (allocationID.first.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::RemoveSuballocation Error: Program tried to access a non-existent memory type!");
 
-		return memoryTypeData[allocationID.second].value().RemoveSuballocation(allocationID.first, beggining, throwOnNotFound);
+		return memoryTypeData[allocationID.first.second].value().RemoveSuballocation(allocationID.first.first, allocationID.second, throwOnNotFound);
 	}
 
 	bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)

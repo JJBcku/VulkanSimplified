@@ -10,6 +10,7 @@
 #include "CreateSharedData.h"
 #include "CreateRenderPassData.h"
 #include "CreatePipelineData.h"
+#include "CreateMemoryData.h"
 
 #include "MiscFunctions.h"
 
@@ -26,6 +27,7 @@ void RunProgram()
 	CreateDeviceDependentData(data);
 	CreateRenderPassData(data);
 	CreatePipelineData(data);
+	CreateMemoryData(data);
 
 	while (!settings.IsClosingRequested())
 	{

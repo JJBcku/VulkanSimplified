@@ -10,10 +10,13 @@ namespace VulkanSimplified
 	class DeviceCore;
 	class WindowList;
 	class ShaderLists;
+
 	class DescriptorDataList;
 	class RenderPassList;
 	class PipelineDataLists;
+
 	class MemoryObjectsList;
+	class ImageDataLists;
 
 	class DeviceMain
 	{
@@ -30,6 +33,7 @@ namespace VulkanSimplified
 		PipelineDataLists GetPipelineDataLists();
 
 		MemoryObjectsList GetMemoryObjectsList();
+		ImageDataLists GetImageDataLists();
 
 		const DeviceCore GetDeviceCore() const;
 		const WindowList GetWindowList() const;
@@ -40,6 +44,7 @@ namespace VulkanSimplified
 		const PipelineDataLists GetPipelineDataLists() const;
 
 		const MemoryObjectsList GetMemoryObjectsList() const;
+		const ImageDataLists GetImageDataLists() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;
