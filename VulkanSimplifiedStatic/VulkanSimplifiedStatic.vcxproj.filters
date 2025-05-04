@@ -702,38 +702,38 @@
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataListsInitialCapacities.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSMain\VSMainDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDescriptorDataListDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSImageDataListsDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\VSMainDef.h">
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSMemoryObjectsListDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSPipelineDataListsDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSRenderPassDataListDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSShaderListsDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataListsDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Shared</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataListsDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Shared</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Shared</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
