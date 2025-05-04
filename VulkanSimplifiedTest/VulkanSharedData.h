@@ -2,20 +2,7 @@
 
 #include <CustomLists/IDObject.h>
 
-namespace VulkanSimplifiedInternal
-{
-	struct SharedShaderPipelineData;
-	struct VertexInputSharedPipelineData;
-
-	struct PipelineScissorData;
-	struct PipelineViewportData;
-
-	struct PipelineInputAssemblyData;
-	struct PipelineRasterizationData;
-	struct PipelineMultisampleData;
-	struct PipelineDepthStencilStateData;
-	struct PipelineColorBlendAttachment;
-}
+#include <VSSharedPipelineDataListsDef.h>
 
 struct VulkanSharedData
 {

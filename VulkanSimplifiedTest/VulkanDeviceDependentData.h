@@ -1,14 +1,9 @@
 #pragma once
 
 #include <CustomLists/IDObject.h>
-#include <VSWindowPointer.h>
 
-namespace VulkanSimplifiedInternal
-{
-	class WindowInternal;
-	class AutoCleanupFragmentShaderModule;
-	class AutoCleanupVertexShaderModule;
-}
+#include <VSWindowListDef.h>
+#include <VSShaderListsDef.h>
 
 struct VulkanDeviceDependentData
 {

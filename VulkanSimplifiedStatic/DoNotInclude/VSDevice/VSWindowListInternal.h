@@ -2,7 +2,7 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
-#include "../../Include/VSDevice/VSWindowPointer.h"
+#include "../../Include/VSDevice/VSWindowListDef.h"
 
 namespace VulkanSimplified
 {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "VSWindowPointer.h"
-
 #include <CustomLists\IDObjectDef.h>
+
+#include "VSWindowListDef.h"
 
 namespace VulkanSimplifiedInternal
 {

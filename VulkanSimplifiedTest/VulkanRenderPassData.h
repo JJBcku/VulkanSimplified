@@ -1,19 +1,9 @@
 #pragma once
 
 #include <CustomLists/IDObject.h>
-#include <VSSharedRenderPassDataList.h>
-#include <VSRenderPassDataList.h>
+#include <VSSharedRenderPassDataListDef.h>
+#include <VSRenderPassDataListDef.h>
 #include <VSRenderPassClearValueID.h>
-
-namespace VulkanSimplifiedInternal
-{
-	struct RenderPassAttachmentData;
-	struct RenderPassAttachmentReference;
-	struct SubpassDependencyData;
-
-	class RenderPassClearValueID;
-	class AutoCleanupRenderPass;
-}
 
 struct VulkanRenderPassData
 {

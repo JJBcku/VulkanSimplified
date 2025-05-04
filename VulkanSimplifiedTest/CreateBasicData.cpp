@@ -32,8 +32,8 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 
 	basicInit.appVersion = basicInit.engineVersion;
 
-	data.basicData->vsmain.emplace(basicInit);
-	auto& main = data.basicData->vsmain.value();
+	data.basicData->vsmain = std::make_unique<VulkanSimplified::Main>(basicInit);
+	auto& main = *data.basicData->vsmain;
 
 	auto availableExtensionPacks = main.GetAvailableInstanceExtensionPacks();
 	auto availableLayerPacks = main.GetAvailableInstanceLayerPacks();

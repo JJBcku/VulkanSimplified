@@ -2,11 +2,12 @@
 
 #include <CustomLists\IDObjectDef.h>
 
+#include "VSDescriptorDataListDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class DescriptorDataListInternal;
 
-	class AutoCleanupDescriptorSetLayout;
 	struct DescriptorSetLayoutBindingData;
 }
 

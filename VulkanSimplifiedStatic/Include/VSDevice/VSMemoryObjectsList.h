@@ -2,14 +2,11 @@
 
 #include <CustomLists\IDObjectDef.h>
 
-#include "../VSCommon/VSMemoryTypePropertiesDef.h"
-
-#include "../VSCommon/VSMemoryAllocationFullID.h"
+#include "VSMemoryObjectsListDef.h"
 
 namespace VulkanSimplifiedInternal
 {
 	class MemoryObjectsListInternal;
-	class MemoryAllocationData;
 }
 
 namespace VulkanSimplified

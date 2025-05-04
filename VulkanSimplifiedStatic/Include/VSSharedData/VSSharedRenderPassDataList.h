@@ -8,23 +8,11 @@
 #include "../../Include/VSCommon/VSPipelineStageFlagsDef.h"
 #include "../../Include/VSCommon/VSRenderPassAttachmentOPDef.h"
 
+#include "VSSharedRenderPassDataListDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class SharedRenderPassDataListInternal;
-
-	struct RenderPassAttachmentData;
-	struct RenderPassAttachmentReference;
-	struct SubpassDependencyData;
-
-	struct RenderPassDoubleColorClearValues;
-	struct RenderPassInt64ColorClearValues;
-	struct RenderPassUInt64ColorClearValues;
-
-	struct RenderPassFloatColorClearValues;
-	struct RenderPassIntColorClearValues;
-	struct RenderPassUIntColorClearValues;
-
-	struct RenderPassDepthStencilClearValues;
 }
 
 namespace VulkanSimplified

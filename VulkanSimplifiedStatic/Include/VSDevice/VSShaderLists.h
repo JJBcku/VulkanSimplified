@@ -2,11 +2,11 @@
 
 #include <CustomLists\IDObjectDef.h>
 
+#include "VSShaderListsDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class ShaderListsInternal;
-	class AutoCleanupFragmentShaderModule;
-	class AutoCleanupVertexShaderModule;
 }
 
 namespace VulkanSimplified

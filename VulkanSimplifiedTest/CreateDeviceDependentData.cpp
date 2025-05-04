@@ -48,7 +48,7 @@ std::vector<char> LoadShader(std::string filename)
 
 void CreateDeviceDependentData(VulkanData& data)
 {
-	auto& base = data.basicData->vsmain.value();
+	auto& base = *data.basicData->vsmain;
 	auto instance = base.GetInstance();
 	auto device = instance.GetChoosenDevicesMainClass();
 

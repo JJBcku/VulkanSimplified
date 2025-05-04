@@ -2,11 +2,11 @@
 
 #include <CustomLists\IDObjectDef.h>
 
+#include "VSPipelineDataListsDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class PipelineDataListsInternal;
-	class AutoCleanupPipelineLayout;
-	class AutoCleanupGraphicsPipeline;
 }
 
 namespace VulkanSimplified

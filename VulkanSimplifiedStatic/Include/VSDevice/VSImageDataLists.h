@@ -3,12 +3,11 @@
 #include "../../Include/VSCommon/VSImageUsageFlagsDef.h"
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 
+#include "VSImageDataListsDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class ImageDataListsInternal;
-
-	class AutoCleanupColorRenderTargetImage;
-	class AutoCleanupImageView;
 }
 
 namespace VulkanSimplified

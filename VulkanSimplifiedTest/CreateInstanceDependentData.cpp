@@ -444,7 +444,7 @@ static std::uint32_t FindPresentingQueueFamily(const std::vector<VulkanSimplifie
 
 void CreateInstanceDependentData(VulkanData& data)
 {
-	auto& main = data.basicData->vsmain.value();
+	auto& main = *data.basicData->vsmain;
 	auto instance = main.GetInstance();
 
 	data.instanceDependentData = std::make_unique<VulkanInstanceDependentData>();

@@ -4,12 +4,7 @@
 #include <CustomLists/IDObject.h>
 
 #include <VSMemoryAllocationFullID.h>
-
-namespace VulkanSimplifiedInternal
-{
-	class AutoCleanupColorRenderTargetImage;
-	class AutoCleanupImageView;
-}
+#include <VSImageDataListsDef.h>
 
 struct VulkanMemoryData
 {

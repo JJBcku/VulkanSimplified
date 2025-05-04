@@ -2,13 +2,11 @@
 
 #include <CustomLists\IDObjectDef.h>
 
-#include "../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
-#include "../../Include/VSCommon/VSShaderTypeFlagsDef.h"
+#include "VSSharedDescriptorDataListDef.h"
 
 namespace VulkanSimplifiedInternal
 {
 	class SharedDescriptorDataListInternal;
-	struct DescriptorSetLayoutBindingData;
 }
 
 namespace VulkanSimplified

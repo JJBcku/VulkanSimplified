@@ -2,12 +2,7 @@
 
 #include <CustomLists/IDObject.h>
 
-namespace VulkanSimplifiedInternal
-{
-	class PipelineDataListsInternal;
-	class AutoCleanupPipelineLayout;
-	class AutoCleanupGraphicsPipeline;
-}
+#include <VSPipelineDataListsDef.h>
 
 struct VulkanPipelineData
 {

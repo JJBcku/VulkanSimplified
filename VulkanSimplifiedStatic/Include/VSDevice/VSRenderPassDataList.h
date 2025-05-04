@@ -2,13 +2,11 @@
 
 #include <CustomLists\IDObjectDef.h>
 
+#include "VSRenderPassDataListDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class RenderPassListInternal;
-	class AutoCleanupRenderPass;
-
-	struct RenderPassAttachmentData;
-	struct SubpassDependencyData;
 }
 
 namespace VulkanSimplified

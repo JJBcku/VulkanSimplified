@@ -2,11 +2,7 @@
 
 #include <CustomLists/IDObject.h>
 
-namespace VulkanSimplifiedInternal
-{
-	class AutoCleanupFence;
-	class AutoCleanupSemaphore;
-}
+#include <VSSynchronizationDataListsDef.h>
 
 struct VulkanSynchronizationData
 {

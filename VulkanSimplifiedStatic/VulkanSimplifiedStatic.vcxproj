@@ -170,14 +170,20 @@
     <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h" />
     <ClInclude Include="Include\VSDevice\VSArbitraryShaderID.h" />
+    <ClInclude Include="Include\VSDevice\VSDescriptorDataListDef.h" />
     <ClInclude Include="Include\VSDevice\VSGraphicsPipelineCreationData.h" />
     <ClInclude Include="Include\VSDevice\VSImageDataLists.h" />
+    <ClInclude Include="Include\VSDevice\VSImageDataListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSImageDataListsInitialCapacities.h" />
     <ClInclude Include="Include\VSDevice\VSMemoryObjectsList.h" />
+    <ClInclude Include="Include\VSDevice\VSMemoryObjectsListDef.h" />
     <ClInclude Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h" />
+    <ClInclude Include="Include\VSDevice\VSPipelineDataListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h" />
+    <ClInclude Include="Include\VSDevice\VSRenderPassDataListDef.h" />
+    <ClInclude Include="Include\VSDevice\VSShaderListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h" />
     <ClInclude Include="Include\VSDevice\VSAttachmentReferenceDef.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h" />
@@ -186,7 +192,9 @@
     <ClInclude Include="Include\VSDevice\VSRenderPassListInitialCapacities.h" />
     <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.h" />
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataLists.h" />
+    <ClInclude Include="Include\VSDevice\VSSynchronizationDataListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataListsInitialCapacities.h" />
+    <ClInclude Include="Include\VSMain\VSMainDef.h" />
     <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlags.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.h" />
     <ClInclude Include="Include\VSCommon\VSCompareOperationsType.h" />
@@ -215,13 +223,16 @@
     <ClInclude Include="Include\VSSharedData\VSRenderPassClearValueID.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataList.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListDef.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataListsDef.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataList.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListDef.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.h" />
     <ClInclude Include="Include\VSSharedData\VSVertexBindingInputRate.h" />
     <ClInclude Include="Include\VSDevice\VSShaderLists.h" />
     <ClInclude Include="Include\VSDevice\VSShaderListsInitialCapacitiesList.h" />
     <ClInclude Include="Include\VSDevice\VSSwapchainCreationData.h" />
-    <ClInclude Include="Include\VSDevice\VSWindowPointer.h" />
+    <ClInclude Include="Include\VSDevice\VSWindowListDef.h" />
     <ClInclude Include="Include\VSCommon\VSSurfacePresentModes.h" />
     <ClInclude Include="Include\VSDevice\VSWindow.h" />
     <ClInclude Include="Include\VSDevice\VSWindowCreationData.h" />
@@ -1235,7 +1246,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedPipelineDataList.cpp">
+    <ClCompile Include="Include\VSSharedData\VSSharedPipelineDataLists.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>

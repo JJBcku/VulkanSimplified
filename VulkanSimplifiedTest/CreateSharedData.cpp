@@ -7,6 +7,7 @@
 #include "VulkanBasicData.h"
 #include "VulkanSharedData.h"
 
+#include <VSMain.h>
 #include <VSSharedDataMainList.h>
 #include <VSSharedPipelineDataLists.h>
 #include <VSShaderTypeFlags.h>
@@ -21,7 +22,7 @@ void CreateSharedData(VulkanData& data)
 	data.sharedData = std::make_unique<VulkanSharedData>();
 	auto& sharedDataList = *data.sharedData;
 
-	auto sharedData = data.basicData->vsmain.value().GetSharedDataMainList();
+	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
 	auto pipelineData = sharedData.GetSharedPipelineDataListss();
 
 	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_FRAGMENT);

@@ -2,12 +2,11 @@
 
 #include <CustomLists\IDObjectDef.h>
 
+#include "VSSynchronizationDataListsDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class SynchronizationDataListsInternal;
-
-	class AutoCleanupFence;
-	class AutoCleanupSemaphore;
 }
 
 namespace VulkanSimplified

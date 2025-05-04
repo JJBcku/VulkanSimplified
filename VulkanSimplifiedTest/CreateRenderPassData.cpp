@@ -26,7 +26,7 @@ void CreateRenderPassData(VulkanData& data)
 {
 	data.renderPassData = std::make_unique<VulkanRenderPassData>();
 
-	auto sharedData = data.basicData->vsmain.value().GetSharedDataMainList();
+	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
 	auto sharedRenderPassData = sharedData.GetRenderPassDataList();
 
 	VulkanSimplified::DataFormatSetIndependentID format = data.instanceDependentData->supportedFormat;
@@ -45,7 +45,7 @@ void CreateRenderPassData(VulkanData& data)
 	renderPassData.clearValues.resize(1);
 	renderPassData.clearValues[0].emplace(sharedRenderPassData.AddFloatColorClearValue(0.0f, 0.0f, 0.0f, 0.0f));
 
-	auto instance = data.basicData->vsmain.value().GetInstance();
+	auto instance = data.basicData->vsmain->GetInstance();
 	auto device = instance.GetChoosenDevicesMainClass();
 	auto deviceRenderPassData = device.GetRenderPassList();
 

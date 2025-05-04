@@ -1,12 +1,10 @@
 #pragma once
 
-#include <optional>
-
-#include "VSMain.h"
+#include <VSMainDef.h>
 
 struct VulkanBasicData
 {
-	std::optional<VulkanSimplified::Main> vsmain;
+	std::unique_ptr<VulkanSimplified::Main> vsmain;
 
 	VulkanBasicData();
 	~VulkanBasicData();

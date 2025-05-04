@@ -14,7 +14,7 @@
 
 void HandleEvents(VulkanData& data)
 {
-	auto& base = data.basicData->vsmain.value();
+	auto& base = *data.basicData->vsmain;
 	auto eventHandler = base.GetSdlEventHandler();
 
 	eventHandler.HandleEvents();
@@ -22,7 +22,7 @@ void HandleEvents(VulkanData& data)
 
 void WaitIdle(VulkanData& data)
 {
-	auto instance = data.basicData->vsmain.value().GetInstance();
+	auto instance = data.basicData->vsmain->GetInstance();
 	auto deviceMain = instance.GetChoosenDevicesMainClass();
 	auto deviceCore = deviceMain.GetDeviceCore();
 	deviceCore.WaitIdle();
