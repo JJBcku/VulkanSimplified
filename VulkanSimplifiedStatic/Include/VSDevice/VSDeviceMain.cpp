@@ -6,11 +6,15 @@
 #include "VSDeviceCore.h"
 #include "VSWindowList.h"
 #include "VSShaderLists.h"
+
 #include "VSDescriptorDataList.h"
 #include "VSRenderPassDataList.h"
 #include "VSPipelineDataLists.h"
+
 #include "VSMemoryObjectsList.h"
 #include "VSImageDataLists.h"
+
+#include "VSSynchronizationDataLists.h"
 
 namespace VulkanSimplified
 {
@@ -62,6 +66,11 @@ namespace VulkanSimplified
 		return _internal.GetImageDataLists();
 	}
 
+	SynchronizationDataLists DeviceMain::GetSynchronizationDataLists()
+	{
+		return _internal.GetSynchronizationDataLists();
+	}
+
 	const DeviceCore DeviceMain::GetDeviceCore() const
 	{
 		return _internal.GetDeviceCore();
@@ -100,6 +109,11 @@ namespace VulkanSimplified
 	const ImageDataLists DeviceMain::GetImageDataLists() const
 	{
 		return _internal.GetImageDataLists();
+	}
+
+	const SynchronizationDataLists DeviceMain::GetSynchronizationDataLists() const
+	{
+		return _internal.GetSynchronizationDataLists();
 	}
 
 }

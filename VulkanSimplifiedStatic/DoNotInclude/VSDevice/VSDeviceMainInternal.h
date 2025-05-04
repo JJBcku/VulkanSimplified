@@ -11,6 +11,8 @@
 #include "VSMemoryObjectsListInternal.h"
 #include "VSImageDataListsInternal.h"
 
+#include "VSSynchronizationDataListsInternal.h"
+
 namespace VulkanSimplified
 {
 	struct DeviceInitialCapacitiesList;
@@ -40,6 +42,8 @@ namespace VulkanSimplifiedInternal
 		MemoryObjectsListInternal& GetMemoryObjectsList();
 		ImageDataListsInternal& GetImageDataLists();
 
+		SynchronizationDataListsInternal& GetSynchronizationDataLists();
+
 		const DeviceCoreInternal& GetDeviceCore() const;
 		const WindowListInternal& GetWindowList() const;
 		const ShaderListsInternal& GetShaderLists() const;
@@ -50,6 +54,8 @@ namespace VulkanSimplifiedInternal
 
 		const MemoryObjectsListInternal& GetMemoryObjectsList() const;
 		const ImageDataListsInternal& GetImageDataLists() const;
+
+		const SynchronizationDataListsInternal& GetSynchronizationDataLists() const;
 
 	private:
 		const SharedDataMainListInternal& _sharedDataMain;
@@ -64,5 +70,7 @@ namespace VulkanSimplifiedInternal
 
 		MemoryObjectsListInternal _memoryObjectsList;
 		ImageDataListsInternal _imageDataLists;
+
+		SynchronizationDataListsInternal _synchroDataLists;
 	};
 }

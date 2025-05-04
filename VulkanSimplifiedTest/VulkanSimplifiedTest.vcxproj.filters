@@ -90,6 +90,12 @@
     <ClCompile Include="VulkanSimplifiedTest.cpp">
       <Filter>Source Files\VulkanData</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanSynchronizationData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateSynchronizationData.cpp">
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VulkanBasicData.h">
@@ -151,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="SwapchainSizes.h">
       <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanSynchronizationData.h">
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateSynchronizationData.h">
+      <Filter>Header Files\CreateData</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

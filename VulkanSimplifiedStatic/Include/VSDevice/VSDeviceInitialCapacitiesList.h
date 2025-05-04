@@ -2,11 +2,15 @@
 
 #include "VSWindowListInitialCapacities.h"
 #include "VSShaderListsInitialCapacitiesList.h"
+
 #include "VSDescriptorListsInitialCapacities.h"
 #include "VSRenderPassListInitialCapacities.h"
 #include "VSPipelineDataListsInitialCapacities.h"
+
 #include "VSMemoryObjectsListInitialCapacities.h"
 #include "VSImageDataListsInitialCapacities.h"
+
+#include "VSSynchronizationDataListsInitialCapacities.h"
 
 namespace VulkanSimplified
 {
@@ -14,11 +18,15 @@ namespace VulkanSimplified
 	{
 		WindowListInitialCapacities windowList;
 		ShaderListsInitialCapacitiesList shaderLists;
+
 		DescriptorListsInitialCapacities descriptorLists;
 		RenderPassDataListsInitialCapacities renderPassLists;
 		PipelineDataListsInitialCapacities pipelineDataLists;
+
 		MemoryObjectsListInitialCapacities memoryObjectsList;
 		ImageDataListsInitialCapacities imageLists;
+
+		SynchronizationDataListsInitialCapacities synchronizationLists;
 
 		DeviceInitialCapacitiesList() = default;
 	};

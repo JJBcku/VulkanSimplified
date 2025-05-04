@@ -18,6 +18,8 @@ namespace VulkanSimplified
 	class MemoryObjectsList;
 	class ImageDataLists;
 
+	class SynchronizationDataLists;
+
 	class DeviceMain
 	{
 	public:
@@ -35,6 +37,8 @@ namespace VulkanSimplified
 		MemoryObjectsList GetMemoryObjectsList();
 		ImageDataLists GetImageDataLists();
 
+		SynchronizationDataLists GetSynchronizationDataLists();
+
 		const DeviceCore GetDeviceCore() const;
 		const WindowList GetWindowList() const;
 		const ShaderLists GetShaderLists() const;
@@ -45,6 +49,8 @@ namespace VulkanSimplified
 
 		const MemoryObjectsList GetMemoryObjectsList() const;
 		const ImageDataLists GetImageDataLists() const;
+
+		const SynchronizationDataLists GetSynchronizationDataLists() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;

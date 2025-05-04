@@ -11,6 +11,7 @@
 #include "CreateRenderPassData.h"
 #include "CreatePipelineData.h"
 #include "CreateMemoryData.h"
+#include "CreateSynchronizationData.h"
 
 #include "MiscFunctions.h"
 
@@ -28,6 +29,7 @@ void RunProgram()
 	CreateRenderPassData(data);
 	CreatePipelineData(data);
 	CreateMemoryData(data);
+	CreateSynchronizationData(data);
 
 	while (!settings.IsClosingRequested())
 	{
