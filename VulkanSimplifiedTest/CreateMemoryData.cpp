@@ -4,6 +4,7 @@
 #include "VulkanData.h"
 #include "VulkanBasicData.h"
 #include "VulkanInstanceDependentData.h"
+#include "VulkanRenderPassData.h"
 #include "VulkanMemoryData.h"
 
 #include "SwapchainSizes.h"
@@ -14,6 +15,7 @@
 
 #include <VSImageDataLists.h>
 #include <VSMemoryObjectsList.h>
+#include <VSMultitypeImagesID.h>
 
 #include <VSImageUsageFlags.h>
 #include <VSMemoryTypeProperties.h>
@@ -31,6 +33,7 @@ void CreateMemoryData(VulkanData& data)
 	
 	memData.colorRenderTargetImages.reserve(framesInFlight);
 	memData.colorRenderTargetImageViews.reserve(framesInFlight);
+	memData.framebuffers.reserve(framesInFlight);
 
 	constexpr VulkanSimplified::ImageUsageFlags usageFlags = VulkanSimplified::ImageUsageFlagBits::IMAGE_USAGE_COLOR_ATTACHMENT |
 		VulkanSimplified::ImageUsageFlagBits::IMAGE_USAGE_TRANSFER_SRC;
@@ -59,5 +62,13 @@ void CreateMemoryData(VulkanData& data)
 	{
 		imageList.BindColorRenderTargetImage(memData.colorRenderTargetImages[i], memData.imageMemoryAllocation);
 		memData.colorRenderTargetImageViews.push_back(imageList.AddColorRenderTargetImageView(memData.colorRenderTargetImages[i]));
+
+		std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>> attachments;
+		attachments.resize(1);
+
+		attachments[0].first = memData.colorRenderTargetImages[i];
+		attachments[0].second = memData.colorRenderTargetImageViews[i];
+
+		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, width, height, 1));
 	}
 }

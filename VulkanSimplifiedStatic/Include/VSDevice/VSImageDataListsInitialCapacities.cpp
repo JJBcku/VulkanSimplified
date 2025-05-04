@@ -5,6 +5,8 @@ namespace VulkanSimplified
 {
 	ImageDataListsInitialCapacities::ImageDataListsInitialCapacities()
 	{
-		_colorRenderTargetsListInitialCapacities = 0;
+		colorRenderTargetsListInitialCapacity = 0;
+
+		framebufferListInitialCapacity = 0;
 	}
 }

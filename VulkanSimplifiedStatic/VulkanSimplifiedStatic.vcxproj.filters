@@ -735,6 +735,15 @@
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListDef.h">
       <Filter>Header Files\Include\Shared</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupFramebuffer.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSMultitypeImagesID.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSMultitypeImagesIDDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -1203,6 +1212,12 @@
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSSynchronizationDataListsInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupFramebuffer.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSMultitypeImagesID.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
   </ItemGroup>

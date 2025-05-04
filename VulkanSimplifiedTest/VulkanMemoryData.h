@@ -12,5 +12,7 @@ struct VulkanMemoryData
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage>> colorRenderTargetImages;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>> colorRenderTargetImageViews;
 
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer>> framebuffers;
+
 	VulkanMemoryData() = default;
 };

@@ -5,11 +5,14 @@
 #include "../../Include/VSCommon/VSImageUsageFlags.h"
 
 #include "../../Include/VSDevice/VSImageDataListsInitialCapacities.h"
+#include "../../Include/VSDevice/VSMultitypeImagesID.h"
 
 #include "VSAutoCleanupColorRenderTargetImage.h"
+#include "VSAutoCleanupFramebuffer.h"
 
 #include "VSDeviceCoreInternal.h"
 #include "VSMemoryObjectsListInternal.h"
+#include "VSRenderPassDataListInternal.h"
 
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
 #include "../VSCommon/VSImageUsageFlagsInternal.h"
@@ -18,7 +21,7 @@ namespace VulkanSimplifiedInternal
 {
 	ImageDataListsInternal::ImageDataListsInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& renderPassData, MemoryObjectsListInternal& memoryList,
 		VkDevice device, const VulkanSimplified::ImageDataListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _renderPassData(renderPassData), _memoryList(memoryList),
-		_device(device), _colorRenderTargets(initialCapacities._colorRenderTargetsListInitialCapacities)
+		_device(device), _colorRenderTargetList(initialCapacities.colorRenderTargetsListInitialCapacity), _framebufferList(initialCapacities.framebufferListInitialCapacity)
 	{
 	}
 
@@ -70,23 +73,23 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateImage(_device, &createInfo, nullptr, &image) != VK_SUCCESS)
 			throw std::runtime_error("ImageDataListsInternal::AddColorRenderTargetImage Error: Program failed to create a single sampled, no mip maps, 2D image!");
 
-		return _colorRenderTargets.AddObject(AutoCleanupColorRenderTargetImage(_device, image, width, height, createInfo.format, initialImageViewListCapacity), addOnReserving);
+		return _colorRenderTargetList.AddObject(AutoCleanupColorRenderTargetImage(_device, image, width, height, createInfo.format, initialImageViewListCapacity), addOnReserving);
 	}
 
 	bool ImageDataListsInternal::RemoveColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound)
 	{
-		bool ret = _colorRenderTargets.CheckForID(imageID);
+		bool ret = _colorRenderTargetList.CheckForID(imageID);
 
 		if (!ret && throwOnIDNotFound)
 			throw std::runtime_error("ImageDataListInternal::RemoveSingleSampled2DImage Error: Program tried to delete a non-existent image!");
 
 		if (ret)
 		{
-			auto& imageData = _colorRenderTargets.GetObject(imageID);
+			auto& imageData = _colorRenderTargetList.GetObject(imageID);
 
 			auto bindingData = imageData.GetBoundMemorySuballocation();
 
-			ret = _colorRenderTargets.RemoveObject(imageID, true);
+			ret = _colorRenderTargetList.RemoveObject(imageID, true);
 
 			if (bindingData.has_value())
 				_memoryList.RemoveSuballocation(bindingData.value(), true);
@@ -97,43 +100,43 @@ namespace VulkanSimplifiedInternal
 
 	VkImage ImageDataListsInternal::GetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetImage();
+		return _colorRenderTargetList.GetConstObject(imageID).GetImage();
 	}
 
 	VkImageView ImageDataListsInternal::GetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetImageView(viewID);
+		return _colorRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
 	}
 
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImageWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetWidth();
+		return _colorRenderTargetList.GetConstObject(imageID).GetWidth();
 	}
 
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImageHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetHeight();
+		return _colorRenderTargetList.GetConstObject(imageID).GetHeight();
 	}
 
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImageMemoryTypeMask(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetImagesMemoryTypeMask();
+		return _colorRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
 	}
 
 	uint64_t ImageDataListsInternal::GetColorRenderTargetImageSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetImagesSize();
+		return _colorRenderTargetList.GetConstObject(imageID).GetImagesSize();
 	}
 
 	uint64_t ImageDataListsInternal::GetColorRenderTargetImageRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargets.GetConstObject(imageID).GetImagesRequiredAligment();
+		return _colorRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
 	}
 
 	void ImageDataListsInternal::BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID,
 		size_t addOnReserving)
 	{
-		auto& imageData = _colorRenderTargets.GetObject(imageID);
+		auto& imageData = _colorRenderTargetList.GetObject(imageID);
 
 		VkImage image = imageData.GetImage();
 		size_t size = imageData.GetImagesSize();
@@ -146,9 +149,59 @@ namespace VulkanSimplifiedInternal
 
 	IDObject<AutoCleanupImageView> ImageDataListsInternal::AddColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, size_t addOnReserving)
 	{
-		auto& imageData = _colorRenderTargets.GetObject(imageID);
+		auto& imageData = _colorRenderTargetList.GetObject(imageID);
 
 		return imageData.AddImageView(addOnReserving);
+	}
+
+	IDObject<AutoCleanupFramebuffer> ImageDataListsInternal::AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
+		const std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
+		uint32_t layers, size_t addOnReserving)
+	{
+		VkFramebufferCreateInfo createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+		createInfo.renderPass = _renderPassData.GetRenderPass(renderPass);
+
+		std::vector<VkImageView> imageViews;
+		imageViews.reserve(attachmentsList.size());
+
+		for (auto& attachmentData : attachmentsList)
+		{
+			auto& imageID = attachmentData.first;
+
+			switch (imageID.type)
+			{
+			case VulkanSimplified::ImageIDType::COLOR_RENDER_TARGET:
+				imageViews.push_back(GetImageView(imageID.colorRenderTarget.ID, attachmentData.second));
+				break;
+			case VulkanSimplified::ImageIDType::UNKNOWN:
+			default:
+				throw std::runtime_error("ImageDataListsInternal::AddFramebuffer Error: Program was given an erroneous value for a attachments image ID type!");
+			}
+		}
+
+		createInfo.attachmentCount = static_cast<std::uint32_t>(imageViews.size());
+		createInfo.pAttachments = imageViews.data();
+		createInfo.width = width;
+		createInfo.height = height;
+		createInfo.layers = layers;
+
+		VkFramebuffer add = VK_NULL_HANDLE;
+
+		if (vkCreateFramebuffer(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+			throw std::runtime_error("ImageDataListsInternal::AddFramebuffer Error: Program failed to create a framebuffer!");
+
+		return _framebufferList.AddObject(AutoCleanupFramebuffer(_device, add), addOnReserving);
+	}
+
+	bool ImageDataListsInternal::RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound)
+	{
+		return _framebufferList.RemoveObject(framebufferID, throwOnIDNotFound);
+	}
+
+	VkFramebuffer ImageDataListsInternal::GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const
+	{
+		return _framebufferList.GetConstObject(framebufferID).GetFramebuffer();
 	}
 
 }

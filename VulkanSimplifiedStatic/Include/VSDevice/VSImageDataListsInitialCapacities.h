@@ -4,7 +4,9 @@ namespace VulkanSimplified
 {
 	struct ImageDataListsInitialCapacities
 	{
-		size_t _colorRenderTargetsListInitialCapacities;
+		size_t colorRenderTargetsListInitialCapacity;
+
+		size_t framebufferListInitialCapacity;
 
 		ImageDataListsInitialCapacities();
 	};

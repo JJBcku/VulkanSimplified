@@ -115,6 +115,7 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanup2DArrayTexture.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupColorRenderTargetImage.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupFence.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupFramebuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImage.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupSemaphore.h" />
@@ -178,6 +179,8 @@
     <ClInclude Include="Include\VSDevice\VSMemoryObjectsList.h" />
     <ClInclude Include="Include\VSDevice\VSMemoryObjectsListDef.h" />
     <ClInclude Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.h" />
+    <ClInclude Include="Include\VSDevice\VSMultitypeImagesID.h" />
+    <ClInclude Include="Include\VSDevice\VSMultitypeImagesIDDef.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h" />
@@ -361,6 +364,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupFragmentShaderModule.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupFramebuffer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
@@ -595,6 +604,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSMultitypeImagesID.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>

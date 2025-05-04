@@ -5,6 +5,8 @@
 #include "../../Include/VSCommon/VSImageUsageFlagsDef.h"
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 
+#include "../../Include/VSDevice/VSMultitypeImagesIDDef.h"
+
 namespace VulkanSimplified
 {
 	struct DataFormatSetIndependentID;
@@ -17,8 +19,11 @@ namespace VulkanSimplifiedInternal
 	class RenderPassListInternal;
 	class MemoryObjectsListInternal;
 
+	class AutoCleanupRenderPass;
+
 	class AutoCleanupImageView;
 	class AutoCleanupColorRenderTargetImage;
+	class AutoCleanupFramebuffer;
 
 	class ImageDataListsInternal
 	{
@@ -48,12 +53,22 @@ namespace VulkanSimplifiedInternal
 
 		IDObject<AutoCleanupImageView> AddColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, size_t addOnReserving);
 
+		IDObject<AutoCleanupFramebuffer> AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
+			const std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
+			uint32_t layers, size_t addOnReserving);
+
+		bool RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound);
+
+		VkFramebuffer GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const;
+
 	private:
 		const DeviceCoreInternal& _deviceCore;
 		const RenderPassListInternal& _renderPassData;
 		MemoryObjectsListInternal& _memoryList;
 		VkDevice _device;
 
-		UnsortedIDVector<AutoCleanupColorRenderTargetImage> _colorRenderTargets;
+		UnsortedIDVector<AutoCleanupColorRenderTargetImage> _colorRenderTargetList;
+
+		UnsortedIDVector<AutoCleanupFramebuffer> _framebufferList;
 	};
 }

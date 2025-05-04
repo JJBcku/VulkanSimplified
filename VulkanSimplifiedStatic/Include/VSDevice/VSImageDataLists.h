@@ -4,6 +4,8 @@
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 
 #include "VSImageDataListsDef.h"
+#include "VSRenderPassDataListDef.h"
+#include "VSMultitypeImagesIDDef.h"
 
 namespace VulkanSimplifiedInternal
 {
@@ -37,6 +39,12 @@ namespace VulkanSimplified
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupImageView> AddColorRenderTargetImageView(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID,
 			size_t addOnReserving = 0);
+
+		IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer> AddFramebuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> renderPass,
+			const std::vector<std::pair<MultitypeImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
+			uint32_t layers, size_t addOnReserving = 0);
+
+		bool RemoveFramebuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound = true);
 
 	private:
 		VulkanSimplifiedInternal::ImageDataListsInternal& _internal;
