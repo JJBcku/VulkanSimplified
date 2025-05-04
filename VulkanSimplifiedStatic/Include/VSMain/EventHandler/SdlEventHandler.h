@@ -2,8 +2,7 @@
 
 #include "SdlEventHandlerTypedefs.h"
 
-template<class T>
-class IDObject;
+#include <CustomLists\IDObjectDef.h>
 
 namespace VulkanSimplifiedInternal
 {

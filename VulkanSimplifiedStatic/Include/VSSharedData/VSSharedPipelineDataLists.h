@@ -3,8 +3,7 @@
 #include "../VSCommon/VSImageSampleFlagsDef.h"
 #include "../VSCommon/VSShaderTypeFlagsDef.h"
 
-template<class T>
-class IDObject;
+#include <CustomLists\IDObjectDef.h>
 
 namespace VulkanSimplifiedInternal
 {

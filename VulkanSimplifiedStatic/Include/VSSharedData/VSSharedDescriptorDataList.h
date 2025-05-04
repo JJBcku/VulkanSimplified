@@ -1,7 +1,6 @@
 #pragma once
 
-template<class T>
-class IDObject;
+#include <CustomLists\IDObjectDef.h>
 
 #include "../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
 #include "../../Include/VSCommon/VSShaderTypeFlagsDef.h"

@@ -1,7 +1,6 @@
 #pragma once
 
-template<class T>
-class IDObject;
+#include <CustomLists\IDObjectDef.h>
 
 namespace VulkanSimplifiedInternal
 {
