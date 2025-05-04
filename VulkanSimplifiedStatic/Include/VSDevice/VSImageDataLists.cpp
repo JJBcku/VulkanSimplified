@@ -64,4 +64,16 @@ namespace VulkanSimplified
 		return _internal.AddColorRenderTargetImageView(imageID, addOnReserving);
 	}
 
+	IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer> ImageDataLists::AddFramebuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> renderPass,
+		const std::vector<std::pair<MultitypeImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height, uint32_t layers,
+		size_t addOnReserving)
+	{
+		return _internal.AddFramebuffer(renderPass, attachmentsList, width, height, layers, addOnReserving);
+	}
+
+	bool ImageDataLists::RemoveFramebuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveFramebuffer(framebufferID, throwOnIDNotFound);
+	}
+
 }
