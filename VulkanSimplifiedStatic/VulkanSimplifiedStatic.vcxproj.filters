@@ -85,6 +85,18 @@
     <Filter Include="Header Files\Include\Device">
       <UniqueIdentifier>{12f16380-1c08-4c93-bead-436edb58e10b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DoNotInclude\Shared">
+      <UniqueIdentifier>{fc9c4bbc-7373-4c59-bae7-474d0e0d2453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Include\Shared">
+      <UniqueIdentifier>{6ccad6cf-1aa8-4a87-bde2-c9466e17ec0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DoNotInclude\Shared">
+      <UniqueIdentifier>{d7bb7a81-5ba1-4fbb-8e95-9373e60ecc50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Include\Shared">
+      <UniqueIdentifier>{e500264d-a17f-4ca8-a60b-dcb98e065864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\VSCommon\VSCommonIframework.h">
@@ -357,329 +369,323 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSWindowInternal.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIframework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIpch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedIframework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedIpch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataListsCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataListInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedDataListsCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDataMainListInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedDataMainList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataAllElementsInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSShaderSpecializationElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSShaderTypeFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedShaderPipelineData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSVertexAttributeDescriptionData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSVertexBindingDescriptionData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSVertexBindingInputRate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSVertexInputSharedPipelineData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineViewportData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineRasterizationData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineScissorData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineInputAssemblyData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSPipelinePrimitiveTopology.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSPipelinePolygonMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineMultisampleData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSImageSampleFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineDepthStencilStateData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSDepthUsage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSCompareOperationsType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSColorBlendingPreset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSPushConstantData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSDataFormatFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSImageSampleFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSImageUsageFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSetLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDescriptorListsInitialCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentReference.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSubpassDependencyData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSRenderPassClearValues.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedRenderPassDataInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOPDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSRenderPassClearValueID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSImageLayoutFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSImageLayoutFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSPipelineStageFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSPipelineStageFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSAccessFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSAccessFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSCommon\VSPipelineStageFlagsInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSRenderPassDataListInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSRenderPassListInitialCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSRenderPassDataList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSAttachmentReferenceDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupPipelineLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupGraphicsPipeline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSPipelineDataListsInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSGraphicsPipelineCreationData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSArbitraryShaderID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSShaderTypeFlagsDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSShaderTypeFlags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryTypePropertiesDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryTypeProperties.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryTypeData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryHeapPropertiesDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryHeapProperties.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemorySizeDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryHeapData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryDataList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSHeapInternalData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSSuballocationInternalData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSMemoryTypeInternalData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSMemoryAllocationData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSMemoryObjectsListInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemorySuballocationFullID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSMemoryObjectsList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSImageDataListsInternal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanup2DArrayTexture.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanup2DTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanup2DArrayTexture.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupColorRenderTargetImage.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSImageDataListsInitialCapacities.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSetLayout.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSCommon\VSImageUsageFlagsInternal.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupGraphicsPipeline.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSMemoryAllocationFullID.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImage.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupPipelineLayout.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSImageDataListsInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSAccessFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSArbitraryShaderID.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSAttachmentReferenceDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSCompareOperationsType.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDataFormatFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSDepthUsage.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSAccessFlags.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDescriptorListsInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlags.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDescriptorTypeFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSGraphicsPipelineCreationData.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSHeapInternalData.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSImageDataLists.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSImageDataListsInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageLayoutFlags.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageLayoutFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageSampleFlags.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageSampleFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageUsageFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSImageUsageFlagsInternal.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSMemoryAllocationData.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryAllocationFullID.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryDataList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapData.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapProperties.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryHeapPropertiesDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSMemoryObjectsList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSMemoryObjectsListInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemorySizeDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemorySuballocationFullID.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlags.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSColorBlendingPreset.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryTypeData.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSMemoryTypeInternalData.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryTypeProperties.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSMemoryTypePropertiesDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSPipelineDataListsInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineDepthStencilStateData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineInputAssemblyData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineMultisampleData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSPipelinePolygonMode.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSPipelinePrimitiveTopology.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineRasterizationData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineScissorData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSPipelineStageFlags.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSPipelineStageFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSPipelineStageFlagsInternal.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineViewportData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSPushConstantData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOP.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOPDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentReference.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSRenderPassClearValueID.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSRenderPassClearValues.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSRenderPassDataList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSRenderPassDataListInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSRenderPassListInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSShaderSpecializationElement.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSShaderTypeFlags.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIpch.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedIframework.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedIpch.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIframework.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedDataListsCapacities.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedDataMainList.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDataMainListInternal.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataList.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataAllElementsInternal.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataLists.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataListsCapacities.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataListsInternal.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedRenderPassDataInternal.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataList.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedShaderPipelineData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSSuballocationInternalData.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSubpassDependencyData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSVertexAttributeDescriptionData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSVertexBindingDescriptionData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSVertexBindingInputRate.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSVertexInputSharedPipelineData.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -800,9 +806,6 @@
     <ClCompile Include="Include\VSCommon\VSBool64.cpp">
       <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSCommon\VSCommonNIpch.cpp">
-      <Filter>Source Files\DoNotInclude\Instance</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSCommon\VSCStringsComparison.cpp">
       <Filter>Source Files\DoNotInclude\Common</Filter>
     </ClCompile>
@@ -905,236 +908,239 @@
     <ClCompile Include="Include\VSDevice\VSWindowList.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedNIpch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedIpch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedPipelineDataListsCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedPipelineDataListInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedDataListsCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDataMainListInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedPipelineDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedDataMainList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSShaderSpecializationElement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedShaderPipelineData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSVertexAttributeDescriptionData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSVertexBindingDescriptionData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSVertexBindingInputRate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSVertexInputSharedPipelineData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineViewportData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineRasterizationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineScissorData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineInputAssemblyData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSPipelinePrimitiveTopology.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSPipelinePolygonMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineMultisampleData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineDepthStencilStateData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSDepthUsage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSColorBlendingComponentFlags.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSColorBlendingPreset.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSPushConstantData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSetLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDescriptorListsInitialCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDescriptorDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentReference.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSubpassDependencyData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSRenderPassClearValues.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedRenderPassDataInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSRenderPassClearValueID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DoNotInclude\VSCommon\VSImageUsageFlagsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Common</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSCommon\VSPipelineStageFlagsInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedRenderPassDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSRenderPassDataListInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSRenderPassListInitialCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSRenderPassDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithResolving.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupPipelineLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupGraphicsPipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSPipelineDataListsInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSPipelineDataLists.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSPipelineLayoutCreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSGraphicsPipelineCreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSMemoryTypeData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSMemoryHeapData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSCommon\VSMemoryDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSHeapInternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSSuballocationInternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSMemoryTypeInternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSMemoryAllocationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSMemoryObjectsListInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSMemoryObjectsList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSImageDataListsInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupImage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanup2DTexture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Common</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanup2DArrayTexture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanup2DTexture.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupColorRenderTargetImage.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSImageDataListsInitialCapacities.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSetLayout.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSCommon\VSImageUsageFlagsInternal.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupGraphicsPipeline.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupImage.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupPipelineLayout.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSCommon\VSCommonNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSColorBlendingComponentFlags.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSColorBlendingPreset.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSDepthUsage.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDescriptorDataList.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDescriptorListsInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSDescriptorSetLayoutBindingData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSGraphicsPipelineCreationData.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSHeapInternalData.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSImageDataLists.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSImageDataListsInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSImageDataListsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSMemoryAllocationData.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryDataList.cpp">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryHeapData.cpp">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSMemoryObjectsList.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSMemoryObjectsListInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSMemoryObjectsListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSMemoryTypeData.cpp">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSMemoryTypeInternalData.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPipelineDataLists.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSPipelineDataListsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineDepthStencilStateData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineInputAssemblyData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPipelineLayoutCreationData.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineMultisampleData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSPipelinePolygonMode.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSPipelinePrimitiveTopology.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineRasterizationData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineScissorData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPipelineViewportData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSPushConstantData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSRenderPassAttachmentReference.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSRenderPassClearValueID.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSRenderPassClearValues.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSRenderPassDataList.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSRenderPassDataListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSRenderPassListInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSShaderSpecializationElement.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDataListsCapacities.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDataMainList.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDataMainListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataList.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDescriptorDataListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedIpch.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedPipelineDataList.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedPipelineDataListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedPipelineDataListsCapacities.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedRenderPassDataInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedRenderPassDataList.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedShaderPipelineData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSSuballocationInternalData.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithoutResolving.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSSubpassCreationDataWithResolving.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSubpassDependencyData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSVertexAttributeDescriptionData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSVertexBindingDescriptionData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSVertexBindingInputRate.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSVertexInputSharedPipelineData.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@
 #include <VSPipelineDataLists.h>
 
 #include <VSSharedDataMainList.h>
-#include <VSSharedPipelineDataList.h>
+#include <VSSharedPipelineDataLists.h>
 
 #include <VSPipelineLayoutCreationData.h>
 #include <VSGraphicsPipelineCreationData.h>

@@ -8,7 +8,7 @@
 #include "VulkanSharedData.h"
 
 #include <VSSharedDataMainList.h>
-#include <VSSharedPipelineDataList.h>
+#include <VSSharedPipelineDataLists.h>
 #include <VSShaderTypeFlags.h>
 #include <VSPipelinePrimitiveTopology.h>
 #include <VSPipelinePolygonMode.h>
@@ -22,7 +22,7 @@ void CreateSharedData(VulkanData& data)
 	auto& sharedDataList = *data.sharedData;
 
 	auto sharedData = data.basicData->vsmain.value().GetSharedDataMainList();
-	auto pipelineData = sharedData.GetSharedPipelineDataList();
+	auto pipelineData = sharedData.GetSharedPipelineDataListss();
 
 	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_FRAGMENT);
 	sharedDataList.vertexShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_VERTEX);

@@ -3,7 +3,7 @@
 
 namespace VulkanSimplified
 {
-	SharedPipelineDataListsCapacities::SharedPipelineDataListsCapacities()
+	SharedPipelineDataListsssCapacities::SharedPipelineDataListsssCapacities()
 	{
 		initialSpecializationElementsCapacity = 0;
 		initialShaderPipelineInfoCapacity = 0;

@@ -8,7 +8,7 @@
 #include "../../Include/VSDevice/VSPipelineLayoutCreationData.h"
 #include "../../Include/VSDevice/VSGraphicsPipelineCreationData.h"
 
-#include "../VSSharedData/VSSharedPipelineDataListInternal.h"
+#include "../VSSharedData/VSSharedPipelineDataListsInternal.h"
 
 #include "VSDescriptorDataListInternal.h"
 #include "VSShaderListsInternal.h"
@@ -16,7 +16,7 @@
 
 namespace VulkanSimplifiedInternal
 {
-    PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListInternal& pipelineData, const DescriptorDataListInternal& descriptorData,
+    PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListssInternal& pipelineData, const DescriptorDataListInternal& descriptorData,
         const ShaderListsInternal& shaderList,  const RenderPassListInternal& renderPassList, VkDevice device,
         const VulkanSimplified::PipelineDataListsInitialCapacities& initialCapacities) : _pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList),
         _renderPassList(renderPassList), _device(device), _pipelineLayoutList(initialCapacities.pipelineLayoutListInitialCapacity),

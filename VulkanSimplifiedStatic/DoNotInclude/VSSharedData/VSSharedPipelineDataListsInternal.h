@@ -9,7 +9,7 @@
 
 namespace VulkanSimplified
 {
-	struct SharedPipelineDataListsCapacities;
+	struct SharedPipelineDataListsssCapacities;
 	enum ShaderTypeFlagBit : ShaderTypeFlags;
 	enum ImageSampleFlagBits : ImageSampleFlags;
 
@@ -27,11 +27,11 @@ namespace VulkanSimplified
 
 namespace VulkanSimplifiedInternal
 {
-	class SharedPipelineDataListInternal
+	class SharedPipelineDataListssInternal
 	{
 	public:
-		SharedPipelineDataListInternal(const VulkanSimplified::SharedPipelineDataListsCapacities& initialCapacities);
-		~SharedPipelineDataListInternal();
+		SharedPipelineDataListssInternal(const VulkanSimplified::SharedPipelineDataListsssCapacities& initialCapacities);
+		~SharedPipelineDataListssInternal();
 
 		IDObject<ShaderSpecializationElement> AddShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize, size_t addOnReserving);
 		IDObject<SharedShaderPipelineData> AddSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType, size_t addOnReserving);

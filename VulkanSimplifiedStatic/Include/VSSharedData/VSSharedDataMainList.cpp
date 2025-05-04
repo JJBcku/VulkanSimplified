@@ -3,12 +3,12 @@
 
 #include "VSSharedDescriptorDataList.h"
 #include "VSSharedRenderPassDataList.h"
-#include "VSSharedPipelineDataList.h"
+#include "VSSharedPipelineDataLists.h"
 
 #include "../../DoNotInclude/VSSharedData/VSSharedDataMainListInternal.h"
 #include "../../DoNotInclude/VSSharedData/VSSharedDescriptorDataListInternal.h"
 #include "../../DoNotInclude/VSSharedData/VSSharedRenderPassDataInternal.h"
-#include "../../DoNotInclude/VSSharedData/VSSharedPipelineDataListInternal.h"
+#include "../../DoNotInclude/VSSharedData/VSSharedPipelineDataListsInternal.h"
 
 namespace VulkanSimplified
 {
@@ -30,7 +30,7 @@ namespace VulkanSimplified
 		return _internal.GetRenderPassDataList();
 	}
 
-	SharedPipelineDataList SharedDataMainList::GetSharedPipelineDataList()
+	SharedPipelineDataListss SharedDataMainList::GetSharedPipelineDataListss()
 	{
 		return _internal.GetPipelineDataList();
 	}
@@ -45,7 +45,7 @@ namespace VulkanSimplified
 		return _internal.GetRenderPassDataList();
 	}
 
-	const SharedPipelineDataList SharedDataMainList::GetSharedPipelineDataList() const
+	const SharedPipelineDataListss SharedDataMainList::GetSharedPipelineDataListss() const
 	{
 		return _internal.GetPipelineDataList();
 	}

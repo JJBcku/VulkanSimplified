@@ -2,7 +2,7 @@
 
 namespace VulkanSimplified
 {
-	struct SharedPipelineDataListsCapacities
+	struct SharedPipelineDataListsssCapacities
 	{
 		size_t initialSpecializationElementsCapacity;
 		size_t initialShaderPipelineInfoCapacity;
@@ -22,6 +22,6 @@ namespace VulkanSimplified
 
 		size_t initialPushConstantDataCapacity;
 
-		SharedPipelineDataListsCapacities();
+		SharedPipelineDataListsssCapacities();
 	};
 }

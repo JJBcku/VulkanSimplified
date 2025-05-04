@@ -10,7 +10,7 @@ namespace VulkanSimplified
 	{
 		SharedDescriptorDataListCapacities descriptorLists;
 		SharedRenderPassDataListsCapacities renderPassLists;
-		SharedPipelineDataListsCapacities pipelineLists;
+		SharedPipelineDataListsssCapacities pipelineLists;
 
 		SharedDataListsCapacities() = default;
 	};

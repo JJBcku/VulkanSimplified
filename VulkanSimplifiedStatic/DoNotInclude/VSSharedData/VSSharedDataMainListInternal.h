@@ -2,7 +2,7 @@
 
 #include "VSSharedDescriptorDataListInternal.h"
 #include "VSSharedRenderPassDataInternal.h"
-#include "VSSharedPipelineDataListInternal.h"
+#include "VSSharedPipelineDataListsInternal.h"
 
 namespace VulkanSimplified
 {
@@ -19,15 +19,15 @@ namespace VulkanSimplifiedInternal
 
 		SharedDescriptorDataListInternal& GetDescriptorDataList();
 		SharedRenderPassDataListInternal& GetRenderPassDataList();
-		SharedPipelineDataListInternal& GetPipelineDataList();
+		SharedPipelineDataListssInternal& GetPipelineDataList();
 
 		const SharedDescriptorDataListInternal& GetDescriptorDataList() const;
 		const SharedRenderPassDataListInternal& GetRenderPassDataList() const;
-		const SharedPipelineDataListInternal& GetPipelineDataList() const;
+		const SharedPipelineDataListssInternal& GetPipelineDataList() const;
 
 	private:
 		SharedDescriptorDataListInternal _descriptorData;
 		SharedRenderPassDataListInternal _renderPassData;
-		SharedPipelineDataListInternal _pipelineData;
+		SharedPipelineDataListssInternal _pipelineData;
 	};
 }

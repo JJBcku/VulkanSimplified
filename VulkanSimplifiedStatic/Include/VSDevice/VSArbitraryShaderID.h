@@ -2,7 +2,7 @@
 
 #include <CustomLists/IDObject.h>
 
-#include "VSShaderTypeFlags.h"
+#include "../VSCommon/VSShaderTypeFlags.h"
 
 namespace VulkanSimplifiedInternal
 {

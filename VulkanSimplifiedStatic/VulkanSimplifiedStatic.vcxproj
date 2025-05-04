@@ -176,8 +176,6 @@
     <ClInclude Include="Include\VSDevice\VSPipelineDataLists.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineDataListsInitialCapacities.h" />
     <ClInclude Include="Include\VSDevice\VSPipelineLayoutCreationData.h" />
-    <ClInclude Include="Include\VSDevice\VSShaderTypeFlags.h" />
-    <ClInclude Include="Include\VSDevice\VSShaderTypeFlagsDef.h" />
     <ClInclude Include="Include\VSDevice\VSSubpassCreationDataWithResolving.h" />
     <ClInclude Include="Include\VSDevice\VSAttachmentReferenceDef.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h" />
@@ -199,7 +197,7 @@
     <ClInclude Include="DoNotInclude\VSSharedData\VSSharedDataMainListInternal.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIframework.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIpch.h" />
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataListInternal.h" />
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataListsInternal.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSShaderSpecializationElement.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSSharedPipelineDataAllElementsInternal.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSVertexAttributeDescriptionData.h" />
@@ -303,7 +301,7 @@
     <ClInclude Include="DoNotInclude\VSMain\VSMainNIpch.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSSharedShaderPipelineData.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedDataMainList.h" />
-    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataList.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataLists.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedDataListsCapacities.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataListsCapacities.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedIframework.h" />

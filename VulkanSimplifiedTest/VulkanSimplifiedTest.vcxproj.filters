@@ -13,126 +13,144 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\VulkanData">
+      <UniqueIdentifier>{2810457c-6c48-4996-a493-8a1a773cef91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CreateData">
+      <UniqueIdentifier>{0a9a79ca-3351-4c08-9c80-395524e6f697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Other">
+      <UniqueIdentifier>{bb856b09-4050-4c79-8473-ae9727c23c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CreateData">
+      <UniqueIdentifier>{f5ea0ad8-2d0b-4c89-abda-644df2ba080c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Other">
+      <UniqueIdentifier>{cdeb3170-de63-4ed0-a026-26b8bdc4eb89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VulkanData">
+      <UniqueIdentifier>{f89d2e56-acc6-4dfd-931e-6c6361dc9001}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="VulkanSimplifiedTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanBasicData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CreateBasicData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainSettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreateInstanceDependentData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanInstanceDependentData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanDeviceDependentData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CreateData</Filter>
     </ClCompile>
     <ClCompile Include="CreateDeviceDependentData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CreateData</Filter>
     </ClCompile>
-    <ClCompile Include="MiscFunctions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreateSharedData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanSharedData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanRenderPassData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreateRenderPassData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanPipelineData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreatePipelineData.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CreateInstanceDependentData.cpp">
+      <Filter>Source Files\CreateData</Filter>
     </ClCompile>
     <ClCompile Include="CreateMemoryData.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatePipelineData.cpp">
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateRenderPassData.cpp">
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateSharedData.cpp">
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
+    <ClCompile Include="MainSettings.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="MiscFunctions.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanBasicData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanDeviceDependentData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanInstanceDependentData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanPipelineData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanRenderPassData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanSharedData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanSimplifiedTest.cpp">
+      <Filter>Source Files\VulkanData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="VulkanBasicData.h">
+      <Filter>Header Files\VulkanData</Filter>
     </ClInclude>
     <ClInclude Include="VulkanData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanBasicData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RunProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreateBasicData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainSettings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreateInstanceDependentData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanInstanceDependentData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\VulkanData</Filter>
     </ClInclude>
     <ClInclude Include="VulkanDeviceDependentData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\VulkanData</Filter>
     </ClInclude>
-    <ClInclude Include="CreateDeviceDependentData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MiscFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreateSharedData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanSharedData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanRenderPassData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreateRenderPassData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VulkanPipelineData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreatePipelineData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SwapchainSizes.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="VulkanInstanceDependentData.h">
+      <Filter>Header Files\VulkanData</Filter>
     </ClInclude>
     <ClInclude Include="VulkanMemoryData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanPipelineData.h">
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanRenderPassData.h">
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanSharedData.h">
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateBasicData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateDeviceDependentData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateInstanceDependentData.h">
+      <Filter>Header Files\CreateData</Filter>
     </ClInclude>
     <ClInclude Include="CreateMemoryData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatePipelineData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateRenderPassData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateSharedData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="MainSettings.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="MiscFunctions.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="RunProgram.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapchainSizes.h">
+      <Filter>Header Files\Other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
