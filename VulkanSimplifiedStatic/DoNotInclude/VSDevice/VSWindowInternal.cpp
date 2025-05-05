@@ -139,6 +139,21 @@ namespace VulkanSimplifiedInternal
 		return _swapchainImages[imageIndex];
 	}
 
+	bool WindowInternal::IsHidden() const
+	{
+		return _hidden;
+	}
+
+	bool WindowInternal::IsMinimized() const
+	{
+		return _minimized;
+	}
+
+	bool WindowInternal::IsQuitingRequested() const
+	{
+		return _quit;
+	}
+
 	uint32_t WindowInternal::GetWidth() const
 	{
 		return _surfaceCapabilities.currentExtent.width;

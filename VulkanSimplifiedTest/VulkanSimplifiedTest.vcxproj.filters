@@ -87,9 +87,6 @@
     <ClCompile Include="VulkanSharedData.cpp">
       <Filter>Source Files\VulkanData</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanSimplifiedTest.cpp">
-      <Filter>Source Files\VulkanData</Filter>
-    </ClCompile>
     <ClCompile Include="VulkanSynchronizationData.cpp">
       <Filter>Source Files\VulkanData</Filter>
     </ClCompile>
@@ -101,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="CreateCommandBufferData.cpp">
       <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
+    <ClCompile Include="RunFrame.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanSimplifiedTest.cpp">
+      <Filter>Source Files\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="CreateCommandBufferData.h">
       <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="RunFrame.h">
+      <Filter>Header Files\Other</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

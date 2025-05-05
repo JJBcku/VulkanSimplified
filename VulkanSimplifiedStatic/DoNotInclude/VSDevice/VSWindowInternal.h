@@ -42,6 +42,10 @@ namespace VulkanSimplifiedInternal
 		size_t GetSwapchainImageAmount() const;
 		VkImage GetSwapchainImage(size_t imageIndex) const;
 
+		bool IsHidden() const;
+		bool IsMinimized() const;
+		bool IsQuitingRequested() const;
+
 		uint32_t GetWidth() const;
 		uint32_t GetHeight() const;
 

@@ -19,21 +19,21 @@ void CreateSynchronizationData(VulkanData& data)
 	data.synchronizationData = std::make_unique<VulkanSynchronizationData>();
 	auto& synchro = *data.synchronizationData;
 
-	synchro.inFlightFence.reserve(framesInFlight);
+	synchro.inFlightFences.reserve(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		synchro.inFlightFence.push_back(synchronizationData.AddFence());
+		synchro.inFlightFences.push_back(synchronizationData.AddFence());
 	}
 
-	synchro.imageAvailableSemaphore.reserve(framesInFlight);
-	synchro.renderingFinishedSemaphore.reserve(framesInFlight);
-	synchro.transferFinishedSemaphore.reserve(framesInFlight);
+	synchro.imageAvailableSemaphores.reserve(framesInFlight);
+	synchro.renderingFinishedSemaphores.reserve(framesInFlight);
+	synchro.queueTransferFinishedSemaphores.reserve(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		synchro.imageAvailableSemaphore.push_back(synchronizationData.AddSemaphore());
-		synchro.renderingFinishedSemaphore.push_back(synchronizationData.AddSemaphore());
-		synchro.transferFinishedSemaphore.push_back(synchronizationData.AddSemaphore());
+		synchro.imageAvailableSemaphores.push_back(synchronizationData.AddSemaphore());
+		synchro.renderingFinishedSemaphores.push_back(synchronizationData.AddSemaphore());
+		synchro.queueTransferFinishedSemaphores.push_back(synchronizationData.AddSemaphore());
 	}
 }

@@ -17,8 +17,8 @@ struct VulkanCommandBufferData
 	std::optional<IDObject<VulkanSimplified::IRPoolPointer>> presentPool;
 
 	std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>> graphicBuffers;
-	std::optional<std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>>> transferBuffers;
-	std::optional<std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>>> presentBuffers;
+	std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>> transferBuffers;
+	std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>> presentBuffers;
 
 	VulkanCommandBufferData() = default;
 };

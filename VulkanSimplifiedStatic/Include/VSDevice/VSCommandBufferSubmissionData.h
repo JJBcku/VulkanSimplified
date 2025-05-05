@@ -2,9 +2,9 @@
 
 #include <CustomLists/IDObjectDef.h>
 
-#include "../VSCommon/VSPipelineStageFlagsDef.h"
+#include "../VSCommon/VSPipelineStageFlags.h"
 
-#include "VSCommandBufferGenericIDDef.h"
+#include "VSCommandBufferGenericID.h"
 
 namespace VulkanSimplifiedInternal
 {
