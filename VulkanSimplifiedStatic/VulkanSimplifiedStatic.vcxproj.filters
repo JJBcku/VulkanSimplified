@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\Include">
       <UniqueIdentifier>{67fbb59e-5b6c-4cf8-ba7a-65d9924abd3a}</UniqueIdentifier>
     </Filter>
@@ -96,6 +92,10 @@
     </Filter>
     <Filter Include="Source Files\Include\Shared">
       <UniqueIdentifier>{e500264d-a17f-4ca8-a60b-dcb98e065864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -744,6 +744,93 @@
     <ClInclude Include="Include\VSDevice\VSMultitypeImagesIDDef.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSCommandBufferBaseInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSPrimaryIRCommandBufferInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSPrimaryNIRCommandBufferInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSSecondaryIRCommandBufferInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandBufferBase.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPrimaryIRCommandBuffer.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSPrimaryNIRCommandBuffer.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSSecondaryIRCommandBuffer.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSSecondaryNIRCommandBuffer.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSSecondaryNIRCommandBufferInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSRenderPassClearValueIDDef.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandBufferUsage.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSIRCommandPoolInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSNIRCommandPoolInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSIRCommandPoolDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSNIRCommandPool.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSNIRCommandPoolDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandBufferGenericID.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandBufferGenericIDDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandBufferSubmissionData.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandPoolMainListDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandPoolQFGroupListDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandPoolMainListInitialCapacity.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandPoolQFGroupListsInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSIRCommandPool.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandPoolMainList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandPoolQFGroupList.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSCommandPoolMainListInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSCommandPoolQFGroupListInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -1219,6 +1306,72 @@
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSMultitypeImagesID.cpp">
       <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSCommandBufferBaseInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSPrimaryIRCommandBufferInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSPrimaryNIRCommandBufferInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSSecondaryIRCommandBufferInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSSecondaryNIRCommandBufferInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPrimaryIRCommandBuffer.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandBufferBase.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSPrimaryNIRCommandBuffer.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSSecondaryIRCommandBuffer.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSSecondaryNIRCommandBuffer.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSIRCommandPoolInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSNIRCommandPoolInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSNIRCommandPool.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandBufferGenericID.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandBufferSubmissionData.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandPoolMainList.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandPoolMainListInitialCapacity.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandPoolQFGroupList.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSCommandPoolQFGroupListsInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSIRCommandPool.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSCommandPoolMainListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSCommandPoolQFGroupListInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,7 +9,6 @@ VulkanInstanceDependentData::VulkanInstanceDependentData()
 	maxSwapchainImageAmount = 0;
 
 	graphicsQueueIndex = std::numeric_limits<size_t>::max();
-	graphicsQueueFamily = std::numeric_limits<size_t>::max();
-	presentingQueueIndex = std::numeric_limits<size_t>::max();
-	presentingQueueFamily = std::numeric_limits<size_t>::max();
+	graphicsQueueFamily = std::numeric_limits<uint32_t>::max();
+	padding = 0;
 }

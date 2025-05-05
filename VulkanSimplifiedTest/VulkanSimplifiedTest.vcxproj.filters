@@ -96,6 +96,12 @@
     <ClCompile Include="CreateSynchronizationData.cpp">
       <Filter>Source Files\CreateData</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanCommandBufferData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateCommandBufferData.cpp">
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VulkanBasicData.h">
@@ -162,6 +168,12 @@
       <Filter>Header Files\VulkanData</Filter>
     </ClInclude>
     <ClInclude Include="CreateSynchronizationData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanCommandBufferData.h">
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateCommandBufferData.h">
       <Filter>Header Files\CreateData</Filter>
     </ClInclude>
   </ItemGroup>

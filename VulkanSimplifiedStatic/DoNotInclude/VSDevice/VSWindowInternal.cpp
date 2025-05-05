@@ -94,6 +94,50 @@ namespace VulkanSimplifiedInternal
 		ReCreateSwapchain();
 	}
 
+	bool WindowInternal::AcquireNextImage(VkDevice device, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t& returnIndex)
+	{
+		if (device != _device)
+			throw std::runtime_error("WindowInternal::AcquireNextImage Error: Program tried to used different device than swapchain was created with!");
+
+		VkResult result = vkAcquireNextImageKHR(_device, _swapchain, timeout, semaphore, fence, &returnIndex);
+
+		if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+			throw std::runtime_error("WindowInternal::AcquireNextImage Error: Program failed to acquire next image!");
+
+		return result == VK_SUCCESS;
+	}
+
+	VkSwapchainKHR WindowInternal::GetSwapchain() const
+	{
+		return _swapchain;
+	}
+
+	size_t WindowInternal::GetSwapchainImageAmount() const
+	{
+		return _swapchainImages.size();
+	}
+
+	VkImage WindowInternal::GetSwapchainImage(size_t imageIndex) const
+	{
+		if (_swapchain == VK_NULL_HANDLE)
+			throw std::runtime_error("WindowInternal::GetSwapchainImage Error: Program tried to get an image from a non-existent swapchain!");
+
+		if (_swapchainImages.size() <= imageIndex)
+			throw std::runtime_error("WindowInternal::GetSwapchainImage Error: Program tried to get read beyond swapchain images list!");
+
+		return _swapchainImages[imageIndex];
+	}
+
+	uint32_t WindowInternal::GetWidth() const
+	{
+		return _surfaceCapabilities.currentExtent.width;
+	}
+
+	uint32_t WindowInternal::GetHeight() const
+	{
+		return _surfaceCapabilities.currentExtent.height;
+	}
+
 	void WindowInternal::DestroyWindow()
 	{
 		if (_window != nullptr)

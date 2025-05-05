@@ -10,6 +10,7 @@ struct VulkanRenderPassData;
 struct VulkanPipelineData;
 struct VulkanMemoryData;
 struct VulkanSynchronizationData;
+struct VulkanCommandBufferData;
 
 struct VulkanData
 {
@@ -21,6 +22,7 @@ struct VulkanData
 	std::unique_ptr<VulkanPipelineData> pipelineData;
 	std::unique_ptr<VulkanMemoryData> memoryData;
 	std::unique_ptr<VulkanSynchronizationData> synchronizationData;
+	std::unique_ptr<VulkanCommandBufferData> commandBufferData;
 
 	VulkanData();
 	~VulkanData();

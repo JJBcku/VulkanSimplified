@@ -11,11 +11,12 @@ struct VulkanInstanceDependentData
 	uint32_t maxSwapchainImageAmount;
 
 	size_t graphicsQueueIndex;
-	size_t graphicsQueueFamily;
+	uint32_t graphicsQueueFamily;
+	uint32_t padding;
 	std::optional<size_t> transferOnlyQueueIndex;
-	std::optional<size_t> transferOnlyQueueFamily;
-	size_t presentingQueueIndex;
-	size_t presentingQueueFamily;
+	std::optional<uint32_t> transferOnlyQueueFamily;
+	std::optional<size_t> presentingQueueIndex;
+	std::optional<uint32_t> presentingQueueFamily;
 
 	VulkanInstanceDependentData();
 };

@@ -9,8 +9,10 @@
 #include "VulkanPipelineData.h"
 #include "VulkanMemoryData.h"
 #include "VulkanSynchronizationData.h"
+#include "VulkanCommandBufferData.h"
 
-VulkanData::VulkanData() : basicData(), sharedData(), instanceDependentData(), deviceDependentData(), renderPassData(), pipelineData(), memoryData(), synchronizationData()
+VulkanData::VulkanData() : basicData(), sharedData(), instanceDependentData(), deviceDependentData(), renderPassData(), pipelineData(), memoryData(), synchronizationData(),
+commandBufferData()
 {
 }
 

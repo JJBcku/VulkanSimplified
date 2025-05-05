@@ -28,6 +28,16 @@ namespace VulkanSimplifiedInternal
 
 		void CreateSwapchain(const VulkanSimplified::SwapchainCreationData& creationData, bool throwOnSwapchainExist);
 
+		bool AcquireNextImage(VkDevice device, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t& returnIndex);
+
+		VkSwapchainKHR GetSwapchain() const;
+
+		size_t GetSwapchainImageAmount() const;
+		VkImage GetSwapchainImage(size_t imageIndex) const;
+
+		uint32_t GetWidth() const;
+		uint32_t GetHeight() const;
+
 	private:
 		DeviceCoreInternal& _core;
 

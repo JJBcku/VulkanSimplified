@@ -12,6 +12,7 @@
 #include "CreatePipelineData.h"
 #include "CreateMemoryData.h"
 #include "CreateSynchronizationData.h"
+#include "CreateCommandBufferData.h"
 
 #include "MiscFunctions.h"
 
@@ -30,6 +31,7 @@ void RunProgram()
 	CreatePipelineData(data);
 	CreateMemoryData(data);
 	CreateSynchronizationData(data);
+	CreateCommandBufferData(data);
 
 	while (!settings.IsClosingRequested())
 	{

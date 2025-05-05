@@ -15,6 +15,7 @@
 #include "VSImageDataLists.h"
 
 #include "VSSynchronizationDataLists.h"
+#include "VSCommandPoolMainList.h"
 
 namespace VulkanSimplified
 {
@@ -71,6 +72,11 @@ namespace VulkanSimplified
 		return _internal.GetSynchronizationDataLists();
 	}
 
+	CommandPoolMainList DeviceMain::GetCommandPoolMainList()
+	{
+		return _internal.GetCommandPoolMainList();
+	}
+
 	const DeviceCore DeviceMain::GetDeviceCore() const
 	{
 		return _internal.GetDeviceCore();
@@ -114,6 +120,11 @@ namespace VulkanSimplified
 	const SynchronizationDataLists DeviceMain::GetSynchronizationDataLists() const
 	{
 		return _internal.GetSynchronizationDataLists();
+	}
+
+	const CommandPoolMainList DeviceMain::GetCommandPoolMainList() const
+	{
+		return _internal.GetCommandPoolMainList();
 	}
 
 }

@@ -12,6 +12,7 @@
 #include "VSImageDataListsInternal.h"
 
 #include "VSSynchronizationDataListsInternal.h"
+#include "VSCommandPoolMainListInternal.h"
 
 namespace VulkanSimplified
 {
@@ -43,6 +44,7 @@ namespace VulkanSimplifiedInternal
 		ImageDataListsInternal& GetImageDataLists();
 
 		SynchronizationDataListsInternal& GetSynchronizationDataLists();
+		CommandPoolMainListInternal& GetCommandPoolMainList();
 
 		const DeviceCoreInternal& GetDeviceCore() const;
 		const WindowListInternal& GetWindowList() const;
@@ -56,6 +58,7 @@ namespace VulkanSimplifiedInternal
 		const ImageDataListsInternal& GetImageDataLists() const;
 
 		const SynchronizationDataListsInternal& GetSynchronizationDataLists() const;
+		const CommandPoolMainListInternal& GetCommandPoolMainList() const;
 
 	private:
 		const SharedDataMainListInternal& _sharedDataMain;
@@ -72,5 +75,6 @@ namespace VulkanSimplifiedInternal
 		ImageDataListsInternal _imageDataLists;
 
 		SynchronizationDataListsInternal _synchroDataLists;
+		CommandPoolMainListInternal _commandPoolMainList;
 	};
 }

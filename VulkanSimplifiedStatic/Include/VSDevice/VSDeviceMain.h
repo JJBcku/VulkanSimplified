@@ -19,6 +19,7 @@ namespace VulkanSimplified
 	class ImageDataLists;
 
 	class SynchronizationDataLists;
+	class CommandPoolMainList;
 
 	class DeviceMain
 	{
@@ -38,6 +39,7 @@ namespace VulkanSimplified
 		ImageDataLists GetImageDataLists();
 
 		SynchronizationDataLists GetSynchronizationDataLists();
+		CommandPoolMainList GetCommandPoolMainList();
 
 		const DeviceCore GetDeviceCore() const;
 		const WindowList GetWindowList() const;
@@ -51,6 +53,7 @@ namespace VulkanSimplified
 		const ImageDataLists GetImageDataLists() const;
 
 		const SynchronizationDataLists GetSynchronizationDataLists() const;
+		const CommandPoolMainList GetCommandPoolMainList() const;
 
 	private:
 		VulkanSimplifiedInternal::DeviceMainInternal& _internal;

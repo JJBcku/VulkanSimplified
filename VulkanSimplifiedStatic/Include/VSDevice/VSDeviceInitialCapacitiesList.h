@@ -11,6 +11,7 @@
 #include "VSImageDataListsInitialCapacities.h"
 
 #include "VSSynchronizationDataListsInitialCapacities.h"
+#include "VSCommandPoolMainListInitialCapacity.h"
 
 namespace VulkanSimplified
 {
@@ -27,6 +28,7 @@ namespace VulkanSimplified
 		ImageDataListsInitialCapacities imageLists;
 
 		SynchronizationDataListsInitialCapacities synchronizationLists;
+		CommandPoolMainListInitialCapacity commandPoolMainList;
 
 		DeviceInitialCapacitiesList() = default;
 	};

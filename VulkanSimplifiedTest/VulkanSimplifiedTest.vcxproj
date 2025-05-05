@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreateBasicData.cpp" />
+    <ClCompile Include="CreateCommandBufferData.cpp" />
     <ClCompile Include="CreateDeviceDependentData.cpp" />
     <ClCompile Include="CreateInstanceDependentData.cpp" />
     <ClCompile Include="CreateMemoryData.cpp" />
@@ -102,6 +103,7 @@
     </ClCompile>
     <ClCompile Include="RunProgram.cpp" />
     <ClCompile Include="VulkanBasicData.cpp" />
+    <ClCompile Include="VulkanCommandBufferData.cpp" />
     <ClCompile Include="VulkanData.cpp" />
     <ClCompile Include="VulkanDeviceDependentData.cpp" />
     <ClCompile Include="VulkanInstanceDependentData.cpp" />
@@ -113,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreateBasicData.h" />
+    <ClInclude Include="CreateCommandBufferData.h" />
     <ClInclude Include="CreateDeviceDependentData.h" />
     <ClInclude Include="CreateInstanceDependentData.h" />
     <ClInclude Include="CreateMemoryData.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="RunProgram.h" />
     <ClInclude Include="SwapchainSizes.h" />
     <ClInclude Include="VulkanBasicData.h" />
+    <ClInclude Include="VulkanCommandBufferData.h" />
     <ClInclude Include="VulkanData.h" />
     <ClInclude Include="VulkanDeviceDependentData.h" />
     <ClInclude Include="VulkanInstanceDependentData.h" />

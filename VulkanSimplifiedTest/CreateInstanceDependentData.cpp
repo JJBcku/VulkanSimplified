@@ -502,18 +502,10 @@ void CreateInstanceDependentData(VulkanData& data)
 		instanceData.presentingQueueFamily = queueCreationData.queuesFamily;
 		deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
 	}
-	else
+	else if (!graphicQueueFamily.second)
 	{
-		if (graphicQueueFamily.second)
-		{
-			instanceData.presentingQueueIndex = instanceData.graphicsQueueIndex;
-			instanceData.presentingQueueFamily = instanceData.graphicsQueueFamily;
-		}
-		else
-		{
-			instanceData.presentingQueueIndex = instanceData.transferOnlyQueueIndex.value();
-			instanceData.presentingQueueFamily = instanceData.transferOnlyQueueFamily.value();
-		}
+		instanceData.presentingQueueIndex = instanceData.transferOnlyQueueIndex.value();
+		instanceData.presentingQueueFamily = instanceData.transferOnlyQueueFamily.value();
 	}
 
 	deviceCreationData.requestedExtensionPacks.swapchainBase = true;
