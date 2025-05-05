@@ -8,3 +8,4 @@
 
 #include <stdint.h>
 #include <optional>
+#include <functional>

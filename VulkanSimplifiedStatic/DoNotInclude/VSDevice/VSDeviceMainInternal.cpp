@@ -9,10 +9,11 @@
 
 namespace VulkanSimplifiedInternal
 {
-	DeviceMainInternal::DeviceMainInternal(const SharedDataMainListInternal& sharedDataMain, VkInstance instance, const LogicalDeviceInternalCreationData& creationData,
-		const PhysicalDeviceDataInternal& physicalDeviceData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _sharedDataMain(sharedDataMain),
+	DeviceMainInternal::DeviceMainInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, VkInstance instance,
+		const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
+		const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _eventHandler(eventHandler), _sharedDataMain(sharedDataMain),
 		_core(instance, creationData, physicalDeviceData),
-		_windowList(_core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
+		_windowList(_eventHandler, _core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
 		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists), _descriptorLists(_sharedDataMain.GetDescriptorDataList(), _core.GetDevice(), initialCapacities.descriptorLists),
 		_renderPassList(_sharedDataMain.GetRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists),
 		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists),

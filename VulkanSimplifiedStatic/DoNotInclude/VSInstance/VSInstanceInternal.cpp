@@ -13,7 +13,8 @@
 
 namespace VulkanSimplifiedInternal
 {
-	InstanceInternal::InstanceInternal(const SharedDataMainListInternal& sharedDataMain, const InstanceInternalCreationData& initData) : _sharedDataMain(sharedDataMain)
+	InstanceInternal::InstanceInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, const InstanceInternalCreationData& initData) :
+		_eventHandler(eventHandler), _sharedDataMain(sharedDataMain)
 	{
 		_instance = VK_NULL_HANDLE;
 		_debugMessenger = VK_NULL_HANDLE;
@@ -261,7 +262,7 @@ namespace VulkanSimplifiedInternal
 		internalCreationData.vulkan10EnabledFeatures = creationData.vulkan10EnabledFeatures;
 		internalCreationData.requestedExtensionPacks = creationData.requestedExtensionPacks;
 
-		_usedDevice.emplace(_sharedDataMain, _instance, internalCreationData, physicalDeviceData, initialCapacities);
+		_usedDevice.emplace(_eventHandler, _sharedDataMain, _instance, internalCreationData, physicalDeviceData, initialCapacities);
 	}
 
 }

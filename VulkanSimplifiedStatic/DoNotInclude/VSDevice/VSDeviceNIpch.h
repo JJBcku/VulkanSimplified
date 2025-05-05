@@ -9,3 +9,4 @@
 #include <stdint.h>
 #include <optional>
 #include <array>
+#include <functional>

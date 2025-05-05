@@ -8,9 +8,9 @@
 
 namespace VulkanSimplifiedInternal
 {
-	WindowListInternal::WindowListInternal(DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-		const VulkanSimplified::WindowListInitialCapacities& initalCapacities) : _core(core), _instance(instance), _physicalDevice(physicalDevice), _device(device),
-		_windowList(initalCapacities.windowListInitialCapacity)
+	WindowListInternal::WindowListInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
+		const VulkanSimplified::WindowListInitialCapacities& initalCapacities) : _eventHandler(eventHandler), _core(core), _instance(instance), _physicalDevice(physicalDevice),
+		_device(device), _windowList(initalCapacities.windowListInitialCapacity)
 	{
 	}
 
@@ -20,7 +20,7 @@ namespace VulkanSimplifiedInternal
 
 	IDObject<VulkanSimplified::WindowPointer> WindowListInternal::CreateWindow(const VulkanSimplified::WindowCreationData& creationData, size_t addOnReserving)
 	{
-		return _windowList.AddObject(std::make_unique<WindowInternal>(_core, _instance, _physicalDevice, _device, creationData), addOnReserving);
+		return _windowList.AddObject(std::make_unique<WindowInternal>(_eventHandler, _core, _instance, _physicalDevice, _device, creationData), addOnReserving);
 	}
 
 	WindowInternal& WindowListInternal::GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID)

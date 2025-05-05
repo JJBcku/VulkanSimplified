@@ -14,11 +14,12 @@ namespace VulkanSimplifiedInternal
 {
 	class DeviceCoreInternal;
 	class WindowInternal;
+	class SdlEventHandlerInternal;
 
 	class WindowListInternal
 	{
 	public:
-		WindowListInternal(DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
+		WindowListInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
 			const VulkanSimplified::WindowListInitialCapacities& initalCapacities);
 		~WindowListInternal();
 
@@ -29,6 +30,7 @@ namespace VulkanSimplifiedInternal
 		const WindowInternal& GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID) const;
 
 	private:
+		SdlEventHandlerInternal& _eventHandler;
 		DeviceCoreInternal& _core;
 
 		VkInstance _instance;

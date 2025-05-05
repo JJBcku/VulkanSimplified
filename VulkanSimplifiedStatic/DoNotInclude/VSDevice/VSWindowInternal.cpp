@@ -8,14 +8,23 @@
 
 #include "VSDeviceCoreInternal.h"
 
+#include "../../Include/VSMain/EventHandler/SdlWindowEventData.h"
+
+#include "../VSMain/EventHandler/SdlEventHandlerInternal.h"
+
 namespace VulkanSimplifiedInternal
 {
-	WindowInternal::WindowInternal(DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-		const VulkanSimplified::WindowCreationData& creationData) : _core(core)
+	WindowInternal::WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
+		const VulkanSimplified::WindowCreationData& creationData) : _eventHandler(eventHandler), _core(core)
 	{
 		_instance = instance;
 		_physicalDevice = physicalDevice;
 		_device = device;
+
+		_hidden = false;
+		_minimized = false;
+		_quit = false;
+		_bpadding = false;
 
 		_window = nullptr;
 		_windowTitle = creationData.windowTitle;
@@ -64,6 +73,8 @@ namespace VulkanSimplifiedInternal
 
 		if (SDL_Vulkan_CreateSurface(_window, _instance, &_surface) != SDL_TRUE)
 			throw std::runtime_error(SDL_GetError());
+
+		_eventHandlingID = _eventHandler.RegisterWindowEventCallback(WindowInternal::HandleWindowEventStatic, this, 0);
 	}
 
 	WindowInternal::~WindowInternal()
@@ -138,8 +149,19 @@ namespace VulkanSimplifiedInternal
 		return _surfaceCapabilities.currentExtent.height;
 	}
 
+	bool WindowInternal::HandleWindowEventStatic(const VulkanSimplified::SdlWindowEventData& event, void* windowptr)
+	{
+		return static_cast<WindowInternal*>(windowptr)->HandleWindowEvent(event);
+	}
+
 	void WindowInternal::DestroyWindow()
 	{
+		if (_eventHandlingID.has_value())
+		{
+			_eventHandler.UnRegisterWindowEventCallback(_eventHandlingID.value(), true);
+			_eventHandlingID.reset();
+		}
+
 		if (_window != nullptr)
 		{
 			DestroySwapchain();
@@ -157,6 +179,8 @@ namespace VulkanSimplifiedInternal
 		DestroySwapchain();
 
 		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_physicalDevice, _surface, &_surfaceCapabilities);
+		ratio = static_cast<double>(std::min(_surfaceCapabilities.currentExtent.width, _surfaceCapabilities.currentExtent.height)) /
+			static_cast<double>(std::max(_surfaceCapabilities.currentExtent.width, _surfaceCapabilities.currentExtent.height));
 
 		VkSwapchainCreateInfoKHR createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
@@ -224,6 +248,46 @@ namespace VulkanSimplifiedInternal
 		}
 
 		return ret;
+	}
+
+	bool WindowInternal::HandleWindowEvent(const VulkanSimplified::SdlWindowEventData& event)
+	{
+		if (event.windowID != _windowID)
+			return true;
+
+		switch (event.event)
+		{
+		case SDL_WINDOWEVENT_SHOWN:
+			_hidden = false;
+			break;
+		case SDL_WINDOWEVENT_HIDDEN:
+			_hidden = true;
+			break;
+		case SDL_WINDOWEVENT_RESIZED:
+			if (_swapchain != VK_NULL_HANDLE)
+				ReCreateSwapchain();
+			break;
+		case SDL_WINDOWEVENT_SIZE_CHANGED:
+			if (_swapchain != VK_NULL_HANDLE)
+				ReCreateSwapchain();
+			break;
+		case SDL_WINDOWEVENT_MINIMIZED:
+			_minimized = true;
+			break;
+		case SDL_WINDOWEVENT_MAXIMIZED:
+			_minimized = false;
+			break;
+		case SDL_WINDOWEVENT_RESTORED:
+			_minimized = false;
+			break;
+		case SDL_WINDOWEVENT_CLOSE:
+			_quit = true;
+			break;
+		default:
+			break;
+		}
+
+		return false;
 	}
 
 }

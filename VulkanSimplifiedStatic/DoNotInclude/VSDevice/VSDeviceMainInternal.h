@@ -24,12 +24,14 @@ namespace VulkanSimplifiedInternal
 	struct LogicalDeviceInternalCreationData;
 	class PhysicalDeviceDataInternal;
 	class SharedDataMainListInternal;
+	class SdlEventHandlerInternal;
 
 	class DeviceMainInternal
 	{
 	public:
-		DeviceMainInternal(const SharedDataMainListInternal& sharedDataMain, VkInstance instance, const LogicalDeviceInternalCreationData& creationData,
-			const PhysicalDeviceDataInternal& physicalDeviceData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities);
+		DeviceMainInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, VkInstance instance,
+			const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
+			const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities);
 		~DeviceMainInternal();
 
 		DeviceCoreInternal& GetDeviceCore();
@@ -61,6 +63,7 @@ namespace VulkanSimplifiedInternal
 		const CommandPoolMainListInternal& GetCommandPoolMainList() const;
 
 	private:
+		SdlEventHandlerInternal& _eventHandler;
 		const SharedDataMainListInternal& _sharedDataMain;
 
 		DeviceCoreInternal _core;

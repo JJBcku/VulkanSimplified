@@ -2,22 +2,29 @@
 
 #include "../../Include/VSCommon/VSSurfacePresentModesDef.h"
 
+#include <CustomLists/IDObject.h>
+
+#include "../../Include/VSMain/EventHandler/SdlEventHandlerTypedefs.h"
+
 namespace VulkanSimplified
 {
 	struct WindowCreationData;
 	struct SwapchainCreationData;
 
 	enum SurfacePresentModeBits : SurfacePresentModes;
+
+	struct SdlWindowEventData;
 }
 
 namespace VulkanSimplifiedInternal
 {
 	class DeviceCoreInternal;
+	class SdlEventHandlerInternal;
 
 	class WindowInternal
 	{
 	public:
-		WindowInternal(DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const VulkanSimplified::WindowCreationData& creationData);
+		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const VulkanSimplified::WindowCreationData& creationData);
 		~WindowInternal();
 
 		WindowInternal(const WindowInternal& rhs) noexcept = delete;
@@ -38,15 +45,25 @@ namespace VulkanSimplifiedInternal
 		uint32_t GetWidth() const;
 		uint32_t GetHeight() const;
 
+		static bool HandleWindowEventStatic(const VulkanSimplified::SdlWindowEventData& event, void* windowptr);
+
 	private:
+		SdlEventHandlerInternal& _eventHandler;
 		DeviceCoreInternal& _core;
 
 		VkInstance _instance;
 		VkPhysicalDevice _physicalDevice;
 		VkDevice _device;
 
+		bool _hidden;
+		bool _minimized;
+		bool _quit;
+		bool _bpadding;
+		uint32_t _windowID;
+
+		std::optional<IDObject<std::pair<VulkanSimplified::WindowEventFunction, void*>>> _eventHandlingID;
+
 		SDL_Window* _window;
-		uint64_t _windowID;
 		std::string _windowTitle;
 		double ratio;
 
@@ -69,5 +86,7 @@ namespace VulkanSimplifiedInternal
 		void DestroySwapchain();
 
 		VkPresentModeKHR TranslateToPresentMode(VulkanSimplified::SurfacePresentModeBits presentMode);
+
+		bool HandleWindowEvent(const VulkanSimplified::SdlWindowEventData& event);
 	};
 }

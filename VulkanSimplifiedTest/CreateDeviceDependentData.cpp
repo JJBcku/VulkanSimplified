@@ -60,6 +60,7 @@ void CreateDeviceDependentData(VulkanData& data)
 	windowCreationData.width = 800;
 	windowCreationData.height = 600;
 	windowCreationData.windowTitle = "Test Window";
+	windowCreationData.settings = VulkanSimplified::WindowSettings::RESIZABLE;
 
 	data.deviceDependentData->windowID = windowList.CreateWindow(windowCreationData);
 

@@ -78,7 +78,7 @@ namespace VulkanSimplifiedInternal
 		init.enabledExtensionPacksList = instanceInit.enabledExtensionPacks;
 		init.enabledLayerPacksList = instanceInit.enabledLayerPacks;
 
-		_instance.emplace(_sharedData, init);
+		_instance.emplace(_eventHandler, _sharedData, init);
 	}
 
 	SdlEventHandlerInternal& MainInternal::GetSdlEventHandler()
