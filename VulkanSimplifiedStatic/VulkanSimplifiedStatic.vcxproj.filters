@@ -849,6 +849,9 @@
     <ClInclude Include="Include\VSDevice\VSDataBufferListsDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -1404,6 +1407,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDataBufferLists.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

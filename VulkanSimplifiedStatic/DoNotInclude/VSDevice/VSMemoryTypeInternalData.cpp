@@ -58,6 +58,11 @@ namespace VulkanSimplifiedInternal
 		return _allocationsList.AddObject(MemoryAllocationData(_device, allocation, dataSize, initialSuballocationsReserved, mapMemory), addOnReserving);
 	}
 
+	VkDeviceMemory MemoryTypeInternalData::GetMemory(IDObject<MemoryAllocationData> memoryId) const
+	{
+		return _allocationsList.GetConstObject(memoryId).GetMemory();
+	}
+
 	bool MemoryTypeInternalData::FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnNotFound)
 	{
 		return _allocationsList.RemoveObject(memoryId, throwOnNotFound);

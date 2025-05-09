@@ -17,6 +17,8 @@ namespace VulkanSimplifiedInternal
 		MemoryAllocationData& operator=(const MemoryAllocationData&) noexcept = delete;
 		MemoryAllocationData& operator=(MemoryAllocationData&& rhs) noexcept;
 
+		VkDeviceMemory GetMemory() const;
+
 		size_t GetTotalSize() const;
 		size_t GetFreeSize() const;
 

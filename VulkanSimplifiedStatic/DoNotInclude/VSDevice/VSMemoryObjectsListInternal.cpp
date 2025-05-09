@@ -111,6 +111,14 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
+	VkDeviceMemory MemoryObjectsListInternal::GetMemory(VulkanSimplified::MemoryAllocationFullID allocationID) const
+	{
+		if (allocationID.second >= typeCount)
+			throw std::runtime_error("MemoryObjectsListInternal::GetMemory Error: Program tried to access a non-existent memory type!");
+
+		return memoryTypeData[allocationID.second].value().GetMemory(allocationID.first);
+	}
+
 	size_t MemoryObjectsListInternal::BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size,
 		VulkanSimplified::MemorySize aligment, size_t addOnReserving)
 	{

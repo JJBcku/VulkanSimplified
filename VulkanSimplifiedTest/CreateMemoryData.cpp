@@ -77,9 +77,11 @@ void CreateMemoryData(VulkanData& data)
 	auto bufferLists = device.GetDataBufferLists();
 
 	memData.vertexBuffers.reserve(framesInFlight);
+	memData.stagingBuffers.reserve(framesInFlight);
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		memData.vertexBuffers.push_back(bufferLists.AddVertexBuffer(vertices.size() * sizeof(vertices[0]), {}));
+		memData.vertexBuffers.push_back(bufferLists.AddVertexBuffer(vertices.size() * sizeof(vertices[0]), {}, framesInFlight));
+		memData.stagingBuffers.push_back(bufferLists.AddStagingBuffer(1024, {}, framesInFlight));
 	}
 
 	allocationSize = bufferLists.GetVertexBuffersSize(memData.vertexBuffers.back()) * framesInFlight;
@@ -87,8 +89,19 @@ void CreateMemoryData(VulkanData& data)
 
 	memData.vertexMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
 
+	acceptableMemoryTypes.clear();
+	acceptableMemoryTypes.reserve(2);
+	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+
+	allocationSize = bufferLists.GetStagingBuffersSize(memData.stagingBuffers.back()) * framesInFlight;
+	memoryTypeMask = bufferLists.GetStagingBuffersMemoryTypeMask(memData.stagingBuffers.back());
+
+	memData.stagingMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
+
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
 		bufferLists.BindVertexBuffer(memData.vertexBuffers[i], memData.vertexMemoryAllocation);
+		bufferLists.BindStagingBuffer(memData.stagingBuffers[i], memData.stagingMemoryAllocation);
 	}
 }

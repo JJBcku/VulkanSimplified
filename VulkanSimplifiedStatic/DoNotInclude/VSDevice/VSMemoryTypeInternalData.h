@@ -23,6 +23,8 @@ namespace VulkanSimplifiedInternal
 
 		IDObject<MemoryAllocationData> AddMemoryAllocation(size_t dataSize, size_t initialSuballocationsReserved, size_t addOnReserving);
 
+		VkDeviceMemory GetMemory(IDObject<MemoryAllocationData> memoryId) const;
+
 		bool FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnNotFound);
 
 		uint32_t GetHeapIndex() const;

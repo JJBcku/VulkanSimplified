@@ -33,6 +33,8 @@ namespace VulkanSimplifiedInternal
 		std::optional<VulkanSimplified::MemoryAllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving);
 
+		VkDeviceMemory GetMemory(VulkanSimplified::MemoryAllocationFullID allocationID) const;
+
 		bool FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound);
 
 		size_t BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,

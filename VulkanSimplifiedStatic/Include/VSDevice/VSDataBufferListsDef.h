@@ -5,4 +5,5 @@
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupVertexBuffer;
+	class AutoCleanupStagingBuffer;
 }

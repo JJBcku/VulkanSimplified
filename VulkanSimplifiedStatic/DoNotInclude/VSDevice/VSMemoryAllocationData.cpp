@@ -52,6 +52,11 @@ namespace VulkanSimplifiedInternal
 		return *this;
 	}
 
+	VkDeviceMemory MemoryAllocationData::GetMemory() const
+	{
+		return _memory;
+	}
+
 	size_t MemoryAllocationData::GetTotalSize() const
 	{
 		return _totalSize;

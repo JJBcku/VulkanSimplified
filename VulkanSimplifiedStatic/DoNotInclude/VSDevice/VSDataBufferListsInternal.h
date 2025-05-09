@@ -23,15 +23,22 @@ namespace VulkanSimplifiedInternal
 			const VulkanSimplified::DataBufferListsInitialCapacities& initialCapacities);
 		~DataBufferListsInternal();
 
-		IDObject<AutoCleanupVertexBuffer> AddVertexBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingImage, size_t addOnReserving);
+		IDObject<AutoCleanupVertexBuffer> AddVertexBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
+		IDObject<AutoCleanupStagingBuffer> AddStagingBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
 
 		void BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void BindStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
 
 		VkBuffer GetVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID) const;
+		VkBuffer GetStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID) const;
 
 		uint32_t GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const;
 		VulkanSimplified::MemorySize GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const;
 		VulkanSimplified::MemorySize GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const;
+
+		uint32_t GetStagingBuffersMemoryTypeMask(IDObject<AutoCleanupStagingBuffer> bufferID) const;
+		VulkanSimplified::MemorySize GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const;
+		VulkanSimplified::MemorySize GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const;
 
 	private:
 		const DeviceCoreInternal& _deviceCore;
@@ -40,5 +47,6 @@ namespace VulkanSimplifiedInternal
 		VkDevice _device;
 
 		UnsortedIDVector<AutoCleanupVertexBuffer> _vertexBuffers;
+		UnsortedIDVector<AutoCleanupStagingBuffer> _stagingBuffers;
 	};
 }

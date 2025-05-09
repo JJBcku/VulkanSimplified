@@ -120,6 +120,7 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImage.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupSemaphore.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSCommandBufferBaseInternal.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSCommandPoolMainListInternal.h" />
@@ -449,6 +450,10 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
