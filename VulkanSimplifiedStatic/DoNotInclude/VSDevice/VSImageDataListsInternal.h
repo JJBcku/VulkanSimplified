@@ -4,6 +4,7 @@
 
 #include "../../Include/VSCommon/VSImageUsageFlagsDef.h"
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
+#include "../../Include/VSCommon/VSMemorySizeDef.h"
 
 #include "../../Include/VSDevice/VSMultitypeImagesIDDef.h"
 
@@ -42,12 +43,12 @@ namespace VulkanSimplifiedInternal
 		VkImage GetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 		VkImageView GetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
 
-		uint32_t GetColorRenderTargetImageWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
-		uint32_t GetColorRenderTargetImageHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
+		uint32_t GetColorRenderTargetImagesWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
+		uint32_t GetColorRenderTargetImagesHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 
-		uint32_t GetColorRenderTargetImageMemoryTypeMask(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
-		uint64_t GetColorRenderTargetImageSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
-		uint64_t GetColorRenderTargetImageRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
+		uint32_t GetColorRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
+		VulkanSimplified::MemorySize GetColorRenderTargetImagesSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
+		VulkanSimplified::MemorySize GetColorRenderTargetImagesRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 
 		void BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
 

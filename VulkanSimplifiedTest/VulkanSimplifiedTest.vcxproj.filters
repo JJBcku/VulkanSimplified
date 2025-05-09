@@ -105,6 +105,9 @@
     <ClCompile Include="VulkanSimplifiedTest.cpp">
       <Filter>Source Files\Other</Filter>
     </ClCompile>
+    <ClCompile Include="VertexData.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VulkanBasicData.h">
@@ -180,6 +183,9 @@
       <Filter>Header Files\CreateData</Filter>
     </ClInclude>
     <ClInclude Include="RunFrame.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexData.h">
       <Filter>Header Files\Other</Filter>
     </ClInclude>
   </ItemGroup>

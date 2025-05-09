@@ -56,6 +56,12 @@ namespace VulkanSimplifiedInternal
 		{
 			queueFamilies = _deviceCore.GetQueuesFamilies(queuesUsingImage);
 
+			std::stable_sort(queueFamilies.begin(), queueFamilies.end());
+			queueFamilies.erase(std::unique(queueFamilies.begin(), queueFamilies.end()), queueFamilies.end());
+		}
+
+		if (queueFamilies.size() > 1)
+		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
 			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
@@ -108,27 +114,27 @@ namespace VulkanSimplifiedInternal
 		return _colorRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
 	}
 
-	uint32_t ImageDataListsInternal::GetColorRenderTargetImageWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetWidth();
 	}
 
-	uint32_t ImageDataListsInternal::GetColorRenderTargetImageHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetHeight();
 	}
 
-	uint32_t ImageDataListsInternal::GetColorRenderTargetImageMemoryTypeMask(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
 	}
 
-	uint64_t ImageDataListsInternal::GetColorRenderTargetImageSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	VulkanSimplified::MemorySize ImageDataListsInternal::GetColorRenderTargetImagesSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImagesSize();
 	}
 
-	uint64_t ImageDataListsInternal::GetColorRenderTargetImageRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	VulkanSimplified::MemorySize ImageDataListsInternal::GetColorRenderTargetImagesRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
 	}

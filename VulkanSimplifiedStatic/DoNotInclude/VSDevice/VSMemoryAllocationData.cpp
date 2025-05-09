@@ -63,14 +63,34 @@ namespace VulkanSimplifiedInternal
 		return _totalSize - _usedSize;
 	}
 
-	size_t MemoryAllocationData::BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserve)
+	size_t MemoryAllocationData::BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
 	{
-		CheckSuballocationVectorSize(addOnReserve);
+		CheckSuballocationVectorSize(addOnReserving);
 
 		auto memoryAddresses = FindMemoryAdressAndVectorIndexForSuballocation(size, aligment);
 
 		if (vkBindImageMemory(_device, image, _memory, memoryAddresses.first) != VK_SUCCESS)
 			throw std::runtime_error("MemoryAllocationData::BindImage Error: Program failed to bind image to memory!");
+
+		SuballocationInternalData add;
+		add.beggining = memoryAddresses.first;
+		add.size = size;
+
+		_usedSize += size;
+
+		_suballocationData.insert(_suballocationData.begin() + static_cast<std::int64_t>(memoryAddresses.second), add);
+
+		return memoryAddresses.first;
+	}
+
+	size_t MemoryAllocationData::BindBuffer(VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
+	{
+		CheckSuballocationVectorSize(addOnReserving);
+
+		auto memoryAddresses = FindMemoryAdressAndVectorIndexForSuballocation(size, aligment);
+
+		if (vkBindBufferMemory(_device, buffer, _memory, memoryAddresses.first) != VK_SUCCESS)
+			throw std::runtime_error("MemoryAllocationData::BindBuffer Error: Program failed to bind data buffer to memory!");
 
 		SuballocationInternalData add;
 		add.beggining = memoryAddresses.first;
@@ -102,11 +122,11 @@ namespace VulkanSimplifiedInternal
 		return false;
 	}
 
-	void MemoryAllocationData::CheckSuballocationVectorSize(size_t addOnReserve)
+	void MemoryAllocationData::CheckSuballocationVectorSize(size_t addOnReserving)
 	{
 		if (_suballocationData.size() == _suballocationData.capacity())
 		{
-			if (addOnReserve == 0)
+			if (addOnReserving == 0)
 			{
 				if (_suballocationData.capacity() == 0)
 					_suballocationData.reserve(1);
@@ -115,7 +135,7 @@ namespace VulkanSimplifiedInternal
 			}
 			else
 			{
-				_suballocationData.reserve(_suballocationData.capacity() + addOnReserve);
+				_suballocationData.reserve(_suballocationData.capacity() + addOnReserving);
 			}
 		}
 	}

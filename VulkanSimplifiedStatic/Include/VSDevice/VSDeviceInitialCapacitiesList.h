@@ -8,6 +8,7 @@
 #include "VSPipelineDataListsInitialCapacities.h"
 
 #include "VSMemoryObjectsListInitialCapacities.h"
+#include "VSDataBufferListsInitialCapacities.h"
 #include "VSImageDataListsInitialCapacities.h"
 
 #include "VSSynchronizationDataListsInitialCapacities.h"
@@ -25,6 +26,7 @@ namespace VulkanSimplified
 		PipelineDataListsInitialCapacities pipelineDataLists;
 
 		MemoryObjectsListInitialCapacities memoryObjectsList;
+		DataBufferListsInitialCapacities dataBufferLists;
 		ImageDataListsInitialCapacities imageLists;
 
 		SynchronizationDataListsInitialCapacities synchronizationLists;

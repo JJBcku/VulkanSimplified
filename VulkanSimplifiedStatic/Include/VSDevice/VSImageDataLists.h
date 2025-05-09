@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../../Include/VSCommon/VSImageUsageFlagsDef.h"
-#include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
+#include "../VSCommon/VSImageUsageFlagsDef.h"
+#include "../VSCommon/VSMemorySuballocationFullID.h"
+#include "../VSCommon/VSMemorySizeDef.h"
 
 #include "VSImageDataListsDef.h"
 #include "VSRenderPassDataListDef.h"
@@ -27,12 +28,12 @@ namespace VulkanSimplified
 
 		bool RemoveColorRenderTargetImage(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound);
 
-		uint32_t GetColorRenderTargetImageWidth(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
-		uint32_t GetColorRenderTargetImageHeight(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
+		uint32_t GetColorRenderTargetImagesWidth(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
+		uint32_t GetColorRenderTargetImagesHeight(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
 
-		uint32_t GetColorRenderTargetImageMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
-		uint64_t GetColorRenderTargetImageSize(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
-		uint64_t GetColorRenderTargetImageRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
+		uint32_t GetColorRenderTargetImagesMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
+		VulkanSimplified::MemorySize GetColorRenderTargetImagesSize(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
+		VulkanSimplified::MemorySize GetColorRenderTargetImagesRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const;
 
 		void BindColorRenderTargetImage(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID, MemoryAllocationFullID allocationID,
 			size_t addOnReserving = 0);

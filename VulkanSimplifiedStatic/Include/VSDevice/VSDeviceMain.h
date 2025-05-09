@@ -16,6 +16,7 @@ namespace VulkanSimplified
 	class PipelineDataLists;
 
 	class MemoryObjectsList;
+	class DataBufferLists;
 	class ImageDataLists;
 
 	class SynchronizationDataLists;
@@ -36,6 +37,7 @@ namespace VulkanSimplified
 		PipelineDataLists GetPipelineDataLists();
 
 		MemoryObjectsList GetMemoryObjectsList();
+		DataBufferLists GetDataBufferLists();
 		ImageDataLists GetImageDataLists();
 
 		SynchronizationDataLists GetSynchronizationDataLists();
@@ -50,6 +52,7 @@ namespace VulkanSimplified
 		const PipelineDataLists GetPipelineDataLists() const;
 
 		const MemoryObjectsList GetMemoryObjectsList() const;
+		const DataBufferLists GetDataBufferLists() const;
 		const ImageDataLists GetImageDataLists() const;
 
 		const SynchronizationDataLists GetSynchronizationDataLists() const;

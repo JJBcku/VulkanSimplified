@@ -28,11 +28,11 @@ namespace VulkanSimplifiedInternal
 
 		IDObject<AutoCleanupRenderPass> AddRenderPassWithoutResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
 			const std::vector<VulkanSimplified::SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
-			size_t addOnReserve);
+			size_t addOnReserving);
 
 		IDObject<AutoCleanupRenderPass> AddRenderPassWithResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
 			const std::vector<VulkanSimplified::SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
-			size_t addOnReserve);
+			size_t addOnReserving);
 
 		VkRenderPass GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const;
 

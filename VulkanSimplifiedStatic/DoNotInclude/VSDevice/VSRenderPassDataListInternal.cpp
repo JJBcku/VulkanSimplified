@@ -23,7 +23,7 @@ namespace VulkanSimplifiedInternal
 
 	IDObject<AutoCleanupRenderPass> RenderPassListInternal::AddRenderPassWithoutResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
 		const std::vector<VulkanSimplified::SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
-		size_t addOnReserve)
+		size_t addOnReserving)
 	{
 		VkRenderPass add = VK_NULL_HANDLE;
 		VkRenderPassCreateInfo createInfo{};
@@ -100,11 +100,11 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateRenderPass(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 			throw std::runtime_error("RenderPassListInternal::AddRenderPassWithoutResolveAttachments Error: Program failed to create the render pass!");
 
-		return _renderPassList.AddObject(AutoCleanupRenderPass(_device, add), addOnReserve);
+		return _renderPassList.AddObject(AutoCleanupRenderPass(_device, add), addOnReserving);
 	}
 
 	IDObject<AutoCleanupRenderPass> RenderPassListInternal::AddRenderPassWithResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
-		const std::vector<VulkanSimplified::SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies, size_t addOnReserve)
+		const std::vector<VulkanSimplified::SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies, size_t addOnReserving)
 	{
 		VkRenderPass add = VK_NULL_HANDLE;
 		VkRenderPassCreateInfo createInfo{};
@@ -192,7 +192,7 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateRenderPass(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 			throw std::runtime_error("RenderPassListInternal::AddRenderPassWithResolveAttachments Error: Program failed to create the render pass!");
 
-		return _renderPassList.AddObject(AutoCleanupRenderPass(_device, add), addOnReserve);
+		return _renderPassList.AddObject(AutoCleanupRenderPass(_device, add), addOnReserving);
 	}
 
 	VkRenderPass RenderPassListInternal::GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const

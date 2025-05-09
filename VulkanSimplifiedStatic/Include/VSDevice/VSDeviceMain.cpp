@@ -12,6 +12,7 @@
 #include "VSPipelineDataLists.h"
 
 #include "VSMemoryObjectsList.h"
+#include "VSDataBufferLists.h"
 #include "VSImageDataLists.h"
 
 #include "VSSynchronizationDataLists.h"
@@ -62,6 +63,11 @@ namespace VulkanSimplified
 		return _internal.GetMemoryObjectsList();
 	}
 
+	DataBufferLists DeviceMain::GetDataBufferLists()
+	{
+		return _internal.GetDataBufferLists();
+	}
+
 	ImageDataLists DeviceMain::GetImageDataLists()
 	{
 		return _internal.GetImageDataLists();
@@ -110,6 +116,11 @@ namespace VulkanSimplified
 	const MemoryObjectsList DeviceMain::GetMemoryObjectsList() const
 	{
 		return _internal.GetMemoryObjectsList();
+	}
+
+	const DataBufferLists DeviceMain::GetDataBufferLists() const
+	{
+		return _internal.GetDataBufferLists();
 	}
 
 	const ImageDataLists DeviceMain::GetImageDataLists() const

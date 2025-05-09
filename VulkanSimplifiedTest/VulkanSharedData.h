@@ -9,6 +9,9 @@ struct VulkanSharedData
 	IDObject<VulkanSimplifiedInternal::SharedShaderPipelineData> fragmentShaderData;
 	IDObject<VulkanSimplifiedInternal::SharedShaderPipelineData> vertexShaderData;
 
+	IDObject<VulkanSimplifiedInternal::VertexAttributeDescriptionData> vertexAttribute1Data;
+	IDObject<VulkanSimplifiedInternal::VertexAttributeDescriptionData> vertexAttribute2Data;
+	IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData> vertexBindingData;
 	IDObject<VulkanSimplifiedInternal::VertexInputSharedPipelineData> vertexInputData;
 
 	IDObject<VulkanSimplifiedInternal::PipelineScissorData> scissorData;

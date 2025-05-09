@@ -5,6 +5,7 @@
 
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 #include "../../Include/VSCommon/VSMemoryTypePropertiesDef.h"
+#include "../../Include/VSCommon/VSMemorySizeDef.h"
 
 namespace VulkanSimplified
 {
@@ -27,14 +28,17 @@ namespace VulkanSimplifiedInternal
 		MemoryObjectsListInternal& operator=(MemoryObjectsListInternal&&) noexcept = delete;
 
 		VulkanSimplified::MemoryAllocationFullID AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve);
+			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving);
 
 		std::optional<VulkanSimplified::MemoryAllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve);
+			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving);
 
 		bool FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound);
 
-		size_t BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve);
+		size_t BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+			size_t addOnReserving);
+		size_t BindBuffer(VulkanSimplified::MemoryAllocationFullID allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+			size_t addOnReserving);
 
 		bool RemoveSuballocation(VulkanSimplified::MemorySuballocationFullID allocationID, bool throwOnNotFound);
 

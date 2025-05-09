@@ -831,6 +831,24 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSCommandPoolQFGroupListInternal.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDataBufferListsInternal.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDataBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDataBufferListsInitialCapacities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDataBufferLists.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDataBufferListsDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -1372,6 +1390,21 @@
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSCommandPoolQFGroupListInternal.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDataBufferListsInternal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDataBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDataBufferListsInitialCapacities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDataBufferLists.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

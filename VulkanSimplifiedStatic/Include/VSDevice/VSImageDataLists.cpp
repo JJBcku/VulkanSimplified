@@ -27,29 +27,29 @@ namespace VulkanSimplified
 		return _internal.RemoveColorRenderTargetImage(imageID, throwOnIDNotFound);
 	}
 
-	uint32_t ImageDataLists::GetColorRenderTargetImageWidth(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
+	uint32_t ImageDataLists::GetColorRenderTargetImagesWidth(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _internal.GetColorRenderTargetImageWidth(imageID);
+		return _internal.GetColorRenderTargetImagesWidth(imageID);
 	}
 
-	uint32_t ImageDataLists::GetColorRenderTargetImageHeight(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
+	uint32_t ImageDataLists::GetColorRenderTargetImagesHeight(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _internal.GetColorRenderTargetImageHeight(imageID);
+		return _internal.GetColorRenderTargetImagesHeight(imageID);
 	}
 
-	uint32_t ImageDataLists::GetColorRenderTargetImageMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
+	uint32_t ImageDataLists::GetColorRenderTargetImagesMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _internal.GetColorRenderTargetImageMemoryTypeMask(imageID);
+		return _internal.GetColorRenderTargetImagesMemoryTypeMask(imageID);
 	}
 
-	uint64_t ImageDataLists::GetColorRenderTargetImageSize(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
+	uint64_t ImageDataLists::GetColorRenderTargetImagesSize(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _internal.GetColorRenderTargetImageSize(imageID);
+		return _internal.GetColorRenderTargetImagesSize(imageID);
 	}
 
-	uint64_t ImageDataLists::GetColorRenderTargetImageRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
+	uint64_t ImageDataLists::GetColorRenderTargetImagesRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _internal.GetColorRenderTargetImageRequiredAligment(imageID);
+		return _internal.GetColorRenderTargetImagesRequiredAligment(imageID);
 	}
 
 	void ImageDataLists::BindColorRenderTargetImage(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID, MemoryAllocationFullID allocationID,

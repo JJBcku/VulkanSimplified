@@ -22,11 +22,11 @@ namespace VulkanSimplified
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> AddRenderPassWithoutResolveAttachments(
 			const std::vector<IDObject<VulkanSimplifiedInternal::RenderPassAttachmentData>>& attachments, const std::vector<SubpassCreationDataWithoutResolving>& subpasses,
-			const std::vector<IDObject<VulkanSimplifiedInternal::SubpassDependencyData>>& subpassDependencies, size_t addOnReserve = 0);
+			const std::vector<IDObject<VulkanSimplifiedInternal::SubpassDependencyData>>& subpassDependencies, size_t addOnReserving = 0);
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> AddRenderPassWithResolveAttachments(
 			const std::vector<IDObject<VulkanSimplifiedInternal::RenderPassAttachmentData>>& attachments, const std::vector<SubpassCreationDataWithResolving>& subpasses,
-			const std::vector<IDObject<VulkanSimplifiedInternal::SubpassDependencyData>>& subpassDependencies, size_t addOnReserve = 0);
+			const std::vector<IDObject<VulkanSimplifiedInternal::SubpassDependencyData>>& subpassDependencies, size_t addOnReserving = 0);
 
 	private:
 		VulkanSimplifiedInternal::RenderPassListInternal& _internal;

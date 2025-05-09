@@ -32,6 +32,7 @@ namespace VulkanSimplifiedInternal
 		size_t GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const;
 
 		size_t BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
+		size_t BindBuffer(IDObject<MemoryAllocationData> allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
 
 		bool CheckForAllocationsExistence(IDObject<MemoryAllocationData> allocationID);
 		bool RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound);

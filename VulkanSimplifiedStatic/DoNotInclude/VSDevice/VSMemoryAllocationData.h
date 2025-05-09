@@ -20,7 +20,8 @@ namespace VulkanSimplifiedInternal
 		size_t GetTotalSize() const;
 		size_t GetFreeSize() const;
 
-		size_t BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserve);
+		size_t BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
+		size_t BindBuffer(VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
 
 		bool RemoveSuballocation(VulkanSimplified::MemorySize beggining, bool throwOnNotFound);
 
@@ -34,7 +35,7 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::MemorySize _usedSize;
 		std::vector<SuballocationInternalData> _suballocationData;
 
-		void CheckSuballocationVectorSize(size_t addOnReserve);
+		void CheckSuballocationVectorSize(size_t addOnReserving);
 		std::pair<size_t, size_t> FindMemoryAdressAndVectorIndexForSuballocation(size_t size, size_t aligment);
 	};
 }

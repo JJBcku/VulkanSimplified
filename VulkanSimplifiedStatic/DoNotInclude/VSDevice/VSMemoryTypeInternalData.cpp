@@ -89,6 +89,12 @@ namespace VulkanSimplifiedInternal
 		return _allocationsList.GetObject(allocationID).BindImage(image, size, aligment, addOnReserving);
 	}
 
+	size_t MemoryTypeInternalData::BindBuffer(IDObject<MemoryAllocationData> allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+		size_t addOnReserving)
+	{
+		return _allocationsList.GetObject(allocationID).BindBuffer(buffer, size, aligment, addOnReserving);
+	}
+
 	bool MemoryTypeInternalData::CheckForAllocationsExistence(IDObject<MemoryAllocationData> allocationID)
 	{
 		return _allocationsList.CheckForID(allocationID);

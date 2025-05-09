@@ -35,7 +35,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	VulkanSimplified::MemoryAllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve)
+		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving)
 	{
 		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
 		assert(memorySize > 0);
@@ -59,7 +59,7 @@ namespace VulkanSimplifiedInternal
 				if (memoryHeapData[heapIndex].GetFreeSize() < memorySize)
 					continue;
 
-				ret.emplace(memoryTypeData[j].value().AddMemoryAllocation(memorySize, initialSuballocationsReserved, addOnReserve), j);
+				ret.emplace(memoryTypeData[j].value().AddMemoryAllocation(memorySize, initialSuballocationsReserved, addOnReserving), j);
 
 				memoryHeapData[heapIndex].usedSize += memorySize;
 
@@ -72,7 +72,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	std::optional<VulkanSimplified::MemoryAllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserve)
+		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
 	{
 		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
 
@@ -97,7 +97,7 @@ namespace VulkanSimplifiedInternal
 				if (memoryHeapData[heapIndex].GetFreeSize() < memorySize)
 					continue;
 
-				ret.emplace(memoryTypeData[j].value().AddMemoryAllocation(memorySize, initialSuballocationsReserved, addOnReserve), j);
+				ret.emplace(memoryTypeData[j].value().AddMemoryAllocation(memorySize, initialSuballocationsReserved, addOnReserving), j);
 				memoryHeapData[heapIndex].usedSize += memorySize;
 
 				if (ret.has_value())
@@ -111,12 +111,21 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	size_t MemoryObjectsListInternal::BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve)
+	size_t MemoryObjectsListInternal::BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size,
+		VulkanSimplified::MemorySize aligment, size_t addOnReserving)
 	{
 		if (allocationID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::BindImage Error: Program tried to access a non-existent memory type!");
 
-		return memoryTypeData[allocationID.second].value().BindImage(allocationID.first, image, size, aligment, addOnReserve);
+		return memoryTypeData[allocationID.second].value().BindImage(allocationID.first, image, size, aligment, addOnReserving);
+	}
+
+	size_t MemoryObjectsListInternal::BindBuffer(VulkanSimplified::MemoryAllocationFullID allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
+	{
+		if (allocationID.second >= typeCount)
+			throw std::runtime_error("MemoryObjectsListInternal::BindBuffer Error: Program tried to access a non-existent memory type!");
+
+		return memoryTypeData[allocationID.second].value().BindBuffer(allocationID.first, buffer, size, aligment, addOnReserving);
 	}
 
 	bool MemoryObjectsListInternal::RemoveSuballocation(VulkanSimplified::MemorySuballocationFullID allocationID, bool throwOnNotFound)

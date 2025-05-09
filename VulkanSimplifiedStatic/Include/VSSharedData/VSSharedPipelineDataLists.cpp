@@ -48,9 +48,9 @@ namespace VulkanSimplified
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineScissorData> SharedPipelineDataListss::AddPipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height,
-		size_t addOnReserve)
+		size_t addOnReserving)
 	{
-		return _internal.AddPipelineScissorData(offsetX, offsetY, width, height, addOnReserve);
+		return _internal.AddPipelineScissorData(offsetX, offsetY, width, height, addOnReserving);
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineViewportData> SharedPipelineDataListss::AddPipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
@@ -126,9 +126,9 @@ namespace VulkanSimplified
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineScissorData> SharedPipelineDataListss::AddUniquePipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height,
-		size_t addOnReserve)
+		size_t addOnReserving)
 	{
-		return _internal.AddUniquePipelineScissorData(offsetX, offsetY, width, height, addOnReserve);
+		return _internal.AddUniquePipelineScissorData(offsetX, offsetY, width, height, addOnReserving);
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineViewportData> SharedPipelineDataListss::AddUniquePipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, float minDepth, float maxDepth, size_t addOnReserving)

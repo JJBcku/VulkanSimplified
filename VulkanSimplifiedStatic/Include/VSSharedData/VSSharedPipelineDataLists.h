@@ -73,7 +73,7 @@ namespace VulkanSimplified
 			const std::vector<IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData>>& bindings, size_t addOnReserving = 0);
 
 		IDObject<VulkanSimplifiedInternal::PipelineScissorData> AddUniquePipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height,
-			size_t addOnReserve = 0);
+			size_t addOnReserving = 0);
 		IDObject<VulkanSimplifiedInternal::PipelineViewportData> AddUniquePipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
 			float minDepth, float maxDepth, size_t addOnReserving = 0);
 

@@ -9,6 +9,7 @@
 #include "VSPipelineDataListsInternal.h"
 
 #include "VSMemoryObjectsListInternal.h"
+#include "VSDataBufferListsInternal.h"
 #include "VSImageDataListsInternal.h"
 
 #include "VSSynchronizationDataListsInternal.h"
@@ -43,6 +44,7 @@ namespace VulkanSimplifiedInternal
 		PipelineDataListsInternal& GetPipelineDataLists();
 
 		MemoryObjectsListInternal& GetMemoryObjectsList();
+		DataBufferListsInternal& GetDataBufferLists();
 		ImageDataListsInternal& GetImageDataLists();
 
 		SynchronizationDataListsInternal& GetSynchronizationDataLists();
@@ -57,6 +59,7 @@ namespace VulkanSimplifiedInternal
 		const PipelineDataListsInternal& GetPipelineDataLists() const;
 
 		const MemoryObjectsListInternal& GetMemoryObjectsList() const;
+		const DataBufferListsInternal& GetDataBufferLists() const;
 		const ImageDataListsInternal& GetImageDataLists() const;
 
 		const SynchronizationDataListsInternal& GetSynchronizationDataLists() const;
@@ -75,6 +78,7 @@ namespace VulkanSimplifiedInternal
 		PipelineDataListsInternal _pipelineDataLists;
 
 		MemoryObjectsListInternal _memoryObjectsList;
+		DataBufferListsInternal _dataBufferLists;
 		ImageDataListsInternal _imageDataLists;
 
 		SynchronizationDataListsInternal _synchroDataLists;

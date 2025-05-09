@@ -17,6 +17,11 @@
 #include <VSColorBlendingPreset.h>
 #include <VSColorBlendingComponentFlags.h>
 
+#include "VertexData.h"
+
+#include <VSDataFormatFlags.h>
+#include <VSVertexBindingInputRate.h>
+
 void CreateSharedData(VulkanData& data)
 {
 	data.sharedData = std::make_unique<VulkanSharedData>();
@@ -28,7 +33,12 @@ void CreateSharedData(VulkanData& data)
 	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_FRAGMENT);
 	sharedDataList.vertexShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_VERTEX);
 
-	sharedDataList.vertexInputData = pipelineData.AddVertexInputSharedPipelineData({});
+	sharedDataList.vertexAttribute1Data = pipelineData.AddVertexAttributeDescriptionData(0, VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT, 2);
+	sharedDataList.vertexAttribute2Data = pipelineData.AddVertexAttributeDescriptionData(sizeof(glm::vec4), VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT, 2);
+	sharedDataList.vertexBindingData = pipelineData.AddVertexBindingData(sizeof(VertexData), VulkanSimplified::VertexBindingInputRate::VERTEX,
+		{ sharedDataList.vertexAttribute1Data, sharedDataList.vertexAttribute2Data });
+
+	sharedDataList.vertexInputData = pipelineData.AddVertexInputSharedPipelineData({ sharedDataList.vertexBindingData });
 
 	sharedDataList.scissorData = pipelineData.AddPipelineScissorData(0, 0, width, height);
 	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);

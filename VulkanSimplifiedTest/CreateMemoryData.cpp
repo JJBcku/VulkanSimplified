@@ -8,11 +8,13 @@
 #include "VulkanMemoryData.h"
 
 #include "SwapchainSizes.h"
+#include "VertexData.h"
 
 #include <VSMain.h>
 #include <VSInstance.h>
 #include <VSDeviceMain.h>
 
+#include <VSDataBufferLists.h>
 #include <VSImageDataLists.h>
 #include <VSMemoryObjectsList.h>
 #include <VSMultitypeImagesID.h>
@@ -43,8 +45,8 @@ void CreateMemoryData(VulkanData& data)
 		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(width, height, format, usageFlags, {}, false, 1, framesInFlight));
 	}
 
-	size_t allocationSize = imageList.GetColorRenderTargetImageSize(memData.colorRenderTargetImages.back()) * framesInFlight;
-	uint32_t memoryTypeMask = imageList.GetColorRenderTargetImageMemoryTypeMask(memData.colorRenderTargetImages.back());
+	size_t allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back()) * framesInFlight;
+	uint32_t memoryTypeMask = imageList.GetColorRenderTargetImagesMemoryTypeMask(memData.colorRenderTargetImages.back());
 
 	std::vector<VulkanSimplified::MemoryTypeProperties> acceptableMemoryTypes;
 	acceptableMemoryTypes.reserve(7);
@@ -56,7 +58,7 @@ void CreateMemoryData(VulkanData& data)
 	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
 	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
 
-	memData.imageMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 1);
+	memData.imageMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
@@ -70,5 +72,23 @@ void CreateMemoryData(VulkanData& data)
 		attachments[0].second = memData.colorRenderTargetImageViews[i];
 
 		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, width, height, 1));
+	}
+
+	auto bufferLists = device.GetDataBufferLists();
+
+	memData.vertexBuffers.reserve(framesInFlight);
+	for (size_t i = 0; i < framesInFlight; ++i)
+	{
+		memData.vertexBuffers.push_back(bufferLists.AddVertexBuffer(vertices.size() * sizeof(vertices[0]), {}));
+	}
+
+	allocationSize = bufferLists.GetVertexBuffersSize(memData.vertexBuffers.back()) * framesInFlight;
+	memoryTypeMask = bufferLists.GetVertexBuffersMemoryTypeMask(memData.vertexBuffers.back());
+
+	memData.vertexMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
+
+	for (size_t i = 0; i < framesInFlight; ++i)
+	{
+		bufferLists.BindVertexBuffer(memData.vertexBuffers[i], memData.vertexMemoryAllocation);
 	}
 }

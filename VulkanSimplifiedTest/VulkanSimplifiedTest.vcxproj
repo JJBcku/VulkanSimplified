@@ -103,6 +103,7 @@
     </ClCompile>
     <ClCompile Include="RunFrame.cpp" />
     <ClCompile Include="RunProgram.cpp" />
+    <ClCompile Include="VertexData.cpp" />
     <ClCompile Include="VulkanBasicData.cpp" />
     <ClCompile Include="VulkanCommandBufferData.cpp" />
     <ClCompile Include="VulkanData.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="RunFrame.h" />
     <ClInclude Include="RunProgram.h" />
     <ClInclude Include="SwapchainSizes.h" />
+    <ClInclude Include="VertexData.h" />
     <ClInclude Include="VulkanBasicData.h" />
     <ClInclude Include="VulkanCommandBufferData.h" />
     <ClInclude Include="VulkanData.h" />
