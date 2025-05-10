@@ -1,0 +1,45 @@
+#include "VSCommonNIpch.h"
+#include "VSImageLayoutFlagsInternal.h"
+
+namespace VulkanSimplifiedInternal
+{
+	VkImageLayout TranslateImageLayout(VulkanSimplified::ImageLayoutFlags imageLayout)
+	{
+		VkImageLayout ret = VK_IMAGE_LAYOUT_MAX_ENUM;
+
+		switch (imageLayout)
+		{
+		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+			ret = VK_IMAGE_LAYOUT_UNDEFINED;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+			ret = VK_IMAGE_LAYOUT_GENERAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+			ret = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+			ret = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+			ret = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+			ret = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+			ret = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+			ret = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+			break;
+		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+			ret = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+			break;
+		default:
+			break;
+		}
+
+		return ret;
+	}
+}

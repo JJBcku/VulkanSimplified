@@ -40,7 +40,7 @@ void CreateRenderPassData(VulkanData& data)
 
 	renderPassData.subpassDependency = sharedRenderPassData.AddSubpassDependency(VulkanSimplified::externalSubpass, 0,
 		VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0,
-		VulkanSimplified::AccessFlagBits::ACCESS_COLOR_WRITE);
+		VulkanSimplified::AccessFlagBits::ACCESS_COLOR_ATTACHMENT_WRITE);
 
 	renderPassData.clearValues.resize(1);
 	renderPassData.clearValues[0].emplace(sharedRenderPassData.AddFloatColorClearValue(0.0f, 0.0f, 0.0f, 0.0f));

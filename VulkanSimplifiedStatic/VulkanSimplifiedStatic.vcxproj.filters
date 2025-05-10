@@ -834,26 +834,38 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSDataBufferListsInternal.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSAccessFlagsInternal.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSImageLayoutFlagsInternal.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImagesGenericID.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSDataBuffersGenericID.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDataBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDataBufferListsInitialCapacities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDataBufferLists.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDataBufferListsDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDataBufferLists.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDataBufferListsDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDataBufferListsInitialCapacities.h">
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDataBuffersCopyRegionData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1397,26 +1409,38 @@
     <ClCompile Include="DoNotInclude\VSDevice\VSCommandPoolQFGroupListInternal.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSDataBufferListsInternal.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DoNotInclude\VSCommon\VSAccessFlagsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSCommon\VSImageLayoutFlagsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSDataBuffersGenericID.cpp">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VSImagesGenericID.cpp">
+      <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDataBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDataBufferListsInitialCapacities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDataBufferLists.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDataBufferListsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDataBufferLists.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDataBufferListsInitialCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDataBuffersCopyRegionData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

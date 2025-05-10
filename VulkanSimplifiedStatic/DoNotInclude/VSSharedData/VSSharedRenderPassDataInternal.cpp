@@ -813,7 +813,7 @@ namespace VulkanSimplifiedInternal
 	{
 		VkAccessFlags ret = 0;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_INDIRECT_COMMAND) == VulkanSimplified::ACCESS_INDIRECT_COMMAND)
+		if ((accessFlags & VulkanSimplified::ACCESS_INDIRECT_COMMAND_READ) == VulkanSimplified::ACCESS_INDIRECT_COMMAND_READ)
 			ret |= VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
 
 		if ((accessFlags & VulkanSimplified::ACCESS_INDEX_READ) == VulkanSimplified::ACCESS_INDEX_READ)
@@ -834,10 +834,10 @@ namespace VulkanSimplifiedInternal
 		if ((accessFlags & VulkanSimplified::ACCESS_SHADER_WRITE) == VulkanSimplified::ACCESS_SHADER_WRITE)
 			ret |= VK_ACCESS_SHADER_WRITE_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_COLOR_READ) == VulkanSimplified::ACCESS_COLOR_READ)
+		if ((accessFlags & VulkanSimplified::ACCESS_COLOR_ATTACHMENT_READ) == VulkanSimplified::ACCESS_COLOR_ATTACHMENT_READ)
 			ret |= VK_ACCESS_COLOR_ATTACHMENT_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_COLOR_WRITE) == VulkanSimplified::ACCESS_COLOR_WRITE)
+		if ((accessFlags & VulkanSimplified::ACCESS_COLOR_ATTACHMENT_WRITE) == VulkanSimplified::ACCESS_COLOR_ATTACHMENT_WRITE)
 			ret |= VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
 
 		if ((accessFlags & VulkanSimplified::ACCESS_DEPTH_STENCIL_READ) == VulkanSimplified::ACCESS_DEPTH_STENCIL_READ)

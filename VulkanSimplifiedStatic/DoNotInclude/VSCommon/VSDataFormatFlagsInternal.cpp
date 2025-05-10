@@ -5,7 +5,7 @@ namespace VulkanSimplifiedInternal
 {
 	VkFormat TranslateDataFormatFirstSetToVKFormat(VulkanSimplified::DataFormatFirstFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -114,7 +114,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatSecondSetToVKFormat(VulkanSimplified::DataFormatSecondFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -223,7 +223,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatThirdSetToVKFormat(VulkanSimplified::DataFormatThirdFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -332,7 +332,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatFourthSetToVKFormat(VulkanSimplified::DataFormatFourthFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -441,7 +441,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatFifthSetToVKFormat(VulkanSimplified::DataFormatFifthFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -550,7 +550,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatSixthSetToVKFormat(VulkanSimplified::DataFormatSixthFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -659,7 +659,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatSeventhSetToVKFormat(VulkanSimplified::DataFormatSeventhFlagSetBits format)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (format)
 		{
@@ -714,7 +714,7 @@ namespace VulkanSimplifiedInternal
 
 	VkFormat TranslateDataFormatToVkFormat(VulkanSimplified::DataFormatSetIndependentID formatID)
 	{
-		VkFormat ret = VK_FORMAT_UNDEFINED;
+		VkFormat ret = VK_FORMAT_MAX_ENUM;
 
 		switch (formatID.dataSet)
 		{
