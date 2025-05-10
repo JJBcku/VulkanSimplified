@@ -23,10 +23,10 @@ namespace VulkanSimplifiedInternal
 {
 	CommandPoolQFGroupListInternal::CommandPoolQFGroupListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, WindowListInternal& windowList, size_t queueFamily,
+		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, size_t queueFamily,
 		const VulkanSimplified::CommandPoolQFGroupListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _deviceRenderPassData(deviceRenderPassData),
 		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList),
-		_windowList(windowList), _device(_deviceCore.GetDevice()), _queueFamily(queueFamily),
+		_dataBufferList(dataBufferList), _windowList(windowList), _device(_deviceCore.GetDevice()), _queueFamily(queueFamily),
 		_noIndividualResetCommandPoolList(initialCapacities.noIndividualResetCommandPoolListInitialReservation),
 		_individualResetCommandPoolList(initialCapacities.individualResetCommandPoolListInitialReservation)
 	{
@@ -55,7 +55,7 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("CommandPoolQFGroupListInternal::AddCommandPoolWithoutIndividualReset Error: Program failed to create a command pool!");
 
 		return _noIndividualResetCommandPoolList.AddObject(std::make_unique<NIRCommandPoolInternal>(_deviceCore, _deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
-			_synchronizationList, _imageList, _windowList, _device, add, _deviceCore.GetQueue(queueID),
+			_synchronizationList, _imageList, _dataBufferList, _windowList, _device, add, _deviceCore.GetQueue(queueID),
 			primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity), addOnReserving);
 	}
 
@@ -79,7 +79,7 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("CommandPoolQFGroupListInternal::AddCommandPoolWithIndividualReset Error: Program failed to create a command pool!");
 
 		return _individualResetCommandPoolList.AddObject(std::make_unique<IRCommandPoolInternal>(_deviceCore, _deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
-			_synchronizationList, _imageList, _windowList, _device, add, _deviceCore.GetQueue(queueID),
+			_synchronizationList, _imageList, _dataBufferList, _windowList, _device, add, _deviceCore.GetQueue(queueID),
 			primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity), addOnReserving);
 	}
 

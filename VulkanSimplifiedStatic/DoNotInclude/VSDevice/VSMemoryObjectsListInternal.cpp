@@ -144,6 +144,12 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.first.second].value().RemoveSuballocation(allocationID.first.first, allocationID.second, throwOnNotFound);
 	}
 
+	void MemoryObjectsListInternal::WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset,
+		const unsigned char& writeData, VulkanSimplified::MemorySize writeSize)
+	{
+		memoryTypeData[suballocationID.first.second].value().WriteToMemory(suballocationID, writeOffset, writeData, writeSize);
+	}
+
 	bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)
 	{
 		if (memoryID.second >= typeCount)

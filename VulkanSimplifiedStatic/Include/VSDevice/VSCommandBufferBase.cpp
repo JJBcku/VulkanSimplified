@@ -41,4 +41,16 @@ namespace VulkanSimplified
 		return _internal.AcquireNextImage(timeout, semaphoreID, fenceID, returnIndex, windowID);
 	}
 
+	void CommandBufferBase::TranferDataToVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
+	{
+		_internal.TranferDataToVertexBuffer(srcBufferID, dstBufferID, copyRegion);
+	}
+
+	void CommandBufferBase::TranferDataListToVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
+	{
+		_internal.TranferDataListToVertexBuffer(srcBufferID, dstBufferID, copyRegionsList);
+	}
+
 }

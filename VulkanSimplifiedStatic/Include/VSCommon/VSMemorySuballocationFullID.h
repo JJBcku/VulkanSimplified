@@ -1,9 +1,9 @@
 #pragma once
 
 #include "VSMemoryAllocationFullID.h"
+#include "VSMemorySizeDef.h"
 
 namespace VulkanSimplified
 {
-	typedef size_t SubAllocationBeggining;
-	typedef std::pair<MemoryAllocationFullID, SubAllocationBeggining> MemorySuballocationFullID;
+	typedef std::pair<MemoryAllocationFullID, MemorySize> MemorySuballocationFullID;
 }

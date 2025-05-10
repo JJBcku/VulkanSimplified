@@ -6,6 +6,7 @@
 
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
 #include "../../Include/VSCommon/VSMemoryTypeData.h"
+#include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 
 namespace VulkanSimplifiedInternal
 {
@@ -38,6 +39,9 @@ namespace VulkanSimplifiedInternal
 
 		bool CheckForAllocationsExistence(IDObject<MemoryAllocationData> allocationID);
 		bool RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound);
+
+		void WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+			VulkanSimplified::MemorySize writeSize);
 
 	private:
 		VkDevice _device;

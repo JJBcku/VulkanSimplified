@@ -3,10 +3,18 @@
 #include <CustomLists/IDObjectDef.h>
 
 #include "../../Include/VSDevice/VSPipelineDataListsDef.h"
+#include "../../Include/VSDevice/VSDataBufferListsDef.h"
 #include "../../Include/VSDevice/VSSynchronizationDataListsDef.h"
 #include "../../Include/VSDevice/VSWindowListDef.h"
 
 #include "../../Include/VSDevice/VSCommandBufferUsage.h"
+
+#include "../../Include/VSCommon/VSMemorySizeDef.h"
+
+namespace VulkanSimplified
+{
+	struct DataBuffersCopyRegionData;
+}
 
 namespace VulkanSimplifiedInternal
 {
@@ -15,6 +23,7 @@ namespace VulkanSimplifiedInternal
 	class RenderPassListInternal;
 	class PipelineDataListsInternal;
 	class ImageDataListsInternal;
+	class DataBufferListsInternal;
 	class SynchronizationDataListsInternal;
 
 	class SharedRenderPassDataListInternal;
@@ -24,7 +33,7 @@ namespace VulkanSimplifiedInternal
 	public:
 		CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData, const SharedRenderPassDataListInternal& sharedRenderPassData,
 			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, const ImageDataListsInternal& imageList,
-			WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+			DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 		~CommandBufferBaseInternal();
 
 		CommandBufferBaseInternal(const CommandBufferBaseInternal&) noexcept = delete;
@@ -45,6 +54,11 @@ namespace VulkanSimplifiedInternal
 		bool AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
 			uint32_t& returnIndex, IDObject<VulkanSimplified::WindowPointer> windowID);
 
+		void TranferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
+			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
+		void TranferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
+			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
+
 	protected:
 		const DeviceCoreInternal& _core;
 
@@ -55,6 +69,7 @@ namespace VulkanSimplifiedInternal
 		const SynchronizationDataListsInternal& _synchronizationList;
 
 		const ImageDataListsInternal& _imageList;
+		DataBufferListsInternal& _dataBufferList;
 
 		WindowListInternal& _windowList;
 

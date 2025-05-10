@@ -127,6 +127,44 @@ namespace VulkanSimplifiedInternal
 		return false;
 	}
 
+	void MemoryAllocationData::WriteToMemory(VulkanSimplified::MemorySize suballocationBeggining, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+		VulkanSimplified::MemorySize writeSize)
+	{
+		if (writeOffset >= _totalSize)
+			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write past the memory allocation!");
+
+		std::optional<size_t> suballocationIndex;
+
+		for (size_t i = 0; i < _suballocationData.size(); ++i)
+		{
+			if (_suballocationData[i].beggining == suballocationBeggining)
+			{
+				suballocationIndex = i;
+				break;
+			}
+		}
+
+		if (!suballocationIndex.has_value())
+			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write to non-existent memory suballocation!");
+
+		VulkanSimplified::MemorySize submemSize = _suballocationData[suballocationIndex.value()].size;
+
+		if (writeOffset > submemSize)
+			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write past the memory suballocation!");
+
+		if (writeSize > submemSize)
+			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write more data there is than space in the memory suballocation!");
+
+		VulkanSimplified::MemorySize sizeLeft = submemSize - writeOffset;
+
+		if (writeSize > sizeLeft)
+			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write more data than there is space between the offset and suballocation's end!");
+
+		VulkanSimplified::MemorySize totalOffset = _suballocationData[suballocationIndex.value()].beggining + writeOffset;
+
+		std::memcpy(&_data[totalOffset], &writeData, writeSize);
+	}
+
 	void MemoryAllocationData::CheckSuballocationVectorSize(size_t addOnReserving)
 	{
 		if (_suballocationData.size() == _suballocationData.capacity())

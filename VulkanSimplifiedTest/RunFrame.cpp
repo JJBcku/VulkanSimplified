@@ -12,10 +12,12 @@
 #include "VulkanSynchronizationData.h"
 
 #include "SwapchainSizes.h"
+#include "VertexData.h"
 
 #include <VSMain.h>
 #include <VSInstance.h>
 #include <VSDeviceMain.h>
+#include <VSDataBufferLists.h>
 #include <VSSynchronizationDataLists.h>
 #include <VSCommandPoolMainList.h>
 
@@ -31,6 +33,7 @@
 void RunFrame(VulkanData& data, uint32_t frameIndex)
 {
 	auto deviceMain = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass();
+	auto dataBufferLists = deviceMain.GetDataBufferLists();
 	auto synchroList = deviceMain.GetSynchronizationDataLists();
 
 	auto mainPoolList = deviceMain.GetCommandPoolMainList();
@@ -54,6 +57,8 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	uint32_t imageIndice = 0;
 	graphicCommandBuffer.AcquireNextImage(std::numeric_limits<std::uint64_t>::max(), data.synchronizationData->imageAvailableSemaphores[frameIndex], {},
 		imageIndice, data.deviceDependentData->windowID);
+
+	dataBufferLists.WriteToStagingBuffer(data.memoryData->stagingBuffers[frameIndex], 0, reinterpret_cast<const unsigned char&>(*vertices.data()), vertices.size() * sizeof(vertices[0]));
 
 	if (data.commandBufferData->presentGroup.has_value())
 	{

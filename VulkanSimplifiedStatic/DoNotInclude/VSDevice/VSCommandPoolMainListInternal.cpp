@@ -10,9 +10,10 @@ namespace VulkanSimplifiedInternal
 {
 	CommandPoolMainListInternal::CommandPoolMainListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, WindowListInternal& windowList, const VulkanSimplified::CommandPoolMainListInitialCapacity& initialCapacity) : _deviceCore(deviceCore),
-		_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList),
-		_imageList(imageList), _windowList(windowList), _qfGroupList(initialCapacity.qfGroupsListInitialCapacity)
+		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList,
+		const VulkanSimplified::CommandPoolMainListInitialCapacity& initialCapacity) : _deviceCore(deviceCore), _deviceRenderPassData(deviceRenderPassData),
+		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList),
+		_dataBufferList(dataBufferList), _windowList(windowList), _qfGroupList(initialCapacity.qfGroupsListInitialCapacity)
 	{
 	}
 
@@ -24,7 +25,7 @@ namespace VulkanSimplifiedInternal
 		const VulkanSimplified::CommandPoolQFGroupListsInitialCapacities& initialCapacities, size_t addOnReserving)
 	{
 		return _qfGroupList.AddObject(std::make_unique<CommandPoolQFGroupListInternal>(_deviceCore, _deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
-			_synchronizationList, _imageList, _windowList, queueFamily, initialCapacities), addOnReserving);
+			_synchronizationList, _imageList, _dataBufferList, _windowList, queueFamily, initialCapacities), addOnReserving);
 	}
 
 	CommandPoolQFGroupListInternal& CommandPoolMainListInternal::GetQueueFamiliesPoolGroup(IDObject<VulkanSimplified::CommandPoolQFGroupPointer> qfGroupID)

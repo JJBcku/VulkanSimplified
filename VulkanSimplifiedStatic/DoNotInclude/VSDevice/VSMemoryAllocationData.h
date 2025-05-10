@@ -27,6 +27,9 @@ namespace VulkanSimplifiedInternal
 
 		bool RemoveSuballocation(VulkanSimplified::MemorySize beggining, bool throwOnNotFound);
 
+		void WriteToMemory(VulkanSimplified::MemorySize suballocationBeggining, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+			VulkanSimplified::MemorySize writeSize);
+
 	private:
 		VkDevice _device;
 		VkDeviceMemory _memory;

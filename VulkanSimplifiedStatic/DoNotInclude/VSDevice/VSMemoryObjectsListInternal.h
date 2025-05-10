@@ -44,6 +44,9 @@ namespace VulkanSimplifiedInternal
 
 		bool RemoveSuballocation(VulkanSimplified::MemorySuballocationFullID allocationID, bool throwOnNotFound);
 
+		void WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+			VulkanSimplified::MemorySize writeSize);
+
 	private:
 		size_t heapCount;
 		std::array<HeapInternalData, 16> memoryHeapData;

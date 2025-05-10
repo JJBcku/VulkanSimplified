@@ -4,17 +4,20 @@
 #include <CustomLists/IDObject.h>
 
 #include "VSPipelineDataListsInternal.h"
+#include "VSDataBufferListsInternal.h"
 #include "VSSynchronizationDataListsInternal.h"
 #include "VSWindowListInternal.h"
 #include "VSWindowInternal.h"
+
+#include "../../Include/VSDevice/VSDataBuffersCopyRegionData.h"
 
 namespace VulkanSimplifiedInternal
 {
 	CommandBufferBaseInternal::CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) : _core(core),
-		_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList),
-		_imageList(imageList), _windowList(windowList), _device(device), _buffer(buffer), _queue(queue)
+		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+		_core(core), _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData),
+		_synchronizationList(synchronizationList), _imageList(imageList), _dataBufferList(dataBufferList), _windowList(windowList), _device(device), _buffer(buffer), _queue(queue)
 	{
 	}
 
@@ -24,7 +27,7 @@ namespace VulkanSimplifiedInternal
 
 	CommandBufferBaseInternal::CommandBufferBaseInternal(CommandBufferBaseInternal&& rhs) noexcept : _core(rhs._core), _deviceRenderPassData(rhs._deviceRenderPassData),
 		_sharedRenderPassData(rhs._sharedRenderPassData), _devicePipelineData(rhs._devicePipelineData), _synchronizationList(rhs._synchronizationList), _imageList(rhs._imageList),
-		_windowList(rhs._windowList), _device(rhs._device), _buffer(rhs._buffer), _queue(rhs._queue)
+		_dataBufferList(rhs._dataBufferList), _windowList(rhs._windowList), _device(rhs._device), _buffer(rhs._buffer), _queue(rhs._queue)
 	{
 		rhs._device = VK_NULL_HANDLE;
 		rhs._buffer = VK_NULL_HANDLE;
@@ -90,6 +93,89 @@ namespace VulkanSimplifiedInternal
 			fence = _synchronizationList.GetFence(fenceID.value());
 
 		return window.AcquireNextImage(_device, timeout, semaphore, fence, returnIndex);
+	}
+
+	void CommandBufferBaseInternal::TranferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
+		const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+	{
+		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
+		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
+
+		if (copyRegion.srcOffset >= stagingBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToVertexBuffer Error: Program tried to read past the end of the staging buffer!");
+
+		if (copyRegion.writeSize > stagingBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToVertexBuffer Error: Program tried to read more data the there is in the entire staging buffer!");
+
+		if (copyRegion.writeSize > stagingBufferSize - copyRegion.srcOffset)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToVertexBuffer Error: Program tried to read more data the there is past the staging buffer's offset!");
+
+		auto vertexBufferSize = _dataBufferList.GetVertexBuffersSize(dstBufferID);
+		auto vertexBuffer = _dataBufferList.GetVertexBuffer(dstBufferID);
+
+		if (copyRegion.dstOffset >= vertexBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToVertexBuffer Error: Program tried to write past the end of the vertex buffer!");
+
+		if (copyRegion.writeSize > vertexBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToVertexBuffer Error: Program tried to write more data the there is in the entire vertex buffer!");
+
+		if (copyRegion.writeSize > vertexBufferSize - copyRegion.dstOffset)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToVertexBuffer Error: Program tried to write more data the there is past the vertex buffer's offset!");
+
+		VkBufferCopy copy{};
+		copy.srcOffset = copyRegion.srcOffset;
+		copy.dstOffset = copyRegion.dstOffset;
+		copy.size = copyRegion.writeSize;
+
+		vkCmdCopyBuffer(_buffer, stagingBuffer, vertexBuffer, 1, &copy);
+	}
+
+	void CommandBufferBaseInternal::TranferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
+		const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	{
+		if (copyRegionsList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Copy regions list overflowed!");
+
+		std::vector<VkBufferCopy> copyRegionsData;
+		copyRegionsData.reserve(copyRegionsList.size());
+
+		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
+		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
+
+		auto vertexBufferSize = _dataBufferList.GetVertexBuffersSize(dstBufferID);
+		auto vertexBuffer = _dataBufferList.GetVertexBuffer(dstBufferID);
+
+		for (size_t i = 0; i < copyRegionsList.size(); ++i)
+		{
+			auto& copyRegion = copyRegionsList[i];
+
+			if (copyRegion.srcOffset >= stagingBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Program tried to read past the end of the staging buffer!");
+
+			if (copyRegion.writeSize > stagingBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Program tried to read more data the there is in the entire staging buffer!");
+
+			if (copyRegion.writeSize > stagingBufferSize - copyRegion.srcOffset)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Program tried to read more data the there is past the staging buffer's offset!");
+
+			if (copyRegion.dstOffset >= vertexBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Program tried to write past the end of the vertex buffer!");
+
+			if (copyRegion.writeSize > vertexBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Program tried to write more data the there is in the entire vertex buffer!");
+
+			if (copyRegion.writeSize > vertexBufferSize - copyRegion.dstOffset)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Program tried to write more data the there is past the vertex buffer's offset!");
+
+			VkBufferCopy copy{};
+			copy.srcOffset = copyRegion.srcOffset;
+			copy.dstOffset = copyRegion.dstOffset;
+			copy.size = copyRegion.writeSize;
+
+			copyRegionsData.push_back(copy);
+		}
+
+		vkCmdCopyBuffer(_buffer, stagingBuffer, vertexBuffer, static_cast<uint32_t>(copyRegionsData.size()), copyRegionsData.data());
 	}
 
 }

@@ -12,10 +12,11 @@ namespace VulkanSimplifiedInternal
 {
 	IRCommandPoolInternal::IRCommandPoolInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
+		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) : _core(core), _deviceRenderPassData(deviceRenderPassData),
-		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList), _windowList(windowList),
-		_device(device), _commandPool(commandPool), _queue(queue), _primaryBufferList(primaryBufferListInitialCapacity), _secondaryBufferList(secondaryBufferListInitialCapacity)
+		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList),
+		_dataBufferList(dataBufferList), _windowList(windowList), _device(device), _commandPool(commandPool), _queue(queue), _primaryBufferList(primaryBufferListInitialCapacity),
+		_secondaryBufferList(secondaryBufferListInitialCapacity)
 	{
 	}
 
@@ -50,7 +51,7 @@ namespace VulkanSimplifiedInternal
 		for (auto& buffer : add)
 		{
 			ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryIRCommandBufferInternal>(_core, _deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
-				_synchronizationList, _imageList, _windowList, _device, buffer, _queue), addOnReserving));
+				_synchronizationList, _imageList, _dataBufferList, _windowList, _device, buffer, _queue), addOnReserving));
 		}
 
 		return ret;
@@ -79,7 +80,7 @@ namespace VulkanSimplifiedInternal
 		for (auto& buffer : add)
 		{
 			ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryIRCommandBufferInternal>(_core, _deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
-				_synchronizationList, _imageList, _windowList, _device, buffer, _queue), addOnReserving));
+				_synchronizationList, _imageList, _dataBufferList, _windowList, _device, buffer, _queue), addOnReserving));
 		}
 
 		return ret;

@@ -64,4 +64,9 @@ namespace VulkanSimplified
 		return _internal.GetStagingBuffersRequiredAligment(bufferID);
 	}
 
+	void DataBufferLists::WriteToStagingBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData, MemorySize dataSize)
+	{
+		_internal.WriteToStagingBuffer(bufferID, writeOffset, writeData, dataSize);
+	}
+
 }

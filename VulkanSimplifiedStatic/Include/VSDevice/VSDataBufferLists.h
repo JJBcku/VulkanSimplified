@@ -34,6 +34,8 @@ namespace VulkanSimplified
 		VulkanSimplified::MemorySize GetStagingBuffersSize(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID) const;
 		VulkanSimplified::MemorySize GetStagingBuffersRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID) const;
 
+		void WriteToStagingBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData, MemorySize dataSize);
+
 	private:
 		VulkanSimplifiedInternal::DataBufferListsInternal& _internal;
 	};

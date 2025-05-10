@@ -40,6 +40,9 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::MemorySize GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const;
 		VulkanSimplified::MemorySize GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const;
 
+		void WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+			VulkanSimplified::MemorySize dataSize);
+
 	private:
 		const DeviceCoreInternal& _deviceCore;
 		MemoryObjectsListInternal& _memoryObjectsList;

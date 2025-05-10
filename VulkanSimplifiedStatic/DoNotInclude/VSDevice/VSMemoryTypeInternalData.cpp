@@ -53,7 +53,7 @@ namespace VulkanSimplifiedInternal
 		if (vkAllocateMemory(_device, &allocInfo, nullptr, &allocation) != VK_SUCCESS)
 			throw std::runtime_error("MemoryTypeInternalData::AddMemoryAllocation Error: Program failed to allocate memory!");
 
-		bool mapMemory = (_properties & VulkanSimplified::HOST_COHERENT) == VulkanSimplified::HOST_COHERENT;
+		bool mapMemory = (_properties & VulkanSimplified::HOST_VISIBLE) == VulkanSimplified::HOST_VISIBLE;
 
 		return _allocationsList.AddObject(MemoryAllocationData(_device, allocation, dataSize, initialSuballocationsReserved, mapMemory), addOnReserving);
 	}
@@ -109,4 +109,11 @@ namespace VulkanSimplifiedInternal
 	{
 		return _allocationsList.GetObject(allocationID).RemoveSuballocation(beggining, throwOnNotFound);
 	}
+
+	void MemoryTypeInternalData::WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+		VulkanSimplified::MemorySize writeSize)
+	{
+		_allocationsList.GetObject(suballocationID.first.first).WriteToMemory(suballocationID.second, writeOffset, writeData, writeSize);
+	}
+
 }

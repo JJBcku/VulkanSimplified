@@ -182,6 +182,7 @@
     <ClInclude Include="Include\VSCommon\VSRenderPassAttachmentOPDef.h" />
     <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSSurfacePresentModesDef.h" />
+    <ClInclude Include="Include\VSDevice\VSDataBuffersCopyRegionData.h" />
     <ClInclude Include="Include\VSDevice\VSCommandPoolMainListDef.h" />
     <ClInclude Include="Include\VSDevice\VSCommandBufferGenericID.h" />
     <ClInclude Include="Include\VSDevice\VSCommandBufferGenericIDDef.h" />
@@ -672,6 +673,10 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDataBuffersCopyRegionData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSCommandBufferBase.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>

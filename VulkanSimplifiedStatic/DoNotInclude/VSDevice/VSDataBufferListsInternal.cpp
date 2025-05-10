@@ -159,4 +159,12 @@ namespace VulkanSimplifiedInternal
 		return _stagingBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
 	}
 
+	void DataBufferListsInternal::WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
+		VulkanSimplified::MemorySize dataSize)
+	{
+		auto& buffer = _stagingBuffers.GetObject(bufferID);
+
+		_memoryObjectsList.WriteToMemory(buffer.GetBoundMemorySuballocationData().value(), writeOffset, writeData, dataSize);
+	}
+
 }

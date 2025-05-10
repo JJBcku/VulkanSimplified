@@ -17,6 +17,7 @@ namespace VulkanSimplifiedInternal
 	class PipelineDataListsInternal;
 	class SynchronizationDataListsInternal;
 	class ImageDataListsInternal;
+	class DataBufferListsInternal;
 	class WindowListInternal;
 
 	class SharedRenderPassDataListInternal;
@@ -26,8 +27,8 @@ namespace VulkanSimplifiedInternal
 	public:
 		CommandPoolMainListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 			const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData,
-			const SynchronizationDataListsInternal& synchronizationList, const ImageDataListsInternal& imageList, WindowListInternal& windowList,
-			const VulkanSimplified::CommandPoolMainListInitialCapacity& initialCapacity);
+			const SynchronizationDataListsInternal& synchronizationList, const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList,
+			WindowListInternal& windowList,  const VulkanSimplified::CommandPoolMainListInitialCapacity& initialCapacity);
 		~CommandPoolMainListInternal();
 
 		CommandPoolMainListInternal(const CommandPoolMainListInternal&) noexcept = delete;
@@ -53,6 +54,7 @@ namespace VulkanSimplifiedInternal
 		const SynchronizationDataListsInternal& _synchronizationList;
 
 		const ImageDataListsInternal& _imageList;
+		DataBufferListsInternal& _dataBufferList;
 
 		WindowListInternal& _windowList;
 
