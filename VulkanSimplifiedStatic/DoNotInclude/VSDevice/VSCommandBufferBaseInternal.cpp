@@ -145,6 +145,9 @@ namespace VulkanSimplifiedInternal
 	void CommandBufferBaseInternal::TranferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
 		const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
 	{
+		if (copyRegionsList.empty())
+			return;
+
 		if (copyRegionsList.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToVertexBuffer Error: Copy regions list overflowed!");
 
@@ -194,6 +197,9 @@ namespace VulkanSimplifiedInternal
 		const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
 		const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData)
 	{
+		if (globalMemoryBarrierData.empty() && dataBuffersBarrierData.empty() && imageBarrierData.empty())
+			return;
+
 		if (globalMemoryBarrierData.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Global memory barrier list overflowed!");
 
@@ -310,6 +316,30 @@ namespace VulkanSimplifiedInternal
 		vkCmdPipelineBarrier(_buffer, srcStagesFlags, dstStagesFlags, 0, static_cast<uint32_t>(globalMemoryBarriersDataList.size()), globalMemoryBarriersDataList.data(),
 			static_cast<uint32_t>(dataBuffersMemoryBarriersDataList.size()), dataBuffersMemoryBarriersDataList.data(), static_cast<uint32_t>(imagesMemoryBarriersDataList.size()),
 			imagesMemoryBarriersDataList.data());
+	}
+
+	void CommandBufferBaseInternal::BindVertexBuffers(uint32_t firstBinding,
+		const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList)
+	{
+		if (buffersDataList.empty())
+			return;
+
+		if (buffersDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::BindVertexBuffers Error: buffer data list overflowed!");
+
+		std::vector<VkBuffer> buffers;
+		std::vector<VkDeviceSize> offsets;
+
+		buffers.resize(buffersDataList.size(), VK_NULL_HANDLE);
+		offsets.resize(buffersDataList.size(), 0);
+
+		for (size_t i = 0; i < buffersDataList.size(); ++i)
+		{
+			buffers[i] = _dataBufferList.GetVertexBuffer(buffersDataList[i].first);
+			offsets[i] = buffersDataList[i].second;
+		}
+
+		vkCmdBindVertexBuffers(_buffer, firstBinding, static_cast<uint32_t>(buffers.size()), buffers.data(), offsets.data());
 	}
 
 }

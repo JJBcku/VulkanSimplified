@@ -10,6 +10,7 @@
 #include "VSCommandBufferUsage.h"
 
 #include "../VSCommon/VSPipelineStageFlagsDef.h"
+#include "../VSCommon/VSMemorySizeDef.h"
 
 namespace VulkanSimplifiedInternal
 {
@@ -49,6 +50,9 @@ namespace VulkanSimplified
 
 		void CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages, const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
 			const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData);
+
+		void BindVertexBuffers(uint32_t firstBinding,
+			const std::vector<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
 
 	private:
 		VulkanSimplifiedInternal::CommandBufferBaseInternal& _internal;

@@ -59,4 +59,10 @@ namespace VulkanSimplified
 		_internal.CreatePipelineBarrier(srcStages, dstStages, globalMemoryBarrierData, dataBuffersBarrierData, imageBarrierData);
 	}
 
+	void CommandBufferBase::BindVertexBuffers(uint32_t firstBinding,
+		const std::vector<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList)
+	{
+		_internal.BindVertexBuffers(firstBinding, buffersDataList);
+	}
+
 }

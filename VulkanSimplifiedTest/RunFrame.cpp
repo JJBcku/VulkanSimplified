@@ -97,7 +97,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 		transferBuffer.EndRecording();
 
-		submitInfo[0].waitSemaphores = {};
+		submitInfo[0].waitSemaphores.resize(0);
 		submitedBuffersID.IRPrimaryID.commandPoolID = data.commandBufferData->transferPool.value();
 		submitedBuffersID.IRPrimaryID.commandBufferID = data.commandBufferData->transferBuffers[frameIndex];
 
@@ -169,6 +169,8 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, data.memoryData->framebuffers[frameIndex], 0U, 0U, width, height, data.renderPassData->clearValues);
 
 	graphicCommandBuffer.BindGraphicsPipeline(data.pipelineData->pipeline);
+	graphicCommandBuffer.BindVertexBuffers(0, { {data.memoryData->vertexBuffers[frameIndex], 0} });
+
 	graphicCommandBuffer.Draw(3, 1, 0, 0);
 
 	graphicCommandBuffer.EndRenderPass();
@@ -199,6 +201,11 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->imageAvailableSemaphores[frameIndex], VulkanSimplified::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT };
 	}
 
+	if (data.commandBufferData->transferGroup.has_value())
+	{
+		submitInfo[0].waitSemaphores.emplace_back(data.synchronizationData->dataTransferFinishedSemaphores[frameIndex], VulkanSimplified::PIPELINE_STAGE_VERTEX_INPUT);
+	}
+
 	submitedBuffersID.IRPrimaryID.commandPoolID = data.commandBufferData->graphicPool;
 	submitedBuffersID.IRPrimaryID.commandBufferID = data.commandBufferData->graphicBuffers[frameIndex];
 	submitInfo[0].commandBufferIDs[0] = submitedBuffersID;
@@ -225,6 +232,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		presentCommandBuffer.EndRecording();
 
 		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->renderingFinishedSemaphores[frameIndex], VulkanSimplified::PIPELINE_STAGE_ALL_COMMANDS };
+		submitInfo[0].waitSemaphores.pop_back();
 
 		submitedBuffersID.IRPrimaryID.commandPoolID = data.commandBufferData->presentPool.value();
 		submitedBuffersID.IRPrimaryID.commandBufferID = data.commandBufferData->presentBuffers[frameIndex];

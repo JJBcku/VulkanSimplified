@@ -68,6 +68,8 @@ namespace VulkanSimplifiedInternal
 			const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
 			const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData);
 
+		void BindVertexBuffers(uint32_t firstBinding, const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
+
 	protected:
 		const DeviceCoreInternal& _core;
 
