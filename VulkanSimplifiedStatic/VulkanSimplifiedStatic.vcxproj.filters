@@ -867,20 +867,20 @@
     <ClInclude Include="Include\VSDevice\VSDataBuffersCopyRegionData.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSGlobalMemoryBarrierData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSQueueOwnershipTransferData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Include\VSCommon\VSBool64Def.h">
+      <Filter>Header Files\Include\Common</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDataBuffersMemoryBarrierData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSGlobalMemoryBarrierData.h">
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSImagesMemoryBarrierData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSBool64Def.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Include\VSDevice\VSQueueOwnershipTransferData.h">
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1457,17 +1457,17 @@
     <ClCompile Include="Include\VSDevice\VSDataBuffersCopyRegionData.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSGlobalMemoryBarrierData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSQueueOwnershipTransferData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDataBuffersMemoryBarrierData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSGlobalMemoryBarrierData.cpp">
+      <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSImagesMemoryBarrierData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSQueueOwnershipTransferData.cpp">
+      <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
