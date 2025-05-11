@@ -10,6 +10,7 @@ struct VulkanSynchronizationData
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>> imageAvailableSemaphores;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>> renderingFinishedSemaphores;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>> queueTransferFinishedSemaphores;
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>> dataTransferFinishedSemaphores;
 
 	VulkanSynchronizationData();
 	~VulkanSynchronizationData();

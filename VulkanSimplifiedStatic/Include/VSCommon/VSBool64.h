@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSBool64Def.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t Bool64;
-
 	enum Bool64Values : Bool64
 	{
 		BOOL64_FALSE = 0,

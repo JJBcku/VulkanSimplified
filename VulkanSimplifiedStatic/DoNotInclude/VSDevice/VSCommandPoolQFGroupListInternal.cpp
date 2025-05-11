@@ -23,7 +23,7 @@ namespace VulkanSimplifiedInternal
 {
 	CommandPoolQFGroupListInternal::CommandPoolQFGroupListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, size_t queueFamily,
+		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, size_t queueFamily,
 		const VulkanSimplified::CommandPoolQFGroupListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _deviceRenderPassData(deviceRenderPassData),
 		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList),
 		_dataBufferList(dataBufferList), _windowList(windowList), _device(_deviceCore.GetDevice()), _queueFamily(queueFamily),

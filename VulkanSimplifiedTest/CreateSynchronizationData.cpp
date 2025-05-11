@@ -29,11 +29,13 @@ void CreateSynchronizationData(VulkanData& data)
 	synchro.imageAvailableSemaphores.reserve(framesInFlight);
 	synchro.renderingFinishedSemaphores.reserve(framesInFlight);
 	synchro.queueTransferFinishedSemaphores.reserve(framesInFlight);
+	synchro.dataTransferFinishedSemaphores.reserve(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
 		synchro.imageAvailableSemaphores.push_back(synchronizationData.AddSemaphore());
 		synchro.renderingFinishedSemaphores.push_back(synchronizationData.AddSemaphore());
 		synchro.queueTransferFinishedSemaphores.push_back(synchronizationData.AddSemaphore());
+		synchro.dataTransferFinishedSemaphores.push_back(synchronizationData.AddSemaphore());
 	}
 }

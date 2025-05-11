@@ -14,11 +14,13 @@
 
 #include "../VSSharedData/VSSharedRenderPassDataInternal.h"
 
+#include "../../Include/VSDevice/VSQueueOwnershipTransferData.h"
+
 namespace VulkanSimplifiedInternal
 {
 	PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
 		CommandBufferBaseInternal(core, deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, dataBufferList, windowList,
 			device, buffer, queue)
 	{
@@ -83,7 +85,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToTrasferDestination(IDObject<VulkanSimplified::WindowPointer> windowID,
-		std::optional<std::pair<size_t, size_t>> queuesIDs, uint32_t imagesIndex)
+		std::optional<VulkanSimplified::QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex)
 	{
 		VkImageMemoryBarrier barrier{};
 		barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -92,10 +94,15 @@ namespace VulkanSimplifiedInternal
 		barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 		barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 
-		if (queuesIDs.has_value())
+		if (queueOwnershipTransferData.has_value())
 		{
-			barrier.srcQueueFamilyIndex = _core.GetQueuesFamily(queuesIDs.value().first);
-			barrier.dstQueueFamilyIndex = _core.GetQueuesFamily(queuesIDs.value().second);
+			barrier.srcQueueFamilyIndex = _core.GetQueuesFamily(queueOwnershipTransferData.value().srcQueueIndex);
+			barrier.dstQueueFamilyIndex = _core.GetQueuesFamily(queueOwnershipTransferData.value().dstQueueIndex);
+		}
+		else
+		{
+			barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+			barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 		}
 
 		auto& window = _windowList.GetWindow(windowID);
@@ -110,8 +117,8 @@ namespace VulkanSimplifiedInternal
 		vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
 	}
 
-	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<VulkanSimplified::WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
-		uint32_t imagesIndex)
+	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<VulkanSimplified::WindowPointer> windowID,
+		std::optional<VulkanSimplified::QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex)
 	{
 		VkImageMemoryBarrier barrier{};
 		barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -120,10 +127,15 @@ namespace VulkanSimplifiedInternal
 		barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 		barrier.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 
-		if (queuesIDs.has_value())
+		if (queueOwnershipTransferData.has_value())
 		{
-			barrier.srcQueueFamilyIndex = _core.GetQueuesFamily(queuesIDs.value().first);
-			barrier.dstQueueFamilyIndex = _core.GetQueuesFamily(queuesIDs.value().second);
+			barrier.srcQueueFamilyIndex = _core.GetQueuesFamily(queueOwnershipTransferData.value().srcQueueIndex);
+			barrier.dstQueueFamilyIndex = _core.GetQueuesFamily(queueOwnershipTransferData.value().dstQueueIndex);
+		}
+		else
+		{
+			barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+			barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 		}
 
 		auto& window = _windowList.GetWindow(windowID);
@@ -168,7 +180,7 @@ namespace VulkanSimplifiedInternal
 		blitData.dstOffsets[1].y = static_cast<std::int32_t>(window.GetHeight());
 		blitData.dstOffsets[1].z = 1;
 
-		vkCmdBlitImage(_buffer, _imageList.GetImage(imageID), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+		vkCmdBlitImage(_buffer, _imageList.GetColorRenderTargetImage(imageID), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 			1, &blitData, VK_FILTER_LINEAR);
 	}
 }

@@ -53,4 +53,10 @@ namespace VulkanSimplified
 		_internal.TranferDataListToVertexBuffer(srcBufferID, dstBufferID, copyRegionsList);
 	}
 
+	void CommandBufferBase::CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages, const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
+		const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData)
+	{
+		_internal.CreatePipelineBarrier(srcStages, dstStages, globalMemoryBarrierData, dataBuffersBarrierData, imageBarrierData);
+	}
+
 }

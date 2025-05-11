@@ -1,7 +1,11 @@
 #include "VSDeviceIpch.h"
 #include "VSPrimaryNIRCommandBuffer.h"
 
+#include <CustomLists/IDObject.h>
+
 #include "../../DoNotInclude/VSDevice/VSPrimaryNIRCommandBufferInternal.h"
+
+#include "VSQueueOwnershipTransferData.h"
 
 namespace VulkanSimplified
 {
@@ -25,15 +29,16 @@ namespace VulkanSimplified
 		_internal.EndRenderPass();
 	}
 
-	void PrimaryNIRCommandBuffer::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
+	void PrimaryNIRCommandBuffer::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData,
 		uint32_t imagesIndex)
 	{
-		_internal.TransitionSwapchainImageToTrasferDestination(windowID, queuesIDs, imagesIndex);
+		_internal.TransitionSwapchainImageToTrasferDestination(windowID, queueOwnershipTransferData, imagesIndex);
 	}
 
-	void PrimaryNIRCommandBuffer::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, uint32_t imagesIndex)
+	void PrimaryNIRCommandBuffer::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData,
+		uint32_t imagesIndex)
 	{
-		_internal.TransitionSwapchainImageToPresent(windowID, queuesIDs, imagesIndex);
+		_internal.TransitionSwapchainImageToPresent(windowID, queueOwnershipTransferData, imagesIndex);
 	}
 
 	void PrimaryNIRCommandBuffer::BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID,

@@ -23,7 +23,7 @@ namespace VulkanSimplifiedInternal
 	{
 	public:
 		IRCommandPoolInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData, const SharedRenderPassDataListInternal& sharedRenderPassData,
-			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, const ImageDataListsInternal& imageList,
+			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, ImageDataListsInternal& imageList,
 			DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
 			size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 		~IRCommandPoolInternal();
@@ -56,7 +56,7 @@ namespace VulkanSimplifiedInternal
 		const PipelineDataListsInternal& _devicePipelineData;
 		const SynchronizationDataListsInternal& _synchronizationList;
 
-		const ImageDataListsInternal& _imageList;
+		ImageDataListsInternal& _imageList;
 		DataBufferListsInternal& _dataBufferList;
 
 		WindowListInternal& _windowList;

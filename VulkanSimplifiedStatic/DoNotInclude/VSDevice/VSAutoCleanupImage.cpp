@@ -36,6 +36,16 @@ namespace VulkanSimplifiedInternal
 		return _mipmapLevels;
 	}
 
+	VkFormat AutoCleanupImage::GetFormat() const
+	{
+		return _format;
+	}
+
+	VkImageLayout AutoCleanupImage::GetLayout() const
+	{
+		return _layout;
+	}
+
 	uint32_t AutoCleanupImage::GetImagesMemoryTypeMask() const
 	{
 		return _memoryTypeMask;
@@ -74,8 +84,13 @@ namespace VulkanSimplifiedInternal
 		_memorySuballocation.emplace(allocationID, bindingBeggining);
 	}
 
-	AutoCleanupImage::AutoCleanupImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipmapLevels, VkFormat format,
-		size_t imageViewsInitialCapacity) : _device(device), _image(image), _width(width), _height(height), _depth(depth), _mipmapLevels(mipmapLevels), _format(format),
+	void AutoCleanupImage::SetLayout(VkImageLayout newLayout)
+	{
+		_layout = newLayout;
+	}
+
+	AutoCleanupImage::AutoCleanupImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipmapLevels, VkFormat format, VkImageLayout layout,
+		size_t imageViewsInitialCapacity) : _device(device), _image(image), _width(width), _height(height), _depth(depth), _mipmapLevels(mipmapLevels), _format(format), _layout(layout),
 		_imageViews(imageViewsInitialCapacity)
 	{
 		VkMemoryRequirements req{};
@@ -93,7 +108,8 @@ namespace VulkanSimplifiedInternal
 	}
 
 	AutoCleanupImage::AutoCleanupImage(AutoCleanupImage&& rhs) noexcept : _device(rhs._device), _image(rhs._image), _width(rhs._width), _height(rhs._height), _depth(rhs._depth),
-		_mipmapLevels(rhs._mipmapLevels), _format(rhs._format), _memoryTypeMask(rhs._memoryTypeMask), _size(rhs._size), _aligment(rhs._aligment), _imageViews(std::move(rhs._imageViews))
+		_mipmapLevels(rhs._mipmapLevels), _format(rhs._format), _layout(rhs._layout), _memoryTypeMask(rhs._memoryTypeMask), _size(rhs._size), _aligment(rhs._aligment),
+		_imageViews(std::move(rhs._imageViews))
 	{
 		rhs._device = VK_NULL_HANDLE;
 		rhs._image = VK_NULL_HANDLE;
@@ -104,6 +120,7 @@ namespace VulkanSimplifiedInternal
 		rhs._mipmapLevels = 0;
 
 		rhs._format = VK_FORMAT_MAX_ENUM;
+		rhs._layout = VK_IMAGE_LAYOUT_MAX_ENUM;
 		rhs._memoryTypeMask = 0;
 		rhs._size = 0;
 		rhs._aligment = 0;
@@ -122,6 +139,7 @@ namespace VulkanSimplifiedInternal
 		_mipmapLevels = rhs._mipmapLevels;
 
 		_format = rhs._format;
+		_layout = rhs._layout;
 		_memoryTypeMask = rhs._memoryTypeMask;
 		_size = rhs._size;
 		_aligment = rhs._aligment;
@@ -137,6 +155,7 @@ namespace VulkanSimplifiedInternal
 		rhs._mipmapLevels = 0;
 
 		rhs._format = VK_FORMAT_MAX_ENUM;
+		rhs._layout = VK_IMAGE_LAYOUT_MAX_ENUM;
 		rhs._memoryTypeMask = 0;
 		rhs._size = 0;
 		rhs._aligment = 0;

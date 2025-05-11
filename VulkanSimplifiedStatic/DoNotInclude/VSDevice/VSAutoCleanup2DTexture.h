@@ -7,7 +7,8 @@ namespace VulkanSimplifiedInternal
 	class AutoCleanup2DTexture : public AutoCleanupImage
 	{
 	public:
-		AutoCleanup2DTexture(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t mipmapLevels, VkFormat format, size_t imageViewsInitialCapacity);
+		AutoCleanup2DTexture(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t mipmapLevels, VkFormat format, VkImageLayout layout,
+			size_t imageViewsInitialCapacity);
 		~AutoCleanup2DTexture();
 
 		AutoCleanup2DTexture(const AutoCleanup2DTexture& rhs) noexcept = delete;

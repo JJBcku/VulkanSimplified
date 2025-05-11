@@ -3,19 +3,31 @@
 
 #include <CustomLists/IDObject.h>
 
+#include "VSDeviceCoreInternal.h"
 #include "VSPipelineDataListsInternal.h"
 #include "VSDataBufferListsInternal.h"
+#include "VSImageDataListsInternal.h"
 #include "VSSynchronizationDataListsInternal.h"
 #include "VSWindowListInternal.h"
 #include "VSWindowInternal.h"
 
 #include "../../Include/VSDevice/VSDataBuffersCopyRegionData.h"
+#include "../../Include/VSDevice/VSGlobalMemoryBarrierData.h"
+#include "../../Include/VSDevice/VSDataBuffersMemoryBarrierData.h"
+#include "../../Include/VSDevice/VSImagesMemoryBarrierData.h"
+#include "../../Include/VSDevice/VSQueueOwnershipTransferData.h"
+
+#include "../VSCommon/VSPipelineStageFlagsInternal.h"
+#include "../VSCommon/VSAccessFlagsInternal.h"
+#include "../VSCommon/VSImageLayoutFlagsInternal.h"
+
+#include "VSAutoCleanupColorRenderTargetImage.h"
 
 namespace VulkanSimplifiedInternal
 {
 	CommandBufferBaseInternal::CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
 		_core(core), _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData),
 		_synchronizationList(synchronizationList), _imageList(imageList), _dataBufferList(dataBufferList), _windowList(windowList), _device(device), _buffer(buffer), _queue(queue)
 	{
@@ -176,6 +188,128 @@ namespace VulkanSimplifiedInternal
 		}
 
 		vkCmdCopyBuffer(_buffer, stagingBuffer, vertexBuffer, static_cast<uint32_t>(copyRegionsData.size()), copyRegionsData.data());
+	}
+
+	void CommandBufferBaseInternal::CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
+		const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
+		const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData)
+	{
+		if (globalMemoryBarrierData.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Global memory barrier list overflowed!");
+
+		if (dataBuffersBarrierData.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Data buffer memory barrier list overflowed!");
+
+		if (imageBarrierData.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Image memory barrier list overflowed!");
+
+		VkPipelineStageFlags srcStagesFlags = TranslateStageFlags(srcStages);
+		VkPipelineStageFlags dstStagesFlags = TranslateStageFlags(dstStages);
+
+		std::vector<VkMemoryBarrier> globalMemoryBarriersDataList;
+		std::vector<VkBufferMemoryBarrier> dataBuffersMemoryBarriersDataList;
+		std::vector<VkImageMemoryBarrier> imagesMemoryBarriersDataList;
+
+		globalMemoryBarriersDataList.resize(globalMemoryBarrierData.size());
+		dataBuffersMemoryBarriersDataList.resize(dataBuffersBarrierData.size());
+		imagesMemoryBarriersDataList.resize(imageBarrierData.size());
+
+		for (size_t i = 0; i < globalMemoryBarrierData.size(); ++i)
+		{
+			auto& inData = globalMemoryBarrierData[i];
+			auto& outData = globalMemoryBarriersDataList[i];
+
+			outData.sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
+
+			outData.srcAccessMask = TranslataAccessFlags(inData.srcAccess);
+			outData.dstAccessMask = TranslataAccessFlags(inData.dstAccess);
+		}
+
+		for (size_t i = 0; i < dataBuffersBarrierData.size(); ++i)
+		{
+			auto& inData = dataBuffersBarrierData[i];
+			auto& outData = dataBuffersMemoryBarriersDataList[i];
+
+			outData.sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
+
+			outData.srcAccessMask = TranslataAccessFlags(inData.srcAccess);
+			outData.dstAccessMask = TranslataAccessFlags(inData.dstAccess);
+
+			if (inData.queueData.has_value())
+			{
+				outData.srcQueueFamilyIndex = _core.GetQueuesFamily(inData.queueData.value().srcQueueIndex);
+				outData.dstQueueFamilyIndex = _core.GetQueuesFamily(inData.queueData.value().dstQueueIndex);
+			}
+			else
+			{
+				outData.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+				outData.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+			}
+
+			switch (inData.bufferID.type)
+			{
+			case VulkanSimplified::DataBuffersIDType::VERTEX:
+				outData.buffer = _dataBufferList.GetVertexBuffer(inData.bufferID.vertexID.ID);
+				break;
+			case VulkanSimplified::DataBuffersIDType::STAGING:
+				outData.buffer = _dataBufferList.GetStagingBuffer(inData.bufferID.stagingID.ID);
+				break;
+			case VulkanSimplified::DataBuffersIDType::UNKNOWN:
+			default:
+				throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Program was given an erroneous generic data buffer id type!");
+			}
+
+			outData.offset = 0;
+			outData.size = VK_WHOLE_SIZE;
+		}
+
+		for (size_t i = 0; i < imageBarrierData.size(); ++i)
+		{
+			auto& inData = imageBarrierData[i];
+			auto& outData = imagesMemoryBarriersDataList[i];
+
+			outData.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+
+			outData.srcAccessMask = TranslataAccessFlags(inData.srcAccess);
+			outData.dstAccessMask = TranslataAccessFlags(inData.dstAccess);
+
+			outData.oldLayout = TranslateImageLayout(inData.oldLayout);
+			outData.newLayout = TranslateImageLayout(inData.newLayout);
+
+			if (inData.queueData.has_value())
+			{
+				outData.srcQueueFamilyIndex = _core.GetQueuesFamily(inData.queueData.value().srcQueueIndex);
+				outData.dstQueueFamilyIndex = _core.GetQueuesFamily(inData.queueData.value().dstQueueIndex);
+			}
+			else
+			{
+				outData.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+				outData.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+			}
+
+			const AutoCleanupImage* imagePtr = nullptr;
+
+			switch (inData.imageID.type)
+			{
+			case VulkanSimplified::ImagesIDType::COLOR_RENDER_TARGET:
+				imagePtr = &_imageList.GetColorRenderTargetImageInternal(inData.imageID.colorRenderTargetID.ID);
+				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+				outData.subresourceRange.baseArrayLayer = 0;
+				outData.subresourceRange.baseMipLevel = 0;
+				outData.subresourceRange.layerCount = 1;
+				outData.subresourceRange.levelCount = 1;
+				break;
+			case VulkanSimplified::ImagesIDType::UNKNOWN:
+			default:
+				throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Program was given an erroneous generic image id type!");
+			}
+
+			outData.image = imagePtr->GetImage();
+		}
+
+		vkCmdPipelineBarrier(_buffer, srcStagesFlags, dstStagesFlags, 0, static_cast<uint32_t>(globalMemoryBarriersDataList.size()), globalMemoryBarriersDataList.data(),
+			static_cast<uint32_t>(dataBuffersMemoryBarriersDataList.size()), dataBuffersMemoryBarriersDataList.data(), static_cast<uint32_t>(imagesMemoryBarriersDataList.size()),
+			imagesMemoryBarriersDataList.data());
 	}
 
 }

@@ -79,7 +79,8 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateImage(_device, &createInfo, nullptr, &image) != VK_SUCCESS)
 			throw std::runtime_error("ImageDataListsInternal::AddColorRenderTargetImage Error: Program failed to create a single sampled, no mip maps, 2D image!");
 
-		return _colorRenderTargetList.AddObject(AutoCleanupColorRenderTargetImage(_device, image, width, height, createInfo.format, initialImageViewListCapacity), addOnReserving);
+		return _colorRenderTargetList.AddObject(AutoCleanupColorRenderTargetImage(_device, image, width, height, createInfo.format, createInfo.initialLayout,
+			initialImageViewListCapacity), addOnReserving);
 	}
 
 	bool ImageDataListsInternal::RemoveColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound)
@@ -104,12 +105,22 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkImage ImageDataListsInternal::GetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	AutoCleanupColorRenderTargetImage& ImageDataListsInternal::GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID)
+	{
+		return _colorRenderTargetList.GetObject(imageID);
+	}
+
+	const AutoCleanupColorRenderTargetImage& ImageDataListsInternal::GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	{
+		return _colorRenderTargetList.GetConstObject(imageID);
+	}
+
+	VkImage ImageDataListsInternal::GetColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImage();
 	}
 
-	VkImageView ImageDataListsInternal::GetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
+	VkImageView ImageDataListsInternal::GetColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
 	}
@@ -178,7 +189,7 @@ namespace VulkanSimplifiedInternal
 			switch (imageID.type)
 			{
 			case VulkanSimplified::ImageIDType::COLOR_RENDER_TARGET:
-				imageViews.push_back(GetImageView(imageID.colorRenderTarget.ID, attachmentData.second));
+				imageViews.push_back(GetColorRenderTargetImageView(imageID.colorRenderTarget.ID, attachmentData.second));
 				break;
 			case VulkanSimplified::ImageIDType::UNKNOWN:
 			default:

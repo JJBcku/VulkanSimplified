@@ -9,6 +9,8 @@
 
 #include "VSCommandBufferUsage.h"
 
+#include "../VSCommon/VSPipelineStageFlagsDef.h"
+
 namespace VulkanSimplifiedInternal
 {
 	class CommandBufferBaseInternal;
@@ -17,6 +19,10 @@ namespace VulkanSimplifiedInternal
 namespace VulkanSimplified
 {
 	struct DataBuffersCopyRegionData;
+
+	struct GlobalMemoryBarrierData;
+	struct DataBuffersMemoryBarrierData;
+	struct ImagesMemoryBarrierData;
 
 	class CommandBufferBase
 	{
@@ -40,6 +46,9 @@ namespace VulkanSimplified
 			IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion);
 		void TranferDataListToVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
 			IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList);
+
+		void CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages, const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
+			const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData);
 
 	private:
 		VulkanSimplifiedInternal::CommandBufferBaseInternal& _internal;

@@ -9,7 +9,7 @@ namespace VulkanSimplifiedInternal
 	public:
 		SecondaryIRCommandBufferInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 			const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData,
-			const SynchronizationDataListsInternal& synchronizationList, const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList,
+			const SynchronizationDataListsInternal& synchronizationList, ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList,
 			WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 		~SecondaryIRCommandBufferInternal();
 

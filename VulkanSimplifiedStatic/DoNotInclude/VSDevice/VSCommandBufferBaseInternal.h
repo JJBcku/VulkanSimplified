@@ -10,10 +10,15 @@
 #include "../../Include/VSDevice/VSCommandBufferUsage.h"
 
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
+#include "../../Include/VSCommon/VSPipelineStageFlagsDef.h"
 
 namespace VulkanSimplified
 {
 	struct DataBuffersCopyRegionData;
+
+	struct GlobalMemoryBarrierData;
+	struct DataBuffersMemoryBarrierData;
+	struct ImagesMemoryBarrierData;
 }
 
 namespace VulkanSimplifiedInternal
@@ -32,7 +37,7 @@ namespace VulkanSimplifiedInternal
 	{
 	public:
 		CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData, const SharedRenderPassDataListInternal& sharedRenderPassData,
-			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, const ImageDataListsInternal& imageList,
+			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, ImageDataListsInternal& imageList,
 			DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 		~CommandBufferBaseInternal();
 
@@ -59,6 +64,10 @@ namespace VulkanSimplifiedInternal
 		void TranferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
 			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
 
+		void CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
+			const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
+			const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData);
+
 	protected:
 		const DeviceCoreInternal& _core;
 
@@ -68,7 +77,7 @@ namespace VulkanSimplifiedInternal
 		const PipelineDataListsInternal& _devicePipelineData;
 		const SynchronizationDataListsInternal& _synchronizationList;
 
-		const ImageDataListsInternal& _imageList;
+		ImageDataListsInternal& _imageList;
 		DataBufferListsInternal& _dataBufferList;
 
 		WindowListInternal& _windowList;

@@ -10,7 +10,7 @@ namespace VulkanSimplifiedInternal
 {
 	CommandPoolMainListInternal::CommandPoolMainListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		const ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList,
+		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList,
 		const VulkanSimplified::CommandPoolMainListInitialCapacity& initialCapacity) : _deviceCore(deviceCore), _deviceRenderPassData(deviceRenderPassData),
 		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList),
 		_dataBufferList(dataBufferList), _windowList(windowList), _qfGroupList(initialCapacity.qfGroupsListInitialCapacity)

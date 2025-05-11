@@ -16,6 +16,8 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
+	struct QueueOwnershipTransferData;
+
 	class PrimaryNIRCommandBuffer : public CommandBufferBase
 	{
 	public:
@@ -28,8 +30,8 @@ namespace VulkanSimplified
 			uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, const std::vector<std::optional<RenderPassClearValueID>>& clearValues, bool usesSecondaryBuffers = false);
 		void EndRenderPass();
 
-		void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, uint32_t imagesIndex);
-		void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, uint32_t imagesIndex);
+		void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex);
+		void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex);
 
 		void BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID, uint32_t startX, uint32_t startY,
 			uint32_t width, uint32_t height, uint32_t swapchainImageIndex);
