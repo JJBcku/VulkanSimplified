@@ -883,13 +883,13 @@
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSIndexType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSIndexTypeDef.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupIndexBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1479,7 +1479,7 @@
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupIndexBuffer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
