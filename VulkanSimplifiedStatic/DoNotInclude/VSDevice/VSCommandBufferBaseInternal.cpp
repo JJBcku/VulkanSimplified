@@ -16,6 +16,7 @@
 #include "../../Include/VSDevice/VSDataBuffersMemoryBarrierData.h"
 #include "../../Include/VSDevice/VSImagesMemoryBarrierData.h"
 #include "../../Include/VSDevice/VSQueueOwnershipTransferData.h"
+#include "../../Include/VSDevice/VSIndexType.h"
 
 #include "../VSCommon/VSPipelineStageFlagsInternal.h"
 #include "../VSCommon/VSAccessFlagsInternal.h"
@@ -88,6 +89,11 @@ namespace VulkanSimplifiedInternal
 	void CommandBufferBaseInternal::Draw(uint32_t vertexCount, uint32_t instanceCount, uint32_t firstVertex, uint32_t firstInstance)
 	{
 		vkCmdDraw(_buffer, vertexCount, instanceCount, firstVertex, firstInstance);
+	}
+
+	void CommandBufferBaseInternal::DrawIndexed(uint32_t indexCount, uint32_t instanceCount, uint32_t firstIndex, int32_t firstVertexOffset, uint32_t firstInstance)
+	{
+		vkCmdDrawIndexed(_buffer, indexCount, instanceCount, firstIndex, firstVertexOffset, firstInstance);
 	}
 
 	bool CommandBufferBaseInternal::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
@@ -191,6 +197,90 @@ namespace VulkanSimplifiedInternal
 		}
 
 		vkCmdCopyBuffer(_buffer, stagingBuffer, vertexBuffer, static_cast<uint32_t>(copyRegionsData.size()), copyRegionsData.data());
+	}
+
+	void CommandBufferBaseInternal::TranferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID, const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+	{
+		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
+		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
+
+		if (copyRegion.srcOffset >= stagingBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToIndexBuffer Error: Program tried to read past the end of the staging buffer!");
+
+		if (copyRegion.writeSize > stagingBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToIndexBuffer Error: Program tried to read more data the there is in the entire staging buffer!");
+
+		if (copyRegion.writeSize > stagingBufferSize - copyRegion.srcOffset)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToIndexBuffer Error: Program tried to read more data the there is past the staging buffer's offset!");
+
+		auto indexBufferSize = _dataBufferList.GetIndexBuffersSize(dstBufferID);
+		auto indexBuffer = _dataBufferList.GetIndexBuffer(dstBufferID);
+
+		if (copyRegion.dstOffset >= indexBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToIndexBuffer Error: Program tried to write past the end of the index buffer!");
+
+		if (copyRegion.writeSize > indexBufferSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToIndexBuffer Error: Program tried to write more data the there is in the entire index buffer!");
+
+		if (copyRegion.writeSize > indexBufferSize - copyRegion.dstOffset)
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataToIndexBuffer Error: Program tried to write more data the there is past the index buffer's offset!");
+
+		VkBufferCopy copy{};
+		copy.srcOffset = copyRegion.srcOffset;
+		copy.dstOffset = copyRegion.dstOffset;
+		copy.size = copyRegion.writeSize;
+
+		vkCmdCopyBuffer(_buffer, stagingBuffer, indexBuffer, 1, &copy);
+	}
+
+	void CommandBufferBaseInternal::TranferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID, const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	{
+		if (copyRegionsList.empty())
+			return;
+
+		if (copyRegionsList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Copy regions list overflowed!");
+
+		std::vector<VkBufferCopy> copyRegionsData;
+		copyRegionsData.reserve(copyRegionsList.size());
+
+		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
+		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
+
+		auto indexBufferSize = _dataBufferList.GetIndexBuffersSize(dstBufferID);
+		auto indexBuffer = _dataBufferList.GetIndexBuffer(dstBufferID);
+
+		for (size_t i = 0; i < copyRegionsList.size(); ++i)
+		{
+			auto& copyRegion = copyRegionsList[i];
+
+			if (copyRegion.srcOffset >= stagingBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Program tried to read past the end of the staging buffer!");
+
+			if (copyRegion.writeSize > stagingBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Program tried to read more data the there is in the entire staging buffer!");
+
+			if (copyRegion.writeSize > stagingBufferSize - copyRegion.srcOffset)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Program tried to read more data the there is past the staging buffer's offset!");
+
+			if (copyRegion.dstOffset >= indexBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Program tried to write past the end of the index buffer!");
+
+			if (copyRegion.writeSize > indexBufferSize)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Program tried to write more data the there is in the entire index buffer!");
+
+			if (copyRegion.writeSize > indexBufferSize - copyRegion.dstOffset)
+				throw std::runtime_error("CommandBufferBaseInternal::TranferDataListToIndexBuffer Error: Program tried to write more data the there is past the index buffer's offset!");
+
+			VkBufferCopy copy{};
+			copy.srcOffset = copyRegion.srcOffset;
+			copy.dstOffset = copyRegion.dstOffset;
+			copy.size = copyRegion.writeSize;
+
+			copyRegionsData.push_back(copy);
+		}
+
+		vkCmdCopyBuffer(_buffer, stagingBuffer, indexBuffer, static_cast<uint32_t>(copyRegionsData.size()), copyRegionsData.data());
 	}
 
 	void CommandBufferBaseInternal::CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
@@ -340,6 +430,27 @@ namespace VulkanSimplifiedInternal
 		}
 
 		vkCmdBindVertexBuffers(_buffer, firstBinding, static_cast<uint32_t>(buffers.size()), buffers.data(), offsets.data());
+	}
+
+	void CommandBufferBaseInternal::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize buffersOffset, VulkanSimplified::IndexType indexType)
+	{
+		auto buffer = _dataBufferList.GetIndexBuffer(bufferID);
+
+		VkIndexType type = VK_INDEX_TYPE_MAX_ENUM;
+
+		switch (indexType)
+		{
+		case VulkanSimplified::IndexType::INDEX_TYPE_16_BITS:
+			type = VK_INDEX_TYPE_UINT16;
+			break;
+		case VulkanSimplified::IndexType::INDEX_TYPE_32_BITS:
+			type = VK_INDEX_TYPE_UINT32;
+			break;
+		default:
+			throw std::runtime_error("CommandBufferBaseInternal::BindIndexBuffer Error: Program was given an erroneous index type value!");
+		}
+
+		vkCmdBindIndexBuffer(_buffer, buffer, buffersOffset, type);
 	}
 
 }

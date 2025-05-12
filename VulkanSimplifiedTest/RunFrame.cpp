@@ -31,6 +31,7 @@
 
 #include <VSPipelineStageFlags.h>
 #include <VSAccessFlags.h>
+#include <VSIndexType.h>
 
 #include <VSDataBuffersCopyRegionData.h>
 #include <VSGlobalMemoryBarrierData.h>
@@ -67,13 +68,20 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		imageIndice, data.deviceDependentData->windowID);
 
 	dataBufferLists.WriteToStagingBuffer(data.memoryData->stagingBuffers[frameIndex], 0, reinterpret_cast<const unsigned char&>(*vertices.data()), vertices.size() * sizeof(vertices[0]));
+	dataBufferLists.WriteToStagingBuffer(data.memoryData->stagingBuffers[frameIndex], vertices.size() * sizeof(vertices[0]),
+		reinterpret_cast<const unsigned char&>(*indices.data()), indices.size() * sizeof(indices[0]));
 
 	VulkanSimplified::QueueOwnershipTransferData queueData;
 
-	VulkanSimplified::DataBuffersCopyRegionData copyRegion;
-	copyRegion.srcOffset = 0;
-	copyRegion.dstOffset = 0;
-	copyRegion.writeSize = vertices.size() * sizeof(vertices[0]);
+	VulkanSimplified::DataBuffersCopyRegionData vertexCopyRegion;
+	vertexCopyRegion.srcOffset = 0;
+	vertexCopyRegion.dstOffset = 0;
+	vertexCopyRegion.writeSize = vertices.size() * sizeof(vertices[0]);
+
+	VulkanSimplified::DataBuffersCopyRegionData indexCopyRegion;
+	indexCopyRegion.srcOffset = vertices.size() * sizeof(vertices[0]);
+	indexCopyRegion.dstOffset = 0;
+	indexCopyRegion.writeSize = indices.size() * sizeof(indices[0]);
 
 	VulkanSimplified::DataBuffersMemoryBarrierData memoryBarrierData;
 	memoryBarrierData.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
@@ -90,7 +98,8 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		transferBuffer.ResetCommandBuffer(false);
 		transferBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
 
-		transferBuffer.TranferDataToVertexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->vertexBuffers[frameIndex], copyRegion);
+		transferBuffer.TranferDataToVertexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->vertexBuffers[frameIndex], vertexCopyRegion);
+		transferBuffer.TranferDataToIndexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->indexBuffers[frameIndex], indexCopyRegion);
 
 		transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 			{}, { memoryBarrierData }, {});
@@ -163,15 +172,17 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	}
 	else
 	{
-		graphicCommandBuffer.TranferDataToVertexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->vertexBuffers[frameIndex], copyRegion);
+		graphicCommandBuffer.TranferDataToVertexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->vertexBuffers[frameIndex], vertexCopyRegion);
+		graphicCommandBuffer.TranferDataToIndexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->indexBuffers[frameIndex], indexCopyRegion);
 	}
 
 	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, data.memoryData->framebuffers[frameIndex], 0U, 0U, width, height, data.renderPassData->clearValues);
 
 	graphicCommandBuffer.BindGraphicsPipeline(data.pipelineData->pipeline);
 	graphicCommandBuffer.BindVertexBuffers(0, { {data.memoryData->vertexBuffers[frameIndex], 0} });
+	graphicCommandBuffer.BindIndexBuffer(data.memoryData->indexBuffers[frameIndex], 0, VulkanSimplified::IndexType::INDEX_TYPE_16_BITS);
 
-	graphicCommandBuffer.Draw(3, 1, 0, 0);
+	graphicCommandBuffer.DrawIndexed(static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
 
 	graphicCommandBuffer.EndRenderPass();
 

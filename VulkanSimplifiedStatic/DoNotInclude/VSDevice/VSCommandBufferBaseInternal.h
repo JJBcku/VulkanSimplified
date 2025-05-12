@@ -6,6 +6,7 @@
 #include "../../Include/VSDevice/VSDataBufferListsDef.h"
 #include "../../Include/VSDevice/VSSynchronizationDataListsDef.h"
 #include "../../Include/VSDevice/VSWindowListDef.h"
+#include "../../Include/VSDevice/VSIndexTypeDef.h"
 
 #include "../../Include/VSDevice/VSCommandBufferUsage.h"
 
@@ -55,6 +56,7 @@ namespace VulkanSimplifiedInternal
 		void BindGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID);
 
 		void Draw(uint32_t vertexCount, uint32_t instanceCount, uint32_t firstVertex, uint32_t firstInstance);
+		void DrawIndexed(uint32_t indexCount, uint32_t instanceCount, uint32_t firstIndex, int32_t firstVertexOffset, uint32_t firstInstance);
 
 		bool AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
 			uint32_t& returnIndex, IDObject<VulkanSimplified::WindowPointer> windowID);
@@ -64,11 +66,17 @@ namespace VulkanSimplifiedInternal
 		void TranferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
 			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
 
+		void TranferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
+			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
+		void TranferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
+			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
+
 		void CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
 			const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
 			const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData);
 
 		void BindVertexBuffers(uint32_t firstBinding, const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
+		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize buffersOffset, VulkanSimplified::IndexType indexType);
 
 	protected:
 		const DeviceCoreInternal& _core;

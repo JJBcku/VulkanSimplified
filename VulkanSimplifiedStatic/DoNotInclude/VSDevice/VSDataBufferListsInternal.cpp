@@ -2,9 +2,11 @@
 #include "VSDataBufferListsInternal.h"
 
 #include "../../Include/VSDevice/VSDataBufferListsInitialCapacities.h"
+#include "../../Include/VSDevice/VSIndexType.h"
 
 #include "VSAutoCleanupVertexBuffer.h"
 #include "VSAutoCleanupStagingBuffer.h"
+#include "VSAutoCleanupIndexBuffer.h"
 
 #include "VSDeviceCoreInternal.h"
 #include "VSMemoryObjectsListInternal.h"
@@ -13,7 +15,8 @@ namespace VulkanSimplifiedInternal
 {
 	DataBufferListsInternal::DataBufferListsInternal(const DeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryObjectsList, VkDevice device,
 		const VulkanSimplified::DataBufferListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _memoryObjectsList(memoryObjectsList), _device(device),
-		_vertexBuffers(initialCapacities.vertexBufferListInitialCapacity), _stagingBuffers(initialCapacities.stagingBufferListInitialCapacity)
+		_vertexBuffers(initialCapacities.vertexBufferListInitialCapacity), _stagingBuffers(initialCapacities.stagingBufferListInitialCapacity),
+		_indexBuffers(initialCapacities.indexBufferListInitialCapacity)
 	{
 	}
 
@@ -93,6 +96,58 @@ namespace VulkanSimplifiedInternal
 		return _stagingBuffers.AddObject(AutoCleanupStagingBuffer(_device, add), addOnReserving);
 	}
 
+	IDObject<AutoCleanupIndexBuffer> DataBufferListsInternal::AddIndexBuffer(size_t indicesCount, VulkanSimplified::IndexType indexType,
+		const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	{
+		VkBufferCreateInfo createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+		createInfo.usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
+
+		switch (indexType)
+		{
+		case VulkanSimplified::IndexType::INDEX_TYPE_16_BITS:
+			if (indicesCount > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DataBufferListsInternal::AddStagingBuffer Error: Program was given 16 bit index count above maximum value!");
+			createInfo.size = indicesCount << 1;
+			break;
+		case VulkanSimplified::IndexType::INDEX_TYPE_32_BITS:
+			if (indicesCount > (std::numeric_limits<uint32_t>::max() >> 1))
+				throw std::runtime_error("DataBufferListsInternal::AddStagingBuffer Error: Program was given 32 bit index count above maximum value!");
+			createInfo.size = indicesCount << 2;
+			break;
+		default:
+			throw std::runtime_error("DataBufferListsInternal::AddStagingBuffer Error: Program was given an erroneous index type value!");
+		}
+
+		std::vector<uint32_t> queueFamilies;
+
+		if (queuesUsingBuffer.size() > 1)
+		{
+			queueFamilies = _deviceCore.GetQueuesFamilies(queuesUsingBuffer);
+
+			std::stable_sort(queueFamilies.begin(), queueFamilies.end());
+			queueFamilies.erase(std::unique(queueFamilies.begin(), queueFamilies.end()), queueFamilies.end());
+		}
+
+		if (queueFamilies.size() > 1)
+		{
+			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
+			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.pQueueFamilyIndices = queueFamilies.data();
+		}
+		else
+		{
+			createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+		}
+
+		VkBuffer add = VK_NULL_HANDLE;
+
+		if (vkCreateBuffer(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+			throw std::runtime_error("DataBufferListsInternal::AddStagingBuffer Error: Program failed to create a data buffer!");
+
+		return _indexBuffers.AddObject(AutoCleanupIndexBuffer(_device, add), addOnReserving);
+	}
+
 	void DataBufferListsInternal::BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& bufferData = _vertexBuffers.GetObject(bufferID);
@@ -119,6 +174,19 @@ namespace VulkanSimplifiedInternal
 		bufferData.BindDataBuffer(allocationID, beggining);
 	}
 
+	void DataBufferListsInternal::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	{
+		auto& bufferData = _indexBuffers.GetObject(bufferID);
+
+		VkBuffer buffer = bufferData.GetDataBuffer();
+		size_t size = bufferData.GetBuffersSize();
+		size_t aligment = bufferData.GetBuffersRequiredAligment();
+
+		auto beggining = _memoryObjectsList.BindBuffer(allocationID, buffer, size, aligment, addOnReserving);
+
+		bufferData.BindDataBuffer(allocationID, beggining);
+	}
+
 	VkBuffer DataBufferListsInternal::GetVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _vertexBuffers.GetConstObject(bufferID).GetDataBuffer();
@@ -127,6 +195,11 @@ namespace VulkanSimplifiedInternal
 	VkBuffer DataBufferListsInternal::GetStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _stagingBuffers.GetConstObject(bufferID).GetDataBuffer();
+	}
+
+	VkBuffer DataBufferListsInternal::GetIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	{
+		return _indexBuffers.GetConstObject(bufferID).GetDataBuffer();
 	}
 
 	uint32_t DataBufferListsInternal::GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const
@@ -157,6 +230,21 @@ namespace VulkanSimplifiedInternal
 	VulkanSimplified::MemorySize DataBufferListsInternal::GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _stagingBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
+	}
+
+	uint32_t DataBufferListsInternal::GetIndexBuffersMemoryTypeMask(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	{
+		return _indexBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
+	}
+
+	VulkanSimplified::MemorySize DataBufferListsInternal::GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	{
+		return _indexBuffers.GetConstObject(bufferID).GetBuffersSize();
+	}
+
+	VulkanSimplified::MemorySize DataBufferListsInternal::GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	{
+		return _indexBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
 	}
 
 	void DataBufferListsInternal::WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,

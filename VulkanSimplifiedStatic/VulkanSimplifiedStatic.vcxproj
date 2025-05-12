@@ -121,6 +121,7 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupFramebuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImage.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupIndexBuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupSemaphore.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.h" />
@@ -203,6 +204,8 @@
     <ClInclude Include="Include\VSDevice\VSDataBufferLists.h" />
     <ClInclude Include="Include\VSDevice\VSDataBufferListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSDataBufferListsInitialCapacities.h" />
+    <ClInclude Include="Include\VSDevice\VSIndexType.h" />
+    <ClInclude Include="Include\VSDevice\VSIndexTypeDef.h" />
     <ClInclude Include="Include\VSDevice\VSIRCommandPool.h" />
     <ClInclude Include="Include\VSDevice\VSIRCommandPoolDef.h" />
     <ClInclude Include="Include\VSDevice\VSNIRCommandPool.h" />
@@ -452,6 +455,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupImageView.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupIndexBuffer.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
