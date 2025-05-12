@@ -91,7 +91,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	memoryBarrierData[0].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
 	memoryBarrierData[0].bufferID = { data.memoryData->vertexBuffers[frameIndex] };
 
-	memoryBarrierData[0].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
+	memoryBarrierData[1].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
 	memoryBarrierData[1].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
 	memoryBarrierData[1].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
 	memoryBarrierData[1].bufferID = { data.memoryData->indexBuffers[frameIndex] };
