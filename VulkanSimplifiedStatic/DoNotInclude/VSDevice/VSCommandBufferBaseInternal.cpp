@@ -350,6 +350,9 @@ namespace VulkanSimplifiedInternal
 			case VulkanSimplified::DataBuffersIDType::STAGING:
 				outData.buffer = _dataBufferList.GetStagingBuffer(inData.bufferID.stagingID.ID);
 				break;
+			case VulkanSimplified::DataBuffersIDType::INDEX:
+				outData.buffer = _dataBufferList.GetIndexBuffer(inData.bufferID.indexID.ID);
+				break;
 			case VulkanSimplified::DataBuffersIDType::UNKNOWN:
 			default:
 				throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Program was given an erroneous generic data buffer id type!");

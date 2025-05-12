@@ -19,4 +19,10 @@ namespace VulkanSimplified
 		stagingID.type = DataBuffersIDType::STAGING;
 		stagingID.ID = ID;
 	}
+
+	DataBuffersGenericID::DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> ID)
+	{
+		indexID.type = DataBuffersIDType::INDEX;
+		indexID.ID = ID;
+	}
 }

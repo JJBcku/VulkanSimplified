@@ -83,11 +83,18 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	indexCopyRegion.dstOffset = 0;
 	indexCopyRegion.writeSize = indices.size() * sizeof(indices[0]);
 
-	VulkanSimplified::DataBuffersMemoryBarrierData memoryBarrierData;
-	memoryBarrierData.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
-	memoryBarrierData.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-	memoryBarrierData.queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
-	memoryBarrierData.bufferID = { data.memoryData->vertexBuffers[frameIndex] };
+	std::vector<VulkanSimplified::DataBuffersMemoryBarrierData> memoryBarrierData;
+	memoryBarrierData.resize(2);
+
+	memoryBarrierData[0].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+	memoryBarrierData[0].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
+	memoryBarrierData[0].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
+	memoryBarrierData[0].bufferID = { data.memoryData->vertexBuffers[frameIndex] };
+
+	memoryBarrierData[1].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+	memoryBarrierData[1].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
+	memoryBarrierData[1].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
+	memoryBarrierData[1].bufferID = { data.memoryData->indexBuffers[frameIndex] };
 
 	if (data.commandBufferData->transferGroup.has_value())
 	{
@@ -102,7 +109,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		transferBuffer.TranferDataToIndexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->indexBuffers[frameIndex], indexCopyRegion);
 
 		transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-			{}, { memoryBarrierData }, {});
+			{}, memoryBarrierData, {});
 
 		transferBuffer.EndRecording();
 
@@ -168,7 +175,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	if (data.commandBufferData->transferGroup.has_value())
 	{
 		graphicCommandBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-			{}, { memoryBarrierData }, {});
+			{}, memoryBarrierData, {});
 	}
 	else
 	{

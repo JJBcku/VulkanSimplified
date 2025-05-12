@@ -11,6 +11,7 @@ namespace VulkanSimplified
 		UNKNOWN = 0,
 		VERTEX = 1,
 		STAGING = 2,
+		INDEX = 4,
 	};
 
 	union DataBuffersGenericID
@@ -29,8 +30,15 @@ namespace VulkanSimplified
 			IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> ID;
 		} stagingID;
 
+		struct
+		{
+			DataBuffersIDType type;
+			IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> ID;
+		} indexID;
+
 		DataBuffersGenericID();
 		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> ID);
 		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> ID);
+		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> ID);
 	};
 }
