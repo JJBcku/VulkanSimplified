@@ -29,6 +29,7 @@
 #include <VSWindow.h>
 
 #include <thread>
+#include <iostream>
 
 void RunProgram()
 {
@@ -47,6 +48,9 @@ void RunProgram()
 	CreateFrameData(data);
 
 	uint32_t frameIndex = 0;
+	size_t framesThisSecond = 0;
+
+	float lastSecond = 0.0;
 
 	auto windowList = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass().GetWindowList();
 	auto window = windowList.GetWindow(data.deviceDependentData->windowID);
@@ -65,6 +69,21 @@ void RunProgram()
 
 			if (++frameIndex >= framesInFlight)
 				frameIndex = 0;
+
+			framesThisSecond++;
+
+			static const auto startTime = std::chrono::high_resolution_clock::now();
+
+			auto currentTime = std::chrono::high_resolution_clock::now();
+
+			float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+			if (time - lastSecond >= 1.0f)
+			{
+				lastSecond = time;
+				std::cout << "FPS: " << framesThisSecond << std::endl;
+				framesThisSecond = 0;
+			}
 		}
 	}
 
