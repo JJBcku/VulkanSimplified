@@ -250,7 +250,9 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		presentCommandBuffer.EndRecording();
 
 		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->renderingFinishedSemaphores[frameIndex], VulkanSimplified::PIPELINE_STAGE_ALL_COMMANDS };
-		submitInfo[0].waitSemaphores.pop_back();
+		
+		if (submitInfo[0].waitSemaphores.size() > 1)
+			submitInfo[0].waitSemaphores.resize(1);
 
 		submitedBuffersID.IRPrimaryID.commandPoolID = data.commandBufferData->presentPool.value();
 		submitedBuffersID.IRPrimaryID.commandBufferID = data.commandBufferData->presentBuffers[frameIndex];
