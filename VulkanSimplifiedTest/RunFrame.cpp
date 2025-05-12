@@ -10,6 +10,7 @@
 #include "VulkanMemoryData.h"
 #include "VulkanCommandBufferData.h"
 #include "VulkanSynchronizationData.h"
+#include "VulkanFrameData.h"
 
 #include "SwapchainSizes.h"
 #include "VertexData.h"
@@ -49,7 +50,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	auto graphicPool = graphicQf.GetCommandPoolWithIndividualReset(data.commandBufferData->graphicPool);
 	auto graphicCommandBuffer = graphicPool.GetPrimaryCommandBuffer(data.commandBufferData->graphicBuffers[frameIndex]);
 
-	std::vector<VulkanSimplified::CommandBufferSubmissionData> submitInfo(1, {});
+	std::vector<VulkanSimplified::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;
 
 	submitInfo[0].waitSemaphores.resize(1);
 	submitInfo[0].commandBufferIDs.resize(1);
@@ -73,28 +74,10 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 	VulkanSimplified::QueueOwnershipTransferData queueData;
 
-	VulkanSimplified::DataBuffersCopyRegionData vertexCopyRegion;
-	vertexCopyRegion.srcOffset = 0;
-	vertexCopyRegion.dstOffset = 0;
-	vertexCopyRegion.writeSize = vertices.size() * sizeof(vertices[0]);
+	const VulkanSimplified::DataBuffersCopyRegionData& vertexCopyRegion = data.frameData->vertexCopyRegion;
+	const VulkanSimplified::DataBuffersCopyRegionData& indexCopyRegion = data.frameData->indexCopyRegion;
 
-	VulkanSimplified::DataBuffersCopyRegionData indexCopyRegion;
-	indexCopyRegion.srcOffset = vertices.size() * sizeof(vertices[0]);
-	indexCopyRegion.dstOffset = 0;
-	indexCopyRegion.writeSize = indices.size() * sizeof(indices[0]);
-
-	std::vector<VulkanSimplified::DataBuffersMemoryBarrierData> memoryBarrierData;
-	memoryBarrierData.resize(2);
-
-	memoryBarrierData[0].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-	memoryBarrierData[0].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
-	memoryBarrierData[0].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
-	memoryBarrierData[0].bufferID = { data.memoryData->vertexBuffers[frameIndex] };
-
-	memoryBarrierData[1].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-	memoryBarrierData[1].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
-	memoryBarrierData[1].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
-	memoryBarrierData[1].bufferID = { data.memoryData->indexBuffers[frameIndex] };
+	const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBufferMemoryBarrierData = data.frameData->dataBufferMemoryBarrierData[frameIndex];
 
 	if (data.commandBufferData->transferGroup.has_value())
 	{
@@ -109,7 +92,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		transferBuffer.TranferDataToIndexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->indexBuffers[frameIndex], indexCopyRegion);
 
 		transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-			{}, memoryBarrierData, {});
+			{}, dataBufferMemoryBarrierData, {});
 
 		transferBuffer.EndRecording();
 
@@ -175,7 +158,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	if (data.commandBufferData->transferGroup.has_value())
 	{
 		graphicCommandBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-			{}, memoryBarrierData, {});
+			{}, dataBufferMemoryBarrierData, {});
 	}
 	else
 	{
