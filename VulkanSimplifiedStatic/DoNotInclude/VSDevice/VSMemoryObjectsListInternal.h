@@ -47,6 +47,8 @@ namespace VulkanSimplifiedInternal
 		void WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
 			VulkanSimplified::MemorySize writeSize);
 
+		bool IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const;
+
 	private:
 		size_t heapCount;
 		std::array<HeapInternalData, 16> memoryHeapData;

@@ -25,4 +25,10 @@ namespace VulkanSimplified
 		indexID.type = DataBuffersIDType::INDEX;
 		indexID.ID = ID;
 	}
+
+	DataBuffersGenericID::DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> ID)
+	{
+		uniformID.type = DataBuffersIDType::UNIFORM;
+		uniformID.ID = ID;
+	}
 }

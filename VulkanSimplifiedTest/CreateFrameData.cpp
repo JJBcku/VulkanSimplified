@@ -11,6 +11,8 @@
 
 #include "VSAccessFlags.h"
 
+#include <VSDataBuffersMemoryBarrierData.h>
+
 void CreateFrameData(VulkanData& data)
 {
 	data.frameData = std::make_unique<VulkanFrameData>();
@@ -19,26 +21,58 @@ void CreateFrameData(VulkanData& data)
 	data.frameData->vertexCopyRegion.dstOffset = 0;
 	data.frameData->vertexCopyRegion.writeSize = vertices.size() * sizeof(vertices[0]);
 
-	data.frameData->indexCopyRegion.srcOffset = vertices.size() * sizeof(vertices[0]);
+	data.frameData->indexCopyRegion.srcOffset = data.frameData->vertexCopyRegion.writeSize;
 	data.frameData->indexCopyRegion.dstOffset = 0;
 	data.frameData->indexCopyRegion.writeSize = indices.size() * sizeof(indices[0]);
+
+	data.frameData->uniformCopyRegion.srcOffset = data.frameData->indexCopyRegion.srcOffset + data.frameData->indexCopyRegion.writeSize;
+	data.frameData->uniformCopyRegion.dstOffset = 0;
+	data.frameData->uniformCopyRegion.writeSize = sizeof(UniformBufferData);
 
 	std::vector<std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>>& dataBufferMemoryBarrierData = data.frameData->dataBufferMemoryBarrierData;
 	dataBufferMemoryBarrierData.resize(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		dataBufferMemoryBarrierData[i].resize(2);
+		dataBufferMemoryBarrierData[i].reserve(3);
 
-		dataBufferMemoryBarrierData[i][0].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-		dataBufferMemoryBarrierData[i][0].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
-		dataBufferMemoryBarrierData[i][0].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
-		dataBufferMemoryBarrierData[i][0].bufferID = { data.memoryData->vertexBuffers[i] };
+		size_t j = 0;
 
-		dataBufferMemoryBarrierData[i][1].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-		dataBufferMemoryBarrierData[i][1].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
-		dataBufferMemoryBarrierData[i][1].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
-		dataBufferMemoryBarrierData[i][1].bufferID = { data.memoryData->indexBuffers[i] };
+		if (!data.memoryData->vertexMemoryMapped)
+		{
+			dataBufferMemoryBarrierData[i].emplace_back();
+
+			dataBufferMemoryBarrierData[i][j].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
+			dataBufferMemoryBarrierData[i][j].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+			dataBufferMemoryBarrierData[i][j].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
+			dataBufferMemoryBarrierData[i][j].bufferID = { data.memoryData->vertexBuffers[i] };
+
+			j++;
+		}
+
+		if (!data.memoryData->indexMemoryMapped)
+		{
+			dataBufferMemoryBarrierData[i].emplace_back();
+
+			dataBufferMemoryBarrierData[i][j].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
+			dataBufferMemoryBarrierData[i][j].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+			dataBufferMemoryBarrierData[i][j].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
+			dataBufferMemoryBarrierData[i][j].bufferID = { data.memoryData->indexBuffers[i] };
+
+			j++;
+		}
+
+		if (!data.memoryData->uniformMemoryMapped)
+		{
+			dataBufferMemoryBarrierData[i].emplace_back();
+
+			dataBufferMemoryBarrierData[i][j].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
+			dataBufferMemoryBarrierData[i][j].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+			dataBufferMemoryBarrierData[i][j].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
+			dataBufferMemoryBarrierData[i][j].bufferID = { data.memoryData->uniformBuffers[i] };
+
+			j++;
+		}
 	}
 
 	std::vector<VulkanSimplified::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;

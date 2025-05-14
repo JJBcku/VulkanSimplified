@@ -30,6 +30,8 @@ namespace VulkanSimplifiedInternal
 		void WriteToMemory(VulkanSimplified::MemorySize suballocationBeggining, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
 			VulkanSimplified::MemorySize writeSize);
 
+		bool IsMemoryBound() const;
+
 	private:
 		VkDevice _device;
 		VkDeviceMemory _memory;

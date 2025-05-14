@@ -29,4 +29,10 @@ namespace VulkanSimplified
 	{
 		return _internal.FreeMemory(memoryID, throwOnNotFound);
 	}
+
+	bool MemoryObjectsList::IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const
+	{
+		return _internal.IsMemoryMapped(allocationID);
+	}
+
 }

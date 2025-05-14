@@ -891,6 +891,9 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupIndexBuffer.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -1480,6 +1483,9 @@
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupIndexBuffer.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBuffer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

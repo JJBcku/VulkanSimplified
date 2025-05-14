@@ -20,14 +20,14 @@ namespace VulkanSimplified
 	{
 	}
 
-	SharedDescriptorDataList SharedDataMainList::GetDescriptorDataList()
+	SharedDescriptorDataList SharedDataMainList::GetSharedDescriptorDataList()
 	{
-		return _internal.GetDescriptorDataList();
+		return _internal.GetSharedDescriptorDataList();
 	}
 
-	SharedRenderPassDataList SharedDataMainList::GetRenderPassDataList()
+	SharedRenderPassDataList SharedDataMainList::GetSharedRenderPassDataList()
 	{
-		return _internal.GetRenderPassDataList();
+		return _internal.GetSharedRenderPassDataList();
 	}
 
 	SharedPipelineDataListss SharedDataMainList::GetSharedPipelineDataListss()
@@ -35,14 +35,14 @@ namespace VulkanSimplified
 		return _internal.GetPipelineDataList();
 	}
 
-	const SharedDescriptorDataList SharedDataMainList::GetDescriptorDataList() const
+	const SharedDescriptorDataList SharedDataMainList::GetSharedDescriptorDataList() const
 	{
-		return _internal.GetDescriptorDataList();
+		return _internal.GetSharedDescriptorDataList();
 	}
 
-	const SharedRenderPassDataList SharedDataMainList::GetRenderPassDataList() const
+	const SharedRenderPassDataList SharedDataMainList::GetSharedRenderPassDataList() const
 	{
-		return _internal.GetRenderPassDataList();
+		return _internal.GetSharedRenderPassDataList();
 	}
 
 	const SharedPipelineDataListss SharedDataMainList::GetSharedPipelineDataListss() const

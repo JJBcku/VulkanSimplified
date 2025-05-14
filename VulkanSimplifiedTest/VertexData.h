@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 
 struct VertexData
 {
@@ -17,4 +18,11 @@ const std::vector<VertexData> vertices = {
 
 const std::vector<uint16_t> indices = {
 	0, 1, 2, 2, 3, 0
+};
+
+struct UniformBufferData
+{
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 projection;
 };

@@ -25,6 +25,8 @@ namespace VulkanSimplified
 
 		bool FreeMemory(std::pair<IDObject<VulkanSimplifiedInternal::MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound = true);
 
+		bool IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const;
+
 	private:
 		VulkanSimplifiedInternal::MemoryObjectsListInternal& _internal;
 	};

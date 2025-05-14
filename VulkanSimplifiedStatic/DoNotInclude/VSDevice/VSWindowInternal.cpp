@@ -58,7 +58,7 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("WindowInternal::WindowInternal Error: Erroneous window creation settings!");
 		}
 
-		ratio = static_cast<double>(std::min(creationData.width, creationData.height)) / static_cast<double>(std::max(creationData.width, creationData.height));
+		_aspectRatio = static_cast<double>(creationData.width) / static_cast<double>(creationData.height);
 
 		_window = SDL_CreateWindow(_windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(creationData.width), static_cast<int>(creationData.height),
 			flags);
@@ -194,8 +194,7 @@ namespace VulkanSimplifiedInternal
 		DestroySwapchain();
 
 		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_physicalDevice, _surface, &_surfaceCapabilities);
-		ratio = static_cast<double>(std::min(_surfaceCapabilities.currentExtent.width, _surfaceCapabilities.currentExtent.height)) /
-			static_cast<double>(std::max(_surfaceCapabilities.currentExtent.width, _surfaceCapabilities.currentExtent.height));
+		_aspectRatio = static_cast<double>(_surfaceCapabilities.currentExtent.width) / static_cast<double>(_surfaceCapabilities.currentExtent.height);
 
 		VkSwapchainCreateInfoKHR createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;

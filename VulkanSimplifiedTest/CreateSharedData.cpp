@@ -10,6 +10,7 @@
 #include <VSMain.h>
 #include <VSSharedDataMainList.h>
 #include <VSSharedPipelineDataLists.h>
+#include <VSSharedDescriptorDataList.h>
 #include <VSShaderTypeFlags.h>
 #include <VSPipelinePrimitiveTopology.h>
 #include <VSPipelinePolygonMode.h>
@@ -22,6 +23,8 @@
 #include <VSDataFormatFlags.h>
 #include <VSVertexBindingInputRate.h>
 
+#include <VSDescriptorTypeFlags.h>
+
 void CreateSharedData(VulkanData& data)
 {
 	data.sharedData = std::make_unique<VulkanSharedData>();
@@ -29,6 +32,7 @@ void CreateSharedData(VulkanData& data)
 
 	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
 	auto pipelineData = sharedData.GetSharedPipelineDataListss();
+	auto descriptorData = sharedData.GetSharedDescriptorDataList();
 
 	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_FRAGMENT);
 	sharedDataList.vertexShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_VERTEX);
@@ -51,4 +55,7 @@ void CreateSharedData(VulkanData& data)
 		VulkanSimplified::COLOR_COMPONENT_B | VulkanSimplified::COLOR_COMPONENT_A;
 
 	sharedDataList.colorBlendData = pipelineData.AddPipelineColorBlendAttachment(colorBlendingComponents, VulkanSimplified::ColorBlendingPreset::NO_BLENDING);
+
+	sharedDataList.uniformBufferBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER, 1,
+		VulkanSimplified::SHADER_TYPE_VERTEX);
 }

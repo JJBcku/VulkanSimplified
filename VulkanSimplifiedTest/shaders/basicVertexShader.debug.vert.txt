@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google Shaderc over Glslang; 11
-; Bound: 25
+; Bound: 48
 ; Schema: 0
                OpCapability Shader
           %2 = OpExtInstImport "GLSL.std.450"
@@ -20,9 +20,16 @@ layout(location = 1) in vec4 inColor;
 
 layout(location = 0) out vec4 outColor;
 
+layout(binding  = 0) uniform UniformBufferObject
+{
+	mat4 model;
+	mat4 view;
+	mat4 projection;
+} ubo;
+
 void main()
 {
-	gl_Position = inPos;
+	gl_Position = ubo.projection * ubo.view * ubo.model * vec4(inPos.xy, 0.0, 1.0);
 	outColor = inColor;
 }
 "
@@ -35,6 +42,11 @@ void main()
                OpMemberName %gl_PerVertex 2 "gl_ClipDistance"
                OpMemberName %gl_PerVertex 3 "gl_CullDistance"
                OpName %_ ""
+               OpName %UniformBufferObject "UniformBufferObject"
+               OpMemberName %UniformBufferObject 0 "model"
+               OpMemberName %UniformBufferObject 1 "view"
+               OpMemberName %UniformBufferObject 2 "projection"
+               OpName %ubo "ubo"
                OpName %inPos "inPos"
                OpName %outColor "outColor"
                OpName %inColor "inColor"
@@ -43,6 +55,18 @@ void main()
                OpMemberDecorate %gl_PerVertex 1 BuiltIn PointSize
                OpMemberDecorate %gl_PerVertex 2 BuiltIn ClipDistance
                OpMemberDecorate %gl_PerVertex 3 BuiltIn CullDistance
+               OpDecorate %UniformBufferObject Block
+               OpMemberDecorate %UniformBufferObject 0 ColMajor
+               OpMemberDecorate %UniformBufferObject 0 MatrixStride 16
+               OpMemberDecorate %UniformBufferObject 0 Offset 0
+               OpMemberDecorate %UniformBufferObject 1 ColMajor
+               OpMemberDecorate %UniformBufferObject 1 MatrixStride 16
+               OpMemberDecorate %UniformBufferObject 1 Offset 64
+               OpMemberDecorate %UniformBufferObject 2 ColMajor
+               OpMemberDecorate %UniformBufferObject 2 MatrixStride 16
+               OpMemberDecorate %UniformBufferObject 2 Offset 128
+               OpDecorate %ubo Binding 0
+               OpDecorate %ubo DescriptorSet 0
                OpDecorate %inPos Location 0
                OpDecorate %outColor Location 0
                OpDecorate %inColor Location 1
@@ -58,21 +82,44 @@ void main()
           %_ = OpVariable %_ptr_Output_gl_PerVertex Output
         %int = OpTypeInt 32 1
       %int_0 = OpConstant %int 0
+%mat4v4float = OpTypeMatrix %v4float 4
+%UniformBufferObject = OpTypeStruct %mat4v4float %mat4v4float %mat4v4float
+%_ptr_Uniform_UniformBufferObject = OpTypePointer Uniform %UniformBufferObject
+        %ubo = OpVariable %_ptr_Uniform_UniformBufferObject Uniform
+      %int_2 = OpConstant %int 2
+%_ptr_Uniform_mat4v4float = OpTypePointer Uniform %mat4v4float
+      %int_1 = OpConstant %int 1
 %_ptr_Input_v4float = OpTypePointer Input %v4float
       %inPos = OpVariable %_ptr_Input_v4float Input
+    %v2float = OpTypeVector %float 2
+    %float_0 = OpConstant %float 0
+    %float_1 = OpConstant %float 1
 %_ptr_Output_v4float = OpTypePointer Output %v4float
    %outColor = OpVariable %_ptr_Output_v4float Output
     %inColor = OpVariable %_ptr_Input_v4float Input
-               OpLine %1 8 11
+               OpLine %1 15 11
        %main = OpFunction %void None %4
           %6 = OpLabel
-               OpLine %1 10 0
-         %19 = OpLoad %v4float %inPos
-         %21 = OpAccessChain %_ptr_Output_v4float %_ %int_0
-               OpStore %21 %19
-               OpLine %1 11 0
-         %24 = OpLoad %v4float %inColor
-               OpStore %outColor %24
-               OpLine %1 12 0
+               OpLine %1 17 0
+         %23 = OpAccessChain %_ptr_Uniform_mat4v4float %ubo %int_2
+         %24 = OpLoad %mat4v4float %23
+         %26 = OpAccessChain %_ptr_Uniform_mat4v4float %ubo %int_1
+         %27 = OpLoad %mat4v4float %26
+         %28 = OpMatrixTimesMatrix %mat4v4float %24 %27
+         %29 = OpAccessChain %_ptr_Uniform_mat4v4float %ubo %int_0
+         %30 = OpLoad %mat4v4float %29
+         %31 = OpMatrixTimesMatrix %mat4v4float %28 %30
+         %35 = OpLoad %v4float %inPos
+         %36 = OpVectorShuffle %v2float %35 %35 0 1
+         %39 = OpCompositeExtract %float %36 0
+         %40 = OpCompositeExtract %float %36 1
+         %41 = OpCompositeConstruct %v4float %39 %40 %float_0 %float_1
+         %42 = OpMatrixTimesVector %v4float %31 %41
+         %44 = OpAccessChain %_ptr_Output_v4float %_ %int_0
+               OpStore %44 %42
+               OpLine %1 18 0
+         %47 = OpLoad %v4float %inColor
+               OpStore %outColor %47
+               OpLine %1 19 0
                OpReturn
                OpFunctionEnd

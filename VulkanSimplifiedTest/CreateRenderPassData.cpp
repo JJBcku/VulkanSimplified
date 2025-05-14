@@ -27,7 +27,7 @@ void CreateRenderPassData(VulkanData& data)
 	data.renderPassData = std::make_unique<VulkanRenderPassData>();
 
 	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
-	auto sharedRenderPassData = sharedData.GetRenderPassDataList();
+	auto sharedRenderPassData = sharedData.GetSharedRenderPassDataList();
 
 	VulkanSimplified::DataFormatSetIndependentID format = data.instanceDependentData->supportedFormat;
 

@@ -150,6 +150,11 @@ namespace VulkanSimplifiedInternal
 		memoryTypeData[suballocationID.first.second].value().WriteToMemory(suballocationID, writeOffset, writeData, writeSize);
 	}
 
+	bool MemoryObjectsListInternal::IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const
+	{
+		return memoryTypeData[allocationID.second].value().IsMemoryMapped();
+	}
+
 	bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)
 	{
 		if (memoryID.second >= typeCount)

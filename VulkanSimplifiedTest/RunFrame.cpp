@@ -39,6 +39,26 @@
 #include <VSDataBuffersMemoryBarrierData.h>
 #include <VSImagesMemoryBarrierData.h>
 
+UniformBufferData ubo;
+
+static UniformBufferData CalculateUniformBuffer()
+{
+	UniformBufferData ret{};
+
+	static auto startTime = std::chrono::high_resolution_clock::now();
+
+	auto currentTime = std::chrono::high_resolution_clock::now();
+
+	float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+	ret.model = glm::rotate(glm::mat4(1.0), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	ret.view = glm::lookAt(glm::vec3(2.0f), glm::vec3(0.0), glm::vec3(0.0f, 0.0f, 1.0f));
+	ret.projection = glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 10.0f);
+	ret.projection[1][1] *= -1;
+
+	return ret;
+}
+
 void RunFrame(VulkanData& data, uint32_t frameIndex)
 {
 	auto deviceMain = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass();
@@ -49,6 +69,8 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	auto graphicQf = mainPoolList.GetQueueFamiliesPoolGroup(data.commandBufferData->graphicGroup);
 	auto graphicPool = graphicQf.GetCommandPoolWithIndividualReset(data.commandBufferData->graphicPool);
 	auto graphicCommandBuffer = graphicPool.GetPrimaryCommandBuffer(data.commandBufferData->graphicBuffers[frameIndex]);
+
+	auto& memData = *data.memoryData;
 
 	std::vector<VulkanSimplified::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;
 
@@ -68,18 +90,50 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	graphicCommandBuffer.AcquireNextImage(std::numeric_limits<std::uint64_t>::max(), data.synchronizationData->imageAvailableSemaphores[frameIndex], {},
 		imageIndice, data.deviceDependentData->windowID);
 
-	dataBufferLists.WriteToStagingBuffer(data.memoryData->stagingBuffers[frameIndex], 0, reinterpret_cast<const unsigned char&>(*vertices.data()), vertices.size() * sizeof(vertices[0]));
-	dataBufferLists.WriteToStagingBuffer(data.memoryData->stagingBuffers[frameIndex], vertices.size() * sizeof(vertices[0]),
-		reinterpret_cast<const unsigned char&>(*indices.data()), indices.size() * sizeof(indices[0]));
+	const VulkanSimplified::DataBuffersCopyRegionData& vertexCopyRegion = data.frameData->vertexCopyRegion;
+	const VulkanSimplified::DataBuffersCopyRegionData& indexCopyRegion = data.frameData->indexCopyRegion;
+	const VulkanSimplified::DataBuffersCopyRegionData& uniformCopyRegion = data.frameData->uniformCopyRegion;
+
+	if (memData.vertexMemoryMapped)
+	{
+		dataBufferLists.WriteToVertexBuffer(memData.vertexBuffers[frameIndex], 0, reinterpret_cast<const unsigned char&>(*vertices.data()),
+			vertexCopyRegion.writeSize);
+	}
+	else
+	{
+		dataBufferLists.WriteToStagingBuffer(memData.stagingBuffers[frameIndex], vertexCopyRegion.srcOffset, reinterpret_cast<const unsigned char&>(*vertices.data()),
+			vertexCopyRegion.writeSize);
+	}
+		
+
+	if (memData.indexMemoryMapped)
+	{
+		dataBufferLists.WriteToIndexBuffer(memData.indexBuffers[frameIndex], 0, reinterpret_cast<const unsigned char&>(*indices.data()),
+			indexCopyRegion.writeSize);
+	}
+	else
+	{
+		dataBufferLists.WriteToStagingBuffer(memData.stagingBuffers[frameIndex], indexCopyRegion.srcOffset, reinterpret_cast<const unsigned char&>(*indices.data()),
+			indexCopyRegion.writeSize);
+	}
+
+	ubo = CalculateUniformBuffer();
+
+	if (memData.uniformMemoryMapped)
+	{
+		dataBufferLists.WriteToUniformBuffer(memData.uniformBuffers[frameIndex], 0, reinterpret_cast<const unsigned char&>(ubo), uniformCopyRegion.writeSize);
+	}
+	else
+	{
+		dataBufferLists.WriteToStagingBuffer(memData.stagingBuffers[frameIndex], uniformCopyRegion.srcOffset, reinterpret_cast<const unsigned char&>(ubo),
+			uniformCopyRegion.writeSize);
+	}
 
 	VulkanSimplified::QueueOwnershipTransferData queueData;
 
-	const VulkanSimplified::DataBuffersCopyRegionData& vertexCopyRegion = data.frameData->vertexCopyRegion;
-	const VulkanSimplified::DataBuffersCopyRegionData& indexCopyRegion = data.frameData->indexCopyRegion;
-
 	const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBufferMemoryBarrierData = data.frameData->dataBufferMemoryBarrierData[frameIndex];
 
-	if (data.commandBufferData->transferGroup.has_value())
+	if (data.commandBufferData->transferGroup.has_value() && (!memData.vertexMemoryMapped || !memData.indexMemoryMapped || !memData.uniformMemoryMapped))
 	{
 		auto transferQf = mainPoolList.GetQueueFamiliesPoolGroup(data.commandBufferData->transferGroup.value());
 		auto transferPool = transferQf.GetCommandPoolWithIndividualReset(data.commandBufferData->transferPool.value());
@@ -88,8 +142,12 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		transferBuffer.ResetCommandBuffer(false);
 		transferBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
 
-		transferBuffer.TranferDataToVertexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->vertexBuffers[frameIndex], vertexCopyRegion);
-		transferBuffer.TranferDataToIndexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->indexBuffers[frameIndex], indexCopyRegion);
+		if (!memData.vertexMemoryMapped)
+			transferBuffer.TranferDataToVertexBuffer(memData.stagingBuffers[frameIndex], memData.vertexBuffers[frameIndex], vertexCopyRegion);
+		if (!memData.indexMemoryMapped)
+			transferBuffer.TranferDataToIndexBuffer(memData.stagingBuffers[frameIndex], memData.indexBuffers[frameIndex], indexCopyRegion);
+		if (!memData.uniformMemoryMapped)
+			transferBuffer.TranferDataToUniformBuffer(memData.stagingBuffers[frameIndex], memData.uniformBuffers[frameIndex], uniformCopyRegion);
 
 		transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 			{}, dataBufferMemoryBarrierData, {});
@@ -155,28 +213,28 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		graphicCommandBuffer.TransitionSwapchainImageToTrasferDestination(data.deviceDependentData->windowID, {}, imageIndice);
 	}
 
-	if (data.commandBufferData->transferGroup.has_value())
+	if (data.commandBufferData->transferGroup.has_value() && (!memData.vertexMemoryMapped || !memData.indexMemoryMapped))
 	{
 		graphicCommandBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 			{}, dataBufferMemoryBarrierData, {});
 	}
 	else
 	{
-		graphicCommandBuffer.TranferDataToVertexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->vertexBuffers[frameIndex], vertexCopyRegion);
-		graphicCommandBuffer.TranferDataToIndexBuffer(data.memoryData->stagingBuffers[frameIndex], data.memoryData->indexBuffers[frameIndex], indexCopyRegion);
+		graphicCommandBuffer.TranferDataToVertexBuffer(memData.stagingBuffers[frameIndex], memData.vertexBuffers[frameIndex], vertexCopyRegion);
+		graphicCommandBuffer.TranferDataToIndexBuffer(memData.stagingBuffers[frameIndex], memData.indexBuffers[frameIndex], indexCopyRegion);
 	}
 
-	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, data.memoryData->framebuffers[frameIndex], 0U, 0U, width, height, data.renderPassData->clearValues);
+	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, memData.framebuffers[frameIndex], 0U, 0U, width, height, data.renderPassData->clearValues);
 
 	graphicCommandBuffer.BindGraphicsPipeline(data.pipelineData->pipeline);
-	graphicCommandBuffer.BindVertexBuffers(0, { {data.memoryData->vertexBuffers[frameIndex], 0} });
-	graphicCommandBuffer.BindIndexBuffer(data.memoryData->indexBuffers[frameIndex], 0, VulkanSimplified::IndexType::INDEX_TYPE_16_BITS);
+	graphicCommandBuffer.BindVertexBuffers(0, { {memData.vertexBuffers[frameIndex], 0} });
+	graphicCommandBuffer.BindIndexBuffer(memData.indexBuffers[frameIndex], 0, VulkanSimplified::IndexType::INDEX_TYPE_16_BITS);
 
 	graphicCommandBuffer.DrawIndexed(static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
 
 	graphicCommandBuffer.EndRenderPass();
 
-	graphicCommandBuffer.BlitToSwapchainImage(data.deviceDependentData->windowID, data.memoryData->colorRenderTargetImages[frameIndex], 0, 0, width, height, imageIndice);
+	graphicCommandBuffer.BlitToSwapchainImage(data.deviceDependentData->windowID, memData.colorRenderTargetImages[frameIndex], 0, 0, width, height, imageIndice);
 
 	if (data.commandBufferData->presentGroup.has_value())
 	{
@@ -202,7 +260,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->imageAvailableSemaphores[frameIndex], VulkanSimplified::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT };
 	}
 
-	if (data.commandBufferData->transferGroup.has_value())
+	if (data.commandBufferData->transferGroup.has_value() && (!memData.vertexMemoryMapped || !memData.indexMemoryMapped))
 	{
 		submitInfo[0].waitSemaphores.emplace_back(data.synchronizationData->dataTransferFinishedSemaphores[frameIndex], VulkanSimplified::PIPELINE_STAGE_VERTEX_INPUT);
 	}

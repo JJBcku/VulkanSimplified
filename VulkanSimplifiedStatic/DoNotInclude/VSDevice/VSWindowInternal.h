@@ -69,7 +69,7 @@ namespace VulkanSimplifiedInternal
 
 		SDL_Window* _window;
 		std::string _windowTitle;
-		double ratio;
+		double _aspectRatio;
 
 		VkSurfaceKHR _surface;
 		VkSurfaceCapabilitiesKHR _surfaceCapabilities;

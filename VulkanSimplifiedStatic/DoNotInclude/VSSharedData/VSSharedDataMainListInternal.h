@@ -17,12 +17,12 @@ namespace VulkanSimplifiedInternal
 		SharedDataMainListInternal(const VulkanSimplified::SharedDataListsCapacities& initialCapabilities);
 		~SharedDataMainListInternal();
 
-		SharedDescriptorDataListInternal& GetDescriptorDataList();
-		SharedRenderPassDataListInternal& GetRenderPassDataList();
+		SharedDescriptorDataListInternal& GetSharedDescriptorDataList();
+		SharedRenderPassDataListInternal& GetSharedRenderPassDataList();
 		SharedPipelineDataListssInternal& GetPipelineDataList();
 
-		const SharedDescriptorDataListInternal& GetDescriptorDataList() const;
-		const SharedRenderPassDataListInternal& GetRenderPassDataList() const;
+		const SharedDescriptorDataListInternal& GetSharedDescriptorDataList() const;
+		const SharedRenderPassDataListInternal& GetSharedRenderPassDataList() const;
 		const SharedPipelineDataListssInternal& GetPipelineDataList() const;
 
 	private:

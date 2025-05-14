@@ -24,5 +24,12 @@ struct VulkanMemoryData
 	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer>> stagingBuffers;
 
+	VulkanSimplified::MemoryAllocationFullID uniformMemoryAllocation;
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer>> uniformBuffers;
+
+	bool vertexMemoryMapped = false;
+	bool indexMemoryMapped = false;
+	bool uniformMemoryMapped = false;
+
 	VulkanMemoryData() = default;
 };

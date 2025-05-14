@@ -3,6 +3,7 @@
 #include <CustomLists/IDObject.h>
 
 #include <VSSharedPipelineDataListsDef.h>
+#include <VSSharedDescriptorDataListDef.h>
 
 struct VulkanSharedData
 {
@@ -22,6 +23,8 @@ struct VulkanSharedData
 	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> multisamplingData;
 	std::optional<IDObject<VulkanSimplifiedInternal::PipelineDepthStencilStateData>> depthStencilData;
 	IDObject<VulkanSimplifiedInternal::PipelineColorBlendAttachment> colorBlendData;
+
+	IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> uniformBufferBinding;
 
 	VulkanSharedData();
 };

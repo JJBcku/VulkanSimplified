@@ -12,6 +12,7 @@
 #include <VSInstance.h>
 #include <VSDeviceMain.h>
 #include <VSPipelineDataLists.h>
+#include <VSDescriptorDataList.h>
 
 #include <VSSharedDataMainList.h>
 #include <VSSharedPipelineDataLists.h>
@@ -24,10 +25,14 @@ void CreatePipelineData(VulkanData& data)
 	auto instance = data.basicData->vsmain->GetInstance();
 	auto deviceMain = instance.GetChoosenDevicesMainClass();
 	auto devicePipelineDataList = deviceMain.GetPipelineDataLists();
+	auto descriptorDataList = deviceMain.GetDescriptorDataLists();
 
 	data.pipelineData = std::make_unique<VulkanPipelineData>();
 
+	data.pipelineData->descriptorLayout = descriptorDataList.AddDescriptorSetLayout(0, { data.sharedData->uniformBufferBinding });
+
 	VulkanSimplified::PipelineLayoutCreationData layoutData;
+	layoutData._descriptorSets = { data.pipelineData->descriptorLayout };
 
 	data.pipelineData->pipelineLayout = devicePipelineDataList.AddPipelineLayout(layoutData);
 

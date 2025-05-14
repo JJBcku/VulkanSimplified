@@ -165,6 +165,11 @@ namespace VulkanSimplifiedInternal
 		std::memcpy(&_data[totalOffset], &writeData, writeSize);
 	}
 
+	bool MemoryAllocationData::IsMemoryBound() const
+	{
+		return _data != nullptr;
+	}
+
 	void MemoryAllocationData::CheckSuballocationVectorSize(size_t addOnReserving)
 	{
 		if (_suballocationData.size() == _suballocationData.capacity())

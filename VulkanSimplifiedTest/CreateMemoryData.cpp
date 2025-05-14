@@ -85,20 +85,20 @@ void CreateMemoryData(VulkanData& data)
 		memData.vertexBuffers.push_back(bufferLists.AddVertexBuffer(vertices.size() * sizeof(vertices[0]), {}, framesInFlight));
 		memData.indexBuffers.push_back(bufferLists.AddIndexBuffer(indices.size(), VulkanSimplified::IndexType::INDEX_TYPE_16_BITS, {}, framesInFlight));
 		memData.stagingBuffers.push_back(bufferLists.AddStagingBuffer(1024, {}, framesInFlight));
+		memData.uniformBuffers.push_back(bufferLists.AddUniformBuffer(sizeof(UniformBufferData), {}, framesInFlight));
 	}
 
 	allocationSize = bufferLists.GetVertexBuffersSize(memData.vertexBuffers.back()) * framesInFlight;
 	memoryTypeMask = bufferLists.GetVertexBuffersMemoryTypeMask(memData.vertexBuffers.back());
 
-	memData.vertexMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
+	memData.vertexMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 8);
 
 	allocationSize = bufferLists.GetIndexBuffersSize(memData.indexBuffers.back()) * framesInFlight;
 	memoryTypeMask = bufferLists.GetIndexBuffersMemoryTypeMask(memData.indexBuffers.back());
 
-	memData.indexMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
+	memData.indexMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 8);
 
 	acceptableMemoryTypes.clear();
-	acceptableMemoryTypes.reserve(5);
 	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
 	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
 	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
@@ -108,12 +108,31 @@ void CreateMemoryData(VulkanData& data)
 	allocationSize = bufferLists.GetStagingBuffersSize(memData.stagingBuffers.back()) * framesInFlight;
 	memoryTypeMask = bufferLists.GetStagingBuffersMemoryTypeMask(memData.stagingBuffers.back());
 
-	memData.stagingMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
+	memData.stagingMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 8);
+
+	acceptableMemoryTypes.clear();
+	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL);
+
+	allocationSize = bufferLists.GetUniformBuffersSize(memData.uniformBuffers.back()) * framesInFlight;
+	memoryTypeMask = bufferLists.GetUniformBuffersMemoryTypeMask(memData.uniformBuffers.back());
+
+	memData.uniformMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 8);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
 		bufferLists.BindVertexBuffer(memData.vertexBuffers[i], memData.vertexMemoryAllocation);
 		bufferLists.BindIndexBuffer(memData.indexBuffers[i], memData.indexMemoryAllocation);
 		bufferLists.BindStagingBuffer(memData.stagingBuffers[i], memData.stagingMemoryAllocation);
+		bufferLists.BindUniformBuffer(memData.uniformBuffers[i], memData.uniformMemoryAllocation);
 	}
+
+	memData.vertexMemoryMapped = memoryList.IsMemoryMapped(memData.vertexMemoryAllocation);
+	memData.indexMemoryMapped = memoryList.IsMemoryMapped(memData.indexMemoryAllocation);
+	memData.uniformMemoryMapped = memoryList.IsMemoryMapped(memData.uniformMemoryAllocation);
 }

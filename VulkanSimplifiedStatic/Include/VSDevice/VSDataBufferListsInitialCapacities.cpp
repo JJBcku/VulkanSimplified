@@ -8,5 +8,6 @@ namespace VulkanSimplified
 		vertexBufferListInitialCapacity = 0;
 		stagingBufferListInitialCapacity = 0;
 		indexBufferListInitialCapacity = 0;
+		uniformBufferListInitialCapacity = 0;
 	}
 }

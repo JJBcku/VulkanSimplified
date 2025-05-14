@@ -70,6 +70,18 @@ namespace VulkanSimplified
 		_internal.TranferDataListToIndexBuffer(srcBufferID, dstBufferID, copyRegionsList);
 	}
 
+	void CommandBufferBase::TranferDataToUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> dstBufferID, const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+	{
+		_internal.TranferDataToUniformBuffer(srcBufferID, dstBufferID, copyRegion);
+	}
+
+	void CommandBufferBase::TranferDataListToUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> dstBufferID, const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	{
+		_internal.TranferDataListToUniformBuffer(srcBufferID, dstBufferID, copyRegionsList);
+	}
+
 	void CommandBufferBase::CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages, const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
 		const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData)
 	{

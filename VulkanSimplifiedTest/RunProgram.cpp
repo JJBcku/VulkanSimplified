@@ -30,7 +30,6 @@
 
 #include <thread>
 #include <iostream>
-#include <chrono>
 
 void RunProgram()
 {

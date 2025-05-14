@@ -8,6 +8,7 @@ struct VulkanFrameData
 {
 	VulkanSimplified::DataBuffersCopyRegionData vertexCopyRegion;
 	VulkanSimplified::DataBuffersCopyRegionData indexCopyRegion;
+	VulkanSimplified::DataBuffersCopyRegionData uniformCopyRegion;
 
 	std::vector<std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>> dataBufferMemoryBarrierData;
 	std::vector<VulkanSimplified::CommandBufferSubmissionData> submitInfo;

@@ -43,6 +43,8 @@ namespace VulkanSimplifiedInternal
 		void WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
 			VulkanSimplified::MemorySize writeSize);
 
+		bool IsMemoryMapped() const;
+
 	private:
 		VkDevice _device;
 
