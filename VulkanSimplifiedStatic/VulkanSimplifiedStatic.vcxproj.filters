@@ -420,10 +420,10 @@
     <ClInclude Include="Include\VSCommon\VSAccessFlags.h">
       <Filter>Header Files\Include\Common</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDescriptorDataList.h">
+    <ClInclude Include="Include\VSDevice\VSDescriptorDataLists.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.h">
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorDataListsInternal.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDescriptorListsInitialCapacities.h">
@@ -892,7 +892,19 @@
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupIFDescriptorPool.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupNIFDescriptorPool.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorPoolTypeCapacities.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSDescriptorTypeFlagsInternal.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1163,7 +1175,7 @@
     <ClCompile Include="Include\VSSharedData\VSDepthUsage.cpp">
       <Filter>Source Files\Include\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDescriptorDataList.cpp">
+    <ClCompile Include="Include\VSDevice\VSDescriptorDataLists.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDescriptorListsInitialCapacities.cpp">
@@ -1346,7 +1358,7 @@
     <ClCompile Include="DoNotInclude\VSSharedData\VSVertexInputSharedPipelineData.cpp">
       <Filter>Source Files\DoNotInclude\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorDataListInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorDataListsInternal.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupFence.cpp">
@@ -1485,7 +1497,19 @@
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBuffer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupIFDescriptorPool.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupNIFDescriptorPool.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorPoolTypeCapacities.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSCommon\VSDescriptorTypeFlagsInternal.cpp">
+      <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,13 +10,13 @@
 
 #include "../VSSharedData/VSSharedPipelineDataListsInternal.h"
 
-#include "VSDescriptorDataListInternal.h"
+#include "VSDescriptorDataListsInternal.h"
 #include "VSShaderListsInternal.h"
 #include "VSRenderPassDataListInternal.h"
 
 namespace VulkanSimplifiedInternal
 {
-    PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListssInternal& pipelineData, const DescriptorDataListInternal& descriptorData,
+    PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListssInternal& pipelineData, const DescriptorDataListsInternal& descriptorData,
         const ShaderListsInternal& shaderList,  const RenderPassListInternal& renderPassList, VkDevice device,
         const VulkanSimplified::PipelineDataListsInitialCapacities& initialCapacities) : _pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList),
         _renderPassList(renderPassList), _device(device), _pipelineLayoutList(initialCapacities.pipelineLayoutListInitialCapacity),

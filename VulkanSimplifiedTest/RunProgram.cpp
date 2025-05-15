@@ -13,6 +13,8 @@
 #include "CreateMemoryData.h"
 #include "CreateSynchronizationData.h"
 #include "CreateCommandBufferData.h"
+#include "CreateDescriptorData.h"
+
 #include "CreateFrameData.h"
 
 #include "MiscFunctions.h"
@@ -45,6 +47,8 @@ void RunProgram()
 	CreateMemoryData(data);
 	CreateSynchronizationData(data);
 	CreateCommandBufferData(data);
+	CreateDescriptorData(data);
+
 	CreateFrameData(data);
 
 	uint32_t frameIndex = 0;

@@ -6,5 +6,8 @@ namespace VulkanSimplified
 	DescriptorListsInitialCapacities::DescriptorListsInitialCapacities()
 	{
 		descriptorSetListInitialCapacity = 0;
+
+		noIndividualFreeingDescriptorPoolsListInitialCapacity = 0;
+		individualFreeingDescriptorPoolsListInitialCapacity = 0;
 	}
 }

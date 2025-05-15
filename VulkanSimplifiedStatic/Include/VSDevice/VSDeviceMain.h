@@ -11,7 +11,7 @@ namespace VulkanSimplified
 	class WindowList;
 	class ShaderLists;
 
-	class DescriptorDataList;
+	class DescriptorDataLists;
 	class RenderPassList;
 	class PipelineDataLists;
 
@@ -32,7 +32,7 @@ namespace VulkanSimplified
 		WindowList GetWindowList();
 		ShaderLists GetShaderLists();
 
-		DescriptorDataList GetDescriptorDataLists();
+		DescriptorDataLists GetDescriptorDataLists();
 		RenderPassList GetRenderPassList();
 		PipelineDataLists GetPipelineDataLists();
 
@@ -47,7 +47,7 @@ namespace VulkanSimplified
 		const WindowList GetWindowList() const;
 		const ShaderLists GetShaderLists() const;
 
-		const DescriptorDataList GetDescriptorDataLists() const;
+		const DescriptorDataLists GetDescriptorDataLists() const;
 		const RenderPassList GetRenderPassList() const;
 		const PipelineDataLists GetPipelineDataLists() const;
 

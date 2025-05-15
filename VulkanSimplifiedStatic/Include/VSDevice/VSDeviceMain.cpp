@@ -7,7 +7,7 @@
 #include "VSWindowList.h"
 #include "VSShaderLists.h"
 
-#include "VSDescriptorDataList.h"
+#include "VSDescriptorDataLists.h"
 #include "VSRenderPassDataList.h"
 #include "VSPipelineDataLists.h"
 
@@ -43,7 +43,7 @@ namespace VulkanSimplified
 		return _internal.GetShaderLists();
 	}
 
-	DescriptorDataList DeviceMain::GetDescriptorDataLists()
+	DescriptorDataLists DeviceMain::GetDescriptorDataLists()
 	{
 		return _internal.GetDescriptorDataLists();
 	}
@@ -98,7 +98,7 @@ namespace VulkanSimplified
 		return _internal.GetShaderLists();
 	}
 
-	const DescriptorDataList DeviceMain::GetDescriptorDataLists() const
+	const DescriptorDataLists DeviceMain::GetDescriptorDataLists() const
 	{
 		return _internal.GetDescriptorDataLists();
 	}

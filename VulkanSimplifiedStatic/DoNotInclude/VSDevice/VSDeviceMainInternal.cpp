@@ -45,7 +45,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderLists;
 	}
 
-	DescriptorDataListInternal& DeviceMainInternal::GetDescriptorDataLists()
+	DescriptorDataListsInternal& DeviceMainInternal::GetDescriptorDataLists()
 	{
 		return _descriptorLists;
 	}
@@ -100,7 +100,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderLists;
 	}
 
-	const DescriptorDataListInternal& DeviceMainInternal::GetDescriptorDataLists() const
+	const DescriptorDataListsInternal& DeviceMainInternal::GetDescriptorDataLists() const
 	{
 		return _descriptorLists;
 	}

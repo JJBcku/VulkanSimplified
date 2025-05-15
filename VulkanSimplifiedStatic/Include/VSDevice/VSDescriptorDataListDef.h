@@ -3,4 +3,7 @@
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupDescriptorSetLayout;
+
+	class AutoCleanupNIFDescriptorPool;
+	class AutoCleanupIFDescriptorPool;
 }

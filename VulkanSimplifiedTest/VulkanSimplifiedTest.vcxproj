@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClCompile Include="CreateBasicData.cpp" />
     <ClCompile Include="CreateCommandBufferData.cpp" />
+    <ClCompile Include="CreateDescriptorData.cpp" />
     <ClCompile Include="CreateDeviceDependentData.cpp" />
     <ClCompile Include="CreateFrameData.cpp" />
     <ClCompile Include="CreateInstanceDependentData.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="VulkanBasicData.cpp" />
     <ClCompile Include="VulkanCommandBufferData.cpp" />
     <ClCompile Include="VulkanData.cpp" />
+    <ClCompile Include="VulkanDescriptorData.cpp" />
     <ClCompile Include="VulkanDeviceDependentData.cpp" />
     <ClCompile Include="VulkanFrameData.cpp" />
     <ClCompile Include="VulkanInstanceDependentData.cpp" />
@@ -120,6 +122,7 @@
   <ItemGroup>
     <ClInclude Include="CreateBasicData.h" />
     <ClInclude Include="CreateCommandBufferData.h" />
+    <ClInclude Include="CreateDescriptorData.h" />
     <ClInclude Include="CreateDeviceDependentData.h" />
     <ClInclude Include="CreateFrameData.h" />
     <ClInclude Include="CreateInstanceDependentData.h" />
@@ -138,6 +141,7 @@
     <ClInclude Include="VulkanBasicData.h" />
     <ClInclude Include="VulkanCommandBufferData.h" />
     <ClInclude Include="VulkanData.h" />
+    <ClInclude Include="VulkanDescriptorData.h" />
     <ClInclude Include="VulkanDeviceDependentData.h" />
     <ClInclude Include="VulkanFrameData.h" />
     <ClInclude Include="VulkanInstanceDependentData.h" />

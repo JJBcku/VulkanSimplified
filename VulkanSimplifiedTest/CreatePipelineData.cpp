@@ -12,7 +12,7 @@
 #include <VSInstance.h>
 #include <VSDeviceMain.h>
 #include <VSPipelineDataLists.h>
-#include <VSDescriptorDataList.h>
+#include <VSDescriptorDataLists.h>
 
 #include <VSSharedDataMainList.h>
 #include <VSSharedPipelineDataLists.h>

@@ -6,6 +6,9 @@ namespace VulkanSimplified
 	{
 		size_t descriptorSetListInitialCapacity;
 
+		size_t noIndividualFreeingDescriptorPoolsListInitialCapacity;
+		size_t individualFreeingDescriptorPoolsListInitialCapacity;
+
 		DescriptorListsInitialCapacities();
 	};
 }
