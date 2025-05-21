@@ -48,7 +48,7 @@ void CreateSharedData(VulkanData& data)
 	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);
 
 	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
-	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, true, true);
+	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, true, false);
 	sharedDataList.multisamplingData = pipelineData.AddPipelineMultisampleData(VulkanSimplified::SAMPLE_1, {});
 
 	VulkanSimplified::ColorBlendingComponentFlags colorBlendingComponents = VulkanSimplified::COLOR_COMPONENT_R | VulkanSimplified::COLOR_COMPONENT_G |

@@ -14,11 +14,18 @@
 
 #include "VSDescriptorPoolTypeCapacities.h"
 
+#include "VSDataBufferListsInternal.h"
+
+#include "../../Include/VSDevice/VSUniformBufferDescriptorSetWriteData.h"
+
+#include "VSUniformBufferDescriptorSetWriteDataInternal.h"
+
 namespace VulkanSimplifiedInternal
 {
-	DescriptorDataListsInternal::DescriptorDataListsInternal(const SharedDescriptorDataListInternal& sharedDescriptorData, VkDevice device,
-		const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities) : _sharedDescriptorData(sharedDescriptorData), _device(device),
-		_descriptorSetLayouts(initialCapacities.descriptorSetListInitialCapacity), _NIFDescriptorPools(initialCapacities.noIndividualFreeingDescriptorPoolsListInitialCapacity),
+	DescriptorDataListsInternal::DescriptorDataListsInternal(const SharedDescriptorDataListInternal& sharedDescriptorData, const DataBufferListsInternal& dataBufferList,
+		VkDevice device, const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities) : _sharedDescriptorData(sharedDescriptorData), _dataBufferList(dataBufferList),
+		_device(device), _descriptorSetLayouts(initialCapacities.descriptorSetListInitialCapacity),
+		_NIFDescriptorPools(initialCapacities.noIndividualFreeingDescriptorPoolsListInitialCapacity),
 		_IFDescriptorPools(initialCapacities.individualFreeingDescriptorPoolsListInitialCapacity)
 	{
 	}
@@ -169,6 +176,65 @@ namespace VulkanSimplifiedInternal
 		return _NIFDescriptorPools.AddObject(AutoCleanupNIFDescriptorPool(_device, add, maxTotalSetCount, capacities), addOnReserving);
 	}
 
+	std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> DescriptorDataListsInternal::AllocateNIFUniformBufferDescriptorSets(
+		IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID, std::vector<IDObject<AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs)
+	{
+		if (descriptorSetLayoutIDs.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::AllocateNIFUniformBufferDescriptorSets Error: Descriptor set layout id list overflowed!");
+
+		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
+
+		std::vector<VkDescriptorSetLayout> descriptorLayouts = GetDescriptorSetLayouts(descriptorSetLayoutIDs);
+
+		return pool.AllocateUniformBufferDescriptorSets(descriptorLayouts);
+	}
+
+	void DescriptorDataListsInternal::WriteNIFUniformBufferDescriptorSets(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		const std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData>& writeDataList)
+	{
+		if (writeDataList.empty())
+			return;
+
+		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::WriteNIFUniformBufferDescriptorSets Error: Write data list overflowed!");
+
+		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
+
+		std::vector<UniformBufferDescriptorSetWriteDataInternal> writeInternalData;
+		writeInternalData.resize(writeDataList.size());
+
+		for (size_t i = 0; i < writeDataList.size(); ++i)
+		{
+			auto& inData = writeDataList[i];
+			auto& outData = writeInternalData[i];
+
+			outData.descriptorSetID = inData.descriptorSetID;
+			outData.binding = inData.binding;
+			outData.startArrayIndex = inData.startArrayIndex;
+
+			if (inData.uniformBufferIDList.size() > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DescriptorDataListsInternal::WriteNIFUniformBufferDescriptorSets Error: Buffer ID list overflowed!");
+
+			outData.bufferList.reserve(inData.uniformBufferIDList.size());
+			for (size_t j = 0; j < inData.uniformBufferIDList.size(); ++j)
+			{
+				auto& inBuffer = inData.uniformBufferIDList[j];
+				if (inBuffer.has_value())
+					outData.bufferList.push_back(_dataBufferList.GetUniformBuffer(inBuffer.value()));
+				else
+					outData.bufferList.push_back(VK_NULL_HANDLE);
+			}
+		}
+
+		pool.WriteUniformBufferDescriptorSets(writeInternalData);
+	}
+
+	VkDescriptorSet DescriptorDataListsInternal::GetNIFUniformBufferDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const
+	{
+		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetUniformBufferDescriptorSet(descriptorSetID);
+	}
+
 	IDObject<AutoCleanupIFDescriptorPool> DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 		const std::vector<std::pair<VulkanSimplified::DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
 	{
@@ -273,4 +339,63 @@ namespace VulkanSimplifiedInternal
 		return _IFDescriptorPools.AddObject(AutoCleanupIFDescriptorPool(_device, add, maxTotalSetCount, capacities), addOnReserving);
 	}
 
+	std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> DescriptorDataListsInternal::AllocateIFUniformBufferDescriptorSets(
+		IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, std::vector<IDObject<AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs)
+	{
+		if (descriptorSetLayoutIDs.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::AllocateIFUniformBufferDescriptorSets Error: Descriptor set layout id list overflowed!");
+
+		auto& pool = _IFDescriptorPools.GetObject(descriptorPoolID);
+
+		std::vector<VkDescriptorSetLayout> descriptorLayouts = GetDescriptorSetLayouts(descriptorSetLayoutIDs);
+
+		return pool.AllocateUniformBufferDescriptorSets(descriptorLayouts);
+	}
+
+	void DescriptorDataListsInternal::WriteIFUniformBufferDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		const std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData>& writeDataList)
+	{
+		if (writeDataList.empty())
+			return;
+
+		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::WriteIFUniformBufferDescriptorSets Error: Write data list overflowed!");
+
+		auto& pool = _IFDescriptorPools.GetObject(descriptorPoolID);
+
+		std::vector<UniformBufferDescriptorSetWriteDataInternal> writeInternalData;
+		writeInternalData.resize(writeDataList.size());
+
+		for (size_t i = 0; i < writeDataList.size(); ++i)
+		{
+			auto& inData = writeDataList[i];
+			auto& outData = writeInternalData[i];
+
+			outData.descriptorSetID = inData.descriptorSetID;
+			outData.binding = inData.binding;
+			outData.startArrayIndex = inData.startArrayIndex;
+
+			if (inData.uniformBufferIDList.size() > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DescriptorDataListsInternal::WriteIFUniformBufferDescriptorSets Error: Buffer ID list overflowed!");
+
+			outData.bufferList.reserve(inData.uniformBufferIDList.size());
+			for (size_t j = 0; j < inData.uniformBufferIDList.size(); ++j)
+			{
+				auto& inBuffer = inData.uniformBufferIDList[j];
+				if (inBuffer.has_value())
+					outData.bufferList.push_back(_dataBufferList.GetUniformBuffer(inBuffer.value()));
+				else
+					outData.bufferList.push_back(VK_NULL_HANDLE);
+			}
+		}
+
+		pool.WriteUniformBufferDescriptorSets(writeInternalData);
+	}
+
+	VkDescriptorSet DescriptorDataListsInternal::GetIFUniformBufferDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const
+	{
+		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetUniformBufferDescriptorSet(descriptorSetID);
+	}
+	
 }

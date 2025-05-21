@@ -6,4 +6,6 @@ namespace VulkanSimplifiedInternal
 
 	class AutoCleanupNIFDescriptorPool;
 	class AutoCleanupIFDescriptorPool;
+
+	class AutoCleanupUniformBufferDescriptorSet;
 }

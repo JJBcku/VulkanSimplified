@@ -10,6 +10,7 @@
 #include "VSSynchronizationDataListsInternal.h"
 #include "VSWindowListInternal.h"
 #include "VSWindowInternal.h"
+#include "VSDescriptorDataListsInternal.h"
 
 #include "../../Include/VSDevice/VSDataBuffersCopyRegionData.h"
 #include "../../Include/VSDevice/VSGlobalMemoryBarrierData.h"
@@ -17,6 +18,9 @@
 #include "../../Include/VSDevice/VSImagesMemoryBarrierData.h"
 #include "../../Include/VSDevice/VSQueueOwnershipTransferData.h"
 #include "../../Include/VSDevice/VSIndexType.h"
+
+#include "../../Include/VSDevice/VSDescriptorPoolGenericID.h"
+#include "../../Include/VSDevice/VSDescriptorSetGenericID.h"
 
 #include "../VSCommon/VSPipelineStageFlagsInternal.h"
 #include "../VSCommon/VSAccessFlagsInternal.h"
@@ -28,9 +32,10 @@ namespace VulkanSimplifiedInternal
 {
 	CommandBufferBaseInternal::CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
-		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-		_core(core), _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData),
-		_synchronizationList(synchronizationList), _imageList(imageList), _dataBufferList(dataBufferList), _windowList(windowList), _device(device), _buffer(buffer), _queue(queue)
+		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList, VkDevice device,
+		VkCommandBuffer buffer, VkQueue queue) : _core(core), _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
+		_devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList), _dataBufferList(dataBufferList), _windowList(windowList),
+		_descriptorDataList(descriptorDataList), _device(device), _buffer(buffer), _queue(queue)
 	{
 	}
 
@@ -40,7 +45,7 @@ namespace VulkanSimplifiedInternal
 
 	CommandBufferBaseInternal::CommandBufferBaseInternal(CommandBufferBaseInternal&& rhs) noexcept : _core(rhs._core), _deviceRenderPassData(rhs._deviceRenderPassData),
 		_sharedRenderPassData(rhs._sharedRenderPassData), _devicePipelineData(rhs._devicePipelineData), _synchronizationList(rhs._synchronizationList), _imageList(rhs._imageList),
-		_dataBufferList(rhs._dataBufferList), _windowList(rhs._windowList), _device(rhs._device), _buffer(rhs._buffer), _queue(rhs._queue)
+		_dataBufferList(rhs._dataBufferList), _windowList(rhs._windowList), _descriptorDataList(rhs._descriptorDataList), _device(rhs._device), _buffer(rhs._buffer), _queue(rhs._queue)
 	{
 		rhs._device = VK_NULL_HANDLE;
 		rhs._buffer = VK_NULL_HANDLE;
@@ -542,6 +547,60 @@ namespace VulkanSimplifiedInternal
 		}
 
 		vkCmdBindIndexBuffer(_buffer, buffer, buffersOffset, type);
+	}
+
+	void CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
+		VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList,
+		const std::vector<uint32_t>& dynamicOffsetList)
+	{
+		if (descriptorSetIDList.empty())
+			return;
+
+		if (descriptorSetIDList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Descriptor set id list overflowed!");
+
+		if (dynamicOffsetList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Dynamic offsets list overflowed!");
+
+		VkPipelineLayout layout = _devicePipelineData.GetPipelineLayout(pipelineLayoutID);
+
+		std::vector<VkDescriptorSet> descriptorSetList;
+
+		descriptorSetList.reserve(descriptorSetIDList.size());
+
+		if (descriptorPoolID.type == VulkanSimplified::DescriptorPoolIDType::NIF)
+		{
+			for (size_t i = 0; i < descriptorSetIDList.size(); ++i)
+			{
+				switch (descriptorSetIDList[i].type)
+				{
+				case VulkanSimplified::DescriptorSetIDType::UNIFORM_BUFFER:
+					descriptorSetList.push_back(_descriptorDataList.GetNIFUniformBufferDescriptorSet(descriptorPoolID.NifID.ID, descriptorSetIDList[i].uniformBufferID.ID));
+					break;
+				default:
+					throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Program was given an erroneous Nif descriptor set ID!");
+				}
+			}
+		}
+		else if (descriptorPoolID.type == VulkanSimplified::DescriptorPoolIDType::IF)
+		{
+			for (size_t i = 0; i < descriptorSetIDList.size(); ++i)
+			{
+				switch (descriptorSetIDList[i].type)
+				{
+				case VulkanSimplified::DescriptorSetIDType::UNIFORM_BUFFER:
+					descriptorSetList.push_back(_descriptorDataList.GetIFUniformBufferDescriptorSet(descriptorPoolID.IfID.ID, descriptorSetIDList[i].uniformBufferID.ID));
+					break;
+				default:
+					throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Program was given an erroneous If descriptor set ID!");
+				}
+			}
+		}
+		else
+			throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Program was given an erroneous descriptor pool ID!");
+
+		vkCmdBindDescriptorSets(_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, layout, firstSet, static_cast<uint32_t>(descriptorSetList.size()),
+			descriptorSetList.data(), static_cast<uint32_t>(dynamicOffsetList.size()), dynamicOffsetList.data());
 	}
 
 }

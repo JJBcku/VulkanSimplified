@@ -26,6 +26,9 @@ namespace VulkanSimplified
 	struct DataBuffersMemoryBarrierData;
 	struct ImagesMemoryBarrierData;
 
+	union DescriptorPoolGenericID;
+	union DescriptorSetGenericID;
+
 	class CommandBufferBase
 	{
 	public:
@@ -66,6 +69,9 @@ namespace VulkanSimplified
 		void BindVertexBuffers(uint32_t firstBinding,
 			const std::vector<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
 		void BindIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType);
+
+		void BindDescriptorSetsToGraphicsPipeline(IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet, VulkanSimplified::DescriptorPoolGenericID descriptorPoolID,
+			const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList, const std::vector<uint32_t>& dynamicOffsetList);
 
 	private:
 		VulkanSimplifiedInternal::CommandBufferBaseInternal& _internal;

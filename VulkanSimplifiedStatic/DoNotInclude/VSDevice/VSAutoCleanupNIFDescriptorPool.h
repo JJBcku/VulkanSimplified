@@ -1,8 +1,14 @@
 #pragma once
 
+#include "../../Include/VSDevice/VSDescriptorDataListDef.h"
+
+#include <CustomLists/UnsortedIDVector.h>
+
 namespace VulkanSimplifiedInternal
 {
 	struct DescriptorPoolTypeCapacities;
+
+	struct UniformBufferDescriptorSetWriteDataInternal;
 
 	class AutoCleanupNIFDescriptorPool
 	{
@@ -16,8 +22,11 @@ namespace VulkanSimplifiedInternal
 		AutoCleanupNIFDescriptorPool& operator=(const AutoCleanupNIFDescriptorPool& rhs) noexcept = delete;
 		AutoCleanupNIFDescriptorPool& operator=(AutoCleanupNIFDescriptorPool&& rhs) noexcept;
 
-	protected:
-		VkDevice GetDevice() const;
+		std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> AllocateUniformBufferDescriptorSets(std::vector<VkDescriptorSetLayout> descriptorLayouts);
+
+		void WriteUniformBufferDescriptorSets(const std::vector<UniformBufferDescriptorSetWriteDataInternal>& uniformBuffer);
+
+		VkDescriptorSet GetUniformBufferDescriptorSet(IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const;
 
 	private:
 		VkDevice _device;
@@ -25,6 +34,8 @@ namespace VulkanSimplifiedInternal
 
 		uint32_t _maxTotalSetCount;
 		uint32_t _currentSetCount;
+
+		UnsortedIDVector<AutoCleanupUniformBufferDescriptorSet> _uniformBufferList;
 
 		void DestroyDescriptorPool() noexcept;
 	};

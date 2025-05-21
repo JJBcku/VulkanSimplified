@@ -20,6 +20,9 @@ namespace VulkanSimplified
 	struct GlobalMemoryBarrierData;
 	struct DataBuffersMemoryBarrierData;
 	struct ImagesMemoryBarrierData;
+
+	union DescriptorPoolGenericID;
+	union DescriptorSetGenericID;
 }
 
 namespace VulkanSimplifiedInternal
@@ -31,6 +34,7 @@ namespace VulkanSimplifiedInternal
 	class ImageDataListsInternal;
 	class DataBufferListsInternal;
 	class SynchronizationDataListsInternal;
+	class DescriptorDataListsInternal;
 
 	class SharedRenderPassDataListInternal;
 
@@ -39,7 +43,8 @@ namespace VulkanSimplifiedInternal
 	public:
 		CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData, const SharedRenderPassDataListInternal& sharedRenderPassData,
 			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, ImageDataListsInternal& imageList,
-			DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+			DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList, VkDevice device, VkCommandBuffer buffer,
+			VkQueue queue);
 		~CommandBufferBaseInternal();
 
 		CommandBufferBaseInternal(const CommandBufferBaseInternal&) noexcept = delete;
@@ -83,6 +88,9 @@ namespace VulkanSimplifiedInternal
 		void BindVertexBuffers(uint32_t firstBinding, const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
 		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize buffersOffset, VulkanSimplified::IndexType indexType);
 
+		void BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet, VulkanSimplified::DescriptorPoolGenericID descriptorPoolID,
+			const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList, const std::vector<uint32_t>& dynamicOffsetList);
+
 	protected:
 		const DeviceCoreInternal& _core;
 
@@ -96,6 +104,7 @@ namespace VulkanSimplifiedInternal
 		DataBufferListsInternal& _dataBufferList;
 
 		WindowListInternal& _windowList;
+		DescriptorDataListsInternal& _descriptorDataList;
 
 		VkDevice _device;
 		VkCommandBuffer _buffer;

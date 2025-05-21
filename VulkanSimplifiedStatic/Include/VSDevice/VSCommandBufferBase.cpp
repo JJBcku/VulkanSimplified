@@ -5,6 +5,9 @@
 
 #include "../../DoNotInclude/VSDevice/VSCommandBufferBaseInternal.h"
 
+#include "VSDescriptorPoolGenericID.h"
+#include "VSDescriptorSetGenericID.h"
+
 namespace VulkanSimplified
 {
 	CommandBufferBase::CommandBufferBase(VulkanSimplifiedInternal::CommandBufferBaseInternal& ref) : _internal(ref)
@@ -97,6 +100,13 @@ namespace VulkanSimplified
 	void CommandBufferBase::BindIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType)
 	{
 		_internal.BindIndexBuffer(bufferID, buffersOffset, indexType);
+	}
+
+	void CommandBufferBase::BindDescriptorSetsToGraphicsPipeline(IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
+		VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList,
+		const std::vector<uint32_t>& dynamicOffsetList)
+	{
+		_internal.BindDescriptorSetsToGraphicsPipeline(pipelineLayoutID, firstSet, descriptorPoolID, descriptorSetIDList, dynamicOffsetList);
 	}
 
 }
