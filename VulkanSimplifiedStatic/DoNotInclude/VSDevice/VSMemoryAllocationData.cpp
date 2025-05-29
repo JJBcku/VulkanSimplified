@@ -68,6 +68,16 @@ namespace VulkanSimplifiedInternal
 		return _totalSize - _usedSize;
 	}
 
+	bool MemoryAllocationData::SuballocationListEmpty() const
+	{
+		return _suballocationData.empty();
+	}
+
+	size_t MemoryAllocationData::SuballocationListSize() const
+	{
+		return _suballocationData.size();
+	}
+
 	size_t MemoryAllocationData::BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
 	{
 		CheckSuballocationVectorSize(addOnReserving);

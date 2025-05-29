@@ -22,6 +22,9 @@ namespace VulkanSimplifiedInternal
 		size_t GetTotalSize() const;
 		size_t GetFreeSize() const;
 
+		bool SuballocationListEmpty() const;
+		size_t SuballocationListSize() const;
+
 		size_t BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
 		size_t BindBuffer(VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
 

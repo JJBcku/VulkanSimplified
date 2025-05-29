@@ -13,4 +13,10 @@ namespace VulkanSimplified
 		colorRenderTargetID.type = ImagesIDType::COLOR_RENDER_TARGET;
 		colorRenderTargetID.ID = ID;
 	}
+
+	ImagesGenericID::ImagesGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ID)
+	{
+		texture2DID.type = ImagesIDType::TEXTURE_2D;
+		texture2DID.ID = ID;
+	}
 }

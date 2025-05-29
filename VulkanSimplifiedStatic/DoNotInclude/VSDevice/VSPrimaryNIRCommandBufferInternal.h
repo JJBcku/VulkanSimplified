@@ -7,6 +7,8 @@
 
 #include "../../Include/VSSharedData/VSRenderPassClearValueID.h"
 
+#include "../../Include/VSCommon/VSPipelineStageFlagsDef.h"
+
 namespace VulkanSimplified
 {
 	struct QueueOwnershipTransferData;

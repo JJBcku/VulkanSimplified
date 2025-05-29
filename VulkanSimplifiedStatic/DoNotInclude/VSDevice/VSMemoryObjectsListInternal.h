@@ -35,7 +35,7 @@ namespace VulkanSimplifiedInternal
 
 		VkDeviceMemory GetMemory(VulkanSimplified::MemoryAllocationFullID allocationID) const;
 
-		bool FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound);
+		bool FreeMemory(VulkanSimplified::MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty);
 
 		size_t BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
 			size_t addOnReserving);

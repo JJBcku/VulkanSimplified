@@ -37,8 +37,6 @@ namespace VulkanSimplifiedInternal
 		VkMemoryRequirements _memReq;
 		std::optional<VulkanSimplified::MemorySuballocationFullID> _memorySuballocation;
 
-		char* mapping;
-
 		void DestroyBuffer();
 	};
 }

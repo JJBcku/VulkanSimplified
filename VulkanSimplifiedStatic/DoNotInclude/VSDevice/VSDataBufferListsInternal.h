@@ -41,6 +41,16 @@ namespace VulkanSimplifiedInternal
 		VkBuffer GetIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID) const;
 		VkBuffer GetUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID) const;
 
+		const AutoCleanupVertexBuffer& GetVertexBufferInternal(IDObject<AutoCleanupVertexBuffer> bufferID) const;
+		const AutoCleanupStagingBuffer& GetStagingBufferInternal(IDObject<AutoCleanupStagingBuffer> bufferID) const;
+		const AutoCleanupIndexBuffer& GetIndexBufferInternal(IDObject<AutoCleanupIndexBuffer> bufferID) const;
+		const AutoCleanupUniformBuffer& GetUniformBufferInternal(IDObject<AutoCleanupUniformBuffer> bufferID) const;
+
+		bool RemoveVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, bool throwOnIDNotFound);
+		bool RemoveStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, bool throwOnIDNotFound);
+		bool RemoveIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, bool throwOnIDNotFound);
+		bool RemoveUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, bool throwOnIDNotFound);
+
 		uint32_t GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const;
 		VulkanSimplified::MemorySize GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const;
 		VulkanSimplified::MemorySize GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const;

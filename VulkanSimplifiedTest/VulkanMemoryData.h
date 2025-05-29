@@ -21,11 +21,11 @@ struct VulkanMemoryData
 	VulkanSimplified::MemoryAllocationFullID indexMemoryAllocation;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer>> indexBuffers;
 
-	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
-	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer>> stagingBuffers;
-
 	VulkanSimplified::MemoryAllocationFullID uniformMemoryAllocation;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer>> uniformBuffers;
+
+	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer>> stagingBuffers;
 
 	bool vertexMemoryMapped = false;
 	bool indexMemoryMapped = false;

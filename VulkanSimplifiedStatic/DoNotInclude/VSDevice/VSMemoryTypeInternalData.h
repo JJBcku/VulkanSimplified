@@ -26,7 +26,7 @@ namespace VulkanSimplifiedInternal
 
 		VkDeviceMemory GetMemory(IDObject<MemoryAllocationData> memoryId) const;
 
-		bool FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnNotFound);
+		bool FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty);
 
 		uint32_t GetHeapIndex() const;
 		uint32_t GetTypeIndex() const;

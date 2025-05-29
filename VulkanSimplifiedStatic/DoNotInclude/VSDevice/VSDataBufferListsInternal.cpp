@@ -257,6 +257,110 @@ namespace VulkanSimplifiedInternal
 		return _uniformBuffers.GetConstObject(bufferID).GetDataBuffer();
 	}
 
+	const AutoCleanupVertexBuffer& DataBufferListsInternal::GetVertexBufferInternal(IDObject<AutoCleanupVertexBuffer> bufferID) const
+	{
+		return _vertexBuffers.GetConstObject(bufferID);
+	}
+
+	const AutoCleanupStagingBuffer& DataBufferListsInternal::GetStagingBufferInternal(IDObject<AutoCleanupStagingBuffer> bufferID) const
+	{
+		return _stagingBuffers.GetConstObject(bufferID);
+	}
+
+	const AutoCleanupIndexBuffer& DataBufferListsInternal::GetIndexBufferInternal(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	{
+		return _indexBuffers.GetConstObject(bufferID);
+	}
+
+	const AutoCleanupUniformBuffer& DataBufferListsInternal::GetUniformBufferInternal(IDObject<AutoCleanupUniformBuffer> bufferID) const
+	{
+		return _uniformBuffers.GetConstObject(bufferID);
+	}
+
+	bool DataBufferListsInternal::RemoveVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		if (_vertexBuffers.CheckForID(bufferID))
+		{
+			auto& bufferData = _vertexBuffers.GetObject(bufferID);
+
+			auto suballocation = bufferData.GetBoundMemorySuballocationData();
+
+			_vertexBuffers.RemoveObject(bufferID, true);
+
+			if (suballocation.has_value())
+				_memoryObjectsList.RemoveSuballocation(suballocation.value(), true);
+
+			return true;
+		}
+		else if (throwOnIDNotFound)
+			throw std::runtime_error("DataBufferListsInternal::RemoveVertexBuffer Error: Program failed to find buffer to be removed!");
+		else
+			return false;
+	}
+
+	bool DataBufferListsInternal::RemoveStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		if (_stagingBuffers.CheckForID(bufferID))
+		{
+			auto& bufferData = _stagingBuffers.GetObject(bufferID);
+
+			auto suballocation = bufferData.GetBoundMemorySuballocationData();
+
+			_stagingBuffers.RemoveObject(bufferID, true);
+
+			if (suballocation.has_value())
+				_memoryObjectsList.RemoveSuballocation(suballocation.value(), true);
+
+			return true;
+		}
+		else if (throwOnIDNotFound)
+			throw std::runtime_error("DataBufferListsInternal::RemoveStagingBuffer Error: Program failed to find buffer to be removed!");
+		else
+			return false;
+	}
+
+	bool DataBufferListsInternal::RemoveIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		if (_indexBuffers.CheckForID(bufferID))
+		{
+			auto& bufferData = _indexBuffers.GetObject(bufferID);
+
+			auto suballocation = bufferData.GetBoundMemorySuballocationData();
+
+			_indexBuffers.RemoveObject(bufferID, true);
+
+			if (suballocation.has_value())
+				_memoryObjectsList.RemoveSuballocation(suballocation.value(), true);
+
+			return true;
+		}
+		else if (throwOnIDNotFound)
+			throw std::runtime_error("DataBufferListsInternal::RemoveIndexBuffer Error: Program failed to find buffer to be removed!");
+		else
+			return false;
+	}
+
+	bool DataBufferListsInternal::RemoveUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		if (_uniformBuffers.CheckForID(bufferID))
+		{
+			auto& bufferData = _uniformBuffers.GetObject(bufferID);
+
+			auto suballocation = bufferData.GetBoundMemorySuballocationData();
+
+			_uniformBuffers.RemoveObject(bufferID, true);
+
+			if (suballocation.has_value())
+				_memoryObjectsList.RemoveSuballocation(suballocation.value(), true);
+
+			return true;
+		}
+		else if (throwOnIDNotFound)
+			throw std::runtime_error("DataBufferListsInternal::RemoveUniformBuffer Error: Program failed to find buffer to be removed!");
+		else
+			return false;
+	}
+
 	uint32_t DataBufferListsInternal::GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _vertexBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();

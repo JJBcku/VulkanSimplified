@@ -14,6 +14,7 @@
 #include "CreateSynchronizationData.h"
 #include "CreateCommandBufferData.h"
 #include "CreateDescriptorData.h"
+#include "CreateTextureData.h"
 
 #include "CreateFrameData.h"
 
@@ -50,6 +51,7 @@ void RunProgram()
 	CreateDescriptorData(data);
 
 	CreateFrameData(data);
+	CreateTextureData(data);
 
 	uint32_t frameIndex = 0;
 	size_t framesThisSecond = 0;

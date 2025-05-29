@@ -148,11 +148,11 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		transferBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
 
 		if (!memData.vertexMemoryMapped)
-			transferBuffer.TranferDataToVertexBuffer(memData.stagingBuffers[frameIndex], memData.vertexBuffers[frameIndex], vertexCopyRegion);
+			transferBuffer.TransferDataToVertexBuffer(memData.stagingBuffers[frameIndex], memData.vertexBuffers[frameIndex], vertexCopyRegion);
 		if (!memData.indexMemoryMapped)
-			transferBuffer.TranferDataToIndexBuffer(memData.stagingBuffers[frameIndex], memData.indexBuffers[frameIndex], indexCopyRegion);
+			transferBuffer.TransferDataToIndexBuffer(memData.stagingBuffers[frameIndex], memData.indexBuffers[frameIndex], indexCopyRegion);
 		if (!memData.uniformMemoryMapped)
-			transferBuffer.TranferDataToUniformBuffer(memData.stagingBuffers[frameIndex], memData.uniformBuffers[frameIndex], uniformCopyRegion);
+			transferBuffer.TransferDataToUniformBuffer(memData.stagingBuffers[frameIndex], memData.uniformBuffers[frameIndex], uniformCopyRegion);
 
 		transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 			{}, dataBufferMemoryBarrierData, {});
@@ -218,15 +218,19 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 		graphicCommandBuffer.TransitionSwapchainImageToTrasferDestination(data.deviceDependentData->windowID, {}, imageIndice);
 	}
 
-	if (data.commandBufferData->transferGroup.has_value() && (!memData.vertexMemoryMapped || !memData.indexMemoryMapped))
+	if (data.commandBufferData->transferGroup.has_value())
 	{
 		graphicCommandBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 			{}, dataBufferMemoryBarrierData, {});
 	}
 	else
 	{
-		graphicCommandBuffer.TranferDataToVertexBuffer(memData.stagingBuffers[frameIndex], memData.vertexBuffers[frameIndex], vertexCopyRegion);
-		graphicCommandBuffer.TranferDataToIndexBuffer(memData.stagingBuffers[frameIndex], memData.indexBuffers[frameIndex], indexCopyRegion);
+		if (!memData.vertexMemoryMapped)
+			graphicCommandBuffer.TransferDataToVertexBuffer(memData.stagingBuffers[frameIndex], memData.vertexBuffers[frameIndex], vertexCopyRegion);
+		if (!memData.indexMemoryMapped)
+			graphicCommandBuffer.TransferDataToIndexBuffer(memData.stagingBuffers[frameIndex], memData.indexBuffers[frameIndex], indexCopyRegion);
+		if (!memData.uniformMemoryMapped)
+			graphicCommandBuffer.TransferDataToUniformBuffer(memData.stagingBuffers[frameIndex], memData.uniformBuffers[frameIndex], uniformCopyRegion);
 	}
 
 	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, memData.framebuffers[frameIndex], 0U, 0U, width, height, data.renderPassData->clearValues);

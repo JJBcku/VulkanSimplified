@@ -155,7 +155,7 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.second].value().IsMemoryMapped();
 	}
 
-	bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)
+	bool MemoryObjectsListInternal::FreeMemory(VulkanSimplified::MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
 	{
 		if (memoryID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::FreeMemory Error: Program tried to access a non-existent memory type!");
@@ -165,7 +165,7 @@ namespace VulkanSimplifiedInternal
 
 		bool ret = memType.value().CheckForAllocationsExistence(memoryID.first);
 
-		if (!ret && throwOnNotFound)
+		if (!ret && throwOnIDNotFound)
 			throw std::runtime_error("MemoryObjectsListInternal::FreeMemory Error: Program tried to free non-existent memory allocation!");
 
 		if (ret)
@@ -174,7 +174,7 @@ namespace VulkanSimplifiedInternal
 			size_t memorySize = memType.value().GetMemoryAllocationsSize(memoryID.first);
 			assert(memHeap.usedSize >= memorySize);
 			memHeap.usedSize -= memorySize;
-			memType.value().FreeMemory(memoryID.first, true);
+			ret = memType.value().FreeMemory(memoryID.first, throwOnIDNotFound, throwOnSuballocationsNotEmpty);
 		}
 
 		return ret;

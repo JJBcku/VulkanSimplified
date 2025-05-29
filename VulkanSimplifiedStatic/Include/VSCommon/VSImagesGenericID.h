@@ -10,6 +10,7 @@ namespace VulkanSimplified
 	{
 		UNKNOWN = 0,
 		COLOR_RENDER_TARGET = 1,
+		TEXTURE_2D = 2,
 	};
 
 	union ImagesGenericID
@@ -22,7 +23,14 @@ namespace VulkanSimplified
 			IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> ID;
 		} colorRenderTargetID;
 
+		struct
+		{
+			ImagesIDType type;
+			IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ID;
+		} texture2DID;
+
 		ImagesGenericID();
 		ImagesGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> ID);
+		ImagesGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ID);
 	};
 }

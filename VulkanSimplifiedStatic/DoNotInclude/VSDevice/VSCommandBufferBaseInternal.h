@@ -4,6 +4,7 @@
 
 #include "../../Include/VSDevice/VSPipelineDataListsDef.h"
 #include "../../Include/VSDevice/VSDataBufferListsDef.h"
+#include "../../Include/VSDevice/VSImageDataListsDef.h"
 #include "../../Include/VSDevice/VSSynchronizationDataListsDef.h"
 #include "../../Include/VSDevice/VSWindowListDef.h"
 #include "../../Include/VSDevice/VSIndexTypeDef.h"
@@ -66,20 +67,22 @@ namespace VulkanSimplifiedInternal
 		bool AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
 			uint32_t& returnIndex, IDObject<VulkanSimplified::WindowPointer> windowID);
 
-		void TranferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
+		void TransferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
 			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
-		void TranferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
+		void TransferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
 			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
 
-		void TranferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
+		void TransferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
 			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
-		void TranferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
+		void TransferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
 			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
 
-		void TranferDataToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
+		void TransferDataToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
 			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
-		void TranferDataListToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
+		void TransferDataListToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
 			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
+
+		void TransferDataTo2dTextureSimple(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t mipLevel);
 
 		void CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
 			const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,

@@ -24,7 +24,6 @@ namespace VulkanSimplifiedInternal
 		uint32_t GetMipmapLevels() const;
 
 		VkFormat GetFormat() const;
-		VkImageLayout GetLayout() const;
 
 		uint32_t GetImagesMemoryTypeMask() const;
 		VulkanSimplified::MemorySize GetImagesSize() const;
@@ -37,10 +36,8 @@ namespace VulkanSimplifiedInternal
 
 		void BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, size_t bindingBeggining);
 
-		void SetLayout(VkImageLayout newLayout);
-
 	protected:
-		AutoCleanupImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipmapLevels, VkFormat format, VkImageLayout layout,
+		AutoCleanupImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipmapLevels, VkFormat format,
 			size_t imageViewsInitialCapacity);
 		~AutoCleanupImage();
 
@@ -62,7 +59,6 @@ namespace VulkanSimplifiedInternal
 		uint32_t _mipmapLevels;
 
 		VkFormat _format;
-		VkImageLayout _layout;
 		uint32_t _memoryTypeMask;
 		VulkanSimplified::MemorySize _size;
 		VulkanSimplified::MemorySize _aligment;

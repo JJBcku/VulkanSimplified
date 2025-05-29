@@ -63,9 +63,19 @@ namespace VulkanSimplifiedInternal
 		return _allocationsList.GetConstObject(memoryId).GetMemory();
 	}
 
-	bool MemoryTypeInternalData::FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnNotFound)
+	bool MemoryTypeInternalData::FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
 	{
-		return _allocationsList.RemoveObject(memoryId, throwOnNotFound);
+		if (_allocationsList.CheckForID(memoryId))
+		{
+			if (throwOnSuballocationsNotEmpty && !_allocationsList.GetConstObject(memoryId).SuballocationListEmpty())
+				throw std::runtime_error("MemoryTypeInternalData::FreeMemory Error: Program tried to delete suballocated memory!");
+
+			return _allocationsList.RemoveObject(memoryId, true);
+		}
+		else if (throwOnIDNotFound)
+			throw std::runtime_error("MemoryTypeInternalData::FreeMemory Error: Program tried to delete memory allocation while its still suballocated!");
+		else
+			return false;
 	}
 
 	std::uint32_t MemoryTypeInternalData::GetHeapIndex() const

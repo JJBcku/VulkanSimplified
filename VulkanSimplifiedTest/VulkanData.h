@@ -12,7 +12,9 @@ struct VulkanMemoryData;
 struct VulkanSynchronizationData;
 struct VulkanCommandBufferData;
 struct VulkanDescriptorData;
+
 struct VulkanFrameData;
+struct VulkanTextureData;
 
 struct VulkanData
 {
@@ -28,6 +30,7 @@ struct VulkanData
 	std::unique_ptr<VulkanDescriptorData> descriptorData;
 
 	std::unique_ptr<VulkanFrameData> frameData;
+	std::unique_ptr<VulkanTextureData> textureData;
 
 	VulkanData();
 	~VulkanData();

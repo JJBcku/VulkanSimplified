@@ -46,7 +46,8 @@ namespace VulkanSimplifiedInternal
 		DestroyBuffer();
 	}
 
-	AutoCleanupDataBuffer::AutoCleanupDataBuffer(AutoCleanupDataBuffer&& rhs) noexcept : _device(rhs._device), _buffer(rhs._buffer), _memReq(rhs._memReq)
+	AutoCleanupDataBuffer::AutoCleanupDataBuffer(AutoCleanupDataBuffer&& rhs) noexcept : _device(rhs._device), _buffer(rhs._buffer), _memReq(rhs._memReq),
+		_memorySuballocation(std::move(rhs._memorySuballocation))
 	{
 		rhs._device = VK_NULL_HANDLE;
 		rhs._buffer = VK_NULL_HANDLE;
@@ -58,6 +59,7 @@ namespace VulkanSimplifiedInternal
 		_device = rhs._device;
 		_buffer = rhs._buffer;
 		_memReq = rhs._memReq;
+		_memorySuballocation = std::move(rhs._memorySuballocation);
 
 		rhs._device = VK_NULL_HANDLE;
 		rhs._buffer = VK_NULL_HANDLE;

@@ -55,6 +55,26 @@ namespace VulkanSimplified
 		_internal.BindUniformBuffer(bufferID, allocationID, addOnReserving);
 	}
 
+	bool DataBufferLists::RemoveVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveVertexBuffer(bufferID, throwOnIDNotFound);
+	}
+
+	bool DataBufferLists::RemoveStagingBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveStagingBuffer(bufferID, throwOnIDNotFound);
+	}
+
+	bool DataBufferLists::RemoveIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveIndexBuffer(bufferID, throwOnIDNotFound);
+	}
+
+	bool DataBufferLists::RemoveUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveUniformBuffer(bufferID, throwOnIDNotFound);
+	}
+
 	uint32_t DataBufferLists::GetVertexBuffersMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _internal.GetVertexBuffersMemoryTypeMask(bufferID);

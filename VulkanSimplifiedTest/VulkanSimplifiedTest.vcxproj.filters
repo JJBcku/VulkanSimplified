@@ -120,6 +120,12 @@
     <ClCompile Include="CreateDescriptorData.cpp">
       <Filter>Source Files\CreateData</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanTextureData.cpp">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateTextureData.cpp">
+      <Filter>Source Files\CreateData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VulkanBasicData.h">
@@ -210,6 +216,12 @@
       <Filter>Header Files\VulkanData</Filter>
     </ClInclude>
     <ClInclude Include="CreateDescriptorData.h">
+      <Filter>Header Files\CreateData</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanTextureData.h">
+      <Filter>Header Files\VulkanData</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateTextureData.h">
       <Filter>Header Files\CreateData</Filter>
     </ClInclude>
   </ItemGroup>

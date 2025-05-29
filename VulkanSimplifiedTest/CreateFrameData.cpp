@@ -21,11 +21,16 @@ void CreateFrameData(VulkanData& data)
 	data.frameData->vertexCopyRegion.dstOffset = 0;
 	data.frameData->vertexCopyRegion.writeSize = vertices.size() * sizeof(vertices[0]);
 
-	data.frameData->indexCopyRegion.srcOffset = data.frameData->vertexCopyRegion.writeSize;
+	if (!data.memoryData->vertexMemoryMapped)
+		data.frameData->indexCopyRegion.srcOffset = data.frameData->vertexCopyRegion.writeSize;
+	else
+		data.frameData->indexCopyRegion.srcOffset = 0;
 	data.frameData->indexCopyRegion.dstOffset = 0;
 	data.frameData->indexCopyRegion.writeSize = indices.size() * sizeof(indices[0]);
 
-	data.frameData->uniformCopyRegion.srcOffset = data.frameData->indexCopyRegion.srcOffset + data.frameData->indexCopyRegion.writeSize;
+	data.frameData->uniformCopyRegion.srcOffset = data.frameData->indexCopyRegion.srcOffset;
+	if (!data.memoryData->indexMemoryMapped)
+		data.frameData->uniformCopyRegion.srcOffset += data.frameData->indexCopyRegion.writeSize;
 	data.frameData->uniformCopyRegion.dstOffset = 0;
 	data.frameData->uniformCopyRegion.writeSize = sizeof(UniformBufferData);
 

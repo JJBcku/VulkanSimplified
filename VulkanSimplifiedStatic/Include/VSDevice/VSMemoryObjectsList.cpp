@@ -25,9 +25,9 @@ namespace VulkanSimplified
 		return _internal.TryToAllocateMemory(memorySize, initialSuballocationsReserved, acceptableMemoryTypesProperties, memoryTypeMask, addOnReserving);
 	}
 
-	bool MemoryObjectsList::FreeMemory(std::pair<IDObject<VulkanSimplifiedInternal::MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)
+	bool MemoryObjectsList::FreeMemory(VulkanSimplified::MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
 	{
-		return _internal.FreeMemory(memoryID, throwOnNotFound);
+		return _internal.FreeMemory(memoryID, throwOnIDNotFound, throwOnSuballocationsNotEmpty);
 	}
 
 	bool MemoryObjectsList::IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const

@@ -5,8 +5,8 @@
 
 namespace VulkanSimplifiedInternal
 {
-	AutoCleanup2DTexture::AutoCleanup2DTexture(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t mipmapLevels, VkFormat format, VkImageLayout layout,
-		size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, 1, mipmapLevels, format, layout, imageViewsInitialCapacity)
+	AutoCleanup2DTexture::AutoCleanup2DTexture(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t mipmapLevels, VkFormat format,
+		size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, 1, mipmapLevels, format, imageViewsInitialCapacity)
 	{
 	}
 

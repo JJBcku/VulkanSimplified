@@ -97,6 +97,7 @@
     <ClCompile Include="CreateRenderPassData.cpp" />
     <ClCompile Include="CreateSharedData.cpp" />
     <ClCompile Include="CreateSynchronizationData.cpp" />
+    <ClCompile Include="CreateTextureData.cpp" />
     <ClCompile Include="MiscFunctions.cpp" />
     <ClCompile Include="MainSettings.cpp" />
     <ClCompile Include="pch.cpp">
@@ -118,6 +119,7 @@
     <ClCompile Include="VulkanSharedData.cpp" />
     <ClCompile Include="VulkanSimplifiedTest.cpp" />
     <ClCompile Include="VulkanSynchronizationData.cpp" />
+    <ClCompile Include="VulkanTextureData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreateBasicData.h" />
@@ -131,6 +133,7 @@
     <ClInclude Include="CreateRenderPassData.h" />
     <ClInclude Include="CreateSharedData.h" />
     <ClInclude Include="CreateSynchronizationData.h" />
+    <ClInclude Include="CreateTextureData.h" />
     <ClInclude Include="MiscFunctions.h" />
     <ClInclude Include="MainSettings.h" />
     <ClInclude Include="pch.h" />
@@ -150,6 +153,7 @@
     <ClInclude Include="VulkanRenderPassData.h" />
     <ClInclude Include="VulkanSharedData.h" />
     <ClInclude Include="VulkanSynchronizationData.h" />
+    <ClInclude Include="VulkanTextureData.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VulkanSimplifiedStatic\VulkanSimplifiedStatic.vcxproj">
