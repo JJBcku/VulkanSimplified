@@ -39,13 +39,13 @@ namespace VulkanSimplifiedInternal
 		WindowListInternal& GetWindowList();
 		ShaderListsInternal& GetShaderLists();
 
-		DescriptorDataListsInternal& GetDescriptorDataLists();
-		RenderPassListInternal& GetRenderPassList();
-		PipelineDataListsInternal& GetPipelineDataLists();
-
 		MemoryObjectsListInternal& GetMemoryObjectsList();
 		DataBufferListsInternal& GetDataBufferLists();
 		ImageDataListsInternal& GetImageDataLists();
+
+		DescriptorDataListsInternal& GetDescriptorDataLists();
+		RenderPassListInternal& GetRenderPassList();
+		PipelineDataListsInternal& GetPipelineDataLists();
 
 		SynchronizationDataListsInternal& GetSynchronizationDataLists();
 		CommandPoolMainListInternal& GetCommandPoolMainList();
@@ -54,13 +54,13 @@ namespace VulkanSimplifiedInternal
 		const WindowListInternal& GetWindowList() const;
 		const ShaderListsInternal& GetShaderLists() const;
 
-		const DescriptorDataListsInternal& GetDescriptorDataLists() const;
-		const RenderPassListInternal& GetRenderPassList() const;
-		const PipelineDataListsInternal& GetPipelineDataLists() const;
-
 		const MemoryObjectsListInternal& GetMemoryObjectsList() const;
 		const DataBufferListsInternal& GetDataBufferLists() const;
 		const ImageDataListsInternal& GetImageDataLists() const;
+
+		const DescriptorDataListsInternal& GetDescriptorDataLists() const;
+		const RenderPassListInternal& GetRenderPassList() const;
+		const PipelineDataListsInternal& GetPipelineDataLists() const;
 
 		const SynchronizationDataListsInternal& GetSynchronizationDataLists() const;
 		const CommandPoolMainListInternal& GetCommandPoolMainList() const;
@@ -73,13 +73,13 @@ namespace VulkanSimplifiedInternal
 		WindowListInternal _windowList;
 		ShaderListsInternal _shaderLists;
 
-		DescriptorDataListsInternal _descriptorLists;
-		RenderPassListInternal _renderPassList;
-		PipelineDataListsInternal _pipelineDataLists;
-
 		MemoryObjectsListInternal _memoryObjectsList;
 		DataBufferListsInternal _dataBufferLists;
 		ImageDataListsInternal _imageDataLists;
+
+		DescriptorDataListsInternal _descriptorLists;
+		RenderPassListInternal _renderPassList;
+		PipelineDataListsInternal _pipelineDataLists;
 
 		SynchronizationDataListsInternal _synchroDataLists;
 		CommandPoolMainListInternal _commandPoolMainList;

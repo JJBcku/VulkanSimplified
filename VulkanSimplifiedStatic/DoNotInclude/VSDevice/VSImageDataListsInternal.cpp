@@ -10,6 +10,7 @@
 #include "VSAutoCleanupColorRenderTargetImage.h"
 #include "VSAutoCleanup2DTexture.h"
 #include "VSAutoCleanupFramebuffer.h"
+#include "VSAutoCleanupSampler.h"
 
 #include "VSDeviceCoreInternal.h"
 #include "VSMemoryObjectsListInternal.h"
@@ -23,7 +24,7 @@ namespace VulkanSimplifiedInternal
 	ImageDataListsInternal::ImageDataListsInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& renderPassData, MemoryObjectsListInternal& memoryList,
 		VkDevice device, const VulkanSimplified::ImageDataListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _renderPassData(renderPassData), _memoryList(memoryList),
 		_device(device), _colorRenderTargetList(initialCapacities.colorRenderTargetsListInitialCapacity), _2dTexturesList(initialCapacities.twoDTexturesListInitialCapacity),
-		_framebufferList(initialCapacities.framebufferListInitialCapacity)
+		_framebufferList(initialCapacities.framebufferListInitialCapacity), _samplerList(initialCapacities.samplerListInitialCapacity)
 	{
 	}
 
@@ -376,14 +377,87 @@ namespace VulkanSimplifiedInternal
 		return _framebufferList.AddObject(AutoCleanupFramebuffer(_device, add), addOnReserving);
 	}
 
+	IDObject<AutoCleanupSampler> ImageDataListsInternal::AddSampler(bool magFilterLinear, bool minFilterLinear, bool mipmapLinear,
+		bool addressXMirrored, bool addressYMirrored, bool addressZMirrored, float mipmapBias, float maxAnisotropy, float minLod, const std::optional<float>& maxLod, size_t addOnReserving)
+	{
+		VkSamplerCreateInfo createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
+
+		if (magFilterLinear)
+			createInfo.magFilter = VK_FILTER_LINEAR;
+		else
+			createInfo.magFilter = VK_FILTER_NEAREST;
+
+		if (minFilterLinear)
+			createInfo.minFilter = VK_FILTER_LINEAR;
+		else
+			createInfo.minFilter = VK_FILTER_NEAREST;
+
+		if (mipmapLinear)
+			createInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
+		else
+			createInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
+
+		if (addressXMirrored)
+			createInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT;
+		else
+			createInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+
+		if (addressYMirrored)
+			createInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT;
+		else
+			createInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+
+		if (addressZMirrored)
+			createInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT;
+		else
+			createInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+
+		createInfo.mipLodBias = mipmapBias;
+
+		if (maxAnisotropy == 0.0f)
+		{
+			createInfo.anisotropyEnable = VK_FALSE;
+		}
+		else
+		{
+			createInfo.anisotropyEnable = VK_TRUE;
+			createInfo.maxAnisotropy = maxAnisotropy;
+		}
+
+		createInfo.minLod = minLod;
+
+		if (maxLod.has_value())
+			createInfo.maxLod = maxLod.value();
+		else
+			createInfo.maxLod = VK_LOD_CLAMP_NONE;
+
+		VkSampler add = VK_NULL_HANDLE;
+
+		if (vkCreateSampler(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+			throw std::runtime_error("ImageDataListsInternal::AddSampler Error: Program failed to create a sampler!");
+
+		return _samplerList.AddObject(AutoCleanupSampler(_device, add), addOnReserving);
+	}
+
 	bool ImageDataListsInternal::RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound)
 	{
 		return _framebufferList.RemoveObject(framebufferID, throwOnIDNotFound);
 	}
 
+	bool ImageDataListsInternal::RemoveSampler(IDObject<AutoCleanupSampler> samplerID, bool throwOnIDNotFound)
+	{
+		return _samplerList.RemoveObject(samplerID, throwOnIDNotFound);
+	}
+
 	VkFramebuffer ImageDataListsInternal::GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const
 	{
 		return _framebufferList.GetConstObject(framebufferID).GetFramebuffer();
+	}
+
+	VkSampler ImageDataListsInternal::GetSampler(IDObject<AutoCleanupSampler> samplerID) const
+	{
+		return _samplerList.GetConstObject(samplerID).GetSampler();
 	}
 
 }

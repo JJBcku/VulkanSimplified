@@ -15,12 +15,12 @@ namespace VulkanSimplifiedInternal
 		_core(instance, creationData, physicalDeviceData),
 		_windowList(_eventHandler, _core, instance, _core.GetDevicesPhysicalData().GetPhysicalDevice(), _core.GetDevice(), initialCapacities.windowList),
 		_shaderLists(_core.GetDevice(), initialCapacities.shaderLists),
-		_descriptorLists(_sharedDataMain.GetSharedDescriptorDataList(), _dataBufferLists, _core.GetDevice(), initialCapacities.descriptorLists),
-		_renderPassList(_sharedDataMain.GetSharedRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists),
-		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists),
 		_memoryObjectsList(_core.GetDevice(), _core.GetDevicesPhysicalData().GetAvailableMemoryDataList(), initialCapacities.memoryObjectsList),
 		_dataBufferLists(_core, _memoryObjectsList, _core.GetDevice(), initialCapacities.dataBufferLists),
 		_imageDataLists(_core, _renderPassList, _memoryObjectsList, _core.GetDevice(), initialCapacities.imageLists),
+		_descriptorLists(_sharedDataMain.GetSharedDescriptorDataList(), _dataBufferLists, _core.GetDevice(), initialCapacities.descriptorLists),
+		_renderPassList(_sharedDataMain.GetSharedRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists),
+		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists),
 		_synchroDataLists(_core.GetDevice(), initialCapacities.synchronizationLists),
 		_commandPoolMainList(_core, _renderPassList, _sharedDataMain.GetSharedRenderPassDataList(), _pipelineDataLists, _synchroDataLists, _imageDataLists, _dataBufferLists,
 			_windowList, _descriptorLists, initialCapacities.commandPoolMainList)
@@ -46,21 +46,6 @@ namespace VulkanSimplifiedInternal
 		return _shaderLists;
 	}
 
-	DescriptorDataListsInternal& DeviceMainInternal::GetDescriptorDataLists()
-	{
-		return _descriptorLists;
-	}
-
-	RenderPassListInternal& DeviceMainInternal::GetRenderPassList()
-	{
-		return _renderPassList;
-	}
-
-	PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists()
-	{
-		return _pipelineDataLists;
-	}
-
 	MemoryObjectsListInternal& DeviceMainInternal::GetMemoryObjectsList()
 	{
 		return _memoryObjectsList;
@@ -74,6 +59,21 @@ namespace VulkanSimplifiedInternal
 	ImageDataListsInternal& DeviceMainInternal::GetImageDataLists()
 	{
 		return _imageDataLists;
+	}
+
+	DescriptorDataListsInternal& DeviceMainInternal::GetDescriptorDataLists()
+	{
+		return _descriptorLists;
+	}
+
+	RenderPassListInternal& DeviceMainInternal::GetRenderPassList()
+	{
+		return _renderPassList;
+	}
+
+	PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists()
+	{
+		return _pipelineDataLists;
 	}
 
 	SynchronizationDataListsInternal& DeviceMainInternal::GetSynchronizationDataLists()
@@ -101,21 +101,6 @@ namespace VulkanSimplifiedInternal
 		return _shaderLists;
 	}
 
-	const DescriptorDataListsInternal& DeviceMainInternal::GetDescriptorDataLists() const
-	{
-		return _descriptorLists;
-	}
-
-	const RenderPassListInternal& DeviceMainInternal::GetRenderPassList() const
-	{
-		return _renderPassList;
-	}
-
-	const PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists() const
-	{
-		return _pipelineDataLists;
-	}
-
 	const MemoryObjectsListInternal& DeviceMainInternal::GetMemoryObjectsList() const
 	{
 		return _memoryObjectsList;
@@ -129,6 +114,21 @@ namespace VulkanSimplifiedInternal
 	const ImageDataListsInternal& DeviceMainInternal::GetImageDataLists() const
 	{
 		return _imageDataLists;
+	}
+
+	const DescriptorDataListsInternal& DeviceMainInternal::GetDescriptorDataLists() const
+	{
+		return _descriptorLists;
+	}
+
+	const RenderPassListInternal& DeviceMainInternal::GetRenderPassList() const
+	{
+		return _renderPassList;
+	}
+
+	const PipelineDataListsInternal& DeviceMainInternal::GetPipelineDataLists() const
+	{
+		return _pipelineDataLists;
 	}
 
 	const SynchronizationDataListsInternal& DeviceMainInternal::GetSynchronizationDataLists() const

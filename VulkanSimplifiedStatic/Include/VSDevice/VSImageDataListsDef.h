@@ -7,4 +7,5 @@ namespace VulkanSimplifiedInternal
 
 	class AutoCleanupImageView;
 	class AutoCleanupFramebuffer;
+	class AutoCleanupSampler;
 }

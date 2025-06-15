@@ -32,13 +32,13 @@ namespace VulkanSimplified
 		WindowList GetWindowList();
 		ShaderLists GetShaderLists();
 
-		DescriptorDataLists GetDescriptorDataLists();
-		RenderPassList GetRenderPassList();
-		PipelineDataLists GetPipelineDataLists();
-
 		MemoryObjectsList GetMemoryObjectsList();
 		DataBufferLists GetDataBufferLists();
 		ImageDataLists GetImageDataLists();
+
+		DescriptorDataLists GetDescriptorDataLists();
+		RenderPassList GetRenderPassList();
+		PipelineDataLists GetPipelineDataLists();
 
 		SynchronizationDataLists GetSynchronizationDataLists();
 		CommandPoolMainList GetCommandPoolMainList();
@@ -47,13 +47,13 @@ namespace VulkanSimplified
 		const WindowList GetWindowList() const;
 		const ShaderLists GetShaderLists() const;
 
-		const DescriptorDataLists GetDescriptorDataLists() const;
-		const RenderPassList GetRenderPassList() const;
-		const PipelineDataLists GetPipelineDataLists() const;
-
 		const MemoryObjectsList GetMemoryObjectsList() const;
 		const DataBufferLists GetDataBufferLists() const;
 		const ImageDataLists GetImageDataLists() const;
+
+		const DescriptorDataLists GetDescriptorDataLists() const;
+		const RenderPassList GetRenderPassList() const;
+		const PipelineDataLists GetPipelineDataLists() const;
 
 		const SynchronizationDataLists GetSynchronizationDataLists() const;
 		const CommandPoolMainList GetCommandPoolMainList() const;

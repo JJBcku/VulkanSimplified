@@ -924,6 +924,9 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBufferDescriptorSet.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupSampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
@@ -1546,6 +1549,9 @@
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSet.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupSampler.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

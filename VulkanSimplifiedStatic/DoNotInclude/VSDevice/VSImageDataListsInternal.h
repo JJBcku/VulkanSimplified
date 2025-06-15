@@ -81,10 +81,14 @@ namespace VulkanSimplifiedInternal
 		IDObject<AutoCleanupFramebuffer> AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
 			const std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
 			uint32_t layers, size_t addOnReserving);
+		IDObject<AutoCleanupSampler> AddSampler(bool magFilterLinear, bool minFilterLinear, bool mipmapLinear, bool addressXMirrored, bool addressYMirrored, bool addressZMirrored,
+			float mipmapBias, float maxAnisotropy, float minLod, const std::optional<float>& maxLod, size_t addOnReserving);
 
 		bool RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound);
+		bool RemoveSampler(IDObject<AutoCleanupSampler> samplerID, bool throwOnIDNotFound);
 
 		VkFramebuffer GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const;
+		VkSampler GetSampler(IDObject<AutoCleanupSampler> samplerID) const;
 
 	private:
 		const DeviceCoreInternal& _deviceCore;
@@ -96,5 +100,6 @@ namespace VulkanSimplifiedInternal
 		UnsortedIDVector<AutoCleanup2DTexture> _2dTexturesList;
 
 		UnsortedIDVector<AutoCleanupFramebuffer> _framebufferList;
+		UnsortedIDVector<AutoCleanupSampler> _samplerList;
 	};
 }

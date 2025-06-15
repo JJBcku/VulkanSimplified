@@ -8,6 +8,7 @@ namespace VulkanSimplified
 		size_t twoDTexturesListInitialCapacity;
 
 		size_t framebufferListInitialCapacity;
+		size_t samplerListInitialCapacity;
 
 		ImageDataListsInitialCapacities();
 	};

@@ -17,6 +17,7 @@
 #include <VSSwapchainCreationData.h>
 
 #include <VSShaderLists.h>
+#include <VSImageDataLists.h>
 
 #include <fstream>
 
@@ -103,4 +104,8 @@ void CreateDeviceDependentData(VulkanData& data)
 
 	data.deviceDependentData->fragmentShadersID = shaderLists.CreateFragmentShaderModule(*fragmentData.data(), fragmentData.size());
 	data.deviceDependentData->vertexShadersID = shaderLists.CreateVertexShaderModule(*vertexData.data(), vertexData.size());
+
+	auto imageList = device.GetImageDataLists();
+
+	data.deviceDependentData->sampler = imageList.AddSampler(true, true, false, false, false, false, 0.0f, data.instanceDependentData->maxAnisotropy, 0.0f, 0.0f);
 }

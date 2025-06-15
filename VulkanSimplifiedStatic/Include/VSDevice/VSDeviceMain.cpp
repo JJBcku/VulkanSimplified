@@ -43,21 +43,6 @@ namespace VulkanSimplified
 		return _internal.GetShaderLists();
 	}
 
-	DescriptorDataLists DeviceMain::GetDescriptorDataLists()
-	{
-		return _internal.GetDescriptorDataLists();
-	}
-
-	RenderPassList DeviceMain::GetRenderPassList()
-	{
-		return _internal.GetRenderPassList();
-	}
-
-	PipelineDataLists DeviceMain::GetPipelineDataLists()
-	{
-		return _internal.GetPipelineDataLists();
-	}
-
 	MemoryObjectsList DeviceMain::GetMemoryObjectsList()
 	{
 		return _internal.GetMemoryObjectsList();
@@ -71,6 +56,21 @@ namespace VulkanSimplified
 	ImageDataLists DeviceMain::GetImageDataLists()
 	{
 		return _internal.GetImageDataLists();
+	}
+
+	DescriptorDataLists DeviceMain::GetDescriptorDataLists()
+	{
+		return _internal.GetDescriptorDataLists();
+	}
+
+	RenderPassList DeviceMain::GetRenderPassList()
+	{
+		return _internal.GetRenderPassList();
+	}
+
+	PipelineDataLists DeviceMain::GetPipelineDataLists()
+	{
+		return _internal.GetPipelineDataLists();
 	}
 
 	SynchronizationDataLists DeviceMain::GetSynchronizationDataLists()
@@ -98,21 +98,6 @@ namespace VulkanSimplified
 		return _internal.GetShaderLists();
 	}
 
-	const DescriptorDataLists DeviceMain::GetDescriptorDataLists() const
-	{
-		return _internal.GetDescriptorDataLists();
-	}
-
-	const RenderPassList DeviceMain::GetRenderPassList() const
-	{
-		return _internal.GetRenderPassList();
-	}
-
-	const PipelineDataLists DeviceMain::GetPipelineDataLists() const
-	{
-		return _internal.GetPipelineDataLists();
-	}
-
 	const MemoryObjectsList DeviceMain::GetMemoryObjectsList() const
 	{
 		return _internal.GetMemoryObjectsList();
@@ -126,6 +111,21 @@ namespace VulkanSimplified
 	const ImageDataLists DeviceMain::GetImageDataLists() const
 	{
 		return _internal.GetImageDataLists();
+	}
+
+	const DescriptorDataLists DeviceMain::GetDescriptorDataLists() const
+	{
+		return _internal.GetDescriptorDataLists();
+	}
+
+	const RenderPassList DeviceMain::GetRenderPassList() const
+	{
+		return _internal.GetRenderPassList();
+	}
+
+	const PipelineDataLists DeviceMain::GetPipelineDataLists() const
+	{
+		return _internal.GetPipelineDataLists();
 	}
 
 	const SynchronizationDataLists DeviceMain::GetSynchronizationDataLists() const

@@ -135,9 +135,21 @@ namespace VulkanSimplified
 		return _internal.AddFramebuffer(renderPass, attachmentsList, width, height, layers, addOnReserving);
 	}
 
+	IDObject<VulkanSimplifiedInternal::AutoCleanupSampler> ImageDataLists::AddSampler(bool magFilterLinear, bool minFilterLinear, bool mipmapLinear, bool addressXMirrored,
+		bool addressYMirrored, bool addressZMirrored, float mipmapBias, float maxAnisotropy, float minLod, std::optional<float> maxLod, size_t addOnReserving)
+	{
+		return _internal.AddSampler(magFilterLinear, minFilterLinear, mipmapLinear, addressXMirrored, addressYMirrored, addressZMirrored, mipmapBias, maxAnisotropy,
+			minLod, maxLod, addOnReserving);
+	}
+
 	bool ImageDataLists::RemoveFramebuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveFramebuffer(framebufferID, throwOnIDNotFound);
+	}
+
+	bool ImageDataLists::RemoveSampler(IDObject<VulkanSimplifiedInternal::AutoCleanupSampler> samplerID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveSampler(samplerID, throwOnIDNotFound);
 	}
 
 }

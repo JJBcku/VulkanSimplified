@@ -10,5 +10,5 @@ VulkanInstanceDependentData::VulkanInstanceDependentData()
 
 	graphicsQueueIndex = std::numeric_limits<size_t>::max();
 	graphicsQueueFamily = std::numeric_limits<uint32_t>::max();
-	padding = 0;
+	maxAnisotropy = 0.0f;
 }

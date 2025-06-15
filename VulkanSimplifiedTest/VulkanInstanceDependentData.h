@@ -12,7 +12,7 @@ struct VulkanInstanceDependentData
 
 	size_t graphicsQueueIndex;
 	uint32_t graphicsQueueFamily;
-	uint32_t padding;
+	float maxAnisotropy;
 	std::optional<size_t> transferOnlyQueueIndex;
 	std::optional<uint32_t> transferOnlyQueueFamily;
 	std::optional<size_t> presentingQueueIndex;

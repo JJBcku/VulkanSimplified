@@ -485,6 +485,9 @@ void CreateInstanceDependentData(VulkanData& data)
 	instanceData.graphicsQueueFamily = queueCreationData.queuesFamily;
 	deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
 
+	instanceData.maxAnisotropy = deviceInfo.GetVulkan10Properties().limits.maxSamplerAnisotropy;
+	deviceCreationData.vulkan10EnabledFeatures = VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY;
+
 	auto transferOnlyFamily = TryToFindTransferOnlyQueueFamily(physicalDevice);
 	if (transferOnlyFamily.has_value())
 	{

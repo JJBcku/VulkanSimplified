@@ -9,5 +9,6 @@ namespace VulkanSimplified
 		twoDTexturesListInitialCapacity = 0;
 
 		framebufferListInitialCapacity = 0;
+		samplerListInitialCapacity = 0;
 	}
 }
