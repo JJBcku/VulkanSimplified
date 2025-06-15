@@ -24,12 +24,12 @@ void CreateDescriptorData(VulkanData& data)
 	auto descriptorDataList = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass().GetDescriptorDataLists();
 
 	data.descriptorData->descriptorPool = descriptorDataList.AddNoIndividualFreeingDescriptorPool(framesInFlight,
-		{ {VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER, framesInFlight} });
+		{ {VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER, framesInFlight}, {VulkanSimplified::DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER, framesInFlight} });
 
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> descriptorLayouts;
 	descriptorLayouts.resize(framesInFlight, data.pipelineData->descriptorLayout);
 
-	data.descriptorData->uniformDescriptorSets = descriptorDataList.AllocateNIFUniformBufferDescriptorSets(data.descriptorData->descriptorPool,
+	data.descriptorData->descriptorSets = descriptorDataList.AllocateNIFDescriptorSets(data.descriptorData->descriptorPool,
 		descriptorLayouts);
 
 	std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData> writeData;
@@ -37,11 +37,11 @@ void CreateDescriptorData(VulkanData& data)
 
 	for (uint32_t i = 0; i < framesInFlight; ++i)
 	{
-		writeData[i].descriptorSetID = data.descriptorData->uniformDescriptorSets[i];
+		writeData[i].descriptorSetID = data.descriptorData->descriptorSets[i];
 		writeData[i].binding = 0;
 		writeData[i].startArrayIndex = 0;
 		writeData[i].uniformBufferIDList.push_back(data.memoryData->uniformBuffers[i]);
 	}
 
-	descriptorDataList.WriteNIFUniformBufferDescriptorSets(data.descriptorData->descriptorPool, writeData);
+	descriptorDataList.WriteNIFUniformBufferDescriptorSetBindings(data.descriptorData->descriptorPool, writeData);
 }

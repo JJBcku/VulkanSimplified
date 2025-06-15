@@ -25,6 +25,7 @@ struct VulkanSharedData
 	IDObject<VulkanSimplifiedInternal::PipelineColorBlendAttachment> colorBlendData;
 
 	IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> uniformBufferBinding;
+	IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> textureBinding;
 
 	VulkanSharedData();
 };

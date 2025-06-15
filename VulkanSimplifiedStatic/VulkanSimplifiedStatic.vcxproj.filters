@@ -900,16 +900,10 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupNIFDescriptorPool.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorPoolTypeCapacities.h">
-      <Filter>Header Files\DoNotInclude\Device</Filter>
-    </ClInclude>
     <ClInclude Include="DoNotInclude\VSCommon\VSDescriptorTypeFlagsInternal.h">
       <Filter>Header Files\DoNotInclude\Common</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDescriptorPoolGenericID.h">
-      <Filter>Header Files\Include\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDescriptorSetGenericID.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSUniformBufferDescriptorSetWriteData.h">
@@ -919,9 +913,6 @@
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSet.h">
-      <Filter>Header Files\DoNotInclude\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBufferDescriptorSet.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupSampler.h">
@@ -1526,9 +1517,6 @@
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupNIFDescriptorPool.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorPoolTypeCapacities.cpp">
-      <Filter>Source Files\Include\Device</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSCommon\VSDescriptorTypeFlagsInternal.cpp">
       <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
@@ -1538,13 +1526,7 @@
     <ClCompile Include="Include\VSDevice\VSDescriptorPoolGenericID.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDescriptorSetGenericID.cpp">
-      <Filter>Source Files\Include\Device</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSUniformBufferDescriptorSetWriteDataInternal.cpp">
-      <Filter>Source Files\DoNotInclude\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBufferDescriptorSet.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSet.cpp">

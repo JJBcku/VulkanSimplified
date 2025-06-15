@@ -69,7 +69,7 @@ void CreateTextureData(VulkanData& data)
 	auto bufferLists = device.GetDataBufferLists();
 
 	{
-		texData.textureID = imageList.Add2DTextureImage(width, height, 1, VulkanSimplified::DATA_FORMAT_RGBA8_SRGB, {}, false, 1);
+		texData.textureID = imageList.Add2DTextureImage(width, height, 1, VulkanSimplified::DATA_FORMAT_RGBA8_UNORM, {}, false, 1);
 
 		VulkanSimplified::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
 		uint32_t memoryTypeMask = imageList.Get2DTextureImagesMemoryTypeMask(texData.textureID);

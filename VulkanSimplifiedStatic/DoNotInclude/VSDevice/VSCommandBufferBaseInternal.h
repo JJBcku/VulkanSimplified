@@ -4,6 +4,7 @@
 
 #include "../../Include/VSDevice/VSPipelineDataListsDef.h"
 #include "../../Include/VSDevice/VSDataBufferListsDef.h"
+#include "../../Include/VSDevice/VSDescriptorDataListDef.h"
 #include "../../Include/VSDevice/VSImageDataListsDef.h"
 #include "../../Include/VSDevice/VSSynchronizationDataListsDef.h"
 #include "../../Include/VSDevice/VSWindowListDef.h"
@@ -23,7 +24,6 @@ namespace VulkanSimplified
 	struct ImagesMemoryBarrierData;
 
 	union DescriptorPoolGenericID;
-	union DescriptorSetGenericID;
 }
 
 namespace VulkanSimplifiedInternal
@@ -92,7 +92,7 @@ namespace VulkanSimplifiedInternal
 		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize buffersOffset, VulkanSimplified::IndexType indexType);
 
 		void BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet, VulkanSimplified::DescriptorPoolGenericID descriptorPoolID,
-			const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList, const std::vector<uint32_t>& dynamicOffsetList);
+			const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDList, const std::vector<uint32_t>& dynamicOffsetList);
 
 	protected:
 		const DeviceCoreInternal& _core;

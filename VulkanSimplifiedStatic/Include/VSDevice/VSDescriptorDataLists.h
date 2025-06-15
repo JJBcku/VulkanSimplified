@@ -24,26 +24,26 @@ namespace VulkanSimplified
 		~DescriptorDataLists();
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout> AddDescriptorSetLayout(uint32_t firstBinding,
-			const std::vector<IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData>>& descriptorSetLayoutBindings, size_t addOnReserving = 0);
+			const std::vector<DescriptorSetBindingFullData>& descriptorSetLayoutBindings, size_t addOnReserving = 0);
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> AddNoIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 			const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving = 0);
 
-		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBufferDescriptorSet>> AllocateNIFUniformBufferDescriptorSets(
+		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet>> AllocateNIFDescriptorSets(
 			IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs);
 
-		void WriteNIFUniformBufferDescriptorSets(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		void WriteNIFUniformBufferDescriptorSetBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			const std::vector<UniformBufferDescriptorSetWriteData>& writeDataList);
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 			const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving = 0);
 
-		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBufferDescriptorSet>> AllocateIFUniformBufferDescriptorSets(
+		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet>> AllocateIFDescriptorSets(
 			IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
 			std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs);
 
-		void WriteIFUniformBufferDescriptorSets(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
+		void WriteIFUniformBufferDescriptorSetBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
 			const std::vector<UniformBufferDescriptorSetWriteData>& writeDataList);
 
 	private:

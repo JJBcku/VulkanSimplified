@@ -42,7 +42,6 @@
 #include <VSImagesMemoryBarrierData.h>
 
 #include <VSDescriptorPoolGenericID.h>
-#include <VSDescriptorSetGenericID.h>
 
 UniformBufferData ubo;
 
@@ -238,7 +237,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	graphicCommandBuffer.BindGraphicsPipeline(data.pipelineData->pipeline);
 	graphicCommandBuffer.BindVertexBuffers(0, { {memData.vertexBuffers[frameIndex], 0} });
 	graphicCommandBuffer.BindDescriptorSetsToGraphicsPipeline(data.pipelineData->pipelineLayout, 0, data.descriptorData->descriptorPool,
-		{ {data.descriptorData->uniformDescriptorSets[frameIndex]} }, {});
+		{ data.descriptorData->descriptorSets[frameIndex] }, {});
 	graphicCommandBuffer.BindIndexBuffer(memData.indexBuffers[frameIndex], 0, VulkanSimplified::IndexType::INDEX_TYPE_16_BITS);
 
 	graphicCommandBuffer.DrawIndexed(static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);

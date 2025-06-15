@@ -5,9 +5,6 @@ namespace VulkanSimplifiedInternal
 	class AutoCleanupDescriptorSet
 	{
 	public:
-		VkDescriptorSet GetDescriptorSet() const;
-
-	protected:
 		AutoCleanupDescriptorSet(VkDescriptorSet set);
 		~AutoCleanupDescriptorSet();
 
@@ -17,6 +14,9 @@ namespace VulkanSimplifiedInternal
 		AutoCleanupDescriptorSet& operator=(const AutoCleanupDescriptorSet& rhs) noexcept = default;
 		AutoCleanupDescriptorSet& operator=(AutoCleanupDescriptorSet&& rhs) noexcept = default;
 
+		VkDescriptorSet GetDescriptorSet() const;
+
+	private:
 		VkDescriptorSet _set;
 	};
 }

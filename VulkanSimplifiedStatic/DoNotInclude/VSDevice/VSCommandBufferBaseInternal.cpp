@@ -20,7 +20,6 @@
 #include "../../Include/VSDevice/VSIndexType.h"
 
 #include "../../Include/VSDevice/VSDescriptorPoolGenericID.h"
-#include "../../Include/VSDevice/VSDescriptorSetGenericID.h"
 
 #include "../VSCommon/VSPipelineStageFlagsInternal.h"
 #include "../VSCommon/VSAccessFlagsInternal.h"
@@ -596,7 +595,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
-		VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList,
+		VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDList,
 		const std::vector<uint32_t>& dynamicOffsetList)
 	{
 		if (descriptorSetIDList.empty())
@@ -612,35 +611,13 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<VkDescriptorSet> descriptorSetList;
 
-		descriptorSetList.reserve(descriptorSetIDList.size());
-
 		if (descriptorPoolID.type == VulkanSimplified::DescriptorPoolIDType::NIF)
 		{
-			for (size_t i = 0; i < descriptorSetIDList.size(); ++i)
-			{
-				switch (descriptorSetIDList[i].type)
-				{
-				case VulkanSimplified::DescriptorSetIDType::UNIFORM_BUFFER:
-					descriptorSetList.push_back(_descriptorDataList.GetNIFUniformBufferDescriptorSet(descriptorPoolID.NifID.ID, descriptorSetIDList[i].uniformBufferID.ID));
-					break;
-				default:
-					throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Program was given an erroneous Nif descriptor set ID!");
-				}
-			}
+			descriptorSetList = _descriptorDataList.GetNIFDescriptorSetList(descriptorPoolID.NifID.ID, descriptorSetIDList);
 		}
 		else if (descriptorPoolID.type == VulkanSimplified::DescriptorPoolIDType::IF)
 		{
-			for (size_t i = 0; i < descriptorSetIDList.size(); ++i)
-			{
-				switch (descriptorSetIDList[i].type)
-				{
-				case VulkanSimplified::DescriptorSetIDType::UNIFORM_BUFFER:
-					descriptorSetList.push_back(_descriptorDataList.GetIFUniformBufferDescriptorSet(descriptorPoolID.IfID.ID, descriptorSetIDList[i].uniformBufferID.ID));
-					break;
-				default:
-					throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Program was given an erroneous If descriptor set ID!");
-				}
-			}
+			descriptorSetList = _descriptorDataList.GetIFDescriptorSetList(descriptorPoolID.IfID.ID, descriptorSetIDList);
 		}
 		else
 			throw std::runtime_error("CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline Error: Program was given an erroneous descriptor pool ID!");

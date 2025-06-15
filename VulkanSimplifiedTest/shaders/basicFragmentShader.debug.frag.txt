@@ -1,12 +1,12 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google Shaderc over Glslang; 11
-; Bound: 38
+; Bound: 48
 ; Schema: 0
                OpCapability Shader
           %2 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %main "main" %inColor %outColor
+               OpEntryPoint Fragment %main "main" %inTexCoord %outColor
                OpExecutionMode %main OriginUpperLeft
           %1 = OpString "basicFragmentShader.frag"
                OpSource GLSL 450 %1 "// OpModuleProcessed entry-point main
@@ -16,13 +16,16 @@
 #line 1
 #version 450
 
-layout(location = 0) in vec4 inColor;
+layout(location = 0) in vec2 inTexCoord;
 
 layout(location = 0) out vec4 outColor;
 
+layout(set = 0, binding = 1) uniform sampler2D texSampler;
+
 void main()
 {
-	vec3 transitionColor = inColor.rgb;
+	vec4 inColor = texture(texSampler, inTexCoord);
+	vec3 transitionColor = vec3(inColor.rgb);
 	transitionColor = (vec3(1.055) * pow(transitionColor, vec3(1.0/2.4))) - vec3(0.055);
 
 	outColor = vec4(transitionColor, inColor.a);
@@ -30,53 +33,69 @@ void main()
                OpSourceExtension "GL_GOOGLE_cpp_style_line_directive"
                OpSourceExtension "GL_GOOGLE_include_directive"
                OpName %main "main"
-               OpName %transitionColor "transitionColor"
                OpName %inColor "inColor"
+               OpName %texSampler "texSampler"
+               OpName %inTexCoord "inTexCoord"
+               OpName %transitionColor "transitionColor"
                OpName %outColor "outColor"
-               OpDecorate %inColor Location 0
+               OpDecorate %texSampler Binding 1
+               OpDecorate %texSampler DescriptorSet 0
+               OpDecorate %inTexCoord Location 0
                OpDecorate %outColor Location 0
        %void = OpTypeVoid
           %4 = OpTypeFunction %void
       %float = OpTypeFloat 32
+    %v4float = OpTypeVector %float 4
+%_ptr_Function_v4float = OpTypePointer Function %v4float
+         %11 = OpTypeImage %float 2D 0 0 0 1 Unknown
+         %12 = OpTypeSampledImage %11
+%_ptr_UniformConstant_12 = OpTypePointer UniformConstant %12
+ %texSampler = OpVariable %_ptr_UniformConstant_12 UniformConstant
+    %v2float = OpTypeVector %float 2
+%_ptr_Input_v2float = OpTypePointer Input %v2float
+ %inTexCoord = OpVariable %_ptr_Input_v2float Input
     %v3float = OpTypeVector %float 3
 %_ptr_Function_v3float = OpTypePointer Function %v3float
-    %v4float = OpTypeVector %float 4
-%_ptr_Input_v4float = OpTypePointer Input %v4float
-    %inColor = OpVariable %_ptr_Input_v4float Input
 %float_1_05499995 = OpConstant %float 1.05499995
-         %17 = OpConstantComposite %v3float %float_1_05499995 %float_1_05499995 %float_1_05499995
+         %27 = OpConstantComposite %v3float %float_1_05499995 %float_1_05499995 %float_1_05499995
 %float_0_416666657 = OpConstant %float 0.416666657
-         %20 = OpConstantComposite %v3float %float_0_416666657 %float_0_416666657 %float_0_416666657
+         %30 = OpConstantComposite %v3float %float_0_416666657 %float_0_416666657 %float_0_416666657
 %float_0_0549999997 = OpConstant %float 0.0549999997
-         %24 = OpConstantComposite %v3float %float_0_0549999997 %float_0_0549999997 %float_0_0549999997
+         %34 = OpConstantComposite %v3float %float_0_0549999997 %float_0_0549999997 %float_0_0549999997
 %_ptr_Output_v4float = OpTypePointer Output %v4float
    %outColor = OpVariable %_ptr_Output_v4float Output
        %uint = OpTypeInt 32 0
      %uint_3 = OpConstant %uint 3
-%_ptr_Input_float = OpTypePointer Input %float
-               OpLine %1 7 11
+%_ptr_Function_float = OpTypePointer Function %float
+               OpLine %1 9 11
        %main = OpFunction %void None %4
           %6 = OpLabel
+    %inColor = OpVariable %_ptr_Function_v4float Function
 %transitionColor = OpVariable %_ptr_Function_v3float Function
-               OpLine %1 9 0
-         %14 = OpLoad %v4float %inColor
-         %15 = OpVectorShuffle %v3float %14 %14 0 1 2
-               OpStore %transitionColor %15
-               OpLine %1 10 0
-         %18 = OpLoad %v3float %transitionColor
-         %21 = OpExtInst %v3float %2 Pow %18 %20
-         %22 = OpFMul %v3float %17 %21
-         %25 = OpFSub %v3float %22 %24
-               OpStore %transitionColor %25
+               OpLine %1 11 0
+         %15 = OpLoad %12 %texSampler
+         %19 = OpLoad %v2float %inTexCoord
+         %20 = OpImageSampleImplicitLod %v4float %15 %19
+               OpStore %inColor %20
                OpLine %1 12 0
-         %28 = OpLoad %v3float %transitionColor
-         %32 = OpAccessChain %_ptr_Input_float %inColor %uint_3
-         %33 = OpLoad %float %32
-         %34 = OpCompositeExtract %float %28 0
-         %35 = OpCompositeExtract %float %28 1
-         %36 = OpCompositeExtract %float %28 2
-         %37 = OpCompositeConstruct %v4float %34 %35 %36 %33
-               OpStore %outColor %37
+         %24 = OpLoad %v4float %inColor
+         %25 = OpVectorShuffle %v3float %24 %24 0 1 2
+               OpStore %transitionColor %25
                OpLine %1 13 0
+         %28 = OpLoad %v3float %transitionColor
+         %31 = OpExtInst %v3float %2 Pow %28 %30
+         %32 = OpFMul %v3float %27 %31
+         %35 = OpFSub %v3float %32 %34
+               OpStore %transitionColor %35
+               OpLine %1 15 0
+         %38 = OpLoad %v3float %transitionColor
+         %42 = OpAccessChain %_ptr_Function_float %inColor %uint_3
+         %43 = OpLoad %float %42
+         %44 = OpCompositeExtract %float %38 0
+         %45 = OpCompositeExtract %float %38 1
+         %46 = OpCompositeExtract %float %38 2
+         %47 = OpCompositeConstruct %v4float %44 %45 %46 %43
+               OpStore %outColor %47
+               OpLine %1 16 0
                OpReturn
                OpFunctionEnd

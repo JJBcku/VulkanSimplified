@@ -29,7 +29,8 @@ void CreatePipelineData(VulkanData& data)
 
 	data.pipelineData = std::make_unique<VulkanPipelineData>();
 
-	data.pipelineData->descriptorLayout = descriptorDataList.AddDescriptorSetLayout(0, { data.sharedData->uniformBufferBinding });
+	data.pipelineData->descriptorLayout = descriptorDataList.AddDescriptorSetLayout(0, { { data.sharedData->uniformBufferBinding, {}},
+		{data.sharedData->textureBinding, {data.deviceDependentData->sampler}} });
 
 	VulkanSimplified::PipelineLayoutCreationData layoutData;
 	layoutData._descriptorSets = { data.pipelineData->descriptorLayout };

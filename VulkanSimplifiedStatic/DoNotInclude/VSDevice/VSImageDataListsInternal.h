@@ -89,6 +89,7 @@ namespace VulkanSimplifiedInternal
 
 		VkFramebuffer GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const;
 		VkSampler GetSampler(IDObject<AutoCleanupSampler> samplerID) const;
+		std::vector<VkSampler> GetSamplerList(std::vector<IDObject<AutoCleanupSampler>> samplerIDs) const;
 
 	private:
 		const DeviceCoreInternal& _deviceCore;

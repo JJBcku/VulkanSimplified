@@ -460,4 +460,17 @@ namespace VulkanSimplifiedInternal
 		return _samplerList.GetConstObject(samplerID).GetSampler();
 	}
 
+	std::vector<VkSampler> ImageDataListsInternal::GetSamplerList(std::vector<IDObject<AutoCleanupSampler>> samplerIDs) const
+	{
+		std::vector<VkSampler> ret;
+		ret.reserve(samplerIDs.size());
+
+		for (size_t i = 0; i < samplerIDs.size(); ++i)
+		{
+			ret.push_back(GetSampler(samplerIDs[i]));
+		}
+
+		return ret;
+	}
+
 }

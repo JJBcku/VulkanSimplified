@@ -8,7 +8,7 @@ namespace VulkanSimplifiedInternal
 {
 	struct UniformBufferDescriptorSetWriteDataInternal
 	{
-		IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID;
+		IDObject<AutoCleanupDescriptorSet> descriptorSetID;
 		uint32_t binding;
 		uint32_t startArrayIndex;
 		std::vector<VkBuffer> bufferList;

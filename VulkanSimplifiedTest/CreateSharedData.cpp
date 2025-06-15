@@ -38,7 +38,7 @@ void CreateSharedData(VulkanData& data)
 	sharedDataList.vertexShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_VERTEX);
 
 	sharedDataList.vertexAttribute1Data = pipelineData.AddVertexAttributeDescriptionData(0, VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT, 2);
-	sharedDataList.vertexAttribute2Data = pipelineData.AddVertexAttributeDescriptionData(sizeof(glm::vec4), VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT, 2);
+	sharedDataList.vertexAttribute2Data = pipelineData.AddVertexAttributeDescriptionData(sizeof(glm::vec4), VulkanSimplified::DATA_FORMAT_RG32_SFLOAT, 2);
 	sharedDataList.vertexBindingData = pipelineData.AddVertexBindingData(sizeof(VertexData), VulkanSimplified::VertexBindingInputRate::VERTEX,
 		{ sharedDataList.vertexAttribute1Data, sharedDataList.vertexAttribute2Data });
 
@@ -58,4 +58,7 @@ void CreateSharedData(VulkanData& data)
 
 	sharedDataList.uniformBufferBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER, 1,
 		VulkanSimplified::SHADER_TYPE_VERTEX);
+
+	sharedDataList.textureBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER, 1,
+		VulkanSimplified::SHADER_TYPE_FRAGMENT);
 }

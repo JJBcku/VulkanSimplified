@@ -8,7 +8,7 @@ struct VulkanDescriptorData
 {
 	IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPool;
 
-	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBufferDescriptorSet>> uniformDescriptorSets;
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet>> descriptorSets;
 
 	VulkanDescriptorData();
 };

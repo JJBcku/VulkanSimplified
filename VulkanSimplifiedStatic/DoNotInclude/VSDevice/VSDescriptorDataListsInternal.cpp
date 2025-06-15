@@ -12,9 +12,8 @@
 #include "VSAutoCleanupNIFDescriptorPool.h"
 #include "VSAutoCleanupIFDescriptorPool.h"
 
-#include "VSDescriptorPoolTypeCapacities.h"
-
 #include "VSDataBufferListsInternal.h"
+#include "VSImageDataListsInternal.h"
 
 #include "../../Include/VSDevice/VSUniformBufferDescriptorSetWriteData.h"
 
@@ -23,9 +22,9 @@
 namespace VulkanSimplifiedInternal
 {
 	DescriptorDataListsInternal::DescriptorDataListsInternal(const SharedDescriptorDataListInternal& sharedDescriptorData, const DataBufferListsInternal& dataBufferList,
-		VkDevice device, const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities) : _sharedDescriptorData(sharedDescriptorData), _dataBufferList(dataBufferList),
-		_device(device), _descriptorSetLayouts(initialCapacities.descriptorSetListInitialCapacity),
-		_NIFDescriptorPools(initialCapacities.noIndividualFreeingDescriptorPoolsListInitialCapacity),
+		const ImageDataListsInternal& imageList, VkDevice device, const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities) :
+		_sharedDescriptorData(sharedDescriptorData), _dataBufferList(dataBufferList), _imageList(imageList), _device(device),
+		_descriptorSetLayouts(initialCapacities.descriptorSetListInitialCapacity), _NIFDescriptorPools(initialCapacities.noIndividualFreeingDescriptorPoolsListInitialCapacity),
 		_IFDescriptorPools(initialCapacities.individualFreeingDescriptorPoolsListInitialCapacity)
 	{
 	}
@@ -35,9 +34,14 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupDescriptorSetLayout> DescriptorDataListsInternal::AddDescriptorSetLayout(uint32_t firstBinding,
-		const std::vector<IDObject<DescriptorSetLayoutBindingData>>& descriptorSetLayoutBindings, size_t addOnReserving)
+		const std::vector<VulkanSimplified::DescriptorSetBindingFullData>& descriptorSetLayoutBindings, size_t addOnReserving)
 	{
+		if (descriptorSetLayoutBindings.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DeviceDescriptorDataInternal::AddDescriptorSetLayout Error: Descriptor set layout bindings list overflowed!");
+
 		std::vector<VkDescriptorSetLayoutBinding> bindingList;
+		std::vector<std::vector<VkSampler>> immutableSamplersLists;
+		immutableSamplersLists.reserve(descriptorSetLayoutBindings.size());
 
 		VkDescriptorSetLayout add = VK_NULL_HANDLE;
 		VkDescriptorSetLayoutCreateInfo createInfo{};
@@ -46,14 +50,36 @@ namespace VulkanSimplifiedInternal
 
 		if (!descriptorSetLayoutBindings.empty())
 		{
-			bindingList = _sharedDescriptorData.GetDescriptorSetLayoutBindings(firstBinding, descriptorSetLayoutBindings);
+			std::vector<IDObject<DescriptorSetLayoutBindingData>> bindingIDs;
+			bindingIDs.reserve(descriptorSetLayoutBindings.size());
 
-			createInfo.bindingCount = static_cast<std::uint32_t>(bindingList.size());
+			for (size_t i = 0; i < descriptorSetLayoutBindings.size(); ++i)
+			{
+				bindingIDs.push_back(descriptorSetLayoutBindings[i].first);
+			}
+
+			bindingList = _sharedDescriptorData.GetDescriptorSetLayoutBindings(firstBinding, bindingIDs);
+
+			createInfo.bindingCount = static_cast<uint32_t>(bindingList.size());
 			createInfo.pBindings = bindingList.data();
+
+			for (size_t i = 0; i < descriptorSetLayoutBindings.size(); ++i)
+			{
+				if ((bindingList[i].descriptorType != VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER && bindingList[i].descriptorType != VK_DESCRIPTOR_TYPE_SAMPLER) ||
+					descriptorSetLayoutBindings[i].second.empty())
+					continue;
+
+				if (bindingList[i].descriptorCount != descriptorSetLayoutBindings[i].second.size())
+					throw std::runtime_error("DeviceDescriptorDataInternal::AddDescriptorSetLayout Error: Immutable sampler list and bindings amount mismatch!");
+
+				immutableSamplersLists.push_back(_imageList.GetSamplerList(descriptorSetLayoutBindings[i].second));
+
+				bindingList[i].pImmutableSamplers = immutableSamplersLists.back().data();
+			}
 		}
 
 		if (vkCreateDescriptorSetLayout(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
-			throw std::runtime_error("DeviceDescriptorDataInternal::AddDescriptorSetLayout Error: Program failed to create ");
+			throw std::runtime_error("DeviceDescriptorDataInternal::AddDescriptorSetLayout Error: Program failed to create a descriptor set layout!");
 
 		return _descriptorSetLayouts.AddObject(AutoCleanupDescriptorSetLayout(_device, add), addOnReserving);
 	}
@@ -126,58 +152,11 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateDescriptorPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 			throw std::runtime_error("DescriptorDataListsInternal::AddNoIdividualFreeingDescriptorPool Error: Program failed to create a descriptor pool!");
 
-		DescriptorPoolTypeCapacities capacities;
-
-		for (size_t i = 0; i < descriptorPoolSizes.size(); ++i)
-		{
-			auto& type = descriptorPoolSizes[i].type;
-			auto& size = descriptorPoolSizes[i].descriptorCount;
-
-			switch (type)
-			{
-			case VK_DESCRIPTOR_TYPE_SAMPLER:
-				capacities.samplerCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER:
-				capacities.combinedImageSamplerCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE:
-				capacities.sampledImageCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_IMAGE:
-				capacities.storageImageCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER:
-				capacities.uniformTexelBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER:
-				capacities.storageTexelBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER:
-				capacities.uniformBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:
-				capacities.storageBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC:
-				capacities.dynamicUniformBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC:
-				capacities.dynamicStorageBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:
-				capacities.inputAttachmentCapacity = size;
-				break;
-			default:
-				throw std::runtime_error("DescriptorDataListsInternal::AddNoIdividualFreeingDescriptorPool Error: Program was given an erroneous descriptor type!");
-			}
-		}
-
-		return _NIFDescriptorPools.AddObject(AutoCleanupNIFDescriptorPool(_device, add, maxTotalSetCount, capacities), addOnReserving);
+		return _NIFDescriptorPools.AddObject(AutoCleanupNIFDescriptorPool(_device, add, maxTotalSetCount), addOnReserving);
 	}
 
-	std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> DescriptorDataListsInternal::AllocateNIFUniformBufferDescriptorSets(
-		IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID, std::vector<IDObject<AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs)
+	std::vector<IDObject<AutoCleanupDescriptorSet>> DescriptorDataListsInternal::AllocateNIFDescriptorSets(
+		IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& descriptorSetLayoutIDs)
 	{
 		if (descriptorSetLayoutIDs.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DescriptorDataListsInternal::AllocateNIFUniformBufferDescriptorSets Error: Descriptor set layout id list overflowed!");
@@ -186,10 +165,10 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<VkDescriptorSetLayout> descriptorLayouts = GetDescriptorSetLayouts(descriptorSetLayoutIDs);
 
-		return pool.AllocateUniformBufferDescriptorSets(descriptorLayouts);
+		return pool.AllocateDescriptorSets(descriptorLayouts);
 	}
 
-	void DescriptorDataListsInternal::WriteNIFUniformBufferDescriptorSets(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+	void DescriptorDataListsInternal::WriteNIFUniformBufferDescriptorSetBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 		const std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData>& writeDataList)
 	{
 		if (writeDataList.empty())
@@ -226,13 +205,19 @@ namespace VulkanSimplifiedInternal
 			}
 		}
 
-		pool.WriteUniformBufferDescriptorSets(writeInternalData);
+		pool.WriteUniformBufferDescriptorSetBindings(writeInternalData);
 	}
 
-	VkDescriptorSet DescriptorDataListsInternal::GetNIFUniformBufferDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
-		IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const
+	VkDescriptorSet DescriptorDataListsInternal::GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		IDObject<AutoCleanupDescriptorSet> descriptorSetID) const
 	{
-		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetUniformBufferDescriptorSet(descriptorSetID);
+		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSet(descriptorSetID);
+	}
+
+	std::vector<VkDescriptorSet> DescriptorDataListsInternal::GetNIFDescriptorSetList(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const
+	{
+		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
 	}
 
 	IDObject<AutoCleanupIFDescriptorPool> DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
@@ -289,58 +274,11 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateDescriptorPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 			throw std::runtime_error("DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool Error: Program failed to create a descriptor pool!");
 
-		DescriptorPoolTypeCapacities capacities;
-
-		for (size_t i = 0; i < descriptorPoolSizes.size(); ++i)
-		{
-			auto& type = descriptorPoolSizes[i].type;
-			auto& size = descriptorPoolSizes[i].descriptorCount;
-
-			switch (type)
-			{
-			case VK_DESCRIPTOR_TYPE_SAMPLER:
-				capacities.samplerCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER:
-				capacities.combinedImageSamplerCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE:
-				capacities.sampledImageCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_IMAGE:
-				capacities.storageImageCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER:
-				capacities.uniformTexelBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER:
-				capacities.storageTexelBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER:
-				capacities.uniformBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:
-				capacities.storageBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC:
-				capacities.dynamicUniformBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC:
-				capacities.dynamicStorageBufferCapacity = size;
-				break;
-			case VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:
-				capacities.inputAttachmentCapacity = size;
-				break;
-			default:
-				throw std::runtime_error("DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool Error: Program was given an erroneous descriptor type!");
-			}
-		}
-
-		return _IFDescriptorPools.AddObject(AutoCleanupIFDescriptorPool(_device, add, maxTotalSetCount, capacities), addOnReserving);
+		return _IFDescriptorPools.AddObject(AutoCleanupIFDescriptorPool(_device, add, maxTotalSetCount), addOnReserving);
 	}
 
-	std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> DescriptorDataListsInternal::AllocateIFUniformBufferDescriptorSets(
-		IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, std::vector<IDObject<AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs)
+	std::vector<IDObject<AutoCleanupDescriptorSet>> DescriptorDataListsInternal::AllocateIFDescriptorSets(
+		IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& descriptorSetLayoutIDs)
 	{
 		if (descriptorSetLayoutIDs.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DescriptorDataListsInternal::AllocateIFUniformBufferDescriptorSets Error: Descriptor set layout id list overflowed!");
@@ -349,10 +287,10 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<VkDescriptorSetLayout> descriptorLayouts = GetDescriptorSetLayouts(descriptorSetLayoutIDs);
 
-		return pool.AllocateUniformBufferDescriptorSets(descriptorLayouts);
+		return pool.AllocateDescriptorSets(descriptorLayouts);
 	}
 
-	void DescriptorDataListsInternal::WriteIFUniformBufferDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+	void DescriptorDataListsInternal::WriteIFUniformBufferDescriptorSetBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 		const std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData>& writeDataList)
 	{
 		if (writeDataList.empty())
@@ -389,13 +327,19 @@ namespace VulkanSimplifiedInternal
 			}
 		}
 
-		pool.WriteUniformBufferDescriptorSets(writeInternalData);
+		pool.WriteUniformBufferDescriptorSetBindings(writeInternalData);
 	}
 
-	VkDescriptorSet DescriptorDataListsInternal::GetIFUniformBufferDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
-		IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const
+	VkDescriptorSet DescriptorDataListsInternal::GetIFDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		IDObject<AutoCleanupDescriptorSet> descriptorSetID) const
 	{
-		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetUniformBufferDescriptorSet(descriptorSetID);
+		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSet(descriptorSetID);
+	}
+
+	std::vector<VkDescriptorSet> DescriptorDataListsInternal::GetIFDescriptorSetList(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const
+	{
+		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
 	}
 	
 }

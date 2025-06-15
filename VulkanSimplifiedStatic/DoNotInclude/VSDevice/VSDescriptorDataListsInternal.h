@@ -5,6 +5,7 @@
 #include "../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
 
 #include "../../Include/VSDevice/VSDescriptorDataListDef.h"
+#include "../../Include/VSDevice/VSImageDataListsDef.h"
 
 namespace VulkanSimplified
 {
@@ -17,48 +18,54 @@ namespace VulkanSimplifiedInternal
 {
 	class SharedDescriptorDataListInternal;
 	class DataBufferListsInternal;
+	class ImageDataListsInternal;
 
 	struct DescriptorSetLayoutBindingData;
 
 	class DescriptorDataListsInternal
 	{
 	public:
-		DescriptorDataListsInternal(const SharedDescriptorDataListInternal& sharedDescriptorData, const DataBufferListsInternal& dataBufferList, VkDevice device,
-			const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities);
+		DescriptorDataListsInternal(const SharedDescriptorDataListInternal& sharedDescriptorData, const DataBufferListsInternal& dataBufferList, const ImageDataListsInternal& imageList,
+			VkDevice device, const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities);
 		~DescriptorDataListsInternal();
 
 		IDObject<AutoCleanupDescriptorSetLayout> AddDescriptorSetLayout(uint32_t firstBinding,
-			const std::vector<IDObject<DescriptorSetLayoutBindingData>>& descriptorSetLayoutBindings, size_t addOnReserving);
+			const std::vector<VulkanSimplified::DescriptorSetBindingFullData>& descriptorSetLayoutBindings, size_t addOnReserving);
 
 		std::vector<VkDescriptorSetLayout> GetDescriptorSetLayouts(const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& layoutIDs) const;
 
 		IDObject<AutoCleanupNIFDescriptorPool> AddNoIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 			const std::vector<std::pair<VulkanSimplified::DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving);
 
-		std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> AllocateNIFUniformBufferDescriptorSets(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
-			std::vector<IDObject<AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs);
+		std::vector<IDObject<AutoCleanupDescriptorSet>> AllocateNIFDescriptorSets(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+			const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& descriptorSetLayoutIDs);
 
-		void WriteNIFUniformBufferDescriptorSets(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		void WriteNIFUniformBufferDescriptorSetBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			const std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData>& writeDataList);
 
-		VkDescriptorSet GetNIFUniformBufferDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
-			IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const;
+		VkDescriptorSet GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+			IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
+		std::vector<VkDescriptorSet> GetNIFDescriptorSetList(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+			const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
 
 		IDObject<AutoCleanupIFDescriptorPool> AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 			const std::vector<std::pair<VulkanSimplified::DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving);
 
-		std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> AllocateIFUniformBufferDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
-			std::vector<IDObject<AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs);
+		std::vector<IDObject<AutoCleanupDescriptorSet>> AllocateIFDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+			const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& descriptorSetLayoutIDs);
 
-		void WriteIFUniformBufferDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		void WriteIFUniformBufferDescriptorSetBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 			const std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData>& writeDataList);
 
-		VkDescriptorSet GetIFUniformBufferDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
-			IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const;
+		VkDescriptorSet GetIFDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+			IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
+		std::vector<VkDescriptorSet> GetIFDescriptorSetList(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+			const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
 
 	private:
 		const SharedDescriptorDataListInternal& _sharedDescriptorData;
 		const DataBufferListsInternal& _dataBufferList;
+		const ImageDataListsInternal& _imageList;
 		VkDevice _device;
 
 		UnsortedIDVector<AutoCleanupDescriptorSetLayout> _descriptorSetLayouts;

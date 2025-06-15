@@ -18,7 +18,7 @@ namespace VulkanSimplifiedInternal
 		_memoryObjectsList(_core.GetDevice(), _core.GetDevicesPhysicalData().GetAvailableMemoryDataList(), initialCapacities.memoryObjectsList),
 		_dataBufferLists(_core, _memoryObjectsList, _core.GetDevice(), initialCapacities.dataBufferLists),
 		_imageDataLists(_core, _renderPassList, _memoryObjectsList, _core.GetDevice(), initialCapacities.imageLists),
-		_descriptorLists(_sharedDataMain.GetSharedDescriptorDataList(), _dataBufferLists, _core.GetDevice(), initialCapacities.descriptorLists),
+		_descriptorLists(_sharedDataMain.GetSharedDescriptorDataList(), _dataBufferLists, _imageDataLists, _core.GetDevice(), initialCapacities.descriptorLists),
 		_renderPassList(_sharedDataMain.GetSharedRenderPassDataList(), _core.GetDevice(), initialCapacities.renderPassLists),
 		_pipelineDataLists(sharedDataMain.GetPipelineDataList(), _descriptorLists, _shaderLists, _renderPassList, _core.GetDevice(), initialCapacities.pipelineDataLists),
 		_synchroDataLists(_core.GetDevice(), initialCapacities.synchronizationLists),

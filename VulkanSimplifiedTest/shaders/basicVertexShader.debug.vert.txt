@@ -1,12 +1,12 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google Shaderc over Glslang; 11
-; Bound: 48
+; Bound: 50
 ; Schema: 0
                OpCapability Shader
           %2 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Vertex %main "main" %_ %inPos %outColor %inColor
+               OpEntryPoint Vertex %main "main" %_ %inPos %outTexCoord %inTexCoord
           %1 = OpString "basicVertexShader.vert"
                OpSource GLSL 450 %1 "// OpModuleProcessed entry-point main
 // OpModuleProcessed client vulkan100
@@ -16,9 +16,9 @@
 #version 450
 
 layout(location = 0) in vec4 inPos;
-layout(location = 1) in vec4 inColor;
+layout(location = 1) in vec2 inTexCoord;
 
-layout(location = 0) out vec4 outColor;
+layout(location = 0) out vec2 outTexCoord;
 
 layout(set = 0, binding  = 0) uniform UniformBufferObject
 {
@@ -30,7 +30,7 @@ layout(set = 0, binding  = 0) uniform UniformBufferObject
 void main()
 {
 	gl_Position = ubo.projection * ubo.view * ubo.model * vec4(inPos.xy, 0.0, 1.0);
-	outColor = inColor;
+	outTexCoord = inTexCoord;
 }
 "
                OpSourceExtension "GL_GOOGLE_cpp_style_line_directive"
@@ -48,8 +48,8 @@ void main()
                OpMemberName %UniformBufferObject 2 "projection"
                OpName %ubo "ubo"
                OpName %inPos "inPos"
-               OpName %outColor "outColor"
-               OpName %inColor "inColor"
+               OpName %outTexCoord "outTexCoord"
+               OpName %inTexCoord "inTexCoord"
                OpDecorate %gl_PerVertex Block
                OpMemberDecorate %gl_PerVertex 0 BuiltIn Position
                OpMemberDecorate %gl_PerVertex 1 BuiltIn PointSize
@@ -68,8 +68,8 @@ void main()
                OpDecorate %ubo Binding 0
                OpDecorate %ubo DescriptorSet 0
                OpDecorate %inPos Location 0
-               OpDecorate %outColor Location 0
-               OpDecorate %inColor Location 1
+               OpDecorate %outTexCoord Location 0
+               OpDecorate %inTexCoord Location 1
        %void = OpTypeVoid
           %4 = OpTypeFunction %void
       %float = OpTypeFloat 32
@@ -95,8 +95,10 @@ void main()
     %float_0 = OpConstant %float 0
     %float_1 = OpConstant %float 1
 %_ptr_Output_v4float = OpTypePointer Output %v4float
-   %outColor = OpVariable %_ptr_Output_v4float Output
-    %inColor = OpVariable %_ptr_Input_v4float Input
+%_ptr_Output_v2float = OpTypePointer Output %v2float
+%outTexCoord = OpVariable %_ptr_Output_v2float Output
+%_ptr_Input_v2float = OpTypePointer Input %v2float
+ %inTexCoord = OpVariable %_ptr_Input_v2float Input
                OpLine %1 15 11
        %main = OpFunction %void None %4
           %6 = OpLabel
@@ -118,8 +120,8 @@ void main()
          %44 = OpAccessChain %_ptr_Output_v4float %_ %int_0
                OpStore %44 %42
                OpLine %1 18 0
-         %47 = OpLoad %v4float %inColor
-               OpStore %outColor %47
+         %49 = OpLoad %v2float %inTexCoord
+               OpStore %outTexCoord %49
                OpLine %1 19 0
                OpReturn
                OpFunctionEnd

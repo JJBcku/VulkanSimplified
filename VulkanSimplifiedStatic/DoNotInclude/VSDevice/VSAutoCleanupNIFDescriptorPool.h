@@ -6,14 +6,12 @@
 
 namespace VulkanSimplifiedInternal
 {
-	struct DescriptorPoolTypeCapacities;
-
 	struct UniformBufferDescriptorSetWriteDataInternal;
 
 	class AutoCleanupNIFDescriptorPool
 	{
 	public:
-		AutoCleanupNIFDescriptorPool(VkDevice device, VkDescriptorPool pool, uint32_t maxTotalSetCount, const DescriptorPoolTypeCapacities& capacities);
+		AutoCleanupNIFDescriptorPool(VkDevice device, VkDescriptorPool pool, uint32_t maxTotalSetCount);
 		~AutoCleanupNIFDescriptorPool();
 
 		AutoCleanupNIFDescriptorPool(const AutoCleanupNIFDescriptorPool& rhs) noexcept = delete;
@@ -22,20 +20,18 @@ namespace VulkanSimplifiedInternal
 		AutoCleanupNIFDescriptorPool& operator=(const AutoCleanupNIFDescriptorPool& rhs) noexcept = delete;
 		AutoCleanupNIFDescriptorPool& operator=(AutoCleanupNIFDescriptorPool&& rhs) noexcept;
 
-		std::vector<IDObject<AutoCleanupUniformBufferDescriptorSet>> AllocateUniformBufferDescriptorSets(std::vector<VkDescriptorSetLayout> descriptorLayouts);
+		std::vector<IDObject<AutoCleanupDescriptorSet>> AllocateDescriptorSets(std::vector<VkDescriptorSetLayout> descriptorLayouts);
 
-		void WriteUniformBufferDescriptorSets(const std::vector<UniformBufferDescriptorSetWriteDataInternal>& uniformBuffer);
+		void WriteUniformBufferDescriptorSetBindings(const std::vector<UniformBufferDescriptorSetWriteDataInternal>& uniformBuffer);
 
-		VkDescriptorSet GetUniformBufferDescriptorSet(IDObject<AutoCleanupUniformBufferDescriptorSet> descriptorSetID) const;
+		VkDescriptorSet GetDescriptorSet(IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
+		std::vector<VkDescriptorSet> GetDescriptorSetList(const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
 
 	private:
 		VkDevice _device;
 		VkDescriptorPool _pool;
 
-		uint32_t _maxTotalSetCount;
-		uint32_t _currentSetCount;
-
-		UnsortedIDVector<AutoCleanupUniformBufferDescriptorSet> _uniformBufferList;
+		UnsortedIDVector<AutoCleanupDescriptorSet> _descriptorSetList;
 
 		void DestroyDescriptorPool() noexcept;
 	};

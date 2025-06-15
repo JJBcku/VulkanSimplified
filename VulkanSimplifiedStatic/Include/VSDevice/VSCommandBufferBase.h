@@ -8,6 +8,7 @@
 #include "VSDataBufferListsDef.h"
 #include "VSImageDataListsDef.h"
 #include "VSIndexTypeDef.h"
+#include "VSDescriptorDataListDef.h"
 
 #include "VSCommandBufferUsage.h"
 
@@ -28,7 +29,6 @@ namespace VulkanSimplified
 	struct ImagesMemoryBarrierData;
 
 	union DescriptorPoolGenericID;
-	union DescriptorSetGenericID;
 
 	class CommandBufferBase
 	{
@@ -74,8 +74,9 @@ namespace VulkanSimplified
 			const std::vector<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
 		void BindIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType);
 
-		void BindDescriptorSetsToGraphicsPipeline(IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet, VulkanSimplified::DescriptorPoolGenericID descriptorPoolID,
-			const std::vector<VulkanSimplified::DescriptorSetGenericID>& descriptorSetIDList, const std::vector<uint32_t>& dynamicOffsetList);
+		void BindDescriptorSetsToGraphicsPipeline(IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
+			VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet>>& descriptorSetIDList,
+			const std::vector<uint32_t>& dynamicOffsetList);
 
 	private:
 		VulkanSimplifiedInternal::CommandBufferBaseInternal& _internal;
