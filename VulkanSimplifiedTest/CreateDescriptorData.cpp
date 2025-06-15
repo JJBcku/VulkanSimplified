@@ -15,7 +15,7 @@
 #include <VSDescriptorDataLists.h>
 
 #include <VSDescriptorTypeFlags.h>
-#include <VSUniformBufferDescriptorSetWriteData.h>
+#include <VSDescriptorSetUniformBufferBindingWriteData.h>
 
 void CreateDescriptorData(VulkanData& data)
 {
@@ -32,16 +32,16 @@ void CreateDescriptorData(VulkanData& data)
 	data.descriptorData->descriptorSets = descriptorDataList.AllocateNIFDescriptorSets(data.descriptorData->descriptorPool,
 		descriptorLayouts);
 
-	std::vector<VulkanSimplified::UniformBufferDescriptorSetWriteData> writeData;
-	writeData.resize(framesInFlight);
+	std::vector<VulkanSimplified::DescriptorSetUniformBufferBindingWriteData> uniformBufferWriteData;
+	uniformBufferWriteData.resize(framesInFlight);
 
-	for (uint32_t i = 0; i < framesInFlight; ++i)
+	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		writeData[i].descriptorSetID = data.descriptorData->descriptorSets[i];
-		writeData[i].binding = 0;
-		writeData[i].startArrayIndex = 0;
-		writeData[i].uniformBufferIDList.push_back(data.memoryData->uniformBuffers[i]);
+		uniformBufferWriteData[i].descriptorSetID = data.descriptorData->descriptorSets[i];
+		uniformBufferWriteData[i].binding = 0;
+		uniformBufferWriteData[i].startArrayIndex = 0;
+		uniformBufferWriteData[i].uniformBufferIDList.push_back(data.memoryData->uniformBuffers[i]);
 	}
 
-	descriptorDataList.WriteNIFUniformBufferDescriptorSetBindings(data.descriptorData->descriptorPool, writeData);
+	descriptorDataList.WriteNIFDescriptorSetUniformBufferBindings(data.descriptorData->descriptorPool, uniformBufferWriteData);
 }

@@ -219,7 +219,7 @@ namespace VulkanSimplifiedInternal
 		return _2dTexturesList.GetConstObject(imageID).GetImage();
 	}
 
-	VkImageView ImageDataListsInternal::Get2DTextureImageImageView(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) const
+	VkImageView ImageDataListsInternal::Get2DTextureImageView(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
 		return _2dTexturesList.GetConstObject(imageID).GetImageView(viewID);
 	}

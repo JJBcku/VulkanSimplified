@@ -1,9 +1,9 @@
 #include "VSDeviceNIpch.h"
-#include "VSUniformBufferDescriptorSetWriteDataInternal.h"
+#include "VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 
 namespace VulkanSimplifiedInternal
 {
-	UniformBufferDescriptorSetWriteDataInternal::UniformBufferDescriptorSetWriteDataInternal()
+	DescriptorSetUniformBufferBindingWriteDataInternal::DescriptorSetUniformBufferBindingWriteDataInternal()
 	{
 		binding = std::numeric_limits<uint32_t>::max();
 		startArrayIndex = std::numeric_limits<uint32_t>::max();

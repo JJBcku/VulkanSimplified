@@ -51,7 +51,7 @@ namespace VulkanSimplifiedInternal
 		VkImageView GetColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
 
 		VkImage Get2DTextureImage(IDObject<AutoCleanup2DTexture> imageID) const;
-		VkImageView Get2DTextureImageImageView(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) const;
+		VkImageView Get2DTextureImageView(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) const;
 
 		uint32_t GetColorRenderTargetImagesWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 		uint32_t GetColorRenderTargetImagesHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;

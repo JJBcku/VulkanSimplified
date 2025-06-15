@@ -3,7 +3,8 @@
 
 #include "VSAutoCleanupDescriptorSet.h"
 
-#include "VSUniformBufferDescriptorSetWriteDataInternal.h"
+#include "VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
+#include "VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 
 namespace VulkanSimplifiedInternal
 {
@@ -68,7 +69,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	void AutoCleanupIFDescriptorPool::WriteUniformBufferDescriptorSetBindings(const std::vector<UniformBufferDescriptorSetWriteDataInternal>& uniformBuffer)
+	void AutoCleanupIFDescriptorPool::WriteUniformBufferDescriptorSetBindings(const std::vector<DescriptorSetUniformBufferBindingWriteDataInternal>& uniformBuffer)
 	{
 		if (uniformBuffer.empty())
 			return;
@@ -102,6 +103,33 @@ namespace VulkanSimplifiedInternal
 			}
 
 			writeData.pBufferInfo = bufferData.data();
+		}
+
+		vkUpdateDescriptorSets(_device, static_cast<uint32_t>(descriptorWriteDataList.size()), descriptorWriteDataList.data(), 0, nullptr);
+	}
+
+	void AutoCleanupIFDescriptorPool::WriteDescriptorSetCombined2DTextureSamplerBindings(
+		const std::vector<DescriptorSetCombined2DTextureSamplerWriteDataInternal>& combined2DTextureSamplers)
+	{
+		if (combined2DTextureSamplers.empty())
+			return;
+
+		std::vector<VkWriteDescriptorSet> descriptorWriteDataList;
+		descriptorWriteDataList.resize(combined2DTextureSamplers.size());
+
+		for (size_t i = 0; i < combined2DTextureSamplers.size(); ++i)
+		{
+			auto& inData = combined2DTextureSamplers[i];
+			auto& writeData = descriptorWriteDataList[i];
+
+			writeData.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+			writeData.dstSet = _descriptorSetList.GetConstObject(inData.descriptorSetID).GetDescriptorSet();
+			writeData.dstBinding = inData.binding;
+			writeData.dstArrayElement = inData.startArrayIndex;
+			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
+			writeData.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+
+			writeData.pImageInfo = inData.imageInfo.data();
 		}
 
 		vkUpdateDescriptorSets(_device, static_cast<uint32_t>(descriptorWriteDataList.size()), descriptorWriteDataList.data(), 0, nullptr);

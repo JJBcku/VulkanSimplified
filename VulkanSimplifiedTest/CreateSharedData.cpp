@@ -44,8 +44,8 @@ void CreateSharedData(VulkanData& data)
 
 	sharedDataList.vertexInputData = pipelineData.AddVertexInputSharedPipelineData({ sharedDataList.vertexBindingData });
 
-	sharedDataList.scissorData = pipelineData.AddPipelineScissorData(0, 0, width, height);
-	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);
+	sharedDataList.scissorData = pipelineData.AddPipelineScissorData(0, 0, swapchainWidth, swapchainHeight);
+	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, swapchainWidth, swapchainHeight, 0.0f, 1.0f);
 
 	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
 	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, true, false);

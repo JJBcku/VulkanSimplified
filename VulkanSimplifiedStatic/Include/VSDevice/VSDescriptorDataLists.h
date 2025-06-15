@@ -15,7 +15,8 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	struct UniformBufferDescriptorSetWriteData;
+	struct DescriptorSetUniformBufferBindingWriteData;
+	struct DescriptorSetCombined2DTextureSamplerWriteData;
 
 	class DescriptorDataLists
 	{
@@ -33,8 +34,10 @@ namespace VulkanSimplified
 			IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs);
 
-		void WriteNIFUniformBufferDescriptorSetBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
-			const std::vector<UniformBufferDescriptorSetWriteData>& writeDataList);
+		void WriteNIFDescriptorSetUniformBufferBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
+			const std::vector<DescriptorSetUniformBufferBindingWriteData>& writeDataList);
+		void WriteNIFDescriptorSetCombined2DTextureSamplerBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPoolID,
+			const std::vector<DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList);
 
 		IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 			const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving = 0);
@@ -43,8 +46,10 @@ namespace VulkanSimplified
 			IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
 			std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> descriptorSetLayoutIDs);
 
-		void WriteIFUniformBufferDescriptorSetBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
-			const std::vector<UniformBufferDescriptorSetWriteData>& writeDataList);
+		void WriteIFDescriptorSetUniformBufferBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
+			const std::vector<DescriptorSetUniformBufferBindingWriteData>& writeDataList);
+		void WriteIFDescriptorSetCombined2DTextureSamplerBindings(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> descriptorPoolID,
+			const std::vector<DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList);
 
 	private:
 		VulkanSimplifiedInternal::DescriptorDataListsInternal& _internal;

@@ -906,16 +906,22 @@
     <ClInclude Include="Include\VSDevice\VSDescriptorPoolGenericID.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSUniformBufferDescriptorSetWriteData.h">
+    <ClInclude Include="Include\VSDevice\VSDescriptorSetUniformBufferBindingWriteData.h">
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSUniformBufferDescriptorSetWriteDataInternal.h">
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorSetUniformBufferBindingWriteDataInternal.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSet.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupSampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1520,19 +1526,25 @@
     <ClCompile Include="DoNotInclude\VSCommon\VSDescriptorTypeFlagsInternal.cpp">
       <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSUniformBufferDescriptorSetWriteData.cpp">
+    <ClCompile Include="Include\VSDevice\VSDescriptorSetUniformBufferBindingWriteData.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDescriptorPoolGenericID.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSUniformBufferDescriptorSetWriteDataInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorSetUniformBufferBindingWriteDataInternal.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSet.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupSampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -131,9 +131,11 @@
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupStagingBuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupUniformBuffer.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSAutoCleanupVertexBuffer.h" />
-    <ClInclude Include="DoNotInclude\VSDevice\VSUniformBufferDescriptorSetWriteDataInternal.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h" />
+    <ClInclude Include="DoNotInclude\VSDevice\VSDescriptorSetUniformBufferBindingWriteDataInternal.h" />
     <ClInclude Include="Include\VSCommon\VSBool64Def.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorPoolGenericID.h" />
+    <ClInclude Include="Include\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteData.h" />
     <ClInclude Include="Include\VSDevice\VSImagesMemoryBarrierData.h" />
     <ClInclude Include="Include\VSDevice\VSDataBuffersMemoryBarrierData.h" />
     <ClInclude Include="DoNotInclude\VSDevice\VSCommandBufferBaseInternal.h" />
@@ -252,7 +254,7 @@
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataLists.h" />
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataListsDef.h" />
     <ClInclude Include="Include\VSDevice\VSSynchronizationDataListsInitialCapacities.h" />
-    <ClInclude Include="Include\VSDevice\VSUniformBufferDescriptorSetWriteData.h" />
+    <ClInclude Include="Include\VSDevice\VSDescriptorSetUniformBufferBindingWriteData.h" />
     <ClInclude Include="Include\VSMain\VSMainDef.h" />
     <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlags.h" />
     <ClInclude Include="DoNotInclude\VSSharedData\VSPipelineColorBlendAttachment.h" />
@@ -583,6 +585,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSHeapInternalData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
@@ -673,7 +681,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSUniformBufferDescriptorSetWriteDataInternal.cpp">
+    <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorSetUniformBufferBindingWriteDataInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceNIpch.h</PrecompiledHeaderFile>
@@ -859,6 +867,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSGlobalMemoryBarrierData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
@@ -1003,7 +1017,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSUniformBufferDescriptorSetWriteData.cpp">
+    <ClCompile Include="Include\VSDevice\VSDescriptorSetUniformBufferBindingWriteData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>

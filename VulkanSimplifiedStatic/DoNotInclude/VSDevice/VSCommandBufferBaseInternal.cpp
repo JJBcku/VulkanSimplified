@@ -403,8 +403,8 @@ namespace VulkanSimplifiedInternal
 		bufferCopy.imageOffset.y = 0;
 		bufferCopy.imageOffset.z = 0;
 
-		bufferCopy.imageExtent.width = std::min(1U, imageData.GetWidth() >> mipLevel);
-		bufferCopy.imageExtent.height = std::min(1U, imageData.GetHeight() >> mipLevel);
+		bufferCopy.imageExtent.width = std::max(1U, imageData.GetWidth() >> mipLevel);
+		bufferCopy.imageExtent.height = std::max(1U, imageData.GetHeight() >> mipLevel);
 		bufferCopy.imageExtent.depth = 1;
 
 		vkCmdCopyBufferToImage(_buffer, buffer, image, layout, 1, &bufferCopy);

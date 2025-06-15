@@ -4,6 +4,8 @@
 #include "VulkanData.h"
 #include "VulkanBasicData.h"
 #include "VulkanInstanceDependentData.h"
+#include "VulkanDeviceDependentData.h"
+#include "VulkanDescriptorData.h"
 #include "VulkanCommandBufferData.h"
 #include "VulkanSynchronizationData.h"
 #include "VulkanFrameData.h"
@@ -39,8 +41,15 @@
 #include <VSAccessFlags.h>
 #include <VSImageLayoutFlags.h>
 
+#include <VSDescriptorSetCombined2DTextureSamplerWriteData.h>
+#include <VSDescriptorDataLists.h>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
+
+#include "SwapchainSizes.h"
+
+#include <iostream>
 
 void CreateTextureData(VulkanData& data)
 {
@@ -48,16 +57,16 @@ void CreateTextureData(VulkanData& data)
 
 	auto& texData = *data.textureData;
 
-	uint32_t width = 0;
-	uint32_t height = 0;
+	uint32_t imageWidth = 0;
+	uint32_t imageHeight = 0;
 
-	stbi_uc* pixels = stbi_load("Textures/Texture.png", reinterpret_cast<int*>(&width), reinterpret_cast<int*>(&height), nullptr, STBI_rgb_alpha);
+	stbi_uc* pixels = stbi_load("Textures/Texture.png", reinterpret_cast<int*>(&imageWidth), reinterpret_cast<int*>(&imageHeight), nullptr, STBI_rgb_alpha);
 
 	if (pixels == nullptr)
 		throw std::runtime_error("CreateTextureData Error: Program failed to load the texture!");
 
-	VulkanSimplified::MemorySize imageSize = width;
-	imageSize *= height;
+	VulkanSimplified::MemorySize imageSize = imageWidth;
+	imageSize *= imageHeight;
 	imageSize = imageSize << 2;
 
 	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
@@ -69,7 +78,7 @@ void CreateTextureData(VulkanData& data)
 	auto bufferLists = device.GetDataBufferLists();
 
 	{
-		texData.textureID = imageList.Add2DTextureImage(width, height, 1, VulkanSimplified::DATA_FORMAT_RGBA8_UNORM, {}, false, 1);
+		texData.textureID = imageList.Add2DTextureImage(imageWidth, imageHeight, 1, VulkanSimplified::DATA_FORMAT_RGBA8_SRGB, {}, false, 1);
 
 		VulkanSimplified::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
 		uint32_t memoryTypeMask = imageList.Get2DTextureImagesMemoryTypeMask(texData.textureID);
@@ -99,11 +108,11 @@ void CreateTextureData(VulkanData& data)
 
 		std::vector<VulkanSimplified::MemoryTypeProperties> acceptableMemoryTypes;
 		acceptableMemoryTypes.reserve(5);
+		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
 		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
 		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
 
 		stagingMemoryAllocation = memoryList.AllocateMemory(allocationSize, 1, acceptableMemoryTypes, memoryTypeMask);
 		bufferLists.BindStagingBuffer(stagingBuffer, stagingMemoryAllocation);
@@ -223,4 +232,22 @@ void CreateTextureData(VulkanData& data)
 	}
 
 	stbi_image_free(pixels);
+
+	std::vector<VulkanSimplified::DescriptorSetCombined2DTextureSamplerWriteData> textureWriteData;
+	textureWriteData.resize(framesInFlight);
+
+	for (size_t i = 0; i < framesInFlight; ++i)
+	{
+		textureWriteData[i].descriptorSetID = data.descriptorData->descriptorSets[i];
+		textureWriteData[i].binding = 1;
+		textureWriteData[i].startArrayIndex = 0;
+
+		VulkanSimplified::Optional2DTextureView texViewID = { {texData.textureID, texData.textureImageView} };
+		VulkanSimplified::OptionalSampler samplerID = data.deviceDependentData->sampler;
+		VulkanSimplified::Combined2DTextureSamplerIDs combinedIDs = { texViewID, samplerID };
+
+		textureWriteData[i].imageDataList.emplace_back(combinedIDs, VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY);
+	}
+
+	device.GetDescriptorDataLists().WriteNIFDescriptorSetCombined2DTextureSamplerBindings(data.descriptorData->descriptorPool, textureWriteData);
 }

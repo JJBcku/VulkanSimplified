@@ -41,7 +41,7 @@ void CreateMemoryData(VulkanData& data)
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(width, height, format, {}, false, 1, framesInFlight));
+		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, format, {}, false, 1, framesInFlight));
 	}
 
 	VulkanSimplified::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back()) * framesInFlight;
@@ -72,7 +72,7 @@ void CreateMemoryData(VulkanData& data)
 		attachments[0].first = memData.colorRenderTargetImages[i];
 		attachments[0].second = memData.colorRenderTargetImageViews[i];
 
-		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, width, height, 1));
+		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, swapchainWidth, swapchainHeight, 1));
 	}
 
 	auto bufferLists = device.GetDataBufferLists();

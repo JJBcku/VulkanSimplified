@@ -232,7 +232,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 			graphicCommandBuffer.TransferDataToUniformBuffer(memData.stagingBuffers[frameIndex], memData.uniformBuffers[frameIndex], uniformCopyRegion);
 	}
 
-	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, memData.framebuffers[frameIndex], 0U, 0U, width, height, data.renderPassData->clearValues);
+	graphicCommandBuffer.BeginRenderPass(data.renderPassData->renderPass, memData.framebuffers[frameIndex], 0U, 0U, swapchainWidth, swapchainHeight, data.renderPassData->clearValues);
 
 	graphicCommandBuffer.BindGraphicsPipeline(data.pipelineData->pipeline);
 	graphicCommandBuffer.BindVertexBuffers(0, { {memData.vertexBuffers[frameIndex], 0} });
@@ -244,7 +244,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 	graphicCommandBuffer.EndRenderPass();
 
-	graphicCommandBuffer.BlitToSwapchainImage(data.deviceDependentData->windowID, memData.colorRenderTargetImages[frameIndex], 0, 0, width, height, imageIndice);
+	graphicCommandBuffer.BlitToSwapchainImage(data.deviceDependentData->windowID, memData.colorRenderTargetImages[frameIndex], 0, 0, swapchainWidth, swapchainHeight, imageIndice);
 
 	if (data.commandBufferData->presentGroup.has_value())
 	{
