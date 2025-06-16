@@ -20,30 +20,38 @@ class CommonVectorObject
 public:
 	CommonVectorObject(const IDSubobject<T>& objectID, const T& object) : _objectID(objectID), _object(object)
 	{
+		std::memset(_padding, 0, sizeof(_padding));
 	}
 
 	CommonVectorObject(const IDSubobject<T>& objectID, T&& object) noexcept : _objectID(objectID), _object(std::move(object))
 	{
+		std::memset(_padding, 0, sizeof(_padding));
 	}
 
 	CommonVectorObject(const CommonVectorObject<T>& other) noexcept : _objectID(other._objectID), _object(other._object)
 	{
+		std::memset(_padding, 0, sizeof(_padding));
 	}
 
 	CommonVectorObject(CommonVectorObject<T>&& other) noexcept : _objectID(std::move(other._objectID)), _object(std::move(other._object))
 	{
+		std::memset(_padding, 0, sizeof(_padding));
 	}
 
 	CommonVectorObject<T>& operator=(const CommonVectorObject<T>& other)
 	{
 		_objectID = other._objectID;
 		_object = other._object;
+
+		std::memset(_padding, 0, sizeof(_padding));
 	}
 
 	CommonVectorObject<T>& operator=(CommonVectorObject<T>&& other)
 	{
 		_objectID = std::move(other._objectID);
 		_object = std::move(other._object);
+
+		std::memset(_padding, 0, sizeof(_padding));
 	}
 
 	void ReplaceValue(const IDSubobject<T>& objectID, const T& object)
