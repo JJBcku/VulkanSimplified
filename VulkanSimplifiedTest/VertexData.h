@@ -7,24 +7,13 @@ struct VertexData
 {
 	glm::vec4 position;
 	glm::vec2 textureCoordinates;
+
+	bool operator==(const VertexData& rhs) const noexcept;
 };
 
-const std::vector<VertexData> vertices = {
-	{{-0.5f, -0.5f, 0.0f, 1.0f}, {1.0f, 0.0f}},
-	{{0.5f, -0.5f, 0.0f, 1.0f}, {0.0f, 0.0f}},
-	{{0.5f, 0.5f, 0.0f, 1.0f}, {0.0f, 1.0f}},
-	{{-0.5f, 0.5f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+extern std::vector<VertexData> vertices;
 
-	{{-0.5f, -0.5f, -0.5f, 1.0f}, {1.0f, 0.0f}},
-	{{0.5f, -0.5f, -0.5f, 1.0f}, {0.0f, 0.0f}},
-	{{0.5f, 0.5f, -0.5f, 1.0f}, {0.0f, 1.0f}},
-	{{-0.5f, 0.5f, -0.5f, 1.0f}, {1.0f, 1.0f}}
-};
-
-const std::vector<uint16_t> indices = {
-	0, 1, 2, 2, 3, 0,
-	4, 5, 6, 6, 7, 4
-};
+extern std::vector<uint16_t> indices;
 
 struct UniformBufferData
 {

@@ -25,6 +25,67 @@
 #include <VSMemorySizeDef.h>
 #include <VSIndexType.h>
 
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tinyobjloader/tiny_obj_loader.h>
+
+void LoadModel()
+{
+	tinyobj::attrib_t attrib{};
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	std::string warn, err;
+
+	std::string filename = "Models\\Model.obj.txt";
+
+	if (tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filename.c_str()) != true)
+		throw std::runtime_error(warn + err);
+
+	size_t totalIndices = 0;
+
+	for (const auto& shape : shapes)
+		totalIndices += shape.mesh.indices.size();
+
+	indices.reserve(totalIndices);
+	vertices.reserve(totalIndices);
+
+	for (const auto& shape : shapes)
+	{
+		for (const auto& index : shape.mesh.indices)
+		{
+			VertexData add{};
+
+			add.position = {
+			attrib.vertices[3 * index.vertex_index + 0],
+			attrib.vertices[3 * index.vertex_index + 1],
+			attrib.vertices[3 * index.vertex_index + 2],
+			1.0f };
+
+			add.textureCoordinates = {
+				attrib.texcoords[2 * index.texcoord_index + 0],
+				attrib.texcoords[2 * index.texcoord_index + 1] };
+
+			bool found = false;
+
+			for (size_t i = 0; i < vertices.size(); ++i)
+			{
+				if (vertices[i] == add)
+				{
+					found = true;
+					indices.push_back(static_cast<uint16_t>(i));
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				indices.push_back(static_cast<uint16_t>(vertices.size()));
+				vertices.push_back(add);
+			}
+		}
+	}
+
+}
+
 void CreateMemoryData(VulkanData& data)
 {
 	auto device = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass();
@@ -86,6 +147,8 @@ void CreateMemoryData(VulkanData& data)
 
 		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, swapchainWidth, swapchainHeight, 1));
 	}
+
+	LoadModel();
 
 	auto bufferLists = device.GetDataBufferLists();
 

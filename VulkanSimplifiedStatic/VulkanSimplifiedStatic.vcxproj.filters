@@ -1544,20 +1544,20 @@
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDescriptorSet.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDepthStencilRenderTargetImage.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupSampler.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupDepthStencilRenderTargetImage.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSCommon\VSImageSampleFlagsInternal.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DoNotInclude\Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
