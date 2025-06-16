@@ -36,7 +36,7 @@ void CreateRenderPassData(VulkanData& data)
 	renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, VulkanSimplified::SAMPLE_1, VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR,
 		VulkanSimplified::RenderPassAttachmentStoreOP::STORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED, VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE));
 	renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(data.instanceDependentData->supportedDepthFormat, VulkanSimplified::SAMPLE_1,
-		VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR, VulkanSimplified::RenderPassAttachmentStoreOP::STORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED,
+		VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR, VulkanSimplified::RenderPassAttachmentStoreOP::IGNORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED,
 		VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE));
 
 	renderPassData.colorAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(0, VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT);
