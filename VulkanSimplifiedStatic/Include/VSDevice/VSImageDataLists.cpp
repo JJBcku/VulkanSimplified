@@ -22,6 +22,13 @@ namespace VulkanSimplified
 		return _internal.AddColorRenderTargetImage(width, height, format, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
 	}
 
+	IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> ImageDataLists::AddDepthStencilRenderTargetImage(uint32_t width, uint32_t height,
+		VulkanSimplified::DataFormatSetIndependentID format, VulkanSimplified::ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage,
+		bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+	{
+		return _internal.AddDepthStencilRenderTargetImage(width, height, format, imageSamples, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
+	}
+
 	IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ImageDataLists::Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		return _internal.Add2DTextureImage(width, height, mipLevel, format, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
@@ -30,6 +37,11 @@ namespace VulkanSimplified
 	bool ImageDataLists::RemoveColorRenderTargetImage(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveColorRenderTargetImage(imageID, throwOnIDNotFound);
+	}
+
+	bool ImageDataLists::RemoveDepthStencilRenderTargetImage(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveDepthStencilRenderTargetImage(imageID, throwOnIDNotFound);
 	}
 
 	bool ImageDataLists::Remove2DTextureImage(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> imageID, bool throwOnIDNotFound)
@@ -60,6 +72,31 @@ namespace VulkanSimplified
 	uint64_t ImageDataLists::GetColorRenderTargetImagesRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _internal.GetColorRenderTargetImagesRequiredAligment(imageID);
+	}
+
+	uint32_t ImageDataLists::GetDepthStencilRenderTargetImagesWidth(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	{
+		return _internal.GetDepthStencilRenderTargetImagesWidth(imageID);
+	}
+
+	uint32_t ImageDataLists::GetDepthStencilRenderTargetImagesHeight(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	{
+		return _internal.GetDepthStencilRenderTargetImagesHeight(imageID);
+	}
+
+	uint32_t ImageDataLists::GetDepthStencilRenderTargetImagesMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	{
+		return _internal.GetDepthStencilRenderTargetImagesMemoryTypeMask(imageID);
+	}
+
+	VulkanSimplified::MemorySize ImageDataLists::GetDepthStencilRenderTargetImagesSize(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	{
+		return _internal.GetDepthStencilRenderTargetImagesSize(imageID);
+	}
+
+	VulkanSimplified::MemorySize ImageDataLists::GetDepthStencilRenderTargetImagesRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	{
+		return _internal.GetDepthStencilRenderTargetImagesRequiredAligment(imageID);
 	}
 
 	uint32_t ImageDataLists::Get2DTextureImagesWidth(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> imageID) const
@@ -93,6 +130,12 @@ namespace VulkanSimplified
 		_internal.BindColorRenderTargetImage(imageID, allocationID, addOnReserving);
 	}
 
+	void ImageDataLists::BindDepthStencilRenderTargetImage(IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID,
+		VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	{
+		_internal.BindDepthStencilRenderTargetImage(imageID, allocationID, addOnReserving);
+	}
+
 	void ImageDataLists::Bind2DTextureImage(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		_internal.Bind2DTextureImage(imageID, allocationID, addOnReserving);
@@ -102,6 +145,12 @@ namespace VulkanSimplified
 		size_t addOnReserving)
 	{
 		return _internal.AddColorRenderTargetImageView(imageID, addOnReserving);
+	}
+
+	IDObject<VulkanSimplifiedInternal::AutoCleanupImageView> ImageDataLists::AddDepthStencilRenderTargetImageView(
+		IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> imageID, size_t addOnReserving)
+	{
+		return _internal.AddDepthStencilRenderTargetImageView(imageID, addOnReserving);
 	}
 
 	IDObject<VulkanSimplifiedInternal::AutoCleanupImageView> ImageDataLists::Add2DTextureImageFullView(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> imageID,

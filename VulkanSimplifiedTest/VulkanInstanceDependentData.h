@@ -6,7 +6,8 @@ struct VulkanInstanceDependentData
 {
 	size_t physicalDevicesIndex;
 
-	VulkanSimplified::DataFormatSetIndependentID supportedFormat;
+	VulkanSimplified::DataFormatSetIndependentID supportedColorFormat;
+	VulkanSimplified::DataFormatSetIndependentID supportedDepthFormat;
 	uint32_t minSwapchainImageAmount;
 	uint32_t maxSwapchainImageAmount;
 

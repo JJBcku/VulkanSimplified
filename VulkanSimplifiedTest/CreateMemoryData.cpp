@@ -20,6 +20,7 @@
 #include <VSMultitypeImagesID.h>
 
 #include <VSImageUsageFlags.h>
+#include <VSImageSampleFlags.h>
 #include <VSMemoryTypeProperties.h>
 #include <VSMemorySizeDef.h>
 #include <VSIndexType.h>
@@ -30,21 +31,27 @@ void CreateMemoryData(VulkanData& data)
 	auto imageList = device.GetImageDataLists();
 	auto memoryList = device.GetMemoryObjectsList();
 
-	auto format = data.instanceDependentData->supportedFormat;
+	auto format = data.instanceDependentData->supportedColorFormat;
 
 	data.memoryData = std::make_unique<VulkanMemoryData>();
 	auto& memData = *data.memoryData;
 	
 	memData.colorRenderTargetImages.reserve(framesInFlight);
 	memData.colorRenderTargetImageViews.reserve(framesInFlight);
+	memData.depthRenderTargetImages.reserve(framesInFlight);
+	memData.depthRenderTargetImageViews.reserve(framesInFlight);
 	memData.framebuffers.reserve(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
 		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, format, {}, false, 1, framesInFlight));
+		memData.depthRenderTargetImages.push_back(imageList.AddDepthStencilRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedDepthFormat,
+			VulkanSimplified::ImageSampleFlagBits::SAMPLE_1, {}, false, 1, framesInFlight));
 	}
 
-	VulkanSimplified::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back()) * framesInFlight;
+	VulkanSimplified::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back());
+	allocationSize += imageList.GetDepthStencilRenderTargetImagesSize(memData.depthRenderTargetImages.back());
+	allocationSize *= framesInFlight;
 	uint32_t memoryTypeMask = imageList.GetColorRenderTargetImagesMemoryTypeMask(memData.colorRenderTargetImages.back());
 
 	std::vector<VulkanSimplified::MemoryTypeProperties> acceptableMemoryTypes;
@@ -66,11 +73,16 @@ void CreateMemoryData(VulkanData& data)
 		imageList.BindColorRenderTargetImage(memData.colorRenderTargetImages[i], memData.imageMemoryAllocation);
 		memData.colorRenderTargetImageViews.push_back(imageList.AddColorRenderTargetImageView(memData.colorRenderTargetImages[i]));
 
+		imageList.BindDepthStencilRenderTargetImage(memData.depthRenderTargetImages[i], memData.imageMemoryAllocation);
+		memData.depthRenderTargetImageViews.push_back(imageList.AddDepthStencilRenderTargetImageView(memData.depthRenderTargetImages[i]));
+
 		std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>> attachments;
-		attachments.resize(1);
+		attachments.resize(2);
 
 		attachments[0].first = memData.colorRenderTargetImages[i];
 		attachments[0].second = memData.colorRenderTargetImageViews[i];
+		attachments[1].first = memData.depthRenderTargetImages[i];
+		attachments[1].second = memData.depthRenderTargetImageViews[i];
 
 		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, swapchainWidth, swapchainHeight, 1));
 	}

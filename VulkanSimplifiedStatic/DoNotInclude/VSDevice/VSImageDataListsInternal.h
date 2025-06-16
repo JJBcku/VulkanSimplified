@@ -3,6 +3,7 @@
 #include "CustomLists/UnsortedIDVector.h"
 
 #include "../../Include/VSCommon/VSImageUsageFlagsDef.h"
+#include "../../Include/VSCommon/VSImageSampleFlagsDef.h"
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
 
@@ -35,20 +36,30 @@ namespace VulkanSimplifiedInternal
 
 		IDObject<AutoCleanupColorRenderTargetImage> AddColorRenderTargetImage(uint32_t width, uint32_t height, VulkanSimplified::DataFormatSetIndependentID format,
 			const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving);
+		IDObject<AutoCleanupDepthStencilRenderTargetImage> AddDepthStencilRenderTargetImage(uint32_t width, uint32_t height, VulkanSimplified::DataFormatSetIndependentID format,
+			VulkanSimplified::ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity,
+			size_t addOnReserving);
 		IDObject<AutoCleanup2DTexture> Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, VulkanSimplified::DataFormatSetIndependentID format,
 			const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving);
 
 		bool RemoveColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound);
+		bool RemoveDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, bool throwOnIDNotFound);
 		bool Remove2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, bool throwOnIDNotFound);
 
 		AutoCleanupColorRenderTargetImage& GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID);
 		const AutoCleanupColorRenderTargetImage& GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
+
+		AutoCleanupDepthStencilRenderTargetImage& GetDepthStencilRenderTargetImageInternal(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID);
+		const AutoCleanupDepthStencilRenderTargetImage& GetDepthStencilRenderTargetImageInternal(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
 
 		AutoCleanup2DTexture& Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID);
 		const AutoCleanup2DTexture& Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID) const;
 
 		VkImage GetColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 		VkImageView GetColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
+
+		VkImage GetDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+		VkImageView GetDepthStencilRenderTargetImageView(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
 
 		VkImage Get2DTextureImage(IDObject<AutoCleanup2DTexture> imageID) const;
 		VkImageView Get2DTextureImageView(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) const;
@@ -60,6 +71,15 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::MemorySize GetColorRenderTargetImagesSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 		VulkanSimplified::MemorySize GetColorRenderTargetImagesRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 
+		uint32_t GetDepthStencilRenderTargetImagesWidth(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+		uint32_t GetDepthStencilRenderTargetImagesHeight(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+
+		uint32_t GetDepthStencilRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+		VulkanSimplified::MemorySize GetDepthStencilRenderTargetImagesSize(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+		VulkanSimplified::MemorySize GetDepthStencilRenderTargetImagesRequiredAligment(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+
+		VkSampleCountFlagBits GetDepthStencilRenderTargetSampleCount(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const;
+
 		uint32_t Get2DTextureImagesWidth(IDObject<AutoCleanup2DTexture> imageID) const;
 		uint32_t Get2DTextureImagesHeight(IDObject<AutoCleanup2DTexture> imageID) const;
 
@@ -68,9 +88,11 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::MemorySize Get2DTextureImagesRequiredAligment(IDObject<AutoCleanup2DTexture> imageID) const;
 
 		void BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void BindDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
 		void Bind2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
 
 		IDObject<AutoCleanupImageView> AddColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, size_t addOnReserving);
+		IDObject<AutoCleanupImageView> AddDepthStencilRenderTargetImageView(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, size_t addOnReserving);
 
 		IDObject<AutoCleanupImageView> Add2DTextureImageFullView(IDObject<AutoCleanup2DTexture> imageID, size_t addOnReserving);
 		IDObject<AutoCleanupImageView> Add2DTextureImageSingleMipmapView(IDObject<AutoCleanup2DTexture> imageID, uint32_t mipmap, size_t addOnReserving);
@@ -98,6 +120,7 @@ namespace VulkanSimplifiedInternal
 		VkDevice _device;
 
 		UnsortedIDVector<AutoCleanupColorRenderTargetImage> _colorRenderTargetList;
+		UnsortedIDVector<AutoCleanupDepthStencilRenderTargetImage> _depthStencilRenderTargetList;
 		UnsortedIDVector<AutoCleanup2DTexture> _2dTexturesList;
 
 		UnsortedIDVector<AutoCleanupFramebuffer> _framebufferList;

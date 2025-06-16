@@ -56,6 +56,11 @@ namespace VulkanSimplifiedInternal
 		return _aligment;
 	}
 
+	VkSampleCountFlagBits AutoCleanupImage::GetSampleCount() const
+	{
+		return _sampleCount;
+	}
+
 	std::optional<VulkanSimplified::MemorySuballocationFullID> AutoCleanupImage::GetBoundMemorySuballocation() const
 	{
 		return _memorySuballocation;
@@ -80,8 +85,8 @@ namespace VulkanSimplifiedInternal
 	}
 
 	AutoCleanupImage::AutoCleanupImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipmapLevels, VkFormat format,
-		size_t imageViewsInitialCapacity) : _device(device), _image(image), _width(width), _height(height), _depth(depth), _mipmapLevels(mipmapLevels), _format(format),
-		_imageViews(imageViewsInitialCapacity)
+		VkSampleCountFlagBits sampleCount, size_t imageViewsInitialCapacity) : _device(device), _image(image), _width(width), _height(height), _depth(depth),
+		_mipmapLevels(mipmapLevels), _format(format), _sampleCount(sampleCount), _padding(0), _imageViews(imageViewsInitialCapacity)
 	{
 		VkMemoryRequirements req{};
 
@@ -98,8 +103,8 @@ namespace VulkanSimplifiedInternal
 	}
 
 	AutoCleanupImage::AutoCleanupImage(AutoCleanupImage&& rhs) noexcept : _device(rhs._device), _image(rhs._image), _width(rhs._width), _height(rhs._height), _depth(rhs._depth),
-		_mipmapLevels(rhs._mipmapLevels), _format(rhs._format), _memoryTypeMask(rhs._memoryTypeMask), _size(rhs._size), _aligment(rhs._aligment),
-		_imageViews(std::move(rhs._imageViews))
+		_mipmapLevels(rhs._mipmapLevels), _format(rhs._format), _memoryTypeMask(rhs._memoryTypeMask), _size(rhs._size), _aligment(rhs._aligment), _sampleCount(rhs._sampleCount),
+		_padding(0), _memorySuballocation(std::move(rhs._memorySuballocation)), _imageViews(std::move(rhs._imageViews))
 	{
 		rhs._device = VK_NULL_HANDLE;
 		rhs._image = VK_NULL_HANDLE;
@@ -113,6 +118,8 @@ namespace VulkanSimplifiedInternal
 		rhs._memoryTypeMask = 0;
 		rhs._size = 0;
 		rhs._aligment = 0;
+
+		rhs._sampleCount = VK_SAMPLE_COUNT_1_BIT;
 	}
 
 	AutoCleanupImage& AutoCleanupImage::operator=(AutoCleanupImage&& rhs) noexcept
@@ -132,6 +139,11 @@ namespace VulkanSimplifiedInternal
 		_size = rhs._size;
 		_aligment = rhs._aligment;
 
+		_sampleCount = rhs._sampleCount;
+		_padding = 0;
+
+		_memorySuballocation = std::move(rhs._memorySuballocation);
+
 		_imageViews = std::move(rhs._imageViews);
 
 		rhs._device = VK_NULL_HANDLE;
@@ -146,6 +158,8 @@ namespace VulkanSimplifiedInternal
 		rhs._memoryTypeMask = 0;
 		rhs._size = 0;
 		rhs._aligment = 0;
+
+		rhs._sampleCount = VK_SAMPLE_COUNT_1_BIT;
 
 		return *this;
 	}

@@ -24,6 +24,8 @@
 #include <VSVertexBindingInputRate.h>
 
 #include <VSDescriptorTypeFlags.h>
+#include <VSDepthUsage.h>
+#include <VSCompareOperationsType.h>
 
 void CreateSharedData(VulkanData& data)
 {
@@ -50,6 +52,9 @@ void CreateSharedData(VulkanData& data)
 	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
 	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, true, false);
 	sharedDataList.multisamplingData = pipelineData.AddPipelineMultisampleData(VulkanSimplified::SAMPLE_1, {});
+
+	sharedDataList.depthStencilData = pipelineData.AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage::TEST_AND_WRITE,
+		VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS, 0.0f, 1.0f);
 
 	VulkanSimplified::ColorBlendingComponentFlags colorBlendingComponents = VulkanSimplified::COLOR_COMPONENT_R | VulkanSimplified::COLOR_COMPONENT_G |
 		VulkanSimplified::COLOR_COMPONENT_B | VulkanSimplified::COLOR_COMPONENT_A;

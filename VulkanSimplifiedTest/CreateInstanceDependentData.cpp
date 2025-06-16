@@ -84,6 +84,13 @@ static size_t ChooseGPU(VulkanSimplified::Instance& instance)
 		if (!CheckFormatSupport(supportedFormats.formatFeaturesBufferSupport.vertexBuffer, VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT))
 			continue;
 
+		bool depthSupported = CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D32_SFLOAT_S8_UINT) ||
+			CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D24_UNORM_S8_UINT) ||
+			CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D16_UNORM_S8_UINT);
+
+		if (!depthSupported)
+			continue;
+
 		switch (deviceProperties.deviceType)
 		{
 		case VulkanSimplified::DeviceType::OTHER:
@@ -465,9 +472,22 @@ void CreateInstanceDependentData(VulkanData& data)
 		CheckFormatSupport(imageSupport.colorAttachment, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM);
 
 	if (bgraSupported)
-		instanceData.supportedFormat = VulkanSimplified::DATA_FORMAT_BGRA8_UNORM;
+		instanceData.supportedColorFormat = VulkanSimplified::DATA_FORMAT_BGRA8_UNORM;
 	else
-		instanceData.supportedFormat = VulkanSimplified::DATA_FORMAT_RGBA8_UNORM;
+		instanceData.supportedColorFormat = VulkanSimplified::DATA_FORMAT_RGBA8_UNORM;
+
+	if (CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D32_SFLOAT_S8_UINT))
+	{
+		instanceData.supportedDepthFormat = VulkanSimplified::DATA_FORMAT_D32_SFLOAT_S8_UINT;
+	}
+	else if (CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D24_UNORM_S8_UINT))
+	{
+		instanceData.supportedDepthFormat = VulkanSimplified::DATA_FORMAT_D24_UNORM_S8_UINT;
+	}
+	else
+	{
+		instanceData.supportedDepthFormat = VulkanSimplified::DATA_FORMAT_D16_UNORM_S8_UINT;
+	}
 
 	instanceData.minSwapchainImageAmount = deviceSurfaceSupport.minImageCount;
 	instanceData.maxSwapchainImageAmount = deviceSurfaceSupport.maxImageCount;

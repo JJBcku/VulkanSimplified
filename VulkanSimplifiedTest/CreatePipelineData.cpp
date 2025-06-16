@@ -63,6 +63,7 @@ void CreatePipelineData(VulkanData& data)
 
 		pipelineData.rasterizationData = data.sharedData->rasterizationData;
 		pipelineData.samplingData = data.sharedData->multisamplingData;
+		pipelineData.depthStencilData = data.sharedData->depthStencilData;
 		pipelineData.colorBlendingData.push_back(data.sharedData->colorBlendData);
 
 		pipelineData.pipelineLayout = data.pipelineData->pipelineLayout;

@@ -70,7 +70,7 @@ void CreateDeviceDependentData(VulkanData& data)
 	VulkanSimplified::SwapchainCreationData swapchainCreationData;
 
 	swapchainCreationData.surfacePresentMode = VulkanSimplified::PRESENT_MODE_FIFO_STRICT;
-	swapchainCreationData.format = data.instanceDependentData->supportedFormat;
+	swapchainCreationData.format = data.instanceDependentData->supportedColorFormat;
 
 	swapchainCreationData.imageAmount = std::min(data.instanceDependentData->minSwapchainImageAmount + 1, data.instanceDependentData->maxSwapchainImageAmount);
 

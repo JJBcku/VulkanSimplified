@@ -29,21 +29,26 @@ void CreateRenderPassData(VulkanData& data)
 	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
 	auto sharedRenderPassData = sharedData.GetSharedRenderPassDataList();
 
-	VulkanSimplified::DataFormatSetIndependentID format = data.instanceDependentData->supportedFormat;
+	VulkanSimplified::DataFormatSetIndependentID format = data.instanceDependentData->supportedColorFormat;
 
 	auto& renderPassData = *data.renderPassData;
 
 	renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, VulkanSimplified::SAMPLE_1, VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR,
 		VulkanSimplified::RenderPassAttachmentStoreOP::STORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED, VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE));
+	renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(data.instanceDependentData->supportedDepthFormat, VulkanSimplified::SAMPLE_1,
+		VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR, VulkanSimplified::RenderPassAttachmentStoreOP::STORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED,
+		VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE));
 
 	renderPassData.colorAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(0, VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT);
+	renderPassData.depthAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(1, VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE);
 
 	renderPassData.subpassDependency = sharedRenderPassData.AddSubpassDependency(VulkanSimplified::externalSubpass, 0,
 		VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0,
 		VulkanSimplified::AccessFlagBits::ACCESS_COLOR_ATTACHMENT_WRITE);
 
-	renderPassData.clearValues.resize(1);
+	renderPassData.clearValues.resize(2);
 	renderPassData.clearValues[0].emplace(sharedRenderPassData.AddFloatColorClearValue(0.0f, 0.0f, 0.0f, 0.0f));
+	renderPassData.clearValues[1].emplace(sharedRenderPassData.AddDepthStencilClearValue(1.0f, 0));
 
 	auto instance = data.basicData->vsmain->GetInstance();
 	auto device = instance.GetChoosenDevicesMainClass();
@@ -51,6 +56,7 @@ void CreateRenderPassData(VulkanData& data)
 
 	VulkanSimplified::SubpassCreationDataWithoutResolving subpassData;
 	subpassData.colorAttachments.push_back(renderPassData.colorAttachmentReference);
+	subpassData.depthStencilAttachment = renderPassData.depthAttachmentReference;
 
 	renderPassData.renderPass = deviceRenderPassData.AddRenderPassWithoutResolveAttachments(renderPassData.renderPassAttachments, { subpassData }, { renderPassData.subpassDependency });
 }

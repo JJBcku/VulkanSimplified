@@ -4,7 +4,7 @@
 namespace VulkanSimplifiedInternal
 {
 	AutoCleanup2DArrayTexture::AutoCleanup2DArrayTexture(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t arrayLayers, uint32_t mipmapLevels, VkFormat format,
-		size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, arrayLayers, mipmapLevels, format, imageViewsInitialCapacity)
+		size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, arrayLayers, mipmapLevels, format, VK_SAMPLE_COUNT_1_BIT, imageViewsInitialCapacity)
 	{
 	}
 

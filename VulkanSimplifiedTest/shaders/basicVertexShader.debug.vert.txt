@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google Shaderc over Glslang; 11
-; Bound: 50
+; Bound: 51
 ; Schema: 0
                OpCapability Shader
           %2 = OpExtInstImport "GLSL.std.450"
@@ -29,7 +29,7 @@ layout(set = 0, binding  = 0) uniform UniformBufferObject
 
 void main()
 {
-	gl_Position = ubo.projection * ubo.view * ubo.model * vec4(inPos.xy, 0.0, 1.0);
+	gl_Position = ubo.projection * ubo.view * ubo.model * vec4(inPos.xyz, 1.0);
 	outTexCoord = inTexCoord;
 }
 "
@@ -91,10 +91,10 @@ void main()
       %int_1 = OpConstant %int 1
 %_ptr_Input_v4float = OpTypePointer Input %v4float
       %inPos = OpVariable %_ptr_Input_v4float Input
-    %v2float = OpTypeVector %float 2
-    %float_0 = OpConstant %float 0
+    %v3float = OpTypeVector %float 3
     %float_1 = OpConstant %float 1
 %_ptr_Output_v4float = OpTypePointer Output %v4float
+    %v2float = OpTypeVector %float 2
 %_ptr_Output_v2float = OpTypePointer Output %v2float
 %outTexCoord = OpVariable %_ptr_Output_v2float Output
 %_ptr_Input_v2float = OpTypePointer Input %v2float
@@ -112,16 +112,17 @@ void main()
          %30 = OpLoad %mat4v4float %29
          %31 = OpMatrixTimesMatrix %mat4v4float %28 %30
          %35 = OpLoad %v4float %inPos
-         %36 = OpVectorShuffle %v2float %35 %35 0 1
-         %39 = OpCompositeExtract %float %36 0
-         %40 = OpCompositeExtract %float %36 1
-         %41 = OpCompositeConstruct %v4float %39 %40 %float_0 %float_1
+         %36 = OpVectorShuffle %v3float %35 %35 0 1 2
+         %38 = OpCompositeExtract %float %36 0
+         %39 = OpCompositeExtract %float %36 1
+         %40 = OpCompositeExtract %float %36 2
+         %41 = OpCompositeConstruct %v4float %38 %39 %40 %float_1
          %42 = OpMatrixTimesVector %v4float %31 %41
          %44 = OpAccessChain %_ptr_Output_v4float %_ %int_0
                OpStore %44 %42
                OpLine %1 18 0
-         %49 = OpLoad %v2float %inTexCoord
-               OpStore %outTexCoord %49
+         %50 = OpLoad %v2float %inTexCoord
+               OpStore %outTexCoord %50
                OpLine %1 19 0
                OpReturn
                OpFunctionEnd

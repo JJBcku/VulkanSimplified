@@ -9,6 +9,7 @@ struct VulkanRenderPassData
 {
 	std::vector<IDObject<VulkanSimplifiedInternal::RenderPassAttachmentData>> renderPassAttachments;
 	IDObject<VulkanSimplifiedInternal::RenderPassAttachmentReference> colorAttachmentReference;
+	IDObject<VulkanSimplifiedInternal::RenderPassAttachmentReference> depthAttachmentReference;
 	IDObject<VulkanSimplifiedInternal::SubpassDependencyData> subpassDependency;
 
 	std::vector<std::optional<VulkanSimplified::RenderPassClearValueID>> clearValues;
