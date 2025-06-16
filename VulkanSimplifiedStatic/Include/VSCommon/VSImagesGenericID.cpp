@@ -18,5 +18,8 @@ namespace VulkanSimplified
 	{
 		texture2DID.type = ImagesIDType::TEXTURE_2D;
 		texture2DID.ID = ID;
+
+		texture2DID.baseMipLevel = 0;
+		texture2DID.mipLevelCount = {};
 	}
 }

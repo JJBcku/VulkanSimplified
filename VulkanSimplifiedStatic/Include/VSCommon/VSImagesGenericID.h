@@ -27,6 +27,9 @@ namespace VulkanSimplified
 		{
 			ImagesIDType type;
 			IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ID;
+
+			uint32_t baseMipLevel;
+			std::optional<uint32_t> mipLevelCount;
 		} texture2DID;
 
 		ImagesGenericID();

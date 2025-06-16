@@ -410,6 +410,46 @@ namespace VulkanSimplifiedInternal
 		vkCmdCopyBufferToImage(_buffer, buffer, image, layout, 1, &bufferCopy);
 	}
 
+	void CommandBufferBaseInternal::BlitDataBetween2DTexturesSimple(IDObject<AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel,
+		IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel)
+	{
+		auto& srcImageInternal = _imageList.Get2DTextureImageInternal(srcTexureID);
+		auto& dstImageInternal = _imageList.Get2DTextureImageInternal(dstTextureID);
+
+		if (srcTexureID == dstTextureID && srcMipLevel == dstMipLevel)
+			throw std::runtime_error("CommandBufferBaseInternal::BlitDataBetween2DTexturesSimple Error: Function cannot blit data between the same mipLevel of one image!");
+
+		if (srcMipLevel >= srcImageInternal.GetMipmapLevels())
+			throw std::runtime_error("CommandBufferBaseInternal::BlitDataBetween2DTexturesSimple Error: Function tried to blit from a non existent mip level!");
+
+		if (dstMipLevel >= dstImageInternal.GetMipmapLevels())
+			throw std::runtime_error("CommandBufferBaseInternal::BlitDataBetween2DTexturesSimple Error: Function tried to blit to a non existent mip level!");
+
+		VkImageBlit blit{};
+		blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		blit.srcSubresource.mipLevel = srcMipLevel;
+		blit.srcSubresource.baseArrayLayer = 0;
+		blit.srcSubresource.layerCount = 1;
+
+		blit.srcOffsets[0] = { 0, 0, 0 };
+		blit.srcOffsets[1].x = std::max(1, static_cast<int32_t>(srcImageInternal.GetWidth()) >> srcMipLevel);
+		blit.srcOffsets[1].y = std::max(1, static_cast<int32_t>(srcImageInternal.GetHeight()) >> srcMipLevel);
+		blit.srcOffsets[1].z = 1;
+
+		blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		blit.dstSubresource.mipLevel = dstMipLevel;
+		blit.dstSubresource.baseArrayLayer = 0;
+		blit.dstSubresource.layerCount = 1;
+
+		blit.dstOffsets[0] = { 0, 0, 0 };
+		blit.dstOffsets[1].x = std::max(1, static_cast<int32_t>(dstImageInternal.GetWidth()) >> dstMipLevel);
+		blit.dstOffsets[1].y = std::max(1, static_cast<int32_t>(dstImageInternal.GetHeight()) >> dstMipLevel);
+		blit.dstOffsets[1].z = 1;
+
+		vkCmdBlitImage(_buffer, srcImageInternal.GetImage(), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, dstImageInternal.GetImage(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
+			&blit, VK_FILTER_LINEAR);
+	}
+
 	void CommandBufferBaseInternal::CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
 		const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
 		const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData)
@@ -532,9 +572,20 @@ namespace VulkanSimplifiedInternal
 				imagePtr = &_imageList.Get2DTextureImageInternal(inData.imageID.texture2DID.ID);
 				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 				outData.subresourceRange.baseArrayLayer = 0;
-				outData.subresourceRange.baseMipLevel = 0;
+				outData.subresourceRange.baseMipLevel = inData.imageID.texture2DID.baseMipLevel;
 				outData.subresourceRange.layerCount = 1;
-				outData.subresourceRange.levelCount = imagePtr->GetMipmapLevels();
+
+				if (!inData.imageID.texture2DID.mipLevelCount.has_value())
+					outData.subresourceRange.levelCount = imagePtr->GetMipmapLevels();
+				else
+				{
+					outData.subresourceRange.levelCount = inData.imageID.texture2DID.mipLevelCount.value();
+
+					uint32_t totalMipmaps = outData.subresourceRange.baseMipLevel + outData.subresourceRange.levelCount;
+
+					if (totalMipmaps > imagePtr->GetMipmapLevels())
+						throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Total sum of base mip level and used levels count must be equal or less than 2D textures mipmap amount!");
+				}
 				break;
 			case VulkanSimplified::ImagesIDType::UNKNOWN:
 			default:

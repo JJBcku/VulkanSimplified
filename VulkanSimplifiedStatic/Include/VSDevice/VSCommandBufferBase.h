@@ -67,6 +67,9 @@ namespace VulkanSimplified
 		void TransferDataTo2dTextureSimple(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
 			IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> dstTextureID, uint32_t mipLevel);
 
+		void BlitDataBetween2DTexturesSimple(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel,
+			IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel);
+
 		void CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages, const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
 			const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData);
 

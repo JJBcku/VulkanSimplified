@@ -6,3 +6,4 @@
 
 #include <stdint.h>
 #include <stdexcept>
+#include <optional>

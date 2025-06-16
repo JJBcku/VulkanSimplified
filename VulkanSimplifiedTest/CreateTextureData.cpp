@@ -69,6 +69,15 @@ void CreateTextureData(VulkanData& data)
 	imageSize *= imageHeight;
 	imageSize = imageSize << 2;
 
+	uint32_t mipLevels = 1;
+	uint32_t maxSide = std::max(imageWidth, imageHeight);
+
+	while (maxSide > 1)
+	{
+		maxSide = maxSide >> 1;
+		mipLevels++;
+	}
+
 	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
 	IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> stagingBuffer;
 
@@ -78,7 +87,7 @@ void CreateTextureData(VulkanData& data)
 	auto bufferLists = device.GetDataBufferLists();
 
 	{
-		texData.textureID = imageList.Add2DTextureImage(imageWidth, imageHeight, 1, VulkanSimplified::DATA_FORMAT_RGBA8_SRGB, {}, false, 1);
+		texData.textureID = imageList.Add2DTextureImage(imageWidth, imageHeight, mipLevels, VulkanSimplified::DATA_FORMAT_RGBA8_SRGB, {}, false, 1);
 
 		VulkanSimplified::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
 		uint32_t memoryTypeMask = imageList.Get2DTextureImagesMemoryTypeMask(texData.textureID);
@@ -135,7 +144,7 @@ void CreateTextureData(VulkanData& data)
 		auto synchro = device.GetSynchronizationDataLists();
 		synchro.ResetFences({ data.synchronizationData->inFlightFences[0] });
 
-		VulkanSimplified::ImagesMemoryBarrierData imageMemBOne, imageMemBTwo;
+		VulkanSimplified::ImagesMemoryBarrierData imageMemBOne, imageMemBTwo, imageMemBThree, imageMemBFour;
 		imageMemBOne.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_NONE;
 		imageMemBOne.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
 		imageMemBOne.oldLayout = VulkanSimplified::ImageLayoutFlags::UNDEFINED;
@@ -143,10 +152,23 @@ void CreateTextureData(VulkanData& data)
 		imageMemBOne.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
 
 		imageMemBTwo.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
-		imageMemBTwo.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+		imageMemBTwo.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_READ;
 		imageMemBTwo.oldLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
-		imageMemBTwo.newLayout = VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY;
+		imageMemBTwo.newLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
 		imageMemBTwo.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
+
+		imageMemBThree.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
+		imageMemBThree.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_READ;
+		imageMemBThree.oldLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
+		imageMemBThree.newLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE;
+		imageMemBThree.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
+		imageMemBThree.imageID.texture2DID.mipLevelCount = 1;
+
+		imageMemBFour.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
+		imageMemBFour.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+		imageMemBFour.oldLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE;
+		imageMemBFour.newLayout = VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY;
+		imageMemBFour.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
 
 		if (data.commandBufferData->transferGroup.has_value())
 		{
@@ -185,7 +207,25 @@ void CreateTextureData(VulkanData& data)
 				graphicBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
 
 				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_BOTTOM_OF_PIPE, {}, {}, { imageMemBTwo });
+					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, {}, {}, { imageMemBTwo });
+
+				imageMemBThree.imageID.texture2DID.baseMipLevel = 0;
+
+				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					{}, {}, { imageMemBThree });
+
+				for (uint32_t i = 1; i < mipLevels; ++i)
+				{
+					graphicBuffer.BlitDataBetween2DTexturesSimple(texData.textureID, i - 1, texData.textureID, i);
+
+					imageMemBThree.imageID.texture2DID.baseMipLevel = i;
+
+					graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+						{}, {}, { imageMemBThree });
+				}
+
+				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBFour });
 
 				graphicBuffer.EndRecording();
 
@@ -213,8 +253,23 @@ void CreateTextureData(VulkanData& data)
 
 			graphicBuffer.TransferDataTo2dTextureSimple(stagingBuffer, texData.textureID, 0);
 
+			imageMemBThree.imageID.texture2DID.baseMipLevel = 0;
+
+			graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+				{}, {}, { imageMemBThree });
+
+			for (uint32_t i = 1; i < mipLevels; ++i)
+			{
+				graphicBuffer.BlitDataBetween2DTexturesSimple(texData.textureID, i - 1, texData.textureID, i);
+
+				imageMemBThree.imageID.texture2DID.baseMipLevel = i;
+
+				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					{}, {}, { imageMemBThree });
+			}
+
 			graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-				VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBTwo });
+				VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBFour });
 
 			graphicBuffer.EndRecording();
 

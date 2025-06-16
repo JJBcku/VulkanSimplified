@@ -107,5 +107,5 @@ void CreateDeviceDependentData(VulkanData& data)
 
 	auto imageList = device.GetImageDataLists();
 
-	data.deviceDependentData->sampler = imageList.AddSampler(true, true, false, false, false, false, 0.0f, data.instanceDependentData->maxAnisotropy, 0.0f, 0.0f);
+	data.deviceDependentData->sampler = imageList.AddSampler(true, true, false, false, false, false, 0.0f, data.instanceDependentData->maxAnisotropy, 0.0f, {});
 }
