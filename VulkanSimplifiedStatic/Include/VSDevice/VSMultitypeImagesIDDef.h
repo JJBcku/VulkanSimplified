@@ -2,5 +2,5 @@
 
 namespace VulkanSimplified
 {
-	union MultitypeImagesID;
+	union RenderTargetImagesID;
 }

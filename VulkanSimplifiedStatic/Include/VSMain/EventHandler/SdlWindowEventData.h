@@ -2,7 +2,7 @@
 
 namespace VulkanSimplified
 {
-    enum SdlWindowEventID : std::uint8_t
+    enum SdlWindowEventID : uint8_t
     {
         SDL_DATA_WINDOWEVENT_NONE,           /**< Never used */
         SDL_DATA_WINDOWEVENT_SHOWN,          /**< Window has been shown */
@@ -32,15 +32,15 @@ namespace VulkanSimplified
 
     struct SdlWindowEventData
     {
-        std::uint32_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
-        std::uint32_t windowID;    /**< The associated window */
-        std::uint8_t event;        /**< SdlWindowEventID */
-        std::uint8_t padding1;
-        std::uint8_t padding2;
-        std::uint8_t padding3;
-        std::int32_t data1;       /**< event dependent data */
-        std::int32_t data2;       /**< event dependent data */
-        std::int32_t padding;       /**< event dependent data */
+        uint32_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
+        uint32_t windowID;    /**< The associated window */
+        uint8_t event;        /**< SdlWindowEventID */
+        uint8_t padding1;
+        uint8_t padding2;
+        uint8_t padding3;
+        int32_t data1;       /**< event dependent data */
+        int32_t data2;       /**< event dependent data */
+        int32_t padding;       /**< event dependent data */
 
         SdlWindowEventData();
         ~SdlWindowEventData();

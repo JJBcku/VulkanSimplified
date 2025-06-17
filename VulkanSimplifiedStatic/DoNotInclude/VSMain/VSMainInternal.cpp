@@ -138,7 +138,7 @@ namespace VulkanSimplifiedInternal
 #pragma warning(push)
 #pragma warning(disable : 4191)
 
-		std::uint32_t ret = 0;
+		uint32_t ret = 0;
 		auto func = reinterpret_cast<PFN_vkEnumerateInstanceVersion>(vkGetInstanceProcAddr(NULL, "vkEnumerateInstanceVersion"));
 #pragma warning(pop)
 

@@ -21,11 +21,11 @@ namespace VulkanSimplified
 	struct QueueFamilyData
 	{
 		QueueTypeFlags queueTypes;
-		std::uint32_t queueCount;
-		std::uint32_t timespampValidBits;
-		std::uint32_t minImageTransferGranularityWidth;
-		std::uint32_t minImageTransferGranularityHeight;
-		std::uint32_t minImageTransferGranularityDepth;
+		uint32_t queueCount;
+		uint32_t timespampValidBits;
+		uint32_t minImageTransferGranularityWidth;
+		uint32_t minImageTransferGranularityHeight;
+		uint32_t minImageTransferGranularityDepth;
 
 		Bool64 presentationSupport;
 

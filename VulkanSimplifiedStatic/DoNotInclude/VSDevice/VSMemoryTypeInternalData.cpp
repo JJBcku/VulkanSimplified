@@ -19,8 +19,8 @@ namespace VulkanSimplifiedInternal
 		_properties(rhs._properties), _allocationsList(std::move(rhs._allocationsList))
 	{
 		rhs._device = VK_NULL_HANDLE;
-		rhs._heapIndex = std::numeric_limits<std::uint32_t>::max();
-		rhs._typeIndex = std::numeric_limits<std::uint32_t>::max();
+		rhs._heapIndex = std::numeric_limits<uint32_t>::max();
+		rhs._typeIndex = std::numeric_limits<uint32_t>::max();
 		rhs._properties = std::numeric_limits<VulkanSimplified::MemoryTypeProperties>::max();
 	}
 
@@ -33,8 +33,8 @@ namespace VulkanSimplifiedInternal
 		_allocationsList = std::move(rhs._allocationsList);
 
 		rhs._device = VK_NULL_HANDLE;
-		rhs._heapIndex = std::numeric_limits<std::uint32_t>::max();
-		rhs._typeIndex = std::numeric_limits<std::uint32_t>::max();
+		rhs._heapIndex = std::numeric_limits<uint32_t>::max();
+		rhs._typeIndex = std::numeric_limits<uint32_t>::max();
 		rhs._properties = std::numeric_limits<VulkanSimplified::MemoryTypeProperties>::max();
 		return *this;
 	}
@@ -78,12 +78,12 @@ namespace VulkanSimplifiedInternal
 			return false;
 	}
 
-	std::uint32_t MemoryTypeInternalData::GetHeapIndex() const
+	uint32_t MemoryTypeInternalData::GetHeapIndex() const
 	{
 		return _heapIndex;
 	}
 
-	std::uint32_t MemoryTypeInternalData::GetTypeIndex() const
+	uint32_t MemoryTypeInternalData::GetTypeIndex() const
 	{
 		return _typeIndex;
 	}

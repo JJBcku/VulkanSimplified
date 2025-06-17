@@ -24,7 +24,7 @@ namespace VulkanSimplifiedInternal
 		{
 			for (size_t j = 0; j < memoryHeapList.memoryHeaps[i].memoryTypeAmount; j++)
 			{
-				memoryTypeData[typeCount++].emplace(device, static_cast<std::uint32_t>(i), memoryHeapList.memoryHeaps[i].memoryTypes[j],
+				memoryTypeData[typeCount++].emplace(device, static_cast<uint32_t>(i), memoryHeapList.memoryHeaps[i].memoryTypes[j],
 					initialCapacities.initialCapacities[memoryHeapList.memoryHeaps[i].memoryTypes[j].memoryIndex]);
 			}
 		}
@@ -35,7 +35,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	VulkanSimplified::MemoryAllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving)
+		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
 	{
 		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
 		assert(memorySize > 0);
@@ -49,7 +49,7 @@ namespace VulkanSimplifiedInternal
 				if (acceptableMemoryTypesProperties[i] != memoryTypeData[j].value().GetProperties())
 					continue;
 
-				std::uint32_t memoryBit = 1U << memoryTypeData[j].value().GetTypeIndex();
+				uint32_t memoryBit = 1U << memoryTypeData[j].value().GetTypeIndex();
 
 				if ((memoryTypeMask & memoryBit) != memoryBit)
 					continue;

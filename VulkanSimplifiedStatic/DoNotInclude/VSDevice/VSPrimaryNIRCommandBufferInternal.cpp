@@ -9,6 +9,8 @@
 
 #include "VSRenderPassDataListInternal.h"
 #include "VSImageDataListsInternal.h"
+#include "VSAutoCleanupColorRenderTargetImage.h"
+#include "VSAutoCleanupResolveRenderTargetImage.h"
 
 #include "../../Include/VSSharedData/VSRenderPassClearValueID.h"
 
@@ -43,7 +45,7 @@ namespace VulkanSimplifiedInternal
 		beginInfo.renderPass = _deviceRenderPassData.GetRenderPass(renderPassID);
 		beginInfo.framebuffer = _imageList.GetFramebuffer(framebufferID);
 
-		beginInfo.renderArea.offset = { static_cast<std::int32_t>(startX), static_cast<std::int32_t>(startY) };
+		beginInfo.renderArea.offset = { static_cast<int32_t>(startX), static_cast<int32_t>(startY) };
 		beginInfo.renderArea.extent = { width, height };
 
 		size_t maxSize = clearValues.size() << 1;
@@ -69,7 +71,7 @@ namespace VulkanSimplifiedInternal
 			}
 		}
 
-		beginInfo.clearValueCount = static_cast<std::uint32_t>(clearValuesList.size());
+		beginInfo.clearValueCount = static_cast<uint32_t>(clearValuesList.size());
 		beginInfo.pClearValues = clearValuesList.data();
 
 		VkSubpassContents contents = VK_SUBPASS_CONTENTS_INLINE;
@@ -151,20 +153,25 @@ namespace VulkanSimplifiedInternal
 		vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
 	}
 
-	void PrimaryNIRCommandBufferInternal::BlitToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID,
+	void PrimaryNIRCommandBufferInternal::BlitColorRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID,
 		uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex)
 	{
+		auto& blitImageInternal = _imageList.GetColorRenderTargetImageInternal(imageID);
+
+		if (blitImageInternal.GetSampleCount() != VK_SAMPLE_COUNT_1_BIT)
+			throw std::runtime_error("PrimaryNIRCommandBufferInternal::BlitColorRenderTargetToSwapchainImage Error: Function cannot blit a multisampled image!");
+
 		VkImageBlit blitData{};
 		blitData.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 		blitData.srcSubresource.mipLevel = 0;
 		blitData.srcSubresource.baseArrayLayer = 0;
 		blitData.srcSubresource.layerCount = 1;
 
-		blitData.srcOffsets[0].x = static_cast<std::int32_t>(startX);
-		blitData.srcOffsets[0].y = static_cast<std::int32_t>(startY);
+		blitData.srcOffsets[0].x = static_cast<int32_t>(startX);
+		blitData.srcOffsets[0].y = static_cast<int32_t>(startY);
 		blitData.srcOffsets[0].z = 0;
-		blitData.srcOffsets[1].x = static_cast<std::int32_t>(width);
-		blitData.srcOffsets[1].y = static_cast<std::int32_t>(height);
+		blitData.srcOffsets[1].x = static_cast<int32_t>(width);
+		blitData.srcOffsets[1].y = static_cast<int32_t>(height);
 		blitData.srcOffsets[1].z = 1;
 
 		auto& window = _windowList.GetWindow(windowID);
@@ -177,11 +184,47 @@ namespace VulkanSimplifiedInternal
 		blitData.dstOffsets[0].x = 0;
 		blitData.dstOffsets[0].y = 0;
 		blitData.dstOffsets[0].z = 0;
-		blitData.dstOffsets[1].x = static_cast<std::int32_t>(window.GetWidth());
-		blitData.dstOffsets[1].y = static_cast<std::int32_t>(window.GetHeight());
+		blitData.dstOffsets[1].x = static_cast<int32_t>(window.GetWidth());
+		blitData.dstOffsets[1].y = static_cast<int32_t>(window.GetHeight());
 		blitData.dstOffsets[1].z = 1;
 
-		vkCmdBlitImage(_buffer, _imageList.GetColorRenderTargetImage(imageID), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+		vkCmdBlitImage(_buffer, blitImageInternal.GetImage(), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+			1, &blitData, VK_FILTER_LINEAR);
+	}
+
+	void PrimaryNIRCommandBufferInternal::BlitResolveRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID,
+		IDObject<AutoCleanupResolveRenderTargetImage> imageID, uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex)
+	{
+		auto& blitImageInternal = _imageList.GetResolveRenderTargetImageInternal(imageID);
+
+		VkImageBlit blitData{};
+		blitData.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		blitData.srcSubresource.mipLevel = 0;
+		blitData.srcSubresource.baseArrayLayer = 0;
+		blitData.srcSubresource.layerCount = 1;
+
+		blitData.srcOffsets[0].x = static_cast<int32_t>(startX);
+		blitData.srcOffsets[0].y = static_cast<int32_t>(startY);
+		blitData.srcOffsets[0].z = 0;
+		blitData.srcOffsets[1].x = static_cast<int32_t>(width);
+		blitData.srcOffsets[1].y = static_cast<int32_t>(height);
+		blitData.srcOffsets[1].z = 1;
+
+		auto& window = _windowList.GetWindow(windowID);
+
+		blitData.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		blitData.dstSubresource.mipLevel = 0;
+		blitData.dstSubresource.baseArrayLayer = 0;
+		blitData.dstSubresource.layerCount = 1;
+
+		blitData.dstOffsets[0].x = 0;
+		blitData.dstOffsets[0].y = 0;
+		blitData.dstOffsets[0].z = 0;
+		blitData.dstOffsets[1].x = static_cast<int32_t>(window.GetWidth());
+		blitData.dstOffsets[1].y = static_cast<int32_t>(window.GetHeight());
+		blitData.dstOffsets[1].z = 1;
+
+		vkCmdBlitImage(_buffer, blitImageInternal.GetImage(), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 			1, &blitData, VK_FILTER_LINEAR);
 	}
 }

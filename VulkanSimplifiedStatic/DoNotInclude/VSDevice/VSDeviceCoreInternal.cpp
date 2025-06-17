@@ -21,10 +21,10 @@ namespace VulkanSimplifiedInternal
 			VkDeviceCreateInfo createInfo{};
 			createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 
-			createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(creationData.queueInfos.size());
+			createInfo.queueCreateInfoCount = static_cast<uint32_t>(creationData.queueInfos.size());
 			createInfo.pQueueCreateInfos = creationData.queueInfos.data();
 
-			createInfo.enabledExtensionCount = static_cast<std::uint32_t>(creationData.enabledExtensionsList.size());
+			createInfo.enabledExtensionCount = static_cast<uint32_t>(creationData.enabledExtensionsList.size());
 			createInfo.ppEnabledExtensionNames = creationData.enabledExtensionsList.data();
 
 			createInfo.pEnabledFeatures = &creationData.features;
@@ -50,7 +50,7 @@ namespace VulkanSimplifiedInternal
 
 			for (size_t i = 0; i < creationData.queueInfos.size(); ++i)
 			{
-				for (std::uint32_t j = 0; j < creationData.queueInfos[i].queueCount; ++j)
+				for (uint32_t j = 0; j < creationData.queueInfos[i].queueCount; ++j)
 				{
 					auto& queueFamilyData = creationData.queueInfos[i];
 					auto& queueData = _queues[currentQueueIndex];

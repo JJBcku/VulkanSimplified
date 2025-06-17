@@ -28,10 +28,10 @@ namespace VulkanSimplifiedInternal
 		MemoryObjectsListInternal& operator=(MemoryObjectsListInternal&&) noexcept = delete;
 
 		VulkanSimplified::MemoryAllocationFullID AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving);
+			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving);
 
 		std::optional<VulkanSimplified::MemoryAllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving);
+			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving);
 
 		VkDeviceMemory GetMemory(VulkanSimplified::MemoryAllocationFullID allocationID) const;
 

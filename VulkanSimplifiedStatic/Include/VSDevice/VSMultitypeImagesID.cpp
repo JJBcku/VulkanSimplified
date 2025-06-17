@@ -3,20 +3,26 @@
 
 namespace VulkanSimplified
 {
-	MultitypeImagesID::MultitypeImagesID()
+	RenderTargetImagesID::RenderTargetImagesID()
 	{
 		type = ImageIDType::UNKNOWN;
 	}
 
-	MultitypeImagesID::MultitypeImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage>& ID)
+	RenderTargetImagesID::RenderTargetImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage>& ID)
 	{
 		colorRenderTarget.type = ImageIDType::COLOR_RENDER_TARGET;
 		colorRenderTarget.ID = ID;
 	}
 
-	MultitypeImagesID::MultitypeImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage>& ID)
+	RenderTargetImagesID::RenderTargetImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage>& ID)
 	{
 		depthStencilRenderTarget.type = ImageIDType::DEPTH_STENCIL_RENDER_TARGET;
 		depthStencilRenderTarget.ID = ID;
+	}
+
+	RenderTargetImagesID::RenderTargetImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupResolveRenderTargetImage>& ID)
+	{
+		resolveRenderTarget.type = ImageIDType::RESOLVE_RENDER_TARGET;
+		resolveRenderTarget.ID = ID;
 	}
 }

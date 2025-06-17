@@ -40,8 +40,8 @@ void RunProgram()
 	MainSettings settings;
 
 	CreateBasicData(data, settings);
-	CreateSharedData(data);
 	CreateInstanceDependentData(data);
+	CreateSharedData(data);
 	CreateDeviceDependentData(data);
 	CreateRenderPassData(data);
 	CreatePipelineData(data);

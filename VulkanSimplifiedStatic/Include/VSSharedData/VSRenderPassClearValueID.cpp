@@ -5,7 +5,7 @@ namespace VulkanSimplified
 {
 	RenderPassClearValueID::RenderPassClearValueID()
 	{
-		type = static_cast<RenderPassClearValueIDType>(std::numeric_limits<std::uint64_t>::max());
+		type = static_cast<RenderPassClearValueIDType>(std::numeric_limits<uint64_t>::max());
 	}
 
 	RenderPassClearValueID::RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassDoubleColorClearValues> ID)

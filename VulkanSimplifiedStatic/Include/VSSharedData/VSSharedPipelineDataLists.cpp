@@ -34,7 +34,7 @@ namespace VulkanSimplified
 		return _internal.AddVertexAttributeDescriptionData(offset, format, addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData> SharedPipelineDataListss::AddVertexBindingData(std::uint32_t stride,
+	IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData> SharedPipelineDataListss::AddVertexBindingData(uint32_t stride,
 		VertexBindingInputRate inputRate, const std::vector<IDObject<VulkanSimplifiedInternal::VertexAttributeDescriptionData>>& vertexAttributeIDs,
 		size_t addOnReserving)
 	{
@@ -72,7 +72,7 @@ namespace VulkanSimplified
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListss::AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting,
-		std::optional<std::uint32_t> minSampleShading, size_t addOnReserving)
+		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		return _internal.AddPipelineMultisampleData(samplingSetting, minSampleShading, addOnReserving);
 	}
@@ -112,7 +112,7 @@ namespace VulkanSimplified
 		return _internal.AddUniqueVertexAttributeDescriptionData(offset, format, addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData> SharedPipelineDataListss::AddUniqueVertexBindingData(std::uint32_t stride,
+	IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData> SharedPipelineDataListss::AddUniqueVertexBindingData(uint32_t stride,
 		VertexBindingInputRate inputRate, const std::vector<IDObject<VulkanSimplifiedInternal::VertexAttributeDescriptionData>>& vertexAttributeIDs,
 		size_t addOnReserving)
 	{
@@ -148,7 +148,7 @@ namespace VulkanSimplified
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListss::AddUniquePipelineMultisampleData(ImageSampleFlagBits samplingSetting,
-		std::optional<std::uint32_t> minSampleShading, size_t addOnReserving)
+		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		return _internal.AddUniquePipelineMultisampleData(samplingSetting, minSampleShading, addOnReserving);
 	}

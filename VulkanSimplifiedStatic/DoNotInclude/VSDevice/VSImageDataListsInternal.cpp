@@ -6,6 +6,8 @@
 
 #include "VSAutoCleanupColorRenderTargetImage.h"
 #include "VSAutoCleanupDepthStencilRenderTargetImage.h"
+#include "VSAutoCleanupResolveRenderTargetImage.h"
+
 #include "VSAutoCleanup2DTexture.h"
 
 #include "VSAutoCleanupFramebuffer.h"
@@ -24,7 +26,8 @@ namespace VulkanSimplifiedInternal
 	ImageDataListsInternal::ImageDataListsInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& renderPassData, MemoryObjectsListInternal& memoryList,
 		VkDevice device, const VulkanSimplified::ImageDataListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _renderPassData(renderPassData), _memoryList(memoryList),
 		_device(device), _colorRenderTargetList(initialCapacities.colorRenderTargetsListInitialCapacity),
-		_depthStencilRenderTargetList(initialCapacities.depthStencilRenderTargetsListInitialCapacity), _2dTexturesList(initialCapacities.twoDTexturesListInitialCapacity),
+		_depthStencilRenderTargetList(initialCapacities.depthStencilRenderTargetsListInitialCapacity),
+		_resolveRenderTargetList(initialCapacities.resolveRenderTargetsListInitialCapacity), _2dTexturesList(initialCapacities.twoDTexturesListInitialCapacity),
 		_framebufferList(initialCapacities.framebufferListInitialCapacity), _samplerList(initialCapacities.samplerListInitialCapacity)
 	{
 	}
@@ -34,7 +37,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupColorRenderTargetImage> ImageDataListsInternal::AddColorRenderTargetImage(uint32_t width, uint32_t height, VulkanSimplified::DataFormatSetIndependentID format,
-		const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+		VulkanSimplified::ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
 		VkImageCreateInfo createInfo{};
@@ -49,7 +52,7 @@ namespace VulkanSimplifiedInternal
 
 		createInfo.mipLevels = 1;
 		createInfo.arrayLayers = 1;
-		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+		createInfo.samples = TranslateImageSampleFlagBits(imageSamples);
 		createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
 
 		createInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
@@ -67,7 +70,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else
@@ -83,7 +86,7 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateImage(_device, &createInfo, nullptr, &image) != VK_SUCCESS)
 			throw std::runtime_error("ImageDataListsInternal::AddColorRenderTargetImage Error: Program failed to create an image!");
 
-		return _colorRenderTargetList.AddObject(AutoCleanupColorRenderTargetImage(_device, image, width, height, createInfo.format,
+		return _colorRenderTargetList.AddObject(AutoCleanupColorRenderTargetImage(_device, image, width, height, createInfo.format, createInfo.samples,
 			initialImageViewListCapacity), addOnReserving);
 	}
 
@@ -122,7 +125,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else
@@ -136,10 +139,64 @@ namespace VulkanSimplifiedInternal
 			createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
 		if (vkCreateImage(_device, &createInfo, nullptr, &image) != VK_SUCCESS)
-			throw std::runtime_error("ImageDataListsInternal::AddColorRenderTargetImage Error: Program failed to create an image!");
+			throw std::runtime_error("ImageDataListsInternal::AddDepthStencilRenderTargetImage Error: Program failed to create an image!");
 
 		return _depthStencilRenderTargetList.AddObject(AutoCleanupDepthStencilRenderTargetImage(_device, image, width, height, createInfo.format, createInfo.samples,
 			initialImageViewListCapacity), addOnReserving);
+	}
+
+	IDObject<AutoCleanupResolveRenderTargetImage> ImageDataListsInternal::AddResolveRenderTargetImage(uint32_t width, uint32_t height,
+		VulkanSimplified::DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity,
+		size_t addOnReserving)
+	{
+		VkImage image = VK_NULL_HANDLE;
+		VkImageCreateInfo createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+
+		createInfo.imageType = VK_IMAGE_TYPE_2D;
+		createInfo.format = TranslateDataFormatToVkFormat(format);
+
+		createInfo.extent.width = width;
+		createInfo.extent.height = height;
+		createInfo.extent.depth = 1;
+
+		createInfo.mipLevels = 1;
+		createInfo.arrayLayers = 1;
+		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+		createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+
+		createInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+
+		std::vector<uint32_t> queueFamilies;
+
+		if (queuesUsingImage.size() > 1)
+		{
+			queueFamilies = _deviceCore.GetQueuesFamilies(queuesUsingImage);
+
+			std::stable_sort(queueFamilies.begin(), queueFamilies.end());
+			queueFamilies.erase(std::unique(queueFamilies.begin(), queueFamilies.end()), queueFamilies.end());
+		}
+
+		if (queueFamilies.size() > 1)
+		{
+			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
+			createInfo.pQueueFamilyIndices = queueFamilies.data();
+		}
+		else
+		{
+			createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+		}
+
+		if (preInitialized)
+			createInfo.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;
+		else
+			createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+
+		if (vkCreateImage(_device, &createInfo, nullptr, &image) != VK_SUCCESS)
+			throw std::runtime_error("ImageDataListsInternal::AddResolveRenderTargetImage Error: Program failed to create an image!");
+
+		return _resolveRenderTargetList.AddObject(AutoCleanupResolveRenderTargetImage(_device, image, width, height, createInfo.format, initialImageViewListCapacity), addOnReserving);
 	}
 
 	IDObject<AutoCleanup2DTexture> ImageDataListsInternal::Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, VulkanSimplified::DataFormatSetIndependentID format,
@@ -176,7 +233,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else
@@ -223,7 +280,7 @@ namespace VulkanSimplifiedInternal
 		bool ret = _depthStencilRenderTargetList.CheckForID(imageID);
 
 		if (!ret && throwOnIDNotFound)
-			throw std::runtime_error("ImageDataListInternal::RemoveSingleSampled2DImage Error: Program tried to delete a non-existent image!");
+			throw std::runtime_error("ImageDataListInternal::RemoveDepthStencilRenderTargetImage Error: Program tried to delete a non-existent image!");
 
 		if (ret)
 		{
@@ -232,6 +289,28 @@ namespace VulkanSimplifiedInternal
 			auto bindingData = imageData.GetBoundMemorySuballocation();
 
 			ret = _depthStencilRenderTargetList.RemoveObject(imageID, true);
+
+			if (bindingData.has_value())
+				_memoryList.RemoveSuballocation(bindingData.value(), true);
+		}
+
+		return ret;
+	}
+
+	bool ImageDataListsInternal::RemoveResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID, bool throwOnIDNotFound)
+	{
+		bool ret = _resolveRenderTargetList.CheckForID(imageID);
+
+		if (!ret && throwOnIDNotFound)
+			throw std::runtime_error("ImageDataListInternal::RemoveResolveRenderTargetImage Error: Program tried to delete a non-existent image!");
+
+		if (ret)
+		{
+			auto& imageData = _resolveRenderTargetList.GetObject(imageID);
+
+			auto bindingData = imageData.GetBoundMemorySuballocation();
+
+			ret = _resolveRenderTargetList.RemoveObject(imageID, true);
 
 			if (bindingData.has_value())
 				_memoryList.RemoveSuballocation(bindingData.value(), true);
@@ -282,6 +361,16 @@ namespace VulkanSimplifiedInternal
 		return _depthStencilRenderTargetList.GetConstObject(imageID);
 	}
 
+	AutoCleanupResolveRenderTargetImage& ImageDataListsInternal::GetResolveRenderTargetImageInternal(IDObject<AutoCleanupResolveRenderTargetImage> imageID)
+	{
+		return _resolveRenderTargetList.GetObject(imageID);
+	}
+
+	const AutoCleanupResolveRenderTargetImage& ImageDataListsInternal::GetResolveRenderTargetImageInternal(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID);
+	}
+
 	AutoCleanup2DTexture& ImageDataListsInternal::Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID)
 	{
 		return _2dTexturesList.GetObject(imageID);
@@ -310,6 +399,16 @@ namespace VulkanSimplifiedInternal
 	VkImageView ImageDataListsInternal::GetDepthStencilRenderTargetImageView(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
 		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
+	}
+
+	VkImage ImageDataListsInternal::GetResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetImage();
+	}
+
+	VkImageView ImageDataListsInternal::GetResolveRenderTargetImageView(IDObject<AutoCleanupResolveRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
 	}
 
 	VkImage ImageDataListsInternal::Get2DTextureImage(IDObject<AutoCleanup2DTexture> imageID) const
@@ -377,6 +476,31 @@ namespace VulkanSimplifiedInternal
 		return _depthStencilRenderTargetList.GetConstObject(imageID).GetSampleCount();
 	}
 
+	uint32_t ImageDataListsInternal::GetResolveRenderTargetImagesWidth(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetWidth();
+	}
+
+	uint32_t ImageDataListsInternal::GetResolveRenderTargetImagesHeight(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetHeight();
+	}
+
+	uint32_t ImageDataListsInternal::GetResolveRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
+	}
+
+	VulkanSimplified::MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesSize(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesSize();
+	}
+
+	VulkanSimplified::MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesRequiredAligment(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	{
+		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
+	}
+
 	uint32_t ImageDataListsInternal::Get2DTextureImagesWidth(IDObject<AutoCleanup2DTexture> imageID) const
 	{
 		return _2dTexturesList.GetConstObject(imageID).GetWidth();
@@ -430,6 +554,20 @@ namespace VulkanSimplifiedInternal
 		imageData.BindImage(allocationID, beggining);
 	}
 
+	void ImageDataListsInternal::BindResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID,
+		size_t addOnReserving)
+	{
+		auto& imageData = _resolveRenderTargetList.GetObject(imageID);
+
+		VkImage image = imageData.GetImage();
+		size_t size = imageData.GetImagesSize();
+		size_t aligment = imageData.GetImagesRequiredAligment();
+
+		auto beggining = _memoryList.BindImage(allocationID, image, size, aligment, addOnReserving);
+
+		imageData.BindImage(allocationID, beggining);
+	}
+
 	void ImageDataListsInternal::Bind2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& imageData = _2dTexturesList.GetObject(imageID);
@@ -453,6 +591,13 @@ namespace VulkanSimplifiedInternal
 	IDObject<AutoCleanupImageView> ImageDataListsInternal::AddDepthStencilRenderTargetImageView(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, size_t addOnReserving)
 	{
 		auto& imageData = _depthStencilRenderTargetList.GetObject(imageID);
+
+		return imageData.AddImageView(addOnReserving);
+	}
+
+	IDObject<AutoCleanupImageView> ImageDataListsInternal::AddResolveRenderTargetImageView(IDObject<AutoCleanupResolveRenderTargetImage> imageID, size_t addOnReserving)
+	{
+		auto& imageData = _resolveRenderTargetList.GetObject(imageID);
 
 		return imageData.AddImageView(addOnReserving);
 	}
@@ -487,7 +632,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupFramebuffer> ImageDataListsInternal::AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
-		const std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
+		const std::vector<std::pair<VulkanSimplified::RenderTargetImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
 		uint32_t layers, size_t addOnReserving)
 	{
 		VkFramebufferCreateInfo createInfo{};
@@ -509,13 +654,16 @@ namespace VulkanSimplifiedInternal
 			case VulkanSimplified::ImageIDType::DEPTH_STENCIL_RENDER_TARGET:
 				imageViews.push_back(GetDepthStencilRenderTargetImageView(imageID.depthStencilRenderTarget.ID, attachmentData.second));
 				break;
+			case VulkanSimplified::ImageIDType::RESOLVE_RENDER_TARGET:
+				imageViews.push_back(GetResolveRenderTargetImageView(imageID.resolveRenderTarget.ID, attachmentData.second));
+				break;
 			case VulkanSimplified::ImageIDType::UNKNOWN:
 			default:
 				throw std::runtime_error("ImageDataListsInternal::AddFramebuffer Error: Program was given an erroneous value for a attachments image ID type!");
 			}
 		}
 
-		createInfo.attachmentCount = static_cast<std::uint32_t>(imageViews.size());
+		createInfo.attachmentCount = static_cast<uint32_t>(imageViews.size());
 		createInfo.pAttachments = imageViews.data();
 		createInfo.width = width;
 		createInfo.height = height;

@@ -92,8 +92,6 @@ void CreateMemoryData(VulkanData& data)
 	auto imageList = device.GetImageDataLists();
 	auto memoryList = device.GetMemoryObjectsList();
 
-	auto format = data.instanceDependentData->supportedColorFormat;
-
 	data.memoryData = std::make_unique<VulkanMemoryData>();
 	auto& memData = *data.memoryData;
 	
@@ -103,15 +101,31 @@ void CreateMemoryData(VulkanData& data)
 	memData.depthRenderTargetImageViews.reserve(framesInFlight);
 	memData.framebuffers.reserve(framesInFlight);
 
+	using VulkanSimplified::ImageSampleFlagBits;
+	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+	{
+		memData.resolveRenderTargetImages.reserve(framesInFlight);
+		memData.resolveRenderTargetImageViews.reserve(framesInFlight);
+	}
+
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, format, {}, false, 1, framesInFlight));
+		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedColorFormat,
+			data.instanceDependentData->maxSamples, {}, false, 1, framesInFlight));
 		memData.depthRenderTargetImages.push_back(imageList.AddDepthStencilRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedDepthFormat,
-			VulkanSimplified::ImageSampleFlagBits::SAMPLE_1, {}, false, 1, framesInFlight));
+			data.instanceDependentData->maxSamples, {}, false, 1, framesInFlight));
+
+		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+		{
+			memData.resolveRenderTargetImages.push_back(imageList.AddResolveRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedColorFormat,
+				{}, false, 1, framesInFlight));
+		}
 	}
 
 	VulkanSimplified::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back());
 	allocationSize += imageList.GetDepthStencilRenderTargetImagesSize(memData.depthRenderTargetImages.back());
+	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+		allocationSize += imageList.GetResolveRenderTargetImagesSize(memData.resolveRenderTargetImages.back());
 	allocationSize *= framesInFlight;
 	uint32_t memoryTypeMask = imageList.GetColorRenderTargetImagesMemoryTypeMask(memData.colorRenderTargetImages.back());
 
@@ -137,13 +151,33 @@ void CreateMemoryData(VulkanData& data)
 		imageList.BindDepthStencilRenderTargetImage(memData.depthRenderTargetImages[i], memData.imageMemoryAllocation);
 		memData.depthRenderTargetImageViews.push_back(imageList.AddDepthStencilRenderTargetImageView(memData.depthRenderTargetImages[i]));
 
-		std::vector<std::pair<VulkanSimplified::MultitypeImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>> attachments;
-		attachments.resize(2);
+		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+		{
+			imageList.BindResolveRenderTargetImage(memData.resolveRenderTargetImages[i], memData.imageMemoryAllocation);
+			memData.resolveRenderTargetImageViews.push_back(imageList.AddResolveRenderTargetImageView(memData.resolveRenderTargetImages[i]));
+		}
+
+		std::vector<std::pair<VulkanSimplified::RenderTargetImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>> attachments;
+		
+		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+		{
+			attachments.resize(3);
+		}
+		else
+		{
+			attachments.resize(2);
+		}
 
 		attachments[0].first = memData.colorRenderTargetImages[i];
 		attachments[0].second = memData.colorRenderTargetImageViews[i];
 		attachments[1].first = memData.depthRenderTargetImages[i];
 		attachments[1].second = memData.depthRenderTargetImageViews[i];
+
+		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+		{
+			attachments[2].first = memData.resolveRenderTargetImages[i];
+			attachments[2].second = memData.resolveRenderTargetImageViews[i];
+		}
 
 		memData.framebuffers.push_back(imageList.AddFramebuffer(data.renderPassData->renderPass, attachments, swapchainWidth, swapchainHeight, 1));
 	}

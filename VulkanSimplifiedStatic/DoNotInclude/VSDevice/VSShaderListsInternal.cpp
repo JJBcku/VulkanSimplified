@@ -29,7 +29,7 @@ namespace VulkanSimplifiedInternal
 		VkShaderModuleCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		createInfo.codeSize = dataSize;
-		createInfo.pCode = reinterpret_cast<const std::uint32_t*>(&data);
+		createInfo.pCode = reinterpret_cast<const uint32_t*>(&data);
 
 		VkShaderModule add = VK_NULL_HANDLE;
 
@@ -50,7 +50,7 @@ namespace VulkanSimplifiedInternal
 		VkShaderModuleCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		createInfo.codeSize = dataSize;
-		createInfo.pCode = reinterpret_cast<const std::uint32_t*>(&data);
+		createInfo.pCode = reinterpret_cast<const uint32_t*>(&data);
 
 		VkShaderModule add = VK_NULL_HANDLE;
 

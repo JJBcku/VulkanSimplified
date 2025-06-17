@@ -37,9 +37,9 @@ namespace VulkanSimplifiedInternal
 		VkInstanceCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 		createInfo.pApplicationInfo = &appInfo;
-		createInfo.enabledLayerCount = static_cast<std::uint32_t>(initData.requestedLayers.size());
+		createInfo.enabledLayerCount = static_cast<uint32_t>(initData.requestedLayers.size());
 		createInfo.ppEnabledLayerNames = initData.requestedLayers.data();
-		createInfo.enabledExtensionCount = static_cast<std::uint32_t>(initData.requestedExtensions.size());
+		createInfo.enabledExtensionCount = static_cast<uint32_t>(initData.requestedExtensions.size());
 		createInfo.ppEnabledExtensionNames = initData.requestedExtensions.data();
 
 		VkDebugUtilsMessengerCreateInfoEXT debugInfo{};
@@ -107,7 +107,7 @@ namespace VulkanSimplifiedInternal
 
 	void InstanceInternal::EnumerateDevices()
 	{
-		std::uint32_t size = 0;
+		uint32_t size = 0;
 		std::vector<VkPhysicalDevice> physicalDevices;
 
 		auto result = vkEnumeratePhysicalDevices(_instance, &size, nullptr);

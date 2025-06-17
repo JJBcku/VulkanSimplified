@@ -16,6 +16,7 @@
 
 #include <VSPhysicalDeviceData.h>
 #include <VSDeviceVulkan10Properties.h>
+#include <VSDeviceVulkan10Features.h>
 #include <VSDeviceExtensionPacksList.h>
 #include <VSDeviceQueueFamilyData.h>
 #include <VSLogicalDeviceCreateInfo.h>
@@ -34,16 +35,16 @@ static size_t ChooseGPU(VulkanSimplified::Instance& instance)
 
 	size_t gpuAmount = instance.GetAvailableDevicesCount();
 
-	std::uint32_t bestDiscreteGpuApi = 0;
+	uint32_t bestDiscreteGpuApi = 0;
 	std::optional<size_t> bestDiscreteGpu;
 
-	std::uint32_t bestIntegratedGpuApi = 0;
+	uint32_t bestIntegratedGpuApi = 0;
 	std::optional<size_t> bestIntegratedGpu;
 
-	std::uint32_t bestVirtualGpuApi = 0;
+	uint32_t bestVirtualGpuApi = 0;
 	std::optional<size_t> bestVirtualGpu;
 
-	std::uint32_t bestCpuApi = 0;
+	uint32_t bestCpuApi = 0;
 	std::optional<size_t> bestCpu;
 
 	for (size_t i = 0; i < gpuAmount; i++)
@@ -152,27 +153,27 @@ static size_t ChooseGPU(VulkanSimplified::Instance& instance)
 	return ret;
 }
 
-static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::PhysicalDeviceData& physicalDevice)
+static std::pair<uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::PhysicalDeviceData& physicalDevice)
 {
-	std::pair<std::uint32_t, bool> choosenFamily = { std::numeric_limits<std::uint32_t>::max(), false };
+	std::pair<uint32_t, bool> choosenFamily = { std::numeric_limits<uint32_t>::max(), false };
 
 	auto& queueData = physicalDevice.GetVulkanQueueFamiliesData();
 
-	std::optional<std::uint32_t> bestNonVideoGraphicQueueFamilyPresenting;
-	std::uint32_t bestNonVideoGraphicQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestNonVideoGraphicQueueFamilyTimestampPresenting = 0;
+	std::optional<uint32_t> bestNonVideoGraphicQueueFamilyPresenting;
+	uint32_t bestNonVideoGraphicQueueFamilyGranularityPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestNonVideoGraphicQueueFamilyTimestampPresenting = 0;
 
-	std::optional<std::uint32_t> bestNonVideoGraphicQueueFamilyNonPresenting;
-	std::uint32_t bestNonVideoGraphicQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestNonVideoGraphicQueueFamilyTimestampNonPresenting = 0;
+	std::optional<uint32_t> bestNonVideoGraphicQueueFamilyNonPresenting;
+	uint32_t bestNonVideoGraphicQueueFamilyGranularityNonPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestNonVideoGraphicQueueFamilyTimestampNonPresenting = 0;
 
-	std::optional<std::uint32_t> bestVideoGraphicQueueFamilyPresenting;
-	std::uint32_t bestVideoGraphicQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestVideoGraphicQueueFamilyTimestampPresenting = 0;
+	std::optional<uint32_t> bestVideoGraphicQueueFamilyPresenting;
+	uint32_t bestVideoGraphicQueueFamilyGranularityPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestVideoGraphicQueueFamilyTimestampPresenting = 0;
 
-	std::optional<std::uint32_t> bestVideoGraphicQueueFamilyNonPresenting;
-	std::uint32_t bestVideoGraphicQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestVideoGraphicQueueFamilyTimestampNonPresenting = 0;
+	std::optional<uint32_t> bestVideoGraphicQueueFamilyNonPresenting;
+	uint32_t bestVideoGraphicQueueFamilyGranularityNonPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestVideoGraphicQueueFamilyTimestampNonPresenting = 0;
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
@@ -200,7 +201,7 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::P
 
 				if (better)
 				{
-					bestNonVideoGraphicQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoGraphicQueueFamilyPresenting = static_cast<uint32_t>(i);
 					bestNonVideoGraphicQueueFamilyGranularityPresenting = biggestGranularity;
 					bestNonVideoGraphicQueueFamilyTimestampPresenting = family.timespampValidBits;
 				}
@@ -218,7 +219,7 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::P
 
 				if (better)
 				{
-					bestNonVideoGraphicQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoGraphicQueueFamilyNonPresenting = static_cast<uint32_t>(i);
 					bestNonVideoGraphicQueueFamilyGranularityNonPresenting = biggestGranularity;
 					bestNonVideoGraphicQueueFamilyTimestampNonPresenting = family.timespampValidBits;
 				}
@@ -239,7 +240,7 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::P
 
 				if (better)
 				{
-					bestVideoGraphicQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestVideoGraphicQueueFamilyPresenting = static_cast<uint32_t>(i);
 					bestVideoGraphicQueueFamilyGranularityPresenting = biggestGranularity;
 					bestVideoGraphicQueueFamilyTimestampPresenting = family.timespampValidBits;
 				}
@@ -257,7 +258,7 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::P
 
 				if (better)
 				{
-					bestVideoGraphicQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestVideoGraphicQueueFamilyNonPresenting = static_cast<uint32_t>(i);
 					bestVideoGraphicQueueFamilyGranularityNonPresenting = biggestGranularity;
 					bestVideoGraphicQueueFamilyTimestampNonPresenting = family.timespampValidBits;
 				}
@@ -293,27 +294,27 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::P
 	return choosenFamily;
 }
 
-static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueFamily(const VulkanSimplified::PhysicalDeviceData& physicalDevice)
+static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily(const VulkanSimplified::PhysicalDeviceData& physicalDevice)
 {
-	std::optional<std::pair<std::uint32_t, bool>> choosenFamily;
+	std::optional<std::pair<uint32_t, bool>> choosenFamily;
 
 	auto& queueData = physicalDevice.GetVulkanQueueFamiliesData();
 
-	std::optional<std::uint32_t> bestNonVideoTransferOnlyQueueFamilyPresenting;
-	std::uint32_t bestNonVideoTransferOnlyQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestNonVideoTransferOnlyQueueFamilyTimestampPresenting = 0;
+	std::optional<uint32_t> bestNonVideoTransferOnlyQueueFamilyPresenting;
+	uint32_t bestNonVideoTransferOnlyQueueFamilyGranularityPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestNonVideoTransferOnlyQueueFamilyTimestampPresenting = 0;
 
-	std::optional<std::uint32_t> bestNonVideoTransferOnlyQueueFamilyNonPresenting;
-	std::uint32_t bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestNonVideoTransferOnlyQueueFamilyTimestampNonPresenting = 0;
+	std::optional<uint32_t> bestNonVideoTransferOnlyQueueFamilyNonPresenting;
+	uint32_t bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestNonVideoTransferOnlyQueueFamilyTimestampNonPresenting = 0;
 
-	std::optional<std::uint32_t> bestVideoTransferOnlyQueueFamilyPresenting;
-	std::uint32_t bestVideoTransferOnlyQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestVideoTransferOnlyQueueFamilyTimestampPresenting = 0;
+	std::optional<uint32_t> bestVideoTransferOnlyQueueFamilyPresenting;
+	uint32_t bestVideoTransferOnlyQueueFamilyGranularityPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestVideoTransferOnlyQueueFamilyTimestampPresenting = 0;
 
-	std::optional<std::uint32_t> bestVideoTransferOnlyQueueFamilyNonPresenting;
-	std::uint32_t bestVideoTransferOnlyQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestVideoTransferOnlyQueueFamilyTimestampNonPresenting = 0;
+	std::optional<uint32_t> bestVideoTransferOnlyQueueFamilyNonPresenting;
+	uint32_t bestVideoTransferOnlyQueueFamilyGranularityNonPresenting = std::numeric_limits<uint32_t>::max();
+	uint32_t bestVideoTransferOnlyQueueFamilyTimestampNonPresenting = 0;
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
@@ -345,7 +346,7 @@ static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueF
 
 				if (better)
 				{
-					bestNonVideoTransferOnlyQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoTransferOnlyQueueFamilyPresenting = static_cast<uint32_t>(i);
 					bestNonVideoTransferOnlyQueueFamilyGranularityPresenting = biggestGranularity;
 					bestNonVideoTransferOnlyQueueFamilyTimestampPresenting = family.timespampValidBits;
 				}
@@ -363,7 +364,7 @@ static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueF
 
 				if (better)
 				{
-					bestNonVideoTransferOnlyQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoTransferOnlyQueueFamilyNonPresenting = static_cast<uint32_t>(i);
 					bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting = biggestGranularity;
 					bestNonVideoTransferOnlyQueueFamilyTimestampNonPresenting = family.timespampValidBits;
 				}
@@ -384,7 +385,7 @@ static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueF
 
 				if (better)
 				{
-					bestVideoTransferOnlyQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestVideoTransferOnlyQueueFamilyPresenting = static_cast<uint32_t>(i);
 					bestVideoTransferOnlyQueueFamilyGranularityPresenting = biggestGranularity;
 					bestVideoTransferOnlyQueueFamilyTimestampPresenting = family.timespampValidBits;
 				}
@@ -402,7 +403,7 @@ static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueF
 
 				if (better)
 				{
-					bestVideoTransferOnlyQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestVideoTransferOnlyQueueFamilyNonPresenting = static_cast<uint32_t>(i);
 					bestVideoTransferOnlyQueueFamilyGranularityNonPresenting = biggestGranularity;
 					bestVideoTransferOnlyQueueFamilyTimestampNonPresenting = family.timespampValidBits;
 				}
@@ -430,21 +431,48 @@ static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueueF
 	return choosenFamily;
 }
 
-static std::uint32_t FindPresentingQueueFamily(const std::vector<VulkanSimplified::QueueFamilyData> queueData)
+static uint32_t FindPresentingQueueFamily(const std::vector<VulkanSimplified::QueueFamilyData> queueData)
 {
-	std::uint32_t ret = std::numeric_limits<std::uint32_t>::max();
+	uint32_t ret = std::numeric_limits<uint32_t>::max();
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
 		if (queueData[i].presentationSupport == VulkanSimplified::BOOL64_TRUE)
 		{
-			ret = static_cast<std::uint32_t>(i);
+			ret = static_cast<uint32_t>(i);
 			break;
 		}
 	}
 
-	if (ret == std::numeric_limits<std::uint32_t>::max())
+	if (ret == std::numeric_limits<uint32_t>::max())
 		throw std::runtime_error("PickGraphicQueueFamily Error: Program failed to find a present queue!");
+
+	return ret;
+}
+
+static VulkanSimplified::ImageSampleFlagBits GetMaxSamples(VulkanSimplified::ImageSampleFlags samples)
+{
+	using VulkanSimplified::ImageSampleFlagBits;
+
+	ImageSampleFlagBits ret = ImageSampleFlagBits::SAMPLE_1;
+
+	if ((samples & ImageSampleFlagBits::SAMPLE_2) == ImageSampleFlagBits::SAMPLE_2)
+		ret = ImageSampleFlagBits::SAMPLE_2;
+
+	if ((samples & ImageSampleFlagBits::SAMPLE_4) == ImageSampleFlagBits::SAMPLE_4)
+		ret = ImageSampleFlagBits::SAMPLE_4;
+
+	if ((samples & ImageSampleFlagBits::SAMPLE_8) == ImageSampleFlagBits::SAMPLE_8)
+		ret = ImageSampleFlagBits::SAMPLE_8;
+
+	if ((samples & ImageSampleFlagBits::SAMPLE_16) == ImageSampleFlagBits::SAMPLE_16)
+		ret = ImageSampleFlagBits::SAMPLE_16;
+
+	if ((samples & ImageSampleFlagBits::SAMPLE_32) == ImageSampleFlagBits::SAMPLE_32)
+		ret = ImageSampleFlagBits::SAMPLE_32;
+
+	if ((samples & ImageSampleFlagBits::SAMPLE_64) == ImageSampleFlagBits::SAMPLE_64)
+		ret = ImageSampleFlagBits::SAMPLE_64;
 
 	return ret;
 }
@@ -459,7 +487,8 @@ void CreateInstanceDependentData(VulkanData& data)
 
 	instanceData.physicalDevicesIndex = ChooseGPU(instance);
 	auto physicalDevice = instance.GetPhysicalDeviceData(instanceData.physicalDevicesIndex);
-	//auto& deviceProperties = physicalDevice.GetVulkan10Properties();
+	auto& deviceProperties = physicalDevice.GetVulkan10Properties();
+	auto& deviceFeatures = physicalDevice.GetVulkan10Features();
 
 	auto deviceInfo = instance.GetPhysicalDeviceData(instanceData.physicalDevicesIndex);
 	auto& deviceSurfaceSupport = deviceInfo.GetSurfaceSupport().value();
@@ -492,6 +521,9 @@ void CreateInstanceDependentData(VulkanData& data)
 	instanceData.minSwapchainImageAmount = deviceSurfaceSupport.minImageCount;
 	instanceData.maxSwapchainImageAmount = deviceSurfaceSupport.maxImageCount;
 
+	instanceData.maxSamples = GetMaxSamples(deviceProperties.limits.framebufferLimits.framebufferColorSampleCounts &
+		deviceProperties.limits.framebufferLimits.framebufferColorSampleCounts);
+
 	VulkanSimplified::LogicalDeviceCreationData deviceCreationData;
 	deviceCreationData.physicalGPUIndex = instanceData.physicalDevicesIndex;
 	deviceCreationData.queuesCreationInfo.reserve(3);
@@ -505,8 +537,21 @@ void CreateInstanceDependentData(VulkanData& data)
 	instanceData.graphicsQueueFamily = queueCreationData.queuesFamily;
 	deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
 
-	instanceData.maxAnisotropy = deviceInfo.GetVulkan10Properties().limits.maxSamplerAnisotropy;
-	deviceCreationData.vulkan10EnabledFeatures = VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY;
+	if ((deviceFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY)
+	{
+		instanceData.maxAnisotropy = deviceProperties.limits.maxSamplerAnisotropy;
+		deviceCreationData.vulkan10EnabledFeatures |= VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY;
+	}
+	else
+	{
+		instanceData.maxAnisotropy = 0.0f;
+	}
+
+	if ((deviceFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING)
+	{
+		instanceData.sampleShadingRate = std::numeric_limits<uint32_t>::max();
+		deviceCreationData.vulkan10EnabledFeatures |= VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING;
+	}
 
 	auto transferOnlyFamily = TryToFindTransferOnlyQueueFamily(physicalDevice);
 	if (transferOnlyFamily.has_value())

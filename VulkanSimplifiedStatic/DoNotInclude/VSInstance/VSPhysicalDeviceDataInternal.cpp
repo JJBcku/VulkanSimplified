@@ -127,6 +127,9 @@ namespace VulkanSimplifiedInternal
 		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_MINIMUM_LOD) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_MINIMUM_LOD)
 			ret.shaderResourceMinLod = VK_TRUE;
 
+		if ((requestedFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING)
+			ret.sampleRateShading = VK_TRUE;
+
 		return ret;
 	}
 
@@ -274,6 +277,9 @@ namespace VulkanSimplifiedInternal
 		if (deviceFeatures.shaderResourceMinLod == VK_TRUE)
 			ret |= VulkanSimplified::DEVICE_VULKAN10_FEATURE_SHADER_RESOURCE_MINIMUM_LOD;
 
+		if (deviceFeatures.sampleRateShading == VK_TRUE)
+			ret |= VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING;
+
 		return ret;
 	}
 
@@ -282,7 +288,7 @@ namespace VulkanSimplifiedInternal
 		VulkanSimplified::DeviceExtensionPacksList ret;
 
 		std::vector<VkExtensionProperties> availableExtensions;
-		std::uint32_t size = 0;
+		uint32_t size = 0;
 
 		auto result = vkEnumerateDeviceExtensionProperties(_device, nullptr, &size, nullptr);
 
@@ -1249,7 +1255,7 @@ namespace VulkanSimplifiedInternal
 			heap.properties = GetMemoryHeapProperties(data.flags);
 		}
 
-		for (std::uint32_t j = 0; j < memoryProperties.memoryTypeCount; j++)
+		for (uint32_t j = 0; j < memoryProperties.memoryTypeCount; j++)
 		{
 			const auto& data = memoryProperties.memoryTypes[j];
 			auto& heap = ret.memoryHeaps[data.heapIndex];

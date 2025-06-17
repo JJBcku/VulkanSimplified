@@ -7,6 +7,8 @@ namespace VulkanSimplified
 	{
 		colorRenderTargetsListInitialCapacity = 0;
 		depthStencilRenderTargetsListInitialCapacity = 0;
+		resolveRenderTargetsListInitialCapacity = 0;
+
 		twoDTexturesListInitialCapacity = 0;
 
 		framebufferListInitialCapacity = 0;

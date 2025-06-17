@@ -40,13 +40,13 @@ namespace VulkanSimplifiedInternal
 
 		if (!descriptorLayouts.empty())
 		{
-			createInfo.setLayoutCount = static_cast<std::uint32_t>(descriptorLayouts.size());
+			createInfo.setLayoutCount = static_cast<uint32_t>(descriptorLayouts.size());
 			createInfo.pSetLayouts = descriptorLayouts.data();
 		}
 
 		if (!pushConstants.empty())
 		{
-			createInfo.pushConstantRangeCount = static_cast<std::uint32_t>(pushConstants.size());
+			createInfo.pushConstantRangeCount = static_cast<uint32_t>(pushConstants.size());
 			createInfo.pPushConstantRanges = pushConstants.data();
 		}
 
@@ -146,7 +146,7 @@ namespace VulkanSimplifiedInternal
 					{
 						specializationData[i][j] = _pipelineData.GetShaderSpecializationData(creationDataList[i].shaderStages[j].specializationData->specializationElements);
 
-						shaderSpecializationInfoList[i][j].mapEntryCount = static_cast<std::uint32_t>(specializationData[i][j].size());
+						shaderSpecializationInfoList[i][j].mapEntryCount = static_cast<uint32_t>(specializationData[i][j].size());
 						shaderSpecializationInfoList[i][j].pMapEntries = specializationData[i][j].data();
 						shaderSpecializationInfoList[i][j].dataSize = creationDataList[i].shaderStages[j].specializationData->dataSize;
 						shaderSpecializationInfoList[i][j].pData = creationDataList[i].shaderStages[j].specializationData->data;
@@ -157,7 +157,7 @@ namespace VulkanSimplifiedInternal
 					shaderStageList[i].push_back(shaderInfo);
 				}
 
-				pipelineAdd.stageCount = static_cast<std::uint32_t>(shaderStageList[i].size());
+				pipelineAdd.stageCount = static_cast<uint32_t>(shaderStageList[i].size());
 				pipelineAdd.pStages = shaderStageList[i].data();
 			}
 
@@ -188,7 +188,7 @@ namespace VulkanSimplifiedInternal
 					for (size_t j = 0; j < bindingsData.size(); j++)
 					{
 						VkVertexInputBindingDescription bindingAdd{};
-						bindingAdd.binding = static_cast<std::uint32_t>(i);
+						bindingAdd.binding = static_cast<uint32_t>(i);
 						bindingAdd.inputRate = bindingsData[j].inputRate;
 						bindingAdd.stride = bindingsData[j].stride;
 
@@ -201,7 +201,7 @@ namespace VulkanSimplifiedInternal
 							for (size_t k = 0; k < attributeData.size(); k++)
 							{
 								VkVertexInputAttributeDescription vertexAttributeAdd{};
-								vertexAttributeAdd.location = static_cast<std::uint32_t>(k);
+								vertexAttributeAdd.location = static_cast<uint32_t>(k);
 								vertexAttributeAdd.binding = bindingAdd.binding;
 								vertexAttributeAdd.format = attributeData[k].format;
 								vertexAttributeAdd.offset = attributeData[k].offset;
@@ -211,12 +211,12 @@ namespace VulkanSimplifiedInternal
 						}
 					}
 
-					vertexAdd.vertexBindingDescriptionCount = static_cast<std::uint32_t>(vertexInputBindingList[i].size());
+					vertexAdd.vertexBindingDescriptionCount = static_cast<uint32_t>(vertexInputBindingList[i].size());
 					vertexAdd.pVertexBindingDescriptions = vertexInputBindingList[i].data();
 
 					if (!vertexInputAttributeList[i].empty())
 					{
-						vertexAdd.vertexAttributeDescriptionCount = static_cast<std::uint32_t>(vertexInputAttributeList[i].size());
+						vertexAdd.vertexAttributeDescriptionCount = static_cast<uint32_t>(vertexInputAttributeList[i].size());
 						vertexAdd.pVertexAttributeDescriptions = vertexInputAttributeList[i].data();
 					}
 				}
@@ -242,7 +242,7 @@ namespace VulkanSimplifiedInternal
 					scissorList[i].push_back(_pipelineData.GetScissors(creationDataList[i].viewportData[j].scissor));
 				}
 
-				viewportStateInfo.viewportCount = static_cast<std::uint32_t>(creationDataList[i].viewportData.size());
+				viewportStateInfo.viewportCount = static_cast<uint32_t>(creationDataList[i].viewportData.size());
 				viewportStateInfo.pViewports = viewportList[i].data();
 				viewportStateInfo.scissorCount = viewportStateInfo.viewportCount;
 				viewportStateInfo.pScissors = scissorList[i].data();
@@ -270,7 +270,7 @@ namespace VulkanSimplifiedInternal
 				VkPipelineColorBlendStateCreateInfo colorBlendAdd{};
 				colorBlendAdd.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
 				colorBlendAdd.logicOpEnable = VK_FALSE;
-				colorBlendAdd.attachmentCount = static_cast<std::uint32_t>(colorBlendAttachmentStateList[i].size());
+				colorBlendAdd.attachmentCount = static_cast<uint32_t>(colorBlendAttachmentStateList[i].size());
 				colorBlendAdd.pAttachments = colorBlendAttachmentStateList[i].data();
 				colorBlendAdd.blendConstants[0] = 1.0f;
 				colorBlendAdd.blendConstants[1] = 1.0f;
@@ -297,7 +297,7 @@ namespace VulkanSimplifiedInternal
 				break;
 			case VulkanSimplified::PipelineDerrivationSettings::PIPELINE_INDEX:
 				pipelineAdd.basePipelineHandle = VK_NULL_HANDLE;
-				pipelineAdd.basePipelineIndex = static_cast<std::int32_t>(creationDataList[i].pipelineDerrivationData.pipelineIndex.index);
+				pipelineAdd.basePipelineIndex = static_cast<int32_t>(creationDataList[i].pipelineDerrivationData.pipelineIndex.index);
 				pipelineAdd.flags |= VK_PIPELINE_CREATE_DERIVATIVE_BIT;
 				break;
 			default:
@@ -310,7 +310,7 @@ namespace VulkanSimplifiedInternal
 		std::vector<VkPipeline> pipelineList;
 		pipelineList.resize(creationDataList.size(), VK_NULL_HANDLE);
 
-		if (vkCreateGraphicsPipelines(_device, VK_NULL_HANDLE, static_cast<std::uint32_t>(createInfoList.size()), createInfoList.data(), nullptr, pipelineList.data()) != VK_SUCCESS)
+		if (vkCreateGraphicsPipelines(_device, VK_NULL_HANDLE, static_cast<uint32_t>(createInfoList.size()), createInfoList.data(), nullptr, pipelineList.data()) != VK_SUCCESS)
 			throw std::runtime_error("DevicePipelineDataInternal::AddGraphicPipelines Error: Program failed to create the pipelines!");
 
 		for (auto& pipeline : pipelineList)

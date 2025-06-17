@@ -4,7 +4,7 @@
 namespace VulkanSimplifiedInternal
 {
 	AutoCleanupColorRenderTargetImage::AutoCleanupColorRenderTargetImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, VkFormat format,
-		size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, 1, 1, format, VK_SAMPLE_COUNT_1_BIT, imageViewsInitialCapacity)
+		VkSampleCountFlagBits sampleCount, size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, 1, 1, format, sampleCount, imageViewsInitialCapacity)
 	{
 	}
 

@@ -41,7 +41,7 @@ namespace VulkanSimplifiedInternal
 		VkInstance _instance;
 		VkDevice _device;
 
-		std::vector<std::pair<VkQueue, std::uint32_t>> _queues;
+		std::vector<std::pair<VkQueue, uint32_t>> _queues;
 
 		uint32_t _apiVersion;
 		uint32_t _padding;

@@ -8,7 +8,7 @@ namespace VulkanSimplifiedInternal
 
 	struct VertexBindingDescriptionData
 	{
-		std::uint32_t stride;
+		uint32_t stride;
 		VkVertexInputRate inputRate;
 
 		std::vector<IDObject<VertexAttributeDescriptionData>> vertexAttributes;

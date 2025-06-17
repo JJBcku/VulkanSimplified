@@ -76,7 +76,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexAttributeData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexBindingDescriptionData> SharedPipelineDataListssInternal::AddVertexBindingData(std::uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+	IDObject<VertexBindingDescriptionData> SharedPipelineDataListssInternal::AddVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving)
 	{
 		VertexBindingDescriptionData add;
@@ -219,7 +219,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListssInternal::AddPipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
-		std::optional<std::uint32_t> minSampleShading, size_t addOnReserving)
+		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		PipelineMultisampleData add;
 
@@ -253,12 +253,12 @@ namespace VulkanSimplifiedInternal
 		if (minSampleShading.has_value())
 		{
 			add.sampleShadingEnable = VK_TRUE;
-			add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<std::uint32_t>::max());
+			add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<uint32_t>::max());
 		}
 		else
 		{
 			add.sampleShadingEnable = VK_FALSE;
-			add.minSampleShading = 0;
+			add.minSampleShading = 0.0f;
 		}
 
 		return _pipelineMultisampleData.AddObject(std::move(add), addOnReserving);
@@ -458,7 +458,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexAttributeData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexBindingDescriptionData> SharedPipelineDataListssInternal::AddUniqueVertexBindingData(std::uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+	IDObject<VertexBindingDescriptionData> SharedPipelineDataListssInternal::AddUniqueVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving)
 	{
 		VertexBindingDescriptionData add;
@@ -601,7 +601,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListssInternal::AddUniquePipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
-		std::optional<std::uint32_t> minSampleShading, size_t addOnReserving)
+		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		PipelineMultisampleData add;
 
@@ -635,7 +635,7 @@ namespace VulkanSimplifiedInternal
 		if (minSampleShading.has_value())
 		{
 			add.sampleShadingEnable = VK_TRUE;
-			add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<std::uint32_t>::max());
+			add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<uint32_t>::max());
 		}
 		else
 		{

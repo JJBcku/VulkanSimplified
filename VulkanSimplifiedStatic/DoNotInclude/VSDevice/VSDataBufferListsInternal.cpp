@@ -45,7 +45,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else
@@ -81,7 +81,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else
@@ -133,7 +133,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else
@@ -169,7 +169,7 @@ namespace VulkanSimplifiedInternal
 		if (queueFamilies.size() > 1)
 		{
 			createInfo.sharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(queueFamilies.size());
 			createInfo.pQueueFamilyIndices = queueFamilies.data();
 		}
 		else

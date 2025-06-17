@@ -21,7 +21,7 @@ namespace VulkanSimplified
 		uint32_t deviceID;
 		DeviceType deviceType;
 		std::string deviceName;
-		std::array<std::uint8_t, 16> pipelineCacheUUID;
+		std::array<uint8_t, 16> pipelineCacheUUID;
 
 		DeviceVulkan10Limits limits;
 

@@ -91,7 +91,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	synchroList.ResetFences({ data.synchronizationData->inFlightFences[frameIndex] });
 
 	uint32_t imageIndice = 0;
-	graphicCommandBuffer.AcquireNextImage(std::numeric_limits<std::uint64_t>::max(), data.synchronizationData->imageAvailableSemaphores[frameIndex], {},
+	graphicCommandBuffer.AcquireNextImage(std::numeric_limits<uint64_t>::max(), data.synchronizationData->imageAvailableSemaphores[frameIndex], {},
 		imageIndice, data.deviceDependentData->windowID);
 
 	const VulkanSimplified::DataBuffersCopyRegionData& vertexCopyRegion = data.frameData->vertexCopyRegion;
@@ -244,7 +244,16 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 	graphicCommandBuffer.EndRenderPass();
 
-	graphicCommandBuffer.BlitToSwapchainImage(data.deviceDependentData->windowID, memData.colorRenderTargetImages[frameIndex], 0, 0, swapchainWidth, swapchainHeight, imageIndice);
+	if (data.instanceDependentData->maxSamples != VulkanSimplified::SAMPLE_1)
+	{
+		graphicCommandBuffer.BlitResolveRenderTargetToSwapchainImage(data.deviceDependentData->windowID, memData.resolveRenderTargetImages[frameIndex], 0, 0,
+			swapchainWidth, swapchainHeight, imageIndice);
+	}
+	else
+	{
+		graphicCommandBuffer.BlitColorRenderTargetToSwapchainImage(data.deviceDependentData->windowID, memData.colorRenderTargetImages[frameIndex], 0, 0,
+			swapchainWidth, swapchainHeight, imageIndice);
+	}
 
 	if (data.commandBufferData->presentGroup.has_value())
 	{

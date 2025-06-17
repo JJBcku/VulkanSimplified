@@ -58,7 +58,7 @@ namespace VulkanSimplifiedInternal
 		if (waitForAll)
 			waitAll = VK_TRUE;
 
-		VkResult result = vkWaitForFences(_device, static_cast<std::uint32_t>(fences.size()), fences.data(), waitAll, timeout);
+		VkResult result = vkWaitForFences(_device, static_cast<uint32_t>(fences.size()), fences.data(), waitAll, timeout);
 
 		if (result != VK_SUCCESS && result != VK_TIMEOUT)
 			throw std::runtime_error("SynchronizationDataListsInternal::WaitOnFences Error: Program failed to wait on fences!");
@@ -79,7 +79,7 @@ namespace VulkanSimplifiedInternal
 			fences.push_back(GetFence(fenceIDs[i]));
 		}
 
-		if (vkResetFences(_device, static_cast<std::uint32_t>(fences.size()), fences.data()) != VK_SUCCESS)
+		if (vkResetFences(_device, static_cast<uint32_t>(fences.size()), fences.data()) != VK_SUCCESS)
 			throw std::runtime_error("SynchronizationDataListsInternal::ResetFence Error: Program failed to reset the fences!");
 	}
 

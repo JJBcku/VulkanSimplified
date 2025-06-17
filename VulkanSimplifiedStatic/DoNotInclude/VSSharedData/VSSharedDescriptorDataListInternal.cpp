@@ -81,7 +81,7 @@ namespace VulkanSimplifiedInternal
 		std::vector<VkDescriptorSetLayoutBinding> ret;
 		ret.reserve(bindingIDs.size());
 
-		std::uint32_t currentBinding = firstBinding;
+		uint32_t currentBinding = firstBinding;
 
 		if ((std::numeric_limits<uint32_t>::max() - static_cast<size_t>(firstBinding)) < (bindingIDs.size() - 1))
 			throw std::runtime_error("SharedDescriptorDataListInternal::GetDescriptorSetLayoutBindings Error: Program was given too high first binding value to fit all bindings in the list!");

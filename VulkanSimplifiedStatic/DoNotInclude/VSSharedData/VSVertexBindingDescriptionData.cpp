@@ -5,7 +5,7 @@ namespace VulkanSimplifiedInternal
 {
 	VertexBindingDescriptionData::VertexBindingDescriptionData()
 	{
-		stride = std::numeric_limits<std::uint32_t>::max();
-		inputRate = static_cast<VkVertexInputRate>(std::numeric_limits<std::uint32_t>::max());
+		stride = std::numeric_limits<uint32_t>::max();
+		inputRate = static_cast<VkVertexInputRate>(std::numeric_limits<uint32_t>::max());
 	}
 }

@@ -40,7 +40,9 @@ namespace VulkanSimplifiedInternal
 		void TransitionSwapchainImageToPresent(IDObject<VulkanSimplified::WindowPointer> windowID,
 			std::optional<VulkanSimplified::QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex);
 
-		void BlitToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID, uint32_t startX, uint32_t startY,
-			uint32_t width, uint32_t height, uint32_t swapchainImageIndex);
+		void BlitColorRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID,
+			uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex);
+		void BlitResolveRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID, IDObject<AutoCleanupResolveRenderTargetImage> imageID,
+			uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex);
 	};
 }

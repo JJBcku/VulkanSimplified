@@ -5,6 +5,7 @@
 
 #include "VulkanData.h"
 #include "VulkanBasicData.h"
+#include "VulkanInstanceDependentData.h"
 #include "VulkanSharedData.h"
 
 #include <VSMain.h>
@@ -51,7 +52,7 @@ void CreateSharedData(VulkanData& data)
 
 	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
 	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, false, false);
-	sharedDataList.multisamplingData = pipelineData.AddPipelineMultisampleData(VulkanSimplified::SAMPLE_1, {});
+	sharedDataList.multisamplingData = pipelineData.AddPipelineMultisampleData(data.instanceDependentData->maxSamples, data.instanceDependentData->sampleShadingRate);
 
 	sharedDataList.depthStencilData = pipelineData.AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage::TEST_AND_WRITE,
 		VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS, 0.0f, 1.0f);

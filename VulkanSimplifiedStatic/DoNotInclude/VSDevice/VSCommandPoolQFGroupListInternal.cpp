@@ -107,7 +107,7 @@ namespace VulkanSimplifiedInternal
 		std::optional<IDObject<AutoCleanupFence>> fenceID)
 	{
 		VkQueue queue = _deviceCore.GetQueue(queueID);
-		std::uint32_t queueFamily = _deviceCore.GetQueuesFamily(queueID);
+		uint32_t queueFamily = _deviceCore.GetQueuesFamily(queueID);
 
 		if (_queueFamily != queueFamily)
 			throw std::runtime_error("CommandPoolQFGroupListInternal::SubmitBuffers Error: Program tried to submit buffers to the wrong queue family!");
@@ -148,7 +148,7 @@ namespace VulkanSimplifiedInternal
 				pipelineStageFlags[i].push_back(TranslateStageFlags(waitSemaphoresData.second));
 			}
 
-			add.waitSemaphoreCount = static_cast<std::uint32_t>(waitSemaphores[i].size());
+			add.waitSemaphoreCount = static_cast<uint32_t>(waitSemaphores[i].size());
 			add.pWaitSemaphores = waitSemaphores[i].data();
 			add.pWaitDstStageMask = pipelineStageFlags[i].data();
 
@@ -157,7 +157,7 @@ namespace VulkanSimplifiedInternal
 				commandBuffers[i].push_back(GetCommandBuffer(commandBufferID));
 			}
 
-			add.commandBufferCount = static_cast<std::uint32_t>(commandBuffers[i].size());
+			add.commandBufferCount = static_cast<uint32_t>(commandBuffers[i].size());
 			add.pCommandBuffers = commandBuffers[i].data();
 
 			for (auto& signalSemaphoresData : submitInfo.signalSemaphores)
@@ -165,7 +165,7 @@ namespace VulkanSimplifiedInternal
 				signalSemaphores[i].push_back(_synchronizationList.GetSemaphore(signalSemaphoresData));
 			}
 
-			add.signalSemaphoreCount = static_cast<std::uint32_t>(signalSemaphores[i].size());
+			add.signalSemaphoreCount = static_cast<uint32_t>(signalSemaphores[i].size());
 			add.pSignalSemaphores = signalSemaphores[i].data();
 
 			submitInfoList.push_back(add);
@@ -175,7 +175,7 @@ namespace VulkanSimplifiedInternal
 		if (fenceID.has_value())
 			fence = _synchronizationList.GetFence(fenceID.value());
 
-		if (vkQueueSubmit(queue, static_cast<std::uint32_t>(submitInfoList.size()), submitInfoList.data(), fence) != VK_SUCCESS)
+		if (vkQueueSubmit(queue, static_cast<uint32_t>(submitInfoList.size()), submitInfoList.data(), fence) != VK_SUCCESS)
 			throw std::runtime_error("CommandPoolQFGroupListInternal::SubmitBuffers Error: Program failed to submit command buffers to queue!");
 	}
 

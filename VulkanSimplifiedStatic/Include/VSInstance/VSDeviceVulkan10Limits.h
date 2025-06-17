@@ -4,24 +4,24 @@ namespace VulkanSimplified
 {
 	struct Vulkan10MaxImageSizeLimits
 	{
-		std::uint64_t maxImageDimension1D;
-		std::uint64_t maxImageDimension2D;
-		std::uint64_t maxImageDimension3D;
-		std::uint64_t maxImageArrayLayers;
+		uint64_t maxImageDimension1D;
+		uint64_t maxImageDimension2D;
+		uint64_t maxImageDimension3D;
+		uint64_t maxImageArrayLayers;
 
 		Vulkan10MaxImageSizeLimits();
 	};
 
 	struct Vulkan10DescriptorSetBindingLimits
 	{
-		std::uint64_t maxBoundDescriptorSets;
-		std::uint64_t maxPerStageDescriptorSamplers;
-		std::uint64_t maxPerStageDescriptorUniformBuffers;
-		std::uint64_t maxPerStageDescriptorStorageBuffers;
-		std::uint64_t maxPerStageDescriptorSampledImages;
-		std::uint64_t maxPerStageDescriptorStorageImages;
-		std::uint64_t maxPerStageDescriptorInputAttachments;
-		std::uint64_t maxPerStageResources;
+		uint64_t maxBoundDescriptorSets;
+		uint64_t maxPerStageDescriptorSamplers;
+		uint64_t maxPerStageDescriptorUniformBuffers;
+		uint64_t maxPerStageDescriptorStorageBuffers;
+		uint64_t maxPerStageDescriptorSampledImages;
+		uint64_t maxPerStageDescriptorStorageImages;
+		uint64_t maxPerStageDescriptorInputAttachments;
+		uint64_t maxPerStageResources;
 
 		Vulkan10DescriptorSetBindingLimits();
 	};
@@ -30,71 +30,71 @@ namespace VulkanSimplified
 	{
 		Vulkan10DescriptorSetBindingLimits descriptorSetBindingsLimit;
 
-		std::uint64_t maxDescriptorSetSamplers;
-		std::uint64_t maxDescriptorSetUniformBuffers;
-		std::uint64_t maxDescriptorSetUniformBuffersDynamic;
-		std::uint64_t maxDescriptorSetStorageBuffers;
-		std::uint64_t maxDescriptorSetStorageBuffersDynamic;
-		std::uint64_t maxDescriptorSetSampledImages;
-		std::uint64_t maxDescriptorSetStorageImages;
-		std::uint64_t maxDescriptorSetInputAttachments;
+		uint64_t maxDescriptorSetSamplers;
+		uint64_t maxDescriptorSetUniformBuffers;
+		uint64_t maxDescriptorSetUniformBuffersDynamic;
+		uint64_t maxDescriptorSetStorageBuffers;
+		uint64_t maxDescriptorSetStorageBuffersDynamic;
+		uint64_t maxDescriptorSetSampledImages;
+		uint64_t maxDescriptorSetStorageImages;
+		uint64_t maxDescriptorSetInputAttachments;
 
 		Vulkan10DescriptorSetLimits();
 	};
 
 	struct Vulkan10VertexShaderLimits
 	{
-		std::uint64_t maxVertexInputAttributes;
-		std::uint64_t maxVertexInputBindings;
-		std::uint64_t maxVertexInputAttributeOffset;
-		std::uint64_t maxVertexInputBindingStride;
-		std::uint64_t maxVertexOutputComponents;
+		uint64_t maxVertexInputAttributes;
+		uint64_t maxVertexInputBindings;
+		uint64_t maxVertexInputAttributeOffset;
+		uint64_t maxVertexInputBindingStride;
+		uint64_t maxVertexOutputComponents;
 
 		Vulkan10VertexShaderLimits();
 	};
 
 	struct Vulkan10FragmentShaderLimits
 	{
-		std::uint64_t maxFragmentInputComponents;
-		std::uint64_t maxFragmentOutputAttachments;
-		std::uint64_t maxFragmentDualSrcAttachments;
-		std::uint64_t maxFragmentCombinedOutputResources;
+		uint64_t maxFragmentInputComponents;
+		uint64_t maxFragmentOutputAttachments;
+		uint64_t maxFragmentDualSrcAttachments;
+		uint64_t maxFragmentCombinedOutputResources;
 
 		Vulkan10FragmentShaderLimits();
 	};
 
 	struct Vulkan10ViewportLimits
 	{
-		std::uint64_t maxViewports;
-		std::uint64_t maxViewportDimensionsX;
-		std::uint64_t maxViewportDimensionsY;
+		uint64_t maxViewports;
+		uint64_t maxViewportDimensionsX;
+		uint64_t maxViewportDimensionsY;
 		float viewportBoundsRangeMin;
 		float viewportBoundsRangeMax;
-		std::uint64_t viewportSubPixelBits;
+		uint64_t viewportSubPixelBits;
 
 		Vulkan10ViewportLimits();
 	};
 
 	struct Vulkan10FramebufferLimits
 	{
-		std::uint64_t maxFramebufferWidth;
-		std::uint64_t maxFramebufferHeight;
-		std::uint64_t maxFramebufferLayers;
-		std::uint64_t framebufferColorSampleCounts;
-		std::uint64_t framebufferDepthSampleCounts;
-		std::uint64_t framebufferStencilSampleCounts;
-		std::uint64_t framebufferNoAttachmentsSampleCounts;
+		uint64_t maxFramebufferWidth;
+		uint64_t maxFramebufferHeight;
+		uint64_t maxFramebufferLayers;
+		uint64_t framebufferColorSampleCounts;
+		uint64_t framebufferDepthSampleCounts;
+		uint64_t framebufferStencilSampleCounts;
+		uint64_t framebufferNoAttachmentsSampleCounts;
 
 		Vulkan10FramebufferLimits();
 	};
 
 	struct Vulkan10SamplingLimits
 	{
-		std::uint64_t sampledImageColorSampleCounts;
-		std::uint64_t sampledImageIntegerSampleCounts;
-		std::uint64_t sampledImageDepthSampleCounts;
-		std::uint64_t sampledImageStencilSampleCounts;
-		std::uint64_t storageImageSampleCounts;
+		uint64_t sampledImageColorSampleCounts;
+		uint64_t sampledImageIntegerSampleCounts;
+		uint64_t sampledImageDepthSampleCounts;
+		uint64_t sampledImageStencilSampleCounts;
+		uint64_t storageImageSampleCounts;
 
 		Vulkan10SamplingLimits();
 	};
@@ -103,22 +103,22 @@ namespace VulkanSimplified
 	{
 		Vulkan10MaxImageSizeLimits maxImageSizes;
 
-		std::uint64_t maxUniformBufferRange;
-		std::uint64_t maxStorageBufferRange;
-		std::uint64_t maxPushConstantsSize;
+		uint64_t maxUniformBufferRange;
+		uint64_t maxStorageBufferRange;
+		uint64_t maxPushConstantsSize;
 
-		std::uint64_t maxMemoryAllocationCount;
-		std::uint64_t maxSamplerAllocationCount;
+		uint64_t maxMemoryAllocationCount;
+		uint64_t maxSamplerAllocationCount;
 
 		Vulkan10DescriptorSetLimits descriptorSetLimits;
 
 		Vulkan10VertexShaderLimits vertexShaderLimit;
 		Vulkan10FragmentShaderLimits fragmentShaderLimit;
 
-		std::uint64_t subPixelPrecisionBits;
-		std::uint64_t mipmapPrecisionBits;
+		uint64_t subPixelPrecisionBits;
+		uint64_t mipmapPrecisionBits;
 
-		std::uint64_t maxDrawIndexedIndexValue;
+		uint64_t maxDrawIndexedIndexValue;
 
 		float maxSamplerLodBias;
 		float maxSamplerAnisotropy;
@@ -126,7 +126,7 @@ namespace VulkanSimplified
 		Vulkan10ViewportLimits viewportLimits;
 		Vulkan10FramebufferLimits framebufferLimits;
 
-		std::uint64_t maxColorAttachments;
+		uint64_t maxColorAttachments;
 
 		Vulkan10SamplingLimits samplingLimits;
 

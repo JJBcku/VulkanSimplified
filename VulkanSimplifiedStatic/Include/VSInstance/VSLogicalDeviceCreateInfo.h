@@ -7,8 +7,8 @@ namespace VulkanSimplified
 {
 	struct QueueCreationData
 	{
-		std::uint32_t queuesFamily;
-		std::uint32_t padding;
+		uint32_t queuesFamily;
+		uint32_t padding;
 		std::vector<uint16_t> queuesPriorities;
 
 		QueueCreationData();

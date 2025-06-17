@@ -37,7 +37,7 @@ namespace VulkanSimplifiedInternal
 		IDObject<SharedShaderPipelineData> AddSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType, size_t addOnReserving);
 
 		IDObject<VertexAttributeDescriptionData> AddVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format, size_t addOnReserving);
-		IDObject<VertexBindingDescriptionData> AddVertexBindingData(std::uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+		IDObject<VertexBindingDescriptionData> AddVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
 			const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving);
 		IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings, size_t addOnReserving);
 
@@ -49,7 +49,7 @@ namespace VulkanSimplifiedInternal
 		IDObject<PipelineRasterizationData> AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise,
 			size_t addOnReserving);
 		IDObject<PipelineMultisampleData> AddPipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
-			std::optional<std::uint32_t> minSampleShading, size_t addOnReserving);
+			std::optional<uint32_t> minSampleShading, size_t addOnReserving);
 		IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp,
 			float minDepth, float maxDepth, size_t addOnReserving);
 		IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
@@ -61,7 +61,7 @@ namespace VulkanSimplifiedInternal
 		IDObject<SharedShaderPipelineData> AddUniqueSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType, size_t addOnReserving);
 
 		IDObject<VertexAttributeDescriptionData> AddUniqueVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format, size_t addOnReserving);
-		IDObject<VertexBindingDescriptionData> AddUniqueVertexBindingData(std::uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+		IDObject<VertexBindingDescriptionData> AddUniqueVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
 			const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving);
 		IDObject<VertexInputSharedPipelineData> AddUniqueVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings, size_t addOnReserving);
 
@@ -73,7 +73,7 @@ namespace VulkanSimplifiedInternal
 		IDObject<PipelineRasterizationData> AddUniquePipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
 			bool frontClockwise, size_t addOnReserving);
 		IDObject<PipelineMultisampleData> AddUniquePipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
-			std::optional<std::uint32_t> minSampleShading, size_t addOnReserving);
+			std::optional<uint32_t> minSampleShading, size_t addOnReserving);
 		IDObject<PipelineDepthStencilStateData> AddUniquePipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp,
 			float minDepth, float maxDepth, size_t addOnReserving);
 		IDObject<PipelineColorBlendAttachment> AddUniquePipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,

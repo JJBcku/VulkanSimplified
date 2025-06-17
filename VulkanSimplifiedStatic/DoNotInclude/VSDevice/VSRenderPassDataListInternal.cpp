@@ -34,7 +34,7 @@ namespace VulkanSimplifiedInternal
 		if (!attachments.empty())
 		{
 			attachmentData = _sharedRenderPassData.GetRenderPassAttachmentDescriptors(attachments);
-			createInfo.attachmentCount = static_cast<std::uint32_t>(attachmentData.size());
+			createInfo.attachmentCount = static_cast<uint32_t>(attachmentData.size());
 			createInfo.pAttachments = attachmentData.data();
 		}
 
@@ -58,14 +58,14 @@ namespace VulkanSimplifiedInternal
 				if (!subpasses[i].inputAttachments.empty())
 				{
 					inputAttachments[i] = _sharedRenderPassData.GetRenderPassAttachmentReferences(subpasses[i].inputAttachments);
-					subpassAdd.inputAttachmentCount = static_cast<std::uint32_t>(inputAttachments[i].size());
+					subpassAdd.inputAttachmentCount = static_cast<uint32_t>(inputAttachments[i].size());
 					subpassAdd.pInputAttachments = inputAttachments[i].data();
 				}
 
 				if (!subpasses[i].colorAttachments.empty())
 				{
 					colorAttachments[i] = _sharedRenderPassData.GetRenderPassAttachmentReferences(subpasses[i].colorAttachments);
-					subpassAdd.colorAttachmentCount = static_cast<std::uint32_t>(colorAttachments[i].size());
+					subpassAdd.colorAttachmentCount = static_cast<uint32_t>(colorAttachments[i].size());
 					subpassAdd.pColorAttachments = colorAttachments[i].data();
 				}
 
@@ -77,14 +77,14 @@ namespace VulkanSimplifiedInternal
 
 				if (!subpasses[i].preserveAttachment.empty())
 				{
-					subpassAdd.preserveAttachmentCount = static_cast<std::uint32_t>(subpasses[i].preserveAttachment.size());
+					subpassAdd.preserveAttachmentCount = static_cast<uint32_t>(subpasses[i].preserveAttachment.size());
 					subpassAdd.pPreserveAttachments = subpasses[i].preserveAttachment.data();
 				}
 
 				subpassDataList.push_back(subpassAdd);
 			}
 
-			createInfo.subpassCount = static_cast<std::uint32_t>(subpassDataList.size());
+			createInfo.subpassCount = static_cast<uint32_t>(subpassDataList.size());
 			createInfo.pSubpasses = subpassDataList.data();
 		}
 
@@ -93,7 +93,7 @@ namespace VulkanSimplifiedInternal
 		if (!subpassDependencies.empty())
 		{
 			subpassDependenciesData = _sharedRenderPassData.GetSubpassDependencies(subpassDependencies);
-			createInfo.dependencyCount = static_cast<std::uint32_t>(subpassDependenciesData.size());
+			createInfo.dependencyCount = static_cast<uint32_t>(subpassDependenciesData.size());
 			createInfo.pDependencies = subpassDependenciesData.data();
 		}
 
@@ -115,7 +115,7 @@ namespace VulkanSimplifiedInternal
 		if (!attachments.empty())
 		{
 			attachmentData = _sharedRenderPassData.GetRenderPassAttachmentDescriptors(attachments);
-			createInfo.attachmentCount = static_cast<std::uint32_t>(attachmentData.size());
+			createInfo.attachmentCount = static_cast<uint32_t>(attachmentData.size());
 			createInfo.pAttachments = attachmentData.data();
 		}
 
@@ -141,7 +141,7 @@ namespace VulkanSimplifiedInternal
 				if (!subpasses[i].inputAttachments.empty())
 				{
 					inputAttachments[i] = _sharedRenderPassData.GetRenderPassAttachmentReferences(subpasses[i].inputAttachments);
-					subpassAdd.inputAttachmentCount = static_cast<std::uint32_t>(inputAttachments[i].size());
+					subpassAdd.inputAttachmentCount = static_cast<uint32_t>(inputAttachments[i].size());
 					subpassAdd.pInputAttachments = inputAttachments[i].data();
 				}
 
@@ -156,7 +156,7 @@ namespace VulkanSimplifiedInternal
 						resolveAttachments[i][j] = _sharedRenderPassData.GetRenderPassAttachmentReference(subpasses[i].colorAttachments[j].second);
 					}
 
-					subpassAdd.colorAttachmentCount = static_cast<std::uint32_t>(colorAttachments[i].size());
+					subpassAdd.colorAttachmentCount = static_cast<uint32_t>(colorAttachments[i].size());
 					subpassAdd.pColorAttachments = colorAttachments[i].data();
 					subpassAdd.pResolveAttachments = resolveAttachments[i].data();
 				}
@@ -169,14 +169,14 @@ namespace VulkanSimplifiedInternal
 
 				if (!subpasses[i].preserveAttachment.empty())
 				{
-					subpassAdd.preserveAttachmentCount = static_cast<std::uint32_t>(subpasses[i].preserveAttachment.size());
+					subpassAdd.preserveAttachmentCount = static_cast<uint32_t>(subpasses[i].preserveAttachment.size());
 					subpassAdd.pPreserveAttachments = subpasses[i].preserveAttachment.data();
 				}
 
 				subpassDataList.push_back(subpassAdd);
 			}
 
-			createInfo.subpassCount = static_cast<std::uint32_t>(subpassDataList.size());
+			createInfo.subpassCount = static_cast<uint32_t>(subpassDataList.size());
 			createInfo.pSubpasses = subpassDataList.data();
 		}
 
@@ -185,7 +185,7 @@ namespace VulkanSimplifiedInternal
 		if (!subpassDependencies.empty())
 		{
 			subpassDependenciesData = _sharedRenderPassData.GetSubpassDependencies(subpassDependencies);
-			createInfo.dependencyCount = static_cast<std::uint32_t>(subpassDependenciesData.size());
+			createInfo.dependencyCount = static_cast<uint32_t>(subpassDependenciesData.size());
 			createInfo.pDependencies = subpassDependenciesData.data();
 		}
 

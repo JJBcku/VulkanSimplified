@@ -1,6 +1,7 @@
 #pragma once
 
 #include <VSDataFormatFlags.h>
+#include <VSImageSampleFlags.h>
 
 struct VulkanInstanceDependentData
 {
@@ -10,6 +11,9 @@ struct VulkanInstanceDependentData
 	VulkanSimplified::DataFormatSetIndependentID supportedDepthFormat;
 	uint32_t minSwapchainImageAmount;
 	uint32_t maxSwapchainImageAmount;
+
+	VulkanSimplified::ImageSampleFlagBits maxSamples;
+	std::optional<uint32_t> sampleShadingRate;
 
 	size_t graphicsQueueIndex;
 	uint32_t graphicsQueueFamily;

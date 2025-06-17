@@ -1178,7 +1178,7 @@ namespace VulkanSimplifiedInternal
 	{
 		VulkanSimplified::SdlJoyDeviceEventData eventData;
 
-		if (event.type == static_cast<std::uint32_t>(SDL_EventType::SDL_JOYDEVICEADDED))
+		if (event.type == static_cast<uint32_t>(SDL_EventType::SDL_JOYDEVICEADDED))
 			eventData.type = 1;
 		else
 			eventData.type = 0;

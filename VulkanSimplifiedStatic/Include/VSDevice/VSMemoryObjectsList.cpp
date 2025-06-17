@@ -14,13 +14,13 @@ namespace VulkanSimplified
 	}
 
 	MemoryAllocationFullID MemoryObjectsList::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving)
+		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
 	{
 		return _internal.AllocateMemory(memorySize, initialSuballocationsReserved, acceptableMemoryTypesProperties, memoryTypeMask, addOnReserving);
 	}
 
 	std::optional<MemoryAllocationFullID> MemoryObjectsList::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserving)
+		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
 	{
 		return _internal.TryToAllocateMemory(memorySize, initialSuballocationsReserved, acceptableMemoryTypesProperties, memoryTypeMask, addOnReserving);
 	}

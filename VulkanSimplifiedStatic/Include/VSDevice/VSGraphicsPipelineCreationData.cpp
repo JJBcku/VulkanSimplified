@@ -16,7 +16,7 @@ namespace VulkanSimplified
 
 	GraphicsPipelineCreationData::GraphicsPipelineCreationData()
 	{
-		subpassIndex = std::numeric_limits<std::uint32_t>::max();
+		subpassIndex = std::numeric_limits<uint32_t>::max();
 		padding = 0;
 	}
 }

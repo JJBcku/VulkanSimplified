@@ -14,6 +14,8 @@ struct VulkanMemoryData
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>> colorRenderTargetImageViews;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage>> depthRenderTargetImages;
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>> depthRenderTargetImageViews;
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupResolveRenderTargetImage>> resolveRenderTargetImages;
+	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>> resolveRenderTargetImageViews;
 
 	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer>> framebuffers;
 

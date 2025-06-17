@@ -211,7 +211,7 @@ namespace VulkanSimplifiedInternal
 		if (_queueFamilies.size() > 1)
 		{
 			createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
-			createInfo.queueFamilyIndexCount = static_cast<std::uint32_t>(_queueFamilies.size());
+			createInfo.queueFamilyIndexCount = static_cast<uint32_t>(_queueFamilies.size());
 			createInfo.pQueueFamilyIndices = _queueFamilies.data();
 		}
 
@@ -223,7 +223,7 @@ namespace VulkanSimplifiedInternal
 		if (vkCreateSwapchainKHR(_device, &createInfo, nullptr, &_swapchain) != VK_SUCCESS)
 			throw std::runtime_error("Program failed to create the swapchain!");
 
-		std::uint32_t imageCreated = 0;
+		uint32_t imageCreated = 0;
 		vkGetSwapchainImagesKHR(_device, _swapchain, &imageCreated, nullptr);
 		_swapchainImages.resize(imageCreated);
 		vkGetSwapchainImagesKHR(_device, _swapchain, &imageCreated, _swapchainImages.data());

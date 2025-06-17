@@ -67,7 +67,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::vector<IDObject<VulkanSimplified::SecondaryNIRPointer>> NIRCommandPoolInternal::AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserving)
+	std::vector<IDObject<VulkanSimplified::SecondaryNIRPointer>> NIRCommandPoolInternal::AllocateSecondaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving)
 	{
 		std::vector<IDObject<VulkanSimplified::SecondaryNIRPointer>> ret;
 
@@ -143,7 +143,7 @@ namespace VulkanSimplifiedInternal
 
 		VkPresentInfoKHR presentInfo{};
 		presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-		presentInfo.waitSemaphoreCount = static_cast<std::uint32_t>(semaphores.size());
+		presentInfo.waitSemaphoreCount = static_cast<uint32_t>(semaphores.size());
 		presentInfo.pWaitSemaphores = semaphores.data();
 		presentInfo.swapchainCount = 1;
 		presentInfo.pSwapchains = &swapchain;

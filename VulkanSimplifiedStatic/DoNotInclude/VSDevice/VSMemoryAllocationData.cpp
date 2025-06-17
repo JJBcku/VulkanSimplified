@@ -93,7 +93,7 @@ namespace VulkanSimplifiedInternal
 
 		_usedSize += size;
 
-		_suballocationData.insert(_suballocationData.begin() + static_cast<std::int64_t>(memoryAddresses.second), add);
+		_suballocationData.insert(_suballocationData.begin() + static_cast<int64_t>(memoryAddresses.second), add);
 
 		return memoryAddresses.first;
 	}
@@ -113,7 +113,7 @@ namespace VulkanSimplifiedInternal
 
 		_usedSize += size;
 
-		_suballocationData.insert(_suballocationData.begin() + static_cast<std::int64_t>(memoryAddresses.second), add);
+		_suballocationData.insert(_suballocationData.begin() + static_cast<int64_t>(memoryAddresses.second), add);
 
 		return memoryAddresses.first;
 	}

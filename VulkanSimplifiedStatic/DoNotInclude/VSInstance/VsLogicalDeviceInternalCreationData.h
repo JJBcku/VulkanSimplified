@@ -9,8 +9,8 @@ namespace VulkanSimplifiedInternal
 	{
 		std::vector<VkDeviceQueueCreateInfo> queueInfos;
 
-		std::uint32_t apiVersion;
-		std::uint32_t padding;
+		uint32_t apiVersion;
+		uint32_t padding;
 
 		VkPhysicalDeviceFeatures features;
 		std::vector<const char*> enabledExtensionsList;
