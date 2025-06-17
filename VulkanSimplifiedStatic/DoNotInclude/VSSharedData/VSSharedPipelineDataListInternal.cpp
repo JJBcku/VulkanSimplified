@@ -18,7 +18,7 @@
 
 namespace VulkanSimplifiedInternal
 {
-	SharedPipelineDataListssInternal::SharedPipelineDataListssInternal(const VulkanSimplified::SharedPipelineDataListsssCapacities& initialCapacities) :
+	SharedPipelineDataListInternal::SharedPipelineDataListInternal(const VulkanSimplified::SharedPipelineDataListsssCapacities& initialCapacities) :
 		_shaderSpecializationElements(initialCapacities.initialSpecializationElementsCapacity), _shaderPipelineData(initialCapacities.initialShaderPipelineInfoCapacity),
 		_vertexAttributeData(initialCapacities.initialVertexAttributeInfoCapacity), _vertexBindingData(initialCapacities.initialVertexBindingInfoCapacity),
 		_vertexInputData(initialCapacities.initialVertexInputPipelineInfoCapacity), _pipelineScissorData(initialCapacities.initialPipelineScissorDataCapacity),
@@ -29,11 +29,11 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	SharedPipelineDataListssInternal::~SharedPipelineDataListssInternal()
+	SharedPipelineDataListInternal::~SharedPipelineDataListInternal()
 	{
 	}
 
-	IDObject<ShaderSpecializationElement> SharedPipelineDataListssInternal::AddShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize,
+	IDObject<ShaderSpecializationElement> SharedPipelineDataListInternal::AddShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize,
 		size_t addOnReserving)
 	{
 		ShaderSpecializationElement add;
@@ -44,7 +44,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderSpecializationElements.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<SharedShaderPipelineData> SharedPipelineDataListssInternal::AddSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType,
+	IDObject<SharedShaderPipelineData> SharedPipelineDataListInternal::AddSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType,
 		size_t addOnReserving)
 	{
 		SharedShaderPipelineData add;
@@ -58,7 +58,7 @@ namespace VulkanSimplifiedInternal
 			add.shaderStage = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddSharedShaderPipelineData Error: Program was given an erroneous shader type value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddSharedShaderPipelineData Error: Program was given an erroneous shader type value!");
 		}
 
 		add.entryPointName = std::move(entryPointName);
@@ -66,7 +66,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderPipelineData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListssInternal::AddVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format,
+	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListInternal::AddVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format,
 		size_t addOnReserving)
 	{
 		VertexAttributeDescriptionData add;
@@ -76,7 +76,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexAttributeData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexBindingDescriptionData> SharedPipelineDataListssInternal::AddVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+	IDObject<VertexBindingDescriptionData> SharedPipelineDataListInternal::AddVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving)
 	{
 		VertexBindingDescriptionData add;
@@ -91,7 +91,7 @@ namespace VulkanSimplifiedInternal
 			add.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddVertexBindingData Error: Program was give an erroneous input rate value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddVertexBindingData Error: Program was give an erroneous input rate value!");
 		}
 
 		add.vertexAttributes = vertexAttributeIDs;
@@ -99,7 +99,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexBindingData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexInputSharedPipelineData> SharedPipelineDataListssInternal::AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
+	IDObject<VertexInputSharedPipelineData> SharedPipelineDataListInternal::AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
 		size_t addOnReserving)
 	{
 		VertexInputSharedPipelineData add;
@@ -108,7 +108,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexInputData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineScissorData> SharedPipelineDataListssInternal::AddPipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height, size_t addOnReserving)
+	IDObject<PipelineScissorData> SharedPipelineDataListInternal::AddPipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height, size_t addOnReserving)
 	{
 		PipelineScissorData add;
 		add.offsetX = offsetX;
@@ -119,7 +119,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineScissorData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineViewportData> SharedPipelineDataListssInternal::AddPipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
+	IDObject<PipelineViewportData> SharedPipelineDataListInternal::AddPipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
 		float minDepth, float maxDepth, size_t addOnReserving)
 	{
 		PipelineViewportData add;
@@ -133,7 +133,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineViewportData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineInputAssemblyData> SharedPipelineDataListssInternal::AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology, bool primitiveRestartEnable,
+	IDObject<PipelineInputAssemblyData> SharedPipelineDataListInternal::AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology, bool primitiveRestartEnable,
 		size_t addOnReserving)
 	{
 		PipelineInputAssemblyData add;
@@ -174,7 +174,7 @@ namespace VulkanSimplifiedInternal
 			add.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineInputAssemblyData Error: Program was given an erroneous pipeline primitive topology value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineInputAssemblyData Error: Program was given an erroneous pipeline primitive topology value!");
 		}
 
 		if (primitiveRestartEnable)
@@ -185,7 +185,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineInputAssemblyData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineRasterizationData> SharedPipelineDataListssInternal::AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
+	IDObject<PipelineRasterizationData> SharedPipelineDataListInternal::AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
 		bool frontClockwise, size_t addOnReserving)
 	{
 		PipelineRasterizationData add;
@@ -202,7 +202,7 @@ namespace VulkanSimplifiedInternal
 			add.polygonMode = VK_POLYGON_MODE_FILL;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineRasterizationData Error: Program was given an erroneous pipeline polygon mode value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineRasterizationData Error: Program was given an erroneous pipeline polygon mode value!");
 		}
 
 		if (cullPolygonBacks)
@@ -218,7 +218,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineRasterizationData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListssInternal::AddPipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
+	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListInternal::AddPipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
 		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		PipelineMultisampleData add;
@@ -247,7 +247,7 @@ namespace VulkanSimplifiedInternal
 			add.sampleCount = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineMultisampleData Error: Program was given an erroneous pipeline sampling value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineMultisampleData Error: Program was given an erroneous pipeline sampling value!");
 		}
 
 		if (minSampleShading.has_value())
@@ -264,7 +264,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineMultisampleData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListssInternal::AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage,
+	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListInternal::AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage,
 		VulkanSimplified::CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
 	{
 		PipelineDepthStencilStateData add;
@@ -284,7 +284,7 @@ namespace VulkanSimplifiedInternal
 			add.depthWriteEnable = VK_FALSE;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineDepthStencilStateData Error: Program was given an erroneous pipeline depth usage value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineDepthStencilStateData Error: Program was given an erroneous pipeline depth usage value!");
 		}
 
 		switch (compareOp)
@@ -314,7 +314,7 @@ namespace VulkanSimplifiedInternal
 			add.compareOp = VK_COMPARE_OP_NEVER;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineDepthStencilStateData Error: Program was given an erroneous compare operation value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineDepthStencilStateData Error: Program was given an erroneous compare operation value!");
 		}
 
 		add.minDepth = minDepth;
@@ -323,7 +323,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineDepthStencilStateData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListssInternal::AddPipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
+	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListInternal::AddPipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
 		VulkanSimplified::ColorBlendingPreset blendingPreset, size_t addOnReserving)
 	{
 		PipelineColorBlendAttachment add;
@@ -358,7 +358,7 @@ namespace VulkanSimplifiedInternal
 			add.alphaBlendOp = VK_BLEND_OP_ADD;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending preset value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending preset value!");
 		}
 
 		add.colorWriteMask = 0;
@@ -388,12 +388,12 @@ namespace VulkanSimplifiedInternal
 		}
 
 		if (blendingComponents != 0)
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending components value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending components value!");
 
 		return _pipelineColorBlendData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PushConstantData> SharedPipelineDataListssInternal::AddPushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
+	IDObject<PushConstantData> SharedPipelineDataListInternal::AddPushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
 	{
 		PushConstantData add;
 
@@ -406,7 +406,7 @@ namespace VulkanSimplifiedInternal
 			add.shaderStages = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddPushConstantData Error: Program was given an erroneous shader type value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddPushConstantData Error: Program was given an erroneous shader type value!");
 		}
 
 		add.offset = offset;
@@ -415,7 +415,7 @@ namespace VulkanSimplifiedInternal
 		return _pushConstantData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<ShaderSpecializationElement> SharedPipelineDataListssInternal::AddUniqueShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize,
+	IDObject<ShaderSpecializationElement> SharedPipelineDataListInternal::AddUniqueShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize,
 		size_t addOnReserving)
 	{
 		ShaderSpecializationElement add;
@@ -426,7 +426,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderSpecializationElements.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<SharedShaderPipelineData> SharedPipelineDataListssInternal::AddUniqueSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType,
+	IDObject<SharedShaderPipelineData> SharedPipelineDataListInternal::AddUniqueSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType,
 		size_t addOnReserving)
 	{
 		SharedShaderPipelineData add;
@@ -440,7 +440,7 @@ namespace VulkanSimplifiedInternal
 			add.shaderStage = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniqueSharedShaderPipelineData Error: Program was given an erroneous shader type value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniqueSharedShaderPipelineData Error: Program was given an erroneous shader type value!");
 		}
 
 		add.entryPointName = std::move(entryPointName);
@@ -448,7 +448,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderPipelineData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListssInternal::AddUniqueVertexAttributeDescriptionData(uint32_t offset,
+	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListInternal::AddUniqueVertexAttributeDescriptionData(uint32_t offset,
 		VulkanSimplified::DataFormatSetIndependentID format, size_t addOnReserving)
 	{
 		VertexAttributeDescriptionData add;
@@ -458,7 +458,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexAttributeData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexBindingDescriptionData> SharedPipelineDataListssInternal::AddUniqueVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+	IDObject<VertexBindingDescriptionData> SharedPipelineDataListInternal::AddUniqueVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving)
 	{
 		VertexBindingDescriptionData add;
@@ -473,7 +473,7 @@ namespace VulkanSimplifiedInternal
 			add.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniqueVertexBindingData Error: Program was give an erroneous input rate value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniqueVertexBindingData Error: Program was give an erroneous input rate value!");
 		}
 
 		add.vertexAttributes = vertexAttributeIDs;
@@ -481,7 +481,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexBindingData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexInputSharedPipelineData> SharedPipelineDataListssInternal::AddUniqueVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
+	IDObject<VertexInputSharedPipelineData> SharedPipelineDataListInternal::AddUniqueVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
 		size_t addOnReserving)
 	{
 		VertexInputSharedPipelineData add;
@@ -490,7 +490,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexInputData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineScissorData> SharedPipelineDataListssInternal::AddUniquePipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height, size_t addOnReserving)
+	IDObject<PipelineScissorData> SharedPipelineDataListInternal::AddUniquePipelineScissorData(int32_t offsetX, int32_t offsetY, uint32_t width, uint32_t height, size_t addOnReserving)
 	{
 		PipelineScissorData add;
 		add.offsetX = offsetX;
@@ -501,7 +501,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineScissorData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineViewportData> SharedPipelineDataListssInternal::AddUniquePipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
+	IDObject<PipelineViewportData> SharedPipelineDataListInternal::AddUniquePipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
 		float minDepth, float maxDepth, size_t addOnReserving)
 	{
 		PipelineViewportData add;
@@ -515,7 +515,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineViewportData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineInputAssemblyData> SharedPipelineDataListssInternal::AddUniquePipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology,
+	IDObject<PipelineInputAssemblyData> SharedPipelineDataListInternal::AddUniquePipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology,
 		bool primitiveRestartEnable, size_t addOnReserving)
 	{
 		PipelineInputAssemblyData add;
@@ -556,7 +556,7 @@ namespace VulkanSimplifiedInternal
 			add.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineInputAssemblyData Error: Program was given an erroneous pipeline primitive topology value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineInputAssemblyData Error: Program was given an erroneous pipeline primitive topology value!");
 		}
 
 		if (primitiveRestartEnable)
@@ -567,7 +567,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineInputAssemblyData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineRasterizationData> SharedPipelineDataListssInternal::AddUniquePipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
+	IDObject<PipelineRasterizationData> SharedPipelineDataListInternal::AddUniquePipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
 		bool frontClockwise, size_t addOnReserving)
 	{
 		PipelineRasterizationData add;
@@ -584,7 +584,7 @@ namespace VulkanSimplifiedInternal
 			add.polygonMode = VK_POLYGON_MODE_FILL;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineRasterizationData Error: Program was given an erroneous pipeline polygon mode value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineRasterizationData Error: Program was given an erroneous pipeline polygon mode value!");
 		}
 
 		if (cullPolygonBacks)
@@ -600,7 +600,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineRasterizationData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListssInternal::AddUniquePipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
+	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListInternal::AddUniquePipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
 		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		PipelineMultisampleData add;
@@ -629,7 +629,7 @@ namespace VulkanSimplifiedInternal
 			add.sampleCount = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineMultisampleData Error: Program was given an erroneous pipeline sampling value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineMultisampleData Error: Program was given an erroneous pipeline sampling value!");
 		}
 
 		if (minSampleShading.has_value())
@@ -646,7 +646,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineMultisampleData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListssInternal::AddUniquePipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
+	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListInternal::AddUniquePipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
 	{
 		PipelineDepthStencilStateData add;
 
@@ -665,7 +665,7 @@ namespace VulkanSimplifiedInternal
 			add.depthWriteEnable = VK_FALSE;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineDepthStencilStateData Error: Program was given an erroneous pipeline depth usage value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineDepthStencilStateData Error: Program was given an erroneous pipeline depth usage value!");
 		}
 
 		switch (compareOp)
@@ -695,7 +695,7 @@ namespace VulkanSimplifiedInternal
 			add.compareOp = VK_COMPARE_OP_NEVER;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineDepthStencilStateData Error: Program was given an erroneous compare operation value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineDepthStencilStateData Error: Program was given an erroneous compare operation value!");
 		}
 
 		add.minDepth = minDepth;
@@ -704,7 +704,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineDepthStencilStateData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListssInternal::AddUniquePipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
+	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListInternal::AddUniquePipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
 		VulkanSimplified::ColorBlendingPreset blendingPreset, size_t addOnReserving)
 	{
 		PipelineColorBlendAttachment add;
@@ -739,7 +739,7 @@ namespace VulkanSimplifiedInternal
 			add.alphaBlendOp = VK_BLEND_OP_ADD;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineColorBlendAttachment Error: Program was given an erroneous blending preset value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineColorBlendAttachment Error: Program was given an erroneous blending preset value!");
 		}
 
 		add.colorWriteMask = 0;
@@ -769,12 +769,12 @@ namespace VulkanSimplifiedInternal
 		}
 
 		if (blendingComponents != 0)
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePipelineColorBlendAttachment Error: Program was given an erroneous blending components value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePipelineColorBlendAttachment Error: Program was given an erroneous blending components value!");
 
 		return _pipelineColorBlendData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PushConstantData> SharedPipelineDataListssInternal::AddUniquePushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
+	IDObject<PushConstantData> SharedPipelineDataListInternal::AddUniquePushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
 	{
 		PushConstantData add;
 
@@ -787,7 +787,7 @@ namespace VulkanSimplifiedInternal
 			add.shaderStages = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedPipelineDataListssInternal::AddUniquePushConstantData Error: Program was given an erroneous shader type value!");
+			throw std::runtime_error("SharedPipelineDataListInternal::AddUniquePushConstantData Error: Program was given an erroneous shader type value!");
 		}
 
 		add.offset = offset;
@@ -796,7 +796,7 @@ namespace VulkanSimplifiedInternal
 		return _pushConstantData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	std::vector<VkSpecializationMapEntry> SharedPipelineDataListssInternal::GetShaderSpecializationData(const std::vector<IDObject<ShaderSpecializationElement>>& specializationIDs) const
+	std::vector<VkSpecializationMapEntry> SharedPipelineDataListInternal::GetShaderSpecializationData(const std::vector<IDObject<ShaderSpecializationElement>>& specializationIDs) const
 	{
 		std::vector<VkSpecializationMapEntry> ret;
 		ret.reserve(specializationIDs.size());
@@ -817,27 +817,27 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	SharedShaderPipelineData SharedPipelineDataListssInternal::GetSharedShaderPipelineData(const IDObject<SharedShaderPipelineData>& shaderID) const
+	SharedShaderPipelineData SharedPipelineDataListInternal::GetSharedShaderPipelineData(const IDObject<SharedShaderPipelineData>& shaderID) const
 	{
 		return _shaderPipelineData.GetObjectCopy(shaderID);
 	}
 
-	std::vector<VertexAttributeDescriptionData> SharedPipelineDataListssInternal::GetVertexAttributeDescriptionData(const std::vector<IDObject<VertexAttributeDescriptionData>>& attributeIDs) const
+	std::vector<VertexAttributeDescriptionData> SharedPipelineDataListInternal::GetVertexAttributeDescriptionData(const std::vector<IDObject<VertexAttributeDescriptionData>>& attributeIDs) const
 	{
 		return _vertexAttributeData.GetObjectList(attributeIDs);
 	}
 
-	std::vector<VertexBindingDescriptionData> SharedPipelineDataListssInternal::GetVertexBindingDescriptionData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindingIDs) const
+	std::vector<VertexBindingDescriptionData> SharedPipelineDataListInternal::GetVertexBindingDescriptionData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindingIDs) const
 	{
 		return _vertexBindingData.GetObjectList(bindingIDs);
 	}
 
-	VertexInputSharedPipelineData SharedPipelineDataListssInternal::GetVertexInputSharedPipelineData(IDObject<VertexInputSharedPipelineData> vertexDataIDs) const
+	VertexInputSharedPipelineData SharedPipelineDataListInternal::GetVertexInputSharedPipelineData(IDObject<VertexInputSharedPipelineData> vertexDataIDs) const
 	{
 		return _vertexInputData.GetConstObject(vertexDataIDs);
 	}
 
-	VkViewport SharedPipelineDataListssInternal::GetViewports(const IDObject<PipelineViewportData>& viewportID) const
+	VkViewport SharedPipelineDataListInternal::GetViewports(const IDObject<PipelineViewportData>& viewportID) const
 	{
 		VkViewport ret{};
 
@@ -853,7 +853,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkRect2D SharedPipelineDataListssInternal::GetScissors(const IDObject<PipelineScissorData>& scissorID) const
+	VkRect2D SharedPipelineDataListInternal::GetScissors(const IDObject<PipelineScissorData>& scissorID) const
 	{
 		VkRect2D ret{};
 
@@ -867,7 +867,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkPipelineInputAssemblyStateCreateInfo SharedPipelineDataListssInternal::GetInputAssembly(IDObject<PipelineInputAssemblyData> assemblyID) const
+	VkPipelineInputAssemblyStateCreateInfo SharedPipelineDataListInternal::GetInputAssembly(IDObject<PipelineInputAssemblyData> assemblyID) const
 	{
 		VkPipelineInputAssemblyStateCreateInfo ret{};
 
@@ -881,7 +881,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkPipelineRasterizationStateCreateInfo SharedPipelineDataListssInternal::GetRasterizationState(IDObject<PipelineRasterizationData> rasterizationID) const
+	VkPipelineRasterizationStateCreateInfo SharedPipelineDataListInternal::GetRasterizationState(IDObject<PipelineRasterizationData> rasterizationID) const
 	{
 		VkPipelineRasterizationStateCreateInfo ret{};
 		ret.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
@@ -899,7 +899,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkPipelineMultisampleStateCreateInfo SharedPipelineDataListssInternal::GetMultisamplingState(IDObject<PipelineMultisampleData> multisamplingID) const
+	VkPipelineMultisampleStateCreateInfo SharedPipelineDataListInternal::GetMultisamplingState(IDObject<PipelineMultisampleData> multisamplingID) const
 	{
 		VkPipelineMultisampleStateCreateInfo ret{};
 		ret.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
@@ -913,7 +913,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkPipelineDepthStencilStateCreateInfo SharedPipelineDataListssInternal::GetDepthStencilState(IDObject<PipelineDepthStencilStateData> depthStencilID) const
+	VkPipelineDepthStencilStateCreateInfo SharedPipelineDataListInternal::GetDepthStencilState(IDObject<PipelineDepthStencilStateData> depthStencilID) const
 	{
 		VkPipelineDepthStencilStateCreateInfo ret{};
 		ret.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
@@ -931,7 +931,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::vector<VkPipelineColorBlendAttachmentState> SharedPipelineDataListssInternal::GetColorBlendAttachments(const std::vector<IDObject<PipelineColorBlendAttachment>>& attachmentIDs) const
+	std::vector<VkPipelineColorBlendAttachmentState> SharedPipelineDataListInternal::GetColorBlendAttachments(const std::vector<IDObject<PipelineColorBlendAttachment>>& attachmentIDs) const
 	{
 		std::vector<VkPipelineColorBlendAttachmentState> ret;
 		ret.reserve(attachmentIDs.size());
@@ -956,7 +956,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::vector<VkPushConstantRange> SharedPipelineDataListssInternal::GetPushConstantData(std::vector<IDObject<PushConstantData>> pushConstantIDs) const
+	std::vector<VkPushConstantRange> SharedPipelineDataListInternal::GetPushConstantData(std::vector<IDObject<PushConstantData>> pushConstantIDs) const
 	{
 		std::vector<VkPushConstantRange> ret;
 

@@ -24,7 +24,7 @@ namespace VulkanSimplifiedInternal
 		return _renderPassData;
 	}
 
-	SharedPipelineDataListssInternal& SharedDataMainListInternal::GetPipelineDataList()
+	SharedPipelineDataListInternal& SharedDataMainListInternal::GetPipelineDataList()
 	{
 		return _pipelineData;
 	}
@@ -39,7 +39,7 @@ namespace VulkanSimplifiedInternal
 		return _renderPassData;
 	}
 
-	const SharedPipelineDataListssInternal& SharedDataMainListInternal::GetPipelineDataList() const
+	const SharedPipelineDataListInternal& SharedDataMainListInternal::GetPipelineDataList() const
 	{
 		return _pipelineData;
 	}

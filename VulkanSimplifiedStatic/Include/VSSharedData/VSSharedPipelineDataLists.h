@@ -6,7 +6,7 @@
 
 namespace VulkanSimplifiedInternal
 {
-	class SharedPipelineDataListssInternal;
+	class SharedPipelineDataListInternal;
 }
 
 namespace VulkanSimplified
@@ -25,11 +25,11 @@ namespace VulkanSimplified
 
 	struct DataFormatSetIndependentID;
 
-	class SharedPipelineDataListss
+	class SharedPipelineDataList
 	{
 	public:
-		SharedPipelineDataListss(VulkanSimplifiedInternal::SharedPipelineDataListssInternal& ref);
-		~SharedPipelineDataListss();
+		SharedPipelineDataList(VulkanSimplifiedInternal::SharedPipelineDataListInternal& ref);
+		~SharedPipelineDataList();
 
 		IDObject<VulkanSimplifiedInternal::ShaderSpecializationElement> AddShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize,
 			size_t addOnReserving = 0);
@@ -92,6 +92,6 @@ namespace VulkanSimplified
 			size_t addOnReserving = 0);
 
 	private:
-		VulkanSimplifiedInternal::SharedPipelineDataListssInternal& _internal;
+		VulkanSimplifiedInternal::SharedPipelineDataListInternal& _internal;
 	};
 }

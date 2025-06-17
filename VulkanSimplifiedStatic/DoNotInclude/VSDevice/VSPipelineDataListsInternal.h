@@ -11,7 +11,7 @@ namespace VulkanSimplified
 
 namespace VulkanSimplifiedInternal
 {
-	class SharedPipelineDataListssInternal;
+	class SharedPipelineDataListInternal;
 	class DescriptorDataListsInternal;
 	class ShaderListsInternal;
 	class RenderPassListInternal;
@@ -22,7 +22,7 @@ namespace VulkanSimplifiedInternal
 	class PipelineDataListsInternal
 	{
 	public:
-		PipelineDataListsInternal(const SharedPipelineDataListssInternal& pipelineData, const DescriptorDataListsInternal& descriptorData, const ShaderListsInternal& shaderList,
+		PipelineDataListsInternal(const SharedPipelineDataListInternal& pipelineData, const DescriptorDataListsInternal& descriptorData, const ShaderListsInternal& shaderList,
 			const RenderPassListInternal& renderPassList, VkDevice device, const VulkanSimplified::PipelineDataListsInitialCapacities& initialCapacities);
 		~PipelineDataListsInternal();
 
@@ -34,7 +34,7 @@ namespace VulkanSimplifiedInternal
 		VkPipeline GetGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID) const;
 
 	private:
-		const SharedPipelineDataListssInternal& _pipelineData;
+		const SharedPipelineDataListInternal& _pipelineData;
 		const DescriptorDataListsInternal& _descriptorData;
 		const ShaderListsInternal& _shaderList;
 		const RenderPassListInternal& _renderPassList;

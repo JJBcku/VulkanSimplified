@@ -19,15 +19,15 @@ namespace VulkanSimplifiedInternal
 
 		SharedDescriptorDataListInternal& GetSharedDescriptorDataList();
 		SharedRenderPassDataListInternal& GetSharedRenderPassDataList();
-		SharedPipelineDataListssInternal& GetPipelineDataList();
+		SharedPipelineDataListInternal& GetPipelineDataList();
 
 		const SharedDescriptorDataListInternal& GetSharedDescriptorDataList() const;
 		const SharedRenderPassDataListInternal& GetSharedRenderPassDataList() const;
-		const SharedPipelineDataListssInternal& GetPipelineDataList() const;
+		const SharedPipelineDataListInternal& GetPipelineDataList() const;
 
 	private:
 		SharedDescriptorDataListInternal _descriptorData;
 		SharedRenderPassDataListInternal _renderPassData;
-		SharedPipelineDataListssInternal _pipelineData;
+		SharedPipelineDataListInternal _pipelineData;
 	};
 }
