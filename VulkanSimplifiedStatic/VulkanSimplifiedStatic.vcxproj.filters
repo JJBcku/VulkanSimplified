@@ -135,12 +135,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\VSCommon\VSCommonIframework.h">
-      <Filter>Header Files\Include\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSCommonIpch.h">
-      <Filter>Header Files\Include\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Include\VSCommon\VSVersionData.h">
       <Filter>Header Files\Include\Common</Filter>
     </ClInclude>
@@ -160,12 +154,6 @@
       <Filter>Header Files\Include\Main\EventHandler</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSMain\EventHandler\SdlDropEventData.h">
-      <Filter>Header Files\Include\Main\EventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlEhIframework.h">
-      <Filter>Header Files\Include\Main\EventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlEhIpch.h">
       <Filter>Header Files\Include\Main\EventHandler</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandler.h">
@@ -213,13 +201,7 @@
     <ClInclude Include="Include\VSMain\VSMain.h">
       <Filter>Header Files\Include\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSMain\VSMainIframework.h">
-      <Filter>Header Files\Include\Main</Filter>
-    </ClInclude>
     <ClInclude Include="Include\VSMain\VSMainInitData.h">
-      <Filter>Header Files\Include\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\VSMainIpch.h">
       <Filter>Header Files\Include\Main</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSMain\VSInstanceExtensionPacksList.h">
@@ -228,34 +210,16 @@
     <ClInclude Include="Include\VSMain\VSInstanceLayerPacksList.h">
       <Filter>Header Files\Include\Main</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEhNIframework.h">
-      <Filter>Header Files\DoNotInclude\Main\EventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEhNIpch.h">
-      <Filter>Header Files\DoNotInclude\Main\EventHandler</Filter>
-    </ClInclude>
     <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEventHandlerInternal.h">
       <Filter>Header Files\DoNotInclude\Main\EventHandler</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSMain\VSMainInternal.h">
       <Filter>Header Files\DoNotInclude\Main</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSMain\VSMainNIframework.h">
-      <Filter>Header Files\DoNotInclude\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSMain\VSMainNIpch.h">
-      <Filter>Header Files\DoNotInclude\Main</Filter>
-    </ClInclude>
     <ClInclude Include="Include\VSInstance\VSInstance.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSInstance\VSInstanceCreationData.h">
-      <Filter>Header Files\Include\Instance</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSInstance\VSInstanceIpch.h">
-      <Filter>Header Files\Include\Instance</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSInstance\VSInstanceIframework.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSInstance\VSDebugCallback.h">
@@ -267,20 +231,8 @@
     <ClInclude Include="DoNotInclude\VSInstance\VSInstanceInternal.h">
       <Filter>Header Files\DoNotInclude\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceNIframework.h">
-      <Filter>Header Files\DoNotInclude\Instance</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceNIpch.h">
-      <Filter>Header Files\DoNotInclude\Instance</Filter>
-    </ClInclude>
     <ClInclude Include="Include\VSCommon\VSBool64.h">
       <Filter>Header Files\Include\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSCommon\VSCommonNIframework.h">
-      <Filter>Header Files\DoNotInclude\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSCommon\VSCommonNIpch.h">
-      <Filter>Header Files\DoNotInclude\Common</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSCommon\VSCStringsComparison.h">
       <Filter>Header Files\DoNotInclude\Common</Filter>
@@ -289,18 +241,6 @@
       <Filter>Header Files\Include\Device</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\VSDevice\VSDeviceCoreInternal.h">
-      <Filter>Header Files\DoNotInclude\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDeviceIframework.h">
-      <Filter>Header Files\Include\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDeviceIpch.h">
-      <Filter>Header Files\Include\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceNIframework.h">
-      <Filter>Header Files\DoNotInclude\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceNIpch.h">
       <Filter>Header Files\DoNotInclude\Device</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDeviceMain.h">
@@ -321,10 +261,10 @@
     <ClInclude Include="Include\VSInstance\VSDeviceSwapchainSupportData.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSInstance\VSDeviceVulkan10FeatureFlags.h">
+    <ClInclude Include="Include\VSInstance\VSDeviceVulkan10FeatureFlagsDef.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSInstance\VSDeviceVulkan10Features.h">
+    <ClInclude Include="Include\VSInstance\VSDeviceVulkan10FeatureFlags.h">
       <Filter>Header Files\Include\Instance</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSInstance\VSDeviceVulkan10Limits.h">
@@ -584,18 +524,6 @@
     </ClInclude>
     <ClInclude Include="Include\VSCommon\VSShaderTypeFlagsDef.h">
       <Filter>Header Files\Include\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIpch.h">
-      <Filter>Header Files\DoNotInclude\Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedIframework.h">
-      <Filter>Header Files\Include\Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedIpch.h">
-      <Filter>Header Files\Include\Shared</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIframework.h">
-      <Filter>Header Files\DoNotInclude\Shared</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSSharedData\VSSharedDataListsCapacities.h">
       <Filter>Header Files\Include\Shared</Filter>
@@ -969,11 +897,92 @@
     <ClInclude Include="Include\VSSharedData\VSDepthUsage.h">
       <Filter>Header Files\Include\Shared\PipelineData</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlagsDef.h">
+      <Filter>Header Files\Include\Shared\PipelineData</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSColorBlendingPresetDef.h">
+      <Filter>Header Files\Include\Shared\PipelineData</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEhIframework.h">
+      <Filter>Header Files\Include\Main\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEhIpch.h">
+      <Filter>Header Files\Include\Main\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEhNIframework.h">
+      <Filter>Header Files\DoNotInclude\Main\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSMain\EventHandler\SdlEhNIpch.h">
+      <Filter>Header Files\DoNotInclude\Main\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\VSMainIframework.h">
+      <Filter>Header Files\Include\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\VSMainIpch.h">
+      <Filter>Header Files\Include\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSMain\VSMainNIframework.h">
+      <Filter>Header Files\DoNotInclude\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSMain\VSMainNIpch.h">
+      <Filter>Header Files\DoNotInclude\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSCommandBufferUsageDef.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VsCommonIframework.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VsCommonIpch.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSCommonNIframework.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSCommon\VSCommonNIpch.h">
+      <Filter>Header Files\DoNotInclude\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSCompareOperationsTypeDef.h">
+      <Filter>Header Files\Include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceIframework.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceIpch.h">
+      <Filter>Header Files\Include\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceNIframework.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSDevice\VSDeviceNIpch.h">
+      <Filter>Header Files\DoNotInclude\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSInstanceIframework.h">
+      <Filter>Header Files\Include\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSInstance\VSInstanceIpch.h">
+      <Filter>Header Files\Include\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceNIframework.h">
+      <Filter>Header Files\DoNotInclude\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSInstance\VSInstanceNIpch.h">
+      <Filter>Header Files\DoNotInclude\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedIframework.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSSharedData\VSSharedIpch.h">
+      <Filter>Header Files\Include\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIframework.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\VSSharedData\VSSharedNIpch.h">
+      <Filter>Header Files\DoNotInclude\Shared</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Include\VSCommon\VSCommonIpch.cpp">
-      <Filter>Source Files\Include\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Include\VSMain\EventHandler\SdlAppEventsData.cpp">
       <Filter>Source Files\Include\Main\EventHandler</Filter>
     </ClCompile>
@@ -990,9 +999,6 @@
       <Filter>Source Files\Include\Main\EventHandler</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSMain\EventHandler\SdlDropEventData.cpp">
-      <Filter>Source Files\Include\Main\EventHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSMain\EventHandler\SdlEhIpch.cpp">
       <Filter>Source Files\Include\Main\EventHandler</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSMain\EventHandler\SdlEventHandler.cpp">
@@ -1034,9 +1040,6 @@
     <ClCompile Include="Include\VSMain\EventHandler\SdlWindowEventData.cpp">
       <Filter>Source Files\Include\Main\EventHandler</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSMain\EventHandler\SdlEhNIpch.cpp">
-      <Filter>Source Files\DoNotInclude\Main\EventHandler</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSMain\EventHandler\SdlEventHandlerInternal.cpp">
       <Filter>Source Files\DoNotInclude\Main\EventHandler</Filter>
     </ClCompile>
@@ -1055,22 +1058,13 @@
     <ClCompile Include="Include\VSMain\VSMainInitData.cpp">
       <Filter>Source Files\Include\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSMain\VSMainIpch.cpp">
-      <Filter>Source Files\Include\Main</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\VSMain\VSMainInternal.cpp">
-      <Filter>Source Files\DoNotInclude\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSMain\VSMainNIpch.cpp">
       <Filter>Source Files\DoNotInclude\Main</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSInstance.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSInstanceCreationData.cpp">
-      <Filter>Source Files\Include\Instance</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSInstance\VSInstanceIpch.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSInstance\VSDebugCallback.cpp">
@@ -1080,9 +1074,6 @@
       <Filter>Source Files\DoNotInclude\Instance</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSInstance\VSInstanceInternal.cpp">
-      <Filter>Source Files\DoNotInclude\Instance</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSInstance\VSInstanceNIpch.cpp">
       <Filter>Source Files\DoNotInclude\Instance</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSCommon\VSBool64.cpp">
@@ -1100,9 +1091,6 @@
     <ClCompile Include="Include\VSDevice\VSDeviceMain.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSDevice\VSDeviceIpch.cpp">
-      <Filter>Source Files\Include\Device</Filter>
-    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSDeviceCore.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
@@ -1110,9 +1098,6 @@
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSDeviceMainInternal.cpp">
-      <Filter>Source Files\DoNotInclude\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSDevice\VSDeviceNIpch.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSDeviceExtensionPacksList.cpp">
@@ -1127,7 +1112,7 @@
     <ClCompile Include="Include\VSInstance\VSDeviceSwapchainSupportData.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VSInstance\VSDeviceVulkan10Features.cpp">
+    <ClCompile Include="Include\VSInstance\VSDeviceVulkan10FeatureFlags.cpp">
       <Filter>Source Files\Include\Instance</Filter>
     </ClCompile>
     <ClCompile Include="Include\VSInstance\VSDeviceVulkan10Limits.cpp">
@@ -1223,9 +1208,6 @@
     <ClCompile Include="DoNotInclude\VSDevice\VSAutoCleanupRenderPass.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VSCommon\VSCommonNIpch.cpp">
-      <Filter>Source Files\DoNotInclude\Common</Filter>
-    </ClCompile>
     <ClCompile Include="Include\VSDevice\VSArbitraryShaderID.cpp">
       <Filter>Source Files\Include\Device</Filter>
     </ClCompile>
@@ -1303,12 +1285,6 @@
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSSharedData\VSSharedDataMainListInternal.cpp">
       <Filter>Source Files\DoNotInclude\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedNIpch.cpp">
-      <Filter>Source Files\DoNotInclude\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\VSSharedData\VSSharedIpch.cpp">
-      <Filter>Source Files\Include\Shared</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VSDevice\VSSuballocationInternalData.cpp">
       <Filter>Source Files\DoNotInclude\Device</Filter>
@@ -1600,6 +1576,42 @@
     </ClCompile>
     <ClCompile Include="Include\VSSharedData\VSSharedDescriptorDataListCapacities.cpp">
       <Filter>Source Files\Include\Shared\DescriptorData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSMain\EventHandler\SdlEhNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Main\EventHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\EventHandler\SdlEhIpch.cpp">
+      <Filter>Source Files\Include\Main\EventHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSMain\VSMainIpch.cpp">
+      <Filter>Source Files\Include\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSMain\VSMainNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSCommon\VsCommonIpch.cpp">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSCommon\VSCommonNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSDevice\VSDeviceIpch.cpp">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSDevice\VSDeviceNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSInstance\VSInstanceIpch.cpp">
+      <Filter>Source Files\Include\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSInstance\VSInstanceNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VSSharedData\VSSharedIpch.cpp">
+      <Filter>Source Files\Include\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\VSSharedData\VSSharedNIpch.cpp">
+      <Filter>Source Files\DoNotInclude\Shared</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

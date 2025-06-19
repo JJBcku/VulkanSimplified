@@ -1,3 +1,4 @@
+#include "VSSharedNIpch.h"
 #include "VSSharedDataMainListInternal.h"
 
 #include "../../Include/VSSharedData/VSSharedDataListsCapacities.h"

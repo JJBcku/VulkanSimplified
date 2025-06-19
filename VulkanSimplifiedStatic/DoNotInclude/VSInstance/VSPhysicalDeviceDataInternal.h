@@ -10,8 +10,13 @@
 
 #include <optional>
 #include <vector>
+#include <vulkan/vulkan_core.h>
 
 typedef struct VkPhysicalDevice_T* VkPhysicalDevice;
+typedef struct VkSurfaceKHR_T* VkSurfaceKHR;
+
+struct VkPhysicalDeviceFeatures;
+struct VkPhysicalDeviceLimits;
 
 namespace VulkanSimplifiedInternal
 {
