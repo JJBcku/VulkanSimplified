@@ -5,6 +5,8 @@
 #include "../VSCommon/VSAccessFlagsDef.h"
 #include "../VSCommon/VSDataBuffersGenericID.h"
 
+#include <optional>
+
 namespace VulkanSimplified
 {
 	struct DataBuffersMemoryBarrierData

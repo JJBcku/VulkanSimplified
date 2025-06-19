@@ -2,6 +2,9 @@
 
 #include "VSCommandPoolQFGroupListDef.h"
 
+#include <optional>
+#include <vector>
+
 namespace VulkanSimplifiedInternal
 {
 	class CommandPoolQFGroupListInternal;

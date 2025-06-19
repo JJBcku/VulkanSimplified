@@ -5,6 +5,9 @@
 #include "VSWindowListDef.h"
 #include "VSNIRCommandPoolDef.h"
 
+#include <vector>
+#include <stdint.h>
+
 namespace VulkanSimplifiedInternal
 {
 	class NIRCommandPoolInternal;

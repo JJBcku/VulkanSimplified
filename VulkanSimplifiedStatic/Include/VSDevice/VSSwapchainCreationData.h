@@ -3,6 +3,9 @@
 #include "../VSCommon/VSSurfacePresentModes.h"
 #include "../VSCommon/VSDataFormatFlags.h"
 
+#include <vector>
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	struct SwapchainCreationData

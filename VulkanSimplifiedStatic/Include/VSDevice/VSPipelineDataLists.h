@@ -4,6 +4,8 @@
 
 #include "VSPipelineDataListsDef.h"
 
+#include <vector>
+
 namespace VulkanSimplifiedInternal
 {
 	class PipelineDataListsInternal;

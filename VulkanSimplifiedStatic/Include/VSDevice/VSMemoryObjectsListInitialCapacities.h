@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 namespace VulkanSimplified
 {
 	struct MemoryObjectsListInitialCapacities

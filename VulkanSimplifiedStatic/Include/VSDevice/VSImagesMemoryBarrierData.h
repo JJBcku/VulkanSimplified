@@ -6,6 +6,8 @@
 #include "../VSCommon/VSImageLayoutFlagsDef.h"
 #include "../VSCommon/VSImagesGenericID.h"
 
+#include <optional>
+
 namespace VulkanSimplified
 {
 	struct ImagesMemoryBarrierData

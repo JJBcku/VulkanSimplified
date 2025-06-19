@@ -1,14 +1,13 @@
 #include "VSDeviceIpch.h"
 #include "VSMemoryObjectsListInitialCapacities.h"
 
+#include <memory>
+
 namespace VulkanSimplified
 {
 	MemoryObjectsListInitialCapacities::MemoryObjectsListInitialCapacities()
 	{
-		for (size_t i = 0; i < initialCapacities.size(); ++i)
-		{
-			initialCapacities[i] = 0;
-		}
+		std::memset(initialCapacities.data(), 0, initialCapacities.size() * sizeof(initialCapacities[0]));
 	}
 
 	MemoryObjectsListInitialCapacities::~MemoryObjectsListInitialCapacities()

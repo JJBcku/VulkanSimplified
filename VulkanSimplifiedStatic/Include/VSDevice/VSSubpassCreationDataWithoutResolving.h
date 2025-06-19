@@ -4,6 +4,9 @@
 
 #include <CustomLists/IDObject.h>
 
+#include <vector>
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	struct SubpassCreationDataWithoutResolving

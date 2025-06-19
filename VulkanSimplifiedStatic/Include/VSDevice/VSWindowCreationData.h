@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdint.h>
+#include <string>
+
 namespace VulkanSimplified
 {
 	enum class WindowSettings : uint64_t

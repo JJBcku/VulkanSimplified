@@ -2,6 +2,9 @@
 
 #include <CustomLists/IDObjectDef.h>
 
+#include <utility>
+#include <vector>
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupDescriptorSetLayout;

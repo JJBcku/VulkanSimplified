@@ -7,6 +7,10 @@
 
 #include "../VSCommon/VSImageLayoutFlags.h"
 
+#include <optional>
+#include <utility>
+#include <vector>
+
 namespace VulkanSimplified
 {
 	typedef std::optional<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture>, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>> Optional2DTextureView;

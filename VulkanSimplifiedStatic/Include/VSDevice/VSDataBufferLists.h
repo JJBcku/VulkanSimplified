@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "VSDataBufferListsDef.h"
 
 #include "../VSCommon/VSMemorySizeDef.h"

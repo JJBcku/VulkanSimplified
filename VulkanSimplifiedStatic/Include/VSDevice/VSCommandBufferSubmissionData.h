@@ -1,10 +1,12 @@
 #pragma once
 
-#include <CustomLists/IDObjectDef.h>
-
 #include "../VSCommon/VSPipelineStageFlags.h"
 
 #include "VSCommandBufferGenericID.h"
+
+#include <CustomLists/IDObjectDef.h>
+#include <vector>
+#include <utility>
 
 namespace VulkanSimplifiedInternal
 {

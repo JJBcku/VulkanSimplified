@@ -4,6 +4,10 @@
 
 #include "VSArbitraryShaderID.h"
 
+#include <stdint.h>
+#include <vector>
+#include <optional>
+
 namespace VulkanSimplifiedInternal
 {
 	struct ShaderStageData;

@@ -9,6 +9,10 @@
 #include "VSRenderPassDataListDef.h"
 #include "VSMultitypeImagesIDDef.h"
 
+#include <stdint.h>
+#include <vector>
+#include <optional>
+
 namespace VulkanSimplifiedInternal
 {
 	class ImageDataListsInternal;

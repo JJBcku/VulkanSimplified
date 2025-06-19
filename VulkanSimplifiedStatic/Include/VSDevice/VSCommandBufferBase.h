@@ -15,6 +15,11 @@
 #include "../VSCommon/VSPipelineStageFlagsDef.h"
 #include "../VSCommon/VSMemorySizeDef.h"
 
+#include <optional>
+#include <vector>
+#include <utility>
+#include <stdint.h>
+
 namespace VulkanSimplifiedInternal
 {
 	class CommandBufferBaseInternal;

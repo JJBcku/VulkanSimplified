@@ -2,6 +2,8 @@
 
 #include <CustomLists/IDObjectDef.h>
 
+#include <memory>
+
 namespace VulkanSimplifiedInternal
 {
 	class PrimaryIRCommandBufferInternal;

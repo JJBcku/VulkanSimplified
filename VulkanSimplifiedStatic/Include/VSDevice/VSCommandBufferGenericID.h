@@ -6,6 +6,9 @@
 #include "VSNIRCommandPoolDef.h"
 #include "VSIRCommandPoolDef.h"
 
+#include <memory>
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	enum class CommandBufferIDType : uint64_t

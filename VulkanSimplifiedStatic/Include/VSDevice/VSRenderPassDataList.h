@@ -4,6 +4,8 @@
 
 #include "VSRenderPassDataListDef.h"
 
+#include <vector>
+
 namespace VulkanSimplifiedInternal
 {
 	class RenderPassListInternal;

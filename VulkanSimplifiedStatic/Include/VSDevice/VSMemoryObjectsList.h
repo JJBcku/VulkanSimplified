@@ -4,6 +4,11 @@
 
 #include "VSMemoryObjectsListDef.h"
 
+#include <limits>
+#include <stdint.h>
+#include <vector>
+#include <optional>
+
 namespace VulkanSimplifiedInternal
 {
 	class MemoryObjectsListInternal;

@@ -4,6 +4,10 @@
 
 #include "VSSynchronizationDataListsDef.h"
 
+#include <vector>
+#include <stdint.h>
+#include <limits>
+
 namespace VulkanSimplifiedInternal
 {
 	class SynchronizationDataListsInternal;

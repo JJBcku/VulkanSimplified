@@ -1,6 +1,8 @@
 #pragma once
 
-#include <CustomLists\IDObjectDef.h>
+#include <CustomLists/IDObject.h>
+
+#include <optional>
 
 namespace VulkanSimplifiedInternal
 {

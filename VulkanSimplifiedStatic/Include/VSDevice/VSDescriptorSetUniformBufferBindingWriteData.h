@@ -5,6 +5,9 @@
 #include "VSDescriptorDataListDef.h"
 #include "VSDataBufferListsDef.h"
 
+#include <vector>
+#include <optional>
+
 namespace VulkanSimplified
 {
 	struct DescriptorSetUniformBufferBindingWriteData
