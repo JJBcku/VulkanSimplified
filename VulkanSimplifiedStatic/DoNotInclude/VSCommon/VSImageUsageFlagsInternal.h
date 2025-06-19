@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../../Include/VSCommon/VSImageUsageFlagsDef.h"
+#include "../../Include/VSCommon/VSImageUsageFlags.h"
+
+#include <stdint.h>
+#include <vulkan/vulkan_core.h>
 
 namespace VulkanSimplifiedInternal
 {

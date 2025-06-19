@@ -2,6 +2,6 @@
 
 #include "VSCommonNIframework.h"
 
-#include <vulkan/vulkan.hpp>
+#include <vulkan/vulkan_core.h>
 
 #include <stdint.h>

@@ -1,8 +1,6 @@
 #include "VSCommonNIpch.h"
 #include "VSImageUsageFlagsInternal.h"
 
-#include "../../Include/VSCommon/VSImageUsageFlags.h"
-
 namespace VulkanSimplifiedInternal
 {
 	VkImageUsageFlags TranslateImageUsage(VulkanSimplified::ImageUsageFlags usageFlags)
