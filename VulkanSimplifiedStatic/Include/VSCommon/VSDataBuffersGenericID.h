@@ -4,6 +4,8 @@
 
 #include "../VSDevice/VSDataBufferListsDef.h"
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	enum class DataBuffersIDType : uint64_t

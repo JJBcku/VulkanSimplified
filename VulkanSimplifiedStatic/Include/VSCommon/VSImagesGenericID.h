@@ -4,9 +4,12 @@
 
 #include "../VSDevice/VSImageDataListsDef.h"
 
+#include <optional>
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
-	enum class ImagesIDType
+	enum class ImagesIDType : uint64_t
 	{
 		UNKNOWN = 0,
 		COLOR_RENDER_TARGET = 1,

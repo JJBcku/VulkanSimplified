@@ -2,12 +2,14 @@
 
 #include "VSMemoryHeapData.h"
 
+#include <array>
+
 namespace VulkanSimplified
 {
 	struct MemoryDataList
 	{
 		size_t heapAmount;
-		std::array<MemoryHeapData, VK_MAX_MEMORY_HEAPS> memoryHeaps;
+		std::array<MemoryHeapData, 16> memoryHeaps;
 
 		MemoryDataList();
 	};

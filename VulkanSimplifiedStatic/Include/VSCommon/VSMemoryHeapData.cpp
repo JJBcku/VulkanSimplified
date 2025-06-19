@@ -9,5 +9,6 @@ namespace VulkanSimplified
 		properties = std::numeric_limits<MemoryHeapProperties>::max();
 
 		memoryTypeAmount = 0;
+		std::memset(memoryTypes.data(), 0, sizeof(memoryTypes[0]) * memoryTypes.size());
 	}
 }

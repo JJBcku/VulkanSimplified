@@ -2,6 +2,8 @@
 
 #include "VSMemoryTypePropertiesDef.h"
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	struct MemoryTypeData

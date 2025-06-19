@@ -1,7 +1,10 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
-	enum class RenderPassAttachmentLoadOP : uint64_t;
-	enum class RenderPassAttachmentStoreOP : uint64_t;
+	typedef uint64_t RenderPassAttachmentOP;
+	enum class RenderPassAttachmentLoadOP : RenderPassAttachmentOP;
+	enum class RenderPassAttachmentStoreOP : RenderPassAttachmentOP;
 }

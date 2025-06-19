@@ -2,6 +2,8 @@
 
 #include <CustomLists\IDObjectDef.h>
 
+#include <utility>
+
 namespace VulkanSimplifiedInternal
 {
 	class MemoryAllocationData;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VSCompareOperationsTypeDef.h"
+
 namespace VulkanSimplified
 {
 	enum class CompareOperationsType : uint64_t

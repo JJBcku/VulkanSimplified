@@ -4,6 +4,5 @@
 
 namespace VulkanSimplified
 {
-	typedef uint64_t Bool64;
-	enum Bool64Values : Bool64;
+	enum class CompareOperationsType : uint64_t;
 }

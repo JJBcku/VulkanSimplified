@@ -1,6 +1,8 @@
 #include "VSCommonIpch.h"
 #include "VSVersionData.h"
 
+#include <vulkan/vulkan_core.h>
+
 namespace VulkanSimplified
 {
 	VersionData::VersionData(uint16_t variant, uint16_t major, uint16_t minor, uint16_t patch)

@@ -4,6 +4,8 @@
 #include "VSMemoryHeapProperties.h"
 #include "VSMemoryTypeData.h"
 
+#include <array>
+
 namespace VulkanSimplified
 {
 	struct MemoryHeapData
@@ -12,7 +14,7 @@ namespace VulkanSimplified
 		MemoryHeapProperties properties;
 
 		size_t memoryTypeAmount;
-		std::array<MemoryTypeData, VK_MAX_MEMORY_TYPES> memoryTypes;
+		std::array<MemoryTypeData, 32> memoryTypes;
 
 		MemoryHeapData();
 	};
