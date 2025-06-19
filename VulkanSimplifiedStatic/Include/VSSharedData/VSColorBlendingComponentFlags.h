@@ -1,9 +1,9 @@
 #pragma once
 
+#include "VSColorBlendingComponentFlagsDef.h"
+
 namespace VulkanSimplified
 {
-	typedef uint64_t ColorBlendingComponentFlags;
-
 	enum ColorBlendingComponentBits : ColorBlendingComponentFlags
 	{
 		COLOR_COMPONENT_R = 0x1,

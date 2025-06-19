@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VSColorBlendingPresetDef.h"
+
 namespace VulkanSimplified
 {
 	enum class ColorBlendingPreset : uint64_t

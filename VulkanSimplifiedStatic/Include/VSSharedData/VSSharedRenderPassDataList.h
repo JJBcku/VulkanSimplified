@@ -10,6 +10,9 @@
 
 #include "VSSharedRenderPassDataListDef.h"
 
+#include <stdint.h>
+#include <limits>
+
 namespace VulkanSimplifiedInternal
 {
 	class SharedRenderPassDataListInternal;

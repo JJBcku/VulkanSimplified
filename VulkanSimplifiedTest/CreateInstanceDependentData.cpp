@@ -16,7 +16,7 @@
 
 #include <VSPhysicalDeviceData.h>
 #include <VSDeviceVulkan10Properties.h>
-#include <VSDeviceVulkan10Features.h>
+#include <VSDeviceVulkan10FeatureFlags.h>
 #include <VSDeviceExtensionPacksList.h>
 #include <VSDeviceQueueFamilyData.h>
 #include <VSLogicalDeviceCreateInfo.h>

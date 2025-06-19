@@ -4,6 +4,11 @@
 
 #include "VSSharedPipelineDataListsDef.h"
 
+#include <vector>
+#include <stdint.h>
+#include <string>
+#include <optional>
+
 namespace VulkanSimplifiedInternal
 {
 	class SharedPipelineDataListInternal;
