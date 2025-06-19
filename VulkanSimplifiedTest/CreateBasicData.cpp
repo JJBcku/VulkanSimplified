@@ -28,7 +28,8 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 	
 	VulkanSimplified::MainInitData basicInit;
 	basicInit.engineVersion.SetVulkanPatchVersion(0);
-	basicInit.engineVersion.SetVulkanMinorVersion(2);
+	basicInit.engineVersion.SetVulkanMinorVersion(0);
+	basicInit.engineVersion.SetVulkanMajorVersion(1);
 
 	basicInit.appVersion = basicInit.engineVersion;
 
