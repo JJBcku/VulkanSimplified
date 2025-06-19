@@ -1,8 +1,6 @@
 #pragma once
 
-#include "VSSharedDescriptorDataListInternal.h"
-#include "VSSharedRenderPassDataInternal.h"
-#include "VSSharedPipelineDataListsInternal.h"
+#include <memory>
 
 namespace VulkanSimplified
 {
@@ -11,6 +9,10 @@ namespace VulkanSimplified
 
 namespace VulkanSimplifiedInternal
 {
+	class SharedDescriptorDataListInternal;
+	class SharedRenderPassDataListInternal;
+	class SharedPipelineDataListInternal;
+
 	class SharedDataMainListInternal
 	{
 	public:
@@ -26,8 +28,8 @@ namespace VulkanSimplifiedInternal
 		const SharedPipelineDataListInternal& GetPipelineDataList() const;
 
 	private:
-		SharedDescriptorDataListInternal _descriptorData;
-		SharedRenderPassDataListInternal _renderPassData;
-		SharedPipelineDataListInternal _pipelineData;
+		std::unique_ptr<SharedDescriptorDataListInternal> _descriptorData;
+		std::unique_ptr<SharedRenderPassDataListInternal> _renderPassData;
+		std::unique_ptr<SharedPipelineDataListInternal> _pipelineData;
 	};
 }

@@ -8,6 +8,17 @@
 #include "../../Include/VSCommon/VSPipelineStageFlagsDef.h"
 #include "../../Include/VSCommon/VSRenderPassAttachmentOPDef.h"
 
+#include <vector>
+#include <utility>
+#include <stdint.h>
+
+union VkClearValue;
+struct VkAttachmentDescription;
+struct VkAttachmentReference;
+struct VkSubpassDependency;
+
+typedef uint32_t VkAccessFlags;
+
 namespace VulkanSimplified
 {
 	struct SharedRenderPassDataListsCapacities;

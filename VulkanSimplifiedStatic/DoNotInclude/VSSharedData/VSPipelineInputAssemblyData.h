@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vulkan/vulkan_core.h>
+#include <compare>
+
 namespace VulkanSimplifiedInternal
 {
 	struct PipelineInputAssemblyData

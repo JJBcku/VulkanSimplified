@@ -2,6 +2,11 @@
 
 #include <CustomLists/IDObject.h>
 
+#include <vulkan/vulkan_core.h>
+#include <vector>
+#include <stdint.h>
+#include <compare>
+
 namespace VulkanSimplifiedInternal
 {
 	struct VertexAttributeDescriptionData;

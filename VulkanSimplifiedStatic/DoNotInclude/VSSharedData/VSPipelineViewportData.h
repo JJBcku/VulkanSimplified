@@ -1,5 +1,7 @@
 #pragma once
 
+#include <compare>
+
 namespace VulkanSimplifiedInternal
 {
 	struct PipelineViewportData

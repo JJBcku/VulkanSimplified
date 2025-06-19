@@ -7,6 +7,10 @@
 #include "../../Include/VSCommon/VSImageSampleFlagsDef.h"
 #include "../../Include/VSCommon/VSShaderTypeFlagsDef.h"
 
+#include <string>
+#include <vector>
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	struct SharedPipelineDataListsssCapacities;

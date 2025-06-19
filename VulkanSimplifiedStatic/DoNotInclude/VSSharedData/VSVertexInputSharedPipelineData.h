@@ -2,6 +2,9 @@
 
 #include <CustomLists/IDObject.h>
 
+#include <vector>
+#include <compare>
+
 namespace VulkanSimplifiedInternal
 {
 	struct VertexBindingDescriptionData;

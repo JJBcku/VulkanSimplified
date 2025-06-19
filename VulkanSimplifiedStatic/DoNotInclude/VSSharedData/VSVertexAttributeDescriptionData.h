@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vulkan/vulkan_core.h>
+#include <stdint.h>
+#include <compare>
+
 namespace VulkanSimplifiedInternal
 {
 	struct VertexAttributeDescriptionData

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vulkan/vulkan_core.h>
+#include <compare>
+#include <stdint.h>
+
 namespace VulkanSimplifiedInternal
 {
 	struct PipelineRasterizationData

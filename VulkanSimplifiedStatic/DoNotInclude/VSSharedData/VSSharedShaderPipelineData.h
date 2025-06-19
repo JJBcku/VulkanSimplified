@@ -1,5 +1,10 @@
 #pragma once
 
+#include <vulkan/vulkan_core.h>
+#include <stdint.h>
+#include <string>
+#include <compare>
+
 namespace VulkanSimplifiedInternal
 {
 	struct SharedShaderPipelineData

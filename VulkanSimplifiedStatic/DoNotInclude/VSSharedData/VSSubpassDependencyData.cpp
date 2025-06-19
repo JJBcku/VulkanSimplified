@@ -9,7 +9,7 @@ namespace VulkanSimplifiedInternal
 		dstSubpass = static_cast<uint32_t>(std::numeric_limits<int32_t>::max());
 		srcStageFlags = 0;
 		dstStageFlags = 0;
-		srcAccessFlags = 0;
-		dstAccessFlags = 0;
+		srcAccessFlags = VK_ACCESS_FLAG_BITS_MAX_ENUM;
+		dstAccessFlags = VK_ACCESS_FLAG_BITS_MAX_ENUM;
 	}
 }

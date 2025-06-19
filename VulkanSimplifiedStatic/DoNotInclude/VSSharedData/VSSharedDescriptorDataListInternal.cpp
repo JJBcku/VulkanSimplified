@@ -6,6 +6,8 @@
 #include "../../Include/VSCommon/VSDescriptorTypeFlags.h"
 #include "../../Include/VSCommon/VSShaderTypeFlags.h"
 
+#include "VSDescriptorSetLayoutBindingData.h"
+
 namespace VulkanSimplifiedInternal
 {
 	SharedDescriptorDataListInternal::SharedDescriptorDataListInternal(const VulkanSimplified::SharedDescriptorDataListCapacities& initalCapacities) :

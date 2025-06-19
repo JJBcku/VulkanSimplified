@@ -1,5 +1,8 @@
 #pragma once
 
+#include <compare>
+#include <stdint.h>
+
 namespace VulkanSimplifiedInternal
 {
 	struct RenderPassDoubleColorClearValues

@@ -2,10 +2,13 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
-#include "VSDescriptorSetLayoutBindingData.h"
-
 #include "../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
 #include "../../Include/VSCommon/VSShaderTypeFlagsDef.h"
+
+#include <stdint.h>
+#include <vector>
+
+struct VkDescriptorSetLayoutBinding;
 
 namespace VulkanSimplified
 {
@@ -14,6 +17,8 @@ namespace VulkanSimplified
 
 namespace VulkanSimplifiedInternal
 {
+	struct DescriptorSetLayoutBindingData;
+
 	class SharedDescriptorDataListInternal
 	{
 	public:

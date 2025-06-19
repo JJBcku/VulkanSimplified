@@ -1,12 +1,17 @@
-#include "VSSharedNIpch.h"
 #include "VSSharedDataMainListInternal.h"
 
 #include "../../Include/VSSharedData/VSSharedDataListsCapacities.h"
 
+#include "VSSharedDescriptorDataListInternal.h"
+#include "VSSharedRenderPassDataInternal.h"
+#include "VSSharedPipelineDataListsInternal.h"
+
 namespace VulkanSimplifiedInternal
 {
 	SharedDataMainListInternal::SharedDataMainListInternal(const VulkanSimplified::SharedDataListsCapacities& initialCapabilities) :
-		_descriptorData(initialCapabilities.descriptorLists), _renderPassData(initialCapabilities.renderPassLists), _pipelineData(initialCapabilities.pipelineLists)
+		_descriptorData(std::make_unique<SharedDescriptorDataListInternal>(initialCapabilities.descriptorLists)),
+		_renderPassData(std::make_unique<SharedRenderPassDataListInternal>(initialCapabilities.renderPassLists)),
+		_pipelineData(std::make_unique<SharedPipelineDataListInternal>(initialCapabilities.pipelineLists))
 	{
 	}
 
@@ -16,32 +21,32 @@ namespace VulkanSimplifiedInternal
 
 	SharedDescriptorDataListInternal& SharedDataMainListInternal::GetSharedDescriptorDataList()
 	{
-		return _descriptorData;
+		return *_descriptorData;
 	}
 
 	SharedRenderPassDataListInternal& SharedDataMainListInternal::GetSharedRenderPassDataList()
 	{
-		return _renderPassData;
+		return *_renderPassData;
 	}
 
 	SharedPipelineDataListInternal& SharedDataMainListInternal::GetPipelineDataList()
 	{
-		return _pipelineData;
+		return *_pipelineData;
 	}
 
 	const SharedDescriptorDataListInternal& SharedDataMainListInternal::GetSharedDescriptorDataList() const
 	{
-		return _descriptorData;
+		return *_descriptorData;
 	}
 
 	const SharedRenderPassDataListInternal& SharedDataMainListInternal::GetSharedRenderPassDataList() const
 	{
-		return _renderPassData;
+		return *_renderPassData;
 	}
 
 	const SharedPipelineDataListInternal& SharedDataMainListInternal::GetPipelineDataList() const
 	{
-		return _pipelineData;
+		return *_pipelineData;
 	}
 
 }
