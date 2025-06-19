@@ -8,3 +8,8 @@
 
 #include <stdint.h>
 #include <optional>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <stdexcept>
+#include <algorithm>

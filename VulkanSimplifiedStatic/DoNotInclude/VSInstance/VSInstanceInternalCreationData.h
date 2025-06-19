@@ -3,6 +3,10 @@
 #include "../../Include/VSMain/VSInstanceExtensionPacksList.h"
 #include "../../Include/VSMain/VSInstanceLayerPacksList.h"
 
+#include <string>
+#include <stdint.h>
+#include <vector>
+
 namespace VulkanSimplifiedInternal
 {
 	struct InstanceInternalCreationData

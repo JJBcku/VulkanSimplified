@@ -5,6 +5,7 @@
 #include "VSDebugCallback.h"
 
 #include "VSPhysicalDeviceDataInternal.h"
+#include "../VSDevice/VSDeviceMainInternal.h"
 
 #include "../../Include/VSInstance/VSLogicalDeviceCreateInfo.h"
 #include "VsLogicalDeviceInternalCreationData.h"
@@ -170,8 +171,8 @@ namespace VulkanSimplifiedInternal
 
 	DeviceMainInternal& InstanceInternal::GetChoosenDevicesMainClass()
 	{
-		if (_usedDevice.has_value())
-			return _usedDevice.value();
+		if (_usedDevice)
+			return *_usedDevice;
 		else
 			throw std::runtime_error("InstanceInternal::GetChoosenDevicesMainClass Error: Program tried to access a non-existent logical devices main class!");
 	}
@@ -186,15 +187,15 @@ namespace VulkanSimplifiedInternal
 
 	const DeviceMainInternal& InstanceInternal::GetChoosenDevicesMainClass() const
 	{
-		if (_usedDevice.has_value())
-			return _usedDevice.value();
+		if (_usedDevice)
+			return *_usedDevice;
 		else
 			throw std::runtime_error("InstanceInternal::GetChoosenDevicesMainClass Const Error: Program tried to access a non-existent logical devices main class!");
 	}
 
 	void InstanceInternal::CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities)
 	{
-		if (_usedDevice.has_value())
+		if (_usedDevice)
 			throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Program support only up to one logical device at one time!");
 
 		if (creationData.physicalGPUIndex >= _availableDevices.size())
@@ -262,7 +263,7 @@ namespace VulkanSimplifiedInternal
 		internalCreationData.vulkan10EnabledFeatures = creationData.vulkan10EnabledFeatures;
 		internalCreationData.requestedExtensionPacks = creationData.requestedExtensionPacks;
 
-		_usedDevice.emplace(_eventHandler, _sharedDataMain, _instance, internalCreationData, physicalDeviceData, initialCapacities);
+		_usedDevice = std::make_unique<DeviceMainInternal>(_eventHandler, _sharedDataMain, _instance, internalCreationData, physicalDeviceData, initialCapacities);
 	}
 
 }

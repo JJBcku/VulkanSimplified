@@ -4,9 +4,14 @@
 #include "../../Include/VSInstance/VSDeviceQueueFamilyData.h"
 #include "../../Include/VSInstance/VSDevicesSupportedFormats.h"
 #include "../../Include/VSInstance/VSDeviceExtensionPacksList.h"
-#include "../../Include/VSInstance/VSDeviceVulkan10Features.h"
+#include "../../Include/VSInstance/VSDeviceVulkan10FeatureFlagsDef.h"
 #include "../../Include/VSInstance/VSDeviceSwapchainSupportData.h"
 #include "../../Include/VSCommon/VSMemoryData.h"
+
+#include <optional>
+#include <vector>
+
+typedef struct VkPhysicalDevice_T* VkPhysicalDevice;
 
 namespace VulkanSimplifiedInternal
 {

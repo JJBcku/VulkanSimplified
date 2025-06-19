@@ -3,7 +3,13 @@
 #include "../../Include/VSMain/VSInstanceExtensionPacksList.h"
 #include "../../Include/VSMain/VSInstanceLayerPacksList.h"
 
-#include "../VSDevice/VSDeviceMainInternal.h"
+#include <string>
+#include <stdint.h>
+#include <vector>
+#include <memory>
+
+typedef struct VkInstance_T* VkInstance;
+typedef struct VkDebugUtilsMessengerEXT_T* VkDebugUtilsMessengerEXT;
 
 namespace VulkanSimplified
 {
@@ -15,9 +21,11 @@ namespace VulkanSimplifiedInternal
 {
 	struct InstanceInternalCreationData;
 
-	class PhysicalDeviceDataInternal;
 	class SharedDataMainListInternal;
 	class SdlEventHandlerInternal;
+
+	class PhysicalDeviceDataInternal;
+	class DeviceMainInternal;
 
 	class InstanceInternal
 	{
@@ -60,7 +68,7 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<PhysicalDeviceDataInternal> _availableDevices;
 
-		std::optional<DeviceMainInternal> _usedDevice;
+		std::unique_ptr<DeviceMainInternal> _usedDevice;
 
 		void EnumerateDevices();
 	};

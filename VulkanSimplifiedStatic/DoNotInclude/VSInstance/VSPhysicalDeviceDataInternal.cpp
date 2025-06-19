@@ -3,8 +3,11 @@
 
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
 #include "../VSCommon/VSCStringsComparison.h"
+
 #include "../../Include/VSCommon/VSImageUsageFlags.h"
 #include "../../Include/VSCommon/VSSurfacePresentModes.h"
+
+#include "../../Include/VSInstance/VSDeviceVulkan10FeatureFlags.h"
 
 namespace VulkanSimplifiedInternal
 {
