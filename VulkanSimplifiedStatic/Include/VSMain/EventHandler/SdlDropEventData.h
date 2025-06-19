@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	enum class SdlDropEventType : uint32_t

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
     enum SdlWindowEventID : uint8_t

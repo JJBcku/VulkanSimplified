@@ -1,8 +1,6 @@
 #include "SdlEhIpch.h"
 #include "SdlEventHandler.h"
 
-#include <functional>
-
 #include "../../../DoNotInclude/VSMain/EventHandler/SdlEventHandlerInternal.h"
 
 #include "CustomLists/IDObject.h"

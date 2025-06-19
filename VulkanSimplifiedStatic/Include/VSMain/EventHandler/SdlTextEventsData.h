@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
     constexpr uint32_t SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE = 32;

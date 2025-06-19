@@ -4,5 +4,5 @@
 
 #include <stdint.h>
 #include <stdexcept>
-
-#include <SDL2/SDL_events.h>
+#include <limits>
+#include <functional>

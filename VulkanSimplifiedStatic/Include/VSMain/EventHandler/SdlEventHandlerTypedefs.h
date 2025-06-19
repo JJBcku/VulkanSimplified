@@ -1,13 +1,6 @@
 #pragma once
 
-namespace std
-{
-	template<class T>
-	class function;
-
-	template<class T, class Y>
-	struct pair;
-}
+#include <functional>
 
 namespace VulkanSimplified
 {

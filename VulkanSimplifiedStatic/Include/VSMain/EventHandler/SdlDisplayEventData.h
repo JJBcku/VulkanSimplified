@@ -1,6 +1,6 @@
 #pragma once
 
-struct SDL_DisplayEvent;
+#include <stdint.h>
 
 namespace VulkanSimplified
 {

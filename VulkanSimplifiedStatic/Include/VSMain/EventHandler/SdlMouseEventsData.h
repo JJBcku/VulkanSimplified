@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdint.h>
+#include <limits>
+
 namespace VulkanSimplified
 {
     enum SdlMouseButtonIndex : uint8_t
