@@ -3,14 +3,20 @@
 
 #include "../../Include/VSMain/VSMainInitData.h"
 
+#include "EventHandler/SdlEventHandlerInternal.h"
+
 #include "../VSInstance/VSInstanceInternalCreationData.h"
 #include "../../Include/VSInstance/VSInstanceCreationData.h"
+
+#include "../VSSharedData/VSSharedDataMainListInternal.h"
+#include "../VSInstance/VSInstanceInternal.h"
 
 #include "../VSCommon/VSCStringsComparison.h"
 
 namespace VulkanSimplifiedInternal
 {
-	MainInternal::MainInternal(const VulkanSimplified::MainInitData& initData) : _eventHandler(initData.eventHandlerData),  _sharedData(initData.sharedDataCapabilities)
+	MainInternal::MainInternal(const VulkanSimplified::MainInitData& initData) : _eventHandler(std::make_unique<SdlEventHandlerInternal>(initData.eventHandlerData)),
+		_sharedData(std::make_unique<SharedDataMainListInternal>(initData.sharedDataCapabilities))
 	{
 		int result = SDL_Init(SDL_INIT_VIDEO);
 
@@ -60,7 +66,7 @@ namespace VulkanSimplifiedInternal
 
 	void MainInternal::CreateInstance(const VulkanSimplified::InstanceCreationData& instanceInit)
 	{
-		if (_instance.has_value())
+		if (_instance)
 			throw std::runtime_error("MainInternal::CreateInstance Error: Program tried to create the instance class twice!");
 
 		InstanceInternalCreationData init;
@@ -78,39 +84,39 @@ namespace VulkanSimplifiedInternal
 		init.enabledExtensionPacksList = instanceInit.enabledExtensionPacks;
 		init.enabledLayerPacksList = instanceInit.enabledLayerPacks;
 
-		_instance.emplace(_eventHandler, _sharedData, init);
+		_instance = std::make_unique<InstanceInternal>(*_eventHandler, *_sharedData, init);
 	}
 
 	SdlEventHandlerInternal& MainInternal::GetSdlEventHandler()
 	{
-		return _eventHandler;
+		return *_eventHandler;
 	}
 
 	SharedDataMainListInternal& MainInternal::GetSharedDataMainList()
 	{
-		return _sharedData;
+		return *_sharedData;
 	}
 
 	InstanceInternal& MainInternal::GetInstance()
 	{
-		assert(_instance.has_value());
-		return _instance.value();
+		assert(_instance);
+		return *_instance;
 	}
 
 	const SdlEventHandlerInternal& MainInternal::GetSdlEventHandler() const
 	{
-		return _eventHandler;
+		return *_eventHandler;
 	}
 
 	const SharedDataMainListInternal& MainInternal::GetSharedDataMainList() const
 	{
-		return _sharedData;
+		return *_sharedData;
 	}
 
 	const InstanceInternal& MainInternal::GetInstance() const
 	{
-		assert(_instance.has_value());
-		return _instance.value();
+		assert(_instance);
+		return *_instance;
 	}
 
 	VulkanSimplified::VersionData MainInternal::GetAppVersion() const

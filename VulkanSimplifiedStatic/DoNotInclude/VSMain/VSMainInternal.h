@@ -1,15 +1,14 @@
 #pragma once
 
-#include "EventHandler/SdlEventHandlerInternal.h"
-
-#include <string>
-
 #include "../../Include/VSCommon/VSVersionData.h"
 #include "../../Include/VSMain/VSInstanceExtensionPacksList.h"
 #include "../../Include/VSMain/VSInstanceLayerPacksList.h"
 
-#include "../VSSharedData/VSSharedDataMainListInternal.h"
-#include "../VSInstance/VSInstanceInternal.h"
+#include <string>
+#include <optional>
+#include <vector>
+#include <memory>
+#include <stdint.h>
 
 namespace VulkanSimplified
 {
@@ -19,6 +18,8 @@ namespace VulkanSimplified
 
 namespace VulkanSimplifiedInternal
 {
+	class SdlEventHandlerInternal;
+	class SharedDataMainListInternal;
 	class InstanceInternal;
 
 	class MainInternal
@@ -61,9 +62,9 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<const char*> _sdlRequired;
 
-		SdlEventHandlerInternal _eventHandler;
-		SharedDataMainListInternal _sharedData;
-		std::optional<InstanceInternal> _instance;
+		std::unique_ptr<SdlEventHandlerInternal> _eventHandler;
+		std::unique_ptr<SharedDataMainListInternal> _sharedData;
+		std::unique_ptr<InstanceInternal> _instance;
 
 		uint32_t FindMaximumAvailableVulkanVersion() const;
 
