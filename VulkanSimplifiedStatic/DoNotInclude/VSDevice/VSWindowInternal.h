@@ -6,6 +6,14 @@
 
 #include "../../Include/VSMain/EventHandler/SdlEventHandlerTypedefs.h"
 
+struct SDL_Window;
+
+#include <vulkan/vulkan.hpp>
+#include <stdint.h>
+#include <vector>
+#include <string>
+#include <optional>
+
 namespace VulkanSimplified
 {
 	struct WindowCreationData;

@@ -2,6 +2,11 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
+#include <vector>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkRenderPass_T* VkRenderPass;
+
 namespace VulkanSimplified
 {
 	struct RenderPassDataListsInitialCapacities;

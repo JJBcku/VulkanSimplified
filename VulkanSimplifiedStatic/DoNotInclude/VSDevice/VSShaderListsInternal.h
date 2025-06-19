@@ -2,6 +2,9 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkShaderModule_T* VkShaderModule;
+
 namespace VulkanSimplified
 {
 	struct ShaderListsInitialCapacitiesList;

@@ -2,6 +2,12 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
+#include <vector>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkPipelineLayout_T* VkPipelineLayout;
+typedef struct VkPipeline_T* VkPipeline;
+
 namespace VulkanSimplified
 {
 	struct PipelineDataListsInitialCapacities;

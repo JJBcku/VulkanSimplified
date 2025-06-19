@@ -8,6 +8,11 @@
 #include "../../Include/VSCommon/VSMemoryAllocationFullID.h"
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
 
+#include <stdint.h>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkBuffer_T* VkBuffer;
+
 namespace VulkanSimplified
 {
 	struct DataBufferListsInitialCapacities;

@@ -5,6 +5,9 @@
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
 
+#include <vulkan/vulkan.hpp>
+#include <optional>
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupDataBuffer

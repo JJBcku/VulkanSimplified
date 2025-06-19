@@ -7,6 +7,12 @@
 #include "../../Include/VSDevice/VSNIRCommandPoolDef.h"
 #include "../../Include/VSDevice/VSIRCommandPoolDef.h"
 
+#include <optional>
+#include <vector>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkCommandBuffer_T* VkCommandBuffer;
+
 namespace VulkanSimplified
 {
 	struct CommandPoolQFGroupListsInitialCapacities;

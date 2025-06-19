@@ -1,11 +1,15 @@
 #pragma once
 
-#include <CustomLists/UnsortedIDVector.h>
-
 #include "../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
 
 #include "../../Include/VSDevice/VSDescriptorDataListDef.h"
 #include "../../Include/VSDevice/VSImageDataListsDef.h"
+
+#include <CustomLists/UnsortedIDVector.h>
+
+#include <vector>
+#include <utility>
+#include <stdint.h>
 
 namespace VulkanSimplified
 {
@@ -14,6 +18,10 @@ namespace VulkanSimplified
 	struct DescriptorSetUniformBufferBindingWriteData;
 	struct DescriptorSetCombined2DTextureSamplerWriteData;
 }
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkDescriptorSet_T* VkDescriptorSet;
+typedef struct VkDescriptorSetLayout_T* VkDescriptorSetLayout;
 
 namespace VulkanSimplifiedInternal
 {

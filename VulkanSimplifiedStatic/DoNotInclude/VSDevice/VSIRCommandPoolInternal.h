@@ -1,9 +1,15 @@
 #pragma once
 
-#include <CustomLists/UnsortedIDVector.h>
-
 #include "../../Include/VSDevice/VSIRCommandPoolDef.h"
 #include "../../Include/VSDevice/VSWindowListDef.h"
+
+#include <CustomLists/UnsortedIDVector.h>
+#include <memory>
+#include <vector>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkCommandPool_T* VkCommandPool;
+typedef struct VkQueue_T* VkQueue;
 
 namespace VulkanSimplifiedInternal
 {

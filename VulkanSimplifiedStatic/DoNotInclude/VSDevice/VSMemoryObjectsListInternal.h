@@ -7,6 +7,16 @@
 #include "../../Include/VSCommon/VSMemoryTypePropertiesDef.h"
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
 
+#include <vector>
+#include <array>
+#include <optional>
+#include <stdint.h>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkDeviceMemory_T* VkDeviceMemory;
+typedef struct VkImage_T* VkImage;
+typedef struct VkBuffer_T* VkBuffer;
+
 namespace VulkanSimplified
 {
 	struct MemoryObjectsListInitialCapacities;

@@ -8,6 +8,10 @@
 
 #include "../../Include/VSCommon/VSMemoryAllocationFullID.h"
 
+#include <vulkan/vulkan_core.h>
+#include <optional>
+#include <stdint.h>
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupImageView;

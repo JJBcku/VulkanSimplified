@@ -1,5 +1,8 @@
 #pragma once
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkPipeline_T* VkPipeline;
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupGraphicsPipeline

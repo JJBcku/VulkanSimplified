@@ -1,5 +1,8 @@
 #pragma once
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkShaderModule_T* VkShaderModule;
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupShaderModule

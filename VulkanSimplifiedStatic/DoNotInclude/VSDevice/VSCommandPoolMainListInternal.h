@@ -4,6 +4,10 @@
 
 #include "../../Include/VSDevice/VSCommandPoolMainListDef.h"
 
+#include <stdint.h>
+
+typedef struct VkDevice_T* VkDevice;
+
 namespace VulkanSimplified
 {
 	struct CommandPoolMainListInitialCapacity;

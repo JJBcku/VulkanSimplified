@@ -4,6 +4,10 @@
 
 #include "../../Include/VSDevice/VSWindowListDef.h"
 
+typedef struct VkInstance_T* VkInstance;
+typedef struct VkPhysicalDevice_T* VkPhysicalDevice;
+typedef struct VkDevice_T* VkDevice;
+
 namespace VulkanSimplified
 {
 	struct WindowListInitialCapacities;

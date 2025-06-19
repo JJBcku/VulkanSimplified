@@ -1,9 +1,17 @@
 #pragma once
 
-#include "../../Include/VSInstance/VSDeviceVulkan10Features.h"
+#include "../../Include/VSInstance/VSDeviceVulkan10FeatureFlagsDef.h"
 #include "../../Include/VSInstance/VSDeviceExtensionPacksList.h"
 
 #include "../VSInstance/VSPhysicalDeviceDataInternal.h"
+
+#include <stdint.h>
+#include <vector>
+#include <utility>
+
+typedef struct VkInstance_T* VkInstance;
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkQueue_T* VkQueue;
 
 namespace VulkanSimplifiedInternal
 {

@@ -11,6 +11,16 @@
 
 #include "../../Include/VSDevice/VSImageDataListsDef.h"
 
+#include <vulkan/vulkan_core.h>
+#include <stdint.h>
+#include <vector>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkImage_T* VkImage;
+typedef struct VkImageView_T* VkImageView;
+typedef struct VkFramebuffer_T* VkFramebuffer;
+typedef struct VkSampler_T* VkSampler;
+
 namespace VulkanSimplified
 {
 	struct DataFormatSetIndependentID;

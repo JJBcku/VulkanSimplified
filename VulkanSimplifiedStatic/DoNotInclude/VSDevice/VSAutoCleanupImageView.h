@@ -1,5 +1,8 @@
 #pragma once
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkImageView_T* VkImageView;
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupImageView

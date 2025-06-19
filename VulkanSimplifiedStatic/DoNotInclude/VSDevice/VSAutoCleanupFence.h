@@ -1,5 +1,8 @@
 #pragma once
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkFence_T* VkFence;
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupFence

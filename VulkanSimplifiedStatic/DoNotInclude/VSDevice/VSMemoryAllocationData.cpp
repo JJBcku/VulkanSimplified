@@ -1,6 +1,8 @@
 #include "VSDeviceNIpch.h"
 #include "VSMemoryAllocationData.h"
 
+#include "VSSuballocationInternalData.h"
+
 namespace VulkanSimplifiedInternal
 {
 	MemoryAllocationData::MemoryAllocationData(VkDevice device, VkDeviceMemory memory, VulkanSimplified::MemorySize totalSize, size_t reservedSuballocations, bool mapMemory) :

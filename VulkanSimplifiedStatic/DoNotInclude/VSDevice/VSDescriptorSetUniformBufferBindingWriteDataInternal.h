@@ -4,6 +4,11 @@
 
 #include "../../Include/VSDevice/VSDescriptorDataListDef.h"
 
+#include <vector>
+#include <stdint.h>
+
+typedef struct VkBuffer_T* VkBuffer;
+
 namespace VulkanSimplifiedInternal
 {
 	struct DescriptorSetUniformBufferBindingWriteDataInternal

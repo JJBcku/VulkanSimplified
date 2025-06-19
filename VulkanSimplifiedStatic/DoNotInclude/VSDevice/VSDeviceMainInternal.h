@@ -1,19 +1,8 @@
 #pragma once
 
-#include "VSDeviceCoreInternal.h"
-#include "VSWindowListInternal.h"
-#include "VSShaderListsInternal.h"
+#include <memory>
 
-#include "VSDescriptorDataListsInternal.h"
-#include "VSRenderPassDataListInternal.h"
-#include "VSPipelineDataListsInternal.h"
-
-#include "VSMemoryObjectsListInternal.h"
-#include "VSDataBufferListsInternal.h"
-#include "VSImageDataListsInternal.h"
-
-#include "VSSynchronizationDataListsInternal.h"
-#include "VSCommandPoolMainListInternal.h"
+typedef struct VkInstance_T* VkInstance;
 
 namespace VulkanSimplified
 {
@@ -27,6 +16,21 @@ namespace VulkanSimplifiedInternal
 	class SharedDataMainListInternal;
 	class SdlEventHandlerInternal;
 
+	class DeviceCoreInternal;
+	class WindowListInternal;
+	class ShaderListsInternal;
+
+	class MemoryObjectsListInternal;
+	class DataBufferListsInternal;
+	class ImageDataListsInternal;
+
+	class DescriptorDataListsInternal;
+	class RenderPassListInternal;
+	class PipelineDataListsInternal;
+
+	class SynchronizationDataListsInternal;
+	class CommandPoolMainListInternal;
+
 	class DeviceMainInternal
 	{
 	public:
@@ -38,50 +42,50 @@ namespace VulkanSimplifiedInternal
 		DeviceCoreInternal& GetDeviceCore();
 		WindowListInternal& GetWindowList();
 		ShaderListsInternal& GetShaderLists();
+		RenderPassListInternal& GetRenderPassList();
 
 		MemoryObjectsListInternal& GetMemoryObjectsList();
 		DataBufferListsInternal& GetDataBufferLists();
 		ImageDataListsInternal& GetImageDataLists();
 
 		DescriptorDataListsInternal& GetDescriptorDataLists();
-		RenderPassListInternal& GetRenderPassList();
 		PipelineDataListsInternal& GetPipelineDataLists();
-
 		SynchronizationDataListsInternal& GetSynchronizationDataLists();
+
 		CommandPoolMainListInternal& GetCommandPoolMainList();
 
 		const DeviceCoreInternal& GetDeviceCore() const;
 		const WindowListInternal& GetWindowList() const;
 		const ShaderListsInternal& GetShaderLists() const;
+		const RenderPassListInternal& GetRenderPassList() const;
 
 		const MemoryObjectsListInternal& GetMemoryObjectsList() const;
 		const DataBufferListsInternal& GetDataBufferLists() const;
 		const ImageDataListsInternal& GetImageDataLists() const;
 
 		const DescriptorDataListsInternal& GetDescriptorDataLists() const;
-		const RenderPassListInternal& GetRenderPassList() const;
 		const PipelineDataListsInternal& GetPipelineDataLists() const;
-
 		const SynchronizationDataListsInternal& GetSynchronizationDataLists() const;
+
 		const CommandPoolMainListInternal& GetCommandPoolMainList() const;
 
 	private:
 		SdlEventHandlerInternal& _eventHandler;
 		const SharedDataMainListInternal& _sharedDataMain;
 
-		DeviceCoreInternal _core;
-		WindowListInternal _windowList;
-		ShaderListsInternal _shaderLists;
+		std::unique_ptr<DeviceCoreInternal> _core;
+		std::unique_ptr<WindowListInternal> _windowList;
+		std::unique_ptr<ShaderListsInternal> _shaderLists;
+		std::unique_ptr<RenderPassListInternal> _renderPassList;
 
-		MemoryObjectsListInternal _memoryObjectsList;
-		DataBufferListsInternal _dataBufferLists;
-		ImageDataListsInternal _imageDataLists;
+		std::unique_ptr<MemoryObjectsListInternal> _memoryObjectsList;
+		std::unique_ptr<DataBufferListsInternal> _dataBufferLists;
+		std::unique_ptr<ImageDataListsInternal> _imageDataLists;
 
-		DescriptorDataListsInternal _descriptorLists;
-		RenderPassListInternal _renderPassList;
-		PipelineDataListsInternal _pipelineDataLists;
+		std::unique_ptr<DescriptorDataListsInternal> _descriptorLists;
+		std::unique_ptr<PipelineDataListsInternal> _pipelineDataLists;
+		std::unique_ptr<SynchronizationDataListsInternal> _synchroDataLists;
 
-		SynchronizationDataListsInternal _synchroDataLists;
-		CommandPoolMainListInternal _commandPoolMainList;
+		std::unique_ptr<CommandPoolMainListInternal> _commandPoolMainList;
 	};
 }

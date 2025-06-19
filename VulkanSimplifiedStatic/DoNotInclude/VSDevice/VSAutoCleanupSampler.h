@@ -1,5 +1,8 @@
 #pragma once
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkSampler_T* VkSampler;
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupSampler

@@ -2,6 +2,13 @@
 
 #include <CustomLists/UnsortedIDVector.h>
 
+#include <vector>
+#include <stdint.h>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkFence_T* VkFence;
+typedef struct VkSemaphore_T* VkSemaphore;
+
 namespace VulkanSimplified
 {
 	struct SynchronizationDataListsInitialCapacities;

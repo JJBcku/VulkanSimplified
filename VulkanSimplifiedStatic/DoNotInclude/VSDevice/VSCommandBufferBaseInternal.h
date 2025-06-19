@@ -15,6 +15,15 @@
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
 #include "../../Include/VSCommon/VSPipelineStageFlagsDef.h"
 
+#include <optional>
+#include <vector>
+#include <utility>
+#include <stdint.h>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkCommandBuffer_T* VkCommandBuffer;
+typedef struct VkQueue_T* VkQueue;
+
 namespace VulkanSimplified
 {
 	struct DataBuffersCopyRegionData;

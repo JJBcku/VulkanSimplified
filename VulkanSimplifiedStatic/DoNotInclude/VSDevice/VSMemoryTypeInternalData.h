@@ -8,6 +8,13 @@
 #include "../../Include/VSCommon/VSMemoryTypeData.h"
 #include "../../Include/VSCommon/VSMemorySuballocationFullID.h"
 
+#include <stdint.h>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkDeviceMemory_T* VkDeviceMemory;
+typedef struct VkImage_T* VkImage;
+typedef struct VkBuffer_T* VkBuffer;
+
 namespace VulkanSimplifiedInternal
 {
 	class MemoryTypeInternalData

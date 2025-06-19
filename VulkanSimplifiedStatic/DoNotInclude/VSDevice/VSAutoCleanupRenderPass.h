@@ -1,5 +1,8 @@
 #pragma once
 
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkRenderPass_T* VkRenderPass;
+
 namespace VulkanSimplifiedInternal
 {
 	class AutoCleanupRenderPass

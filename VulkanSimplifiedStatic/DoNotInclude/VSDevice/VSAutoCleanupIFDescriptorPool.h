@@ -3,6 +3,12 @@
 #include "../../Include/VSDevice/VSDescriptorDataListDef.h"
 
 #include <CustomLists/UnsortedIDVector.h>
+#include <vector>
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkDescriptorPool_T* VkDescriptorPool;
+typedef struct VkDescriptorSet_T* VkDescriptorSet;
+typedef struct VkDescriptorSetLayout_T* VkDescriptorSetLayout;
 
 namespace VulkanSimplifiedInternal
 {

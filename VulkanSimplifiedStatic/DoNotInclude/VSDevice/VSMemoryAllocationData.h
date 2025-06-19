@@ -1,10 +1,19 @@
 #pragma once
 
 #include "../../Include/VSCommon/VSMemorySizeDef.h"
-#include "VSSuballocationInternalData.h"
+
+typedef struct VkDevice_T* VkDevice;
+typedef struct VkDeviceMemory_T* VkDeviceMemory;
+typedef struct VkImage_T* VkImage;
+typedef struct VkBuffer_T* VkBuffer;
+
+#include <vector>
+#include <utility>
 
 namespace VulkanSimplifiedInternal
 {
+	struct SuballocationInternalData;
+
 	class MemoryAllocationData
 	{
 	public:

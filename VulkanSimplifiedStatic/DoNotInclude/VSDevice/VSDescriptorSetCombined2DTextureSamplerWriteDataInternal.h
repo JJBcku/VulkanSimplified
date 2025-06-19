@@ -1,8 +1,13 @@
 #pragma once
 
+#include "../../Include/VSDevice/VSDescriptorDataListDef.h"
+
 #include <CustomLists/IDObject.h>
 
-#include "../../Include/VSDevice/VSDescriptorDataListDef.h"
+#include <cstdint>
+#include <vector>
+
+struct VkDescriptorImageInfo;
 
 namespace VulkanSimplifiedInternal
 {
