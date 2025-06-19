@@ -2,6 +2,8 @@
 
 #include "../VSCommon/VSBool64.h"
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	typedef uint32_t QueueTypeFlags;

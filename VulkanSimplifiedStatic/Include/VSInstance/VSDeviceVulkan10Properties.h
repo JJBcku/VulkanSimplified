@@ -2,6 +2,10 @@
 
 #include "VSDeviceVulkan10Limits.h"
 
+#include <string>
+#include <array>
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	enum class DeviceType : uint64_t

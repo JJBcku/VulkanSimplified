@@ -4,6 +4,8 @@
 #include "../VSCommon/VSDataFormatFlags.h"
 #include "../VSCommon/VSSurfacePresentModesDef.h"
 
+#include <stdint.h>
+
 namespace VulkanSimplified
 {
 	struct SurfaceSupportedColorspaceFormatsLists

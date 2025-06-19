@@ -2,6 +2,9 @@
 
 #include "VSDeviceVulkan10FeatureFlags.h"
 
+#include <vector>
+#include <optional>
+
 namespace VulkanSimplifiedInternal
 {
 	class PhysicalDeviceDataInternal;

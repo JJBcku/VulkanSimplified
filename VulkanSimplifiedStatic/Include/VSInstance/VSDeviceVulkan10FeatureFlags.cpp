@@ -1,5 +1,5 @@
 #include "VSInstanceIpch.h"
-#include "VSDeviceVulkan10Features.h"
+#include "VSDeviceVulkan10FeatureFlags.h"
 
 namespace VulkanSimplified
 {

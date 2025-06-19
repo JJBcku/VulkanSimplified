@@ -1,7 +1,10 @@
 #pragma once
 
-#include "VSDeviceVulkan10Features.h"
+#include "VSDeviceVulkan10FeatureFlags.h"
 #include "VSDeviceExtensionPacksList.h"
+
+#include <stdint.h>
+#include <vector>
 
 namespace VulkanSimplified
 {
