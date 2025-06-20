@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanSimplifiedStatic", "VulkanSimplifiedStatic\VulkanSimplifiedStatic.vcxproj", "{D3484D80-562B-4514-B337-A5BD3DB44997}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanSimplified", "VulkanSimplified\VulkanSimplified.vcxproj", "{D3484D80-562B-4514-B337-A5BD3DB44997}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanSimplifiedTest", "VulkanSimplifiedTest\VulkanSimplifiedTest.vcxproj", "{216DC90E-B19D-4844-81F3-BE29875C0374}"
 EndProject

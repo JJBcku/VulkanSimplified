@@ -167,7 +167,7 @@
     <ClInclude Include="VulkanTextureData.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VulkanSimplifiedStatic\VulkanSimplifiedStatic.vcxproj">
+    <ProjectReference Include="..\VulkanSimplified\VulkanSimplified.vcxproj">
       <Project>{d3484d80-562b-4514-b337-a5bd3db44997}</Project>
     </ProjectReference>
   </ItemGroup>
