@@ -101,7 +101,7 @@ void CreateMemoryData(VulkanData& data)
 	memData.depthRenderTargetImageViews.reserve(framesInFlight);
 	memData.framebuffers.reserve(framesInFlight);
 
-	using VulkanSimplified::ImageSampleFlagBits;
+	using VS::ImageSampleFlagBits;
 	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 	{
 		memData.resolveRenderTargetImages.reserve(framesInFlight);
@@ -122,22 +122,22 @@ void CreateMemoryData(VulkanData& data)
 		}
 	}
 
-	VulkanSimplified::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back());
+	VS::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back());
 	allocationSize += imageList.GetDepthStencilRenderTargetImagesSize(memData.depthRenderTargetImages.back());
 	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 		allocationSize += imageList.GetResolveRenderTargetImagesSize(memData.resolveRenderTargetImages.back());
 	allocationSize *= framesInFlight;
 	uint32_t memoryTypeMask = imageList.GetColorRenderTargetImagesMemoryTypeMask(memData.colorRenderTargetImages.back());
 
-	std::vector<VulkanSimplified::MemoryTypeProperties> acceptableMemoryTypes;
+	std::vector<VS::MemoryTypeProperties> acceptableMemoryTypes;
 	acceptableMemoryTypes.reserve(7);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE);
+	acceptableMemoryTypes.push_back(VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
 
 	memData.imageMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
 
@@ -157,7 +157,7 @@ void CreateMemoryData(VulkanData& data)
 			memData.resolveRenderTargetImageViews.push_back(imageList.AddResolveRenderTargetImageView(memData.resolveRenderTargetImages[i]));
 		}
 
-		std::vector<std::pair<VulkanSimplified::RenderTargetImagesID, IDObject<VulkanSimplified::AutoCleanupImageView>>> attachments;
+		std::vector<std::pair<VS::RenderTargetImagesID, IDObject<VS::AutoCleanupImageView>>> attachments;
 		
 		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 		{
@@ -192,7 +192,7 @@ void CreateMemoryData(VulkanData& data)
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
 		memData.vertexBuffers.push_back(bufferLists.AddVertexBuffer(vertices.size() * sizeof(vertices[0]), {}, framesInFlight));
-		memData.indexBuffers.push_back(bufferLists.AddIndexBuffer(indices.size(), VulkanSimplified::IndexType::INDEX_TYPE_16_BITS, {}, framesInFlight));
+		memData.indexBuffers.push_back(bufferLists.AddIndexBuffer(indices.size(), VS::IndexType::INDEX_TYPE_16_BITS, {}, framesInFlight));
 		memData.uniformBuffers.push_back(bufferLists.AddUniformBuffer(sizeof(UniformBufferData), {}, framesInFlight));
 	}
 
@@ -215,13 +215,13 @@ void CreateMemoryData(VulkanData& data)
 		stagingBufferSize += bufferLists.GetIndexBuffersSize(memData.indexBuffers.back());
 
 	acceptableMemoryTypes.clear();
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-	acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-	acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE);
+	acceptableMemoryTypes.push_back(VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+	acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL);
 
 	allocationSize = bufferLists.GetUniformBuffersSize(memData.uniformBuffers.back()) * framesInFlight;
 	memoryTypeMask = bufferLists.GetUniformBuffersMemoryTypeMask(memData.uniformBuffers.back());
@@ -240,11 +240,11 @@ void CreateMemoryData(VulkanData& data)
 		}
 
 		acceptableMemoryTypes.clear();
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
 
 		allocationSize = bufferLists.GetStagingBuffersSize(memData.stagingBuffers.back()) * framesInFlight;
 		memoryTypeMask = bufferLists.GetStagingBuffersMemoryTypeMask(memData.stagingBuffers.back());

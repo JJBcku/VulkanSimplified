@@ -28,7 +28,7 @@ void CreateCommandBufferData(VulkanData& data)
 	auto deviceCore = deviceMain.GetDeviceCore();
 	auto commandPoolMain = deviceMain.GetCommandPoolMainList();
 
-	VulkanSimplified::CommandPoolQFGroupListsInitialCapacities qfInit;
+	VS::CommandPoolQFGroupListsInitialCapacities qfInit;
 	qfInit.individualResetCommandPoolListInitialReservation = 3;
 
 	{

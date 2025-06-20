@@ -16,4 +16,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "NamespaceAliases.h"
+
 #endif //PCH_H

@@ -4,7 +4,7 @@
 
 struct VulkanBasicData
 {
-	std::unique_ptr<VulkanSimplified::Main> vsmain;
+	std::unique_ptr<VS::Main> vsmain;
 
 	VulkanBasicData();
 	~VulkanBasicData();

@@ -32,31 +32,31 @@ void CreatePipelineData(VulkanData& data)
 	data.pipelineData->descriptorLayout = descriptorDataList.AddDescriptorSetLayout(0, { { data.sharedData->uniformBufferBinding, {}},
 		{data.sharedData->textureBinding, {data.deviceDependentData->sampler}} });
 
-	VulkanSimplified::PipelineLayoutCreationData layoutData;
+	VS::PipelineLayoutCreationData layoutData;
 	layoutData._descriptorSets = { data.pipelineData->descriptorLayout };
 
 	data.pipelineData->pipelineLayout = devicePipelineDataList.AddPipelineLayout(layoutData);
 
 	{
-		VulkanSimplified::GraphicsPipelineCreationData pipelineData;
+		VS::GraphicsPipelineCreationData pipelineData;
 
 		pipelineData.shaderStages.reserve(2);
-		VulkanSimplified::ShaderStageData stageData;
+		VS::ShaderStageData stageData;
 
 		stageData.sharedData = data.sharedData->fragmentShaderData;
-		stageData.shaderDeviceID.type = VulkanSimplified::SHADER_TYPE_FRAGMENT;
+		stageData.shaderDeviceID.type = VS::SHADER_TYPE_FRAGMENT;
 		stageData.shaderDeviceID.fragmentShader.fragmentShaderID = data.deviceDependentData->fragmentShadersID;
 		pipelineData.shaderStages.push_back(stageData);
 
 		stageData.sharedData = data.sharedData->vertexShaderData;
-		stageData.shaderDeviceID.type = VulkanSimplified::SHADER_TYPE_VERTEX;
+		stageData.shaderDeviceID.type = VS::SHADER_TYPE_VERTEX;
 		stageData.shaderDeviceID.vertexShader.vertexShaderID = data.deviceDependentData->vertexShadersID;
 		pipelineData.shaderStages.push_back(stageData);
 
 		pipelineData.vertexInputData = data.sharedData->vertexInputData;
 		pipelineData.inputAssemblyData = data.sharedData->inputAssemblyData;
 
-		VulkanSimplified::ViewportStatePipelineDataPoint viewportData;
+		VS::ViewportStatePipelineDataPoint viewportData;
 		viewportData.viewport = data.sharedData->viewportData;
 		viewportData.scissor = data.sharedData->scissorData;
 		pipelineData.viewportData.push_back(viewportData);
@@ -69,7 +69,7 @@ void CreatePipelineData(VulkanData& data)
 		pipelineData.pipelineLayout = data.pipelineData->pipelineLayout;
 		pipelineData.renderPass = data.renderPassData->renderPass;
 		pipelineData.subpassIndex = 0;
-		pipelineData.pipelineDerrivationData.settings = VulkanSimplified::PipelineDerrivationSettings::DO_NOT_DERRIVE;
+		pipelineData.pipelineDerrivationData.settings = VS::PipelineDerrivationSettings::DO_NOT_DERRIVE;
 
 		auto pipelineIDs = devicePipelineDataList.AddGraphicPipelines({ pipelineData });
 		data.pipelineData->pipeline = pipelineIDs[0];

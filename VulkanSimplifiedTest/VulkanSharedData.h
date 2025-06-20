@@ -7,25 +7,25 @@
 
 struct VulkanSharedData
 {
-	IDObject<VulkanSimplified::SharedShaderPipelineData> fragmentShaderData;
-	IDObject<VulkanSimplified::SharedShaderPipelineData> vertexShaderData;
+	IDObject<VS::SharedShaderPipelineData> fragmentShaderData;
+	IDObject<VS::SharedShaderPipelineData> vertexShaderData;
 
-	IDObject<VulkanSimplified::VertexAttributeDescriptionData> vertexAttribute1Data;
-	IDObject<VulkanSimplified::VertexAttributeDescriptionData> vertexAttribute2Data;
-	IDObject<VulkanSimplified::VertexBindingDescriptionData> vertexBindingData;
-	IDObject<VulkanSimplified::VertexInputSharedPipelineData> vertexInputData;
+	IDObject<VS::VertexAttributeDescriptionData> vertexAttribute1Data;
+	IDObject<VS::VertexAttributeDescriptionData> vertexAttribute2Data;
+	IDObject<VS::VertexBindingDescriptionData> vertexBindingData;
+	IDObject<VS::VertexInputSharedPipelineData> vertexInputData;
 
-	IDObject<VulkanSimplified::PipelineScissorData> scissorData;
-	IDObject<VulkanSimplified::PipelineViewportData> viewportData;
+	IDObject<VS::PipelineScissorData> scissorData;
+	IDObject<VS::PipelineViewportData> viewportData;
 
-	IDObject<VulkanSimplified::PipelineInputAssemblyData> inputAssemblyData;
-	IDObject<VulkanSimplified::PipelineRasterizationData> rasterizationData;
-	IDObject<VulkanSimplified::PipelineMultisampleData> multisamplingData;
-	std::optional<IDObject<VulkanSimplified::PipelineDepthStencilStateData>> depthStencilData;
-	IDObject<VulkanSimplified::PipelineColorBlendAttachment> colorBlendData;
+	IDObject<VS::PipelineInputAssemblyData> inputAssemblyData;
+	IDObject<VS::PipelineRasterizationData> rasterizationData;
+	IDObject<VS::PipelineMultisampleData> multisamplingData;
+	std::optional<IDObject<VS::PipelineDepthStencilStateData>> depthStencilData;
+	IDObject<VS::PipelineColorBlendAttachment> colorBlendData;
 
-	IDObject<VulkanSimplified::DescriptorSetLayoutBindingData> uniformBufferBinding;
-	IDObject<VulkanSimplified::DescriptorSetLayoutBindingData> textureBinding;
+	IDObject<VS::DescriptorSetLayoutBindingData> uniformBufferBinding;
+	IDObject<VS::DescriptorSetLayoutBindingData> textureBinding;
 
 	VulkanSharedData();
 };

@@ -8,17 +8,17 @@
 
 struct VulkanCommandBufferData
 {
-	IDObject<VulkanSimplified::CommandPoolQFGroupPointer> graphicGroup;
-	std::optional<IDObject<VulkanSimplified::CommandPoolQFGroupPointer>> transferGroup;
-	std::optional<IDObject<VulkanSimplified::CommandPoolQFGroupPointer>> presentGroup;
+	IDObject<VS::CommandPoolQFGroupPointer> graphicGroup;
+	std::optional<IDObject<VS::CommandPoolQFGroupPointer>> transferGroup;
+	std::optional<IDObject<VS::CommandPoolQFGroupPointer>> presentGroup;
 
-	IDObject<VulkanSimplified::IRPoolPointer> graphicPool;
-	std::optional<IDObject<VulkanSimplified::IRPoolPointer>> transferPool;
-	std::optional<IDObject<VulkanSimplified::IRPoolPointer>> presentPool;
+	IDObject<VS::IRPoolPointer> graphicPool;
+	std::optional<IDObject<VS::IRPoolPointer>> transferPool;
+	std::optional<IDObject<VS::IRPoolPointer>> presentPool;
 
-	std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>> graphicBuffers;
-	std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>> transferBuffers;
-	std::vector<IDObject<VulkanSimplified::PrimaryIRPointer>> presentBuffers;
+	std::vector<IDObject<VS::PrimaryIRPointer>> graphicBuffers;
+	std::vector<IDObject<VS::PrimaryIRPointer>> transferBuffers;
+	std::vector<IDObject<VS::PrimaryIRPointer>> presentBuffers;
 
 	VulkanCommandBufferData() = default;
 };

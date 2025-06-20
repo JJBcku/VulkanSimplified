@@ -8,7 +8,7 @@ VulkanInstanceDependentData::VulkanInstanceDependentData()
 	minSwapchainImageAmount = 0;
 	maxSwapchainImageAmount = 0;
 
-	maxSamples = VulkanSimplified::ImageSampleFlagBits::SAMPLE_1;
+	maxSamples = VS::ImageSampleFlagBits::SAMPLE_1;
 	sampleShadingRate = {};
 
 	graphicsQueueIndex = std::numeric_limits<size_t>::max();

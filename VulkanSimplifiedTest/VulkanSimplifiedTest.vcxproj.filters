@@ -224,5 +224,8 @@
     <ClInclude Include="CreateTextureData.h">
       <Filter>Header Files\CreateData</Filter>
     </ClInclude>
+    <ClInclude Include="NamespaceAliases.h">
+      <Filter>Header Files\Other</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

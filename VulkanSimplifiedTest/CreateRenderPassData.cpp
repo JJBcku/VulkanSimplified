@@ -30,43 +30,43 @@ void CreateRenderPassData(VulkanData& data)
 	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
 	auto sharedRenderPassData = sharedData.GetSharedRenderPassDataList();
 
-	VulkanSimplified::DataFormatSetIndependentID format = data.instanceDependentData->supportedColorFormat;
+	VS::DataFormatSetIndependentID format = data.instanceDependentData->supportedColorFormat;
 
 	auto& renderPassData = *data.renderPassData;
 
 	renderPassData.renderPassAttachments.reserve(3);
 
-	if (data.instanceDependentData->maxSamples != VulkanSimplified::SAMPLE_1)
+	if (data.instanceDependentData->maxSamples != VS::SAMPLE_1)
 	{
 		renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, data.instanceDependentData->maxSamples,
-			VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR, VulkanSimplified::RenderPassAttachmentStoreOP::IGNORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED,
-			VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE));
+			VS::RenderPassAttachmentLoadOP::CLEAR, VS::RenderPassAttachmentStoreOP::IGNORE, VS::ImageLayoutFlags::UNDEFINED,
+			VS::ImageLayoutFlags::TRANSFER_SOURCE));
 	}
 	else
 	{
-		renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, VulkanSimplified::SAMPLE_1,
-			VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR, VulkanSimplified::RenderPassAttachmentStoreOP::STORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED,
-			VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE));
+		renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, VS::SAMPLE_1,
+			VS::RenderPassAttachmentLoadOP::CLEAR, VS::RenderPassAttachmentStoreOP::STORE, VS::ImageLayoutFlags::UNDEFINED,
+			VS::ImageLayoutFlags::TRANSFER_SOURCE));
 	}
 
 	renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(data.instanceDependentData->supportedDepthFormat,
-		data.instanceDependentData->maxSamples, VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR, VulkanSimplified::RenderPassAttachmentStoreOP::IGNORE,
-		VulkanSimplified::ImageLayoutFlags::UNDEFINED, VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE));
+		data.instanceDependentData->maxSamples, VS::RenderPassAttachmentLoadOP::CLEAR, VS::RenderPassAttachmentStoreOP::IGNORE,
+		VS::ImageLayoutFlags::UNDEFINED, VS::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE));
 
-	if (data.instanceDependentData->maxSamples != VulkanSimplified::SAMPLE_1)
+	if (data.instanceDependentData->maxSamples != VS::SAMPLE_1)
 	{
-		renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, VulkanSimplified::SAMPLE_1,
-			VulkanSimplified::RenderPassAttachmentLoadOP::IGNORE, VulkanSimplified::RenderPassAttachmentStoreOP::STORE, VulkanSimplified::ImageLayoutFlags::UNDEFINED,
-			VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE));
+		renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, VS::SAMPLE_1,
+			VS::RenderPassAttachmentLoadOP::IGNORE, VS::RenderPassAttachmentStoreOP::STORE, VS::ImageLayoutFlags::UNDEFINED,
+			VS::ImageLayoutFlags::TRANSFER_SOURCE));
 	}
 
-	renderPassData.colorAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(0, VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT);
-	renderPassData.depthAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(1, VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE);
-	renderPassData.resolveAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(2, VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT);
+	renderPassData.colorAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(0, VS::ImageLayoutFlags::COLOR_ATTACHMENT);
+	renderPassData.depthAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(1, VS::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE);
+	renderPassData.resolveAttachmentReference = sharedRenderPassData.AddRenderPassAttachmentReference(2, VS::ImageLayoutFlags::COLOR_ATTACHMENT);
 
-	renderPassData.subpassDependency = sharedRenderPassData.AddSubpassDependency(VulkanSimplified::externalSubpass, 0,
-		VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0,
-		VulkanSimplified::AccessFlagBits::ACCESS_COLOR_ATTACHMENT_WRITE);
+	renderPassData.subpassDependency = sharedRenderPassData.AddSubpassDependency(VS::externalSubpass, 0,
+		VS::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, VS::PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0,
+		VS::AccessFlagBits::ACCESS_COLOR_ATTACHMENT_WRITE);
 
 	renderPassData.clearValues.resize(2);
 	renderPassData.clearValues[0].emplace(sharedRenderPassData.AddFloatColorClearValue(0.0f, 0.0f, 0.0f, 0.0f));
@@ -76,9 +76,9 @@ void CreateRenderPassData(VulkanData& data)
 	auto device = instance.GetChoosenDevicesMainClass();
 	auto deviceRenderPassData = device.GetRenderPassList();
 
-	if (data.instanceDependentData->maxSamples != VulkanSimplified::SAMPLE_1)
+	if (data.instanceDependentData->maxSamples != VS::SAMPLE_1)
 	{
-		VulkanSimplified::SubpassCreationDataWithResolving subpassData;
+		VS::SubpassCreationDataWithResolving subpassData;
 		subpassData.colorAttachments.emplace_back(renderPassData.colorAttachmentReference, renderPassData.resolveAttachmentReference);
 		subpassData.depthStencilAttachment = renderPassData.depthAttachmentReference;
 
@@ -87,7 +87,7 @@ void CreateRenderPassData(VulkanData& data)
 	}
 	else
 	{
-		VulkanSimplified::SubpassCreationDataWithoutResolving subpassData;
+		VS::SubpassCreationDataWithoutResolving subpassData;
 		subpassData.colorAttachments.push_back(renderPassData.colorAttachmentReference);
 		subpassData.depthStencilAttachment = renderPassData.depthAttachmentReference;
 

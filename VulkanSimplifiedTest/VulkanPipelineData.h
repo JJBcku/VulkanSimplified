@@ -7,9 +7,9 @@
 
 struct VulkanPipelineData
 {
-	IDObject<VulkanSimplified::AutoCleanupDescriptorSetLayout> descriptorLayout;
-	IDObject<VulkanSimplified::AutoCleanupPipelineLayout> pipelineLayout;
-	IDObject<VulkanSimplified::AutoCleanupGraphicsPipeline> pipeline;
+	IDObject<VS::AutoCleanupDescriptorSetLayout> descriptorLayout;
+	IDObject<VS::AutoCleanupPipelineLayout> pipelineLayout;
+	IDObject<VS::AutoCleanupGraphicsPipeline> pipeline;
 
 	VulkanPipelineData();
 };

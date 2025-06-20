@@ -57,19 +57,19 @@ void CreateDeviceDependentData(VulkanData& data)
 
 	data.deviceDependentData = std::make_unique<VulkanDeviceDependentData>();
 
-	VulkanSimplified::WindowCreationData windowCreationData;
+	VS::WindowCreationData windowCreationData;
 	windowCreationData.width = 800;
 	windowCreationData.height = 600;
 	windowCreationData.windowTitle = "Test Window";
-	windowCreationData.settings = VulkanSimplified::WindowSettings::RESIZABLE;
+	windowCreationData.settings = VS::WindowSettings::RESIZABLE;
 
 	data.deviceDependentData->windowID = windowList.CreateWindow(windowCreationData);
 
 	auto window = windowList.GetWindow(data.deviceDependentData->windowID);
 
-	VulkanSimplified::SwapchainCreationData swapchainCreationData;
+	VS::SwapchainCreationData swapchainCreationData;
 
-	swapchainCreationData.surfacePresentMode = VulkanSimplified::PRESENT_MODE_FIFO_STRICT;
+	swapchainCreationData.surfacePresentMode = VS::PRESENT_MODE_FIFO_STRICT;
 	swapchainCreationData.format = data.instanceDependentData->supportedColorFormat;
 
 	swapchainCreationData.imageAmount = std::min(data.instanceDependentData->minSwapchainImageAmount + 1, data.instanceDependentData->maxSwapchainImageAmount);

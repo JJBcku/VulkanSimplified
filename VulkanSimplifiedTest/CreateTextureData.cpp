@@ -65,7 +65,7 @@ void CreateTextureData(VulkanData& data)
 	if (pixels == nullptr)
 		throw std::runtime_error("CreateTextureData Error: Program failed to load the texture!");
 
-	VulkanSimplified::MemorySize imageSize = imageWidth;
+	VS::MemorySize imageSize = imageWidth;
 	imageSize *= imageHeight;
 	imageSize = imageSize << 2;
 
@@ -78,8 +78,8 @@ void CreateTextureData(VulkanData& data)
 		mipLevels++;
 	}
 
-	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
-	IDObject<VulkanSimplified::AutoCleanupStagingBuffer> stagingBuffer;
+	VS::MemoryAllocationFullID stagingMemoryAllocation;
+	IDObject<VS::AutoCleanupStagingBuffer> stagingBuffer;
 
 	auto device = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass();
 	auto imageList = device.GetImageDataLists();
@@ -87,20 +87,20 @@ void CreateTextureData(VulkanData& data)
 	auto bufferLists = device.GetDataBufferLists();
 
 	{
-		texData.textureID = imageList.Add2DTextureImage(imageWidth, imageHeight, mipLevels, VulkanSimplified::DATA_FORMAT_RGBA8_SRGB, {}, false, 1);
+		texData.textureID = imageList.Add2DTextureImage(imageWidth, imageHeight, mipLevels, VS::DATA_FORMAT_RGBA8_SRGB, {}, false, 1);
 
-		VulkanSimplified::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
+		VS::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
 		uint32_t memoryTypeMask = imageList.Get2DTextureImagesMemoryTypeMask(texData.textureID);
 
-		std::vector<VulkanSimplified::MemoryTypeProperties> acceptableMemoryTypes;
+		std::vector<VS::MemoryTypeProperties> acceptableMemoryTypes;
 		acceptableMemoryTypes.reserve(7);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
 
 		texData.textureMemoryAllocation = memoryList.AllocateMemory(allocationSize, 1, acceptableMemoryTypes, memoryTypeMask);
 		imageList.Bind2DTextureImage(texData.textureID, texData.textureMemoryAllocation);
@@ -109,19 +109,19 @@ void CreateTextureData(VulkanData& data)
 	}
 
 	{
-		VulkanSimplified::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
+		VS::MemorySize allocationSize = imageList.Get2DTextureImagesSize(texData.textureID);
 		stagingBuffer = bufferLists.AddStagingBuffer(allocationSize, {});
 
 		allocationSize = bufferLists.GetStagingBuffersSize(stagingBuffer);
 		uint32_t memoryTypeMask = bufferLists.GetStagingBuffersMemoryTypeMask(stagingBuffer);
 
-		std::vector<VulkanSimplified::MemoryTypeProperties> acceptableMemoryTypes;
+		std::vector<VS::MemoryTypeProperties> acceptableMemoryTypes;
 		acceptableMemoryTypes.reserve(5);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE | VulkanSimplified::HOST_CACHED);
-		acceptableMemoryTypes.push_back(VulkanSimplified::DEVICE_LOCAL | VulkanSimplified::HOST_COHERENT | VulkanSimplified::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE);
 
 		stagingMemoryAllocation = memoryList.AllocateMemory(allocationSize, 1, acceptableMemoryTypes, memoryTypeMask);
 		bufferLists.BindStagingBuffer(stagingBuffer, stagingMemoryAllocation);
@@ -132,7 +132,7 @@ void CreateTextureData(VulkanData& data)
 
 		auto mainPoolList = device.GetCommandPoolMainList();
 
-		std::vector<VulkanSimplified::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;
+		std::vector<VS::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;
 
 		submitInfo[0].waitSemaphores.resize(0);
 		submitInfo[0].commandBufferIDs.resize(1);
@@ -144,31 +144,31 @@ void CreateTextureData(VulkanData& data)
 		auto synchro = device.GetSynchronizationDataLists();
 		synchro.ResetFences({ data.synchronizationData->inFlightFences[0] });
 
-		VulkanSimplified::ImagesMemoryBarrierData imageMemBOne, imageMemBTwo, imageMemBThree, imageMemBFour;
-		imageMemBOne.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_NONE;
-		imageMemBOne.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
-		imageMemBOne.oldLayout = VulkanSimplified::ImageLayoutFlags::UNDEFINED;
-		imageMemBOne.newLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
-		imageMemBOne.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
+		VS::ImagesMemoryBarrierData imageMemBOne, imageMemBTwo, imageMemBThree, imageMemBFour;
+		imageMemBOne.srcAccess = VS::AccessFlagBits::ACCESS_NONE;
+		imageMemBOne.dstAccess = VS::AccessFlagBits::ACCESS_TRANSFER_WRITE;
+		imageMemBOne.oldLayout = VS::ImageLayoutFlags::UNDEFINED;
+		imageMemBOne.newLayout = VS::ImageLayoutFlags::TRANSFER_DESTINATION;
+		imageMemBOne.imageID = VS::ImagesGenericID(texData.textureID);
 
-		imageMemBTwo.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
-		imageMemBTwo.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_READ;
-		imageMemBTwo.oldLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
-		imageMemBTwo.newLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
-		imageMemBTwo.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
+		imageMemBTwo.srcAccess = VS::AccessFlagBits::ACCESS_TRANSFER_WRITE;
+		imageMemBTwo.dstAccess = VS::AccessFlagBits::ACCESS_TRANSFER_READ;
+		imageMemBTwo.oldLayout = VS::ImageLayoutFlags::TRANSFER_DESTINATION;
+		imageMemBTwo.newLayout = VS::ImageLayoutFlags::TRANSFER_DESTINATION;
+		imageMemBTwo.imageID = VS::ImagesGenericID(texData.textureID);
 
-		imageMemBThree.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
-		imageMemBThree.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_READ;
-		imageMemBThree.oldLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION;
-		imageMemBThree.newLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE;
-		imageMemBThree.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
+		imageMemBThree.srcAccess = VS::AccessFlagBits::ACCESS_TRANSFER_WRITE;
+		imageMemBThree.dstAccess = VS::AccessFlagBits::ACCESS_TRANSFER_READ;
+		imageMemBThree.oldLayout = VS::ImageLayoutFlags::TRANSFER_DESTINATION;
+		imageMemBThree.newLayout = VS::ImageLayoutFlags::TRANSFER_SOURCE;
+		imageMemBThree.imageID = VS::ImagesGenericID(texData.textureID);
 		imageMemBThree.imageID.texture2DID.mipLevelCount = 1;
 
-		imageMemBFour.srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_TRANSFER_WRITE;
-		imageMemBFour.dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
-		imageMemBFour.oldLayout = VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE;
-		imageMemBFour.newLayout = VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY;
-		imageMemBFour.imageID = VulkanSimplified::ImagesGenericID(texData.textureID);
+		imageMemBFour.srcAccess = VS::AccessFlagBits::ACCESS_TRANSFER_WRITE;
+		imageMemBFour.dstAccess = VS::AccessFlagBits::ACCESS_MEMORY_READ;
+		imageMemBFour.oldLayout = VS::ImageLayoutFlags::TRANSFER_SOURCE;
+		imageMemBFour.newLayout = VS::ImageLayoutFlags::SHADER_READ_ONLY;
+		imageMemBFour.imageID = VS::ImagesGenericID(texData.textureID);
 
 		if (data.commandBufferData->transferGroup.has_value())
 		{
@@ -181,19 +181,19 @@ void CreateTextureData(VulkanData& data)
 			auto transferBuffer = transferPool.GetPrimaryCommandBuffer(data.commandBufferData->transferBuffers[0]);
 
 			{
-				transferBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
+				transferBuffer.BeginRecording(VS::CommandBufferUsage::ONE_USE);
 
-				transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE,
-					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, {}, {}, { imageMemBOne });
+				transferBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE,
+					VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, {}, {}, { imageMemBOne });
 
 				transferBuffer.TransferDataTo2dTextureSimple(stagingBuffer, texData.textureID, 0);
 
-				transferBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_BOTTOM_OF_PIPE, {}, {}, { imageMemBTwo });
+				transferBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					VS::PipelineStageFlagBits::PIPELINE_STAGE_BOTTOM_OF_PIPE, {}, {}, { imageMemBTwo });
 
 				transferBuffer.EndRecording();
 
-				submitInfo[0].commandBufferIDs[0].IRPrimaryID.type = VulkanSimplified::CommandBufferIDType::IR_PRIMARY;
+				submitInfo[0].commandBufferIDs[0].IRPrimaryID.type = VS::CommandBufferIDType::IR_PRIMARY;
 				submitInfo[0].commandBufferIDs[0].IRPrimaryID.commandPoolID = data.commandBufferData->transferPool.value();
 				submitInfo[0].commandBufferIDs[0].IRPrimaryID.commandBufferID = data.commandBufferData->transferBuffers[0];
 
@@ -204,14 +204,14 @@ void CreateTextureData(VulkanData& data)
 			}
 
 			{
-				graphicBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
+				graphicBuffer.BeginRecording(VS::CommandBufferUsage::ONE_USE);
 
-				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, {}, {}, { imageMemBTwo });
+				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, {}, {}, { imageMemBTwo });
 
 				imageMemBThree.imageID.texture2DID.baseMipLevel = 0;
 
-				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 					{}, {}, { imageMemBThree });
 
 				for (uint32_t i = 1; i < mipLevels; ++i)
@@ -220,20 +220,20 @@ void CreateTextureData(VulkanData& data)
 
 					imageMemBThree.imageID.texture2DID.baseMipLevel = i;
 
-					graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 						{}, {}, { imageMemBThree });
 				}
 
-				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-					VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBFour });
+				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+					VS::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBFour });
 
 				graphicBuffer.EndRecording();
 
 				submitInfo[0].waitSemaphores.resize(1);
 				submitInfo[0].waitSemaphores[0].first = submitInfo[0].signalSemaphores[0];
-				submitInfo[0].waitSemaphores[0].second = VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER;
+				submitInfo[0].waitSemaphores[0].second = VS::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER;
 
-				submitInfo[0].commandBufferIDs[0].IRPrimaryID.type = VulkanSimplified::CommandBufferIDType::IR_PRIMARY;
+				submitInfo[0].commandBufferIDs[0].IRPrimaryID.type = VS::CommandBufferIDType::IR_PRIMARY;
 				submitInfo[0].commandBufferIDs[0].IRPrimaryID.commandPoolID = data.commandBufferData->graphicPool;
 				submitInfo[0].commandBufferIDs[0].IRPrimaryID.commandBufferID = data.commandBufferData->graphicBuffers[0];
 
@@ -246,16 +246,16 @@ void CreateTextureData(VulkanData& data)
 		{
 			submitInfo[0].signalSemaphores.resize(0);
 
-			graphicBuffer.BeginRecording(VulkanSimplified::CommandBufferUsage::ONE_USE);
+			graphicBuffer.BeginRecording(VS::CommandBufferUsage::ONE_USE);
 
-			graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+			graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TOP_OF_PIPE, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 				{}, {}, { imageMemBOne });
 
 			graphicBuffer.TransferDataTo2dTextureSimple(stagingBuffer, texData.textureID, 0);
 
 			imageMemBThree.imageID.texture2DID.baseMipLevel = 0;
 
-			graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+			graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 				{}, {}, { imageMemBThree });
 
 			for (uint32_t i = 1; i < mipLevels; ++i)
@@ -264,16 +264,16 @@ void CreateTextureData(VulkanData& data)
 
 				imageMemBThree.imageID.texture2DID.baseMipLevel = i;
 
-				graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 					{}, {}, { imageMemBThree });
 			}
 
-			graphicBuffer.CreatePipelineBarrier(VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
-				VulkanSimplified::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBFour });
+			graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
+				VS::PipelineStageFlagBits::PIPELINE_STAGE_FRAGMENT_SHADER, {}, {}, { imageMemBFour });
 
 			graphicBuffer.EndRecording();
 
-			submitInfo[0].commandBufferIDs[0].IRPrimaryID.type = VulkanSimplified::CommandBufferIDType::IR_PRIMARY;
+			submitInfo[0].commandBufferIDs[0].IRPrimaryID.type = VS::CommandBufferIDType::IR_PRIMARY;
 			submitInfo[0].commandBufferIDs[0].IRPrimaryID.commandPoolID = data.commandBufferData->graphicPool;
 			submitInfo[0].commandBufferIDs[0].IRPrimaryID.commandBufferID = data.commandBufferData->graphicBuffers[0];
 
@@ -288,7 +288,7 @@ void CreateTextureData(VulkanData& data)
 
 	stbi_image_free(pixels);
 
-	std::vector<VulkanSimplified::DescriptorSetCombined2DTextureSamplerWriteData> textureWriteData;
+	std::vector<VS::DescriptorSetCombined2DTextureSamplerWriteData> textureWriteData;
 	textureWriteData.resize(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
@@ -297,11 +297,11 @@ void CreateTextureData(VulkanData& data)
 		textureWriteData[i].binding = 1;
 		textureWriteData[i].startArrayIndex = 0;
 
-		VulkanSimplified::Optional2DTextureView texViewID = { {texData.textureID, texData.textureImageView} };
-		VulkanSimplified::OptionalSampler samplerID = data.deviceDependentData->sampler;
-		VulkanSimplified::Combined2DTextureSamplerIDs combinedIDs = { texViewID, samplerID };
+		VS::Optional2DTextureView texViewID = { {texData.textureID, texData.textureImageView} };
+		VS::OptionalSampler samplerID = data.deviceDependentData->sampler;
+		VS::Combined2DTextureSamplerIDs combinedIDs = { texViewID, samplerID };
 
-		textureWriteData[i].imageDataList.emplace_back(combinedIDs, VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY);
+		textureWriteData[i].imageDataList.emplace_back(combinedIDs, VS::ImageLayoutFlags::SHADER_READ_ONLY);
 	}
 
 	device.GetDescriptorDataLists().WriteNIFDescriptorSetCombined2DTextureSamplerBindings(data.descriptorData->descriptorPool, textureWriteData);

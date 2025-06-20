@@ -7,12 +7,12 @@ struct VulkanInstanceDependentData
 {
 	size_t physicalDevicesIndex;
 
-	VulkanSimplified::DataFormatSetIndependentID supportedColorFormat;
-	VulkanSimplified::DataFormatSetIndependentID supportedDepthFormat;
+	VS::DataFormatSetIndependentID supportedColorFormat;
+	VS::DataFormatSetIndependentID supportedDepthFormat;
 	uint32_t minSwapchainImageAmount;
 	uint32_t maxSwapchainImageAmount;
 
-	VulkanSimplified::ImageSampleFlagBits maxSamples;
+	VS::ImageSampleFlagBits maxSamples;
 	std::optional<uint32_t> sampleShadingRate;
 
 	size_t graphicsQueueIndex;

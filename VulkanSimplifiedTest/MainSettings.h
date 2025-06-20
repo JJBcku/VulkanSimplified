@@ -17,7 +17,7 @@ public:
 
 	bool IsClosingRequested() const;
 
-	static bool QuitEventCallback(const VulkanSimplified::SdlQuitEventData&, void* instance);
+	static bool QuitEventCallback(const VS::SdlQuitEventData&, void* instance);
 
 private:
 	bool _quit;

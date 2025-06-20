@@ -9,27 +9,27 @@
 
 struct VulkanMemoryData
 {
-	VulkanSimplified::MemoryAllocationFullID imageMemoryAllocation;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupColorRenderTargetImage>> colorRenderTargetImages;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupImageView>> colorRenderTargetImageViews;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupDepthStencilRenderTargetImage>> depthRenderTargetImages;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupImageView>> depthRenderTargetImageViews;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupResolveRenderTargetImage>> resolveRenderTargetImages;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupImageView>> resolveRenderTargetImageViews;
+	VS::MemoryAllocationFullID imageMemoryAllocation;
+	std::vector<IDObject<VS::AutoCleanupColorRenderTargetImage>> colorRenderTargetImages;
+	std::vector<IDObject<VS::AutoCleanupImageView>> colorRenderTargetImageViews;
+	std::vector<IDObject<VS::AutoCleanupDepthStencilRenderTargetImage>> depthRenderTargetImages;
+	std::vector<IDObject<VS::AutoCleanupImageView>> depthRenderTargetImageViews;
+	std::vector<IDObject<VS::AutoCleanupResolveRenderTargetImage>> resolveRenderTargetImages;
+	std::vector<IDObject<VS::AutoCleanupImageView>> resolveRenderTargetImageViews;
 
-	std::vector<IDObject<VulkanSimplified::AutoCleanupFramebuffer>> framebuffers;
+	std::vector<IDObject<VS::AutoCleanupFramebuffer>> framebuffers;
 
-	VulkanSimplified::MemoryAllocationFullID vertexMemoryAllocation;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupVertexBuffer>> vertexBuffers;
+	VS::MemoryAllocationFullID vertexMemoryAllocation;
+	std::vector<IDObject<VS::AutoCleanupVertexBuffer>> vertexBuffers;
 
-	VulkanSimplified::MemoryAllocationFullID indexMemoryAllocation;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupIndexBuffer>> indexBuffers;
+	VS::MemoryAllocationFullID indexMemoryAllocation;
+	std::vector<IDObject<VS::AutoCleanupIndexBuffer>> indexBuffers;
 
-	VulkanSimplified::MemoryAllocationFullID uniformMemoryAllocation;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupUniformBuffer>> uniformBuffers;
+	VS::MemoryAllocationFullID uniformMemoryAllocation;
+	std::vector<IDObject<VS::AutoCleanupUniformBuffer>> uniformBuffers;
 
-	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupStagingBuffer>> stagingBuffers;
+	VS::MemoryAllocationFullID stagingMemoryAllocation;
+	std::vector<IDObject<VS::AutoCleanupStagingBuffer>> stagingBuffers;
 
 	bool vertexMemoryMapped = false;
 	bool indexMemoryMapped = false;

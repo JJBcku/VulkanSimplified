@@ -6,11 +6,11 @@
 
 struct VulkanSynchronizationData
 {
-	std::vector<IDObject<VulkanSimplified::AutoCleanupFence>> inFlightFences;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupSemaphore>> imageAvailableSemaphores;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupSemaphore>> renderingFinishedSemaphores;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupSemaphore>> queueTransferFinishedSemaphores;
-	std::vector<IDObject<VulkanSimplified::AutoCleanupSemaphore>> dataTransferFinishedSemaphores;
+	std::vector<IDObject<VS::AutoCleanupFence>> inFlightFences;
+	std::vector<IDObject<VS::AutoCleanupSemaphore>> imageAvailableSemaphores;
+	std::vector<IDObject<VS::AutoCleanupSemaphore>> renderingFinishedSemaphores;
+	std::vector<IDObject<VS::AutoCleanupSemaphore>> queueTransferFinishedSemaphores;
+	std::vector<IDObject<VS::AutoCleanupSemaphore>> dataTransferFinishedSemaphores;
 
 	VulkanSynchronizationData();
 	~VulkanSynchronizationData();

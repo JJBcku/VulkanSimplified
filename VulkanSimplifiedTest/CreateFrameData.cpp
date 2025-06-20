@@ -34,7 +34,7 @@ void CreateFrameData(VulkanData& data)
 	data.frameData->uniformCopyRegion.dstOffset = 0;
 	data.frameData->uniformCopyRegion.writeSize = sizeof(UniformBufferData);
 
-	std::vector<std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>>& dataBufferMemoryBarrierData = data.frameData->dataBufferMemoryBarrierData;
+	std::vector<std::vector<VS::DataBuffersMemoryBarrierData>>& dataBufferMemoryBarrierData = data.frameData->dataBufferMemoryBarrierData;
 	dataBufferMemoryBarrierData.resize(framesInFlight);
 
 	for (size_t i = 0; i < framesInFlight; ++i)
@@ -47,8 +47,8 @@ void CreateFrameData(VulkanData& data)
 		{
 			dataBufferMemoryBarrierData[i].emplace_back();
 
-			dataBufferMemoryBarrierData[i][j].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-			dataBufferMemoryBarrierData[i][j].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+			dataBufferMemoryBarrierData[i][j].srcAccess = VS::AccessFlagBits::ACCESS_MEMORY_WRITE;
+			dataBufferMemoryBarrierData[i][j].dstAccess = VS::AccessFlagBits::ACCESS_MEMORY_READ;
 			dataBufferMemoryBarrierData[i][j].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
 			dataBufferMemoryBarrierData[i][j].bufferID = { data.memoryData->vertexBuffers[i] };
 
@@ -59,8 +59,8 @@ void CreateFrameData(VulkanData& data)
 		{
 			dataBufferMemoryBarrierData[i].emplace_back();
 
-			dataBufferMemoryBarrierData[i][j].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-			dataBufferMemoryBarrierData[i][j].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+			dataBufferMemoryBarrierData[i][j].srcAccess = VS::AccessFlagBits::ACCESS_MEMORY_WRITE;
+			dataBufferMemoryBarrierData[i][j].dstAccess = VS::AccessFlagBits::ACCESS_MEMORY_READ;
 			dataBufferMemoryBarrierData[i][j].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
 			dataBufferMemoryBarrierData[i][j].bufferID = { data.memoryData->indexBuffers[i] };
 
@@ -71,8 +71,8 @@ void CreateFrameData(VulkanData& data)
 		{
 			dataBufferMemoryBarrierData[i].emplace_back();
 
-			dataBufferMemoryBarrierData[i][j].srcAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_WRITE;
-			dataBufferMemoryBarrierData[i][j].dstAccess = VulkanSimplified::AccessFlagBits::ACCESS_MEMORY_READ;
+			dataBufferMemoryBarrierData[i][j].srcAccess = VS::AccessFlagBits::ACCESS_MEMORY_WRITE;
+			dataBufferMemoryBarrierData[i][j].dstAccess = VS::AccessFlagBits::ACCESS_MEMORY_READ;
 			dataBufferMemoryBarrierData[i][j].queueData = { data.instanceDependentData->transferOnlyQueueIndex.value(), data.instanceDependentData->graphicsQueueIndex };
 			dataBufferMemoryBarrierData[i][j].bufferID = { data.memoryData->uniformBuffers[i] };
 
@@ -80,7 +80,7 @@ void CreateFrameData(VulkanData& data)
 		}
 	}
 
-	std::vector<VulkanSimplified::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;
+	std::vector<VS::CommandBufferSubmissionData>& submitInfo = data.frameData->submitInfo;
 
 	submitInfo.resize(1);
 	submitInfo[0].waitSemaphores.reserve(4);

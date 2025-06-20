@@ -37,12 +37,12 @@ void CreateSharedData(VulkanData& data)
 	auto pipelineData = sharedData.GetSharedPipelineDataListss();
 	auto descriptorData = sharedData.GetSharedDescriptorDataList();
 
-	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_FRAGMENT);
-	sharedDataList.vertexShaderData = pipelineData.AddSharedShaderPipelineData("main", VulkanSimplified::SHADER_TYPE_VERTEX);
+	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VS::SHADER_TYPE_FRAGMENT);
+	sharedDataList.vertexShaderData = pipelineData.AddSharedShaderPipelineData("main", VS::SHADER_TYPE_VERTEX);
 
-	sharedDataList.vertexAttribute1Data = pipelineData.AddVertexAttributeDescriptionData(0, VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT, 2);
-	sharedDataList.vertexAttribute2Data = pipelineData.AddVertexAttributeDescriptionData(sizeof(glm::vec4), VulkanSimplified::DATA_FORMAT_RG32_SFLOAT, 2);
-	sharedDataList.vertexBindingData = pipelineData.AddVertexBindingData(sizeof(VertexData), VulkanSimplified::VertexBindingInputRate::VERTEX,
+	sharedDataList.vertexAttribute1Data = pipelineData.AddVertexAttributeDescriptionData(0, VS::DATA_FORMAT_RGBA32_SFLOAT, 2);
+	sharedDataList.vertexAttribute2Data = pipelineData.AddVertexAttributeDescriptionData(sizeof(glm::vec4), VS::DATA_FORMAT_RG32_SFLOAT, 2);
+	sharedDataList.vertexBindingData = pipelineData.AddVertexBindingData(sizeof(VertexData), VS::VertexBindingInputRate::VERTEX,
 		{ sharedDataList.vertexAttribute1Data, sharedDataList.vertexAttribute2Data });
 
 	sharedDataList.vertexInputData = pipelineData.AddVertexInputSharedPipelineData({ sharedDataList.vertexBindingData });
@@ -50,21 +50,21 @@ void CreateSharedData(VulkanData& data)
 	sharedDataList.scissorData = pipelineData.AddPipelineScissorData(0, 0, swapchainWidth, swapchainHeight);
 	sharedDataList.viewportData = pipelineData.AddPipelineViewportData(0, 0, swapchainWidth, swapchainHeight, 0.0f, 1.0f);
 
-	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
-	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode::FILL, false, false);
+	sharedDataList.inputAssemblyData = pipelineData.AddPipelineInputAssemblyData(VS::PipelinePrimitiveTopology::TRIANGLE_LIST, false);
+	sharedDataList.rasterizationData = pipelineData.AddPipelineRasterizationData(VS::PipelinePolygonMode::FILL, false, false);
 	sharedDataList.multisamplingData = pipelineData.AddPipelineMultisampleData(data.instanceDependentData->maxSamples, data.instanceDependentData->sampleShadingRate);
 
-	sharedDataList.depthStencilData = pipelineData.AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage::TEST_AND_WRITE,
-		VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS, 0.0f, 1.0f);
+	sharedDataList.depthStencilData = pipelineData.AddPipelineDepthStencilStateData(VS::DepthUsage::TEST_AND_WRITE,
+		VS::CompareOperationsType::COMPARE_OPERATION_LESS, 0.0f, 1.0f);
 
-	VulkanSimplified::ColorBlendingComponentFlags colorBlendingComponents = VulkanSimplified::COLOR_COMPONENT_R | VulkanSimplified::COLOR_COMPONENT_G |
-		VulkanSimplified::COLOR_COMPONENT_B | VulkanSimplified::COLOR_COMPONENT_A;
+	VS::ColorBlendingComponentFlags colorBlendingComponents = VS::COLOR_COMPONENT_R | VS::COLOR_COMPONENT_G |
+		VS::COLOR_COMPONENT_B | VS::COLOR_COMPONENT_A;
 
-	sharedDataList.colorBlendData = pipelineData.AddPipelineColorBlendAttachment(colorBlendingComponents, VulkanSimplified::ColorBlendingPreset::NO_BLENDING);
+	sharedDataList.colorBlendData = pipelineData.AddPipelineColorBlendAttachment(colorBlendingComponents, VS::ColorBlendingPreset::NO_BLENDING);
 
-	sharedDataList.uniformBufferBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER, 1,
-		VulkanSimplified::SHADER_TYPE_VERTEX);
+	sharedDataList.uniformBufferBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VS::DescriptorTypeFlagBits::UNIFORM_BUFFER, 1,
+		VS::SHADER_TYPE_VERTEX);
 
-	sharedDataList.textureBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER, 1,
-		VulkanSimplified::SHADER_TYPE_FRAGMENT);
+	sharedDataList.textureBinding = descriptorData.AddDescriptorSetLayoutBindingsData(VS::DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER, 1,
+		VS::SHADER_TYPE_FRAGMENT);
 }

@@ -140,6 +140,7 @@
     <ClInclude Include="CreateTextureData.h" />
     <ClInclude Include="MiscFunctions.h" />
     <ClInclude Include="MainSettings.h" />
+    <ClInclude Include="NamespaceAliases.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RunFrame.h" />
     <ClInclude Include="RunProgram.h" />

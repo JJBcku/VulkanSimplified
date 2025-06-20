@@ -19,7 +19,7 @@ bool MainSettings::IsClosingRequested() const
 	return _quit;
 }
 
-bool MainSettings::QuitEventCallback(const VulkanSimplified::SdlQuitEventData&, void* instance)
+bool MainSettings::QuitEventCallback(const VS::SdlQuitEventData&, void* instance)
 {
 	if (instance != nullptr)
 	{

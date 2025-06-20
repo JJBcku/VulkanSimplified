@@ -26,9 +26,9 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 {
 	data.basicData = std::make_unique<VulkanBasicData>();
 	
-	VulkanSimplified::MainInitData basicInit;
+	VS::MainInitData basicInit;
 
-	data.basicData->vsmain = std::make_unique<VulkanSimplified::Main>(basicInit);
+	data.basicData->vsmain = std::make_unique<VS::Main>(basicInit);
 	auto& main = *data.basicData->vsmain;
 
 	auto availableExtensionPacks = main.GetAvailableInstanceExtensionPacks();
@@ -49,7 +49,7 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 
 	eventHandler.RegisterQuitEventCallback(MainSettings::QuitEventCallback, &settings, 1);
 
-	VulkanSimplified::InstanceCreationData instanceInit;
+	VS::InstanceCreationData instanceInit;
 	instanceInit.engineVersion.SetVulkanPatchVersion(0);
 	instanceInit.engineVersion.SetVulkanMinorVersion(0);
 	instanceInit.engineVersion.SetVulkanMajorVersion(1);
@@ -66,7 +66,7 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 
 	instanceInit.engineName = "Vulkan Simplified";
 
-	instanceInit.usedVulkanApiVersion = VulkanSimplified::VersionData(0, 1, 0, 0);
+	instanceInit.usedVulkanApiVersion = VS::VersionData(0, 1, 0, 0);
 	instanceInit.enabledExtensionPacks.sdlRequiredExtensions = true;
 
 #if defined(_DEBUG) || defined(DEBUG) || defined(DEBUG_UTILS)

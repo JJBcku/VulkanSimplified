@@ -23,13 +23,13 @@
 
 #include "VSDeviceInitialCapacitiesList.h"
 
-static bool CheckFormatSupport(const VulkanSimplified::FormatsSupportedImageFeaturesList& supportedImageFormats,
-	const VulkanSimplified::SurfaceSupportedColorspaceFormatsLists& surfaceColorspace, const VulkanSimplified::DataFormatSetIndependentID& formatID)
+static bool CheckFormatSupport(const VS::FormatsSupportedImageFeaturesList& supportedImageFormats,
+	const VS::SurfaceSupportedColorspaceFormatsLists& surfaceColorspace, const VS::DataFormatSetIndependentID& formatID)
 {
 	return CheckFormatSupport(supportedImageFormats.blitDst, formatID) && CheckFormatSupport(surfaceColorspace.srgbNonlinearColorspace, formatID);
 }
 
-static size_t ChooseGPU(VulkanSimplified::Instance& instance)
+static size_t ChooseGPU(VS::Instance& instance)
 {
 	size_t ret = 0;
 
@@ -64,60 +64,60 @@ static size_t ChooseGPU(VulkanSimplified::Instance& instance)
 
 		auto& deviceSurfaceSupport = deviceSurfaceSupportOptional.value();
 
-		if ((deviceSurfaceSupport.surfaceUsageFlags & VulkanSimplified::IMAGE_USAGE_TRANSFER_DST) != VulkanSimplified::IMAGE_USAGE_TRANSFER_DST)
+		if ((deviceSurfaceSupport.surfaceUsageFlags & VS::IMAGE_USAGE_TRANSFER_DST) != VS::IMAGE_USAGE_TRANSFER_DST)
 			continue;
 
-		if ((deviceSurfaceSupport.surfacePresentModes & VulkanSimplified::PRESENT_MODE_FIFO_STRICT) != VulkanSimplified::PRESENT_MODE_FIFO_STRICT)
+		if ((deviceSurfaceSupport.surfacePresentModes & VS::PRESENT_MODE_FIFO_STRICT) != VS::PRESENT_MODE_FIFO_STRICT)
 			continue;
 
 		auto& surfaceSupport = deviceSurfaceSupport.surfaceSupportedSwapchainFormats;
 		auto& supportedFormats = deviceInfo.GetFormatsSupportedFeatures();
 		auto& imageSupport = supportedFormats.formatFeaturesOptimalImageSupport;
 
-		bool bgraSupported = CheckFormatSupport(imageSupport, surfaceSupport, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM) &&
-			CheckFormatSupport(imageSupport.colorAttachment, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM);
-		bool rgbaSupported = CheckFormatSupport(imageSupport, surfaceSupport, VulkanSimplified::DATA_FORMAT_RGBA8_UNORM) &&
-			CheckFormatSupport(imageSupport.colorAttachment, VulkanSimplified::DATA_FORMAT_RGBA8_UNORM);
+		bool bgraSupported = CheckFormatSupport(imageSupport, surfaceSupport, VS::DATA_FORMAT_BGRA8_UNORM) &&
+			CheckFormatSupport(imageSupport.colorAttachment, VS::DATA_FORMAT_BGRA8_UNORM);
+		bool rgbaSupported = CheckFormatSupport(imageSupport, surfaceSupport, VS::DATA_FORMAT_RGBA8_UNORM) &&
+			CheckFormatSupport(imageSupport.colorAttachment, VS::DATA_FORMAT_RGBA8_UNORM);
 
 		if (!bgraSupported && !rgbaSupported)
 			continue;
 
-		if (!CheckFormatSupport(supportedFormats.formatFeaturesBufferSupport.vertexBuffer, VulkanSimplified::DATA_FORMAT_RGBA32_SFLOAT))
+		if (!CheckFormatSupport(supportedFormats.formatFeaturesBufferSupport.vertexBuffer, VS::DATA_FORMAT_RGBA32_SFLOAT))
 			continue;
 
-		bool depthSupported = CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D32_SFLOAT_S8_UINT) ||
-			CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D24_UNORM_S8_UINT) ||
-			CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D16_UNORM_S8_UINT);
+		bool depthSupported = CheckFormatSupport(imageSupport.depthStencilAttachment, VS::DATA_FORMAT_D32_SFLOAT_S8_UINT) ||
+			CheckFormatSupport(imageSupport.depthStencilAttachment, VS::DATA_FORMAT_D24_UNORM_S8_UINT) ||
+			CheckFormatSupport(imageSupport.depthStencilAttachment, VS::DATA_FORMAT_D16_UNORM_S8_UINT);
 
 		if (!depthSupported)
 			continue;
 
 		switch (deviceProperties.deviceType)
 		{
-		case VulkanSimplified::DeviceType::OTHER:
+		case VS::DeviceType::OTHER:
 			break;
-		case VulkanSimplified::DeviceType::INTERGRATED_GPU:
+		case VS::DeviceType::INTERGRATED_GPU:
 			if (deviceProperties.apiMaxSupportedVersion > bestIntegratedGpuApi)
 			{
 				bestIntegratedGpu = i;
 				bestIntegratedGpuApi = deviceProperties.apiMaxSupportedVersion;
 			}
 			break;
-		case VulkanSimplified::DeviceType::DISCRETE_GPU:
+		case VS::DeviceType::DISCRETE_GPU:
 			if (deviceProperties.apiMaxSupportedVersion > bestDiscreteGpuApi)
 			{
 				bestDiscreteGpu = i;
 				bestDiscreteGpuApi = deviceProperties.apiMaxSupportedVersion;
 			}
 			break;
-		case VulkanSimplified::DeviceType::VIRTUAL_GPU:
+		case VS::DeviceType::VIRTUAL_GPU:
 			if (deviceProperties.apiMaxSupportedVersion > bestVirtualGpuApi)
 			{
 				bestVirtualGpu = i;
 				bestVirtualGpuApi = deviceProperties.apiMaxSupportedVersion;
 			}
 			break;
-		case VulkanSimplified::DeviceType::CPU:
+		case VS::DeviceType::CPU:
 			if (deviceProperties.apiMaxSupportedVersion > bestCpuApi)
 			{
 				bestCpu = i;
@@ -153,7 +153,7 @@ static size_t ChooseGPU(VulkanSimplified::Instance& instance)
 	return ret;
 }
 
-static std::pair<uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::PhysicalDeviceData& physicalDevice)
+static std::pair<uint32_t, bool> PickGraphicQueueFamily(VS::PhysicalDeviceData& physicalDevice)
 {
 	std::pair<uint32_t, bool> choosenFamily = { std::numeric_limits<uint32_t>::max(), false };
 
@@ -179,16 +179,16 @@ static std::pair<uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::Physic
 	{
 		auto& family = queueData[i];
 
-		if ((family.queueTypes & VulkanSimplified::QUEUE_TYPE_GRAPHICS) != VulkanSimplified::QUEUE_TYPE_GRAPHICS)
+		if ((family.queueTypes & VS::QUEUE_TYPE_GRAPHICS) != VS::QUEUE_TYPE_GRAPHICS)
 			continue;
 
 		bool better = false;
 		auto biggestGranularity = std::max(std::max(family.minImageTransferGranularityWidth, family.minImageTransferGranularityHeight), family.minImageTransferGranularityDepth);
 
-		if ((family.queueTypes & VulkanSimplified::QUEUE_TYPE_VIDEO_DECODE) != VulkanSimplified::QUEUE_TYPE_VIDEO_DECODE &&
-			(family.queueTypes & VulkanSimplified::QUEUE_TYPE_VIDEO_ENCODE) != VulkanSimplified::QUEUE_TYPE_VIDEO_ENCODE)
+		if ((family.queueTypes & VS::QUEUE_TYPE_VIDEO_DECODE) != VS::QUEUE_TYPE_VIDEO_DECODE &&
+			(family.queueTypes & VS::QUEUE_TYPE_VIDEO_ENCODE) != VS::QUEUE_TYPE_VIDEO_ENCODE)
 		{
-			if (queueData[i].presentationSupport == VulkanSimplified::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
 			{
 				if (bestNonVideoGraphicQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -227,7 +227,7 @@ static std::pair<uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::Physic
 		}
 		else
 		{
-			if (queueData[i].presentationSupport == VulkanSimplified::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
 			{
 				if (bestVideoGraphicQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -294,7 +294,7 @@ static std::pair<uint32_t, bool> PickGraphicQueueFamily(VulkanSimplified::Physic
 	return choosenFamily;
 }
 
-static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily(const VulkanSimplified::PhysicalDeviceData& physicalDevice)
+static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily(const VS::PhysicalDeviceData& physicalDevice)
 {
 	std::optional<std::pair<uint32_t, bool>> choosenFamily;
 
@@ -320,20 +320,20 @@ static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily
 	{
 		auto& family = queueData[i];
 
-		if ((family.queueTypes & VulkanSimplified::QUEUE_TYPE_GRAPHICS) == VulkanSimplified::QUEUE_TYPE_GRAPHICS ||
-			(family.queueTypes & VulkanSimplified::QUEUE_TYPE_COMPUTE) == VulkanSimplified::QUEUE_TYPE_COMPUTE)
+		if ((family.queueTypes & VS::QUEUE_TYPE_GRAPHICS) == VS::QUEUE_TYPE_GRAPHICS ||
+			(family.queueTypes & VS::QUEUE_TYPE_COMPUTE) == VS::QUEUE_TYPE_COMPUTE)
 			continue;
 
-		if ((family.queueTypes & VulkanSimplified::QUEUE_TYPE_TRANSFER) != VulkanSimplified::QUEUE_TYPE_TRANSFER)
+		if ((family.queueTypes & VS::QUEUE_TYPE_TRANSFER) != VS::QUEUE_TYPE_TRANSFER)
 			continue;
 
 		bool better = false;
 		auto biggestGranularity = std::max(std::max(family.minImageTransferGranularityWidth, family.minImageTransferGranularityHeight), family.minImageTransferGranularityDepth);
 
-		if ((family.queueTypes & VulkanSimplified::QUEUE_TYPE_VIDEO_DECODE) != VulkanSimplified::QUEUE_TYPE_VIDEO_DECODE &&
-			(family.queueTypes & VulkanSimplified::QUEUE_TYPE_VIDEO_ENCODE) != VulkanSimplified::QUEUE_TYPE_VIDEO_ENCODE)
+		if ((family.queueTypes & VS::QUEUE_TYPE_VIDEO_DECODE) != VS::QUEUE_TYPE_VIDEO_DECODE &&
+			(family.queueTypes & VS::QUEUE_TYPE_VIDEO_ENCODE) != VS::QUEUE_TYPE_VIDEO_ENCODE)
 		{
-			if (queueData[i].presentationSupport == VulkanSimplified::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
 			{
 				if (bestNonVideoTransferOnlyQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -372,7 +372,7 @@ static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily
 		}
 		else
 		{
-			if (queueData[i].presentationSupport == VulkanSimplified::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
 			{
 				if (bestVideoTransferOnlyQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -431,13 +431,13 @@ static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily
 	return choosenFamily;
 }
 
-static uint32_t FindPresentingQueueFamily(const std::vector<VulkanSimplified::QueueFamilyData> queueData)
+static uint32_t FindPresentingQueueFamily(const std::vector<VS::QueueFamilyData> queueData)
 {
 	uint32_t ret = std::numeric_limits<uint32_t>::max();
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
-		if (queueData[i].presentationSupport == VulkanSimplified::BOOL64_TRUE)
+		if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
 		{
 			ret = static_cast<uint32_t>(i);
 			break;
@@ -450,9 +450,9 @@ static uint32_t FindPresentingQueueFamily(const std::vector<VulkanSimplified::Qu
 	return ret;
 }
 
-static VulkanSimplified::ImageSampleFlagBits GetMaxSamples(VulkanSimplified::ImageSampleFlags samples)
+static VS::ImageSampleFlagBits GetMaxSamples(VS::ImageSampleFlags samples)
 {
-	using VulkanSimplified::ImageSampleFlagBits;
+	using VS::ImageSampleFlagBits;
 
 	ImageSampleFlagBits ret = ImageSampleFlagBits::SAMPLE_1;
 
@@ -497,25 +497,25 @@ void CreateInstanceDependentData(VulkanData& data)
 	auto& supportedFormats = deviceInfo.GetFormatsSupportedFeatures();
 	auto& imageSupport = supportedFormats.formatFeaturesOptimalImageSupport;
 
-	bool bgraSupported = CheckFormatSupport(imageSupport, surfaceSupport, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM) &&
-		CheckFormatSupport(imageSupport.colorAttachment, VulkanSimplified::DATA_FORMAT_BGRA8_UNORM);
+	bool bgraSupported = CheckFormatSupport(imageSupport, surfaceSupport, VS::DATA_FORMAT_BGRA8_UNORM) &&
+		CheckFormatSupport(imageSupport.colorAttachment, VS::DATA_FORMAT_BGRA8_UNORM);
 
 	if (bgraSupported)
-		instanceData.supportedColorFormat = VulkanSimplified::DATA_FORMAT_BGRA8_UNORM;
+		instanceData.supportedColorFormat = VS::DATA_FORMAT_BGRA8_UNORM;
 	else
-		instanceData.supportedColorFormat = VulkanSimplified::DATA_FORMAT_RGBA8_UNORM;
+		instanceData.supportedColorFormat = VS::DATA_FORMAT_RGBA8_UNORM;
 
-	if (CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D32_SFLOAT_S8_UINT))
+	if (CheckFormatSupport(imageSupport.depthStencilAttachment, VS::DATA_FORMAT_D32_SFLOAT_S8_UINT))
 	{
-		instanceData.supportedDepthFormat = VulkanSimplified::DATA_FORMAT_D32_SFLOAT_S8_UINT;
+		instanceData.supportedDepthFormat = VS::DATA_FORMAT_D32_SFLOAT_S8_UINT;
 	}
-	else if (CheckFormatSupport(imageSupport.depthStencilAttachment, VulkanSimplified::DATA_FORMAT_D24_UNORM_S8_UINT))
+	else if (CheckFormatSupport(imageSupport.depthStencilAttachment, VS::DATA_FORMAT_D24_UNORM_S8_UINT))
 	{
-		instanceData.supportedDepthFormat = VulkanSimplified::DATA_FORMAT_D24_UNORM_S8_UINT;
+		instanceData.supportedDepthFormat = VS::DATA_FORMAT_D24_UNORM_S8_UINT;
 	}
 	else
 	{
-		instanceData.supportedDepthFormat = VulkanSimplified::DATA_FORMAT_D16_UNORM_S8_UINT;
+		instanceData.supportedDepthFormat = VS::DATA_FORMAT_D16_UNORM_S8_UINT;
 	}
 
 	instanceData.minSwapchainImageAmount = deviceSurfaceSupport.minImageCount;
@@ -524,11 +524,11 @@ void CreateInstanceDependentData(VulkanData& data)
 	instanceData.maxSamples = GetMaxSamples(deviceProperties.limits.framebufferLimits.framebufferColorSampleCounts &
 		deviceProperties.limits.framebufferLimits.framebufferColorSampleCounts);
 
-	VulkanSimplified::LogicalDeviceCreationData deviceCreationData;
+	VS::LogicalDeviceCreationData deviceCreationData;
 	deviceCreationData.physicalGPUIndex = instanceData.physicalDevicesIndex;
 	deviceCreationData.queuesCreationInfo.reserve(3);
 
-	VulkanSimplified::QueueCreationData queueCreationData;
+	VS::QueueCreationData queueCreationData;
 	queueCreationData.queuesPriorities.push_back(std::numeric_limits<uint16_t>::max());
 
 	auto graphicQueueFamily = PickGraphicQueueFamily(physicalDevice);
@@ -537,20 +537,20 @@ void CreateInstanceDependentData(VulkanData& data)
 	instanceData.graphicsQueueFamily = queueCreationData.queuesFamily;
 	deviceCreationData.queuesCreationInfo.push_back(queueCreationData);
 
-	if ((deviceFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY)
+	if ((deviceFeatures & VS::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY) == VS::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY)
 	{
 		instanceData.maxAnisotropy = deviceProperties.limits.maxSamplerAnisotropy;
-		deviceCreationData.vulkan10EnabledFeatures |= VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY;
+		deviceCreationData.vulkan10EnabledFeatures |= VS::DEVICE_VULKAN10_FEATURE_SAMPLER_ANISOTROPY;
 	}
 	else
 	{
 		instanceData.maxAnisotropy = 0.0f;
 	}
 
-	if ((deviceFeatures & VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING) == VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING)
+	if ((deviceFeatures & VS::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING) == VS::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING)
 	{
 		instanceData.sampleShadingRate = std::numeric_limits<uint32_t>::max();
-		deviceCreationData.vulkan10EnabledFeatures |= VulkanSimplified::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING;
+		deviceCreationData.vulkan10EnabledFeatures |= VS::DEVICE_VULKAN10_FEATURE_SAMPLE_RATE_SHADING;
 	}
 
 	auto transferOnlyFamily = TryToFindTransferOnlyQueueFamily(physicalDevice);
