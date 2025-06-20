@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <compare>
 
 namespace VulkanSimplified
 {
@@ -9,6 +10,9 @@ namespace VulkanSimplified
 	public:
 		VersionData(uint16_t variant = 0, uint16_t major = 0, uint16_t minor = 0, uint16_t patch = 0);
 		VersionData(uint32_t vulkanApiVersion);
+
+		std::strong_ordering operator<=>(const VersionData& rhs) const = default;
+		bool operator==(const VersionData& rhs) const = default;
 
 		uint32_t GetVulkanApiCompatibleVersion() const;
 

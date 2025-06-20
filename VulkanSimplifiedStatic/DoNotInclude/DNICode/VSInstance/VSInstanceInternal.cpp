@@ -25,14 +25,14 @@ namespace VulkanSimplifiedInternal
 		_padding = 0;
 		_engineName = initData.engineName;
 		_engineVersion = initData.engineVersion;
-		_usedVulkanApiVersion = initData.usedVulkanApiVersion;
+		_usedVulkanApiVersion = initData.usedVulkanApiVersion.GetVulkanApiCompatibleVersion();
 
 		VkApplicationInfo appInfo{};
 		appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		appInfo.pApplicationName = _appName.c_str();
-		appInfo.applicationVersion = _appVersion;
+		appInfo.applicationVersion = _appVersion.GetVulkanApiCompatibleVersion();
 		appInfo.pEngineName = _engineName.c_str();
-		appInfo.engineVersion = _engineVersion;
+		appInfo.engineVersion = _engineVersion.GetVulkanApiCompatibleVersion();
 		appInfo.apiVersion = _usedVulkanApiVersion;
 
 		VkInstanceCreateInfo createInfo{};
@@ -154,6 +154,26 @@ namespace VulkanSimplifiedInternal
 		{
 			throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to find any Vulkan compatible devices!");
 		}
+	}
+
+	const std::string& InstanceInternal::GetAppFullName() const
+	{
+		return _appName;
+	}
+
+	const std::string& InstanceInternal::GetEngineFullName() const
+	{
+		return _engineName;
+	}
+
+	VulkanSimplified::VersionData InstanceInternal::GetAppVersion() const
+	{
+		return _appVersion;
+	}
+
+	VulkanSimplified::VersionData InstanceInternal::GetEngineVersion() const
+	{
+		return _engineVersion;
 	}
 
 	size_t InstanceInternal::GetAvailableDevicesCount() const

@@ -3,13 +3,8 @@
 
 namespace VulkanSimplifiedInternal
 {
-	InstanceInternalCreationData::InstanceInternalCreationData()
+	InstanceInternalCreationData::InstanceInternalCreationData() : appName("Unknown"), appVariantName(), appVersion(), engineName("Unknown"), engineVersion(),
+		requestedExtensions(), requestedLayers(), usedVulkanApiVersion(), enabledExtensionPacksList(), enabledLayerPacksList()
 	{
-		appName = "Unknown";
-		appVersion = 0;
-		padding = 0;
-		engineName = "Unknown";
-		engineVersion = 0;
-		usedVulkanApiVersion = 0;
 	}
 }

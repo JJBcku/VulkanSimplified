@@ -2,6 +2,7 @@
 
 #include "../../../Include/VSMain/VSInstanceExtensionPacksList.h"
 #include "../../../Include/VSMain/VSInstanceLayerPacksList.h"
+#include "../../../Include/VSCommon/VSVersionData.h"
 
 #include <string>
 #include <stdint.h>
@@ -12,14 +13,14 @@ namespace VulkanSimplifiedInternal
 	struct InstanceInternalCreationData
 	{
 		std::string appName;
-		uint32_t appVersion;
-		uint32_t padding;
+		std::string appVariantName;
+		VulkanSimplified::VersionData appVersion;
 		std::string engineName;
-		uint32_t engineVersion;
-		uint32_t usedVulkanApiVersion;
+		VulkanSimplified::VersionData engineVersion;
 		std::vector<const char*> requestedExtensions;
 		std::vector<const char*> requestedLayers;
 
+		VulkanSimplified::VersionData usedVulkanApiVersion;
 		VulkanSimplified::InstanceExtensionPacksList enabledExtensionPacksList;
 		VulkanSimplified::InstanceLayerPacksList enabledLayerPacksList;
 

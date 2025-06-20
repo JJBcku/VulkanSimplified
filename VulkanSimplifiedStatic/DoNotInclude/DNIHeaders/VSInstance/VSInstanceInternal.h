@@ -3,6 +3,8 @@
 #include "../../../Include/VSMain/VSInstanceExtensionPacksList.h"
 #include "../../../Include/VSMain/VSInstanceLayerPacksList.h"
 
+#include "../../../Include/VSCommon/VSVersionData.h"
+
 #include <string>
 #include <stdint.h>
 #include <vector>
@@ -39,6 +41,12 @@ namespace VulkanSimplifiedInternal
 		InstanceInternal& operator=(const InstanceInternal&) noexcept = delete;
 		InstanceInternal& operator=(InstanceInternal&&) noexcept = delete;
 
+		const std::string& GetAppFullName() const;
+		const std::string& GetEngineFullName() const;
+
+		VulkanSimplified::VersionData GetAppVersion() const;
+		VulkanSimplified::VersionData GetEngineVersion() const;
+
 		size_t GetAvailableDevicesCount() const;
 
 		PhysicalDeviceDataInternal& GetPhysicalDeviceData(size_t deviceIndex);
@@ -57,11 +65,11 @@ namespace VulkanSimplifiedInternal
 		VkDebugUtilsMessengerEXT _debugMessenger;
 
 		std::string _appName;
-		uint32_t _appVersion;
-		uint32_t _padding;
+		VulkanSimplified::VersionData _appVersion;
 		std::string _engineName;
-		uint32_t _engineVersion;
+		VulkanSimplified::VersionData _engineVersion;
 		uint32_t _usedVulkanApiVersion;
+		uint32_t _padding;
 
 		VulkanSimplified::InstanceExtensionPacksList _enabledExtensionPacksList;
 		VulkanSimplified::InstanceLayerPacksList _enabledLayerPacksList;

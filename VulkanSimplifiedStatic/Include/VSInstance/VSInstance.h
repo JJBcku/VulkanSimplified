@@ -13,6 +13,8 @@ namespace VulkanSimplified
 	struct LogicalDeviceCreationData;
 	struct DeviceInitialCapacitiesList;
 
+	class VersionData;
+
 	class Instance
 	{
 	public:
@@ -20,6 +22,12 @@ namespace VulkanSimplified
 		~Instance();
 
 		Instance& operator=(const Instance&) noexcept = delete;
+
+		const std::string& GetAppFullName() const;
+		const std::string& GetEngineFullName() const;
+
+		VersionData GetAppVersion() const;
+		VersionData GetEngineVersion() const;
 
 		size_t GetAvailableDevicesCount() const;
 

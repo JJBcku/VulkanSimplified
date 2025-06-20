@@ -8,6 +8,8 @@
 
 #include "../../../Include/VSDevice/VSDeviceInitialCapacitiesList.h"
 
+#include "../../../Include/VSCommon/VSVersionData.h"
+
 namespace VulkanSimplified
 {
 	Instance::Instance(VulkanSimplifiedInternal::InstanceInternal& ref) : _internal(ref)
@@ -16,6 +18,26 @@ namespace VulkanSimplified
 
 	Instance::~Instance()
 	{
+	}
+
+	const std::string& VulkanSimplified::Instance::GetAppFullName() const
+	{
+		return _internal.GetAppFullName();
+	}
+
+	const std::string& VulkanSimplified::Instance::GetEngineFullName() const
+	{
+		return _internal.GetEngineFullName();
+	}
+
+	VersionData Instance::GetAppVersion() const
+	{
+		return _internal.GetAppVersion();
+	}
+
+	VersionData Instance::GetEngineVersion() const
+	{
+		return _internal.GetEngineVersion();
 	}
 
 	size_t VulkanSimplified::Instance::GetAvailableDevicesCount() const

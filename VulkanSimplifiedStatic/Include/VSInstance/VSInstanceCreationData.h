@@ -8,6 +8,12 @@ namespace VulkanSimplified
 {
 	struct InstanceCreationData
 	{
+		std::string appName;
+		std::string appVariantName;
+		VersionData appVersion;
+		std::string engineName;
+		VersionData engineVersion;
+
 		VersionData usedVulkanApiVersion;
 		InstanceExtensionPacksList enabledExtensionPacks;
 		InstanceLayerPacksList enabledLayerPacks;

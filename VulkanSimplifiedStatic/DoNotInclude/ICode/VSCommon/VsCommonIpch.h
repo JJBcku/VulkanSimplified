@@ -7,3 +7,4 @@
 #include <optional>
 #include <limits>
 #include <memory>
+#include <compare>

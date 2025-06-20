@@ -44,18 +44,11 @@ namespace VulkanSimplifiedInternal
 		const SharedDataMainListInternal& GetSharedDataMainList() const;
 		const InstanceInternal& GetInstance() const;
 
-		VulkanSimplified::VersionData GetAppVersion() const;
 		VulkanSimplified::VersionData GetMaxAvailableVulkanVersion() const;
 		VulkanSimplified::InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
 		VulkanSimplified::InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
 
 	private:
-		std::string _appName;
-		std::string _appVariantName;
-		VulkanSimplified::VersionData _appVersion;
-		std::string _engineName;
-		VulkanSimplified::VersionData _engineVersion;
-
 		VulkanSimplified::VersionData _maxApiVersion;
 		VulkanSimplified::InstanceExtensionPacksList _availableExtensionPacksList;
 		VulkanSimplified::InstanceLayerPacksList _availableLayerPacksList;

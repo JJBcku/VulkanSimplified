@@ -68,11 +68,6 @@ namespace VulkanSimplified
 		return _internal->GetInstance();
 	}
 
-	VersionData Main::GetAppVersion() const
-	{
-		return _internal->GetAppVersion();
-	}
-
 	VersionData Main::GetMaxAvailableVulkanVersion() const
 	{
 		return _internal->GetMaxAvailableVulkanVersion();

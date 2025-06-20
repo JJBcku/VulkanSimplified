@@ -11,12 +11,6 @@ namespace VulkanSimplified
 {
 	struct MainInitData
 	{
-		std::string appName;
-		std::string appVariantName;
-		VersionData appVersion;
-		std::string engineName;
-		VersionData engineVersion;
-
 		SdlEventHandlerInitData eventHandlerData;
 		SharedDataListsCapacities sharedDataCapabilities;
 

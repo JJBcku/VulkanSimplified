@@ -28,12 +28,6 @@ namespace VulkanSimplifiedInternal
 		if (result < 0)
 			throw std::runtime_error(SDL_GetError());
 
-		_appName = initData.appName;
-		_appVariantName = initData.appVariantName;
-		_appVersion = initData.appVersion;
-		_engineName = initData.engineName;
-		_engineVersion = initData.engineVersion;
-
 		_maxApiVersion = FindMaximumAvailableVulkanVersion();
 
 		{
@@ -70,13 +64,13 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("MainInternal::CreateInstance Error: Program tried to create the instance class twice!");
 
 		InstanceInternalCreationData init;
-		init.appName = _appName + _appVariantName;
-		init.appVersion = _appVersion.GetVulkanApiCompatibleVersion();
-		init.engineName = _engineName;
-		init.engineVersion = _engineVersion.GetVulkanApiCompatibleVersion();
-		init.usedVulkanApiVersion = instanceInit.usedVulkanApiVersion.GetVulkanApiCompatibleVersion();
+		init.appName = instanceInit.appName + std::string(" ") + instanceInit.appVariantName;
+		init.appVersion = instanceInit.appVersion.GetVulkanApiCompatibleVersion();
+		init.engineName = instanceInit.engineName;
+		init.engineVersion = instanceInit.engineVersion.GetVulkanApiCompatibleVersion();
+		init.usedVulkanApiVersion = instanceInit.usedVulkanApiVersion;
 
-		if (init.usedVulkanApiVersion < VK_API_VERSION_1_0)
+		if (init.usedVulkanApiVersion < VulkanSimplified::VersionData(0, 1, 0, 0))
 			throw std::runtime_error("MainInternal::CreateInstance Error: Vulkan api version used must be 1.0.0 or later!");
 
 		init.requestedExtensions = CompileRequestedInstanceExtensions(instanceInit.enabledExtensionPacks, _availableExtensionPacksList);
@@ -117,11 +111,6 @@ namespace VulkanSimplifiedInternal
 	{
 		assert(_instance);
 		return *_instance;
-	}
-
-	VulkanSimplified::VersionData MainInternal::GetAppVersion() const
-	{
-		return _appVersion;
 	}
 
 	VulkanSimplified::VersionData MainInternal::GetMaxAvailableVulkanVersion() const

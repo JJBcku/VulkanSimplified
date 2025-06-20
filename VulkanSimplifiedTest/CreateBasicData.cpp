@@ -27,11 +27,6 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 	data.basicData = std::make_unique<VulkanBasicData>();
 	
 	VulkanSimplified::MainInitData basicInit;
-	basicInit.engineVersion.SetVulkanPatchVersion(0);
-	basicInit.engineVersion.SetVulkanMinorVersion(0);
-	basicInit.engineVersion.SetVulkanMajorVersion(1);
-
-	basicInit.appVersion = basicInit.engineVersion;
 
 	data.basicData->vsmain = std::make_unique<VulkanSimplified::Main>(basicInit);
 	auto& main = *data.basicData->vsmain;
@@ -55,7 +50,23 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 	eventHandler.RegisterQuitEventCallback(MainSettings::QuitEventCallback, &settings, 1);
 
 	VulkanSimplified::InstanceCreationData instanceInit;
-	instanceInit.usedVulkanApiVersion = main.GetMaxAvailableVulkanVersion();
+	instanceInit.engineVersion.SetVulkanPatchVersion(0);
+	instanceInit.engineVersion.SetVulkanMinorVersion(0);
+	instanceInit.engineVersion.SetVulkanMajorVersion(1);
+
+	instanceInit.appVersion = instanceInit.engineVersion;
+
+	instanceInit.appName = "VulkanSimplified Test";
+	
+#if defined(_DEBUG) || defined(DEBUG)
+	instanceInit.appVariantName = "x64 Debug";
+#else
+	instanceInit.appVariantName = "x64 Release";
+#endif
+
+	instanceInit.engineName = "Vulkan Simplified";
+
+	instanceInit.usedVulkanApiVersion = VulkanSimplified::VersionData(0, 1, 0, 0);
 	instanceInit.enabledExtensionPacks.sdlRequiredExtensions = true;
 
 #if defined(_DEBUG) || defined(DEBUG) || defined(DEBUG_UTILS)

@@ -43,7 +43,6 @@ namespace VulkanSimplified
 		const SharedDataMainList GetSharedDataMainList() const;
 		const Instance GetInstance() const;
 
-		VersionData GetAppVersion() const;
 		VersionData GetMaxAvailableVulkanVersion() const;
 
 		InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
