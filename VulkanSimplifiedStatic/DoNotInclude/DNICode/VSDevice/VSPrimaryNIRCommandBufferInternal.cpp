@@ -18,7 +18,7 @@
 
 #include "../../../Include/VSDevice/VSQueueOwnershipTransferData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
@@ -38,7 +38,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void PrimaryNIRCommandBufferInternal::BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID, IDObject<AutoCleanupFramebuffer> framebufferID, uint32_t startX, uint32_t startY,
-		uint32_t width, uint32_t height, const std::vector<std::optional<VulkanSimplified::RenderPassClearValueID>>& clearValues, bool usesSecondaryBuffers)
+		uint32_t width, uint32_t height, const std::vector<std::optional<RenderPassClearValueID>>& clearValues, bool usesSecondaryBuffers)
 	{
 		VkRenderPassBeginInfo beginInfo{};
 		beginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
@@ -87,8 +87,8 @@ namespace VulkanSimplifiedInternal
 		vkCmdEndRenderPass(_buffer);
 	}
 
-	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToTrasferDestination(IDObject<VulkanSimplified::WindowPointer> windowID,
-		std::optional<VulkanSimplified::QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex)
+	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID,
+		std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex)
 	{
 		VkImageMemoryBarrier barrier{};
 		barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -120,8 +120,8 @@ namespace VulkanSimplifiedInternal
 		vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
 	}
 
-	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<VulkanSimplified::WindowPointer> windowID,
-		std::optional<VulkanSimplified::QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex)
+	void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID,
+		std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex)
 	{
 		VkImageMemoryBarrier barrier{};
 		barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -153,7 +153,7 @@ namespace VulkanSimplifiedInternal
 		vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
 	}
 
-	void PrimaryNIRCommandBufferInternal::BlitColorRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID,
+	void PrimaryNIRCommandBufferInternal::BlitColorRenderTargetToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID,
 		uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex)
 	{
 		auto& blitImageInternal = _imageList.GetColorRenderTargetImageInternal(imageID);
@@ -192,7 +192,7 @@ namespace VulkanSimplifiedInternal
 			1, &blitData, VK_FILTER_LINEAR);
 	}
 
-	void PrimaryNIRCommandBufferInternal::BlitResolveRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID,
+	void PrimaryNIRCommandBufferInternal::BlitResolveRenderTargetToSwapchainImage(IDObject<WindowPointer> windowID,
 		IDObject<AutoCleanupResolveRenderTargetImage> imageID, uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex)
 	{
 		auto& blitImageInternal = _imageList.GetResolveRenderTargetImageInternal(imageID);

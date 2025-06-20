@@ -23,12 +23,12 @@ namespace VulkanSimplified
 	struct MemoryDataList;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class MemoryObjectsListInternal
 	{
 	public:
-		MemoryObjectsListInternal(VkDevice device, const VulkanSimplified::MemoryDataList& memoryHeapList, const VulkanSimplified::MemoryObjectsListInitialCapacities& initialCapacities);
+		MemoryObjectsListInternal(VkDevice device, const MemoryDataList& memoryHeapList, const MemoryObjectsListInitialCapacities& initialCapacities);
 		~MemoryObjectsListInternal();
 
 		MemoryObjectsListInternal(const MemoryObjectsListInternal&) noexcept = delete;
@@ -37,27 +37,27 @@ namespace VulkanSimplifiedInternal
 		MemoryObjectsListInternal& operator=(const MemoryObjectsListInternal&) noexcept = delete;
 		MemoryObjectsListInternal& operator=(MemoryObjectsListInternal&&) noexcept = delete;
 
-		VulkanSimplified::MemoryAllocationFullID AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving);
+		MemoryAllocationFullID AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+			const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving);
 
-		std::optional<VulkanSimplified::MemoryAllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-			const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving);
+		std::optional<MemoryAllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+			const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving);
 
-		VkDeviceMemory GetMemory(VulkanSimplified::MemoryAllocationFullID allocationID) const;
+		VkDeviceMemory GetMemory(MemoryAllocationFullID allocationID) const;
 
-		bool FreeMemory(VulkanSimplified::MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty);
+		bool FreeMemory(MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty);
 
-		size_t BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+		size_t BindImage(MemoryAllocationFullID allocationID, VkImage image, MemorySize size, MemorySize aligment,
 			size_t addOnReserving);
-		size_t BindBuffer(VulkanSimplified::MemoryAllocationFullID allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+		size_t BindBuffer(MemoryAllocationFullID allocationID, VkBuffer buffer, MemorySize size, MemorySize aligment,
 			size_t addOnReserving);
 
-		bool RemoveSuballocation(VulkanSimplified::MemorySuballocationFullID allocationID, bool throwOnNotFound);
+		bool RemoveSuballocation(MemorySuballocationFullID allocationID, bool throwOnNotFound);
 
-		void WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize writeSize);
+		void WriteToMemory(MemorySuballocationFullID suballocationID, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize writeSize);
 
-		bool IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const;
+		bool IsMemoryMapped(MemoryAllocationFullID allocationID) const;
 
 	private:
 		size_t heapCount;

@@ -10,7 +10,7 @@
 
 namespace VulkanSimplified
 {
-	CommandPoolQFGroupList::CommandPoolQFGroupList(VulkanSimplifiedInternal::CommandPoolQFGroupListInternal& ref) : _internal(ref)
+	CommandPoolQFGroupList::CommandPoolQFGroupList(CommandPoolQFGroupListInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -51,7 +51,7 @@ namespace VulkanSimplified
 	}
 
 	void CommandPoolQFGroupList::SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmissionData>& submitInfos,
-		std::optional<IDObject<VulkanSimplifiedInternal::AutoCleanupFence>> fenceID)
+		std::optional<IDObject<AutoCleanupFence>> fenceID)
 	{
 		_internal.SubmitBuffers(queueID, submitInfos, fenceID);
 	}

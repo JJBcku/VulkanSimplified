@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupDescriptorSetLayout;
 
@@ -20,6 +20,6 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	typedef std::pair<IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData>,
-		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSampler>>> DescriptorSetBindingFullData;
+	typedef std::pair<IDObject<DescriptorSetLayoutBindingData>,
+		std::vector<IDObject<AutoCleanupSampler>>> DescriptorSetBindingFullData;
 }

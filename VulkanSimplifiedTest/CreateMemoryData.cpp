@@ -157,7 +157,7 @@ void CreateMemoryData(VulkanData& data)
 			memData.resolveRenderTargetImageViews.push_back(imageList.AddResolveRenderTargetImageView(memData.resolveRenderTargetImages[i]));
 		}
 
-		std::vector<std::pair<VulkanSimplified::RenderTargetImagesID, IDObject<VulkanSimplifiedInternal::AutoCleanupImageView>>> attachments;
+		std::vector<std::pair<VulkanSimplified::RenderTargetImagesID, IDObject<VulkanSimplified::AutoCleanupImageView>>> attachments;
 		
 		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 		{

@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSShaderSpecializationElement.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	ShaderSpecializationElement::ShaderSpecializationElement()
 	{

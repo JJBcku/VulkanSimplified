@@ -8,7 +8,7 @@
 #include <vector>
 #include <stdint.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class NIRCommandPoolInternal;
 	class AutoCleanupSemaphore;
@@ -22,7 +22,7 @@ namespace VulkanSimplified
 	class NIRCommandPool
 	{
 	public:
-		NIRCommandPool(VulkanSimplifiedInternal::NIRCommandPoolInternal& ref);
+		NIRCommandPool(NIRCommandPoolInternal& ref);
 		~NIRCommandPool();
 
 		NIRCommandPool(const NIRCommandPool&) noexcept = default;
@@ -42,10 +42,10 @@ namespace VulkanSimplified
 
 		void ResetCommandPool(bool freeResources);
 
-		bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>>& waitSemaphoreIDs,
+		bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs,
 			uint32_t imageIndex);
 
 	private:
-		VulkanSimplifiedInternal::NIRCommandPoolInternal& _internal;
+		NIRCommandPoolInternal& _internal;
 	};
 }

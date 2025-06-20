@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class NIRCommandPoolInternal;
 	class IRCommandPoolInternal;
@@ -12,6 +12,6 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	typedef std::unique_ptr<VulkanSimplifiedInternal::NIRCommandPoolInternal> NIRPoolPointer;
-	typedef std::unique_ptr<VulkanSimplifiedInternal::IRCommandPoolInternal> IRPoolPointer;
+	typedef std::unique_ptr<NIRCommandPoolInternal> NIRPoolPointer;
+	typedef std::unique_ptr<IRCommandPoolInternal> IRPoolPointer;
 }

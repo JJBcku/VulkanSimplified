@@ -19,12 +19,12 @@
 
 #include "../../DNIHeaders/VSCommon/VSPipelineStageFlagsInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	CommandPoolQFGroupListInternal::CommandPoolQFGroupListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
 		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList, size_t queueFamily,
-		const VulkanSimplified::CommandPoolQFGroupListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _deviceRenderPassData(deviceRenderPassData),
+		const CommandPoolQFGroupListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _deviceRenderPassData(deviceRenderPassData),
 		_sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList),
 		_dataBufferList(dataBufferList), _windowList(windowList), _descriptorDataList(descriptorDataList), _device(_deviceCore.GetDevice()), _queueFamily(queueFamily),
 		_noIndividualResetCommandPoolList(initialCapacities.noIndividualResetCommandPoolListInitialReservation),
@@ -36,7 +36,7 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<VulkanSimplified::NIRPoolPointer> CommandPoolQFGroupListInternal::AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+	IDObject<NIRPoolPointer> CommandPoolQFGroupListInternal::AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserving)
 	{
 		VkCommandPoolCreateInfo createInfo{};
@@ -59,7 +59,7 @@ namespace VulkanSimplifiedInternal
 			primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity), addOnReserving);
 	}
 
-	IDObject<VulkanSimplified::IRPoolPointer> CommandPoolQFGroupListInternal::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+	IDObject<IRPoolPointer> CommandPoolQFGroupListInternal::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserving)
 	{
 		VkCommandPoolCreateInfo createInfo{};
@@ -83,27 +83,27 @@ namespace VulkanSimplifiedInternal
 			primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity), addOnReserving);
 	}
 
-	NIRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithoutIndividualReset(IDObject<VulkanSimplified::NIRPoolPointer> poolID)
+	NIRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithoutIndividualReset(IDObject<NIRPoolPointer> poolID)
 	{
 		return *_noIndividualResetCommandPoolList.GetObject(poolID);
 	}
 
-	IRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithIndividualReset(IDObject<VulkanSimplified::IRPoolPointer> poolID)
+	IRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithIndividualReset(IDObject<IRPoolPointer> poolID)
 	{
 		return *_individualResetCommandPoolList.GetObject(poolID);
 	}
 
-	const NIRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithoutIndividualReset(IDObject<VulkanSimplified::NIRPoolPointer> poolID) const
+	const NIRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithoutIndividualReset(IDObject<NIRPoolPointer> poolID) const
 	{
 		return *_noIndividualResetCommandPoolList.GetConstObject(poolID);
 	}
 
-	const IRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithIndividualReset(IDObject<VulkanSimplified::IRPoolPointer> poolID) const
+	const IRCommandPoolInternal& CommandPoolQFGroupListInternal::GetCommandPoolWithIndividualReset(IDObject<IRPoolPointer> poolID) const
 	{
 		return *_individualResetCommandPoolList.GetConstObject(poolID);
 	}
 
-	void CommandPoolQFGroupListInternal::SubmitBuffers(size_t queueID, const std::vector<VulkanSimplified::CommandBufferSubmissionData>& submissionData,
+	void CommandPoolQFGroupListInternal::SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmissionData>& submissionData,
 		std::optional<IDObject<AutoCleanupFence>> fenceID)
 	{
 		VkQueue queue = _deviceCore.GetQueue(queueID);
@@ -179,25 +179,25 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("CommandPoolQFGroupListInternal::SubmitBuffers Error: Program failed to submit command buffers to queue!");
 	}
 
-	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(VulkanSimplified::CommandBufferGenericID bufferID) const
+	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(CommandBufferGenericID bufferID) const
 	{
 		VkCommandBuffer ret = VK_NULL_HANDLE;
 
 		switch (bufferID.type)
 		{
-		case VulkanSimplified::CommandBufferIDType::NIR_PRIMARY:
+		case CommandBufferIDType::NIR_PRIMARY:
 			ret = GetCommandBuffer(bufferID.NIRPrimaryID.commandPoolID, bufferID.NIRPrimaryID.commandBufferID);
 			break;
-		case VulkanSimplified::CommandBufferIDType::NIR_SECONDARY:
+		case CommandBufferIDType::NIR_SECONDARY:
 			ret = GetCommandBuffer(bufferID.NIRSecondaryID.commandPoolID, bufferID.NIRSecondaryID.commandBufferID);
 			break;
-		case VulkanSimplified::CommandBufferIDType::IR_PRIMARY:
+		case CommandBufferIDType::IR_PRIMARY:
 			ret = GetCommandBuffer(bufferID.IRPrimaryID.commandPoolID, bufferID.IRPrimaryID.commandBufferID);
 			break;
-		case VulkanSimplified::CommandBufferIDType::IR_SECONDARY:
+		case CommandBufferIDType::IR_SECONDARY:
 			ret = GetCommandBuffer(bufferID.IRSecondaryID.commandPoolID, bufferID.IRSecondaryID.commandBufferID);
 			break;
-		case VulkanSimplified::CommandBufferIDType::UNKNOWN:
+		case CommandBufferIDType::UNKNOWN:
 		default:
 			throw std::runtime_error("CommandPoolQFGroupListInternal::GetCommandBuffer Error: Program was given an erroneous command buffer ID type!");
 		}
@@ -205,8 +205,8 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<VulkanSimplified::NIRPoolPointer> commandPoolID,
-		IDObject<VulkanSimplified::PrimaryNIRPointer> commandBufferID) const
+	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<NIRPoolPointer> commandPoolID,
+		IDObject<PrimaryNIRPointer> commandBufferID) const
 	{
 		auto& commandPool = _noIndividualResetCommandPoolList.GetConstObject(commandPoolID);
 		auto& commandBuffer = commandPool->GetPrimaryCommandBuffer(commandBufferID);
@@ -214,8 +214,8 @@ namespace VulkanSimplifiedInternal
 		return commandBuffer.GetCommandBuffer();
 	}
 
-	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<VulkanSimplified::NIRPoolPointer> commandPoolID,
-		IDObject<VulkanSimplified::SecondaryNIRPointer> commandBufferID) const
+	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<NIRPoolPointer> commandPoolID,
+		IDObject<SecondaryNIRPointer> commandBufferID) const
 	{
 		auto& commandPool = _noIndividualResetCommandPoolList.GetConstObject(commandPoolID);
 		auto& commandBuffer = commandPool->GetSecondaryCommandBuffer(commandBufferID);
@@ -223,8 +223,8 @@ namespace VulkanSimplifiedInternal
 		return commandBuffer.GetCommandBuffer();
 	}
 
-	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<VulkanSimplified::IRPoolPointer> commandPoolID,
-		IDObject<VulkanSimplified::PrimaryIRPointer> commandBufferID) const
+	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<IRPoolPointer> commandPoolID,
+		IDObject<PrimaryIRPointer> commandBufferID) const
 	{
 		auto& commandPool = _individualResetCommandPoolList.GetConstObject(commandPoolID);
 		auto& commandBuffer = commandPool->GetPrimaryCommandBuffer(commandBufferID);
@@ -232,8 +232,8 @@ namespace VulkanSimplifiedInternal
 		return commandBuffer.GetCommandBuffer();
 	}
 
-	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<VulkanSimplified::IRPoolPointer> commandPoolID,
-		IDObject<VulkanSimplified::SecondaryIRPointer> commandBufferID) const
+	VkCommandBuffer CommandPoolQFGroupListInternal::GetCommandBuffer(IDObject<IRPoolPointer> commandPoolID,
+		IDObject<SecondaryIRPointer> commandBufferID) const
 	{
 		auto& commandPool = _individualResetCommandPoolList.GetConstObject(commandPoolID);
 		auto& commandBuffer = commandPool->GetSecondaryCommandBuffer(commandBufferID);

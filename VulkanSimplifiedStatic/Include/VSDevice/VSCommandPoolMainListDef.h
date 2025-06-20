@@ -4,12 +4,12 @@
 
 #include <memory>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class CommandPoolQFGroupListInternal;
 }
 
 namespace VulkanSimplified
 {
-	typedef std::unique_ptr<VulkanSimplifiedInternal::CommandPoolQFGroupListInternal> CommandPoolQFGroupPointer;
+	typedef std::unique_ptr<CommandPoolQFGroupListInternal> CommandPoolQFGroupPointer;
 }

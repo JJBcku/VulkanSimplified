@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSPipelineViewportData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PipelineViewportData::PipelineViewportData()
 	{

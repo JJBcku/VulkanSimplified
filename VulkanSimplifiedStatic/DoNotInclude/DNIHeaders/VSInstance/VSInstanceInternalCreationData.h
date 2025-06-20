@@ -8,21 +8,21 @@
 #include <stdint.h>
 #include <vector>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct InstanceInternalCreationData
 	{
 		std::string appName;
 		std::string appVariantName;
-		VulkanSimplified::VersionData appVersion;
+		VersionData appVersion;
 		std::string engineName;
-		VulkanSimplified::VersionData engineVersion;
+		VersionData engineVersion;
 		std::vector<const char*> requestedExtensions;
 		std::vector<const char*> requestedLayers;
 
-		VulkanSimplified::VersionData usedVulkanApiVersion;
-		VulkanSimplified::InstanceExtensionPacksList enabledExtensionPacksList;
-		VulkanSimplified::InstanceLayerPacksList enabledLayerPacksList;
+		VersionData usedVulkanApiVersion;
+		InstanceExtensionPacksList enabledExtensionPacksList;
+		InstanceLayerPacksList enabledLayerPacksList;
 
 		InstanceInternalCreationData();
 	};

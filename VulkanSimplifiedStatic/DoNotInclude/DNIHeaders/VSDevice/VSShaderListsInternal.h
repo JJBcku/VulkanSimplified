@@ -11,7 +11,7 @@ namespace VulkanSimplified
 	union ArbitraryShaderID;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupFragmentShaderModule;
 	class AutoCleanupVertexShaderModule;
@@ -19,13 +19,13 @@ namespace VulkanSimplifiedInternal
 	class ShaderListsInternal
 	{
 	public:
-		ShaderListsInternal(VkDevice device, const VulkanSimplified::ShaderListsInitialCapacitiesList& initialCapacities);
+		ShaderListsInternal(VkDevice device, const ShaderListsInitialCapacitiesList& initialCapacities);
 		~ShaderListsInternal();
 
 		IDObject<AutoCleanupFragmentShaderModule> CreateFragmentShaderModule(const char& data, size_t dataSize, size_t addOnReservation);
 		IDObject<AutoCleanupVertexShaderModule> CreateVertexShaderModule(const char& data, size_t dataSize, size_t addOnReservation);
 
-		VkShaderModule GetShaderModule(VulkanSimplified::ArbitraryShaderID shaderID) const;
+		VkShaderModule GetShaderModule(ArbitraryShaderID shaderID) const;
 
 	private:
 		VkDevice _device;

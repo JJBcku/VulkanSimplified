@@ -15,7 +15,7 @@ namespace VulkanSimplified
 	struct SubpassCreationDataWithResolving;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SharedRenderPassDataListInternal;
 
@@ -28,15 +28,15 @@ namespace VulkanSimplifiedInternal
 	{
 	public:
 		RenderPassListInternal(const SharedRenderPassDataListInternal& sharedRenderPassData, VkDevice device,
-			const VulkanSimplified::RenderPassDataListsInitialCapacities& initialCapacities);
+			const RenderPassDataListsInitialCapacities& initialCapacities);
 		~RenderPassListInternal();
 
 		IDObject<AutoCleanupRenderPass> AddRenderPassWithoutResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
-			const std::vector<VulkanSimplified::SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
+			const std::vector<SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
 			size_t addOnReserving);
 
 		IDObject<AutoCleanupRenderPass> AddRenderPassWithResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
-			const std::vector<VulkanSimplified::SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
+			const std::vector<SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
 			size_t addOnReserving);
 
 		VkRenderPass GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const;

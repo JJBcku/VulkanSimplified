@@ -14,7 +14,7 @@ namespace VulkanSimplified
 	struct CommandPoolQFGroupListsInitialCapacities;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 	class WindowListInternal;
@@ -33,7 +33,7 @@ namespace VulkanSimplifiedInternal
 		CommandPoolMainListInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& deviceRenderPassData,
 			const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData,
 			const SynchronizationDataListsInternal& synchronizationList, ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList,
-			WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList, const VulkanSimplified::CommandPoolMainListInitialCapacity& initialCapacity);
+			WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList, const CommandPoolMainListInitialCapacity& initialCapacity);
 		~CommandPoolMainListInternal();
 
 		CommandPoolMainListInternal(const CommandPoolMainListInternal&) noexcept = delete;
@@ -42,12 +42,12 @@ namespace VulkanSimplifiedInternal
 		CommandPoolMainListInternal& operator=(const CommandPoolMainListInternal&) noexcept = delete;
 		CommandPoolMainListInternal& operator=(CommandPoolMainListInternal&&) noexcept = delete;
 
-		IDObject<VulkanSimplified::CommandPoolQFGroupPointer> AddQueueFamiliesPoolGroup(uint32_t queueFamily,
-			const VulkanSimplified::CommandPoolQFGroupListsInitialCapacities& initialCapacities, size_t addOnReserving);
+		IDObject<CommandPoolQFGroupPointer> AddQueueFamiliesPoolGroup(uint32_t queueFamily,
+			const CommandPoolQFGroupListsInitialCapacities& initialCapacities, size_t addOnReserving);
 
-		CommandPoolQFGroupListInternal& GetQueueFamiliesPoolGroup(IDObject<VulkanSimplified::CommandPoolQFGroupPointer> qfGroupID);
+		CommandPoolQFGroupListInternal& GetQueueFamiliesPoolGroup(IDObject<CommandPoolQFGroupPointer> qfGroupID);
 
-		const CommandPoolQFGroupListInternal& GetQueueFamiliesPoolGroup(IDObject<VulkanSimplified::CommandPoolQFGroupPointer> qfGroupID) const;
+		const CommandPoolQFGroupListInternal& GetQueueFamiliesPoolGroup(IDObject<CommandPoolQFGroupPointer> qfGroupID) const;
 
 	private:
 		const DeviceCoreInternal& _deviceCore;
@@ -66,6 +66,6 @@ namespace VulkanSimplifiedInternal
 
 		VkDevice _device;
 
-		UnsortedIDVector<VulkanSimplified::CommandPoolQFGroupPointer> _qfGroupList;
+		UnsortedIDVector<CommandPoolQFGroupPointer> _qfGroupList;
 	};
 }

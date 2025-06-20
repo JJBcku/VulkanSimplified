@@ -12,10 +12,10 @@
 #include "../../DNIHeaders/VSDevice/VSDeviceCoreInternal.h"
 #include "../../DNIHeaders/VSDevice/VSMemoryObjectsListInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	DataBufferListsInternal::DataBufferListsInternal(const DeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryObjectsList, VkDevice device,
-		const VulkanSimplified::DataBufferListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _memoryObjectsList(memoryObjectsList), _device(device),
+		const DataBufferListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _memoryObjectsList(memoryObjectsList), _device(device),
 		_vertexBuffers(initialCapacities.vertexBufferListInitialCapacity), _stagingBuffers(initialCapacities.stagingBufferListInitialCapacity),
 		_indexBuffers(initialCapacities.indexBufferListInitialCapacity), _uniformBuffers(initialCapacities.uniformBufferListInitialCapacity)
 	{
@@ -25,7 +25,7 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<AutoCleanupVertexBuffer> DataBufferListsInternal::AddVertexBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	IDObject<AutoCleanupVertexBuffer> DataBufferListsInternal::AddVertexBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		VkBufferCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
@@ -61,7 +61,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexBuffers.AddObject(AutoCleanupVertexBuffer(_device, add), addOnReserving);
 	}
 
-	IDObject<AutoCleanupStagingBuffer> DataBufferListsInternal::AddStagingBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	IDObject<AutoCleanupStagingBuffer> DataBufferListsInternal::AddStagingBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		VkBufferCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
@@ -97,7 +97,7 @@ namespace VulkanSimplifiedInternal
 		return _stagingBuffers.AddObject(AutoCleanupStagingBuffer(_device, add), addOnReserving);
 	}
 
-	IDObject<AutoCleanupIndexBuffer> DataBufferListsInternal::AddIndexBuffer(size_t indicesCount, VulkanSimplified::IndexType indexType,
+	IDObject<AutoCleanupIndexBuffer> DataBufferListsInternal::AddIndexBuffer(size_t indicesCount, IndexType indexType,
 		const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		VkBufferCreateInfo createInfo{};
@@ -106,12 +106,12 @@ namespace VulkanSimplifiedInternal
 
 		switch (indexType)
 		{
-		case VulkanSimplified::IndexType::INDEX_TYPE_16_BITS:
+		case IndexType::INDEX_TYPE_16_BITS:
 			if (indicesCount > std::numeric_limits<uint32_t>::max())
 				throw std::runtime_error("DataBufferListsInternal::AddIndexBuffer Error: Program was given 16 bit index count above maximum value!");
 			createInfo.size = indicesCount << 1;
 			break;
-		case VulkanSimplified::IndexType::INDEX_TYPE_32_BITS:
+		case IndexType::INDEX_TYPE_32_BITS:
 			if (indicesCount > (std::numeric_limits<uint32_t>::max() >> 1))
 				throw std::runtime_error("DataBufferListsInternal::AddIndexBuffer Error: Program was given 32 bit index count above maximum value!");
 			createInfo.size = indicesCount << 2;
@@ -149,7 +149,7 @@ namespace VulkanSimplifiedInternal
 		return _indexBuffers.AddObject(AutoCleanupIndexBuffer(_device, add), addOnReserving);
 	}
 
-	IDObject<AutoCleanupUniformBuffer> DataBufferListsInternal::AddUniformBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	IDObject<AutoCleanupUniformBuffer> DataBufferListsInternal::AddUniformBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		VkBufferCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
@@ -185,7 +185,7 @@ namespace VulkanSimplifiedInternal
 		return _uniformBuffers.AddObject(AutoCleanupUniformBuffer(_device, add), addOnReserving);
 	}
 
-	void DataBufferListsInternal::BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferListsInternal::BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& bufferData = _vertexBuffers.GetObject(bufferID);
 
@@ -198,7 +198,7 @@ namespace VulkanSimplifiedInternal
 		bufferData.BindDataBuffer(allocationID, beggining);
 	}
 
-	void DataBufferListsInternal::BindStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferListsInternal::BindStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& bufferData = _stagingBuffers.GetObject(bufferID);
 
@@ -211,7 +211,7 @@ namespace VulkanSimplifiedInternal
 		bufferData.BindDataBuffer(allocationID, beggining);
 	}
 
-	void DataBufferListsInternal::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferListsInternal::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& bufferData = _indexBuffers.GetObject(bufferID);
 
@@ -224,7 +224,7 @@ namespace VulkanSimplifiedInternal
 		bufferData.BindDataBuffer(allocationID, beggining);
 	}
 
-	void DataBufferListsInternal::BindUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferListsInternal::BindUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& bufferData = _uniformBuffers.GetObject(bufferID);
 
@@ -366,12 +366,12 @@ namespace VulkanSimplifiedInternal
 		return _vertexBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _vertexBuffers.GetConstObject(bufferID).GetBuffersSize();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _vertexBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
 	}
@@ -381,12 +381,12 @@ namespace VulkanSimplifiedInternal
 		return _stagingBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _stagingBuffers.GetConstObject(bufferID).GetBuffersSize();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _stagingBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
 	}
@@ -396,12 +396,12 @@ namespace VulkanSimplifiedInternal
 		return _indexBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
 		return _indexBuffers.GetConstObject(bufferID).GetBuffersSize();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
 		return _indexBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
 	}
@@ -411,42 +411,42 @@ namespace VulkanSimplifiedInternal
 		return _uniformBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetUniformBuffersSize(IDObject<AutoCleanupUniformBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetUniformBuffersSize(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
 		return _uniformBuffers.GetConstObject(bufferID).GetBuffersSize();
 	}
 
-	VulkanSimplified::MemorySize DataBufferListsInternal::GetUniformBuffersRequiredAligment(IDObject<AutoCleanupUniformBuffer> bufferID) const
+	MemorySize DataBufferListsInternal::GetUniformBuffersRequiredAligment(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
 		return _uniformBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
 	}
 
-	void DataBufferListsInternal::WriteToVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-		VulkanSimplified::MemorySize dataSize)
+	void DataBufferListsInternal::WriteToVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+		MemorySize dataSize)
 	{
 		auto& buffer = _vertexBuffers.GetObject(bufferID);
 
 		_memoryObjectsList.WriteToMemory(buffer.GetBoundMemorySuballocationData().value(), writeOffset, writeData, dataSize);
 	}
 
-	void DataBufferListsInternal::WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-		VulkanSimplified::MemorySize dataSize)
+	void DataBufferListsInternal::WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+		MemorySize dataSize)
 	{
 		auto& buffer = _stagingBuffers.GetObject(bufferID);
 
 		_memoryObjectsList.WriteToMemory(buffer.GetBoundMemorySuballocationData().value(), writeOffset, writeData, dataSize);
 	}
 
-	void DataBufferListsInternal::WriteToIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-		VulkanSimplified::MemorySize dataSize)
+	void DataBufferListsInternal::WriteToIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+		MemorySize dataSize)
 	{
 		auto& buffer = _indexBuffers.GetObject(bufferID);
 
 		_memoryObjectsList.WriteToMemory(buffer.GetBoundMemorySuballocationData().value(), writeOffset, writeData, dataSize);
 	}
 
-	void DataBufferListsInternal::WriteToUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-		VulkanSimplified::MemorySize dataSize)
+	void DataBufferListsInternal::WriteToUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+		MemorySize dataSize)
 	{
 		auto& buffer = _uniformBuffers.GetObject(bufferID);
 

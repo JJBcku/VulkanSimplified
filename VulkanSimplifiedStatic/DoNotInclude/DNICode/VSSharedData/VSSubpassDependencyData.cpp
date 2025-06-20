@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSSubpassDependencyData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	SubpassDependencyData::SubpassDependencyData()
 	{

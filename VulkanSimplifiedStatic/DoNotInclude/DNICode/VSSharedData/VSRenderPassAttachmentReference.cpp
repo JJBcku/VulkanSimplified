@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSRenderPassAttachmentReference.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	RenderPassAttachmentReference::RenderPassAttachmentReference()
 	{

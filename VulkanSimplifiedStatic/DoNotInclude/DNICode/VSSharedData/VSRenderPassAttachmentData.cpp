@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSRenderPassAttachmentData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	RenderPassAttachmentData::RenderPassAttachmentData()
 	{

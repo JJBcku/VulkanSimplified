@@ -2,7 +2,7 @@
 
 #include "VSAutoCleanupImage.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupDepthStencilRenderTargetImage : public AutoCleanupImage
 	{

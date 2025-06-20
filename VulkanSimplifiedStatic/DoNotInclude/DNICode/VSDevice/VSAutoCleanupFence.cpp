@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupFence.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupFence::AutoCleanupFence(VkDevice device, VkFence fence) : _device(device), _fence(fence)
 	{

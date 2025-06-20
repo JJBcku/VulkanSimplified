@@ -3,7 +3,7 @@
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkDescriptorSetLayout_T* VkDescriptorSetLayout;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupDescriptorSetLayout
 	{

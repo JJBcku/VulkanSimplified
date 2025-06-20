@@ -1,7 +1,7 @@
 #include "VSInstanceNIpch.h"
 #include "../../DNIHeaders/VSInstance/VsLogicalDeviceInternalCreationData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	LogicalDeviceInternalCreationData::LogicalDeviceInternalCreationData()
 	{

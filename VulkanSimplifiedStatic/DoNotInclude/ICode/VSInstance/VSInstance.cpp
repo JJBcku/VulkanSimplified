@@ -12,7 +12,7 @@
 
 namespace VulkanSimplified
 {
-	Instance::Instance(VulkanSimplifiedInternal::InstanceInternal& ref) : _internal(ref)
+	Instance::Instance(InstanceInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -20,12 +20,12 @@ namespace VulkanSimplified
 	{
 	}
 
-	const std::string& VulkanSimplified::Instance::GetAppFullName() const
+	const std::string& Instance::GetAppFullName() const
 	{
 		return _internal.GetAppFullName();
 	}
 
-	const std::string& VulkanSimplified::Instance::GetEngineFullName() const
+	const std::string& Instance::GetEngineFullName() const
 	{
 		return _internal.GetEngineFullName();
 	}
@@ -40,7 +40,7 @@ namespace VulkanSimplified
 		return _internal.GetEngineVersion();
 	}
 
-	size_t VulkanSimplified::Instance::GetAvailableDevicesCount() const
+	size_t Instance::GetAvailableDevicesCount() const
 	{
 		return _internal.GetAvailableDevicesCount();
 	}

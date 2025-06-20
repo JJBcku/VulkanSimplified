@@ -7,7 +7,7 @@
 #include <vector>
 #include <stdint.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class IRCommandPoolInternal;
 	class AutoCleanupSemaphore;
@@ -21,7 +21,7 @@ namespace VulkanSimplified
 	class IRCommandPool
 	{
 	public:
-		IRCommandPool(VulkanSimplifiedInternal::IRCommandPoolInternal& ref);
+		IRCommandPool(IRCommandPoolInternal& ref);
 		~IRCommandPool();
 
 		IRCommandPool& operator=(const IRCommandPool&) noexcept = delete;
@@ -37,10 +37,10 @@ namespace VulkanSimplified
 
 		void ResetCommandPool(bool freeResources);
 
-		bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>>& waitSemaphoreIDs,
+		bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs,
 			uint32_t imageIndex);
 
 	private:
-		VulkanSimplifiedInternal::IRCommandPoolInternal& _internal;
+		IRCommandPoolInternal& _internal;
 	};
 }

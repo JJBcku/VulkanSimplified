@@ -12,7 +12,7 @@
 
 #include "../../../Include/VSDevice/VSDeviceInitialCapacitiesList.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	InstanceInternal::InstanceInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, const InstanceInternalCreationData& initData) :
 		_eventHandler(eventHandler), _sharedDataMain(sharedDataMain)
@@ -166,12 +166,12 @@ namespace VulkanSimplifiedInternal
 		return _engineName;
 	}
 
-	VulkanSimplified::VersionData InstanceInternal::GetAppVersion() const
+	VersionData InstanceInternal::GetAppVersion() const
 	{
 		return _appVersion;
 	}
 
-	VulkanSimplified::VersionData InstanceInternal::GetEngineVersion() const
+	VersionData InstanceInternal::GetEngineVersion() const
 	{
 		return _engineVersion;
 	}
@@ -213,7 +213,7 @@ namespace VulkanSimplifiedInternal
 			throw std::runtime_error("InstanceInternal::GetChoosenDevicesMainClass Const Error: Program tried to access a non-existent logical devices main class!");
 	}
 
-	void InstanceInternal::CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities)
+	void InstanceInternal::CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities)
 	{
 		if (_usedDevice)
 			throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Program support only up to one logical device at one time!");

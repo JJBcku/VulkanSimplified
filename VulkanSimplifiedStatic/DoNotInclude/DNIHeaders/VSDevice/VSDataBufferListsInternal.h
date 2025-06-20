@@ -18,7 +18,7 @@ namespace VulkanSimplified
 	struct DataBufferListsInitialCapacities;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 	class MemoryObjectsListInternal;
@@ -27,19 +27,19 @@ namespace VulkanSimplifiedInternal
 	{
 	public:
 		DataBufferListsInternal(const DeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryObjectsList, VkDevice device,
-			const VulkanSimplified::DataBufferListsInitialCapacities& initialCapacities);
+			const DataBufferListsInitialCapacities& initialCapacities);
 		~DataBufferListsInternal();
 
-		IDObject<AutoCleanupVertexBuffer> AddVertexBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
-		IDObject<AutoCleanupStagingBuffer> AddStagingBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
-		IDObject<AutoCleanupIndexBuffer> AddIndexBuffer(size_t indicesCount, VulkanSimplified::IndexType indexType, const std::vector<size_t>& queuesUsingBuffer,
+		IDObject<AutoCleanupVertexBuffer> AddVertexBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
+		IDObject<AutoCleanupStagingBuffer> AddStagingBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
+		IDObject<AutoCleanupIndexBuffer> AddIndexBuffer(size_t indicesCount, IndexType indexType, const std::vector<size_t>& queuesUsingBuffer,
 			size_t addOnReserving);
-		IDObject<AutoCleanupUniformBuffer> AddUniformBuffer(VulkanSimplified::MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
+		IDObject<AutoCleanupUniformBuffer> AddUniformBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
 
-		void BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
-		void BindStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
-		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
-		void BindUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void BindStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void BindUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving);
 
 		VkBuffer GetVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID) const;
 		VkBuffer GetStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID) const;
@@ -57,29 +57,29 @@ namespace VulkanSimplifiedInternal
 		bool RemoveUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, bool throwOnIDNotFound);
 
 		uint32_t GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const;
+		MemorySize GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const;
+		MemorySize GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const;
 
 		uint32_t GetStagingBuffersMemoryTypeMask(IDObject<AutoCleanupStagingBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const;
+		MemorySize GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const;
+		MemorySize GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const;
 
 		uint32_t GetIndexBuffersMemoryTypeMask(IDObject<AutoCleanupIndexBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const;
+		MemorySize GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const;
+		MemorySize GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const;
 
 		uint32_t GetUniformBuffersMemoryTypeMask(IDObject<AutoCleanupUniformBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetUniformBuffersSize(IDObject<AutoCleanupUniformBuffer> bufferID) const;
-		VulkanSimplified::MemorySize GetUniformBuffersRequiredAligment(IDObject<AutoCleanupUniformBuffer> bufferID) const;
+		MemorySize GetUniformBuffersSize(IDObject<AutoCleanupUniformBuffer> bufferID) const;
+		MemorySize GetUniformBuffersRequiredAligment(IDObject<AutoCleanupUniformBuffer> bufferID) const;
 
-		void WriteToVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize dataSize);
-		void WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize dataSize);
-		void WriteToIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize dataSize);
-		void WriteToUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize dataSize);
+		void WriteToVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize dataSize);
+		void WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize dataSize);
+		void WriteToIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize dataSize);
+		void WriteToUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize dataSize);
 
 	private:
 		const DeviceCoreInternal& _deviceCore;

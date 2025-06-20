@@ -16,7 +16,7 @@ namespace VulkanSimplified
 	struct InstanceCreationData;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SdlEventHandlerInternal;
 	class SharedDataMainListInternal;
@@ -25,7 +25,7 @@ namespace VulkanSimplifiedInternal
 	class MainInternal
 	{
 	public:
-		MainInternal(const VulkanSimplified::MainInitData& initData);
+		MainInternal(const MainInitData& initData);
 		~MainInternal();
 
 		MainInternal(const MainInternal&) noexcept = delete;
@@ -34,7 +34,7 @@ namespace VulkanSimplifiedInternal
 		MainInternal& operator=(const MainInternal&) noexcept = delete;
 		MainInternal& operator=(MainInternal&&) noexcept = delete;
 
-		void CreateInstance(const VulkanSimplified::InstanceCreationData& instanceInit);
+		void CreateInstance(const InstanceCreationData& instanceInit);
 
 		SdlEventHandlerInternal& GetSdlEventHandler();
 		SharedDataMainListInternal& GetSharedDataMainList();
@@ -44,14 +44,14 @@ namespace VulkanSimplifiedInternal
 		const SharedDataMainListInternal& GetSharedDataMainList() const;
 		const InstanceInternal& GetInstance() const;
 
-		VulkanSimplified::VersionData GetMaxAvailableVulkanVersion() const;
-		VulkanSimplified::InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
-		VulkanSimplified::InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
+		VersionData GetMaxAvailableVulkanVersion() const;
+		InstanceExtensionPacksList GetAvailableInstanceExtensionPacks() const;
+		InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
 
 	private:
-		VulkanSimplified::VersionData _maxApiVersion;
-		VulkanSimplified::InstanceExtensionPacksList _availableExtensionPacksList;
-		VulkanSimplified::InstanceLayerPacksList _availableLayerPacksList;
+		VersionData _maxApiVersion;
+		InstanceExtensionPacksList _availableExtensionPacksList;
+		InstanceLayerPacksList _availableLayerPacksList;
 
 		std::vector<const char*> _sdlRequired;
 
@@ -61,12 +61,12 @@ namespace VulkanSimplifiedInternal
 
 		uint32_t FindMaximumAvailableVulkanVersion() const;
 
-		VulkanSimplified::InstanceExtensionPacksList CompileAvailableInstanceExtensionPacks() const;
-		VulkanSimplified::InstanceLayerPacksList CompileAvailableInstanceLayerPacks() const;
+		InstanceExtensionPacksList CompileAvailableInstanceExtensionPacks() const;
+		InstanceLayerPacksList CompileAvailableInstanceLayerPacks() const;
 
-		std::vector<const char*> CompileRequestedInstanceExtensions(const VulkanSimplified::InstanceExtensionPacksList& extensionPacksEnabled,
-			const VulkanSimplified::InstanceExtensionPacksList& extensionPacksAvailable) const;
-		std::vector<const char*> CompileRequestedInstanceLayers(const VulkanSimplified::InstanceLayerPacksList& layerPacksEnabled,
-			const VulkanSimplified::InstanceLayerPacksList& layerPacksAvailable) const;
+		std::vector<const char*> CompileRequestedInstanceExtensions(const InstanceExtensionPacksList& extensionPacksEnabled,
+			const InstanceExtensionPacksList& extensionPacksAvailable) const;
+		std::vector<const char*> CompileRequestedInstanceLayers(const InstanceLayerPacksList& layerPacksEnabled,
+			const InstanceLayerPacksList& layerPacksAvailable) const;
 	};
 }

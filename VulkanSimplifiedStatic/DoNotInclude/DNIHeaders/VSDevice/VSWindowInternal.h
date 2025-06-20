@@ -24,7 +24,7 @@ namespace VulkanSimplified
 	struct SdlWindowEventData;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 	class SdlEventHandlerInternal;
@@ -32,7 +32,7 @@ namespace VulkanSimplifiedInternal
 	class WindowInternal
 	{
 	public:
-		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const VulkanSimplified::WindowCreationData& creationData);
+		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const WindowCreationData& creationData);
 		~WindowInternal();
 
 		WindowInternal(const WindowInternal& rhs) noexcept = delete;
@@ -41,7 +41,7 @@ namespace VulkanSimplifiedInternal
 		WindowInternal& operator=(const WindowInternal& rhs) noexcept = delete;
 		WindowInternal& operator=(WindowInternal&& rhs) noexcept = delete;
 
-		void CreateSwapchain(const VulkanSimplified::SwapchainCreationData& creationData, bool throwOnSwapchainExist);
+		void CreateSwapchain(const SwapchainCreationData& creationData, bool throwOnSwapchainExist);
 
 		bool AcquireNextImage(VkDevice device, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t& returnIndex);
 
@@ -57,7 +57,7 @@ namespace VulkanSimplifiedInternal
 		uint32_t GetWidth() const;
 		uint32_t GetHeight() const;
 
-		static bool HandleWindowEventStatic(const VulkanSimplified::SdlWindowEventData& event, void* windowptr);
+		static bool HandleWindowEventStatic(const SdlWindowEventData& event, void* windowptr);
 
 	private:
 		SdlEventHandlerInternal& _eventHandler;
@@ -73,7 +73,7 @@ namespace VulkanSimplifiedInternal
 		bool _bpadding;
 		uint32_t _windowID;
 
-		std::optional<IDObject<std::pair<VulkanSimplified::WindowEventFunction, void*>>> _eventHandlingID;
+		std::optional<IDObject<std::pair<WindowEventFunction, void*>>> _eventHandlingID;
 
 		SDL_Window* _window;
 		std::string _windowTitle;
@@ -97,8 +97,8 @@ namespace VulkanSimplifiedInternal
 		void ReCreateSwapchain();
 		void DestroySwapchain();
 
-		VkPresentModeKHR TranslateToPresentMode(VulkanSimplified::SurfacePresentModeBits presentMode);
+		VkPresentModeKHR TranslateToPresentMode(SurfacePresentModeBits presentMode);
 
-		bool HandleWindowEvent(const VulkanSimplified::SdlWindowEventData& event);
+		bool HandleWindowEvent(const SdlWindowEventData& event);
 	};
 }

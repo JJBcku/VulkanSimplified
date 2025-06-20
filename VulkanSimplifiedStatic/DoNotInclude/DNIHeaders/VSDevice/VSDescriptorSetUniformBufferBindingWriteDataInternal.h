@@ -9,7 +9,7 @@
 
 typedef struct VkBuffer_T* VkBuffer;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct DescriptorSetUniformBufferBindingWriteDataInternal
 	{

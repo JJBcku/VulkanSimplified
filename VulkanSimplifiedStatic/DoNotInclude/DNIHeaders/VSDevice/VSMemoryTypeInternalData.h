@@ -15,12 +15,12 @@ typedef struct VkDeviceMemory_T* VkDeviceMemory;
 typedef struct VkImage_T* VkImage;
 typedef struct VkBuffer_T* VkBuffer;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class MemoryTypeInternalData
 	{
 	public:
-		MemoryTypeInternalData(VkDevice device, uint32_t heapIndex, const VulkanSimplified::MemoryTypeData& memoryData, size_t reservedAllocation);
+		MemoryTypeInternalData(VkDevice device, uint32_t heapIndex, const MemoryTypeData& memoryData, size_t reservedAllocation);
 		~MemoryTypeInternalData();
 
 		MemoryTypeInternalData(const MemoryTypeInternalData&) noexcept = delete;
@@ -37,18 +37,18 @@ namespace VulkanSimplifiedInternal
 
 		uint32_t GetHeapIndex() const;
 		uint32_t GetTypeIndex() const;
-		VulkanSimplified::MemoryTypeProperties GetProperties() const;
+		MemoryTypeProperties GetProperties() const;
 
 		size_t GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const;
 
-		size_t BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
-		size_t BindBuffer(IDObject<MemoryAllocationData> allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
+		size_t BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, MemorySize size, MemorySize aligment, size_t addOnReserving);
+		size_t BindBuffer(IDObject<MemoryAllocationData> allocationID, VkBuffer buffer, MemorySize size, MemorySize aligment, size_t addOnReserving);
 
 		bool CheckForAllocationsExistence(IDObject<MemoryAllocationData> allocationID);
 		bool RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound);
 
-		void WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize writeSize);
+		void WriteToMemory(MemorySuballocationFullID suballocationID, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize writeSize);
 
 		bool IsMemoryMapped() const;
 
@@ -57,7 +57,7 @@ namespace VulkanSimplifiedInternal
 
 		uint32_t _heapIndex;
 		uint32_t _typeIndex;
-		VulkanSimplified::MemoryTypeProperties _properties;
+		MemoryTypeProperties _properties;
 
 		UnsortedIDVector<MemoryAllocationData> _allocationsList;
 	};

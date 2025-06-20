@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class PipelineDataListsInternal;
 }
@@ -19,14 +19,14 @@ namespace VulkanSimplified
 	class PipelineDataLists
 	{
 	public:
-		PipelineDataLists(VulkanSimplifiedInternal::PipelineDataListsInternal& ref);
+		PipelineDataLists(PipelineDataListsInternal& ref);
 		~PipelineDataLists();
 
-		IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserving = 0);
-		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupGraphicsPipeline>> AddGraphicPipelines(const std::vector<GraphicsPipelineCreationData>& creationDataList,
+		IDObject<AutoCleanupPipelineLayout> AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserving = 0);
+		std::vector<IDObject<AutoCleanupGraphicsPipeline>> AddGraphicPipelines(const std::vector<GraphicsPipelineCreationData>& creationDataList,
 			size_t addOnReserving = 0);
 
 	private:
-		VulkanSimplifiedInternal::PipelineDataListsInternal& _internal;
+		PipelineDataListsInternal& _internal;
 	};
 }

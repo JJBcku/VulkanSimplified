@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupSemaphore.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupSemaphore::AutoCleanupSemaphore(VkDevice device, VkSemaphore semaphore) : _device(device), _semaphore(semaphore)
 	{

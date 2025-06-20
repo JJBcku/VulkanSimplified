@@ -21,24 +21,24 @@ namespace VulkanSimplified
 		struct
 		{
 			ImageIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> ID;
+			IDObject<AutoCleanupColorRenderTargetImage> ID;
 		} colorRenderTarget;
 
 		struct
 		{
 			ImageIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage> ID;
+			IDObject<AutoCleanupDepthStencilRenderTargetImage> ID;
 		} depthStencilRenderTarget;
 
 		struct
 		{
 			ImageIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupResolveRenderTargetImage> ID;
+			IDObject<AutoCleanupResolveRenderTargetImage> ID;
 		} resolveRenderTarget;
 
 		RenderTargetImagesID();
-		RenderTargetImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage>& ID);
-		RenderTargetImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupDepthStencilRenderTargetImage>& ID);
-		RenderTargetImagesID(const IDObject<VulkanSimplifiedInternal::AutoCleanupResolveRenderTargetImage>& ID);
+		RenderTargetImagesID(const IDObject<AutoCleanupColorRenderTargetImage>& ID);
+		RenderTargetImagesID(const IDObject<AutoCleanupDepthStencilRenderTargetImage>& ID);
+		RenderTargetImagesID(const IDObject<AutoCleanupResolveRenderTargetImage>& ID);
 	};
 }

@@ -5,7 +5,7 @@
 
 namespace VulkanSimplified
 {
-	Window::Window(VulkanSimplifiedInternal::WindowInternal& ref) : _internal(ref)
+	Window::Window(WindowInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -13,7 +13,7 @@ namespace VulkanSimplified
 	{
 	}
 
-	void Window::CreateSwapchain(const VulkanSimplified::SwapchainCreationData& creationData, bool throwOnSwapchainExist)
+	void Window::CreateSwapchain(const SwapchainCreationData& creationData, bool throwOnSwapchainExist)
 	{
 		_internal.CreateSwapchain(creationData, throwOnSwapchainExist);
 	}

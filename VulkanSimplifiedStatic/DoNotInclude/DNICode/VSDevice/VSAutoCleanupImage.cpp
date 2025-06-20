@@ -3,7 +3,7 @@
 
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupImageView.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 
 	VkImage AutoCleanupImage::GetImage() const
@@ -46,12 +46,12 @@ namespace VulkanSimplifiedInternal
 		return _memoryTypeMask;
 	}
 
-	VulkanSimplified::MemorySize AutoCleanupImage::GetImagesSize() const
+	MemorySize AutoCleanupImage::GetImagesSize() const
 	{
 		return _size;
 	}
 
-	VulkanSimplified::MemorySize AutoCleanupImage::GetImagesRequiredAligment() const
+	MemorySize AutoCleanupImage::GetImagesRequiredAligment() const
 	{
 		return _aligment;
 	}
@@ -61,7 +61,7 @@ namespace VulkanSimplifiedInternal
 		return _sampleCount;
 	}
 
-	std::optional<VulkanSimplified::MemorySuballocationFullID> AutoCleanupImage::GetBoundMemorySuballocation() const
+	std::optional<MemorySuballocationFullID> AutoCleanupImage::GetBoundMemorySuballocation() const
 	{
 		return _memorySuballocation;
 	}
@@ -76,7 +76,7 @@ namespace VulkanSimplifiedInternal
 		_imageViews.Reset(newImageViewListCapacity);
 	}
 
-	void AutoCleanupImage::BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, size_t bindingBeggining)
+	void AutoCleanupImage::BindImage(MemoryAllocationFullID allocationID, size_t bindingBeggining)
 	{
 		if (_memorySuballocation.has_value())
 			throw std::runtime_error("AutoCleanupImage::BindImage Error: Program tried to bind an already bound image!");

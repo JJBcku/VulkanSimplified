@@ -14,7 +14,7 @@ namespace VulkanSimplified
 	struct WindowCreationData;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 	class WindowInternal;
@@ -24,14 +24,14 @@ namespace VulkanSimplifiedInternal
 	{
 	public:
 		WindowListInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-			const VulkanSimplified::WindowListInitialCapacities& initalCapacities);
+			const WindowListInitialCapacities& initalCapacities);
 		~WindowListInternal();
 
-		IDObject<VulkanSimplified::WindowPointer> CreateWindow(const VulkanSimplified::WindowCreationData& creationData, size_t addOnReserving);
+		IDObject<WindowPointer> CreateWindow(const WindowCreationData& creationData, size_t addOnReserving);
 
-		WindowInternal& GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID);
+		WindowInternal& GetWindow(IDObject<WindowPointer> windowID);
 
-		const WindowInternal& GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID) const;
+		const WindowInternal& GetWindow(IDObject<WindowPointer> windowID) const;
 
 	private:
 		SdlEventHandlerInternal& _eventHandler;
@@ -41,6 +41,6 @@ namespace VulkanSimplifiedInternal
 		VkPhysicalDevice _physicalDevice;
 		VkDevice _device;
 
-		UnsortedIDVector<VulkanSimplified::WindowPointer> _windowList;
+		UnsortedIDVector<WindowPointer> _windowList;
 	};
 }

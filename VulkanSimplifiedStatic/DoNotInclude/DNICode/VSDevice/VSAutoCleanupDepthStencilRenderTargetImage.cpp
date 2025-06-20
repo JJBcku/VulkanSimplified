@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupDepthStencilRenderTargetImage.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupDepthStencilRenderTargetImage::AutoCleanupDepthStencilRenderTargetImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, VkFormat format,
 		VkSampleCountFlagBits sampleCount, size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, 1, 1, format, sampleCount, imageViewsInitialCapacity)

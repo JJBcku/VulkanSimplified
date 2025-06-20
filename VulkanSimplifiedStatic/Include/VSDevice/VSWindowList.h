@@ -4,7 +4,7 @@
 
 #include "VSWindowListDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class WindowListInternal;
 }
@@ -17,7 +17,7 @@ namespace VulkanSimplified
 	class WindowList
 	{
 	public:
-		WindowList(VulkanSimplifiedInternal::WindowListInternal& ref);
+		WindowList(WindowListInternal& ref);
 		~WindowList();
 
 		IDObject<WindowPointer> CreateWindow(const WindowCreationData& creationData, size_t addOnReserving = 0);
@@ -27,6 +27,6 @@ namespace VulkanSimplified
 		const Window GetWindow(IDObject<WindowPointer> windowID) const;
 
 	private:
-		VulkanSimplifiedInternal::WindowListInternal& _internal;
+		WindowListInternal& _internal;
 	};
 }

@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSPipelineInputAssemblyData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PipelineInputAssemblyData::PipelineInputAssemblyData()
 	{

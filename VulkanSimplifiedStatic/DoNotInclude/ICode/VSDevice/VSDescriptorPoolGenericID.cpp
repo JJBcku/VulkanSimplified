@@ -8,13 +8,13 @@ namespace VulkanSimplified
 		type = DescriptorPoolIDType::UNKNOWN;
 	}
 
-	DescriptorPoolGenericID::DescriptorPoolGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> ID)
+	DescriptorPoolGenericID::DescriptorPoolGenericID(IDObject<AutoCleanupNIFDescriptorPool> ID)
 	{
 		NifID.type = DescriptorPoolIDType::NIF;
 		NifID.ID = ID;
 	}
 
-	DescriptorPoolGenericID::DescriptorPoolGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> ID)
+	DescriptorPoolGenericID::DescriptorPoolGenericID(IDObject<AutoCleanupIFDescriptorPool> ID)
 	{
 		IfID.type = DescriptorPoolIDType::IF;
 		IfID.ID = ID;

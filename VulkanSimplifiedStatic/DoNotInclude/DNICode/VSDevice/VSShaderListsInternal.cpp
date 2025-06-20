@@ -7,9 +7,9 @@
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupFragmentShaderModule.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupVertexShaderModule.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	ShaderListsInternal::ShaderListsInternal(VkDevice device, const VulkanSimplified::ShaderListsInitialCapacitiesList& initialCapacities) : _device(device),
+	ShaderListsInternal::ShaderListsInternal(VkDevice device, const ShaderListsInitialCapacitiesList& initialCapacities) : _device(device),
 		_fragmentShaders(initialCapacities.fragmentShadersListInitialCapacity), _vertexShaders(initialCapacities.vertexShadersListInitialCapacity)
 	{
 	}
@@ -60,16 +60,16 @@ namespace VulkanSimplifiedInternal
 		return _vertexShaders.AddObject(AutoCleanupVertexShaderModule(_device, add), addOnReservation);
 	}
 
-	VkShaderModule ShaderListsInternal::GetShaderModule(VulkanSimplified::ArbitraryShaderID shaderID) const
+	VkShaderModule ShaderListsInternal::GetShaderModule(ArbitraryShaderID shaderID) const
 	{
 		VkShaderModule ret = VK_NULL_HANDLE;
 
 		switch (shaderID.type)
 		{
-		case VulkanSimplified::SHADER_TYPE_FRAGMENT:
+		case SHADER_TYPE_FRAGMENT:
 			ret = GetFragmentShader(shaderID.fragmentShader.fragmentShaderID);
 			break;
-		case VulkanSimplified::SHADER_TYPE_VERTEX:
+		case SHADER_TYPE_VERTEX:
 			ret = GetVertexShader(shaderID.vertexShader.vertexShaderID);
 			break;
 		default:

@@ -20,7 +20,7 @@
 
 namespace VulkanSimplified
 {
-	DeviceMain::DeviceMain(VulkanSimplifiedInternal::DeviceMainInternal& ref) : _internal(ref)
+	DeviceMain::DeviceMain(DeviceMainInternal& ref) : _internal(ref)
 	{
 	}
 

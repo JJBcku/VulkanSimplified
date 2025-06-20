@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkPipelineStageFlags TranslateStageFlags(VulkanSimplified::PipelineStageFlags stageFlags);
+	VkPipelineStageFlags TranslateStageFlags(PipelineStageFlags stageFlags);
 }

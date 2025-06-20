@@ -2,7 +2,7 @@
 
 #include "../VSInstance/VSDeviceVulkan10FeatureFlags.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 }
@@ -16,7 +16,7 @@ namespace VulkanSimplified
 	class DeviceCore
 	{
 	public:
-		DeviceCore(VulkanSimplifiedInternal::DeviceCoreInternal& ref);
+		DeviceCore(DeviceCoreInternal& ref);
 		~DeviceCore();
 
 		DeviceCore(const DeviceCore&) noexcept = delete;
@@ -36,6 +36,6 @@ namespace VulkanSimplified
 		void WaitIdle() const;
 
 	private:
-		VulkanSimplifiedInternal::DeviceCoreInternal& _internal;
+		DeviceCoreInternal& _internal;
 	};
 }

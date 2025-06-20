@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupRenderPass.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupRenderPass::AutoCleanupRenderPass(VkDevice device, VkRenderPass renderPass) : _device(device), _renderPass(renderPass)
 	{

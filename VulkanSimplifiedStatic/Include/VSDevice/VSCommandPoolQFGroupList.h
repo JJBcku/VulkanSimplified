@@ -5,7 +5,7 @@
 #include <optional>
 #include <vector>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class CommandPoolQFGroupListInternal;
 
@@ -22,7 +22,7 @@ namespace VulkanSimplified
 	class CommandPoolQFGroupList
 	{
 	public:
-		CommandPoolQFGroupList(VulkanSimplifiedInternal::CommandPoolQFGroupListInternal& ref);
+		CommandPoolQFGroupList(CommandPoolQFGroupListInternal& ref);
 		~CommandPoolQFGroupList();
 
 		CommandPoolQFGroupList& operator=(const CommandPoolQFGroupList&) noexcept = delete;
@@ -38,9 +38,9 @@ namespace VulkanSimplified
 		const NIRCommandPool GetCommandPoolWithoutIndividualReset(IDObject<NIRPoolPointer> poolID) const;
 		const IRCommandPool GetCommandPoolWithIndividualReset(IDObject<IRPoolPointer> poolID) const;
 
-		void SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmissionData>& submitInfos, std::optional<IDObject<VulkanSimplifiedInternal::AutoCleanupFence>> fenceID);
+		void SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmissionData>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID);
 
 	private:
-		VulkanSimplifiedInternal::CommandPoolQFGroupListInternal& _internal;
+		CommandPoolQFGroupListInternal& _internal;
 	};
 }

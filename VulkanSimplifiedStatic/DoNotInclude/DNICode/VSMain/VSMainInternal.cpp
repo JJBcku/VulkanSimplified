@@ -13,9 +13,9 @@
 
 #include "../../DNIHeaders/VSCommon/VSCStringsComparison.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	MainInternal::MainInternal(const VulkanSimplified::MainInitData& initData) : _eventHandler(std::make_unique<SdlEventHandlerInternal>(initData.eventHandlerData)),
+	MainInternal::MainInternal(const MainInitData& initData) : _eventHandler(std::make_unique<SdlEventHandlerInternal>(initData.eventHandlerData)),
 		_sharedData(std::make_unique<SharedDataMainListInternal>(initData.sharedDataCapabilities))
 	{
 		int result = SDL_Init(SDL_INIT_VIDEO);
@@ -58,7 +58,7 @@ namespace VulkanSimplifiedInternal
 		SDL_Quit();
 	}
 
-	void MainInternal::CreateInstance(const VulkanSimplified::InstanceCreationData& instanceInit)
+	void MainInternal::CreateInstance(const InstanceCreationData& instanceInit)
 	{
 		if (_instance)
 			throw std::runtime_error("MainInternal::CreateInstance Error: Program tried to create the instance class twice!");
@@ -70,7 +70,7 @@ namespace VulkanSimplifiedInternal
 		init.engineVersion = instanceInit.engineVersion.GetVulkanApiCompatibleVersion();
 		init.usedVulkanApiVersion = instanceInit.usedVulkanApiVersion;
 
-		if (init.usedVulkanApiVersion < VulkanSimplified::VersionData(0, 1, 0, 0))
+		if (init.usedVulkanApiVersion < VersionData(0, 1, 0, 0))
 			throw std::runtime_error("MainInternal::CreateInstance Error: Vulkan api version used must be 1.0.0 or later!");
 
 		init.requestedExtensions = CompileRequestedInstanceExtensions(instanceInit.enabledExtensionPacks, _availableExtensionPacksList);
@@ -113,17 +113,17 @@ namespace VulkanSimplifiedInternal
 		return *_instance;
 	}
 
-	VulkanSimplified::VersionData MainInternal::GetMaxAvailableVulkanVersion() const
+	VersionData MainInternal::GetMaxAvailableVulkanVersion() const
 	{
 		return _maxApiVersion;
 	}
 
-	VulkanSimplified::InstanceExtensionPacksList MainInternal::GetAvailableInstanceExtensionPacks() const
+	InstanceExtensionPacksList MainInternal::GetAvailableInstanceExtensionPacks() const
 	{
 		return _availableExtensionPacksList;
 	}
 
-	VulkanSimplified::InstanceLayerPacksList MainInternal::GetAvailableInstanceLayerPacks() const
+	InstanceLayerPacksList MainInternal::GetAvailableInstanceLayerPacks() const
 	{
 		return _availableLayerPacksList;
 	}
@@ -150,9 +150,9 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VulkanSimplified::InstanceExtensionPacksList MainInternal::CompileAvailableInstanceExtensionPacks() const
+	InstanceExtensionPacksList MainInternal::CompileAvailableInstanceExtensionPacks() const
 	{
-		VulkanSimplified::InstanceExtensionPacksList ret;
+		InstanceExtensionPacksList ret;
 
 		std::vector<VkExtensionProperties> availableExtensions;
 
@@ -210,9 +210,9 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VulkanSimplified::InstanceLayerPacksList MainInternal::CompileAvailableInstanceLayerPacks() const
+	InstanceLayerPacksList MainInternal::CompileAvailableInstanceLayerPacks() const
 	{
-		VulkanSimplified::InstanceLayerPacksList ret;
+		InstanceLayerPacksList ret;
 
 		std::vector<VkLayerProperties> availableLayers;
 
@@ -236,11 +236,11 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::vector<const char*> MainInternal::CompileRequestedInstanceExtensions(const VulkanSimplified::InstanceExtensionPacksList& extensionPacksEnabled,
-		const VulkanSimplified::InstanceExtensionPacksList& extensionPacksAvailable) const
+	std::vector<const char*> MainInternal::CompileRequestedInstanceExtensions(const InstanceExtensionPacksList& extensionPacksEnabled,
+		const InstanceExtensionPacksList& extensionPacksAvailable) const
 	{
 		std::vector<const char*> ret;
-		ret.reserve(sizeof(VulkanSimplified::InstanceExtensionPacksList) * 16);
+		ret.reserve(sizeof(InstanceExtensionPacksList) * 16);
 
 		if (extensionPacksEnabled.sdlRequiredExtensions)
 		{
@@ -266,11 +266,11 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::vector<const char*> MainInternal::CompileRequestedInstanceLayers(const VulkanSimplified::InstanceLayerPacksList& layerPacksEnabled,
-		const VulkanSimplified::InstanceLayerPacksList& layerPacksAvailable) const
+	std::vector<const char*> MainInternal::CompileRequestedInstanceLayers(const InstanceLayerPacksList& layerPacksEnabled,
+		const InstanceLayerPacksList& layerPacksAvailable) const
 	{
 		std::vector<const char*> ret;
-		ret.reserve(sizeof(VulkanSimplified::InstanceLayerPacksList) * 16);
+		ret.reserve(sizeof(InstanceLayerPacksList) * 16);
 
 		if (layerPacksEnabled.debugUtils)
 		{

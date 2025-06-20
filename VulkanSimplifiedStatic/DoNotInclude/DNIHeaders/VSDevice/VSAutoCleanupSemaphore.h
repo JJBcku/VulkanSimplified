@@ -3,7 +3,7 @@
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkSemaphore_T* VkSemaphore;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupSemaphore
 	{

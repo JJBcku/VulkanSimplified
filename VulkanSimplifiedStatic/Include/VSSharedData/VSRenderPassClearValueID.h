@@ -2,7 +2,7 @@
 
 #include <CustomLists/IDObject.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct RenderPassDoubleColorClearValues;
 	struct RenderPassInt64ColorClearValues;
@@ -33,54 +33,54 @@ namespace VulkanSimplified
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassDoubleColorClearValues> ID;
+			IDObject<RenderPassDoubleColorClearValues> ID;
 		} doubleColorID;
 
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassInt64ColorClearValues> ID;
+			IDObject<RenderPassInt64ColorClearValues> ID;
 		} int64ColorID;
 
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassUInt64ColorClearValues> ID;
+			IDObject<RenderPassUInt64ColorClearValues> ID;
 		} uint64ColorID;
 
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassFloatColorClearValues> ID;
+			IDObject<RenderPassFloatColorClearValues> ID;
 		} floatColorID;
 
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassIntColorClearValues> ID;
+			IDObject<RenderPassIntColorClearValues> ID;
 		} intColorID;
 
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassUIntColorClearValues> ID;
+			IDObject<RenderPassUIntColorClearValues> ID;
 		} uintColorID;
 
 		struct
 		{
 			RenderPassClearValueIDType type;
-			IDObject<VulkanSimplifiedInternal::RenderPassDepthStencilClearValues> ID;
+			IDObject<RenderPassDepthStencilClearValues> ID;
 		} depthStencilID;
 
 		RenderPassClearValueID();
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassDoubleColorClearValues> ID);
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassInt64ColorClearValues> ID);
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassUInt64ColorClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassDoubleColorClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassInt64ColorClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassUInt64ColorClearValues> ID);
 
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassFloatColorClearValues> ID);
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassIntColorClearValues> ID);
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassUIntColorClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassFloatColorClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassIntColorClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassUIntColorClearValues> ID);
 
-		RenderPassClearValueID(IDObject<VulkanSimplifiedInternal::RenderPassDepthStencilClearValues> ID);
+		RenderPassClearValueID(IDObject<RenderPassDepthStencilClearValues> ID);
 	};
 }

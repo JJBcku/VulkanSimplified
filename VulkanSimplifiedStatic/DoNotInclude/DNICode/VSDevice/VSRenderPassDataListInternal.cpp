@@ -9,10 +9,10 @@
 #include "../../../Include/VSDevice/VSSubpassCreationDataWithoutResolving.h"
 #include "../../../Include/VSDevice/VSSubpassCreationDataWithResolving.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	RenderPassListInternal::RenderPassListInternal(const SharedRenderPassDataListInternal& sharedRenderPassData, VkDevice device,
-		const VulkanSimplified::RenderPassDataListsInitialCapacities& initialCapacities) : _sharedRenderPassData(sharedRenderPassData), _device(device),
+		const RenderPassDataListsInitialCapacities& initialCapacities) : _sharedRenderPassData(sharedRenderPassData), _device(device),
 		_renderPassList(initialCapacities.renderPassListInitialCapacity)
 	{
 	}
@@ -22,7 +22,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupRenderPass> RenderPassListInternal::AddRenderPassWithoutResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
-		const std::vector<VulkanSimplified::SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
+		const std::vector<SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
 		size_t addOnReserving)
 	{
 		VkRenderPass add = VK_NULL_HANDLE;
@@ -104,7 +104,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupRenderPass> RenderPassListInternal::AddRenderPassWithResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
-		const std::vector<VulkanSimplified::SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies, size_t addOnReserving)
+		const std::vector<SubpassCreationDataWithResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies, size_t addOnReserving)
 	{
 		VkRenderPass add = VK_NULL_HANDLE;
 		VkRenderPassCreateInfo createInfo{};

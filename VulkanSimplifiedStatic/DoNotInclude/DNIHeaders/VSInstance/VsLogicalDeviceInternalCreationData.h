@@ -8,7 +8,7 @@
 
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct LogicalDeviceInternalCreationData
 	{
@@ -20,8 +20,8 @@ namespace VulkanSimplifiedInternal
 		VkPhysicalDeviceFeatures features;
 		std::vector<const char*> enabledExtensionsList;
 
-		VulkanSimplified::DeviceVulkan10FeatureFlags vulkan10EnabledFeatures;
-		VulkanSimplified::DeviceExtensionPacksList requestedExtensionPacks;
+		DeviceVulkan10FeatureFlags vulkan10EnabledFeatures;
+		DeviceExtensionPacksList requestedExtensionPacks;
 
 		LogicalDeviceInternalCreationData();
 	};

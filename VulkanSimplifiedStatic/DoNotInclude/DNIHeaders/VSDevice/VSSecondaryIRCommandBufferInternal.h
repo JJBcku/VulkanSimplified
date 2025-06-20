@@ -2,7 +2,7 @@
 
 #include "VSSecondaryNIRCommandBufferInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SecondaryIRCommandBufferInternal : public SecondaryNIRCommandBufferInternal
 	{

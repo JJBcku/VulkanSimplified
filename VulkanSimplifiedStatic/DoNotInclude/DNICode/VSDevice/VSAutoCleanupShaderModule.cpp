@@ -1,7 +1,7 @@
 #include "VSDeviceNipch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupShaderModule.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupShaderModule::AutoCleanupShaderModule(VkDevice device, VkShaderModule shader) : _device(device), _shader(shader)
 	{

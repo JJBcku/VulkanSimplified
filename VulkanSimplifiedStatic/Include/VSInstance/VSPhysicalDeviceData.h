@@ -5,7 +5,7 @@
 #include <vector>
 #include <optional>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class PhysicalDeviceDataInternal;
 }
@@ -22,7 +22,7 @@ namespace VulkanSimplified
 	class PhysicalDeviceData
 	{
 	public:
-		PhysicalDeviceData(VulkanSimplifiedInternal::PhysicalDeviceDataInternal& ref);
+		PhysicalDeviceData(PhysicalDeviceDataInternal& ref);
 		~PhysicalDeviceData();
 
 		const DeviceVulkan10Properties& GetVulkan10Properties() const;
@@ -31,9 +31,9 @@ namespace VulkanSimplified
 		const FormatsSupportedFeatures& GetFormatsSupportedFeatures() const;
 		const DeviceExtensionPacksList& GetDeviceExtensionPacks() const;
 		const MemoryDataList& GetAvailableMemoryDataList() const;
-		const std::optional<VulkanSimplified::SurfaceSupportData>& GetSurfaceSupport() const;
+		const std::optional<SurfaceSupportData>& GetSurfaceSupport() const;
 
 	private:
-		VulkanSimplifiedInternal::PhysicalDeviceDataInternal& _internal;
+		PhysicalDeviceDataInternal& _internal;
 	};
 }

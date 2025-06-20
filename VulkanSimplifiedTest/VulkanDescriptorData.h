@@ -6,9 +6,9 @@
 
 struct VulkanDescriptorData
 {
-	IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> descriptorPool;
+	IDObject<VulkanSimplified::AutoCleanupNIFDescriptorPool> descriptorPool;
 
-	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet>> descriptorSets;
+	std::vector<IDObject<VulkanSimplified::AutoCleanupDescriptorSet>> descriptorSets;
 
 	VulkanDescriptorData();
 };

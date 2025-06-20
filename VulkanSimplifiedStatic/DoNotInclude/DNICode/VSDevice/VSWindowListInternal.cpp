@@ -6,10 +6,10 @@
 
 #include "../../DNIHeaders/VSDevice/VSWindowInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	WindowListInternal::WindowListInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-		const VulkanSimplified::WindowListInitialCapacities& initalCapacities) : _eventHandler(eventHandler), _core(core), _instance(instance), _physicalDevice(physicalDevice),
+		const WindowListInitialCapacities& initalCapacities) : _eventHandler(eventHandler), _core(core), _instance(instance), _physicalDevice(physicalDevice),
 		_device(device), _windowList(initalCapacities.windowListInitialCapacity)
 	{
 	}
@@ -18,17 +18,17 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<VulkanSimplified::WindowPointer> WindowListInternal::CreateWindow(const VulkanSimplified::WindowCreationData& creationData, size_t addOnReserving)
+	IDObject<WindowPointer> WindowListInternal::CreateWindow(const WindowCreationData& creationData, size_t addOnReserving)
 	{
 		return _windowList.AddObject(std::make_unique<WindowInternal>(_eventHandler, _core, _instance, _physicalDevice, _device, creationData), addOnReserving);
 	}
 
-	WindowInternal& WindowListInternal::GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID)
+	WindowInternal& WindowListInternal::GetWindow(IDObject<WindowPointer> windowID)
 	{
 		return *_windowList.GetObject(windowID);
 	}
 
-	const WindowInternal& WindowListInternal::GetWindow(IDObject<VulkanSimplified::WindowPointer> windowID) const
+	const WindowInternal& WindowListInternal::GetWindow(IDObject<WindowPointer> windowID) const
 	{
 		return *_windowList.GetConstObject(windowID);
 	}

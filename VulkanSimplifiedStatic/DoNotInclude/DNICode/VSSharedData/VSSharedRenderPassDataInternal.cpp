@@ -19,9 +19,9 @@
 
 #include "../../../Include/VSSharedData/VSRenderPassClearValueID.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	SharedRenderPassDataListInternal::SharedRenderPassDataListInternal(const VulkanSimplified::SharedRenderPassDataListsCapacities& initialCapacities) :
+	SharedRenderPassDataListInternal::SharedRenderPassDataListInternal(const SharedRenderPassDataListsCapacities& initialCapacities) :
 		_attachmentData(initialCapacities.sharedRenderPassAttachmentsInitialCapacity), _attachmentReferenceData(initialCapacities.sharedRenderPassReferencesInitialCapacity),
 		_subpassDependencies(initialCapacities.sharedSubpassDependenciesInitialCapacity), _doubleClearValues(initialCapacities.doubleColorClearValueInitialCapacity),
 		_int64ClearValues(initialCapacities.int64ColorClearValueInitialCapacity), _uint64ClearValues(initialCapacities.uint64ColorClearValueInitialCapacity),
@@ -34,9 +34,9 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<RenderPassAttachmentData> SharedRenderPassDataListInternal::AddRenderPassAttachment(VulkanSimplified::DataFormatSetIndependentID format,
-		VulkanSimplified::ImageSampleFlagBits samples, VulkanSimplified::RenderPassAttachmentLoadOP loadOP, VulkanSimplified::RenderPassAttachmentStoreOP storeOP,
-		VulkanSimplified::ImageLayoutFlags initialLayout, VulkanSimplified::ImageLayoutFlags finalLayout, size_t addOnReserving)
+	IDObject<RenderPassAttachmentData> SharedRenderPassDataListInternal::AddRenderPassAttachment(DataFormatSetIndependentID format,
+		ImageSampleFlagBits samples, RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP,
+		ImageLayoutFlags initialLayout, ImageLayoutFlags finalLayout, size_t addOnReserving)
 	{
 		RenderPassAttachmentData add;
 
@@ -44,25 +44,25 @@ namespace VulkanSimplifiedInternal
 
 		switch (samples)
 		{
-		case VulkanSimplified::SAMPLE_64:
+		case SAMPLE_64:
 			add.samples = VK_SAMPLE_COUNT_64_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_32:
+		case SAMPLE_32:
 			add.samples = VK_SAMPLE_COUNT_32_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_16:
+		case SAMPLE_16:
 			add.samples = VK_SAMPLE_COUNT_16_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_8:
+		case SAMPLE_8:
 			add.samples = VK_SAMPLE_COUNT_8_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_4:
+		case SAMPLE_4:
 			add.samples = VK_SAMPLE_COUNT_4_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_2:
+		case SAMPLE_2:
 			add.samples = VK_SAMPLE_COUNT_2_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_1:
+		case SAMPLE_1:
 			add.samples = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
@@ -71,13 +71,13 @@ namespace VulkanSimplifiedInternal
 
 		switch (loadOP)
 		{
-		case VulkanSimplified::RenderPassAttachmentLoadOP::IGNORE:
+		case RenderPassAttachmentLoadOP::IGNORE:
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
 			break;
-		case VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR:
+		case RenderPassAttachmentLoadOP::CLEAR:
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_CLEAR;
 			break;
-		case VulkanSimplified::RenderPassAttachmentLoadOP::LOAD:
+		case RenderPassAttachmentLoadOP::LOAD:
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_LOAD;
 			break;
 		default:
@@ -86,10 +86,10 @@ namespace VulkanSimplifiedInternal
 
 		switch (storeOP)
 		{
-		case VulkanSimplified::RenderPassAttachmentStoreOP::IGNORE:
+		case RenderPassAttachmentStoreOP::IGNORE:
 			add.storeOP = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 			break;
-		case VulkanSimplified::RenderPassAttachmentStoreOP::STORE:
+		case RenderPassAttachmentStoreOP::STORE:
 			add.storeOP = VK_ATTACHMENT_STORE_OP_STORE;
 			break;
 		default:
@@ -98,31 +98,31 @@ namespace VulkanSimplifiedInternal
 
 		switch (initialLayout)
 		{
-		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+		case ImageLayoutFlags::PRESENT:
 			add.initialLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+		case ImageLayoutFlags::TRANSFER_DESTINATION:
 			add.initialLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+		case ImageLayoutFlags::TRANSFER_SOURCE:
 			add.initialLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+		case ImageLayoutFlags::SHADER_READ_ONLY:
 			add.initialLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
 			add.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 			add.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+		case ImageLayoutFlags::COLOR_ATTACHMENT:
 			add.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+		case ImageLayoutFlags::GENERAL:
 			add.initialLayout = VK_IMAGE_LAYOUT_GENERAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+		case ImageLayoutFlags::UNDEFINED:
 			add.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
@@ -131,31 +131,31 @@ namespace VulkanSimplifiedInternal
 
 		switch (finalLayout)
 		{
-		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+		case ImageLayoutFlags::PRESENT:
 			add.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+		case ImageLayoutFlags::TRANSFER_DESTINATION:
 			add.finalLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+		case ImageLayoutFlags::TRANSFER_SOURCE:
 			add.finalLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+		case ImageLayoutFlags::SHADER_READ_ONLY:
 			add.finalLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
 			add.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 			add.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+		case ImageLayoutFlags::COLOR_ATTACHMENT:
 			add.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+		case ImageLayoutFlags::GENERAL:
 			add.finalLayout = VK_IMAGE_LAYOUT_GENERAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+		case ImageLayoutFlags::UNDEFINED:
 			add.finalLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
@@ -165,9 +165,9 @@ namespace VulkanSimplifiedInternal
 		return _attachmentData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<RenderPassAttachmentData> SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment(VulkanSimplified::DataFormatSetIndependentID format,
-		VulkanSimplified::ImageSampleFlagBits samples, VulkanSimplified::RenderPassAttachmentLoadOP loadOP, VulkanSimplified::RenderPassAttachmentStoreOP storeOP,
-		VulkanSimplified::ImageLayoutFlags initialLayout, VulkanSimplified::ImageLayoutFlags finalLayout, size_t addOnReserving)
+	IDObject<RenderPassAttachmentData> SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment(DataFormatSetIndependentID format,
+		ImageSampleFlagBits samples, RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP,
+		ImageLayoutFlags initialLayout, ImageLayoutFlags finalLayout, size_t addOnReserving)
 	{
 		RenderPassAttachmentData add;
 
@@ -175,25 +175,25 @@ namespace VulkanSimplifiedInternal
 
 		switch (samples)
 		{
-		case VulkanSimplified::SAMPLE_64:
+		case SAMPLE_64:
 			add.samples = VK_SAMPLE_COUNT_64_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_32:
+		case SAMPLE_32:
 			add.samples = VK_SAMPLE_COUNT_32_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_16:
+		case SAMPLE_16:
 			add.samples = VK_SAMPLE_COUNT_16_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_8:
+		case SAMPLE_8:
 			add.samples = VK_SAMPLE_COUNT_8_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_4:
+		case SAMPLE_4:
 			add.samples = VK_SAMPLE_COUNT_4_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_2:
+		case SAMPLE_2:
 			add.samples = VK_SAMPLE_COUNT_2_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_1:
+		case SAMPLE_1:
 			add.samples = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
@@ -202,13 +202,13 @@ namespace VulkanSimplifiedInternal
 
 		switch (loadOP)
 		{
-		case VulkanSimplified::RenderPassAttachmentLoadOP::IGNORE:
+		case RenderPassAttachmentLoadOP::IGNORE:
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
 			break;
-		case VulkanSimplified::RenderPassAttachmentLoadOP::CLEAR:
+		case RenderPassAttachmentLoadOP::CLEAR:
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_CLEAR;
 			break;
-		case VulkanSimplified::RenderPassAttachmentLoadOP::LOAD:
+		case RenderPassAttachmentLoadOP::LOAD:
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_LOAD;
 			break;
 		default:
@@ -217,10 +217,10 @@ namespace VulkanSimplifiedInternal
 
 		switch (storeOP)
 		{
-		case VulkanSimplified::RenderPassAttachmentStoreOP::IGNORE:
+		case RenderPassAttachmentStoreOP::IGNORE:
 			add.storeOP = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 			break;
-		case VulkanSimplified::RenderPassAttachmentStoreOP::STORE:
+		case RenderPassAttachmentStoreOP::STORE:
 			add.storeOP = VK_ATTACHMENT_STORE_OP_STORE;
 			break;
 		default:
@@ -229,31 +229,31 @@ namespace VulkanSimplifiedInternal
 
 		switch (initialLayout)
 		{
-		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+		case ImageLayoutFlags::PRESENT:
 			add.initialLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+		case ImageLayoutFlags::TRANSFER_DESTINATION:
 			add.initialLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+		case ImageLayoutFlags::TRANSFER_SOURCE:
 			add.initialLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+		case ImageLayoutFlags::SHADER_READ_ONLY:
 			add.initialLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
 			add.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 			add.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+		case ImageLayoutFlags::COLOR_ATTACHMENT:
 			add.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+		case ImageLayoutFlags::GENERAL:
 			add.initialLayout = VK_IMAGE_LAYOUT_GENERAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+		case ImageLayoutFlags::UNDEFINED:
 			add.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
@@ -262,31 +262,31 @@ namespace VulkanSimplifiedInternal
 
 		switch (finalLayout)
 		{
-		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+		case ImageLayoutFlags::PRESENT:
 			add.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+		case ImageLayoutFlags::TRANSFER_DESTINATION:
 			add.finalLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+		case ImageLayoutFlags::TRANSFER_SOURCE:
 			add.finalLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+		case ImageLayoutFlags::SHADER_READ_ONLY:
 			add.finalLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
 			add.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 			add.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+		case ImageLayoutFlags::COLOR_ATTACHMENT:
 			add.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+		case ImageLayoutFlags::GENERAL:
 			add.finalLayout = VK_IMAGE_LAYOUT_GENERAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+		case ImageLayoutFlags::UNDEFINED:
 			add.finalLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
@@ -297,38 +297,38 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<RenderPassAttachmentReference> SharedRenderPassDataListInternal::AddRenderPassAttachmentReference(uint32_t attachmentIndex,
-		VulkanSimplified::ImageLayoutFlags subpassUsedAttachmentLayout, size_t addOnReserving)
+		ImageLayoutFlags subpassUsedAttachmentLayout, size_t addOnReserving)
 	{
 		RenderPassAttachmentReference add;
 		add.attachmentIndex = attachmentIndex;
 
 		switch (subpassUsedAttachmentLayout)
 		{
-		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+		case ImageLayoutFlags::PRESENT:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+		case ImageLayoutFlags::TRANSFER_DESTINATION:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+		case ImageLayoutFlags::TRANSFER_SOURCE:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+		case ImageLayoutFlags::SHADER_READ_ONLY:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+		case ImageLayoutFlags::COLOR_ATTACHMENT:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+		case ImageLayoutFlags::GENERAL:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_GENERAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+		case ImageLayoutFlags::UNDEFINED:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
@@ -339,38 +339,38 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<RenderPassAttachmentReference> SharedRenderPassDataListInternal::AddUniqueRenderPassAttachmentReference(uint32_t attachmentIndex,
-		VulkanSimplified::ImageLayoutFlags subpassUsedAttachmentLayout, size_t addOnReserving)
+		ImageLayoutFlags subpassUsedAttachmentLayout, size_t addOnReserving)
 	{
 		RenderPassAttachmentReference add;
 		add.attachmentIndex = attachmentIndex;
 
 		switch (subpassUsedAttachmentLayout)
 		{
-		case VulkanSimplified::ImageLayoutFlags::PRESENT:
+		case ImageLayoutFlags::PRESENT:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_DESTINATION:
+		case ImageLayoutFlags::TRANSFER_DESTINATION:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::TRANSFER_SOURCE:
+		case ImageLayoutFlags::TRANSFER_SOURCE:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::SHADER_READ_ONLY:
+		case ImageLayoutFlags::SHADER_READ_ONLY:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::COLOR_ATTACHMENT:
+		case ImageLayoutFlags::COLOR_ATTACHMENT:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::GENERAL:
+		case ImageLayoutFlags::GENERAL:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_GENERAL;
 			break;
-		case VulkanSimplified::ImageLayoutFlags::UNDEFINED:
+		case ImageLayoutFlags::UNDEFINED:
 			add.attachmentLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
@@ -381,8 +381,8 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<SubpassDependencyData> SharedRenderPassDataListInternal::AddSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass,
-		VulkanSimplified::PipelineStageFlags srcStageFlags, VulkanSimplified::PipelineStageFlags dstStageFlags, VulkanSimplified::AccessFlags srcAccessFlags,
-		VulkanSimplified::AccessFlags dstAccessFlags, size_t addOnReserving)
+		PipelineStageFlags srcStageFlags, PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags,
+		AccessFlags dstAccessFlags, size_t addOnReserving)
 	{
 		SubpassDependencyData add;
 
@@ -399,8 +399,8 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<SubpassDependencyData> SharedRenderPassDataListInternal::AddUniqueSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass,
-		VulkanSimplified::PipelineStageFlags srcStageFlags, VulkanSimplified::PipelineStageFlags dstStageFlags, VulkanSimplified::AccessFlags srcAccessFlags,
-		VulkanSimplified::AccessFlags dstAccessFlags, size_t addOnReserving)
+		PipelineStageFlags srcStageFlags, PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags,
+		AccessFlags dstAccessFlags, size_t addOnReserving)
 	{
 		SubpassDependencyData add;
 
@@ -677,7 +677,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::pair<VkClearValue, std::optional<VkClearValue>> SharedRenderPassDataListInternal::GetClearValue(VulkanSimplified::RenderPassClearValueID valueID) const
+	std::pair<VkClearValue, std::optional<VkClearValue>> SharedRenderPassDataListInternal::GetClearValue(RenderPassClearValueID valueID) const
 	{
 		std::pair<VkClearValue, std::optional<VkClearValue>> ret;
 
@@ -685,31 +685,31 @@ namespace VulkanSimplifiedInternal
 
 		switch (valueID.type)
 		{
-		case VulkanSimplified::RenderPassClearValueIDType::COLOR_DOUBLE:
+		case RenderPassClearValueIDType::COLOR_DOUBLE:
 			data = GetDoubleColorClearValue(valueID.doubleColorID.ID);
 			ret.first = data.first;
 			ret.second = data.second;
 			break;
-		case VulkanSimplified::RenderPassClearValueIDType::COLOR_INT64:
+		case RenderPassClearValueIDType::COLOR_INT64:
 			data = GetInt64ColorClearValue(valueID.int64ColorID.ID);
 			ret.first = data.first;
 			ret.second = data.second;
 			break;
-		case VulkanSimplified::RenderPassClearValueIDType::COLOR_UINT64:
+		case RenderPassClearValueIDType::COLOR_UINT64:
 			data = GetUInt64ColorClearValue(valueID.uint64ColorID.ID);
 			ret.first = data.first;
 			ret.second = data.second;
 			break;
-		case VulkanSimplified::RenderPassClearValueIDType::COLOR_FLOAT:
+		case RenderPassClearValueIDType::COLOR_FLOAT:
 			ret.first = GetFloatColorClearValue(valueID.floatColorID.ID);
 			break;
-		case VulkanSimplified::RenderPassClearValueIDType::COLOR_INT:
+		case RenderPassClearValueIDType::COLOR_INT:
 			ret.first = GetIntColorClearValue(valueID.intColorID.ID);
 			break;
-		case VulkanSimplified::RenderPassClearValueIDType::COLOR_UINT:
+		case RenderPassClearValueIDType::COLOR_UINT:
 			ret.first = GetUIntColorClearValue(valueID.uintColorID.ID);
 			break;
-		case VulkanSimplified::RenderPassClearValueIDType::DEPTH_STENCIL:
+		case RenderPassClearValueIDType::DEPTH_STENCIL:
 			ret.first = GetDepthStencilClearValue(valueID.depthStencilID.ID);
 			break;
 		default:
@@ -809,59 +809,59 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkAccessFlags SharedRenderPassDataListInternal::CompileAccessFlags(VulkanSimplified::AccessFlags accessFlags)
+	VkAccessFlags SharedRenderPassDataListInternal::CompileAccessFlags(AccessFlags accessFlags)
 	{
 		VkAccessFlags ret = 0;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_INDIRECT_COMMAND_READ) == VulkanSimplified::ACCESS_INDIRECT_COMMAND_READ)
+		if ((accessFlags & ACCESS_INDIRECT_COMMAND_READ) == ACCESS_INDIRECT_COMMAND_READ)
 			ret |= VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_INDEX_READ) == VulkanSimplified::ACCESS_INDEX_READ)
+		if ((accessFlags & ACCESS_INDEX_READ) == ACCESS_INDEX_READ)
 			ret |= VK_ACCESS_INDEX_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_VERTEX_ATTRIBUTE_READ) == VulkanSimplified::ACCESS_VERTEX_ATTRIBUTE_READ)
+		if ((accessFlags & ACCESS_VERTEX_ATTRIBUTE_READ) == ACCESS_VERTEX_ATTRIBUTE_READ)
 			ret |= VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_UNIFORM_READ) == VulkanSimplified::ACCESS_UNIFORM_READ)
+		if ((accessFlags & ACCESS_UNIFORM_READ) == ACCESS_UNIFORM_READ)
 			ret |= VK_ACCESS_UNIFORM_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_INPUT_ATTACHMENT_READ) == VulkanSimplified::ACCESS_INPUT_ATTACHMENT_READ)
+		if ((accessFlags & ACCESS_INPUT_ATTACHMENT_READ) == ACCESS_INPUT_ATTACHMENT_READ)
 			ret |= VK_ACCESS_INPUT_ATTACHMENT_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_SHADER_READ) == VulkanSimplified::ACCESS_SHADER_READ)
+		if ((accessFlags & ACCESS_SHADER_READ) == ACCESS_SHADER_READ)
 			ret |= VK_ACCESS_SHADER_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_SHADER_WRITE) == VulkanSimplified::ACCESS_SHADER_WRITE)
+		if ((accessFlags & ACCESS_SHADER_WRITE) == ACCESS_SHADER_WRITE)
 			ret |= VK_ACCESS_SHADER_WRITE_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_COLOR_ATTACHMENT_READ) == VulkanSimplified::ACCESS_COLOR_ATTACHMENT_READ)
+		if ((accessFlags & ACCESS_COLOR_ATTACHMENT_READ) == ACCESS_COLOR_ATTACHMENT_READ)
 			ret |= VK_ACCESS_COLOR_ATTACHMENT_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_COLOR_ATTACHMENT_WRITE) == VulkanSimplified::ACCESS_COLOR_ATTACHMENT_WRITE)
+		if ((accessFlags & ACCESS_COLOR_ATTACHMENT_WRITE) == ACCESS_COLOR_ATTACHMENT_WRITE)
 			ret |= VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_DEPTH_STENCIL_READ) == VulkanSimplified::ACCESS_DEPTH_STENCIL_READ)
+		if ((accessFlags & ACCESS_DEPTH_STENCIL_READ) == ACCESS_DEPTH_STENCIL_READ)
 			ret |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_DEPTH_STENCIL_WRITE) == VulkanSimplified::ACCESS_DEPTH_STENCIL_WRITE)
+		if ((accessFlags & ACCESS_DEPTH_STENCIL_WRITE) == ACCESS_DEPTH_STENCIL_WRITE)
 			ret |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_TRANSFER_READ) == VulkanSimplified::ACCESS_TRANSFER_READ)
+		if ((accessFlags & ACCESS_TRANSFER_READ) == ACCESS_TRANSFER_READ)
 			ret |= VK_ACCESS_TRANSFER_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_TRANSFER_WRITE) == VulkanSimplified::ACCESS_TRANSFER_WRITE)
+		if ((accessFlags & ACCESS_TRANSFER_WRITE) == ACCESS_TRANSFER_WRITE)
 			ret |= VK_ACCESS_TRANSFER_WRITE_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_HOST_READ) == VulkanSimplified::ACCESS_HOST_READ)
+		if ((accessFlags & ACCESS_HOST_READ) == ACCESS_HOST_READ)
 			ret |= VK_ACCESS_HOST_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_HOST_WRITE) == VulkanSimplified::ACCESS_HOST_WRITE)
+		if ((accessFlags & ACCESS_HOST_WRITE) == ACCESS_HOST_WRITE)
 			ret |= VK_ACCESS_HOST_WRITE_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_MEMORY_READ) == VulkanSimplified::ACCESS_MEMORY_READ)
+		if ((accessFlags & ACCESS_MEMORY_READ) == ACCESS_MEMORY_READ)
 			ret |= VK_ACCESS_MEMORY_READ_BIT;
 
-		if ((accessFlags & VulkanSimplified::ACCESS_MEMORY_WRITE) == VulkanSimplified::ACCESS_MEMORY_WRITE)
+		if ((accessFlags & ACCESS_MEMORY_WRITE) == ACCESS_MEMORY_WRITE)
 			ret |= VK_ACCESS_MEMORY_WRITE_BIT;
 
 		return ret;

@@ -15,7 +15,7 @@ namespace VulkanSimplified
 	struct GraphicsPipelineCreationData;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SharedPipelineDataListInternal;
 	class DescriptorDataListsInternal;
@@ -29,11 +29,11 @@ namespace VulkanSimplifiedInternal
 	{
 	public:
 		PipelineDataListsInternal(const SharedPipelineDataListInternal& pipelineData, const DescriptorDataListsInternal& descriptorData, const ShaderListsInternal& shaderList,
-			const RenderPassListInternal& renderPassList, VkDevice device, const VulkanSimplified::PipelineDataListsInitialCapacities& initialCapacities);
+			const RenderPassListInternal& renderPassList, VkDevice device, const PipelineDataListsInitialCapacities& initialCapacities);
 		~PipelineDataListsInternal();
 
-		IDObject<AutoCleanupPipelineLayout> AddPipelineLayout(const VulkanSimplified::PipelineLayoutCreationData& creationData, size_t addOnReserving);
-		std::vector<IDObject<AutoCleanupGraphicsPipeline>> AddGraphicPipelines(const std::vector<VulkanSimplified::GraphicsPipelineCreationData>& creationDataList,
+		IDObject<AutoCleanupPipelineLayout> AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserving);
+		std::vector<IDObject<AutoCleanupGraphicsPipeline>> AddGraphicPipelines(const std::vector<GraphicsPipelineCreationData>& creationDataList,
 			size_t addOnReserving);
 
 		VkPipelineLayout GetPipelineLayout(IDObject<AutoCleanupPipelineLayout> layoutID) const;

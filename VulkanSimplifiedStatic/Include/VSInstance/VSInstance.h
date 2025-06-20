@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class InstanceInternal;
 }
@@ -18,7 +18,7 @@ namespace VulkanSimplified
 	class Instance
 	{
 	public:
-		Instance(VulkanSimplifiedInternal::InstanceInternal& ref);
+		Instance(InstanceInternal& ref);
 		~Instance();
 
 		Instance& operator=(const Instance&) noexcept = delete;
@@ -40,6 +40,6 @@ namespace VulkanSimplified
 		void CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities);
 
 	private:
-		VulkanSimplifiedInternal::InstanceInternal& _internal;
+		InstanceInternal& _internal;
 	};
 }

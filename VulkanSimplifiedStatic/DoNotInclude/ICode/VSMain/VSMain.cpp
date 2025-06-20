@@ -15,7 +15,7 @@ namespace VulkanSimplified
 {
 	Main::Main(const MainInitData& initData)
 	{
-		_internal = std::make_unique<VulkanSimplifiedInternal::MainInternal>(initData);
+		_internal = std::make_unique<MainInternal>(initData);
 	}
 
 	Main::~Main()

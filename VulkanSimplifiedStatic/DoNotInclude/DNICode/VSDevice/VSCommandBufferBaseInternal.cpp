@@ -30,7 +30,7 @@
 
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupStagingBuffer.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	CommandBufferBaseInternal::CommandBufferBaseInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
@@ -59,19 +59,19 @@ namespace VulkanSimplifiedInternal
 		return _buffer;
 	}
 
-	void CommandBufferBaseInternal::BeginRecording(VulkanSimplified::CommandBufferUsage usage)
+	void CommandBufferBaseInternal::BeginRecording(CommandBufferUsage usage)
 	{
 		VkCommandBufferBeginInfo beginInfo{};
 		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 
 		switch (usage)
 		{
-		case VulkanSimplified::CommandBufferUsage::MULTIPLE_USE_SIMULTANEOUS_USAGE:
+		case CommandBufferUsage::MULTIPLE_USE_SIMULTANEOUS_USAGE:
 			beginInfo.flags = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
 			break;
-		case VulkanSimplified::CommandBufferUsage::MULTIPLE_USE_NO_SIMULTANEOUS_USAGE:
+		case CommandBufferUsage::MULTIPLE_USE_NO_SIMULTANEOUS_USAGE:
 			break;
-		case VulkanSimplified::CommandBufferUsage::ONE_USE:
+		case CommandBufferUsage::ONE_USE:
 			beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 			break;
 		default:
@@ -104,7 +104,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	bool CommandBufferBaseInternal::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
-		uint32_t& returnIndex, IDObject<VulkanSimplified::WindowPointer> windowID)
+		uint32_t& returnIndex, IDObject<WindowPointer> windowID)
 	{
 		auto& window = _windowList.GetWindow(windowID);
 
@@ -121,7 +121,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void CommandBufferBaseInternal::TransferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
-		const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+		const DataBuffersCopyRegionData& copyRegion)
 	{
 		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
 		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
@@ -156,7 +156,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void CommandBufferBaseInternal::TransferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
-		const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+		const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
 	{
 		if (copyRegionsList.empty())
 			return;
@@ -206,7 +206,7 @@ namespace VulkanSimplifiedInternal
 		vkCmdCopyBuffer(_buffer, stagingBuffer, dstBuffer, static_cast<uint32_t>(copyRegionsData.size()), copyRegionsData.data());
 	}
 
-	void CommandBufferBaseInternal::TransferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID, const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+	void CommandBufferBaseInternal::TransferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
 	{
 		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
 		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
@@ -240,7 +240,7 @@ namespace VulkanSimplifiedInternal
 		vkCmdCopyBuffer(_buffer, stagingBuffer, dstBuffer, 1, &copy);
 	}
 
-	void CommandBufferBaseInternal::TransferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID, const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	void CommandBufferBaseInternal::TransferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
 	{
 		if (copyRegionsList.empty())
 			return;
@@ -291,7 +291,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void CommandBufferBaseInternal::TransferDataToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
-		const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+		const DataBuffersCopyRegionData& copyRegion)
 	{
 		auto stagingBufferSize = _dataBufferList.GetStagingBuffersSize(srcBufferID);
 		auto stagingBuffer = _dataBufferList.GetStagingBuffer(srcBufferID);
@@ -325,7 +325,7 @@ namespace VulkanSimplifiedInternal
 		vkCmdCopyBuffer(_buffer, stagingBuffer, dstBuffer, 1, &copy);
 	}
 
-	void CommandBufferBaseInternal::TransferDataListToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID, const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	void CommandBufferBaseInternal::TransferDataListToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
 	{
 		if (copyRegionsList.empty())
 			return;
@@ -450,9 +450,9 @@ namespace VulkanSimplifiedInternal
 			&blit, VK_FILTER_LINEAR);
 	}
 
-	void CommandBufferBaseInternal::CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
-		const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
-		const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData)
+	void CommandBufferBaseInternal::CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages,
+		const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
+		const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData)
 	{
 		if (globalMemoryBarrierData.empty() && dataBuffersBarrierData.empty() && imageBarrierData.empty())
 			return;
@@ -511,19 +511,19 @@ namespace VulkanSimplifiedInternal
 
 			switch (inData.bufferID.type)
 			{
-			case VulkanSimplified::DataBuffersIDType::VERTEX:
+			case DataBuffersIDType::VERTEX:
 				outData.buffer = _dataBufferList.GetVertexBuffer(inData.bufferID.vertexID.ID);
 				break;
-			case VulkanSimplified::DataBuffersIDType::STAGING:
+			case DataBuffersIDType::STAGING:
 				outData.buffer = _dataBufferList.GetStagingBuffer(inData.bufferID.stagingID.ID);
 				break;
-			case VulkanSimplified::DataBuffersIDType::INDEX:
+			case DataBuffersIDType::INDEX:
 				outData.buffer = _dataBufferList.GetIndexBuffer(inData.bufferID.indexID.ID);
 				break;
-			case VulkanSimplified::DataBuffersIDType::UNIFORM:
+			case DataBuffersIDType::UNIFORM:
 				outData.buffer = _dataBufferList.GetUniformBuffer(inData.bufferID.uniformID.ID);
 				break;
-			case VulkanSimplified::DataBuffersIDType::UNKNOWN:
+			case DataBuffersIDType::UNKNOWN:
 			default:
 				throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Program was given an erroneous generic data buffer id type!");
 			}
@@ -560,7 +560,7 @@ namespace VulkanSimplifiedInternal
 
 			switch (inData.imageID.type)
 			{
-			case VulkanSimplified::ImagesIDType::COLOR_RENDER_TARGET:
+			case ImagesIDType::COLOR_RENDER_TARGET:
 				imagePtr = &_imageList.GetColorRenderTargetImageInternal(inData.imageID.colorRenderTargetID.ID);
 				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 				outData.subresourceRange.baseArrayLayer = 0;
@@ -568,7 +568,7 @@ namespace VulkanSimplifiedInternal
 				outData.subresourceRange.layerCount = 1;
 				outData.subresourceRange.levelCount = 1;
 				break;
-			case VulkanSimplified::ImagesIDType::TEXTURE_2D:
+			case ImagesIDType::TEXTURE_2D:
 				imagePtr = &_imageList.Get2DTextureImageInternal(inData.imageID.texture2DID.ID);
 				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 				outData.subresourceRange.baseArrayLayer = 0;
@@ -587,7 +587,7 @@ namespace VulkanSimplifiedInternal
 						throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Total sum of base mip level and used levels count must be equal or less than 2D textures mipmap amount!");
 				}
 				break;
-			case VulkanSimplified::ImagesIDType::UNKNOWN:
+			case ImagesIDType::UNKNOWN:
 			default:
 				throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Program was given an erroneous generic image id type!");
 			}
@@ -601,7 +601,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void CommandBufferBaseInternal::BindVertexBuffers(uint32_t firstBinding,
-		const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList)
+		const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, MemorySize>>& buffersDataList)
 	{
 		if (buffersDataList.empty())
 			return;
@@ -624,7 +624,7 @@ namespace VulkanSimplifiedInternal
 		vkCmdBindVertexBuffers(_buffer, firstBinding, static_cast<uint32_t>(buffers.size()), buffers.data(), offsets.data());
 	}
 
-	void CommandBufferBaseInternal::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize buffersOffset, VulkanSimplified::IndexType indexType)
+	void CommandBufferBaseInternal::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType)
 	{
 		auto buffer = _dataBufferList.GetIndexBuffer(bufferID);
 
@@ -632,10 +632,10 @@ namespace VulkanSimplifiedInternal
 
 		switch (indexType)
 		{
-		case VulkanSimplified::IndexType::INDEX_TYPE_16_BITS:
+		case IndexType::INDEX_TYPE_16_BITS:
 			type = VK_INDEX_TYPE_UINT16;
 			break;
-		case VulkanSimplified::IndexType::INDEX_TYPE_32_BITS:
+		case IndexType::INDEX_TYPE_32_BITS:
 			type = VK_INDEX_TYPE_UINT32;
 			break;
 		default:
@@ -646,7 +646,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void CommandBufferBaseInternal::BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
-		VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDList,
+		DescriptorPoolGenericID descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDList,
 		const std::vector<uint32_t>& dynamicOffsetList)
 	{
 		if (descriptorSetIDList.empty())
@@ -662,11 +662,11 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<VkDescriptorSet> descriptorSetList;
 
-		if (descriptorPoolID.type == VulkanSimplified::DescriptorPoolIDType::NIF)
+		if (descriptorPoolID.type == DescriptorPoolIDType::NIF)
 		{
 			descriptorSetList = _descriptorDataList.GetNIFDescriptorSetList(descriptorPoolID.NifID.ID, descriptorSetIDList);
 		}
-		else if (descriptorPoolID.type == VulkanSimplified::DescriptorPoolIDType::IF)
+		else if (descriptorPoolID.type == DescriptorPoolIDType::IF)
 		{
 			descriptorSetList = _descriptorDataList.GetIFDescriptorSetList(descriptorPoolID.IfID.ID, descriptorSetIDList);
 		}

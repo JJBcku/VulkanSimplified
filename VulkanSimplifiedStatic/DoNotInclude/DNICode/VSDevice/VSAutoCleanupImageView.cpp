@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupImageView.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupImageView::AutoCleanupImageView(VkDevice device, VkImageView imageView) : _device(device), _imageView(imageView)
 	{

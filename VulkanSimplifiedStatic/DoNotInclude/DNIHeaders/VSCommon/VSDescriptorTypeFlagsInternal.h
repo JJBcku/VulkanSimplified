@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkDescriptorType TranslateDescriptorTypeFlags(VulkanSimplified::DescriptorTypeFlagBits descriptorType);
+	VkDescriptorType TranslateDescriptorTypeFlags(DescriptorTypeFlagBits descriptorType);
 }

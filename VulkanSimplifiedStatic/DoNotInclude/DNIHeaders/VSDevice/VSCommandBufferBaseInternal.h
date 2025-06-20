@@ -35,7 +35,7 @@ namespace VulkanSimplified
 	union DescriptorPoolGenericID;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 	class WindowListInternal;
@@ -65,7 +65,7 @@ namespace VulkanSimplifiedInternal
 
 		VkCommandBuffer GetCommandBuffer() const;
 
-		void BeginRecording(VulkanSimplified::CommandBufferUsage usage);
+		void BeginRecording(CommandBufferUsage usage);
 		void EndRecording();
 
 		void BindGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID);
@@ -74,35 +74,35 @@ namespace VulkanSimplifiedInternal
 		void DrawIndexed(uint32_t indexCount, uint32_t instanceCount, uint32_t firstIndex, int32_t firstVertexOffset, uint32_t firstInstance);
 
 		bool AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
-			uint32_t& returnIndex, IDObject<VulkanSimplified::WindowPointer> windowID);
+			uint32_t& returnIndex, IDObject<WindowPointer> windowID);
 
 		void TransferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
-			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
+			const DataBuffersCopyRegionData& copyRegion);
 		void TransferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
-			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
+			const std::vector<DataBuffersCopyRegionData>& copyRegionsList);
 
 		void TransferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
-			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
+			const DataBuffersCopyRegionData& copyRegion);
 		void TransferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupIndexBuffer> dstBufferID,
-			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
+			const std::vector<DataBuffersCopyRegionData>& copyRegionsList);
 
 		void TransferDataToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
-			const VulkanSimplified::DataBuffersCopyRegionData& copyRegion);
+			const DataBuffersCopyRegionData& copyRegion);
 		void TransferDataListToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupUniformBuffer> dstBufferID,
-			const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList);
+			const std::vector<DataBuffersCopyRegionData>& copyRegionsList);
 
 		void TransferDataTo2dTextureSimple(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t mipLevel);
 
 		void BlitDataBetween2DTexturesSimple(IDObject<AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel, IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel);
 
-		void CreatePipelineBarrier(VulkanSimplified::PipelineStageFlags srcStages, VulkanSimplified::PipelineStageFlags dstStages,
-			const std::vector<VulkanSimplified::GlobalMemoryBarrierData>& globalMemoryBarrierData,
-			const std::vector<VulkanSimplified::DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<VulkanSimplified::ImagesMemoryBarrierData>& imageBarrierData);
+		void CreatePipelineBarrier(PipelineStageFlags srcStages, PipelineStageFlags dstStages,
+			const std::vector<GlobalMemoryBarrierData>& globalMemoryBarrierData,
+			const std::vector<DataBuffersMemoryBarrierData>& dataBuffersBarrierData, const std::vector<ImagesMemoryBarrierData>& imageBarrierData);
 
-		void BindVertexBuffers(uint32_t firstBinding, const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList);
-		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, VulkanSimplified::MemorySize buffersOffset, VulkanSimplified::IndexType indexType);
+		void BindVertexBuffers(uint32_t firstBinding, const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, MemorySize>>& buffersDataList);
+		void BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType);
 
-		void BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet, VulkanSimplified::DescriptorPoolGenericID descriptorPoolID,
+		void BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet, DescriptorPoolGenericID descriptorPoolID,
 			const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDList, const std::vector<uint32_t>& dynamicOffsetList);
 
 	protected:

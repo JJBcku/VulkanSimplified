@@ -29,19 +29,19 @@ namespace VulkanSimplified
 	struct DataFormatSetIndependentID;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SharedPipelineDataListInternal
 	{
 	public:
-		SharedPipelineDataListInternal(const VulkanSimplified::SharedPipelineDataListsssCapacities& initialCapacities);
+		SharedPipelineDataListInternal(const SharedPipelineDataListsssCapacities& initialCapacities);
 		~SharedPipelineDataListInternal();
 
 		IDObject<ShaderSpecializationElement> AddShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize, size_t addOnReserving);
-		IDObject<SharedShaderPipelineData> AddSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType, size_t addOnReserving);
+		IDObject<SharedShaderPipelineData> AddSharedShaderPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserving);
 
-		IDObject<VertexAttributeDescriptionData> AddVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format, size_t addOnReserving);
-		IDObject<VertexBindingDescriptionData> AddVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+		IDObject<VertexAttributeDescriptionData> AddVertexAttributeDescriptionData(uint32_t offset, DataFormatSetIndependentID format, size_t addOnReserving);
+		IDObject<VertexBindingDescriptionData> AddVertexBindingData(uint32_t stride, VertexBindingInputRate inputRate,
 			const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving);
 		IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings, size_t addOnReserving);
 
@@ -49,23 +49,23 @@ namespace VulkanSimplifiedInternal
 		IDObject<PipelineViewportData> AddPipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, float minDepth, float maxDepth,
 			size_t addOnReserving);
 
-		IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserving);
-		IDObject<PipelineRasterizationData> AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise,
+		IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserving);
+		IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise,
 			size_t addOnReserving);
-		IDObject<PipelineMultisampleData> AddPipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
+		IDObject<PipelineMultisampleData> AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting,
 			std::optional<uint32_t> minSampleShading, size_t addOnReserving);
-		IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp,
+		IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationsType compareOp,
 			float minDepth, float maxDepth, size_t addOnReserving);
-		IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
-			VulkanSimplified::ColorBlendingPreset blendingPreset, size_t addOnReserving);
+		IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents,
+			ColorBlendingPreset blendingPreset, size_t addOnReserving);
 
-		IDObject<PushConstantData> AddPushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving);
+		IDObject<PushConstantData> AddPushConstantData(ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving);
 
 		IDObject<ShaderSpecializationElement> AddUniqueShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize, size_t addOnReserving);
-		IDObject<SharedShaderPipelineData> AddUniqueSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType, size_t addOnReserving);
+		IDObject<SharedShaderPipelineData> AddUniqueSharedShaderPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserving);
 
-		IDObject<VertexAttributeDescriptionData> AddUniqueVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format, size_t addOnReserving);
-		IDObject<VertexBindingDescriptionData> AddUniqueVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+		IDObject<VertexAttributeDescriptionData> AddUniqueVertexAttributeDescriptionData(uint32_t offset, DataFormatSetIndependentID format, size_t addOnReserving);
+		IDObject<VertexBindingDescriptionData> AddUniqueVertexBindingData(uint32_t stride, VertexBindingInputRate inputRate,
 			const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving);
 		IDObject<VertexInputSharedPipelineData> AddUniqueVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings, size_t addOnReserving);
 
@@ -73,17 +73,17 @@ namespace VulkanSimplifiedInternal
 		IDObject<PipelineViewportData> AddUniquePipelineViewportData(uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, float minDepth, float maxDepth,
 			size_t addOnReserving);
 
-		IDObject<PipelineInputAssemblyData> AddUniquePipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserving);
-		IDObject<PipelineRasterizationData> AddUniquePipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
+		IDObject<PipelineInputAssemblyData> AddUniquePipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserving);
+		IDObject<PipelineRasterizationData> AddUniquePipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks,
 			bool frontClockwise, size_t addOnReserving);
-		IDObject<PipelineMultisampleData> AddUniquePipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
+		IDObject<PipelineMultisampleData> AddUniquePipelineMultisampleData(ImageSampleFlagBits samplingSetting,
 			std::optional<uint32_t> minSampleShading, size_t addOnReserving);
-		IDObject<PipelineDepthStencilStateData> AddUniquePipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp,
+		IDObject<PipelineDepthStencilStateData> AddUniquePipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationsType compareOp,
 			float minDepth, float maxDepth, size_t addOnReserving);
-		IDObject<PipelineColorBlendAttachment> AddUniquePipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
-			VulkanSimplified::ColorBlendingPreset blendingPreset, size_t addOnReserving);
+		IDObject<PipelineColorBlendAttachment> AddUniquePipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents,
+			ColorBlendingPreset blendingPreset, size_t addOnReserving);
 
-		IDObject<PushConstantData> AddUniquePushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving);
+		IDObject<PushConstantData> AddUniquePushConstantData(ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving);
 
 		std::vector<VkSpecializationMapEntry> GetShaderSpecializationData(const std::vector<IDObject<ShaderSpecializationElement>>& specializationIDs) const;
 		SharedShaderPipelineData GetSharedShaderPipelineData(const IDObject<SharedShaderPipelineData>& shaderID) const;

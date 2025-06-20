@@ -12,7 +12,7 @@
 
 namespace VulkanSimplified
 {
-	SharedDataMainList::SharedDataMainList(VulkanSimplifiedInternal::SharedDataMainListInternal& ref) : _internal(ref)
+	SharedDataMainList::SharedDataMainList(SharedDataMainListInternal& ref) : _internal(ref)
 	{
 	}
 

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupDescriptorSetLayout;
 	struct PushConstantData;
@@ -14,8 +14,8 @@ namespace VulkanSimplified
 {
 	struct PipelineLayoutCreationData
 	{
-		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> _descriptorSets;
-		std::vector<IDObject<VulkanSimplifiedInternal::PushConstantData>> _pushConstants;
+		std::vector<IDObject<AutoCleanupDescriptorSetLayout>> _descriptorSets;
+		std::vector<IDObject<PushConstantData>> _pushConstants;
 
 		PipelineLayoutCreationData() = default;
 	};

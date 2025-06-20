@@ -8,20 +8,20 @@
 #include <vulkan/vulkan.hpp>
 #include <optional>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupDataBuffer
 	{
 	public:
 		VkBuffer GetDataBuffer() const;
 
-		void BindDataBuffer(VulkanSimplified::MemoryAllocationFullID allocationID, size_t bindingBeggining);
+		void BindDataBuffer(MemoryAllocationFullID allocationID, size_t bindingBeggining);
 
-		std::optional<VulkanSimplified::MemorySuballocationFullID> GetBoundMemorySuballocationData() const;
+		std::optional<MemorySuballocationFullID> GetBoundMemorySuballocationData() const;
 
 		uint32_t GetBuffersMemoryTypeMask() const;
-		VulkanSimplified::MemorySize GetBuffersSize() const;
-		VulkanSimplified::MemorySize GetBuffersRequiredAligment() const;
+		MemorySize GetBuffersSize() const;
+		MemorySize GetBuffersRequiredAligment() const;
 
 	protected:
 		AutoCleanupDataBuffer(VkDevice device, VkBuffer buffer);
@@ -38,7 +38,7 @@ namespace VulkanSimplifiedInternal
 		VkBuffer _buffer;
 
 		VkMemoryRequirements _memReq;
-		std::optional<VulkanSimplified::MemorySuballocationFullID> _memorySuballocation;
+		std::optional<MemorySuballocationFullID> _memorySuballocation;
 
 		void DestroyBuffer();
 	};

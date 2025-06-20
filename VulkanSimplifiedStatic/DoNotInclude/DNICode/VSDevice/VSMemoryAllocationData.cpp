@@ -3,9 +3,9 @@
 
 #include "../../DNIHeaders/VSDevice/VSSuballocationInternalData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	MemoryAllocationData::MemoryAllocationData(VkDevice device, VkDeviceMemory memory, VulkanSimplified::MemorySize totalSize, size_t reservedSuballocations, bool mapMemory) :
+	MemoryAllocationData::MemoryAllocationData(VkDevice device, VkDeviceMemory memory, MemorySize totalSize, size_t reservedSuballocations, bool mapMemory) :
 		_device(device), _memory(memory), _totalSize(totalSize), _usedSize(0)
 	{
 		_data = nullptr;
@@ -80,7 +80,7 @@ namespace VulkanSimplifiedInternal
 		return _suballocationData.size();
 	}
 
-	size_t MemoryAllocationData::BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
+	size_t MemoryAllocationData::BindImage(VkImage image, MemorySize size, MemorySize aligment, size_t addOnReserving)
 	{
 		CheckSuballocationVectorSize(addOnReserving);
 
@@ -100,7 +100,7 @@ namespace VulkanSimplifiedInternal
 		return memoryAddresses.first;
 	}
 
-	size_t MemoryAllocationData::BindBuffer(VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
+	size_t MemoryAllocationData::BindBuffer(VkBuffer buffer, MemorySize size, MemorySize aligment, size_t addOnReserving)
 	{
 		CheckSuballocationVectorSize(addOnReserving);
 
@@ -120,7 +120,7 @@ namespace VulkanSimplifiedInternal
 		return memoryAddresses.first;
 	}
 
-	bool MemoryAllocationData::RemoveSuballocation(VulkanSimplified::MemorySize beggining, bool throwOnNotFound)
+	bool MemoryAllocationData::RemoveSuballocation(MemorySize beggining, bool throwOnNotFound)
 	{
 		for (auto it = _suballocationData.begin(); it < _suballocationData.end(); ++it)
 		{
@@ -139,8 +139,8 @@ namespace VulkanSimplifiedInternal
 		return false;
 	}
 
-	void MemoryAllocationData::WriteToMemory(VulkanSimplified::MemorySize suballocationBeggining, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-		VulkanSimplified::MemorySize writeSize)
+	void MemoryAllocationData::WriteToMemory(MemorySize suballocationBeggining, MemorySize writeOffset, const unsigned char& writeData,
+		MemorySize writeSize)
 	{
 		if (writeOffset >= _totalSize)
 			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write past the memory allocation!");
@@ -159,7 +159,7 @@ namespace VulkanSimplifiedInternal
 		if (!suballocationIndex.has_value())
 			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write to non-existent memory suballocation!");
 
-		VulkanSimplified::MemorySize submemSize = _suballocationData[suballocationIndex.value()].size;
+		MemorySize submemSize = _suballocationData[suballocationIndex.value()].size;
 
 		if (writeOffset > submemSize)
 			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write past the memory suballocation!");
@@ -167,12 +167,12 @@ namespace VulkanSimplifiedInternal
 		if (writeSize > submemSize)
 			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write more data there is than space in the memory suballocation!");
 
-		VulkanSimplified::MemorySize sizeLeft = submemSize - writeOffset;
+		MemorySize sizeLeft = submemSize - writeOffset;
 
 		if (writeSize > sizeLeft)
 			throw std::runtime_error("MemoryAllocationData::WriteToMemory Error: Program tried to write more data than there is space between the offset and suballocation's end!");
 
-		VulkanSimplified::MemorySize totalOffset = _suballocationData[suballocationIndex.value()].beggining + writeOffset;
+		MemorySize totalOffset = _suballocationData[suballocationIndex.value()].beggining + writeOffset;
 
 		std::memcpy(&_data[totalOffset], &writeData, writeSize);
 	}

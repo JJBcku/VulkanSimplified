@@ -21,10 +21,10 @@
 #include "../../DNIHeaders/VSCommon/VSImageUsageFlagsInternal.h"
 #include "../../DNIHeaders/VSCommon/VSImageSampleFlagsInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	ImageDataListsInternal::ImageDataListsInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& renderPassData, MemoryObjectsListInternal& memoryList,
-		VkDevice device, const VulkanSimplified::ImageDataListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _renderPassData(renderPassData), _memoryList(memoryList),
+		VkDevice device, const ImageDataListsInitialCapacities& initialCapacities) : _deviceCore(deviceCore), _renderPassData(renderPassData), _memoryList(memoryList),
 		_device(device), _colorRenderTargetList(initialCapacities.colorRenderTargetsListInitialCapacity),
 		_depthStencilRenderTargetList(initialCapacities.depthStencilRenderTargetsListInitialCapacity),
 		_resolveRenderTargetList(initialCapacities.resolveRenderTargetsListInitialCapacity), _2dTexturesList(initialCapacities.twoDTexturesListInitialCapacity),
@@ -36,8 +36,8 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<AutoCleanupColorRenderTargetImage> ImageDataListsInternal::AddColorRenderTargetImage(uint32_t width, uint32_t height, VulkanSimplified::DataFormatSetIndependentID format,
-		VulkanSimplified::ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+	IDObject<AutoCleanupColorRenderTargetImage> ImageDataListsInternal::AddColorRenderTargetImage(uint32_t width, uint32_t height, DataFormatSetIndependentID format,
+		ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
 		VkImageCreateInfo createInfo{};
@@ -91,7 +91,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupDepthStencilRenderTargetImage> ImageDataListsInternal::AddDepthStencilRenderTargetImage(uint32_t width, uint32_t height,
-		VulkanSimplified::DataFormatSetIndependentID format, VulkanSimplified::ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized,
+		DataFormatSetIndependentID format, ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized,
 		size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
@@ -146,7 +146,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupResolveRenderTargetImage> ImageDataListsInternal::AddResolveRenderTargetImage(uint32_t width, uint32_t height,
-		VulkanSimplified::DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity,
+		DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity,
 		size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
@@ -199,7 +199,7 @@ namespace VulkanSimplifiedInternal
 		return _resolveRenderTargetList.AddObject(AutoCleanupResolveRenderTargetImage(_device, image, width, height, createInfo.format, initialImageViewListCapacity), addOnReserving);
 	}
 
-	IDObject<AutoCleanup2DTexture> ImageDataListsInternal::Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, VulkanSimplified::DataFormatSetIndependentID format,
+	IDObject<AutoCleanup2DTexture> ImageDataListsInternal::Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, DataFormatSetIndependentID format,
 		const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
@@ -436,12 +436,12 @@ namespace VulkanSimplifiedInternal
 		return _colorRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::GetColorRenderTargetImagesSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	MemorySize ImageDataListsInternal::GetColorRenderTargetImagesSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImagesSize();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::GetColorRenderTargetImagesRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
+	MemorySize ImageDataListsInternal::GetColorRenderTargetImagesRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
 	}
@@ -461,12 +461,12 @@ namespace VulkanSimplifiedInternal
 		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::GetDepthStencilRenderTargetImagesSize(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	MemorySize ImageDataListsInternal::GetDepthStencilRenderTargetImagesSize(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
 		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImagesSize();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::GetDepthStencilRenderTargetImagesRequiredAligment(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
+	MemorySize ImageDataListsInternal::GetDepthStencilRenderTargetImagesRequiredAligment(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
 		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
 	}
@@ -491,12 +491,12 @@ namespace VulkanSimplifiedInternal
 		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesSize(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesSize(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
 		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesSize();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesRequiredAligment(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
+	MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesRequiredAligment(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
 		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
 	}
@@ -516,17 +516,17 @@ namespace VulkanSimplifiedInternal
 		return _2dTexturesList.GetConstObject(imageID).GetImagesMemoryTypeMask();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::Get2DTextureImagesSize(IDObject<AutoCleanup2DTexture> imageID) const
+	MemorySize ImageDataListsInternal::Get2DTextureImagesSize(IDObject<AutoCleanup2DTexture> imageID) const
 	{
 		return _2dTexturesList.GetConstObject(imageID).GetImagesSize();
 	}
 
-	VulkanSimplified::MemorySize ImageDataListsInternal::Get2DTextureImagesRequiredAligment(IDObject<AutoCleanup2DTexture> imageID) const
+	MemorySize ImageDataListsInternal::Get2DTextureImagesRequiredAligment(IDObject<AutoCleanup2DTexture> imageID) const
 	{
 		return _2dTexturesList.GetConstObject(imageID).GetImagesRequiredAligment();
 	}
 
-	void ImageDataListsInternal::BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID,
+	void ImageDataListsInternal::BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, MemoryAllocationFullID allocationID,
 		size_t addOnReserving)
 	{
 		auto& imageData = _colorRenderTargetList.GetObject(imageID);
@@ -540,7 +540,7 @@ namespace VulkanSimplifiedInternal
 		imageData.BindImage(allocationID, beggining);
 	}
 
-	void ImageDataListsInternal::BindDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID,
+	void ImageDataListsInternal::BindDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, MemoryAllocationFullID allocationID,
 		size_t addOnReserving)
 	{
 		auto& imageData = _depthStencilRenderTargetList.GetObject(imageID);
@@ -554,7 +554,7 @@ namespace VulkanSimplifiedInternal
 		imageData.BindImage(allocationID, beggining);
 	}
 
-	void ImageDataListsInternal::BindResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID, VulkanSimplified::MemoryAllocationFullID allocationID,
+	void ImageDataListsInternal::BindResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID, MemoryAllocationFullID allocationID,
 		size_t addOnReserving)
 	{
 		auto& imageData = _resolveRenderTargetList.GetObject(imageID);
@@ -568,7 +568,7 @@ namespace VulkanSimplifiedInternal
 		imageData.BindImage(allocationID, beggining);
 	}
 
-	void ImageDataListsInternal::Bind2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, VulkanSimplified::MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void ImageDataListsInternal::Bind2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		auto& imageData = _2dTexturesList.GetObject(imageID);
 
@@ -632,7 +632,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupFramebuffer> ImageDataListsInternal::AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
-		const std::vector<std::pair<VulkanSimplified::RenderTargetImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
+		const std::vector<std::pair<RenderTargetImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
 		uint32_t layers, size_t addOnReserving)
 	{
 		VkFramebufferCreateInfo createInfo{};
@@ -648,16 +648,16 @@ namespace VulkanSimplifiedInternal
 
 			switch (imageID.type)
 			{
-			case VulkanSimplified::ImageIDType::COLOR_RENDER_TARGET:
+			case ImageIDType::COLOR_RENDER_TARGET:
 				imageViews.push_back(GetColorRenderTargetImageView(imageID.colorRenderTarget.ID, attachmentData.second));
 				break;
-			case VulkanSimplified::ImageIDType::DEPTH_STENCIL_RENDER_TARGET:
+			case ImageIDType::DEPTH_STENCIL_RENDER_TARGET:
 				imageViews.push_back(GetDepthStencilRenderTargetImageView(imageID.depthStencilRenderTarget.ID, attachmentData.second));
 				break;
-			case VulkanSimplified::ImageIDType::RESOLVE_RENDER_TARGET:
+			case ImageIDType::RESOLVE_RENDER_TARGET:
 				imageViews.push_back(GetResolveRenderTargetImageView(imageID.resolveRenderTarget.ID, attachmentData.second));
 				break;
-			case VulkanSimplified::ImageIDType::UNKNOWN:
+			case ImageIDType::UNKNOWN:
 			default:
 				throw std::runtime_error("ImageDataListsInternal::AddFramebuffer Error: Program was given an erroneous value for a attachments image ID type!");
 			}

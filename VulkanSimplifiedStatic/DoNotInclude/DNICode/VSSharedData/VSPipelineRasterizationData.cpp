@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSPipelineRasterizationData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PipelineRasterizationData::PipelineRasterizationData()
 	{

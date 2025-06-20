@@ -19,7 +19,7 @@ namespace VulkanSimplified
 	struct DeviceInitialCapacitiesList;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct InstanceInternalCreationData;
 
@@ -44,8 +44,8 @@ namespace VulkanSimplifiedInternal
 		const std::string& GetAppFullName() const;
 		const std::string& GetEngineFullName() const;
 
-		VulkanSimplified::VersionData GetAppVersion() const;
-		VulkanSimplified::VersionData GetEngineVersion() const;
+		VersionData GetAppVersion() const;
+		VersionData GetEngineVersion() const;
 
 		size_t GetAvailableDevicesCount() const;
 
@@ -55,7 +55,7 @@ namespace VulkanSimplifiedInternal
 		const PhysicalDeviceDataInternal& GetPhysicalDeviceData(size_t deviceIndex) const;
 		const DeviceMainInternal& GetChoosenDevicesMainClass() const;
 
-		void CreateLogicalDevice(const VulkanSimplified::LogicalDeviceCreationData& creationData, const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities);
+		void CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities);
 
 	private:
 		SdlEventHandlerInternal& _eventHandler;
@@ -65,14 +65,14 @@ namespace VulkanSimplifiedInternal
 		VkDebugUtilsMessengerEXT _debugMessenger;
 
 		std::string _appName;
-		VulkanSimplified::VersionData _appVersion;
+		VersionData _appVersion;
 		std::string _engineName;
-		VulkanSimplified::VersionData _engineVersion;
+		VersionData _engineVersion;
 		uint32_t _usedVulkanApiVersion;
 		uint32_t _padding;
 
-		VulkanSimplified::InstanceExtensionPacksList _enabledExtensionPacksList;
-		VulkanSimplified::InstanceLayerPacksList _enabledLayerPacksList;
+		InstanceExtensionPacksList _enabledExtensionPacksList;
+		InstanceLayerPacksList _enabledLayerPacksList;
 
 		std::vector<PhysicalDeviceDataInternal> _availableDevices;
 

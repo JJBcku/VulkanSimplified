@@ -3,7 +3,7 @@
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkShaderModule_T* VkShaderModule;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupShaderModule
 	{

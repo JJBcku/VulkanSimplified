@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSPipelineColorBlendAttachment.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PipelineColorBlendAttachment::PipelineColorBlendAttachment()
 	{

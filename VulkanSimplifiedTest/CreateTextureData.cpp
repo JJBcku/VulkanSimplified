@@ -79,7 +79,7 @@ void CreateTextureData(VulkanData& data)
 	}
 
 	VulkanSimplified::MemoryAllocationFullID stagingMemoryAllocation;
-	IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> stagingBuffer;
+	IDObject<VulkanSimplified::AutoCleanupStagingBuffer> stagingBuffer;
 
 	auto device = data.basicData->vsmain->GetInstance().GetChoosenDevicesMainClass();
 	auto imageList = device.GetImageDataLists();

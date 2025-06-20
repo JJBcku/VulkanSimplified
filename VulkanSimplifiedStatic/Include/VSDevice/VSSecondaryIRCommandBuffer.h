@@ -2,7 +2,7 @@
 
 #include "VSSecondaryNIRCommandBuffer.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SecondaryIRCommandBufferInternal;
 }
@@ -12,7 +12,7 @@ namespace VulkanSimplified
 	class SecondaryIRCommandBuffer : public SecondaryNIRCommandBuffer
 	{
 	public:
-		SecondaryIRCommandBuffer(VulkanSimplifiedInternal::SecondaryIRCommandBufferInternal& ref);
+		SecondaryIRCommandBuffer(SecondaryIRCommandBufferInternal& ref);
 		~SecondaryIRCommandBuffer();
 
 		SecondaryIRCommandBuffer& operator=(const SecondaryIRCommandBuffer&) noexcept = delete;
@@ -20,6 +20,6 @@ namespace VulkanSimplified
 		void ResetCommandBuffer(bool freeResources);
 
 	private:
-		VulkanSimplifiedInternal::SecondaryIRCommandBufferInternal& _internal;
+		SecondaryIRCommandBufferInternal& _internal;
 	};
 }

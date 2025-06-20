@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	DescriptorSetUniformBufferBindingWriteDataInternal::DescriptorSetUniformBufferBindingWriteDataInternal()
 	{

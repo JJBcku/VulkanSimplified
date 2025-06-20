@@ -3,7 +3,7 @@
 #include <vulkan/vulkan_core.h>
 #include <compare>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct RenderPassAttachmentData
 	{

@@ -5,7 +5,7 @@
 
 namespace VulkanSimplified
 {
-	DataBufferLists::DataBufferLists(VulkanSimplifiedInternal::DataBufferListsInternal& ref) : _internal(ref)
+	DataBufferLists::DataBufferLists(DataBufferListsInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -13,147 +13,147 @@ namespace VulkanSimplified
 	{
 	}
 
-	IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> DataBufferLists::AddVertexBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	IDObject<AutoCleanupVertexBuffer> DataBufferLists::AddVertexBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		return _internal.AddVertexBuffer(size, queuesUsingBuffer, addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> DataBufferLists::AddStagingBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	IDObject<AutoCleanupStagingBuffer> DataBufferLists::AddStagingBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		return _internal.AddStagingBuffer(size, queuesUsingBuffer, addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> DataBufferLists::AddIndexBuffer(size_t indicesCount, IndexType indexType,
+	IDObject<AutoCleanupIndexBuffer> DataBufferLists::AddIndexBuffer(size_t indicesCount, IndexType indexType,
 		const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		return _internal.AddIndexBuffer(indicesCount, indexType, queuesUsingBuffer, addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> DataBufferLists::AddUniformBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
+	IDObject<AutoCleanupUniformBuffer> DataBufferLists::AddUniformBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving)
 	{
 		return _internal.AddUniformBuffer(size, queuesUsingBuffer, addOnReserving);
 	}
 
-	void DataBufferLists::BindVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID, MemoryAllocationFullID allocationID,
+	void DataBufferLists::BindVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemoryAllocationFullID allocationID,
 		size_t addOnReserving)
 	{
 		_internal.BindVertexBuffer(bufferID, allocationID, addOnReserving);
 	}
 
-	void DataBufferLists::BindStagingBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferLists::BindStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		_internal.BindStagingBuffer(bufferID, allocationID, addOnReserving);
 	}
 
-	void DataBufferLists::BindIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferLists::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		_internal.BindIndexBuffer(bufferID, allocationID, addOnReserving);
 	}
 
-	void DataBufferLists::BindUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
+	void DataBufferLists::BindUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		_internal.BindUniformBuffer(bufferID, allocationID, addOnReserving);
 	}
 
-	bool DataBufferLists::RemoveVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID, bool throwOnIDNotFound)
+	bool DataBufferLists::RemoveVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveVertexBuffer(bufferID, throwOnIDNotFound);
 	}
 
-	bool DataBufferLists::RemoveStagingBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID, bool throwOnIDNotFound)
+	bool DataBufferLists::RemoveStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveStagingBuffer(bufferID, throwOnIDNotFound);
 	}
 
-	bool DataBufferLists::RemoveIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, bool throwOnIDNotFound)
+	bool DataBufferLists::RemoveIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveIndexBuffer(bufferID, throwOnIDNotFound);
 	}
 
-	bool DataBufferLists::RemoveUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID, bool throwOnIDNotFound)
+	bool DataBufferLists::RemoveUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveUniformBuffer(bufferID, throwOnIDNotFound);
 	}
 
-	uint32_t DataBufferLists::GetVertexBuffersMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID) const
+	uint32_t DataBufferLists::GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _internal.GetVertexBuffersMemoryTypeMask(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetVertexBuffersSize(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID) const
+	MemorySize DataBufferLists::GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _internal.GetVertexBuffersSize(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetVertexBuffersRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID) const
+	MemorySize DataBufferLists::GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
 		return _internal.GetVertexBuffersRequiredAligment(bufferID);
 	}
 
-	uint32_t DataBufferLists::GetStagingBuffersMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID) const
+	uint32_t DataBufferLists::GetStagingBuffersMemoryTypeMask(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _internal.GetStagingBuffersMemoryTypeMask(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetStagingBuffersSize(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID) const
+	MemorySize DataBufferLists::GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _internal.GetStagingBuffersSize(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetStagingBuffersRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID) const
+	MemorySize DataBufferLists::GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
 		return _internal.GetStagingBuffersRequiredAligment(bufferID);
 	}
 
-	uint32_t DataBufferLists::GetIndexBuffersMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID) const
+	uint32_t DataBufferLists::GetIndexBuffersMemoryTypeMask(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
 		return _internal.GetIndexBuffersMemoryTypeMask(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetIndexBuffersSize(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID) const
+	MemorySize DataBufferLists::GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
 		return _internal.GetIndexBuffersSize(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetIndexBuffersRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID) const
+	MemorySize DataBufferLists::GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
 		return _internal.GetIndexBuffersRequiredAligment(bufferID);
 	}
 
-	uint32_t DataBufferLists::GetUniformBuffersMemoryTypeMask(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID) const
+	uint32_t DataBufferLists::GetUniformBuffersMemoryTypeMask(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
 		return _internal.GetUniformBuffersMemoryTypeMask(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetUniformBuffersSize(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID) const
+	MemorySize DataBufferLists::GetUniformBuffersSize(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
 		return _internal.GetUniformBuffersSize(bufferID);
 	}
 
-	MemorySize DataBufferLists::GetUniformBuffersRequiredAligment(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID) const
+	MemorySize DataBufferLists::GetUniformBuffersRequiredAligment(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
 		return _internal.GetUniformBuffersRequiredAligment(bufferID);
 	}
 
-	void DataBufferLists::WriteToVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+	void DataBufferLists::WriteToVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
 		MemorySize dataSize)
 	{
 		_internal.WriteToVertexBuffer(bufferID, writeOffset, writeData, dataSize);
 	}
 
-	void DataBufferLists::WriteToStagingBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+	void DataBufferLists::WriteToStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
 		MemorySize dataSize)
 	{
 		_internal.WriteToStagingBuffer(bufferID, writeOffset, writeData, dataSize);
 	}
 
-	void DataBufferLists::WriteToIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+	void DataBufferLists::WriteToIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
 		MemorySize dataSize)
 	{
 		_internal.WriteToIndexBuffer(bufferID, writeOffset, writeData, dataSize);
 	}
 
-	void DataBufferLists::WriteToUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
+	void DataBufferLists::WriteToUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,
 		MemorySize dataSize)
 	{
 		_internal.WriteToUniformBuffer(bufferID, writeOffset, writeData, dataSize);

@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupFramebuffer.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupFramebuffer::AutoCleanupFramebuffer(VkDevice device, VkFramebuffer framebuffer) : _device(device), _framebuffer(framebuffer)
 	{

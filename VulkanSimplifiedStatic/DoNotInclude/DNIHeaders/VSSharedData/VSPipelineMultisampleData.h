@@ -4,7 +4,7 @@
 #include <compare>
 #include <stdint.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct PipelineMultisampleData
 	{

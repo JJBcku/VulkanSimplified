@@ -5,7 +5,7 @@
 
 namespace VulkanSimplified
 {
-	PrimaryIRCommandBuffer::PrimaryIRCommandBuffer(VulkanSimplifiedInternal::PrimaryIRCommandBufferInternal& ref) : PrimaryNIRCommandBuffer(ref), _internal(ref)
+	PrimaryIRCommandBuffer::PrimaryIRCommandBuffer(PrimaryIRCommandBufferInternal& ref) : PrimaryNIRCommandBuffer(ref), _internal(ref)
 	{
 	}
 

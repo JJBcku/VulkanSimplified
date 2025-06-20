@@ -12,7 +12,7 @@
 #include <optional>
 #include <stdint.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupImageView;
 
@@ -30,17 +30,17 @@ namespace VulkanSimplifiedInternal
 		VkFormat GetFormat() const;
 
 		uint32_t GetImagesMemoryTypeMask() const;
-		VulkanSimplified::MemorySize GetImagesSize() const;
-		VulkanSimplified::MemorySize GetImagesRequiredAligment() const;
+		MemorySize GetImagesSize() const;
+		MemorySize GetImagesRequiredAligment() const;
 
 		VkSampleCountFlagBits GetSampleCount() const;
 
-		std::optional<VulkanSimplified::MemorySuballocationFullID> GetBoundMemorySuballocation() const;
+		std::optional<MemorySuballocationFullID> GetBoundMemorySuballocation() const;
 
 		bool DeleteImageView(IDObject<AutoCleanupImageView> imageViewID, bool throwOnIDNotFound);
 		void ResetImageViewList(size_t newImageViewListCapacity);
 
-		void BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, size_t bindingBeggining);
+		void BindImage(MemoryAllocationFullID allocationID, size_t bindingBeggining);
 
 	protected:
 		AutoCleanupImage(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t depth, uint32_t mipmapLevels, VkFormat format, VkSampleCountFlagBits sampleCount,
@@ -66,13 +66,13 @@ namespace VulkanSimplifiedInternal
 
 		VkFormat _format;
 		uint32_t _memoryTypeMask;
-		VulkanSimplified::MemorySize _size;
-		VulkanSimplified::MemorySize _aligment;
+		MemorySize _size;
+		MemorySize _aligment;
 
 		VkSampleCountFlagBits _sampleCount;
 		uint32_t _padding;
 
-		std::optional<VulkanSimplified::MemorySuballocationFullID> _memorySuballocation;
+		std::optional<MemorySuballocationFullID> _memorySuballocation;
 
 		UnsortedIDVector<AutoCleanupImageView> _imageViews;
 

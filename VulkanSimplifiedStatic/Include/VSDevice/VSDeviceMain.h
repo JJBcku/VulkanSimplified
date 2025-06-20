@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceMainInternal;
 }
@@ -25,7 +25,7 @@ namespace VulkanSimplified
 	class DeviceMain
 	{
 	public:
-		DeviceMain(VulkanSimplifiedInternal::DeviceMainInternal& ref);
+		DeviceMain(DeviceMainInternal& ref);
 		~DeviceMain();
 
 		DeviceCore GetDeviceCore();
@@ -59,6 +59,6 @@ namespace VulkanSimplified
 		const CommandPoolMainList GetCommandPoolMainList() const;
 
 	private:
-		VulkanSimplifiedInternal::DeviceMainInternal& _internal;
+		DeviceMainInternal& _internal;
 	};
 }

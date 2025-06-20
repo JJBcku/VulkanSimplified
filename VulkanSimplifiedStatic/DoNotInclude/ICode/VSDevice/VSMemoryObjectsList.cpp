@@ -5,7 +5,7 @@
 
 namespace VulkanSimplified
 {
-	MemoryObjectsList::MemoryObjectsList(VulkanSimplifiedInternal::MemoryObjectsListInternal& ref) : _internal(ref)
+	MemoryObjectsList::MemoryObjectsList(MemoryObjectsListInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -25,12 +25,12 @@ namespace VulkanSimplified
 		return _internal.TryToAllocateMemory(memorySize, initialSuballocationsReserved, acceptableMemoryTypesProperties, memoryTypeMask, addOnReserving);
 	}
 
-	bool MemoryObjectsList::FreeMemory(VulkanSimplified::MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
+	bool MemoryObjectsList::FreeMemory(MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
 	{
 		return _internal.FreeMemory(memoryID, throwOnIDNotFound, throwOnSuballocationsNotEmpty);
 	}
 
-	bool MemoryObjectsList::IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const
+	bool MemoryObjectsList::IsMemoryMapped(MemoryAllocationFullID allocationID) const
 	{
 		return _internal.IsMemoryMapped(allocationID);
 	}

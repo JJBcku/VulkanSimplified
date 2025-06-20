@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkSampleCountFlagBits TranslateImageSampleFlagBits(VulkanSimplified::ImageSampleFlagBits sampleCount);
+	VkSampleCountFlagBits TranslateImageSampleFlagBits(ImageSampleFlagBits sampleCount);
 }

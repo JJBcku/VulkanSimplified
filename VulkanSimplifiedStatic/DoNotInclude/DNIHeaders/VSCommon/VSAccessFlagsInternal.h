@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkAccessFlags TranslataAccessFlags(VulkanSimplified::AccessFlags accessFlags);
+	VkAccessFlags TranslataAccessFlags(AccessFlags accessFlags);
 }

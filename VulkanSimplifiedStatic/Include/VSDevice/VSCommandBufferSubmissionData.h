@@ -8,7 +8,7 @@
 #include <vector>
 #include <utility>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupSemaphore;
 }
@@ -17,9 +17,9 @@ namespace VulkanSimplified
 {
 	struct CommandBufferSubmissionData
 	{
-		std::vector<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>, PipelineStageFlags>> waitSemaphores;
+		std::vector<std::pair<IDObject<AutoCleanupSemaphore>, PipelineStageFlags>> waitSemaphores;
 		std::vector<CommandBufferGenericID> commandBufferIDs;
-		std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>> signalSemaphores;
+		std::vector<IDObject<AutoCleanupSemaphore>> signalSemaphores;
 
 		CommandBufferSubmissionData() = default;
 	};

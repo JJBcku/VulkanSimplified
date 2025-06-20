@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSPipelineMultisampleData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PipelineMultisampleData::PipelineMultisampleData()
 	{

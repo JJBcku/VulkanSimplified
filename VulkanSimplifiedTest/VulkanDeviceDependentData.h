@@ -9,10 +9,10 @@
 struct VulkanDeviceDependentData
 {
 	IDObject<VulkanSimplified::WindowPointer> windowID;
-	IDObject<VulkanSimplifiedInternal::AutoCleanupFragmentShaderModule> fragmentShadersID;
-	IDObject<VulkanSimplifiedInternal::AutoCleanupVertexShaderModule> vertexShadersID;
+	IDObject<VulkanSimplified::AutoCleanupFragmentShaderModule> fragmentShadersID;
+	IDObject<VulkanSimplified::AutoCleanupVertexShaderModule> vertexShadersID;
 
-	IDObject<VulkanSimplifiedInternal::AutoCleanupSampler> sampler;
+	IDObject<VulkanSimplified::AutoCleanupSampler> sampler;
 
 	VulkanDeviceDependentData();
 	~VulkanDeviceDependentData();

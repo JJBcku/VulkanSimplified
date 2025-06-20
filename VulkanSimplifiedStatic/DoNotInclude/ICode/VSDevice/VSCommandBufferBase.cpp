@@ -9,7 +9,7 @@
 
 namespace VulkanSimplified
 {
-	CommandBufferBase::CommandBufferBase(VulkanSimplifiedInternal::CommandBufferBaseInternal& ref) : _internal(ref)
+	CommandBufferBase::CommandBufferBase(CommandBufferBaseInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -27,7 +27,7 @@ namespace VulkanSimplified
 		_internal.EndRecording();
 	}
 
-	void CommandBufferBase::BindGraphicsPipeline(IDObject<VulkanSimplifiedInternal::AutoCleanupGraphicsPipeline> pipelineID)
+	void CommandBufferBase::BindGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID)
 	{
 		_internal.BindGraphicsPipeline(pipelineID);
 	}
@@ -42,56 +42,56 @@ namespace VulkanSimplified
 		_internal.DrawIndexed(indexCount, instanceCount, firstIndex, firstVertexOffset, firstInstance);
 	}
 
-	bool CommandBufferBase::AcquireNextImage(uint64_t timeout, std::optional<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>> semaphoreID,
-		std::optional<IDObject<VulkanSimplifiedInternal::AutoCleanupFence>> fenceID, uint32_t& returnIndex, IDObject<WindowPointer> windowID)
+	bool CommandBufferBase::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID,
+		std::optional<IDObject<AutoCleanupFence>> fenceID, uint32_t& returnIndex, IDObject<WindowPointer> windowID)
 	{
 		return _internal.AcquireNextImage(timeout, semaphoreID, fenceID, returnIndex, windowID);
 	}
 
-	void CommandBufferBase::TransferDataToVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
+	void CommandBufferBase::TransferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanupVertexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
 	{
 		_internal.TransferDataToVertexBuffer(srcBufferID, dstBufferID, copyRegion);
 	}
 
-	void CommandBufferBase::TransferDataListToVertexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
+	void CommandBufferBase::TransferDataListToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanupVertexBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
 	{
 		_internal.TransferDataListToVertexBuffer(srcBufferID, dstBufferID, copyRegionsList);
 	}
 
-	void CommandBufferBase::TransferDataToIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> dstBufferID, const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+	void CommandBufferBase::TransferDataToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanupIndexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
 	{
 		_internal.TransferDataToIndexBuffer(srcBufferID, dstBufferID, copyRegion);
 	}
 
-	void CommandBufferBase::TransferDataListToIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> dstBufferID, const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	void CommandBufferBase::TransferDataListToIndexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanupIndexBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
 	{
 		_internal.TransferDataListToIndexBuffer(srcBufferID, dstBufferID, copyRegionsList);
 	}
 
-	void CommandBufferBase::TransferDataToUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> dstBufferID, const VulkanSimplified::DataBuffersCopyRegionData& copyRegion)
+	void CommandBufferBase::TransferDataToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanupUniformBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
 	{
 		_internal.TransferDataToUniformBuffer(srcBufferID, dstBufferID, copyRegion);
 	}
 
-	void CommandBufferBase::TransferDataListToUniformBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> dstBufferID, const std::vector<VulkanSimplified::DataBuffersCopyRegionData>& copyRegionsList)
+	void CommandBufferBase::TransferDataListToUniformBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanupUniformBuffer> dstBufferID, const std::vector<DataBuffersCopyRegionData>& copyRegionsList)
 	{
 		_internal.TransferDataListToUniformBuffer(srcBufferID, dstBufferID, copyRegionsList);
 	}
 
-	void CommandBufferBase::TransferDataTo2dTextureSimple(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> srcBufferID,
-		IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> dstTextureID, uint32_t mipLevel)
+	void CommandBufferBase::TransferDataTo2dTextureSimple(IDObject<AutoCleanupStagingBuffer> srcBufferID,
+		IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t mipLevel)
 	{
 		_internal.TransferDataTo2dTextureSimple(srcBufferID, dstTextureID, mipLevel);
 	}
 
-	void CommandBufferBase::BlitDataBetween2DTexturesSimple(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel,
-		IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel)
+	void CommandBufferBase::BlitDataBetween2DTexturesSimple(IDObject<AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel,
+		IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel)
 	{
 		_internal.BlitDataBetween2DTexturesSimple(srcTexureID, srcMipLevel, dstTextureID, dstMipLevel);
 	}
@@ -103,18 +103,18 @@ namespace VulkanSimplified
 	}
 
 	void CommandBufferBase::BindVertexBuffers(uint32_t firstBinding,
-		const std::vector<std::pair<IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer>, VulkanSimplified::MemorySize>>& buffersDataList)
+		const std::vector<std::pair<IDObject<AutoCleanupVertexBuffer>, MemorySize>>& buffersDataList)
 	{
 		_internal.BindVertexBuffers(firstBinding, buffersDataList);
 	}
 
-	void CommandBufferBase::BindIndexBuffer(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType)
+	void CommandBufferBase::BindIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID, MemorySize buffersOffset, IndexType indexType)
 	{
 		_internal.BindIndexBuffer(bufferID, buffersOffset, indexType);
 	}
 
-	void CommandBufferBase::BindDescriptorSetsToGraphicsPipeline(IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
-		VulkanSimplified::DescriptorPoolGenericID descriptorPoolID, const std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet>>& descriptorSetIDList,
+	void CommandBufferBase::BindDescriptorSetsToGraphicsPipeline(IDObject<AutoCleanupPipelineLayout> pipelineLayoutID, uint32_t firstSet,
+		DescriptorPoolGenericID descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDList,
 		const std::vector<uint32_t>& dynamicOffsetList)
 	{
 		_internal.BindDescriptorSetsToGraphicsPipeline(pipelineLayoutID, firstSet, descriptorPoolID, descriptorSetIDList, dynamicOffsetList);

@@ -20,17 +20,17 @@ namespace VulkanSimplified
 		struct
 		{
 			DescriptorPoolIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> ID;
+			IDObject<AutoCleanupNIFDescriptorPool> ID;
 		} NifID;
 
 		struct
 		{
 			DescriptorPoolIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> ID;
+			IDObject<AutoCleanupIFDescriptorPool> ID;
 		} IfID;
 
 		DescriptorPoolGenericID();
-		DescriptorPoolGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupNIFDescriptorPool> ID);
-		DescriptorPoolGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupIFDescriptorPool> ID);
+		DescriptorPoolGenericID(IDObject<AutoCleanupNIFDescriptorPool> ID);
+		DescriptorPoolGenericID(IDObject<AutoCleanupIFDescriptorPool> ID);
 	};
 }

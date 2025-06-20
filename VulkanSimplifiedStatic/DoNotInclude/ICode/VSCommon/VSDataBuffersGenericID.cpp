@@ -8,25 +8,25 @@ namespace VulkanSimplified
 		type = DataBuffersIDType::UNKNOWN;
 	}
 
-	DataBuffersGenericID::DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> ID)
+	DataBuffersGenericID::DataBuffersGenericID(IDObject<AutoCleanupVertexBuffer> ID)
 	{
 		vertexID.type = DataBuffersIDType::VERTEX;
 		vertexID.ID = ID;
 	}
 
-	DataBuffersGenericID::DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> ID)
+	DataBuffersGenericID::DataBuffersGenericID(IDObject<AutoCleanupStagingBuffer> ID)
 	{
 		stagingID.type = DataBuffersIDType::STAGING;
 		stagingID.ID = ID;
 	}
 
-	DataBuffersGenericID::DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> ID)
+	DataBuffersGenericID::DataBuffersGenericID(IDObject<AutoCleanupIndexBuffer> ID)
 	{
 		indexID.type = DataBuffersIDType::INDEX;
 		indexID.ID = ID;
 	}
 
-	DataBuffersGenericID::DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> ID)
+	DataBuffersGenericID::DataBuffersGenericID(IDObject<AutoCleanupUniformBuffer> ID)
 	{
 		uniformID.type = DataBuffersIDType::UNIFORM;
 		uniformID.ID = ID;

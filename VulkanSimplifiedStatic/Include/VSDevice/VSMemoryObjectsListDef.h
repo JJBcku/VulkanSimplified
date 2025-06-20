@@ -3,7 +3,7 @@
 #include "../VSCommon/VSMemoryTypePropertiesDef.h"
 #include "../VSCommon/VSMemoryAllocationFullID.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class MemoryAllocationData;
 }

@@ -12,10 +12,10 @@
 
 #include "../../DNIHeaders/VSMain/EventHandler/SdlEventHandlerInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	WindowInternal::WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-		const VulkanSimplified::WindowCreationData& creationData) : _eventHandler(eventHandler), _core(core)
+		const WindowCreationData& creationData) : _eventHandler(eventHandler), _core(core)
 	{
 		_instance = instance;
 		_physicalDevice = physicalDevice;
@@ -43,15 +43,15 @@ namespace VulkanSimplifiedInternal
 
 		switch (creationData.settings)
 		{
-		case VulkanSimplified::WindowSettings::STANDARD:
+		case WindowSettings::STANDARD:
 			break;
-		case VulkanSimplified::WindowSettings::RESIZABLE:
+		case WindowSettings::RESIZABLE:
 			flags |= SDL_WINDOW_RESIZABLE;
 			break;
-		case VulkanSimplified::WindowSettings::BORDERLESS:
+		case WindowSettings::BORDERLESS:
 			flags |= SDL_WINDOW_BORDERLESS;
 			break;
-		case VulkanSimplified::WindowSettings::FULLSCREEN_NONEXCLUSIVE:
+		case WindowSettings::FULLSCREEN_NONEXCLUSIVE:
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 			break;
 		default:
@@ -82,7 +82,7 @@ namespace VulkanSimplifiedInternal
 		DestroyWindow();
 	}
 
-	void WindowInternal::CreateSwapchain(const VulkanSimplified::SwapchainCreationData& creationData, bool throwOnSwapchainExist)
+	void WindowInternal::CreateSwapchain(const SwapchainCreationData& creationData, bool throwOnSwapchainExist)
 	{
 		if (_swapchain != VK_NULL_HANDLE)
 		{
@@ -164,7 +164,7 @@ namespace VulkanSimplifiedInternal
 		return _surfaceCapabilities.currentExtent.height;
 	}
 
-	bool WindowInternal::HandleWindowEventStatic(const VulkanSimplified::SdlWindowEventData& event, void* windowptr)
+	bool WindowInternal::HandleWindowEventStatic(const SdlWindowEventData& event, void* windowptr)
 	{
 		return static_cast<WindowInternal*>(windowptr)->HandleWindowEvent(event);
 	}
@@ -239,22 +239,22 @@ namespace VulkanSimplifiedInternal
 		}
 	}
 
-	VkPresentModeKHR WindowInternal::TranslateToPresentMode(VulkanSimplified::SurfacePresentModeBits presentMode)
+	VkPresentModeKHR WindowInternal::TranslateToPresentMode(SurfacePresentModeBits presentMode)
 	{
 		VkPresentModeKHR ret = VK_PRESENT_MODE_MAX_ENUM_KHR;
 
 		switch (presentMode)
 		{
-		case VulkanSimplified::PRESENT_MODE_IMMEDIATE:
+		case PRESENT_MODE_IMMEDIATE:
 			ret = VK_PRESENT_MODE_IMMEDIATE_KHR;
 			break;
-		case VulkanSimplified::PRESENT_MODE_MAILBOX:
+		case PRESENT_MODE_MAILBOX:
 			ret = VK_PRESENT_MODE_MAILBOX_KHR;
 			break;
-		case VulkanSimplified::PRESENT_MODE_FIFO_STRICT:
+		case PRESENT_MODE_FIFO_STRICT:
 			ret = VK_PRESENT_MODE_FIFO_KHR;
 			break;
-		case VulkanSimplified::PRESENT_MODE_FIFO_RELAXED:
+		case PRESENT_MODE_FIFO_RELAXED:
 			ret = VK_PRESENT_MODE_FIFO_RELAXED_KHR;
 			break;
 		default:
@@ -264,7 +264,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	bool WindowInternal::HandleWindowEvent(const VulkanSimplified::SdlWindowEventData& event)
+	bool WindowInternal::HandleWindowEvent(const SdlWindowEventData& event)
 	{
 		if (event.windowID != _windowID)
 			return true;

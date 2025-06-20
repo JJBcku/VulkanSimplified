@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupColorRenderTargetImage;
 	class AutoCleanupDepthStencilRenderTargetImage;

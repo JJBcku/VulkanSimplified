@@ -3,9 +3,9 @@
 
 #include "../../../Include/VSCommon/VSMemoryTypeProperties.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	MemoryTypeInternalData::MemoryTypeInternalData(VkDevice device, uint32_t heapIndex, const VulkanSimplified::MemoryTypeData& memoryData,
+	MemoryTypeInternalData::MemoryTypeInternalData(VkDevice device, uint32_t heapIndex, const MemoryTypeData& memoryData,
 		size_t reservedAllocation) : _device(device), _heapIndex(heapIndex), _typeIndex(memoryData.memoryIndex), _properties(memoryData.properties),
 		_allocationsList(reservedAllocation)
 	{
@@ -21,7 +21,7 @@ namespace VulkanSimplifiedInternal
 		rhs._device = VK_NULL_HANDLE;
 		rhs._heapIndex = std::numeric_limits<uint32_t>::max();
 		rhs._typeIndex = std::numeric_limits<uint32_t>::max();
-		rhs._properties = std::numeric_limits<VulkanSimplified::MemoryTypeProperties>::max();
+		rhs._properties = std::numeric_limits<MemoryTypeProperties>::max();
 	}
 
 	MemoryTypeInternalData& MemoryTypeInternalData::operator=(MemoryTypeInternalData&& rhs) noexcept
@@ -35,7 +35,7 @@ namespace VulkanSimplifiedInternal
 		rhs._device = VK_NULL_HANDLE;
 		rhs._heapIndex = std::numeric_limits<uint32_t>::max();
 		rhs._typeIndex = std::numeric_limits<uint32_t>::max();
-		rhs._properties = std::numeric_limits<VulkanSimplified::MemoryTypeProperties>::max();
+		rhs._properties = std::numeric_limits<MemoryTypeProperties>::max();
 		return *this;
 	}
 
@@ -88,7 +88,7 @@ namespace VulkanSimplifiedInternal
 		return _typeIndex;
 	}
 
-	VulkanSimplified::MemoryTypeProperties MemoryTypeInternalData::GetProperties() const
+	MemoryTypeProperties MemoryTypeInternalData::GetProperties() const
 	{
 		return _properties;
 	}
@@ -98,13 +98,13 @@ namespace VulkanSimplifiedInternal
 		return _allocationsList.GetConstObject(allocationID).GetTotalSize();
 	}
 
-	size_t MemoryTypeInternalData::BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+	size_t MemoryTypeInternalData::BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, MemorySize size, MemorySize aligment,
 		size_t addOnReserving)
 	{
 		return _allocationsList.GetObject(allocationID).BindImage(image, size, aligment, addOnReserving);
 	}
 
-	size_t MemoryTypeInternalData::BindBuffer(IDObject<MemoryAllocationData> allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment,
+	size_t MemoryTypeInternalData::BindBuffer(IDObject<MemoryAllocationData> allocationID, VkBuffer buffer, MemorySize size, MemorySize aligment,
 		size_t addOnReserving)
 	{
 		return _allocationsList.GetObject(allocationID).BindBuffer(buffer, size, aligment, addOnReserving);
@@ -120,15 +120,15 @@ namespace VulkanSimplifiedInternal
 		return _allocationsList.GetObject(allocationID).RemoveSuballocation(beggining, throwOnNotFound);
 	}
 
-	void MemoryTypeInternalData::WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-		VulkanSimplified::MemorySize writeSize)
+	void MemoryTypeInternalData::WriteToMemory(MemorySuballocationFullID suballocationID, MemorySize writeOffset, const unsigned char& writeData,
+		MemorySize writeSize)
 	{
 		_allocationsList.GetObject(suballocationID.first.first).WriteToMemory(suballocationID.second, writeOffset, writeData, writeSize);
 	}
 
 	bool MemoryTypeInternalData::IsMemoryMapped() const
 	{
-		return (_properties & VulkanSimplified::HOST_VISIBLE) == VulkanSimplified::HOST_VISIBLE;
+		return (_properties & HOST_VISIBLE) == HOST_VISIBLE;
 	}
 
 }

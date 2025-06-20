@@ -3,7 +3,7 @@
 
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupImageView.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanup2DTexture::AutoCleanup2DTexture(VkDevice device, VkImage image, uint32_t width, uint32_t height, uint32_t mipmapLevels, VkFormat format,
 		size_t imageViewsInitialCapacity) : AutoCleanupImage(device, image, width, height, 1, mipmapLevels, format, VK_SAMPLE_COUNT_1_BIT, imageViewsInitialCapacity)
@@ -14,7 +14,7 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<AutoCleanupImageView> VulkanSimplifiedInternal::AutoCleanup2DTexture::AddFullImageView(size_t addOnReserving)
+	IDObject<AutoCleanupImageView> AutoCleanup2DTexture::AddFullImageView(size_t addOnReserving)
 	{
 		VkImageSubresourceRange range{};
 		range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;

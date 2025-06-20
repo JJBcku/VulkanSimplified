@@ -7,7 +7,7 @@ namespace VulkanSimplified
 	struct SharedDataListsCapacities;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SharedDescriptorDataListInternal;
 	class SharedRenderPassDataListInternal;
@@ -16,7 +16,7 @@ namespace VulkanSimplifiedInternal
 	class SharedDataMainListInternal
 	{
 	public:
-		SharedDataMainListInternal(const VulkanSimplified::SharedDataListsCapacities& initialCapabilities);
+		SharedDataMainListInternal(const SharedDataListsCapacities& initialCapabilities);
 		~SharedDataMainListInternal();
 
 		SharedDescriptorDataListInternal& GetSharedDescriptorDataList();

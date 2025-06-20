@@ -5,7 +5,7 @@
 
 namespace VulkanSimplified
 {
-	SecondaryIRCommandBuffer::SecondaryIRCommandBuffer(VulkanSimplifiedInternal::SecondaryIRCommandBufferInternal& ref) : SecondaryNIRCommandBuffer(ref),
+	SecondaryIRCommandBuffer::SecondaryIRCommandBuffer(SecondaryIRCommandBufferInternal& ref) : SecondaryNIRCommandBuffer(ref),
 		_internal(ref)
 	{
 	}

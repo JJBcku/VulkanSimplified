@@ -2,7 +2,7 @@
 
 #include <memory>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class MainInternal;
 }
@@ -49,6 +49,6 @@ namespace VulkanSimplified
 		InstanceLayerPacksList GetAvailableInstanceLayerPacks() const;
 
 	private:
-		std::unique_ptr<VulkanSimplifiedInternal::MainInternal> _internal;
+		std::unique_ptr<MainInternal> _internal;
 	};
 }

@@ -4,7 +4,7 @@
 
 #include "VSSharedDescriptorDataListDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SharedDescriptorDataListInternal;
 }
@@ -14,13 +14,13 @@ namespace VulkanSimplified
 	class SharedDescriptorDataList
 	{
 	public:
-		SharedDescriptorDataList(VulkanSimplifiedInternal::SharedDescriptorDataListInternal& ref);
+		SharedDescriptorDataList(SharedDescriptorDataListInternal& ref);
 		~SharedDescriptorDataList();
 
-		IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits descriptorType,
-			uint32_t descriptorAmount, VulkanSimplified::ShaderTypeFlags shaderStageFlags, size_t addOnReserving = 0);
+		IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType,
+			uint32_t descriptorAmount, ShaderTypeFlags shaderStageFlags, size_t addOnReserving = 0);
 
 	private:
-		VulkanSimplifiedInternal::SharedDescriptorDataListInternal& _internal;
+		SharedDescriptorDataListInternal& _internal;
 	};
 }

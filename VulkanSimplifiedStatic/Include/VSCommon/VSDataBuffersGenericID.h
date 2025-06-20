@@ -24,31 +24,31 @@ namespace VulkanSimplified
 		struct
 		{
 			DataBuffersIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> ID;
+			IDObject<AutoCleanupVertexBuffer> ID;
 		} vertexID;
 
 		struct
 		{
 			DataBuffersIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> ID;
+			IDObject<AutoCleanupStagingBuffer> ID;
 		} stagingID;
 
 		struct
 		{
 			DataBuffersIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> ID;
+			IDObject<AutoCleanupIndexBuffer> ID;
 		} indexID;
 
 		struct
 		{
 			DataBuffersIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> ID;
+			IDObject<AutoCleanupUniformBuffer> ID;
 		} uniformID;
 
 		DataBuffersGenericID();
-		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexBuffer> ID);
-		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupStagingBuffer> ID);
-		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupIndexBuffer> ID);
-		DataBuffersGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer> ID);
+		DataBuffersGenericID(IDObject<AutoCleanupVertexBuffer> ID);
+		DataBuffersGenericID(IDObject<AutoCleanupStagingBuffer> ID);
+		DataBuffersGenericID(IDObject<AutoCleanupIndexBuffer> ID);
+		DataBuffersGenericID(IDObject<AutoCleanupUniformBuffer> ID);
 	};
 }

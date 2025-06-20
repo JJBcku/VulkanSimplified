@@ -9,7 +9,7 @@
 
 #include "../VSSharedData/VSRenderPassClearValueIDDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class PrimaryNIRCommandBufferInternal;
 }
@@ -21,25 +21,25 @@ namespace VulkanSimplified
 	class PrimaryNIRCommandBuffer : public CommandBufferBase
 	{
 	public:
-		PrimaryNIRCommandBuffer(VulkanSimplifiedInternal::PrimaryNIRCommandBufferInternal& ref);
+		PrimaryNIRCommandBuffer(PrimaryNIRCommandBufferInternal& ref);
 		~PrimaryNIRCommandBuffer();
 
 		PrimaryNIRCommandBuffer& operator=(const PrimaryNIRCommandBuffer&) noexcept = delete;
 
-		void BeginRenderPass(IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> renderPassID, IDObject<VulkanSimplifiedInternal::AutoCleanupFramebuffer> framebufferID,
+		void BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID, IDObject<AutoCleanupFramebuffer> framebufferID,
 			uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, const std::vector<std::optional<RenderPassClearValueID>>& clearValues, bool usesSecondaryBuffers = false);
 		void EndRenderPass();
 
 		void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex);
 		void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex);
 
-		void BlitColorRenderTargetToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> imageID,
+		void BlitColorRenderTargetToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanupColorRenderTargetImage> imageID,
 			uint32_t startX, uint32_t startY, uint32_t width, uint32_t height, uint32_t swapchainImageIndex);
-		void BlitResolveRenderTargetToSwapchainImage(IDObject<VulkanSimplified::WindowPointer> windowID,
-			IDObject<VulkanSimplifiedInternal::AutoCleanupResolveRenderTargetImage> imageID, uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
+		void BlitResolveRenderTargetToSwapchainImage(IDObject<WindowPointer> windowID,
+			IDObject<AutoCleanupResolveRenderTargetImage> imageID, uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
 			uint32_t swapchainImageIndex);
 
 	private:
-		VulkanSimplifiedInternal::PrimaryNIRCommandBufferInternal& _internal;
+		PrimaryNIRCommandBufferInternal& _internal;
 	};
 }

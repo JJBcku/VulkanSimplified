@@ -3,7 +3,7 @@
 #include "../VSCommon/VSImageSampleFlagsDef.h"
 #include "../VSCommon/VSShaderTypeFlagsDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct ShaderSpecializationElement;
 	struct SharedShaderPipelineData;

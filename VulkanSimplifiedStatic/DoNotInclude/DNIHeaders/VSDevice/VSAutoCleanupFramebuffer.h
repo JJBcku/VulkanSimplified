@@ -3,7 +3,7 @@
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkFramebuffer_T* VkFramebuffer;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupFramebuffer
 	{

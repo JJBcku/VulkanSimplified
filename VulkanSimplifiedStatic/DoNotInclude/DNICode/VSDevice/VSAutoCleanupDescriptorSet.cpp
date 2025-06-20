@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupDescriptorSet.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 
 	AutoCleanupDescriptorSet::AutoCleanupDescriptorSet(VkDescriptorSet set) : _set(set)

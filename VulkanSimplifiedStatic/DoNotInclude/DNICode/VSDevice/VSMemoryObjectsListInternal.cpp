@@ -5,10 +5,10 @@
 
 #include "../../../Include/VSDevice/VSMemoryObjectsListInitialCapacities.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	MemoryObjectsListInternal::MemoryObjectsListInternal(VkDevice device, const VulkanSimplified::MemoryDataList& memoryHeapList,
-		const VulkanSimplified::MemoryObjectsListInitialCapacities& initialCapacities)
+	MemoryObjectsListInternal::MemoryObjectsListInternal(VkDevice device, const MemoryDataList& memoryHeapList,
+		const MemoryObjectsListInitialCapacities& initialCapacities)
 	{
 		heapCount = memoryHeapList.heapAmount;
 
@@ -34,10 +34,10 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	VulkanSimplified::MemoryAllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
+	MemoryAllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
 	{
-		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
+		std::optional<MemoryAllocationFullID> ret;
 		assert(memorySize > 0);
 		assert(memoryTypeMask > 0);
 		assert(!acceptableMemoryTypesProperties.empty());
@@ -71,10 +71,10 @@ namespace VulkanSimplifiedInternal
 		throw std::runtime_error("MemoryObjectsListInternal::AddMemoryAllocation Error: Program failed to allocate memory!");
 	}
 
-	std::optional<VulkanSimplified::MemoryAllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
-		const std::vector<VulkanSimplified::MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
+	std::optional<MemoryAllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, uint32_t memoryTypeMask, size_t addOnReserving)
 	{
-		std::optional<VulkanSimplified::MemoryAllocationFullID> ret;
+		std::optional<MemoryAllocationFullID> ret;
 
 		assert(memorySize > 0);
 		assert(memoryTypeMask > 0);
@@ -111,7 +111,7 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VkDeviceMemory MemoryObjectsListInternal::GetMemory(VulkanSimplified::MemoryAllocationFullID allocationID) const
+	VkDeviceMemory MemoryObjectsListInternal::GetMemory(MemoryAllocationFullID allocationID) const
 	{
 		if (allocationID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::GetMemory Error: Program tried to access a non-existent memory type!");
@@ -119,8 +119,8 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.second].value().GetMemory(allocationID.first);
 	}
 
-	size_t MemoryObjectsListInternal::BindImage(VulkanSimplified::MemoryAllocationFullID allocationID, VkImage image, VulkanSimplified::MemorySize size,
-		VulkanSimplified::MemorySize aligment, size_t addOnReserving)
+	size_t MemoryObjectsListInternal::BindImage(MemoryAllocationFullID allocationID, VkImage image, MemorySize size,
+		MemorySize aligment, size_t addOnReserving)
 	{
 		if (allocationID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::BindImage Error: Program tried to access a non-existent memory type!");
@@ -128,7 +128,7 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.second].value().BindImage(allocationID.first, image, size, aligment, addOnReserving);
 	}
 
-	size_t MemoryObjectsListInternal::BindBuffer(VulkanSimplified::MemoryAllocationFullID allocationID, VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving)
+	size_t MemoryObjectsListInternal::BindBuffer(MemoryAllocationFullID allocationID, VkBuffer buffer, MemorySize size, MemorySize aligment, size_t addOnReserving)
 	{
 		if (allocationID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::BindBuffer Error: Program tried to access a non-existent memory type!");
@@ -136,7 +136,7 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.second].value().BindBuffer(allocationID.first, buffer, size, aligment, addOnReserving);
 	}
 
-	bool MemoryObjectsListInternal::RemoveSuballocation(VulkanSimplified::MemorySuballocationFullID allocationID, bool throwOnNotFound)
+	bool MemoryObjectsListInternal::RemoveSuballocation(MemorySuballocationFullID allocationID, bool throwOnNotFound)
 	{
 		if (allocationID.first.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::RemoveSuballocation Error: Program tried to access a non-existent memory type!");
@@ -144,18 +144,18 @@ namespace VulkanSimplifiedInternal
 		return memoryTypeData[allocationID.first.second].value().RemoveSuballocation(allocationID.first.first, allocationID.second, throwOnNotFound);
 	}
 
-	void MemoryObjectsListInternal::WriteToMemory(VulkanSimplified::MemorySuballocationFullID suballocationID, VulkanSimplified::MemorySize writeOffset,
-		const unsigned char& writeData, VulkanSimplified::MemorySize writeSize)
+	void MemoryObjectsListInternal::WriteToMemory(MemorySuballocationFullID suballocationID, MemorySize writeOffset,
+		const unsigned char& writeData, MemorySize writeSize)
 	{
 		memoryTypeData[suballocationID.first.second].value().WriteToMemory(suballocationID, writeOffset, writeData, writeSize);
 	}
 
-	bool MemoryObjectsListInternal::IsMemoryMapped(VulkanSimplified::MemoryAllocationFullID allocationID) const
+	bool MemoryObjectsListInternal::IsMemoryMapped(MemoryAllocationFullID allocationID) const
 	{
 		return memoryTypeData[allocationID.second].value().IsMemoryMapped();
 	}
 
-	bool MemoryObjectsListInternal::FreeMemory(VulkanSimplified::MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
+	bool MemoryObjectsListInternal::FreeMemory(MemoryAllocationFullID memoryID, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
 	{
 		if (memoryID.second >= typeCount)
 			throw std::runtime_error("MemoryObjectsListInternal::FreeMemory Error: Program tried to access a non-existent memory type!");

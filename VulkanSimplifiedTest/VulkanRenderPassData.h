@@ -7,15 +7,15 @@
 
 struct VulkanRenderPassData
 {
-	std::vector<IDObject<VulkanSimplifiedInternal::RenderPassAttachmentData>> renderPassAttachments;
-	IDObject<VulkanSimplifiedInternal::RenderPassAttachmentReference> colorAttachmentReference;
-	IDObject<VulkanSimplifiedInternal::RenderPassAttachmentReference> depthAttachmentReference;
-	IDObject<VulkanSimplifiedInternal::RenderPassAttachmentReference> resolveAttachmentReference;
-	IDObject<VulkanSimplifiedInternal::SubpassDependencyData> subpassDependency;
+	std::vector<IDObject<VulkanSimplified::RenderPassAttachmentData>> renderPassAttachments;
+	IDObject<VulkanSimplified::RenderPassAttachmentReference> colorAttachmentReference;
+	IDObject<VulkanSimplified::RenderPassAttachmentReference> depthAttachmentReference;
+	IDObject<VulkanSimplified::RenderPassAttachmentReference> resolveAttachmentReference;
+	IDObject<VulkanSimplified::SubpassDependencyData> subpassDependency;
 
 	std::vector<std::optional<VulkanSimplified::RenderPassClearValueID>> clearValues;
 
-	IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> renderPass;
+	IDObject<VulkanSimplified::AutoCleanupRenderPass> renderPass;
 
 	VulkanRenderPassData() = default;
 };

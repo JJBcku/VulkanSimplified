@@ -3,7 +3,7 @@
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkPipelineLayout_T* VkPipelineLayout;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupPipelineLayout
 	{

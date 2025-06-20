@@ -7,7 +7,7 @@
 
 namespace VulkanSimplified
 {
-	CommandPoolMainList::CommandPoolMainList(VulkanSimplifiedInternal::CommandPoolMainListInternal& ref) : _internal(ref)
+	CommandPoolMainList::CommandPoolMainList(CommandPoolMainListInternal& ref) : _internal(ref)
 	{
 	}
 

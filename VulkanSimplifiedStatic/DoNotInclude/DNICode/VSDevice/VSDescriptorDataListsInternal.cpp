@@ -22,10 +22,10 @@
 #include "../../DNIHeaders/VSDevice/VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 #include "../../DNIHeaders/VSDevice/VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	DescriptorDataListsInternal::DescriptorDataListsInternal(const SharedDescriptorDataListInternal& sharedDescriptorData, const DataBufferListsInternal& dataBufferList,
-		const ImageDataListsInternal& imageList, VkDevice device, const VulkanSimplified::DescriptorListsInitialCapacities& initialCapacities) :
+		const ImageDataListsInternal& imageList, VkDevice device, const DescriptorListsInitialCapacities& initialCapacities) :
 		_sharedDescriptorData(sharedDescriptorData), _dataBufferList(dataBufferList), _imageList(imageList), _device(device),
 		_descriptorSetLayouts(initialCapacities.descriptorSetListInitialCapacity), _NIFDescriptorPools(initialCapacities.noIndividualFreeingDescriptorPoolsListInitialCapacity),
 		_IFDescriptorPools(initialCapacities.individualFreeingDescriptorPoolsListInitialCapacity)
@@ -37,7 +37,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupDescriptorSetLayout> DescriptorDataListsInternal::AddDescriptorSetLayout(uint32_t firstBinding,
-		const std::vector<VulkanSimplified::DescriptorSetBindingFullData>& descriptorSetLayoutBindings, size_t addOnReserving)
+		const std::vector<DescriptorSetBindingFullData>& descriptorSetLayoutBindings, size_t addOnReserving)
 	{
 		if (descriptorSetLayoutBindings.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DeviceDescriptorDataInternal::AddDescriptorSetLayout Error: Descriptor set layout bindings list overflowed!");
@@ -103,7 +103,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupNIFDescriptorPool> DescriptorDataListsInternal::AddNoIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
-		const std::vector<std::pair<VulkanSimplified::DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
+		const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
 	{
 		if (maxTotalSetCount == 0)
 			throw std::runtime_error("DescriptorDataListsInternal::AddNoIdividualFreeingDescriptorPool Error: Program was given zero as the max total set amount!");
@@ -172,7 +172,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void DescriptorDataListsInternal::WriteNIFDescriptorSetUniformBufferBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
-		const std::vector<VulkanSimplified::DescriptorSetUniformBufferBindingWriteData>& writeDataList)
+		const std::vector<DescriptorSetUniformBufferBindingWriteData>& writeDataList)
 	{
 		if (writeDataList.empty())
 			return;
@@ -212,7 +212,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DTextureSamplerBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
-		const std::vector<VulkanSimplified::DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList)
+		const std::vector<DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList)
 	{
 		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DTextureSamplerBindings Error: Write data list overflowed!");
@@ -240,8 +240,8 @@ namespace VulkanSimplifiedInternal
 			{
 				auto& imageInfo = outData.imageInfo[j];
 
-				const VulkanSimplified::Optional2DTextureView& viewID = inData.imageDataList[j].first.first;
-				const VulkanSimplified::OptionalSampler& samplerID = inData.imageDataList[j].first.second;
+				const Optional2DTextureView& viewID = inData.imageDataList[j].first.first;
+				const OptionalSampler& samplerID = inData.imageDataList[j].first.second;
 
 				if (samplerID.has_value())
 				{
@@ -281,7 +281,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<AutoCleanupIFDescriptorPool> DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
-		const std::vector<std::pair<VulkanSimplified::DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
+		const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
 	{
 		if (maxTotalSetCount == 0)
 			throw std::runtime_error("DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool Error: Program was given zero as the max total set amount!");
@@ -351,7 +351,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void DescriptorDataListsInternal::WriteIFDescriptorSetUniformBufferBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
-		const std::vector<VulkanSimplified::DescriptorSetUniformBufferBindingWriteData>& writeDataList)
+		const std::vector<DescriptorSetUniformBufferBindingWriteData>& writeDataList)
 	{
 		if (writeDataList.empty())
 			return;
@@ -391,7 +391,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	void DescriptorDataListsInternal::WriteIFDescriptorSetCombined2DTextureSamplerBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
-		const std::vector<VulkanSimplified::DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList)
+		const std::vector<DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList)
 	{
 		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetCombined2DTextureSamplerBindings Error: Write data list overflowed!");
@@ -419,8 +419,8 @@ namespace VulkanSimplifiedInternal
 			{
 				auto& imageInfo = outData.imageInfo[j];
 
-				const VulkanSimplified::Optional2DTextureView& viewID = inData.imageDataList[j].first.first;
-				const VulkanSimplified::OptionalSampler& samplerID = inData.imageDataList[j].first.second;
+				const Optional2DTextureView& viewID = inData.imageDataList[j].first.first;
+				const OptionalSampler& samplerID = inData.imageDataList[j].first.second;
 
 				if (samplerID.has_value())
 				{

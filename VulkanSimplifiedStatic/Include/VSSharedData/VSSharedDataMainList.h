@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SharedDataMainListInternal;
 }
@@ -14,7 +14,7 @@ namespace VulkanSimplified
 	class SharedDataMainList
 	{
 	public:
-		SharedDataMainList(VulkanSimplifiedInternal::SharedDataMainListInternal& ref);
+		SharedDataMainList(SharedDataMainListInternal& ref);
 		~SharedDataMainList();
 
 		SharedDescriptorDataList GetSharedDescriptorDataList();
@@ -26,6 +26,6 @@ namespace VulkanSimplified
 		const SharedPipelineDataList GetSharedPipelineDataListss() const;
 
 	private:
-		VulkanSimplifiedInternal::SharedDataMainListInternal& _internal;
+		SharedDataMainListInternal& _internal;
 	};
 }

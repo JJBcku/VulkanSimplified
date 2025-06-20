@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class PrimaryNIRCommandBufferInternal;
 	class SecondaryNIRCommandBufferInternal;
@@ -12,6 +12,6 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	typedef std::unique_ptr<VulkanSimplifiedInternal::PrimaryNIRCommandBufferInternal> PrimaryNIRPointer;
-	typedef std::unique_ptr<VulkanSimplifiedInternal::SecondaryNIRCommandBufferInternal> SecondaryNIRPointer;
+	typedef std::unique_ptr<PrimaryNIRCommandBufferInternal> PrimaryNIRPointer;
+	typedef std::unique_ptr<SecondaryNIRCommandBufferInternal> SecondaryNIRPointer;
 }

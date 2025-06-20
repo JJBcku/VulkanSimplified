@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkImageUsageFlags TranslateImageUsage(VulkanSimplified::ImageUsageFlags usageFlags);
+	VkImageUsageFlags TranslateImageUsage(ImageUsageFlags usageFlags);
 }

@@ -12,10 +12,10 @@ namespace VulkanSimplified
 {
 	struct DescriptorSetUniformBufferBindingWriteData
 	{
-		IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSet> descriptorSetID;
+		IDObject<AutoCleanupDescriptorSet> descriptorSetID;
 		uint32_t binding;
 		uint32_t startArrayIndex;
-		std::vector<std::optional<IDObject<VulkanSimplifiedInternal::AutoCleanupUniformBuffer>>> uniformBufferIDList;
+		std::vector<std::optional<IDObject<AutoCleanupUniformBuffer>>> uniformBufferIDList;
 
 		DescriptorSetUniformBufferBindingWriteData();
 	};

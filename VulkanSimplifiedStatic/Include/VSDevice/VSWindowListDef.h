@@ -2,12 +2,12 @@
 
 #include <memory>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class WindowInternal;
 }
 
 namespace VulkanSimplified
 {
-	typedef std::unique_ptr<VulkanSimplifiedInternal::WindowInternal> WindowPointer;
+	typedef std::unique_ptr<WindowInternal> WindowPointer;
 }

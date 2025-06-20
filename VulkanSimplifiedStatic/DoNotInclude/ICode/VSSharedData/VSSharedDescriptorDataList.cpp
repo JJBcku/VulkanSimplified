@@ -8,7 +8,7 @@
 
 namespace VulkanSimplified
 {
-	SharedDescriptorDataList::SharedDescriptorDataList(VulkanSimplifiedInternal::SharedDescriptorDataListInternal& ref) :  _internal(ref)
+	SharedDescriptorDataList::SharedDescriptorDataList(SharedDescriptorDataListInternal& ref) :  _internal(ref)
 	{
 	}
 
@@ -16,8 +16,8 @@ namespace VulkanSimplified
 	{
 	}
 
-	IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> SharedDescriptorDataList::AddDescriptorSetLayoutBindingsData(
-		VulkanSimplified::DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount, VulkanSimplified::ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
+	IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataList::AddDescriptorSetLayoutBindingsData(
+		DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount, ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
 	{
 		return _internal.AddDescriptorSetLayoutBindingsData(descriptorType, descriptorAmount, shaderStageFlags, addOnReserving);
 	}

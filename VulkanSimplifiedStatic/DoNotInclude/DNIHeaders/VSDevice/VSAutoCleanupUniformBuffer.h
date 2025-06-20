@@ -2,7 +2,7 @@
 
 #include "VSAutoCleanupDataBuffer.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupUniformBuffer : public AutoCleanupDataBuffer
 	{

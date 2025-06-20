@@ -27,29 +27,29 @@ namespace VulkanSimplified
 		struct
 		{
 			CommandBufferIDType type;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::NIRCommandPoolInternal>> commandPoolID;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::PrimaryNIRCommandBufferInternal>> commandBufferID;
+			IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID;
+			IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> commandBufferID;
 		} NIRPrimaryID;
 
 		struct
 		{
 			CommandBufferIDType type;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::NIRCommandPoolInternal>> commandPoolID;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::SecondaryNIRCommandBufferInternal>> commandBufferID;
+			IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID;
+			IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> commandBufferID;
 		} NIRSecondaryID;
 
 		struct
 		{
 			CommandBufferIDType type;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::IRCommandPoolInternal>> commandPoolID;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::PrimaryIRCommandBufferInternal>> commandBufferID;
+			IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID;
+			IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> commandBufferID;
 		} IRPrimaryID;
 
 		struct
 		{
 			CommandBufferIDType type;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::IRCommandPoolInternal>> commandPoolID;
-			IDObject<std::unique_ptr<VulkanSimplifiedInternal::SecondaryIRCommandBufferInternal>> commandBufferID;
+			IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID;
+			IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> commandBufferID;
 		} IRSecondaryID;
 
 		CommandBufferGenericID();

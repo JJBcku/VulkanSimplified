@@ -16,9 +16,9 @@
 
 #include "../../DNIHeaders/VSCommon/VSDataFormatFlagsInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	SharedPipelineDataListInternal::SharedPipelineDataListInternal(const VulkanSimplified::SharedPipelineDataListsssCapacities& initialCapacities) :
+	SharedPipelineDataListInternal::SharedPipelineDataListInternal(const SharedPipelineDataListsssCapacities& initialCapacities) :
 		_shaderSpecializationElements(initialCapacities.initialSpecializationElementsCapacity), _shaderPipelineData(initialCapacities.initialShaderPipelineInfoCapacity),
 		_vertexAttributeData(initialCapacities.initialVertexAttributeInfoCapacity), _vertexBindingData(initialCapacities.initialVertexBindingInfoCapacity),
 		_vertexInputData(initialCapacities.initialVertexInputPipelineInfoCapacity), _pipelineScissorData(initialCapacities.initialPipelineScissorDataCapacity),
@@ -44,17 +44,17 @@ namespace VulkanSimplifiedInternal
 		return _shaderSpecializationElements.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<SharedShaderPipelineData> SharedPipelineDataListInternal::AddSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType,
+	IDObject<SharedShaderPipelineData> SharedPipelineDataListInternal::AddSharedShaderPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType,
 		size_t addOnReserving)
 	{
 		SharedShaderPipelineData add;
 
 		switch (shaderType)
 		{
-		case VulkanSimplified::SHADER_TYPE_VERTEX:
+		case SHADER_TYPE_VERTEX:
 			add.shaderStage = VK_SHADER_STAGE_VERTEX_BIT;
 			break;
-		case VulkanSimplified::SHADER_TYPE_FRAGMENT:
+		case SHADER_TYPE_FRAGMENT:
 			add.shaderStage = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
@@ -66,7 +66,7 @@ namespace VulkanSimplifiedInternal
 		return _shaderPipelineData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListInternal::AddVertexAttributeDescriptionData(uint32_t offset, VulkanSimplified::DataFormatSetIndependentID format,
+	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListInternal::AddVertexAttributeDescriptionData(uint32_t offset, DataFormatSetIndependentID format,
 		size_t addOnReserving)
 	{
 		VertexAttributeDescriptionData add;
@@ -76,7 +76,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexAttributeData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexBindingDescriptionData> SharedPipelineDataListInternal::AddVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+	IDObject<VertexBindingDescriptionData> SharedPipelineDataListInternal::AddVertexBindingData(uint32_t stride, VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving)
 	{
 		VertexBindingDescriptionData add;
@@ -84,10 +84,10 @@ namespace VulkanSimplifiedInternal
 
 		switch (inputRate)
 		{
-		case VulkanSimplified::VertexBindingInputRate::INSTANCE:
+		case VertexBindingInputRate::INSTANCE:
 			add.inputRate = VK_VERTEX_INPUT_RATE_INSTANCE;
 			break;
-		case VulkanSimplified::VertexBindingInputRate::VERTEX:
+		case VertexBindingInputRate::VERTEX:
 			add.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 			break;
 		default:
@@ -133,44 +133,44 @@ namespace VulkanSimplifiedInternal
 		return _pipelineViewportData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineInputAssemblyData> SharedPipelineDataListInternal::AddPipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology, bool primitiveRestartEnable,
+	IDObject<PipelineInputAssemblyData> SharedPipelineDataListInternal::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable,
 		size_t addOnReserving)
 	{
 		PipelineInputAssemblyData add;
 
 		switch (topology)
 		{
-		case VulkanSimplified::PipelinePrimitiveTopology::PATCH_LIST:
+		case PipelinePrimitiveTopology::PATCH_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_STRIP_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::LINE_STRIP_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_LIST_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::LINE_LIST_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_FAN:
+		case PipelinePrimitiveTopology::TRIANGLE_FAN:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_STRIP:
+		case PipelinePrimitiveTopology::TRIANGLE_STRIP:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST:
+		case PipelinePrimitiveTopology::TRIANGLE_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_STRIP:
+		case PipelinePrimitiveTopology::LINE_STRIP:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_LIST:
+		case PipelinePrimitiveTopology::LINE_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::POINT_LIST:
+		case PipelinePrimitiveTopology::POINT_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
 			break;
 		default:
@@ -185,20 +185,20 @@ namespace VulkanSimplifiedInternal
 		return _pipelineInputAssemblyData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineRasterizationData> SharedPipelineDataListInternal::AddPipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
+	IDObject<PipelineRasterizationData> SharedPipelineDataListInternal::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks,
 		bool frontClockwise, size_t addOnReserving)
 	{
 		PipelineRasterizationData add;
 
 		switch (polygonMode)
 		{
-		case VulkanSimplified::PipelinePolygonMode::POINT:
+		case PipelinePolygonMode::POINT:
 			add.polygonMode = VK_POLYGON_MODE_POINT;
 			break;
-		case VulkanSimplified::PipelinePolygonMode::LINE:
+		case PipelinePolygonMode::LINE:
 			add.polygonMode = VK_POLYGON_MODE_LINE;
 			break;
-		case VulkanSimplified::PipelinePolygonMode::FILL:
+		case PipelinePolygonMode::FILL:
 			add.polygonMode = VK_POLYGON_MODE_FILL;
 			break;
 		default:
@@ -218,32 +218,32 @@ namespace VulkanSimplifiedInternal
 		return _pipelineRasterizationData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListInternal::AddPipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
+	IDObject<PipelineMultisampleData> SharedPipelineDataListInternal::AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting,
 		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		PipelineMultisampleData add;
 
 		switch (samplingSetting)
 		{
-		case VulkanSimplified::SAMPLE_64:
+		case SAMPLE_64:
 			add.sampleCount = VK_SAMPLE_COUNT_64_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_32:
+		case SAMPLE_32:
 			add.sampleCount = VK_SAMPLE_COUNT_32_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_16:
+		case SAMPLE_16:
 			add.sampleCount = VK_SAMPLE_COUNT_16_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_8:
+		case SAMPLE_8:
 			add.sampleCount = VK_SAMPLE_COUNT_8_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_4:
+		case SAMPLE_4:
 			add.sampleCount = VK_SAMPLE_COUNT_4_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_2:
+		case SAMPLE_2:
 			add.sampleCount = VK_SAMPLE_COUNT_2_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_1:
+		case SAMPLE_1:
 			add.sampleCount = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
@@ -264,22 +264,22 @@ namespace VulkanSimplifiedInternal
 		return _pipelineMultisampleData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListInternal::AddPipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage,
-		VulkanSimplified::CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
+	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListInternal::AddPipelineDepthStencilStateData(DepthUsage depthUsage,
+		CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
 	{
 		PipelineDepthStencilStateData add;
 
 		switch (depthUsage)
 		{
-		case VulkanSimplified::DepthUsage::TEST_AND_WRITE:
+		case DepthUsage::TEST_AND_WRITE:
 			add.depthTestEnable = VK_TRUE;
 			add.depthWriteEnable = VK_TRUE;
 			break;
-		case VulkanSimplified::DepthUsage::WRITE:
+		case DepthUsage::WRITE:
 			add.depthTestEnable = VK_FALSE;
 			add.depthWriteEnable = VK_TRUE;
 			break;
-		case VulkanSimplified::DepthUsage::TEST:
+		case DepthUsage::TEST:
 			add.depthTestEnable = VK_TRUE;
 			add.depthWriteEnable = VK_FALSE;
 			break;
@@ -289,28 +289,28 @@ namespace VulkanSimplifiedInternal
 
 		switch (compareOp)
 		{
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_NOT_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_NOT_EQUAL:
 			add.compareOp = VK_COMPARE_OP_NOT_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_GREATER_OR_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_GREATER_OR_EQUAL:
 			add.compareOp = VK_COMPARE_OP_GREATER_OR_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_GREATER:
+		case CompareOperationsType::COMPARE_OPERATION_GREATER:
 			add.compareOp = VK_COMPARE_OP_GREATER;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS_OR_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_LESS_OR_EQUAL:
 			add.compareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS:
+		case CompareOperationsType::COMPARE_OPERATION_LESS:
 			add.compareOp = VK_COMPARE_OP_LESS;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_EQUAL:
 			add.compareOp = VK_COMPARE_OP_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_ALWAYS:
+		case CompareOperationsType::COMPARE_OPERATION_ALWAYS:
 			add.compareOp = VK_COMPARE_OP_ALWAYS;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_NEVER:
+		case CompareOperationsType::COMPARE_OPERATION_NEVER:
 			add.compareOp = VK_COMPARE_OP_NEVER;
 			break;
 		default:
@@ -323,14 +323,14 @@ namespace VulkanSimplifiedInternal
 		return _pipelineDepthStencilStateData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListInternal::AddPipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
-		VulkanSimplified::ColorBlendingPreset blendingPreset, size_t addOnReserving)
+	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListInternal::AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents,
+		ColorBlendingPreset blendingPreset, size_t addOnReserving)
 	{
 		PipelineColorBlendAttachment add;
 
 		switch (blendingPreset)
 		{
-		case VulkanSimplified::ColorBlendingPreset::NO_BLENDING:
+		case ColorBlendingPreset::NO_BLENDING:
 			add.blendEnable = VK_FALSE;
 			add.srcColorBlend = VK_BLEND_FACTOR_ONE;
 			add.dstColorBlend = VK_BLEND_FACTOR_ZERO;
@@ -339,7 +339,7 @@ namespace VulkanSimplifiedInternal
 			add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
 			add.alphaBlendOp = VK_BLEND_OP_ADD;
 			break;
-		case VulkanSimplified::ColorBlendingPreset::ALPHA_BLENDING:
+		case ColorBlendingPreset::ALPHA_BLENDING:
 			add.blendEnable = VK_TRUE;
 			add.srcColorBlend = VK_BLEND_FACTOR_SRC_ALPHA;
 			add.dstColorBlend = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
@@ -348,7 +348,7 @@ namespace VulkanSimplifiedInternal
 			add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
 			add.alphaBlendOp = VK_BLEND_OP_ADD;
 			break;
-		case VulkanSimplified::ColorBlendingPreset::ADDITIVE_BLENDING:
+		case ColorBlendingPreset::ADDITIVE_BLENDING:
 			add.blendEnable = VK_TRUE;
 			add.srcColorBlend = VK_BLEND_FACTOR_SRC_ALPHA;
 			add.dstColorBlend = VK_BLEND_FACTOR_ONE;
@@ -363,28 +363,28 @@ namespace VulkanSimplifiedInternal
 
 		add.colorWriteMask = 0;
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_R) == VulkanSimplified::COLOR_COMPONENT_R)
+		if ((blendingComponents & COLOR_COMPONENT_R) == COLOR_COMPONENT_R)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_R_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_R;
+			blendingComponents ^= COLOR_COMPONENT_R;
 		}
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_G) == VulkanSimplified::COLOR_COMPONENT_G)
+		if ((blendingComponents & COLOR_COMPONENT_G) == COLOR_COMPONENT_G)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_G_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_G;
+			blendingComponents ^= COLOR_COMPONENT_G;
 		}
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_B) == VulkanSimplified::COLOR_COMPONENT_B)
+		if ((blendingComponents & COLOR_COMPONENT_B) == COLOR_COMPONENT_B)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_B_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_B;
+			blendingComponents ^= COLOR_COMPONENT_B;
 		}
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_A) == VulkanSimplified::COLOR_COMPONENT_A)
+		if ((blendingComponents & COLOR_COMPONENT_A) == COLOR_COMPONENT_A)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_A_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_A;
+			blendingComponents ^= COLOR_COMPONENT_A;
 		}
 
 		if (blendingComponents != 0)
@@ -393,16 +393,16 @@ namespace VulkanSimplifiedInternal
 		return _pipelineColorBlendData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PushConstantData> SharedPipelineDataListInternal::AddPushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
+	IDObject<PushConstantData> SharedPipelineDataListInternal::AddPushConstantData(ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
 	{
 		PushConstantData add;
 
 		switch (shaderType)
 		{
-		case VulkanSimplified::SHADER_TYPE_VERTEX:
+		case SHADER_TYPE_VERTEX:
 			add.shaderStages = VK_SHADER_STAGE_VERTEX_BIT;
 			break;
-		case VulkanSimplified::SHADER_TYPE_FRAGMENT:
+		case SHADER_TYPE_FRAGMENT:
 			add.shaderStages = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
@@ -426,17 +426,17 @@ namespace VulkanSimplifiedInternal
 		return _shaderSpecializationElements.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<SharedShaderPipelineData> SharedPipelineDataListInternal::AddUniqueSharedShaderPipelineData(std::string& entryPointName, VulkanSimplified::ShaderTypeFlagBit shaderType,
+	IDObject<SharedShaderPipelineData> SharedPipelineDataListInternal::AddUniqueSharedShaderPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType,
 		size_t addOnReserving)
 	{
 		SharedShaderPipelineData add;
 
 		switch (shaderType)
 		{
-		case VulkanSimplified::SHADER_TYPE_VERTEX:
+		case SHADER_TYPE_VERTEX:
 			add.shaderStage = VK_SHADER_STAGE_VERTEX_BIT;
 			break;
-		case VulkanSimplified::SHADER_TYPE_FRAGMENT:
+		case SHADER_TYPE_FRAGMENT:
 			add.shaderStage = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:
@@ -449,7 +449,7 @@ namespace VulkanSimplifiedInternal
 	}
 
 	IDObject<VertexAttributeDescriptionData> SharedPipelineDataListInternal::AddUniqueVertexAttributeDescriptionData(uint32_t offset,
-		VulkanSimplified::DataFormatSetIndependentID format, size_t addOnReserving)
+		DataFormatSetIndependentID format, size_t addOnReserving)
 	{
 		VertexAttributeDescriptionData add;
 		add.format = TranslateDataFormatToVkFormat(format);
@@ -458,7 +458,7 @@ namespace VulkanSimplifiedInternal
 		return _vertexAttributeData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VertexBindingDescriptionData> SharedPipelineDataListInternal::AddUniqueVertexBindingData(uint32_t stride, VulkanSimplified::VertexBindingInputRate inputRate,
+	IDObject<VertexBindingDescriptionData> SharedPipelineDataListInternal::AddUniqueVertexBindingData(uint32_t stride, VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserving)
 	{
 		VertexBindingDescriptionData add;
@@ -466,10 +466,10 @@ namespace VulkanSimplifiedInternal
 
 		switch (inputRate)
 		{
-		case VulkanSimplified::VertexBindingInputRate::INSTANCE:
+		case VertexBindingInputRate::INSTANCE:
 			add.inputRate = VK_VERTEX_INPUT_RATE_INSTANCE;
 			break;
-		case VulkanSimplified::VertexBindingInputRate::VERTEX:
+		case VertexBindingInputRate::VERTEX:
 			add.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 			break;
 		default:
@@ -515,44 +515,44 @@ namespace VulkanSimplifiedInternal
 		return _pipelineViewportData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineInputAssemblyData> SharedPipelineDataListInternal::AddUniquePipelineInputAssemblyData(VulkanSimplified::PipelinePrimitiveTopology topology,
+	IDObject<PipelineInputAssemblyData> SharedPipelineDataListInternal::AddUniquePipelineInputAssemblyData(PipelinePrimitiveTopology topology,
 		bool primitiveRestartEnable, size_t addOnReserving)
 	{
 		PipelineInputAssemblyData add;
 
 		switch (topology)
 		{
-		case VulkanSimplified::PipelinePrimitiveTopology::PATCH_LIST:
+		case PipelinePrimitiveTopology::PATCH_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_STRIP_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::LINE_STRIP_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_LIST_WITH_ADJACENCY:
+		case PipelinePrimitiveTopology::LINE_LIST_WITH_ADJACENCY:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_FAN:
+		case PipelinePrimitiveTopology::TRIANGLE_FAN:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_STRIP:
+		case PipelinePrimitiveTopology::TRIANGLE_STRIP:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::TRIANGLE_LIST:
+		case PipelinePrimitiveTopology::TRIANGLE_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_STRIP:
+		case PipelinePrimitiveTopology::LINE_STRIP:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::LINE_LIST:
+		case PipelinePrimitiveTopology::LINE_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
 			break;
-		case VulkanSimplified::PipelinePrimitiveTopology::POINT_LIST:
+		case PipelinePrimitiveTopology::POINT_LIST:
 			add.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
 			break;
 		default:
@@ -567,20 +567,20 @@ namespace VulkanSimplifiedInternal
 		return _pipelineInputAssemblyData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineRasterizationData> SharedPipelineDataListInternal::AddUniquePipelineRasterizationData(VulkanSimplified::PipelinePolygonMode polygonMode, bool cullPolygonBacks,
+	IDObject<PipelineRasterizationData> SharedPipelineDataListInternal::AddUniquePipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks,
 		bool frontClockwise, size_t addOnReserving)
 	{
 		PipelineRasterizationData add;
 
 		switch (polygonMode)
 		{
-		case VulkanSimplified::PipelinePolygonMode::POINT:
+		case PipelinePolygonMode::POINT:
 			add.polygonMode = VK_POLYGON_MODE_POINT;
 			break;
-		case VulkanSimplified::PipelinePolygonMode::LINE:
+		case PipelinePolygonMode::LINE:
 			add.polygonMode = VK_POLYGON_MODE_LINE;
 			break;
-		case VulkanSimplified::PipelinePolygonMode::FILL:
+		case PipelinePolygonMode::FILL:
 			add.polygonMode = VK_POLYGON_MODE_FILL;
 			break;
 		default:
@@ -600,32 +600,32 @@ namespace VulkanSimplifiedInternal
 		return _pipelineRasterizationData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> SharedPipelineDataListInternal::AddUniquePipelineMultisampleData(VulkanSimplified::ImageSampleFlagBits samplingSetting,
+	IDObject<PipelineMultisampleData> SharedPipelineDataListInternal::AddUniquePipelineMultisampleData(ImageSampleFlagBits samplingSetting,
 		std::optional<uint32_t> minSampleShading, size_t addOnReserving)
 	{
 		PipelineMultisampleData add;
 
 		switch (samplingSetting)
 		{
-		case VulkanSimplified::SAMPLE_64:
+		case SAMPLE_64:
 			add.sampleCount = VK_SAMPLE_COUNT_64_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_32:
+		case SAMPLE_32:
 			add.sampleCount = VK_SAMPLE_COUNT_32_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_16:
+		case SAMPLE_16:
 			add.sampleCount = VK_SAMPLE_COUNT_16_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_8:
+		case SAMPLE_8:
 			add.sampleCount = VK_SAMPLE_COUNT_8_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_4:
+		case SAMPLE_4:
 			add.sampleCount = VK_SAMPLE_COUNT_4_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_2:
+		case SAMPLE_2:
 			add.sampleCount = VK_SAMPLE_COUNT_2_BIT;
 			break;
-		case VulkanSimplified::SAMPLE_1:
+		case SAMPLE_1:
 			add.sampleCount = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
@@ -646,21 +646,21 @@ namespace VulkanSimplifiedInternal
 		return _pipelineMultisampleData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListInternal::AddUniquePipelineDepthStencilStateData(VulkanSimplified::DepthUsage depthUsage, VulkanSimplified::CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
+	IDObject<PipelineDepthStencilStateData> SharedPipelineDataListInternal::AddUniquePipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserving)
 	{
 		PipelineDepthStencilStateData add;
 
 		switch (depthUsage)
 		{
-		case VulkanSimplified::DepthUsage::TEST_AND_WRITE:
+		case DepthUsage::TEST_AND_WRITE:
 			add.depthTestEnable = VK_TRUE;
 			add.depthWriteEnable = VK_TRUE;
 			break;
-		case VulkanSimplified::DepthUsage::WRITE:
+		case DepthUsage::WRITE:
 			add.depthTestEnable = VK_FALSE;
 			add.depthWriteEnable = VK_TRUE;
 			break;
-		case VulkanSimplified::DepthUsage::TEST:
+		case DepthUsage::TEST:
 			add.depthTestEnable = VK_TRUE;
 			add.depthWriteEnable = VK_FALSE;
 			break;
@@ -670,28 +670,28 @@ namespace VulkanSimplifiedInternal
 
 		switch (compareOp)
 		{
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_NOT_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_NOT_EQUAL:
 			add.compareOp = VK_COMPARE_OP_NOT_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_GREATER_OR_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_GREATER_OR_EQUAL:
 			add.compareOp = VK_COMPARE_OP_GREATER_OR_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_GREATER:
+		case CompareOperationsType::COMPARE_OPERATION_GREATER:
 			add.compareOp = VK_COMPARE_OP_GREATER;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS_OR_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_LESS_OR_EQUAL:
 			add.compareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_LESS:
+		case CompareOperationsType::COMPARE_OPERATION_LESS:
 			add.compareOp = VK_COMPARE_OP_LESS;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_EQUAL:
+		case CompareOperationsType::COMPARE_OPERATION_EQUAL:
 			add.compareOp = VK_COMPARE_OP_EQUAL;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_ALWAYS:
+		case CompareOperationsType::COMPARE_OPERATION_ALWAYS:
 			add.compareOp = VK_COMPARE_OP_ALWAYS;
 			break;
-		case VulkanSimplified::CompareOperationsType::COMPARE_OPERATION_NEVER:
+		case CompareOperationsType::COMPARE_OPERATION_NEVER:
 			add.compareOp = VK_COMPARE_OP_NEVER;
 			break;
 		default:
@@ -704,14 +704,14 @@ namespace VulkanSimplifiedInternal
 		return _pipelineDepthStencilStateData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListInternal::AddUniquePipelineColorBlendAttachment(VulkanSimplified::ColorBlendingComponentFlags blendingComponents,
-		VulkanSimplified::ColorBlendingPreset blendingPreset, size_t addOnReserving)
+	IDObject<PipelineColorBlendAttachment> SharedPipelineDataListInternal::AddUniquePipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents,
+		ColorBlendingPreset blendingPreset, size_t addOnReserving)
 	{
 		PipelineColorBlendAttachment add;
 
 		switch (blendingPreset)
 		{
-		case VulkanSimplified::ColorBlendingPreset::NO_BLENDING:
+		case ColorBlendingPreset::NO_BLENDING:
 			add.blendEnable = VK_FALSE;
 			add.srcColorBlend = VK_BLEND_FACTOR_ONE;
 			add.dstColorBlend = VK_BLEND_FACTOR_ZERO;
@@ -720,7 +720,7 @@ namespace VulkanSimplifiedInternal
 			add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
 			add.alphaBlendOp = VK_BLEND_OP_ADD;
 			break;
-		case VulkanSimplified::ColorBlendingPreset::ALPHA_BLENDING:
+		case ColorBlendingPreset::ALPHA_BLENDING:
 			add.blendEnable = VK_TRUE;
 			add.srcColorBlend = VK_BLEND_FACTOR_SRC_ALPHA;
 			add.dstColorBlend = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
@@ -729,7 +729,7 @@ namespace VulkanSimplifiedInternal
 			add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
 			add.alphaBlendOp = VK_BLEND_OP_ADD;
 			break;
-		case VulkanSimplified::ColorBlendingPreset::ADDITIVE_BLENDING:
+		case ColorBlendingPreset::ADDITIVE_BLENDING:
 			add.blendEnable = VK_TRUE;
 			add.srcColorBlend = VK_BLEND_FACTOR_SRC_ALPHA;
 			add.dstColorBlend = VK_BLEND_FACTOR_ONE;
@@ -744,28 +744,28 @@ namespace VulkanSimplifiedInternal
 
 		add.colorWriteMask = 0;
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_R) == VulkanSimplified::COLOR_COMPONENT_R)
+		if ((blendingComponents & COLOR_COMPONENT_R) == COLOR_COMPONENT_R)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_R_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_R;
+			blendingComponents ^= COLOR_COMPONENT_R;
 		}
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_G) == VulkanSimplified::COLOR_COMPONENT_G)
+		if ((blendingComponents & COLOR_COMPONENT_G) == COLOR_COMPONENT_G)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_G_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_G;
+			blendingComponents ^= COLOR_COMPONENT_G;
 		}
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_B) == VulkanSimplified::COLOR_COMPONENT_B)
+		if ((blendingComponents & COLOR_COMPONENT_B) == COLOR_COMPONENT_B)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_B_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_B;
+			blendingComponents ^= COLOR_COMPONENT_B;
 		}
 
-		if ((blendingComponents & VulkanSimplified::COLOR_COMPONENT_A) == VulkanSimplified::COLOR_COMPONENT_A)
+		if ((blendingComponents & COLOR_COMPONENT_A) == COLOR_COMPONENT_A)
 		{
 			add.colorWriteMask |= VK_COLOR_COMPONENT_A_BIT;
-			blendingComponents ^= VulkanSimplified::COLOR_COMPONENT_A;
+			blendingComponents ^= COLOR_COMPONENT_A;
 		}
 
 		if (blendingComponents != 0)
@@ -774,16 +774,16 @@ namespace VulkanSimplifiedInternal
 		return _pipelineColorBlendData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<PushConstantData> SharedPipelineDataListInternal::AddUniquePushConstantData(VulkanSimplified::ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
+	IDObject<PushConstantData> SharedPipelineDataListInternal::AddUniquePushConstantData(ShaderTypeFlagBit shaderType, uint32_t offset, uint32_t size, size_t addOnReserving)
 	{
 		PushConstantData add;
 
 		switch (shaderType)
 		{
-		case VulkanSimplified::SHADER_TYPE_VERTEX:
+		case SHADER_TYPE_VERTEX:
 			add.shaderStages = VK_SHADER_STAGE_VERTEX_BIT;
 			break;
-		case VulkanSimplified::SHADER_TYPE_FRAGMENT:
+		case SHADER_TYPE_FRAGMENT:
 			add.shaderStages = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
 		default:

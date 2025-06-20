@@ -13,7 +13,7 @@ typedef struct VkInstance_T* VkInstance;
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkQueue_T* VkQueue;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct LogicalDeviceInternalCreationData;
 
@@ -36,8 +36,8 @@ namespace VulkanSimplifiedInternal
 		uint32_t GetQueuesFamily(size_t queueIndex) const;
 		std::vector<uint32_t> GetQueuesFamilies(const std::vector<size_t>& queueIndex) const;
 
-		VulkanSimplified::DeviceVulkan10FeatureFlags GetVulkan10EnabledFeatures() const;
-		const VulkanSimplified::DeviceExtensionPacksList& GetDevicesEnabledExtensionPacks() const;
+		DeviceVulkan10FeatureFlags GetVulkan10EnabledFeatures() const;
+		const DeviceExtensionPacksList& GetDevicesEnabledExtensionPacks() const;
 
 		PhysicalDeviceDataInternal& GetDevicesPhysicalData();
 
@@ -54,8 +54,8 @@ namespace VulkanSimplifiedInternal
 		uint32_t _apiVersion;
 		uint32_t _padding;
 
-		VulkanSimplified::DeviceVulkan10FeatureFlags _vulkan10EnabledFeatures;
-		VulkanSimplified::DeviceExtensionPacksList _requestedExtensionPacks;
+		DeviceVulkan10FeatureFlags _vulkan10EnabledFeatures;
+		DeviceExtensionPacksList _requestedExtensionPacks;
 
 		PhysicalDeviceDataInternal _physicalDeviceData;
 	};

@@ -14,11 +14,11 @@
 #include "../../DNIHeaders/VSDevice/VSShaderListsInternal.h"
 #include "../../DNIHeaders/VSDevice/VSRenderPassDataListInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
     PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListInternal& pipelineData, const DescriptorDataListsInternal& descriptorData,
         const ShaderListsInternal& shaderList,  const RenderPassListInternal& renderPassList, VkDevice device,
-        const VulkanSimplified::PipelineDataListsInitialCapacities& initialCapacities) : _pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList),
+        const PipelineDataListsInitialCapacities& initialCapacities) : _pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList),
         _renderPassList(renderPassList), _device(device), _pipelineLayoutList(initialCapacities.pipelineLayoutListInitialCapacity),
         _graphicPipelineList(initialCapacities.graphicsPipelineListInitialCapacity)
     {
@@ -28,7 +28,7 @@ namespace VulkanSimplifiedInternal
     {
     }
 
-    IDObject<AutoCleanupPipelineLayout> PipelineDataListsInternal::AddPipelineLayout(const VulkanSimplified::PipelineLayoutCreationData& creationData, size_t addOnReserving)
+    IDObject<AutoCleanupPipelineLayout> PipelineDataListsInternal::AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserving)
     {
 		VkPipelineLayout add = VK_NULL_HANDLE;
 		VkPipelineLayoutCreateInfo createInfo{};
@@ -56,7 +56,7 @@ namespace VulkanSimplifiedInternal
 		return _pipelineLayoutList.AddObject(AutoCleanupPipelineLayout(_device, add), addOnReserving);
     }
 
-	std::vector<IDObject<AutoCleanupGraphicsPipeline>> PipelineDataListsInternal::AddGraphicPipelines(const std::vector<VulkanSimplified::GraphicsPipelineCreationData>& creationDataList,
+	std::vector<IDObject<AutoCleanupGraphicsPipeline>> PipelineDataListsInternal::AddGraphicPipelines(const std::vector<GraphicsPipelineCreationData>& creationDataList,
 		size_t addOnReserving)
 	{
 		assert(!creationDataList.empty());
@@ -287,15 +287,15 @@ namespace VulkanSimplifiedInternal
 
 			switch (creationDataList[i].pipelineDerrivationData.settings)
 			{
-			case VulkanSimplified::PipelineDerrivationSettings::DO_NOT_DERRIVE:
+			case PipelineDerrivationSettings::DO_NOT_DERRIVE:
 				pipelineAdd.basePipelineHandle = VK_NULL_HANDLE;
 				pipelineAdd.basePipelineIndex = -1;
 				break;
-			case VulkanSimplified::PipelineDerrivationSettings::PIPELINE_ID:
+			case PipelineDerrivationSettings::PIPELINE_ID:
 				pipelineAdd.basePipelineHandle = GetGraphicsPipeline(creationDataList[i].pipelineDerrivationData.pipelineID.ID);
 				pipelineAdd.basePipelineIndex = -1;
 				break;
-			case VulkanSimplified::PipelineDerrivationSettings::PIPELINE_INDEX:
+			case PipelineDerrivationSettings::PIPELINE_INDEX:
 				pipelineAdd.basePipelineHandle = VK_NULL_HANDLE;
 				pipelineAdd.basePipelineIndex = static_cast<int32_t>(creationDataList[i].pipelineDerrivationData.pipelineIndex.index);
 				pipelineAdd.flags |= VK_PIPELINE_CREATE_DERIVATIVE_BIT;

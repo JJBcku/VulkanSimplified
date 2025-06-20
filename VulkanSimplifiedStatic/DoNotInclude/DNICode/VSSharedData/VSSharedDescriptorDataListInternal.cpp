@@ -8,9 +8,9 @@
 
 #include "../../DNIHeaders/VSSharedData/VSDescriptorSetLayoutBindingData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	SharedDescriptorDataListInternal::SharedDescriptorDataListInternal(const VulkanSimplified::SharedDescriptorDataListCapacities& initalCapacities) :
+	SharedDescriptorDataListInternal::SharedDescriptorDataListInternal(const SharedDescriptorDataListCapacities& initalCapacities) :
 		_bindingDataList(initalCapacities.descriptorBindingListInitialCapacity)
 	{
 	}
@@ -19,44 +19,44 @@ namespace VulkanSimplifiedInternal
 	{
 	}
 
-	IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataListInternal::AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits descriptorType,
-		uint32_t descriptorAmount, VulkanSimplified::ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
+	IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataListInternal::AddDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType,
+		uint32_t descriptorAmount, ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
 	{
 		DescriptorSetLayoutBindingData add;
 
 		switch (descriptorType)
 		{
-		case VulkanSimplified::DescriptorTypeFlagBits::INPUT_ATTACHMENT:
+		case DescriptorTypeFlagBits::INPUT_ATTACHMENT:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::STORAGE_BUFFER_DYNAMIC:
+		case DescriptorTypeFlagBits::STORAGE_BUFFER_DYNAMIC:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC;;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER_DYNAMIC:
+		case DescriptorTypeFlagBits::UNIFORM_BUFFER_DYNAMIC:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::STORAGE_BUFFER:
+		case DescriptorTypeFlagBits::STORAGE_BUFFER:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER:
+		case DescriptorTypeFlagBits::UNIFORM_BUFFER:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::STORAGE_TEXEL_BUFFER:
+		case DescriptorTypeFlagBits::STORAGE_TEXEL_BUFFER:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_TEXEL_BUFFER:
+		case DescriptorTypeFlagBits::UNIFORM_TEXEL_BUFFER:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::STORAGE_IMAGE:
+		case DescriptorTypeFlagBits::STORAGE_IMAGE:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::SAMPLED_IMAGE:
+		case DescriptorTypeFlagBits::SAMPLED_IMAGE:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER:
+		case DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
 			break;
-		case VulkanSimplified::DescriptorTypeFlagBits::SAMPLER:
+		case DescriptorTypeFlagBits::SAMPLER:
 			add.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
 			break;
 		default:
@@ -66,10 +66,10 @@ namespace VulkanSimplifiedInternal
 		add.descriptorCount = descriptorAmount;
 
 		add.shaderStages = 0;
-		if ((shaderStageFlags & VulkanSimplified::SHADER_TYPE_FRAGMENT) == VulkanSimplified::SHADER_TYPE_FRAGMENT)
+		if ((shaderStageFlags & SHADER_TYPE_FRAGMENT) == SHADER_TYPE_FRAGMENT)
 			add.shaderStages |= VK_SHADER_STAGE_FRAGMENT_BIT;
 
-		if ((shaderStageFlags & VulkanSimplified::SHADER_TYPE_VERTEX) == VulkanSimplified::SHADER_TYPE_VERTEX)
+		if ((shaderStageFlags & SHADER_TYPE_VERTEX) == SHADER_TYPE_VERTEX)
 			add.shaderStages |= VK_SHADER_STAGE_VERTEX_BIT;
 
 		return _bindingDataList.AddUniqueObject(std::move(add), addOnReserving);

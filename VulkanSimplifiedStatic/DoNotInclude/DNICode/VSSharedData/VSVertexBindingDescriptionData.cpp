@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSVertexBindingDescriptionData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	VertexBindingDescriptionData::VertexBindingDescriptionData()
 	{

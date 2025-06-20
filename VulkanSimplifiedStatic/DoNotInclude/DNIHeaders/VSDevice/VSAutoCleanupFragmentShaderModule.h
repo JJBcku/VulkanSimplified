@@ -2,7 +2,7 @@
 
 #include "VSAutoCleanupShaderModule.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupFragmentShaderModule : public AutoCleanupShaderModule
 	{

@@ -29,7 +29,7 @@ namespace VulkanSimplified
 	union RenderPassClearValueID;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct RenderPassAttachmentData;
 	struct RenderPassAttachmentReference;
@@ -48,25 +48,25 @@ namespace VulkanSimplifiedInternal
 	class SharedRenderPassDataListInternal
 	{
 	public:
-		SharedRenderPassDataListInternal(const VulkanSimplified::SharedRenderPassDataListsCapacities& initialCapacities);
+		SharedRenderPassDataListInternal(const SharedRenderPassDataListsCapacities& initialCapacities);
 		~SharedRenderPassDataListInternal();
 
-		IDObject<RenderPassAttachmentData> AddRenderPassAttachment(VulkanSimplified::DataFormatSetIndependentID format, VulkanSimplified::ImageSampleFlagBits samples,
-			VulkanSimplified::RenderPassAttachmentLoadOP loadOP, VulkanSimplified::RenderPassAttachmentStoreOP storeOP, VulkanSimplified::ImageLayoutFlags initialLayout,
-			VulkanSimplified::ImageLayoutFlags finalLayout, size_t addOnReserving);
-		IDObject<RenderPassAttachmentData> AddUniqueRenderPassAttachment(VulkanSimplified::DataFormatSetIndependentID format, VulkanSimplified::ImageSampleFlagBits samples,
-			VulkanSimplified::RenderPassAttachmentLoadOP loadOP, VulkanSimplified::RenderPassAttachmentStoreOP storeOP, VulkanSimplified::ImageLayoutFlags initialLayout,
-			VulkanSimplified::ImageLayoutFlags finalLayout, size_t addOnReserving);
+		IDObject<RenderPassAttachmentData> AddRenderPassAttachment(DataFormatSetIndependentID format, ImageSampleFlagBits samples,
+			RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP, ImageLayoutFlags initialLayout,
+			ImageLayoutFlags finalLayout, size_t addOnReserving);
+		IDObject<RenderPassAttachmentData> AddUniqueRenderPassAttachment(DataFormatSetIndependentID format, ImageSampleFlagBits samples,
+			RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP, ImageLayoutFlags initialLayout,
+			ImageLayoutFlags finalLayout, size_t addOnReserving);
 
-		IDObject<RenderPassAttachmentReference> AddRenderPassAttachmentReference(uint32_t attachmentIndex, VulkanSimplified::ImageLayoutFlags subpassUsedAttachmentLayout,
+		IDObject<RenderPassAttachmentReference> AddRenderPassAttachmentReference(uint32_t attachmentIndex, ImageLayoutFlags subpassUsedAttachmentLayout,
 			size_t addOnReserving);
-		IDObject<RenderPassAttachmentReference> AddUniqueRenderPassAttachmentReference(uint32_t attachmentIndex, VulkanSimplified::ImageLayoutFlags subpassUsedAttachmentLayout,
+		IDObject<RenderPassAttachmentReference> AddUniqueRenderPassAttachmentReference(uint32_t attachmentIndex, ImageLayoutFlags subpassUsedAttachmentLayout,
 			size_t addOnReserving);
 
-		IDObject<SubpassDependencyData> AddSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass, VulkanSimplified::PipelineStageFlags srcStageFlags,
-			VulkanSimplified::PipelineStageFlags dstStageFlags, VulkanSimplified::AccessFlags srcAccessFlags, VulkanSimplified::AccessFlags dstAccessFlags, size_t addOnReserving);
-		IDObject<SubpassDependencyData> AddUniqueSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass, VulkanSimplified::PipelineStageFlags srcStageFlags,
-			VulkanSimplified::PipelineStageFlags dstStageFlags, VulkanSimplified::AccessFlags srcAccessFlags, VulkanSimplified::AccessFlags dstAccessFlags, size_t addOnReserving);
+		IDObject<SubpassDependencyData> AddSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass, PipelineStageFlags srcStageFlags,
+			PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags, AccessFlags dstAccessFlags, size_t addOnReserving);
+		IDObject<SubpassDependencyData> AddUniqueSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass, PipelineStageFlags srcStageFlags,
+			PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags, AccessFlags dstAccessFlags, size_t addOnReserving);
 
 		IDObject<RenderPassDoubleColorClearValues> AddDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserving);
 		IDObject<RenderPassDoubleColorClearValues> AddUniqueDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserving);
@@ -92,7 +92,7 @@ namespace VulkanSimplifiedInternal
 
 		std::vector<VkSubpassDependency> GetSubpassDependencies(const std::vector<IDObject<SubpassDependencyData>>& dependencyIDs) const;
 
-		std::pair<VkClearValue, std::optional<VkClearValue>> GetClearValue(VulkanSimplified::RenderPassClearValueID valueID) const;
+		std::pair<VkClearValue, std::optional<VkClearValue>> GetClearValue(RenderPassClearValueID valueID) const;
 
 	private:
 		UnsortedIDVector<RenderPassAttachmentData> _attachmentData;
@@ -119,6 +119,6 @@ namespace VulkanSimplifiedInternal
 
 		VkClearValue GetDepthStencilClearValue(IDObject<RenderPassDepthStencilClearValues> valueID) const;
 
-		VkAccessFlags CompileAccessFlags(VulkanSimplified::AccessFlags accessFlags);
+		VkAccessFlags CompileAccessFlags(AccessFlags accessFlags);
 	};
 }

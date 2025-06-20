@@ -10,7 +10,7 @@
 
 namespace VulkanSimplified
 {
-	WindowList::WindowList(VulkanSimplifiedInternal::WindowListInternal& ref) : _internal(ref)
+	WindowList::WindowList(WindowListInternal& ref) : _internal(ref)
 	{
 	}
 

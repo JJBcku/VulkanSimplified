@@ -4,7 +4,7 @@
 
 #include <utility>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class MemoryAllocationData;
 }
@@ -12,5 +12,5 @@ namespace VulkanSimplifiedInternal
 namespace VulkanSimplified
 {
 	typedef size_t MemoryTypeIndex;
-	typedef std::pair<IDObject<VulkanSimplifiedInternal::MemoryAllocationData>, MemoryTypeIndex> MemoryAllocationFullID;
+	typedef std::pair<IDObject<MemoryAllocationData>, MemoryTypeIndex> MemoryAllocationFullID;
 }

@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <compare>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct VertexAttributeDescriptionData;
 

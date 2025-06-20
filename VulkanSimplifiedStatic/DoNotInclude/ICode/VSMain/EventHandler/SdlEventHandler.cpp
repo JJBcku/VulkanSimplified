@@ -7,7 +7,7 @@
 
 namespace VulkanSimplified
 {
-	SdlEventHandler::SdlEventHandler(VulkanSimplifiedInternal::SdlEventHandlerInternal& ref) : _internal(ref)
+	SdlEventHandler::SdlEventHandler(SdlEventHandlerInternal& ref) : _internal(ref)
 	{
 	}
 

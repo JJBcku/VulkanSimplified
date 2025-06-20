@@ -10,7 +10,7 @@ typedef struct VkDescriptorPool_T* VkDescriptorPool;
 typedef struct VkDescriptorSet_T* VkDescriptorSet;
 typedef struct VkDescriptorSetLayout_T* VkDescriptorSetLayout;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct DescriptorSetUniformBufferBindingWriteDataInternal;
 	struct DescriptorSetCombined2DTextureSamplerWriteDataInternal;

@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSSharedShaderPipelineData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	SharedShaderPipelineData::SharedShaderPipelineData()
 	{

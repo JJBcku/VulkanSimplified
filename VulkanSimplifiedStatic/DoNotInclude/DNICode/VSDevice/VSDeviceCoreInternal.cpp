@@ -3,7 +3,7 @@
 
 #include "../../DNIHeaders/VSInstance/VsLogicalDeviceInternalCreationData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	DeviceCoreInternal::DeviceCoreInternal(VkInstance instance, const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData) :
 		_physicalDeviceData(physicalDeviceData)
@@ -119,12 +119,12 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	VulkanSimplified::DeviceVulkan10FeatureFlags DeviceCoreInternal::GetVulkan10EnabledFeatures() const
+	DeviceVulkan10FeatureFlags DeviceCoreInternal::GetVulkan10EnabledFeatures() const
 	{
 		return _vulkan10EnabledFeatures;
 	}
 
-	const VulkanSimplified::DeviceExtensionPacksList& DeviceCoreInternal::GetDevicesEnabledExtensionPacks() const
+	const DeviceExtensionPacksList& DeviceCoreInternal::GetDevicesEnabledExtensionPacks() const
 	{
 		return _requestedExtensionPacks;
 	}

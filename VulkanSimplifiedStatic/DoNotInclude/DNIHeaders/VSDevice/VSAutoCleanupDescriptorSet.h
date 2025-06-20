@@ -2,7 +2,7 @@
 
 typedef struct VkDescriptorSet_T* VkDescriptorSet;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupDescriptorSet
 	{

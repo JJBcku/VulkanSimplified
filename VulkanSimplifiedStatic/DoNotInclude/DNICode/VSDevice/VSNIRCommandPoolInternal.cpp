@@ -8,7 +8,7 @@
 #include "../../DNIHeaders/VSDevice/VSWindowListInternal.h"
 #include "../../DNIHeaders/VSDevice/VSWindowInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	NIRCommandPoolInternal::NIRCommandPoolInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
 		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
@@ -38,9 +38,9 @@ namespace VulkanSimplifiedInternal
 		_queue = VK_NULL_HANDLE;
 	}*/
 
-	std::vector<IDObject<VulkanSimplified::PrimaryNIRPointer>> NIRCommandPoolInternal::AllocatePrimaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving)
+	std::vector<IDObject<PrimaryNIRPointer>> NIRCommandPoolInternal::AllocatePrimaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving)
 	{
-		std::vector<IDObject<VulkanSimplified::PrimaryNIRPointer>> ret;
+		std::vector<IDObject<PrimaryNIRPointer>> ret;
 
 		if (buffersToAllocate == 0)
 			throw std::runtime_error("NIRCommandPoolInternal::AllocatePrimaryCommandBuffers Error: Program tried to allocate zero buffers!");
@@ -67,9 +67,9 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	std::vector<IDObject<VulkanSimplified::SecondaryNIRPointer>> NIRCommandPoolInternal::AllocateSecondaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving)
+	std::vector<IDObject<SecondaryNIRPointer>> NIRCommandPoolInternal::AllocateSecondaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving)
 	{
-		std::vector<IDObject<VulkanSimplified::SecondaryNIRPointer>> ret;
+		std::vector<IDObject<SecondaryNIRPointer>> ret;
 
 		if (buffersToAllocate == 0)
 			throw std::runtime_error("NIRCommandPoolInternal::AllocateSecondaryCommandBuffers Error: Program tried to allocate zero buffers!");
@@ -96,22 +96,22 @@ namespace VulkanSimplifiedInternal
 		return ret;
 	}
 
-	PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBuffer(IDObject<VulkanSimplified::PrimaryNIRPointer> bufferID)
+	PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBuffer(IDObject<PrimaryNIRPointer> bufferID)
 	{
 		return *_primaryBufferList.GetObject(bufferID);
 	}
 
-	SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBuffer(IDObject<VulkanSimplified::SecondaryNIRPointer> bufferID)
+	SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBuffer(IDObject<SecondaryNIRPointer> bufferID)
 	{
 		return *_secondaryBufferList.GetObject(bufferID);
 	}
 
-	const PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBuffer(IDObject<VulkanSimplified::PrimaryNIRPointer> bufferID) const
+	const PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBuffer(IDObject<PrimaryNIRPointer> bufferID) const
 	{
 		return *_primaryBufferList.GetConstObject(bufferID);
 	}
 
-	const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBuffer(IDObject<VulkanSimplified::SecondaryNIRPointer> bufferID) const
+	const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBuffer(IDObject<SecondaryNIRPointer> bufferID) const
 	{
 		return *_secondaryBufferList.GetConstObject(bufferID);
 	}
@@ -125,7 +125,7 @@ namespace VulkanSimplifiedInternal
 		vkResetCommandPool(_device, _commandPool, flags);
 	}
 
-	bool NIRCommandPoolInternal::PresentSwapchainToQueue(IDObject<VulkanSimplified::WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs,
+	bool NIRCommandPoolInternal::PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs,
 		uint32_t imageIndex)
 	{
 		auto& window = _windowList.GetWindow(windowID);

@@ -15,18 +15,18 @@ namespace VulkanSimplified
 	struct SharedDescriptorDataListCapacities;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct DescriptorSetLayoutBindingData;
 
 	class SharedDescriptorDataListInternal
 	{
 	public:
-		SharedDescriptorDataListInternal(const VulkanSimplified::SharedDescriptorDataListCapacities& initalCapacities);
+		SharedDescriptorDataListInternal(const SharedDescriptorDataListCapacities& initalCapacities);
 		~SharedDescriptorDataListInternal();
 
-		IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(VulkanSimplified::DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount,
-			VulkanSimplified::ShaderTypeFlags shaderStageFlags, size_t addOnReserving);
+		IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount,
+			ShaderTypeFlags shaderStageFlags, size_t addOnReserving);
 
 		std::vector<VkDescriptorSetLayoutBinding> GetDescriptorSetLayoutBindings(uint32_t firstBinding, const std::vector<IDObject<DescriptorSetLayoutBindingData>>& bindingIDs) const;
 

@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class WindowInternal;
 }
@@ -14,10 +14,10 @@ namespace VulkanSimplified
 	class Window
 	{
 	public:
-		Window(VulkanSimplifiedInternal::WindowInternal& ref);
+		Window(WindowInternal& ref);
 		~Window();
 
-		void CreateSwapchain(const VulkanSimplified::SwapchainCreationData& creationData, bool throwOnSwapchainExist);
+		void CreateSwapchain(const SwapchainCreationData& creationData, bool throwOnSwapchainExist);
 
 		size_t GetSwapchainImageAmount() const;
 
@@ -29,6 +29,6 @@ namespace VulkanSimplified
 		uint32_t GetHeight() const;
 
 	private:
-		VulkanSimplifiedInternal::WindowInternal& _internal;
+		WindowInternal& _internal;
 	};
 }

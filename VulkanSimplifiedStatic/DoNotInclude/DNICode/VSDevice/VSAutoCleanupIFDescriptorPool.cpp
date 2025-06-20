@@ -6,7 +6,7 @@
 #include "../../DNIHeaders/VSDevice/VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 #include "../../DNIHeaders/VSDevice/VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupIFDescriptorPool::AutoCleanupIFDescriptorPool(VkDevice device, VkDescriptorPool pool, uint32_t maxTotalSetCount) :
 		_device(device), _pool(pool), _descriptorSetList(maxTotalSetCount)

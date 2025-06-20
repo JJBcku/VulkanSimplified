@@ -8,7 +8,7 @@
 
 namespace VulkanSimplified
 {
-	NIRCommandPool::NIRCommandPool(VulkanSimplifiedInternal::NIRCommandPoolInternal& ref) : _internal(ref)
+	NIRCommandPool::NIRCommandPool(NIRCommandPoolInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -51,7 +51,7 @@ namespace VulkanSimplified
 		_internal.ResetCommandPool(freeResources);
 	}
 
-	bool NIRCommandPool::PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupSemaphore>>& waitSemaphoreIDs,
+	bool NIRCommandPool::PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs,
 		uint32_t imageIndex)
 	{
 		return _internal.PresentSwapchainToQueue(windowID, waitSemaphoreIDs, imageIndex);

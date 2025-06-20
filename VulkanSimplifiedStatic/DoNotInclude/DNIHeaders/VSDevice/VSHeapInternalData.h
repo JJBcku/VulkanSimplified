@@ -3,16 +3,16 @@
 #include "../../../Include/VSCommon/VSMemorySizeDef.h"
 #include "../../../Include/VSCommon/VSMemoryHeapPropertiesDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct HeapInternalData
 	{
-		VulkanSimplified::MemorySize heapSize;
-		VulkanSimplified::MemorySize usedSize;
-		VulkanSimplified::MemoryHeapProperties properties;
+		MemorySize heapSize;
+		MemorySize usedSize;
+		MemoryHeapProperties properties;
 
 		HeapInternalData();
 
-		VulkanSimplified::MemorySize GetFreeSize() const;
+		MemorySize GetFreeSize() const;
 	};
 }

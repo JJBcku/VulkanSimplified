@@ -6,7 +6,7 @@
 namespace VulkanSimplified
 {
 
-	PhysicalDeviceData::PhysicalDeviceData(VulkanSimplifiedInternal::PhysicalDeviceDataInternal& ref) : _internal(ref)
+	PhysicalDeviceData::PhysicalDeviceData(PhysicalDeviceDataInternal& ref) : _internal(ref)
 	{
 	}
 
@@ -14,37 +14,37 @@ namespace VulkanSimplified
 	{
 	}
 
-	const VulkanSimplified::DeviceVulkan10Properties& PhysicalDeviceData::GetVulkan10Properties() const
+	const DeviceVulkan10Properties& PhysicalDeviceData::GetVulkan10Properties() const
 	{
 		return _internal.GetVulkan10Properties();
 	}
 
-	const VulkanSimplified::DeviceVulkan10FeatureFlags& PhysicalDeviceData::GetVulkan10Features() const
+	const DeviceVulkan10FeatureFlags& PhysicalDeviceData::GetVulkan10Features() const
 	{
 		return _internal.GetVulkan10Features();
 	}
 
-	const std::vector<VulkanSimplified::QueueFamilyData>& PhysicalDeviceData::GetVulkanQueueFamiliesData() const
+	const std::vector<QueueFamilyData>& PhysicalDeviceData::GetVulkanQueueFamiliesData() const
 	{
 		return _internal.GetVulkanQueueFamiliesData();
 	}
 
-	const VulkanSimplified::FormatsSupportedFeatures& PhysicalDeviceData::GetFormatsSupportedFeatures() const
+	const FormatsSupportedFeatures& PhysicalDeviceData::GetFormatsSupportedFeatures() const
 	{
 		return _internal.GetFormatsSupportedFeatures();
 	}
 
-	const VulkanSimplified::DeviceExtensionPacksList& PhysicalDeviceData::GetDeviceExtensionPacks() const
+	const DeviceExtensionPacksList& PhysicalDeviceData::GetDeviceExtensionPacks() const
 	{
 		return _internal.GetDeviceExtensionPacks();
 	}
 
-	const VulkanSimplified::MemoryDataList& PhysicalDeviceData::GetAvailableMemoryDataList() const
+	const MemoryDataList& PhysicalDeviceData::GetAvailableMemoryDataList() const
 	{
 		return _internal.GetAvailableMemoryDataList();
 	}
 
-	const std::optional<VulkanSimplified::SurfaceSupportData>& PhysicalDeviceData::GetSurfaceSupport() const
+	const std::optional<SurfaceSupportData>& PhysicalDeviceData::GetSurfaceSupport() const
 	{
 		return _internal.GetSurfaceSupport();
 	}

@@ -7,25 +7,25 @@
 
 struct VulkanSharedData
 {
-	IDObject<VulkanSimplifiedInternal::SharedShaderPipelineData> fragmentShaderData;
-	IDObject<VulkanSimplifiedInternal::SharedShaderPipelineData> vertexShaderData;
+	IDObject<VulkanSimplified::SharedShaderPipelineData> fragmentShaderData;
+	IDObject<VulkanSimplified::SharedShaderPipelineData> vertexShaderData;
 
-	IDObject<VulkanSimplifiedInternal::VertexAttributeDescriptionData> vertexAttribute1Data;
-	IDObject<VulkanSimplifiedInternal::VertexAttributeDescriptionData> vertexAttribute2Data;
-	IDObject<VulkanSimplifiedInternal::VertexBindingDescriptionData> vertexBindingData;
-	IDObject<VulkanSimplifiedInternal::VertexInputSharedPipelineData> vertexInputData;
+	IDObject<VulkanSimplified::VertexAttributeDescriptionData> vertexAttribute1Data;
+	IDObject<VulkanSimplified::VertexAttributeDescriptionData> vertexAttribute2Data;
+	IDObject<VulkanSimplified::VertexBindingDescriptionData> vertexBindingData;
+	IDObject<VulkanSimplified::VertexInputSharedPipelineData> vertexInputData;
 
-	IDObject<VulkanSimplifiedInternal::PipelineScissorData> scissorData;
-	IDObject<VulkanSimplifiedInternal::PipelineViewportData> viewportData;
+	IDObject<VulkanSimplified::PipelineScissorData> scissorData;
+	IDObject<VulkanSimplified::PipelineViewportData> viewportData;
 
-	IDObject<VulkanSimplifiedInternal::PipelineInputAssemblyData> inputAssemblyData;
-	IDObject<VulkanSimplifiedInternal::PipelineRasterizationData> rasterizationData;
-	IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> multisamplingData;
-	std::optional<IDObject<VulkanSimplifiedInternal::PipelineDepthStencilStateData>> depthStencilData;
-	IDObject<VulkanSimplifiedInternal::PipelineColorBlendAttachment> colorBlendData;
+	IDObject<VulkanSimplified::PipelineInputAssemblyData> inputAssemblyData;
+	IDObject<VulkanSimplified::PipelineRasterizationData> rasterizationData;
+	IDObject<VulkanSimplified::PipelineMultisampleData> multisamplingData;
+	std::optional<IDObject<VulkanSimplified::PipelineDepthStencilStateData>> depthStencilData;
+	IDObject<VulkanSimplified::PipelineColorBlendAttachment> colorBlendData;
 
-	IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> uniformBufferBinding;
-	IDObject<VulkanSimplifiedInternal::DescriptorSetLayoutBindingData> textureBinding;
+	IDObject<VulkanSimplified::DescriptorSetLayoutBindingData> uniformBufferBinding;
+	IDObject<VulkanSimplified::DescriptorSetLayoutBindingData> textureBinding;
 
 	VulkanSharedData();
 };

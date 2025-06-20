@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSVertexAttributeDescriptionData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	VertexAttributeDescriptionData::VertexAttributeDescriptionData()
 	{

@@ -2,7 +2,7 @@
 
 #include <compare>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct PipelineViewportData
 	{

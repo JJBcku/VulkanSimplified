@@ -23,20 +23,20 @@ namespace VulkanSimplified
 		struct
 		{
 			ImagesIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> ID;
+			IDObject<AutoCleanupColorRenderTargetImage> ID;
 		} colorRenderTargetID;
 
 		struct
 		{
 			ImagesIDType type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ID;
+			IDObject<AutoCleanup2DTexture> ID;
 
 			uint32_t baseMipLevel;
 			std::optional<uint32_t> mipLevelCount;
 		} texture2DID;
 
 		ImagesGenericID();
-		ImagesGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanupColorRenderTargetImage> ID);
-		ImagesGenericID(IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> ID);
+		ImagesGenericID(IDObject<AutoCleanupColorRenderTargetImage> ID);
+		ImagesGenericID(IDObject<AutoCleanup2DTexture> ID);
 	};
 }

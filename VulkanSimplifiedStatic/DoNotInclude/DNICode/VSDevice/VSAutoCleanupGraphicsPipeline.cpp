@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupGraphicsPipeline.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupGraphicsPipeline::AutoCleanupGraphicsPipeline(VkDevice device, VkPipeline pipeline) : _device(device), _pipeline(pipeline)
 	{

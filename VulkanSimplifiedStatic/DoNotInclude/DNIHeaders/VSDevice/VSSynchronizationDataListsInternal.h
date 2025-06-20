@@ -14,7 +14,7 @@ namespace VulkanSimplified
 	struct SynchronizationDataListsInitialCapacities;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupFence;
 	class AutoCleanupSemaphore;
@@ -22,7 +22,7 @@ namespace VulkanSimplifiedInternal
 	class SynchronizationDataListsInternal
 	{
 	public:
-		SynchronizationDataListsInternal(VkDevice device, const VulkanSimplified::SynchronizationDataListsInitialCapacities& initialCapacities);
+		SynchronizationDataListsInternal(VkDevice device, const SynchronizationDataListsInitialCapacities& initialCapacities);
 		~SynchronizationDataListsInternal();
 
 		SynchronizationDataListsInternal(const SynchronizationDataListsInternal& rhs) noexcept = delete;

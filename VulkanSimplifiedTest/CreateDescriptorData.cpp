@@ -26,7 +26,7 @@ void CreateDescriptorData(VulkanData& data)
 	data.descriptorData->descriptorPool = descriptorDataList.AddNoIndividualFreeingDescriptorPool(framesInFlight,
 		{ {VulkanSimplified::DescriptorTypeFlagBits::UNIFORM_BUFFER, framesInFlight}, {VulkanSimplified::DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER, framesInFlight} });
 
-	std::vector<IDObject<VulkanSimplifiedInternal::AutoCleanupDescriptorSetLayout>> descriptorLayouts;
+	std::vector<IDObject<VulkanSimplified::AutoCleanupDescriptorSetLayout>> descriptorLayouts;
 	descriptorLayouts.resize(framesInFlight, data.pipelineData->descriptorLayout);
 
 	data.descriptorData->descriptorSets = descriptorDataList.AllocateNIFDescriptorSets(data.descriptorData->descriptorPool,

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct RenderPassAttachmentData;
 	struct RenderPassAttachmentReference;

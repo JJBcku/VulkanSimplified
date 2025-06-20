@@ -9,7 +9,7 @@ namespace VulkanSimplified
 	struct DeviceInitialCapacitiesList;
 }
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct LogicalDeviceInternalCreationData;
 	class PhysicalDeviceDataInternal;
@@ -36,7 +36,7 @@ namespace VulkanSimplifiedInternal
 	public:
 		DeviceMainInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, VkInstance instance,
 			const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
-			const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities);
+			const DeviceInitialCapacitiesList& initialCapacities);
 		~DeviceMainInternal();
 
 		DeviceCoreInternal& GetDeviceCore();

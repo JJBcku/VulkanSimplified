@@ -22,11 +22,11 @@
 
 #include  "../../DNIHeaders/VSSharedData/VSSharedDataMainListInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	DeviceMainInternal::DeviceMainInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, VkInstance instance,
 		const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
-		const VulkanSimplified::DeviceInitialCapacitiesList& initialCapacities) : _eventHandler(eventHandler), _sharedDataMain(sharedDataMain),
+		const DeviceInitialCapacitiesList& initialCapacities) : _eventHandler(eventHandler), _sharedDataMain(sharedDataMain),
 		_core(std::make_unique<DeviceCoreInternal>(instance, creationData, physicalDeviceData)),
 		_windowList(std::make_unique<WindowListInternal>(_eventHandler, *_core, instance, _core->GetDevicesPhysicalData().GetPhysicalDevice(), _core->GetDevice(),
 			initialCapacities.windowList)), _shaderLists(std::make_unique<ShaderListsInternal>(_core->GetDevice(), initialCapacities.shaderLists)),

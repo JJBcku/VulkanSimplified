@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupSampler.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupSampler::AutoCleanupSampler(VkDevice device, VkSampler sampler) : _device(device), _sampler(sampler)
 	{

@@ -10,14 +10,14 @@ typedef struct VkBuffer_T* VkBuffer;
 #include <vector>
 #include <utility>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct SuballocationInternalData;
 
 	class MemoryAllocationData
 	{
 	public:
-		MemoryAllocationData(VkDevice device, VkDeviceMemory memory, VulkanSimplified::MemorySize totalSize, size_t reservedSuballocations, bool mapMemory);
+		MemoryAllocationData(VkDevice device, VkDeviceMemory memory, MemorySize totalSize, size_t reservedSuballocations, bool mapMemory);
 		~MemoryAllocationData();
 
 		MemoryAllocationData(const MemoryAllocationData&) noexcept = delete;
@@ -34,13 +34,13 @@ namespace VulkanSimplifiedInternal
 		bool SuballocationListEmpty() const;
 		size_t SuballocationListSize() const;
 
-		size_t BindImage(VkImage image, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
-		size_t BindBuffer(VkBuffer buffer, VulkanSimplified::MemorySize size, VulkanSimplified::MemorySize aligment, size_t addOnReserving);
+		size_t BindImage(VkImage image, MemorySize size, MemorySize aligment, size_t addOnReserving);
+		size_t BindBuffer(VkBuffer buffer, MemorySize size, MemorySize aligment, size_t addOnReserving);
 
-		bool RemoveSuballocation(VulkanSimplified::MemorySize beggining, bool throwOnNotFound);
+		bool RemoveSuballocation(MemorySize beggining, bool throwOnNotFound);
 
-		void WriteToMemory(VulkanSimplified::MemorySize suballocationBeggining, VulkanSimplified::MemorySize writeOffset, const unsigned char& writeData,
-			VulkanSimplified::MemorySize writeSize);
+		void WriteToMemory(MemorySize suballocationBeggining, MemorySize writeOffset, const unsigned char& writeData,
+			MemorySize writeSize);
 
 		bool IsMemoryBound() const;
 
@@ -50,8 +50,8 @@ namespace VulkanSimplifiedInternal
 
 		unsigned char* _data;
 
-		VulkanSimplified::MemorySize _totalSize;
-		VulkanSimplified::MemorySize _usedSize;
+		MemorySize _totalSize;
+		MemorySize _usedSize;
 		std::vector<SuballocationInternalData> _suballocationData;
 
 		void CheckSuballocationVectorSize(size_t addOnReserving);

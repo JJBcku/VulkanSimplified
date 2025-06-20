@@ -9,8 +9,8 @@
 struct VulkanTextureData
 {
 	VulkanSimplified::MemoryAllocationFullID textureMemoryAllocation;
-	IDObject<VulkanSimplifiedInternal::AutoCleanup2DTexture> textureID;
-	IDObject<VulkanSimplifiedInternal::AutoCleanupImageView> textureImageView;
+	IDObject<VulkanSimplified::AutoCleanup2DTexture> textureID;
+	IDObject<VulkanSimplified::AutoCleanupImageView> textureImageView;
 
 	VulkanTextureData();
 	~VulkanTextureData();

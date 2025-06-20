@@ -9,7 +9,7 @@
 
 struct VkDescriptorImageInfo;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct DescriptorSetCombined2DTextureSamplerWriteDataInternal
 	{

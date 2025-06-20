@@ -4,7 +4,7 @@
 
 #include <CustomLists\IDObjectDef.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class SdlEventHandlerInternal;
 }
@@ -14,7 +14,7 @@ namespace VulkanSimplified
 	class SdlEventHandler
 	{
 	public:
-		SdlEventHandler(VulkanSimplifiedInternal::SdlEventHandlerInternal& ref);
+		SdlEventHandler(SdlEventHandlerInternal& ref);
 		~SdlEventHandler();
 
 		SdlEventHandler(const SdlEventHandler&) noexcept = default;
@@ -126,6 +126,6 @@ namespace VulkanSimplified
 		bool UnRegisterRenderDeviceResetEventCallback(IDObject<std::pair<RenderDeviceResetEventFunction, void*>> ID, bool throwOnIDNotFound);
 
 	private:
-		VulkanSimplifiedInternal::SdlEventHandlerInternal& _internal;
+		SdlEventHandlerInternal& _internal;
 	};
 }

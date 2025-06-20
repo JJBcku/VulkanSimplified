@@ -8,7 +8,7 @@
 #include <vector>
 #include <optional>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct ShaderStageData;
 
@@ -35,7 +35,7 @@ namespace VulkanSimplified
 {
 	struct ShaderSpecializationData
 	{
-		std::vector<IDObject<VulkanSimplifiedInternal::ShaderSpecializationElement>> specializationElements;
+		std::vector<IDObject<ShaderSpecializationElement>> specializationElements;
 		size_t dataSize;
 		const void* data;
 
@@ -44,8 +44,8 @@ namespace VulkanSimplified
 
 	struct ShaderStageData
 	{
-		IDObject<VulkanSimplifiedInternal::SharedShaderPipelineData> sharedData;
-		VulkanSimplified::ArbitraryShaderID shaderDeviceID;
+		IDObject<SharedShaderPipelineData> sharedData;
+		ArbitraryShaderID shaderDeviceID;
 
 		std::optional<ShaderSpecializationData> specializationData;
 
@@ -54,8 +54,8 @@ namespace VulkanSimplified
 
 	struct ViewportStatePipelineDataPoint
 	{
-		IDObject<VulkanSimplifiedInternal::PipelineViewportData> viewport;
-		IDObject<VulkanSimplifiedInternal::PipelineScissorData> scissor;
+		IDObject<PipelineViewportData> viewport;
+		IDObject<PipelineScissorData> scissor;
 
 		ViewportStatePipelineDataPoint() = default;
 	};
@@ -74,7 +74,7 @@ namespace VulkanSimplified
 		struct
 		{
 			PipelineDerrivationSettings settings;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupGraphicsPipeline> ID;
+			IDObject<AutoCleanupGraphicsPipeline> ID;
 		} pipelineID;
 
 		struct
@@ -89,16 +89,16 @@ namespace VulkanSimplified
 	struct GraphicsPipelineCreationData
 	{
 		std::vector<ShaderStageData> shaderStages;
-		IDObject<VulkanSimplifiedInternal::VertexInputSharedPipelineData> vertexInputData;
-		IDObject<VulkanSimplifiedInternal::PipelineInputAssemblyData> inputAssemblyData;
+		IDObject<VertexInputSharedPipelineData> vertexInputData;
+		IDObject<PipelineInputAssemblyData> inputAssemblyData;
 		std::vector<ViewportStatePipelineDataPoint> viewportData;
-		IDObject<VulkanSimplifiedInternal::PipelineRasterizationData> rasterizationData;
-		IDObject<VulkanSimplifiedInternal::PipelineMultisampleData> samplingData;
-		std::optional<IDObject<VulkanSimplifiedInternal::PipelineDepthStencilStateData>> depthStencilData;
-		std::vector<IDObject<VulkanSimplifiedInternal::PipelineColorBlendAttachment>> colorBlendingData;
+		IDObject<PipelineRasterizationData> rasterizationData;
+		IDObject<PipelineMultisampleData> samplingData;
+		std::optional<IDObject<PipelineDepthStencilStateData>> depthStencilData;
+		std::vector<IDObject<PipelineColorBlendAttachment>> colorBlendingData;
 
-		IDObject<VulkanSimplifiedInternal::AutoCleanupPipelineLayout> pipelineLayout;
-		IDObject<VulkanSimplifiedInternal::AutoCleanupRenderPass> renderPass;
+		IDObject<AutoCleanupPipelineLayout> pipelineLayout;
+		IDObject<AutoCleanupRenderPass> renderPass;
 		uint32_t subpassIndex;
 		uint32_t padding;
 		GraphicsPipelineDerrivationData pipelineDerrivationData;

@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	DescriptorSetCombined2DTextureSamplerWriteDataInternal::DescriptorSetCombined2DTextureSamplerWriteDataInternal()
 	{

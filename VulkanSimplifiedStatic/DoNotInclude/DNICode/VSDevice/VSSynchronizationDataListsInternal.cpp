@@ -6,9 +6,9 @@
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupFence.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupSemaphore.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	SynchronizationDataListsInternal::SynchronizationDataListsInternal(VkDevice device, const VulkanSimplified::SynchronizationDataListsInitialCapacities& initialCapacities) :
+	SynchronizationDataListsInternal::SynchronizationDataListsInternal(VkDevice device, const SynchronizationDataListsInitialCapacities& initialCapacities) :
 		_device(device), _fenceList(initialCapacities.fenceListInitialCapacity), _semaphoreList(initialCapacities.semaphoreListInitialCapacity)
 	{
 	}

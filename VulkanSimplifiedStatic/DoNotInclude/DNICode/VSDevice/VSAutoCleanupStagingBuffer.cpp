@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupStagingBuffer.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	AutoCleanupStagingBuffer::AutoCleanupStagingBuffer(VkDevice device, VkBuffer buffer) : AutoCleanupDataBuffer(device, buffer)
 	{

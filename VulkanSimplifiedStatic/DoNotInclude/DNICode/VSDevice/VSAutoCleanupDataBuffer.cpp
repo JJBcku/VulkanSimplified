@@ -1,14 +1,14 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSAutoCleanupDataBuffer.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	VkBuffer AutoCleanupDataBuffer::GetDataBuffer() const
 	{
 		return _buffer;
 	}
 
-	void AutoCleanupDataBuffer::BindDataBuffer(VulkanSimplified::MemoryAllocationFullID allocationID, size_t bindingBeggining)
+	void AutoCleanupDataBuffer::BindDataBuffer(MemoryAllocationFullID allocationID, size_t bindingBeggining)
 	{
 		if (_memorySuballocation.has_value())
 			throw std::runtime_error("AutoCleanupDataBuffer::BindDataBuffer Error: Program tried to bind an already bound data buffer!");
@@ -16,7 +16,7 @@ namespace VulkanSimplifiedInternal
 		_memorySuballocation.emplace(allocationID, bindingBeggining);
 	}
 
-	std::optional<VulkanSimplified::MemorySuballocationFullID> AutoCleanupDataBuffer::GetBoundMemorySuballocationData() const
+	std::optional<MemorySuballocationFullID> AutoCleanupDataBuffer::GetBoundMemorySuballocationData() const
 	{
 		return _memorySuballocation;
 	}
@@ -26,12 +26,12 @@ namespace VulkanSimplifiedInternal
 		return _memReq.memoryTypeBits;
 	}
 
-	VulkanSimplified::MemorySize AutoCleanupDataBuffer::GetBuffersSize() const
+	MemorySize AutoCleanupDataBuffer::GetBuffersSize() const
 	{
 		return _memReq.size;
 	}
 
-	VulkanSimplified::MemorySize AutoCleanupDataBuffer::GetBuffersRequiredAligment() const
+	MemorySize AutoCleanupDataBuffer::GetBuffersRequiredAligment() const
 	{
 		return _memReq.alignment;
 	}

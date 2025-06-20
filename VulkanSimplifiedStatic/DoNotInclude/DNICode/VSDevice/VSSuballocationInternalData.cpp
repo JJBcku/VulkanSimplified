@@ -1,7 +1,7 @@
 #include "VSDeviceNIpch.h"
 #include "../../DNIHeaders/VSDevice/VSSuballocationInternalData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	SuballocationInternalData::SuballocationInternalData()
 	{

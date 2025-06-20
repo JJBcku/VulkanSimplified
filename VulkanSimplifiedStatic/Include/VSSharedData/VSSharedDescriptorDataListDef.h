@@ -3,7 +3,7 @@
 #include "../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
 #include "../../Include/VSCommon/VSShaderTypeFlagsDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct DescriptorSetLayoutBindingData;
 }

@@ -4,12 +4,12 @@
 
 #include <optional>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct RenderPassAttachmentReference;
 }
 
 namespace VulkanSimplified
 {
-	typedef std::optional<IDObject<VulkanSimplifiedInternal::RenderPassAttachmentReference>> AttachmentReference;
+	typedef std::optional<IDObject<RenderPassAttachmentReference>> AttachmentReference;
 }

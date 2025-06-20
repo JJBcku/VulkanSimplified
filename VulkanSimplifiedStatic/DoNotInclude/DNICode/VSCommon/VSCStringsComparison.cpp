@@ -1,7 +1,7 @@
 #include "VSCommonNIpch.h"
 #include "../../DNIHeaders/VSCommon/VSCStringsComparison.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	bool AreCStringEqual(const char* str1, const char* str2)
 	{

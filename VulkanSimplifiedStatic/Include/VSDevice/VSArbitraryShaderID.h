@@ -4,7 +4,7 @@
 
 #include "../VSCommon/VSShaderTypeFlags.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupFragmentShaderModule;
 	class AutoCleanupVertexShaderModule;
@@ -20,17 +20,17 @@ namespace VulkanSimplified
 		struct
 		{
 			ShaderTypeFlagBit type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupFragmentShaderModule> fragmentShaderID;
+			IDObject<AutoCleanupFragmentShaderModule> fragmentShaderID;
 		} fragmentShader;
 
 		struct
 		{
 			ShaderTypeFlagBit type;
-			IDObject<VulkanSimplifiedInternal::AutoCleanupVertexShaderModule> vertexShaderID;
+			IDObject<AutoCleanupVertexShaderModule> vertexShaderID;
 		} vertexShader;
 
 		ArbitraryShaderID();
-		ArbitraryShaderID(IDObject<VulkanSimplifiedInternal::AutoCleanupFragmentShaderModule> fragmentShaderID);
-		ArbitraryShaderID(IDObject<VulkanSimplifiedInternal::AutoCleanupVertexShaderModule> vertexShaderID);
+		ArbitraryShaderID(IDObject<AutoCleanupFragmentShaderModule> fragmentShaderID);
+		ArbitraryShaderID(IDObject<AutoCleanupVertexShaderModule> vertexShaderID);
 	};
 }

@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkImageLayout TranslateImageLayout(VulkanSimplified::ImageLayoutFlags imageLayout);
+	VkImageLayout TranslateImageLayout(ImageLayoutFlags imageLayout);
 }

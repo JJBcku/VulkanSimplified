@@ -10,7 +10,7 @@
 
 namespace VulkanSimplified
 {
-	DeviceCore::DeviceCore(VulkanSimplifiedInternal::DeviceCoreInternal& ref) : _internal(ref)
+	DeviceCore::DeviceCore(DeviceCoreInternal& ref) : _internal(ref)
 	{
 	}
 

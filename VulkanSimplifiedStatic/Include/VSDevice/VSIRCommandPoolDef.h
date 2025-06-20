@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class PrimaryIRCommandBufferInternal;
 	class SecondaryIRCommandBufferInternal;
@@ -12,6 +12,6 @@ namespace VulkanSimplifiedInternal
 
 namespace VulkanSimplified
 {
-	typedef std::unique_ptr<VulkanSimplifiedInternal::PrimaryIRCommandBufferInternal> PrimaryIRPointer;
-	typedef std::unique_ptr<VulkanSimplifiedInternal::SecondaryIRCommandBufferInternal> SecondaryIRPointer;
+	typedef std::unique_ptr<PrimaryIRCommandBufferInternal> PrimaryIRPointer;
+	typedef std::unique_ptr<SecondaryIRCommandBufferInternal> SecondaryIRPointer;
 }

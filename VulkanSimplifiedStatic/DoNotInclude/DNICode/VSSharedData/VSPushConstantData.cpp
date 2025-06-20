@@ -1,7 +1,7 @@
 #include "VSSharedNIpch.h"
 #include "../../DNIHeaders/VSSharedData/VSPushConstantData.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	PushConstantData::PushConstantData()
 	{

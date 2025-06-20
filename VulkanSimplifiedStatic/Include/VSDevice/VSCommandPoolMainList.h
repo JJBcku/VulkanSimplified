@@ -2,7 +2,7 @@
 
 #include "VSCommandPoolMainListDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class CommandPoolMainListInternal;
 }
@@ -16,7 +16,7 @@ namespace VulkanSimplified
 	class CommandPoolMainList
 	{
 	public:
-		CommandPoolMainList(VulkanSimplifiedInternal::CommandPoolMainListInternal& ref);
+		CommandPoolMainList(CommandPoolMainListInternal& ref);
 		~CommandPoolMainList();
 
 		CommandPoolMainList& operator=(const CommandPoolMainList&) noexcept = delete;
@@ -29,6 +29,6 @@ namespace VulkanSimplified
 		const CommandPoolQFGroupList GetQueueFamiliesPoolGroup(IDObject<CommandPoolQFGroupPointer> qfGroupID) const;
 
 	private:
-		VulkanSimplifiedInternal::CommandPoolMainListInternal& _internal;
+		CommandPoolMainListInternal& _internal;
 	};
 }

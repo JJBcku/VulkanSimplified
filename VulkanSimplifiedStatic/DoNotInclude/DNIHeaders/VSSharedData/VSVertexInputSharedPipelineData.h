@@ -5,7 +5,7 @@
 #include <vector>
 #include <compare>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct VertexBindingDescriptionData;
 

@@ -7,9 +7,9 @@
 #include "../../DNIHeaders/VSSharedData/VSSharedRenderPassDataInternal.h"
 #include "../../DNIHeaders/VSSharedData/VSSharedPipelineDataListsInternal.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	SharedDataMainListInternal::SharedDataMainListInternal(const VulkanSimplified::SharedDataListsCapacities& initialCapabilities) :
+	SharedDataMainListInternal::SharedDataMainListInternal(const SharedDataListsCapacities& initialCapabilities) :
 		_descriptorData(std::make_unique<SharedDescriptorDataListInternal>(initialCapabilities.descriptorLists)),
 		_renderPassData(std::make_unique<SharedRenderPassDataListInternal>(initialCapabilities.renderPassLists)),
 		_pipelineData(std::make_unique<SharedPipelineDataListInternal>(initialCapabilities.pipelineLists))

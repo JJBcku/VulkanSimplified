@@ -12,7 +12,7 @@ typedef struct VkDevice_T* VkDevice;
 typedef struct VkCommandPool_T* VkCommandPool;
 typedef struct VkQueue_T* VkQueue;
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
 	class WindowListInternal;
@@ -43,18 +43,18 @@ namespace VulkanSimplifiedInternal
 		NIRCommandPoolInternal& operator=(const NIRCommandPoolInternal&) noexcept = delete;
 		NIRCommandPoolInternal& operator=(NIRCommandPoolInternal&& rhs) noexcept = delete;
 
-		std::vector<IDObject<VulkanSimplified::PrimaryNIRPointer>> AllocatePrimaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving);
-		std::vector<IDObject<VulkanSimplified::SecondaryNIRPointer>> AllocateSecondaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving);
+		std::vector<IDObject<PrimaryNIRPointer>> AllocatePrimaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving);
+		std::vector<IDObject<SecondaryNIRPointer>> AllocateSecondaryCommandBuffers(uint32_t buffersToAllocate, size_t addOnReserving);
 
-		PrimaryNIRCommandBufferInternal& GetPrimaryCommandBuffer(IDObject<VulkanSimplified::PrimaryNIRPointer> bufferID);
-		SecondaryNIRCommandBufferInternal& GetSecondaryCommandBuffer(IDObject<VulkanSimplified::SecondaryNIRPointer> bufferID);
+		PrimaryNIRCommandBufferInternal& GetPrimaryCommandBuffer(IDObject<PrimaryNIRPointer> bufferID);
+		SecondaryNIRCommandBufferInternal& GetSecondaryCommandBuffer(IDObject<SecondaryNIRPointer> bufferID);
 
-		const PrimaryNIRCommandBufferInternal& GetPrimaryCommandBuffer(IDObject<VulkanSimplified::PrimaryNIRPointer> bufferID) const;
-		const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBuffer(IDObject<VulkanSimplified::SecondaryNIRPointer> bufferID) const;
+		const PrimaryNIRCommandBufferInternal& GetPrimaryCommandBuffer(IDObject<PrimaryNIRPointer> bufferID) const;
+		const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBuffer(IDObject<SecondaryNIRPointer> bufferID) const;
 
 		void ResetCommandPool(bool freeResources);
 
-		bool PresentSwapchainToQueue(IDObject<VulkanSimplified::WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, uint32_t imageIndex);
+		bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, uint32_t imageIndex);
 
 	private:
 		const DeviceCoreInternal& _core;

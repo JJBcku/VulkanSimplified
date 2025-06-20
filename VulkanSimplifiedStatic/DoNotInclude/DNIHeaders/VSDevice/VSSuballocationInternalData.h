@@ -2,12 +2,12 @@
 
 #include "../../../Include/VSCommon/VSMemorySizeDef.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct SuballocationInternalData
 	{
-		VulkanSimplified::MemorySize beggining;
-		VulkanSimplified::MemorySize size;
+		MemorySize beggining;
+		MemorySize size;
 
 		SuballocationInternalData();
 	};

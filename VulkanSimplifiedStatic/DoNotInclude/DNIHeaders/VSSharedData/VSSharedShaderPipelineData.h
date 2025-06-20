@@ -5,7 +5,7 @@
 #include <string>
 #include <compare>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	struct SharedShaderPipelineData
 	{

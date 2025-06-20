@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
-	VkFormat TranslateDataFormatToVkFormat(VulkanSimplified::DataFormatSetIndependentID formatID);
+	VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID);
 }

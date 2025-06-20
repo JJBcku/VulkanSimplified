@@ -2,7 +2,7 @@
 
 #include "VSAutoCleanupImage.h"
 
-namespace VulkanSimplifiedInternal
+namespace VulkanSimplified
 {
 	class AutoCleanupColorRenderTargetImage : public AutoCleanupImage
 	{
