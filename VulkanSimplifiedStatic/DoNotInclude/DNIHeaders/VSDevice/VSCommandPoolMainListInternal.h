@@ -6,8 +6,6 @@
 
 #include <stdint.h>
 
-typedef struct VkDevice_T* VkDevice;
-
 namespace VulkanSimplified
 {
 	struct CommandPoolMainListInitialCapacity;
@@ -63,8 +61,6 @@ namespace VulkanSimplified
 
 		WindowListInternal& _windowList;
 		DescriptorDataListsInternal& _descriptorDataList;
-
-		VkDevice _device;
 
 		UnsortedIDVector<CommandPoolQFGroupPointer> _qfGroupList;
 	};
