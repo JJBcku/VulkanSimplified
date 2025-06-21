@@ -1,15 +1,15 @@
 #include "VSSharedIpch.h"
 #include "../../../Include/VSSharedData/VSSharedRenderPassDataList.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedRenderPassDataInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedRenderPassDataInternal.h"
 
 #include "../../../Include/VSCommon/VSAccessFlags.h"
 #include "../../../Include/VSCommon/VSImageSampleFlags.h"
 #include "../../../Include/VSCommon/VSImageLayoutFlags.h"
 #include "../../../Include/VSCommon/VSRenderPassAttachmentOP.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSCommon/VSDataFormatFlagsInternal.h"
-#include "../../../DoNotInclude/DNIHeaders/VSCommon/VSPipelineStageFlagsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSCommon/VSDataFormatFlagsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSCommon/VSPipelineStageFlagsInternal.h"
 
 #include "../../../Include/VSSharedData/VSRenderPassClearValueID.h"
 

@@ -3,7 +3,7 @@
 
 #include <CustomLists/IDObject.h>
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSPrimaryNIRCommandBufferInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSPrimaryNIRCommandBufferInternal.h"
 
 #include "../../../Include/VSDevice/VSQueueOwnershipTransferData.h"
 

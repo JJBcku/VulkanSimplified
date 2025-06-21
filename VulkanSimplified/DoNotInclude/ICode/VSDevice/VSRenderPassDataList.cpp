@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSRenderPassDataList.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSRenderPassDataListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSRenderPassDataListInternal.h"
 
 namespace VulkanSimplified
 {

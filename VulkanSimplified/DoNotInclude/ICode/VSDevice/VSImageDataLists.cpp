@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSImageDataLists.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSImageDataListsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSImageDataListsInternal.h"
 
 #include "../../../Include/VSCommon/VSDataFormatFlags.h"
 #include "../../../Include/VSCommon/VSImageUsageFlags.h"

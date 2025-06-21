@@ -1,7 +1,7 @@
 #include "VSMainIpch.h"
 #include "../../../Include/VSMain/VSMain.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSMain/VSMainInternal.h"
+#include "../../../DoNotInclude/DNIData/VSMain/VSMainInternal.h"
 
 #include "../../../Include/VSMain/VSMainInitData.h"
 #include "../../../Include/VSMain/EventHandler/SdlEventHandler.h"

@@ -3,8 +3,8 @@
 
 #include "../../../Include/VSDevice/VSWindow.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSWindowListInternal.h"
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSWindowInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSWindowListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSWindowInternal.h"
 
 #include <CustomLists/IDObject.h>
 

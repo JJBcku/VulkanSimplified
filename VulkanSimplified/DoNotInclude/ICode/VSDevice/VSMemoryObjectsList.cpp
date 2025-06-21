@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSMemoryObjectsList.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSMemoryObjectsListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSMemoryObjectsListInternal.h"
 
 namespace VulkanSimplified
 {

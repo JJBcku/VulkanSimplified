@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSDeviceMain.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSDeviceMainInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSDeviceMainInternal.h"
 
 #include "../../../Include/VSDevice/VSDeviceCore.h"
 #include "../../../Include/VSDevice/VSWindowList.h"

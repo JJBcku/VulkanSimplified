@@ -1,9 +1,9 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSDeviceCore.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSDeviceCoreInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSDeviceCoreInternal.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSInstance/VSPhysicalDeviceDataInternal.h"
+#include "../../../DoNotInclude/DNIData/VSInstance/VSPhysicalDeviceDataInternal.h"
 
 #include "../../../Include/VSInstance/VSPhysicalDeviceData.h"
 #include "../../../Include/VSInstance/VSDeviceExtensionPacksList.h"

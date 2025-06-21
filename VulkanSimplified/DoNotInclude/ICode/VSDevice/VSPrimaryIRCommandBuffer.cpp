@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSPrimaryIRCommandBuffer.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSPrimaryIRCommandBufferInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSPrimaryIRCommandBufferInternal.h"
 
 namespace VulkanSimplified
 {

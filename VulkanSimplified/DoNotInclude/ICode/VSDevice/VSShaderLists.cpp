@@ -3,10 +3,10 @@
 
 #include <CustomLists/IDObject.h>
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSShaderListsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSShaderListsInternal.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSAutoCleanupFragmentShaderModule.h"
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSAutoCleanupVertexShaderModule.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSAutoCleanupFragmentShaderModule.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSAutoCleanupVertexShaderModule.h"
 
 namespace VulkanSimplified
 {

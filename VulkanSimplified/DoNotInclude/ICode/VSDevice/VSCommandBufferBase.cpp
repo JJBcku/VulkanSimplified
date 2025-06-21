@@ -3,7 +3,7 @@
 
 #include <CustomLists/IDObject.h>
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSCommandBufferBaseInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSCommandBufferBaseInternal.h"
 
 #include "../../../Include/VSDevice/VSDescriptorPoolGenericID.h"
 

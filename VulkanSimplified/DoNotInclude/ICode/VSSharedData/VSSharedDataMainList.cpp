@@ -5,10 +5,10 @@
 #include "../../../Include/VSSharedData/VSSharedRenderPassDataList.h"
 #include "../../../Include/VSSharedData/VSSharedPipelineDataLists.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedDataMainListInternal.h"
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedDescriptorDataListInternal.h"
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedRenderPassDataInternal.h"
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedPipelineDataListsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedDataMainListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedDescriptorDataListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedRenderPassDataInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedPipelineDataListsInternal.h"
 
 namespace VulkanSimplified
 {

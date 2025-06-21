@@ -1,7 +1,7 @@
 #include "VSSharedIpch.h"
 #include "../../../Include/VSSharedData/VSSharedDescriptorDataList.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedDescriptorDataListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedDescriptorDataListInternal.h"
 
 #include "../../../Include/VSCommon/VSDescriptorTypeFlags.h"
 #include "../../../Include/VSCommon/VSShaderTypeFlags.h"

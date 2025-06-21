@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSWindow.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSWindowInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSWindowInternal.h"
 
 namespace VulkanSimplified
 {

@@ -1,7 +1,7 @@
 #include "VSSharedIpch.h"
 #include "../../../Include/VSSharedData/VSSharedPipelineDataLists.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSSharedData/VSSharedPipelineDataListsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedPipelineDataListsInternal.h"
 
 #include "../../../Include/VSCommon/VSDataFormatFlags.h"
 #include "../../../Include/VSCommon/VSImageSampleFlags.h"

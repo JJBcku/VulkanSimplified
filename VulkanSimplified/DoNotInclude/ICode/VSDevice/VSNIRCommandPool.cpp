@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSNIRCommandPool.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSNIRCommandPoolInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSNIRCommandPoolInternal.h"
 
 #include "../../../Include/VSDevice/VSPrimaryNIRCommandBuffer.h"
 #include "../../../Include/VSDevice/VSSecondaryNIRCommandBuffer.h"

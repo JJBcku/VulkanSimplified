@@ -1,7 +1,7 @@
 #include "SdlEhIpch.h"
 #include "../../../../Include/VSMain/EventHandler/SdlEventHandler.h"
 
-#include "../../../../DoNotInclude/DNIHeaders/VSMain/EventHandler/SdlEventHandlerInternal.h"
+#include "../../../../DoNotInclude/DNIData/VSMain/EventHandler/SdlEventHandlerInternal.h"
 
 #include <CustomLists/IDObject.h>
 

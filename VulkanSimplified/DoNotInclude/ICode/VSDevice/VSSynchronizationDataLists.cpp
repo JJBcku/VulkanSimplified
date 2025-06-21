@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSSynchronizationDataLists.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSSynchronizationDataListsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSSynchronizationDataListsInternal.h"
 
 namespace VulkanSimplified
 {

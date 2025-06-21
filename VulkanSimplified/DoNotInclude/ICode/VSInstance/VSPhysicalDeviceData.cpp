@@ -1,7 +1,7 @@
 #include "VSInstanceIpch.h"
 #include "../../../Include/VSInstance/VSPhysicalDeviceData.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSInstance/VSPhysicalDeviceDataInternal.h"
+#include "../../../DoNotInclude/DNIData/VSInstance/VSPhysicalDeviceDataInternal.h"
 
 namespace VulkanSimplified
 {

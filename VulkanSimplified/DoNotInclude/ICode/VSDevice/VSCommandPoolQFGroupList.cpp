@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSCommandPoolQFGroupList.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSCommandPoolQFGroupListInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSCommandPoolQFGroupListInternal.h"
 
 #include <CustomLists/IDObject.h>
 

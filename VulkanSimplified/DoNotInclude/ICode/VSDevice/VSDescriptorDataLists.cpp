@@ -1,7 +1,7 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSDescriptorDataLists.h"
 
-#include "../../../DoNotInclude/DNIHeaders/VSDevice/VSDescriptorDataListsInternal.h"
+#include "../../../DoNotInclude/DNIData/VSDevice/VSDescriptorDataListsInternal.h"
 
 namespace VulkanSimplified
 {
