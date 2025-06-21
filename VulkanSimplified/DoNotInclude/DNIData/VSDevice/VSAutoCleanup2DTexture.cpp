@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSAutoCleanup2DTexture.h"
 
 #include "VSAutoCleanupImageView.h"

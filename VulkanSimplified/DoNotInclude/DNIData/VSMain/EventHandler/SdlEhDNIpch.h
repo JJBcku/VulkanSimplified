@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SdlEhDNIframework.h"
+
 #include <stdint.h>
 #include <stdexcept>
 #include <functional>

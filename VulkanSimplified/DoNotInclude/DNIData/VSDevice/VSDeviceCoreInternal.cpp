@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSDeviceCoreInternal.h"
 
 #include "../VSInstance/VsLogicalDeviceInternalCreationData.h"

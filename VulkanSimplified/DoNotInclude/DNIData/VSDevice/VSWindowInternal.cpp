@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSWindowInternal.h"
 
 #include "../../../Include/VSDevice/VSWindowCreationData.h"

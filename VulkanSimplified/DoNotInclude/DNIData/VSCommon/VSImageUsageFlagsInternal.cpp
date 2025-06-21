@@ -1,4 +1,4 @@
-#include "VSCommonNIpch.h"
+#include "VSCommonDNIpch.h"
 #include "VSImageUsageFlagsInternal.h"
 
 namespace VulkanSimplified

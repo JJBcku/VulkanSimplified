@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSAutoCleanupNIFDescriptorPool.h"
 
 #include "VSAutoCleanupDescriptorSet.h"

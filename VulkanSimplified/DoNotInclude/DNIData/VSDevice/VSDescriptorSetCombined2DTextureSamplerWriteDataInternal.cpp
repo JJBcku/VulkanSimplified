@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 
 namespace VulkanSimplified

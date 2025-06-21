@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSImageDataListsInternal.h"
 
 #include "../../../Include/VSDevice/VSImageDataListsInitialCapacities.h"

@@ -1,4 +1,4 @@
-#include "VSDeviceNipch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSAutoCleanupShaderModule.h"
 
 namespace VulkanSimplified

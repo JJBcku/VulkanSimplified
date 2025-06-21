@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhNIpch.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEventHandlerInternal.cpp">
@@ -199,7 +199,7 @@
     <ClCompile Include="DoNotInclude\ICode\VSCommon\VsCommonIpch.cpp">
       <Filter>Source Files\Include\VSCommon</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSCommonNIpch.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSCommonDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VsCommon</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSCStringsComparison.cpp">
@@ -280,7 +280,7 @@
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDeviceMainInternal.cpp">
       <Filter>Source Files\DoNotInclude\VSDevice</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDeviceNIpch.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDeviceDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VSDevice</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSInstance\VSDeviceQueueFamilyData.cpp">
@@ -355,7 +355,7 @@
     <ClCompile Include="DoNotInclude\ICode\VSMain\VSInstanceLayerPacksList.cpp">
       <Filter>Source Files\Include\VSMain</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSInstance\VSInstanceNIpch.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSInstance\VSInstanceDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VSInstance</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSDevice\VSIRCommandPool.cpp">
@@ -379,7 +379,7 @@
     <ClCompile Include="DoNotInclude\DNIData\VSMain\VSMainInternal.cpp">
       <Filter>Source Files\DoNotInclude\VSMain</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSMain\VSMainNIpch.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSMain\VSMainDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VSMain</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSMain\VSMainIpch.cpp">
@@ -550,7 +550,7 @@
     <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedIpch.cpp">
       <Filter>Source Files\Include\VSSharedData</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedNIpch.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VSSharedData</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataListInternal.cpp">
@@ -633,10 +633,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhNIframework.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIframework.h">
       <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhNIpch.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIpch.h">
       <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEventHandlerInternal.h">
@@ -870,10 +870,10 @@
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIpch.h">
       <Filter>Header Files\Include\VSCommon</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCommonNIframework.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCommonDNIframework.h">
       <Filter>Header Files\DoNotInclude\VSCommon</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCommonNIpch.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCommonDNIpch.h">
       <Filter>Header Files\DoNotInclude\VSCommon</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSCommon\VSCompareOperationsType.h">
@@ -984,10 +984,10 @@
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDeviceMainInternal.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDeviceNIframework.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDeviceDNIframework.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDeviceNIpch.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDeviceDNIpch.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSInstance\VSDeviceQueueFamilyData.h">
@@ -1095,10 +1095,10 @@
     <ClInclude Include="Include\VSMain\VSInstanceLayerPacksList.h">
       <Filter>Header Files\Include\VSMain</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceNIframework.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceDNIframework.h">
       <Filter>Header Files\DoNotInclude\VSInstance</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceNIpch.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceDNIpch.h">
       <Filter>Header Files\DoNotInclude\VSInstance</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSIRCommandPool.h">
@@ -1134,10 +1134,10 @@
     <ClInclude Include="DoNotInclude\DNIData\VSMain\VSMainInternal.h">
       <Filter>Header Files\DoNotInclude\VSMain</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSMain\VSMainNIframework.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSMain\VSMainDNIframework.h">
       <Filter>Header Files\DoNotInclude\VSMain</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSMain\VSMainNIpch.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSMain\VSMainDNIpch.h">
       <Filter>Header Files\DoNotInclude\VSMain</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSCommon\VSMemoryAllocationFullID.h">
@@ -1374,10 +1374,10 @@
     <ClInclude Include="Include\VSSharedData\VSSharedDescriptorDataListDef.h">
       <Filter>Header Files\Include\VSSharedData</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedNIpch.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedDNIpch.h">
       <Filter>Header Files\DoNotInclude\VSSharedData</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedNIframework.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedDNIframework.h">
       <Filter>Header Files\DoNotInclude\VSSharedData</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataAllElementsInternal.h">

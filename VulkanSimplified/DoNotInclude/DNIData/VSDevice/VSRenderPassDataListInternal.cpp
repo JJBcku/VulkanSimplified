@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSRenderPassDataListInternal.h"
 
 #include "VSAutoCleanupRenderPass.h"

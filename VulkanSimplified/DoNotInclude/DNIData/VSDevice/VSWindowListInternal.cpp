@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSWindowListInternal.h"
 
 #include "../../../Include/VSDevice/VSWindowListInitialCapacities.h"

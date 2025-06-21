@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VSInstanceNIframework.h"
+#include "VSInstanceDNIframework.h"
 
 #include <vulkan/vulkan.hpp>
 #include <SDL2/SDL.h>

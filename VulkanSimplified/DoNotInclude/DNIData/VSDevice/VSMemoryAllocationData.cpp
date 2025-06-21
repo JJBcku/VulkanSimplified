@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSMemoryAllocationData.h"
 
 #include "VSSuballocationInternalData.h"

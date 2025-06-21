@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSMemoryTypeInternalData.h"
 
 #include "../../../Include/VSCommon/VSMemoryTypeProperties.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VSDeviceNIframework.h"
+#include "VSDeviceDNIframework.h"
 
 #include <vulkan/vulkan.hpp>
 #include <SDL2/SDL.h>

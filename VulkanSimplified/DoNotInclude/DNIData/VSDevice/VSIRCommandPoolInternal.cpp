@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSIRCommandPoolInternal.h"
 
 #include "VSSynchronizationDataListsInternal.h"

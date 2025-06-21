@@ -1,4 +1,4 @@
-#include "VSSharedNIpch.h"
+#include "VSSharedDNIpch.h"
 #include "VSSharedDescriptorDataListInternal.h"
 
 #include "../../../Include/VSSharedData/VSSharedDescriptorDataListCapacities.h"

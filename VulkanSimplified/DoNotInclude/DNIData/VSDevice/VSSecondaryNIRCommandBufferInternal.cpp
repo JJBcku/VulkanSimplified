@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSSecondaryNIRCommandBufferInternal.h"
 
 namespace VulkanSimplified

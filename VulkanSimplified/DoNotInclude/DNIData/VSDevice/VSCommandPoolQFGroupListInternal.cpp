@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSCommandPoolQFGroupListInternal.h"
 
 #include "VSDeviceCoreInternal.h"

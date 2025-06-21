@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSCommandBufferBaseInternal.h"
 
 #include <CustomLists/IDObject.h>

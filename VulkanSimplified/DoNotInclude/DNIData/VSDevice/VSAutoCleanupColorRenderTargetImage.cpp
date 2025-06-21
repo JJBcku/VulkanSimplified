@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSAutoCleanupColorRenderTargetImage.h"
 
 namespace VulkanSimplified

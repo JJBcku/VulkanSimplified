@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSCommandPoolMainListInternal.h"
 
 #include "../../../Include/VSDevice/VSCommandPoolMainListInitialCapacity.h"

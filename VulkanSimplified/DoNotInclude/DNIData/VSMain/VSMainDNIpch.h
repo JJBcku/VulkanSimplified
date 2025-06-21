@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VSMainNIframework.h"
+#include "VSMainDNIframework.h"
 
 #include <stdint.h>
 #include <string>

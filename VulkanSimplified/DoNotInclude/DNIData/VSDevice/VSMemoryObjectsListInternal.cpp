@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSMemoryObjectsListInternal.h"
 
 #include "../../../Include/VSCommon/VSMemoryDataList.h"

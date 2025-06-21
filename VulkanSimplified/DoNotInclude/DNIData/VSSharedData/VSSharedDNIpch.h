@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VSSharedNIframework.h"
+#include "VSSharedDNIframework.h"
 
 #include <vulkan/vulkan.hpp>
 

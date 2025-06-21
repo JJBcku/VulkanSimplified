@@ -1,4 +1,4 @@
-#include "VSCommonNIpch.h"
+#include "VSCommonDNIpch.h"
 #include "VSPipelineStageFlagsInternal.h"
 
 namespace VulkanSimplified

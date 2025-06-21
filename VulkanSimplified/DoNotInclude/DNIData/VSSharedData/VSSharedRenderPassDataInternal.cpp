@@ -1,4 +1,4 @@
-#include "VSSharedNIpch.h"
+#include "VSSharedDNIpch.h"
 #include "VSSharedRenderPassDataInternal.h"
 
 #include "../../../Include/VSSharedData/VSSharedRenderPassDataListsCapacities.h"

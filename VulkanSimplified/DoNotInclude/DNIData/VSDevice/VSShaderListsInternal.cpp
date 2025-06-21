@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSShaderListsInternal.h"
 
 #include "../../../Include/VSDevice/VSShaderListsInitialCapacitiesList.h"

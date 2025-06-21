@@ -1,4 +1,4 @@
-#include "VSDeviceNIpch.h"
+#include "VSDeviceDNIpch.h"
 #include "VSAutoCleanupDescriptorSetLayout.h"
 
 namespace VulkanSimplified
