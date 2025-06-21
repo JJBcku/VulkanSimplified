@@ -660,54 +660,6 @@
     <ClInclude Include="Include\VSMain\EventHandler\SdlDropEventData.h">
       <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandler.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerInitData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerTypedefs.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlJoyEventsData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlKeyboardEventsData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlLocaleChangedEventData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlMouseEventsData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlQuitEventData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlRenderEventsData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlSensorEventData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlTextEventsData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlTouchpadEventData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlUserEventData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSMain\EventHandler\SdlWindowEventData.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\ICode\VSMain\EventHandler\SdlEhIframework.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="DoNotInclude\ICode\VSMain\EventHandler\SdlEhIpch.h">
-      <Filter>Header Files\DoNotInclude\VSMain\SDLEventHandler</Filter>
-    </ClInclude>
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSAccessFlagsInternal.h">
       <Filter>Header Files\DoNotInclude\VSCommon</Filter>
     </ClInclude>
@@ -1478,6 +1430,54 @@
     </ClInclude>
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSWindowListInternal.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerTypedefs.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandlerInitData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlEventHandler.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlJoyEventsData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlKeyboardEventsData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlLocaleChangedEventData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlMouseEventsData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlQuitEventData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlRenderEventsData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlSensorEventData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlTextEventsData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlTouchpadEventData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlUserEventData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSMain\EventHandler\SdlWindowEventData.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\ICode\VSMain\EventHandler\SdlEhIframework.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\ICode\VSMain\EventHandler\SdlEhIpch.h">
+      <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
