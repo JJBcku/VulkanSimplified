@@ -216,7 +216,7 @@ namespace VulkanSimplified
 	void InstanceInternal::CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities)
 	{
 		if (_usedDevice)
-			throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Program support only up to one logical device at one time!");
+			throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Program support only one logical device at any one time!");
 
 		if (creationData.physicalGPUIndex >= _availableDevices.size())
 			throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Program tried to read past the end of the available devices list!");
@@ -255,6 +255,79 @@ namespace VulkanSimplified
 
 				if (totalQueueCount + queueData.queuesPriorities.size() < totalQueueCount)
 					throw std::runtime_error("InstanceInternal::CreateLogicalDevice Error: Total queue count overflowed!");
+
+				totalQueueCount += queueData.queuesPriorities.size();
+
+				queueInfo.queueFamilyIndex = queueData.queuesFamily;
+				queueInfo.queueCount = static_cast<uint32_t>(queueData.queuesPriorities.size());
+
+				queuePrioritiesList[i].reserve(queueData.queuesPriorities.size());
+				for (size_t j = 0; j < queueData.queuesPriorities.size(); ++j)
+				{
+					float priority = static_cast<float>(queueData.queuesPriorities[j]) / static_cast<float>(std::numeric_limits<uint16_t>::max());
+					queuePrioritiesList[i].push_back(priority);
+				}
+
+				queueInfo.pQueuePriorities = queuePrioritiesList[i].data();
+
+				internalCreationData.queueInfos.push_back(queueInfo);
+			}
+		}
+
+		auto& vulkan10Properties = physicalDeviceData.GetVulkan10Properties();
+		internalCreationData.apiVersion = std::min(_usedVulkanApiVersion, vulkan10Properties.apiMaxSupportedVersion);
+
+		internalCreationData.features = PhysicalDeviceDataInternal::CompileDevicesRequestedVulkan10Features(creationData.vulkan10EnabledFeatures);
+		internalCreationData.enabledExtensionsList = PhysicalDeviceDataInternal::CompileDevicesRequestedExtensionList(creationData.requestedExtensionPacks);
+
+		internalCreationData.vulkan10EnabledFeatures = creationData.vulkan10EnabledFeatures;
+		internalCreationData.requestedExtensionPacks = creationData.requestedExtensionPacks;
+
+		_usedDevice = std::make_unique<DeviceMainInternal>(_eventHandler, _sharedDataMain, _instance, internalCreationData, physicalDeviceData, initialCapacities);
+	}
+
+	void InstanceInternal::RecreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities)
+	{
+		if (_usedDevice)
+			_usedDevice.reset();
+
+		if (creationData.physicalGPUIndex >= _availableDevices.size())
+			throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Program tried to read past the end of the available devices list!");
+
+		if (creationData.queuesCreationInfo.empty())
+			throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Program tried to create device with no queues!");
+
+		if (creationData.queuesCreationInfo.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Queue creation info list is bigger than allowed!");
+
+		const auto& physicalDeviceData = _availableDevices[creationData.physicalGPUIndex];
+
+		LogicalDeviceInternalCreationData internalCreationData;
+		internalCreationData.queueInfos.reserve(creationData.queuesCreationInfo.size());
+
+		std::vector<std::vector<float>> queuePrioritiesList(creationData.queuesCreationInfo.size(), {});
+		{
+			auto& queueFamiliesData = physicalDeviceData.GetVulkanQueueFamiliesData();
+			size_t totalQueueCount = 0;
+
+			VkDeviceQueueCreateInfo queueInfo{};
+			queueInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+
+			for (size_t i = 0; i < creationData.queuesCreationInfo.size(); ++i)
+			{
+				auto& queueData = creationData.queuesCreationInfo[i];
+
+				if (queueData.queuesFamily >= queueFamiliesData.size())
+					throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Program tried to create queues on non-existent family!");
+
+				if (queueData.queuesPriorities.empty())
+					throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Queue priorities list must not be empty!");
+
+				if (queueData.queuesPriorities.size() > queueFamiliesData[queueData.queuesFamily].queueCount)
+					throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Program tried to create more queues than the queues family allow");
+
+				if (totalQueueCount + queueData.queuesPriorities.size() < totalQueueCount)
+					throw std::runtime_error("InstanceInternal::RecreateLogicalDevice Error: Total queue count overflowed!");
 
 				totalQueueCount += queueData.queuesPriorities.size();
 

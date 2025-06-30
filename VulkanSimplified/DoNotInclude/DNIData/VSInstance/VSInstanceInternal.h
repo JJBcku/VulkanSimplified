@@ -56,6 +56,7 @@ namespace VulkanSimplified
 		const DeviceMainInternal& GetChoosenDevicesMainClass() const;
 
 		void CreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities);
+		void RecreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities);
 
 	private:
 		SdlEventHandlerInternal& _eventHandler;

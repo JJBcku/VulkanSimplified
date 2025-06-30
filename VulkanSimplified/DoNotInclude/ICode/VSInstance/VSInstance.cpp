@@ -70,4 +70,9 @@ namespace VulkanSimplified
 		_internal.CreateLogicalDevice(creationData, initialCapacities);
 	}
 
+	void Instance::RecreateLogicalDevice(const LogicalDeviceCreationData& creationData, const DeviceInitialCapacitiesList& initialCapacities)
+	{
+		_internal.RecreateLogicalDevice(creationData, initialCapacities);
+	}
+
 }
