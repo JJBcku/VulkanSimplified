@@ -1402,22 +1402,22 @@ namespace VulkanSimplified
 						auto& srgb = data.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
 
 						if (formatData.format == VK_FORMAT_A1R5G5B5_UNORM_PACK16)
-							srgb.fifthSet |= DATA_FORMAT_A1_RGB5_UNORM_PACK16;
+							srgb.firstSet |= DATA_FORMAT_A1_RGB5_UNORM_PACK16;
 
 						if (formatData.format == VK_FORMAT_A2B10G10R10_UNORM_PACK32)
-							srgb.fifthSet |= DATA_FORMAT_A2_BGR10_UNORM_PACK32;
+							srgb.firstSet |= DATA_FORMAT_A2_BGR10_UNORM_PACK32;
 
 						if (formatData.format == VK_FORMAT_A2R10G10B10_UNORM_PACK32)
-							srgb.fifthSet |= DATA_FORMAT_A2_RGB10_UNORM_PACK32;
+							srgb.firstSet |= DATA_FORMAT_A2_RGB10_UNORM_PACK32;
 
 						if (formatData.format == VK_FORMAT_A8B8G8R8_SNORM_PACK32)
-							srgb.fifthSet |= DATA_FORMAT_ABGR8_SNORM_PACK32;
+							srgb.firstSet |= DATA_FORMAT_ABGR8_SNORM_PACK32;
 
 						if (formatData.format == VK_FORMAT_A8B8G8R8_SRGB_PACK32)
-							srgb.fifthSet |= DATA_FORMAT_ABGR8_SRGB_PACK32;
+							srgb.firstSet |= DATA_FORMAT_ABGR8_SRGB_PACK32;
 
 						if (formatData.format == VK_FORMAT_A8B8G8R8_UNORM_PACK32)
-							srgb.fifthSet |= DATA_FORMAT_ABGR8_UNORM_PACK32;
+							srgb.firstSet |= DATA_FORMAT_ABGR8_UNORM_PACK32;
 
 						if (formatData.format == VK_FORMAT_B10G11R11_UFLOAT_PACK32)
 							srgb.secondSet |= DATA_FORMAT_B10_GR11_UFLOAT_PACK32;
