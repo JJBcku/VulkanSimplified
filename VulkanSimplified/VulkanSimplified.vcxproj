@@ -143,6 +143,7 @@
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupImageView.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupIndexBuffer.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupNIFDescriptorPool.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineCache.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineLayout.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupRenderPass.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupResolveRenderTargetImage.h" />
@@ -530,6 +531,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupNIFDescriptorPool.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineCache.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>

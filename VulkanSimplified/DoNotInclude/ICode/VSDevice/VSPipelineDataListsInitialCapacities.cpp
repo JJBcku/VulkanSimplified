@@ -5,6 +5,8 @@ namespace VulkanSimplified
 {
 	PipelineDataListsInitialCapacities::PipelineDataListsInitialCapacities()
 	{
+		pipelineCacheListInitialCapacity = 0;
+
 		pipelineLayoutListInitialCapacity = 0;
 		graphicsPipelineListInitialCapacity = 0;
 	}

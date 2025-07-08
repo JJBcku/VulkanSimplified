@@ -1,6 +1,7 @@
 #include "VSDeviceDNIpch.h"
 #include "VSPipelineDataListsInternal.h"
 
+#include "VSAutoCleanupPipelineCache.h"
 #include "VSAutoCleanupPipelineLayout.h"
 #include "VSAutoCleanupGraphicsPipeline.h"
 
@@ -19,14 +20,67 @@ namespace VulkanSimplified
     PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListInternal& pipelineData, const DescriptorDataListsInternal& descriptorData,
         const ShaderListsInternal& shaderList,  const RenderPassListInternal& renderPassList, VkDevice device,
         const PipelineDataListsInitialCapacities& initialCapacities) : _pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList),
-        _renderPassList(renderPassList), _device(device), _pipelineLayoutList(initialCapacities.pipelineLayoutListInitialCapacity),
-        _graphicPipelineList(initialCapacities.graphicsPipelineListInitialCapacity)
+        _renderPassList(renderPassList), _device(device), _pipelineHeader(), _pipelineCacheList(initialCapacities.pipelineCacheListInitialCapacity),
+		_pipelineLayoutList(initialCapacities.pipelineLayoutListInitialCapacity), _graphicPipelineList(initialCapacities.graphicsPipelineListInitialCapacity)
     {
+		VkPipelineCacheCreateInfo cacheTestInfo{};
+		cacheTestInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+
+		VkPipelineCache testCache = VK_NULL_HANDLE;
+
+		if (vkCreatePipelineCache(_device, &cacheTestInfo, nullptr, &testCache) != VK_SUCCESS)
+			throw std::runtime_error("PipelineDataListsInternal::PipelineDataListsInternal Error: Program failed to create the test pipeline cache!");
+
+		size_t testCacheSize = 0;
+
+		vkGetPipelineCacheData(_device, testCache, &testCacheSize, nullptr);
+
+		if (testCacheSize < sizeof(_pipelineHeader))
+			throw std::runtime_error("PipelineDataListsInternal::PipelineDataListsInternal Error: Program failed to create enough test pipeline cache data!");
+
+		std::vector<unsigned char> cacheData;
+		cacheData.resize(testCacheSize);
+
+		if (vkGetPipelineCacheData(_device, testCache, &testCacheSize, cacheData.data()) != VK_SUCCESS)
+			throw std::runtime_error("PipelineDataListsInternal::PipelineDataListsInternal Error: Program failed to read test cache data!");
+
+		std::memcpy(&_pipelineHeader, cacheData.data(), sizeof(_pipelineHeader));
+
+		vkDestroyPipelineCache(_device, testCache, nullptr);
     }
 
     PipelineDataListsInternal::~PipelineDataListsInternal()
     {
     }
+
+	std::optional<IDObject<AutoCleanupPipelineCache>> PipelineDataListsInternal::AddPipelineCache(const std::vector<unsigned char>& initialData, size_t addOnReserving)
+	{
+		std::optional<IDObject<AutoCleanupPipelineCache>> ret;
+
+		if (!initialData.empty() && initialData.size() < sizeof(_pipelineHeader))
+			throw std::runtime_error("PipelineDataListsInternal::AddPipelineCache Error: Program was given too little initial data!");
+
+		if (std::memcmp(initialData.data(), &_pipelineHeader, sizeof(_pipelineHeader)) == 0)
+		{
+			VkPipelineCacheCreateInfo createInfo{};
+			createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+
+			if (!initialData.empty())
+			{
+				createInfo.initialDataSize = initialData.size();
+				createInfo.pInitialData = initialData.data();
+			}
+
+			VkPipelineCache add = VK_NULL_HANDLE;
+
+			if (vkCreatePipelineCache(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+				throw std::runtime_error("PipelineDataListsInternal::AddPipelineCache Error: Program failed to create the pipeline cache!");
+
+			ret = _pipelineCacheList.AddObject(AutoCleanupPipelineCache(_device, add), addOnReserving);
+		}
+
+		return ret;
+	}
 
     IDObject<AutoCleanupPipelineLayout> PipelineDataListsInternal::AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserving)
     {
@@ -57,7 +111,7 @@ namespace VulkanSimplified
     }
 
 	std::vector<IDObject<AutoCleanupGraphicsPipeline>> PipelineDataListsInternal::AddGraphicPipelines(const std::vector<GraphicsPipelineCreationData>& creationDataList,
-		size_t addOnReserving)
+		const std::optional<IDObject<AutoCleanupPipelineCache>>& pipelineCacheID, size_t addOnReserving)
 	{
 		assert(!creationDataList.empty());
 
@@ -310,6 +364,11 @@ namespace VulkanSimplified
 		std::vector<VkPipeline> pipelineList;
 		pipelineList.resize(creationDataList.size(), VK_NULL_HANDLE);
 
+		VkPipelineCache cache = VK_NULL_HANDLE;
+
+		if (pipelineCacheID.has_value())
+			cache = _pipelineCacheList.GetConstObject(pipelineCacheID.value()).GetPipelineCache();
+
 		if (vkCreateGraphicsPipelines(_device, VK_NULL_HANDLE, static_cast<uint32_t>(createInfoList.size()), createInfoList.data(), nullptr, pipelineList.data()) != VK_SUCCESS)
 			throw std::runtime_error("DevicePipelineDataInternal::AddGraphicPipelines Error: Program failed to create the pipelines!");
 
@@ -317,6 +376,32 @@ namespace VulkanSimplified
 		{
 			ret.push_back(_graphicPipelineList.AddObject(AutoCleanupGraphicsPipeline(_device, pipeline), addOnReserving));
 		}
+
+		return ret;
+	}
+
+	size_t PipelineDataListsInternal::GetPipelineCacheSize(IDObject<AutoCleanupPipelineCache> cacheID) const
+	{
+		size_t ret = 0;
+
+		VkPipelineCache cache = _pipelineCacheList.GetConstObject(cacheID).GetPipelineCache();
+
+		if (vkGetPipelineCacheData(_device, cache, &ret, nullptr) != VK_SUCCESS)
+			throw std::runtime_error("PipelineDataListsInternal::GetPipelineCacheSize Error: Program failed to get pipeline cache's size!");
+
+		return ret;
+	}
+
+	std::vector<unsigned char> PipelineDataListsInternal::GetPipelineCacheData(IDObject<AutoCleanupPipelineCache> cacheID) const
+	{
+		std::vector<unsigned char> ret;
+
+		size_t size = GetPipelineCacheSize(cacheID);
+		ret.resize(size);
+
+		VkPipelineCache cache = _pipelineCacheList.GetConstObject(cacheID).GetPipelineCache();
+		if (vkGetPipelineCacheData(_device, cache, &size, ret.data()) != VK_SUCCESS)
+			throw std::runtime_error("PipelineDataListsInternal::GetPipelineCacheData Error: Program failed to get pipeline cache's data!");
 
 		return ret;
 	}

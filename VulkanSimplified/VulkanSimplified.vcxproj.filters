@@ -631,6 +631,9 @@
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSWindowListInternal.cpp">
       <Filter>Source Files\DoNotInclude\VSDevice</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineCache.cpp">
+      <Filter>Source Files\DoNotInclude\VSDevice</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIframework.h">
@@ -1478,6 +1481,9 @@
     </ClInclude>
     <ClInclude Include="DoNotInclude\ICode\VSMain\EventHandler\SdlEhIpch.h">
       <Filter>Header Files\Include\VSMain\SDLEventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineCache.h">
+      <Filter>Header Files\DoNotInclude\VSDevice</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
