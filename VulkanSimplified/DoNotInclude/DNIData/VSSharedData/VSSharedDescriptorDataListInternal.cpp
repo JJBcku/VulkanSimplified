@@ -72,6 +72,61 @@ namespace VulkanSimplified
 		if ((shaderStageFlags & SHADER_TYPE_VERTEX) == SHADER_TYPE_VERTEX)
 			add.shaderStages |= VK_SHADER_STAGE_VERTEX_BIT;
 
+		return _bindingDataList.AddObject(std::move(add), addOnReserving);
+	}
+
+	IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataListInternal::AddUniqueDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount, ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
+	{
+		DescriptorSetLayoutBindingData add;
+
+		switch (descriptorType)
+		{
+		case DescriptorTypeFlagBits::INPUT_ATTACHMENT:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;
+			break;
+		case DescriptorTypeFlagBits::STORAGE_BUFFER_DYNAMIC:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC;;
+			break;
+		case DescriptorTypeFlagBits::UNIFORM_BUFFER_DYNAMIC:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC;
+			break;
+		case DescriptorTypeFlagBits::STORAGE_BUFFER:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+			break;
+		case DescriptorTypeFlagBits::UNIFORM_BUFFER:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+			break;
+		case DescriptorTypeFlagBits::STORAGE_TEXEL_BUFFER:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER;
+			break;
+		case DescriptorTypeFlagBits::UNIFORM_TEXEL_BUFFER:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER;
+			break;
+		case DescriptorTypeFlagBits::STORAGE_IMAGE:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
+			break;
+		case DescriptorTypeFlagBits::SAMPLED_IMAGE:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
+			break;
+		case DescriptorTypeFlagBits::COMBINED_IMAGE_SAMPLER:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+			break;
+		case DescriptorTypeFlagBits::SAMPLER:
+			add.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
+			break;
+		default:
+			throw std::runtime_error("SharedDescriptorDataListInternal::AddUniqueDescriptorSetLayoutBindingsData Error: Program was given an erroneous descriptor type value!");
+		}
+
+		add.descriptorCount = descriptorAmount;
+
+		add.shaderStages = 0;
+		if ((shaderStageFlags & SHADER_TYPE_FRAGMENT) == SHADER_TYPE_FRAGMENT)
+			add.shaderStages |= VK_SHADER_STAGE_FRAGMENT_BIT;
+
+		if ((shaderStageFlags & SHADER_TYPE_VERTEX) == SHADER_TYPE_VERTEX)
+			add.shaderStages |= VK_SHADER_STAGE_VERTEX_BIT;
+
 		return _bindingDataList.AddUniqueObject(std::move(add), addOnReserving);
 	}
 

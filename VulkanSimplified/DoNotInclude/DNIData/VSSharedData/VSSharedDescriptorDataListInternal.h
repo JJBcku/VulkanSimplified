@@ -28,6 +28,9 @@ namespace VulkanSimplified
 		IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount,
 			ShaderTypeFlags shaderStageFlags, size_t addOnReserving);
 
+		IDObject<DescriptorSetLayoutBindingData> AddUniqueDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount,
+			ShaderTypeFlags shaderStageFlags, size_t addOnReserving);
+
 		std::vector<VkDescriptorSetLayoutBinding> GetDescriptorSetLayoutBindings(uint32_t firstBinding, const std::vector<IDObject<DescriptorSetLayoutBindingData>>& bindingIDs) const;
 
 	private:
