@@ -280,7 +280,8 @@ void CreateTextureData(VulkanData& data)
 			graphicQfGroup.SubmitBuffers(data.instanceDependentData->graphicsQueueIndex, submitInfo, data.synchronizationData->inFlightFences[0]);
 		}
 
-		synchro.WaitOnFences({ data.synchronizationData->inFlightFences[0] }, false, 1000000);
+		if (!synchro.WaitOnFences({ data.synchronizationData->inFlightFences[0] }, false, 1000000000))
+			throw std::runtime_error("CreateTextureData Error: Waiting on fence timedout!");
 
 		bufferLists.RemoveStagingBuffer(stagingBuffer, true);
 		memoryList.FreeMemory(stagingMemoryAllocation, true, true);

@@ -164,7 +164,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 		submitInfo[0].commandBufferIDs[0] = submitedBuffersID;
 
-		submitInfo[0].signalSemaphores[0] = data.synchronizationData->dataTransferFinishedSemaphores[frameIndex];
+		submitInfo[0].signalSemaphores[0] = data.synchronizationData->dataTransferFinishedSemaphores[imageIndice];
 
 		transferQf.SubmitBuffers(data.instanceDependentData->transferOnlyQueueIndex.value(), submitInfo, {});
 
@@ -195,7 +195,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 		submitInfo[0].commandBufferIDs[0] = submitedBuffersID;
 
-		submitInfo[0].signalSemaphores[0] = data.synchronizationData->queueTransferFinishedSemaphores[frameIndex];
+		submitInfo[0].signalSemaphores[0] = data.synchronizationData->queueTransferFinishedSemaphores[imageIndice];
 
 		presentQf.SubmitBuffers(data.instanceDependentData->presentingQueueIndex.value(), submitInfo, {});
 	}
@@ -272,7 +272,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 	if (data.commandBufferData->presentGroup.has_value())
 	{
-		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->queueTransferFinishedSemaphores[frameIndex], VS::PIPELINE_STAGE_ALL_COMMANDS };
+		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->queueTransferFinishedSemaphores[imageIndice], VS::PIPELINE_STAGE_ALL_COMMANDS };
 	}
 	else
 	{
@@ -281,14 +281,14 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 	if (data.commandBufferData->transferGroup.has_value() && (!memData.vertexMemoryMapped || !memData.indexMemoryMapped))
 	{
-		submitInfo[0].waitSemaphores.emplace_back(data.synchronizationData->dataTransferFinishedSemaphores[frameIndex], VS::PIPELINE_STAGE_VERTEX_INPUT);
+		submitInfo[0].waitSemaphores.emplace_back(data.synchronizationData->dataTransferFinishedSemaphores[imageIndice], VS::PIPELINE_STAGE_VERTEX_INPUT);
 	}
 
 	submitedBuffersID.IRPrimaryID.commandPoolID = data.commandBufferData->graphicPool;
 	submitedBuffersID.IRPrimaryID.commandBufferID = data.commandBufferData->graphicBuffers[frameIndex];
 	submitInfo[0].commandBufferIDs[0] = submitedBuffersID;
 
-	submitInfo[0].signalSemaphores[0] = data.synchronizationData->renderingFinishedSemaphores[frameIndex];
+	submitInfo[0].signalSemaphores[0] = data.synchronizationData->renderingFinishedSemaphores[imageIndice];
 
 	if (data.commandBufferData->presentGroup.has_value())
 	{
@@ -309,7 +309,7 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 		presentCommandBuffer.EndRecording();
 
-		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->renderingFinishedSemaphores[frameIndex], VS::PIPELINE_STAGE_ALL_COMMANDS };
+		submitInfo[0].waitSemaphores[0] = { data.synchronizationData->renderingFinishedSemaphores[imageIndice], VS::PIPELINE_STAGE_ALL_COMMANDS };
 		
 		if (submitInfo[0].waitSemaphores.size() > 1)
 			submitInfo[0].waitSemaphores.resize(1);
@@ -319,15 +319,15 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 
 		submitInfo[0].commandBufferIDs[0] = submitedBuffersID;
 
-		submitInfo[0].signalSemaphores[0] = data.synchronizationData->queueTransferFinishedSemaphores[frameIndex];
+		submitInfo[0].signalSemaphores[0] = data.synchronizationData->queueTransferFinishedSemaphores[imageIndice];
 
 		presentQf.SubmitBuffers(data.instanceDependentData->presentingQueueIndex.value(), submitInfo, data.synchronizationData->inFlightFences[frameIndex]);
 
-		presentPool.PresentSwapchainToQueue(data.deviceDependentData->windowID, { data.synchronizationData->queueTransferFinishedSemaphores[frameIndex] }, imageIndice);
+		presentPool.PresentSwapchainToQueue(data.deviceDependentData->windowID, { data.synchronizationData->queueTransferFinishedSemaphores[imageIndice] }, imageIndice);
 	}
 	else
 	{
 		graphicQf.SubmitBuffers(data.instanceDependentData->graphicsQueueIndex, submitInfo, data.synchronizationData->inFlightFences[frameIndex]);
-		graphicPool.PresentSwapchainToQueue(data.deviceDependentData->windowID, { data.synchronizationData->renderingFinishedSemaphores[frameIndex] }, imageIndice);
+		graphicPool.PresentSwapchainToQueue(data.deviceDependentData->windowID, { data.synchronizationData->renderingFinishedSemaphores[imageIndice] }, imageIndice);
 	}
 }
