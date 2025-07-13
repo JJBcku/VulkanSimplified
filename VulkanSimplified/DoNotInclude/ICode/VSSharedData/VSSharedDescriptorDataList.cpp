@@ -22,9 +22,10 @@ namespace VulkanSimplified
 		return _internal.AddDescriptorSetLayoutBindingsData(descriptorType, descriptorAmount, shaderStageFlags, addOnReserving);
 	}
 
-	IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataList::AddUniqueDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount, ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
+	IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataList::AddUniqueDescriptorSetLayoutBindingsData(DescriptorTypeFlagBits descriptorType, uint32_t descriptorAmount,
+		ShaderTypeFlags shaderStageFlags, size_t addOnReserving)
 	{
-		return _internal.AddDescriptorSetLayoutBindingsData(descriptorType, descriptorAmount, shaderStageFlags, addOnReserving);
+		return _internal.AddUniqueDescriptorSetLayoutBindingsData(descriptorType, descriptorAmount, shaderStageFlags, addOnReserving);
 	}
 
 }
