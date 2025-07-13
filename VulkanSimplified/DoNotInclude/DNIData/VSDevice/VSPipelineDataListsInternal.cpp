@@ -60,7 +60,7 @@ namespace VulkanSimplified
 		if (!initialData.empty() && initialData.size() < sizeof(_pipelineHeader))
 			throw std::runtime_error("PipelineDataListsInternal::AddPipelineCache Error: Program was given too little initial data!");
 
-		if (std::memcmp(initialData.data(), &_pipelineHeader, sizeof(_pipelineHeader)) == 0)
+		if (initialData.empty() || std::memcmp(initialData.data(), &_pipelineHeader, sizeof(_pipelineHeader)) == 0)
 		{
 			VkPipelineCacheCreateInfo createInfo{};
 			createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
