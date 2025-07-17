@@ -369,7 +369,7 @@ namespace VulkanSimplified
 		if (pipelineCacheID.has_value())
 			cache = _pipelineCacheList.GetConstObject(pipelineCacheID.value()).GetPipelineCache();
 
-		if (vkCreateGraphicsPipelines(_device, VK_NULL_HANDLE, static_cast<uint32_t>(createInfoList.size()), createInfoList.data(), nullptr, pipelineList.data()) != VK_SUCCESS)
+		if (vkCreateGraphicsPipelines(_device, cache, static_cast<uint32_t>(createInfoList.size()), createInfoList.data(), nullptr, pipelineList.data()) != VK_SUCCESS)
 			throw std::runtime_error("DevicePipelineDataInternal::AddGraphicPipelines Error: Program failed to create the pipelines!");
 
 		for (auto& pipeline : pipelineList)
