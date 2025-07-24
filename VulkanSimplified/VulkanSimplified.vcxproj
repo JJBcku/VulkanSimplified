@@ -198,7 +198,6 @@
     <ClInclude Include="DoNotInclude\DNIData\VSMain\VSMainDNIpch.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedDNIframework.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedDNIpch.h" />
-    <ClInclude Include="Include\VSCommon\VSBool64Def.h" />
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIframework.h" />
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIpch.h" />
     <ClInclude Include="Include\VSCommon\VSCompareOperationsTypeDef.h" />
@@ -351,7 +350,6 @@
     <ClInclude Include="Include\VSDevice\VSWindowCreationData.h" />
     <ClInclude Include="Include\VSDevice\VSWindowList.h" />
     <ClInclude Include="Include\VSCommon\VSImageUsageFlags.h" />
-    <ClInclude Include="Include\VSCommon\VSBool64.h" />
     <ClInclude Include="Include\VSCommon\VSDataFormatFlags.h" />
     <ClInclude Include="Include\VSCommon\VSMemoryData.h" />
     <ClInclude Include="Include\VSDevice\VSDeviceCore.h" />
@@ -1305,12 +1303,6 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceDNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceDNIpch.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\ICode\VSCommon\VSBool64.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonIpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSCommon\VSDataFormatFlags.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonIpch.h</PrecompiledHeaderFile>

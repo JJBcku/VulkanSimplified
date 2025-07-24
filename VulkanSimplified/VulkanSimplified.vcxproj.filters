@@ -151,9 +151,6 @@
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupVertexShaderModule.cpp">
       <Filter>Source Files\DoNotInclude\VSDevice</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\ICode\VSCommon\VSBool64.cpp">
-      <Filter>Source Files\Include\VSCommon</Filter>
-    </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSColorBlendingComponentFlags.cpp">
       <Filter>Source Files\Include\VSSharedData</Filter>
     </ClCompile>
@@ -755,12 +752,6 @@
     </ClInclude>
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupVertexShaderModule.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSBool64.h">
-      <Filter>Header Files\Include\VSCommon</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\VSCommon\VSBool64Def.h">
-      <Filter>Header Files\Include\VSCommon</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSSharedData\VSColorBlendingComponentFlags.h">
       <Filter>Header Files\Include\VSSharedData</Filter>

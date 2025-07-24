@@ -1,7 +1,6 @@
 #include "VSDeviceIpch.h"
 #include "../../../Include/VSDevice/VSImagesMemoryBarrierData.h"
 
-#include "../../../Include/VSCommon/VSBool64.h"
 #include "../../../Include/VSCommon/VSImageLayoutFlags.h"
 
 namespace VulkanSimplified

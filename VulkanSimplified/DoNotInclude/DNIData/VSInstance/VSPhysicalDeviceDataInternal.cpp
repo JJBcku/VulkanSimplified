@@ -1,6 +1,8 @@
 #include "VSInstanceDNIpch.h"
 #include "VSPhysicalDeviceDataInternal.h"
 
+#include <Miscellaneous/Bool64.h>
+
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
 #include "../VSCommon/VSCStringsComparison.h"
 
@@ -357,7 +359,7 @@ namespace VulkanSimplified
 						throw std::runtime_error("PhysicalDeviceDataInternal::CompileQueueData Error: Program failed to query queue families support for presenting surfaces!");
 
 					if (presentationSupport == VK_TRUE)
-						queueData.presentationSupport = BOOL64_TRUE;
+						queueData.presentationSupport = Misc::BOOL64_TRUE;
 				}
 			}
 		}

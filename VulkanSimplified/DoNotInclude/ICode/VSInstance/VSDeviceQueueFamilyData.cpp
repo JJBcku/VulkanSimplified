@@ -1,6 +1,8 @@
 #include "VSInstanceIpch.h"
 #include "../../../Include/VSInstance/VSDeviceQueueFamilyData.h"
 
+#include <Miscellaneous/Bool64.h>
+
 namespace VulkanSimplified
 {
 	QueueFamilyData::QueueFamilyData()
@@ -12,7 +14,7 @@ namespace VulkanSimplified
 		minImageTransferGranularityHeight = 0;
 		minImageTransferGranularityDepth = 0;
 
-		presentationSupport = BOOL64_FALSE;
+		presentationSupport = Misc::BOOL64_FALSE;
 	}
 
 	QueueFamilyData::~QueueFamilyData()

@@ -5,6 +5,8 @@
 #include "VulkanBasicData.h"
 #include "VulkanInstanceDependentData.h"
 
+#include <Miscellaneous/Bool64.h>
+
 #include <VSDevicesSupportedFormats.h>
 #include <VSDeviceSwapchainSupportData.h>
 
@@ -188,7 +190,7 @@ static std::pair<uint32_t, bool> PickGraphicQueueFamily(VS::PhysicalDeviceData& 
 		if ((family.queueTypes & VS::QUEUE_TYPE_VIDEO_DECODE) != VS::QUEUE_TYPE_VIDEO_DECODE &&
 			(family.queueTypes & VS::QUEUE_TYPE_VIDEO_ENCODE) != VS::QUEUE_TYPE_VIDEO_ENCODE)
 		{
-			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == Misc::BOOL64_TRUE)
 			{
 				if (bestNonVideoGraphicQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -227,7 +229,7 @@ static std::pair<uint32_t, bool> PickGraphicQueueFamily(VS::PhysicalDeviceData& 
 		}
 		else
 		{
-			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == Misc::BOOL64_TRUE)
 			{
 				if (bestVideoGraphicQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -333,7 +335,7 @@ static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily
 		if ((family.queueTypes & VS::QUEUE_TYPE_VIDEO_DECODE) != VS::QUEUE_TYPE_VIDEO_DECODE &&
 			(family.queueTypes & VS::QUEUE_TYPE_VIDEO_ENCODE) != VS::QUEUE_TYPE_VIDEO_ENCODE)
 		{
-			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == Misc::BOOL64_TRUE)
 			{
 				if (bestNonVideoTransferOnlyQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -372,7 +374,7 @@ static std::optional<std::pair<uint32_t, bool>> TryToFindTransferOnlyQueueFamily
 		}
 		else
 		{
-			if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
+			if (queueData[i].presentationSupport == Misc::BOOL64_TRUE)
 			{
 				if (bestVideoTransferOnlyQueueFamilyGranularityPresenting > biggestGranularity)
 				{
@@ -437,7 +439,7 @@ static uint32_t FindPresentingQueueFamily(const std::vector<VS::QueueFamilyData>
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
-		if (queueData[i].presentationSupport == VS::BOOL64_TRUE)
+		if (queueData[i].presentationSupport == Misc::BOOL64_TRUE)
 		{
 			ret = static_cast<uint32_t>(i);
 			break;
