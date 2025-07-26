@@ -22,7 +22,6 @@ namespace VulkanSimplified
 		surfaceUsageFlags = 0;
 		surfaceSupportedCompositeAlphaModes = 0;
 		surfaceSupportedTransformations = 0;
-		surfaceDefaultTransformation = static_cast<SurfaceTransformFlagBits>(0);
 		surfacePresentModes = 0;
 	}
 

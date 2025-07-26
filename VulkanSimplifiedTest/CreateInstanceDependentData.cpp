@@ -80,9 +80,6 @@ static size_t ChooseGPU(VS::Instance& instance)
 		if ((deviceSurfaceSupport.surfaceSupportedTransformations & VS::SURFACE_TRASFORM_IDENTITY) != VS::SURFACE_TRASFORM_IDENTITY)
 			continue;
 
-		if (deviceSurfaceSupport.surfaceDefaultTransformation != VS::SURFACE_TRASFORM_IDENTITY)
-			continue;
-
 		auto& surfaceSupport = deviceSurfaceSupport.surfaceSupportedSwapchainFormats;
 		auto& supportedFormats = deviceInfo.GetFormatsSupportedFeatures();
 		auto& imageSupport = supportedFormats.formatFeaturesOptimalImageSupport;

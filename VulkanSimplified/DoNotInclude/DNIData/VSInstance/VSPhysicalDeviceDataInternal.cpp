@@ -1398,8 +1398,6 @@ namespace VulkanSimplified
 
 			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR) == VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR)
 				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_HORIZONTAL_MIRROR_ROTATE_270;
-
-			data.surfaceDefaultTransformation = TranslateSurfaceTransformFlag(surfaceCapabilities.currentTransform);
 		}
 
 		if ((surfaceCapabilities.supportedCompositeAlpha & VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR) != VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR)
