@@ -5,6 +5,7 @@
 #include "../../../Include/VSDevice/VSSwapchainCreationData.h"
 
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
+#include "../VSCommon/VSSurfaceTransformFlagsInternal.h"
 
 #include "VSDeviceCoreInternal.h"
 
@@ -32,6 +33,7 @@ namespace VulkanSimplified
 		_surface = VK_NULL_HANDLE;
 		_surfaceCapabilities = {};
 
+		_transformMode = VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR;
 		_presentMode = VK_PRESENT_MODE_MAX_ENUM_KHR;
 		_format = VK_FORMAT_MAX_ENUM;
 		_swapchainFlags = VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR;
@@ -92,6 +94,7 @@ namespace VulkanSimplified
 				DestroySwapchain();
 		}
 
+		_transformMode = TranslateSurfaceTransformFlag(creationData.surfaceTranformMode);
 		_presentMode = TranslateToPresentMode(creationData.surfacePresentMode);
 		_format = TranslateDataFormatToVkFormat(creationData.format);
 		_swapchainFlags = 0;

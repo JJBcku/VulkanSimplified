@@ -127,6 +127,7 @@
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSImageSampleFlagsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSImageUsageFlagsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSPipelineStageFlagsInternal.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSSurfaceTransformFlagsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanup2DArrayTexture.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanup2DTexture.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupColorRenderTargetImage.h" />
@@ -201,6 +202,8 @@
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIframework.h" />
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIpch.h" />
     <ClInclude Include="Include\VSCommon\VSCompareOperationsTypeDef.h" />
+    <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlags.h" />
+    <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlagsDef.h" />
     <ClInclude Include="Include\VSDevice\VSCommandBufferBaseDef.h" />
     <ClInclude Include="Include\VSDevice\VSCommandBufferUsageDef.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorPoolGenericID.h" />
@@ -447,6 +450,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSPipelineStageFlagsInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSSurfaceTransformFlagsInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>

@@ -3,6 +3,7 @@
 #include "../VSCommon/VSImageUsageFlagsDef.h"
 #include "../VSCommon/VSDataFormatFlags.h"
 #include "../VSCommon/VSSurfacePresentModesDef.h"
+#include "../VSCommon/VSSurfaceTransformFlagsDef.h"
 
 #include <stdint.h>
 
@@ -27,6 +28,8 @@ namespace VulkanSimplified
 		uint32_t maxImageCount;
 
 		ImageUsageFlags surfaceUsageFlags;
+		SurfaceTransformFlags surfaceSupportedTransformations;
+		SurfaceTransformFlagBits surfaceDefaultTransformation;
 		SurfacePresentModes surfacePresentModes;
 		SurfaceSupportedColorspaceFormatsLists surfaceSupportedSwapchainFormats;
 

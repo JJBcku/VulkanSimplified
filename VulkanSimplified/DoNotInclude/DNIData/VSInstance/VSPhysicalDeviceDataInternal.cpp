@@ -5,9 +5,11 @@
 
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
 #include "../VSCommon/VSCStringsComparison.h"
+#include "../VSCommon/VSSurfaceTransformFlagsInternal.h"
 
 #include "../../../Include/VSCommon/VSImageUsageFlags.h"
 #include "../../../Include/VSCommon/VSSurfacePresentModes.h"
+#include "../../../Include/VSCommon/VSSurfaceTransformFlags.h"
 
 #include "../../../Include/VSInstance/VSDeviceVulkan10FeatureFlags.h"
 
@@ -1317,24 +1319,25 @@ namespace VulkanSimplified
 	{
 		std::optional<SurfaceSupportData> ret;
 
-		if (testSurface != VK_NULL_HANDLE)
+		if (testSurface == VK_NULL_HANDLE)
+			return ret;
+
+		SurfaceSupportData data;
+
+		VkSurfaceCapabilitiesKHR surfaceCapabilities{};
+
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_device, testSurface, &surfaceCapabilities);
+
+		data.minWidth = surfaceCapabilities.minImageExtent.width;
+		data.minHeight = surfaceCapabilities.minImageExtent.height;
+
+		data.maxWidth = surfaceCapabilities.maxImageExtent.width;
+		data.maxHeight = surfaceCapabilities.maxImageExtent.height;
+
+		data.minImageCount = surfaceCapabilities.minImageCount;
+		data.maxImageCount = surfaceCapabilities.maxImageCount;
+
 		{
-			ret.emplace();
-			auto& data = ret.value();
-
-			VkSurfaceCapabilitiesKHR surfaceCapabilities{};
-
-			vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_device, testSurface, &surfaceCapabilities);
-
-			data.minWidth = surfaceCapabilities.minImageExtent.width;
-			data.minHeight = surfaceCapabilities.minImageExtent.height;
-
-			data.maxWidth = surfaceCapabilities.maxImageExtent.width;
-			data.maxHeight = surfaceCapabilities.maxImageExtent.height;
-
-			data.minImageCount = surfaceCapabilities.minImageCount;
-			data.maxImageCount = surfaceCapabilities.maxImageCount;
-
 			if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_TRANSFER_SRC_BIT) == VK_IMAGE_USAGE_TRANSFER_SRC_BIT)
 				data.surfaceUsageFlags |= IMAGE_USAGE_TRANSFER_SRC;
 
@@ -1358,124 +1361,159 @@ namespace VulkanSimplified
 
 			if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT) == VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT)
 				data.surfaceUsageFlags |= IMAGE_USAGE_INPUT_ATTACHMENT;
+		}
 
-			std::vector<VkPresentModeKHR> surfacePresentModes;
-			uint32_t size = 0;
+		{
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR) == VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_IDENTITY;
 
-			vkGetPhysicalDeviceSurfacePresentModesKHR(_device, testSurface, &size, nullptr);
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR) == VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_ROTATE_90;
 
-			if (size > 0)
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR) == VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_ROTATE_180;
+
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR) == VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_ROTATE_270;
+
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR) == VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_HORIZONTAL_MIRROR;
+
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR) == VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_HORIZONTAL_MIRROR_ROTATE_90;
+
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR) == VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_HORIZONTAL_MIRROR_ROTATE_180;
+
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR) == VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_HORIZONTAL_MIRROR_ROTATE_270;
+
+			if ((surfaceCapabilities.supportedTransforms & VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR) == VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR)
+				data.surfaceSupportedTransformations |= SURFACE_TRASFORM_INHERIT;
+
+			data.surfaceDefaultTransformation = TranslateSurfaceTransformFlag(surfaceCapabilities.currentTransform);
+		}
+
+		if ((surfaceCapabilities.supportedCompositeAlpha & VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR) != VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR)
+			return ret;
+
+		std::vector<VkPresentModeKHR> surfacePresentModes;
+		uint32_t size = 0;
+
+		vkGetPhysicalDeviceSurfacePresentModesKHR(_device, testSurface, &size, nullptr);
+
+		if (size > 0)
+		{
+			surfacePresentModes.resize(size);
+			vkGetPhysicalDeviceSurfacePresentModesKHR(_device, testSurface, &size, surfacePresentModes.data());
+
+			for (auto& presentMode : surfacePresentModes)
 			{
-				surfacePresentModes.resize(size);
-				vkGetPhysicalDeviceSurfacePresentModesKHR(_device, testSurface, &size, surfacePresentModes.data());
+				if (presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR)
+					data.surfacePresentModes |= PRESENT_MODE_IMMEDIATE;
 
-				for (auto& presentMode : surfacePresentModes)
-				{
-					if (presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR)
-						data.surfacePresentModes |= PRESENT_MODE_IMMEDIATE;
+				if (presentMode == VK_PRESENT_MODE_MAILBOX_KHR)
+					data.surfacePresentModes |= PRESENT_MODE_MAILBOX;
 
-					if (presentMode == VK_PRESENT_MODE_MAILBOX_KHR)
-						data.surfacePresentModes |= PRESENT_MODE_MAILBOX;
+				if (presentMode == VK_PRESENT_MODE_FIFO_KHR)
+					data.surfacePresentModes |= PRESENT_MODE_FIFO_STRICT;
 
-					if (presentMode == VK_PRESENT_MODE_FIFO_KHR)
-						data.surfacePresentModes |= PRESENT_MODE_FIFO_STRICT;
-
-					if (presentMode == VK_PRESENT_MODE_FIFO_RELAXED_KHR)
-						data.surfacePresentModes |= PRESENT_MODE_FIFO_RELAXED;
-				}
+				if (presentMode == VK_PRESENT_MODE_FIFO_RELAXED_KHR)
+					data.surfacePresentModes |= PRESENT_MODE_FIFO_RELAXED;
 			}
+		}
 
-			size = 0;
+		size = 0;
 
-			vkGetPhysicalDeviceSurfaceFormatsKHR(_device, testSurface, &size, nullptr);
+		vkGetPhysicalDeviceSurfaceFormatsKHR(_device, testSurface, &size, nullptr);
 
-			std::vector<VkSurfaceFormatKHR> supportedSwapchainFormats;
+		std::vector<VkSurfaceFormatKHR> supportedSwapchainFormats;
 
-			if (size > 0)
+		if (size > 0)
+		{
+			supportedSwapchainFormats.resize(size);
+
+			vkGetPhysicalDeviceSurfaceFormatsKHR(_device, testSurface, &size, supportedSwapchainFormats.data());
+
+			for (auto& formatData : supportedSwapchainFormats)
 			{
-				supportedSwapchainFormats.resize(size);
-
-				vkGetPhysicalDeviceSurfaceFormatsKHR(_device, testSurface, &size, supportedSwapchainFormats.data());
-
-				for (auto& formatData : supportedSwapchainFormats)
+				if (formatData.colorSpace == VK_COLORSPACE_SRGB_NONLINEAR_KHR)
 				{
-					if (formatData.colorSpace == VK_COLORSPACE_SRGB_NONLINEAR_KHR)
-					{
-						auto& srgb = data.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
+					auto& srgb = data.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
 
-						if (formatData.format == VK_FORMAT_A1R5G5B5_UNORM_PACK16)
-							srgb.firstSet |= DATA_FORMAT_A1_RGB5_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_A1R5G5B5_UNORM_PACK16)
+						srgb.firstSet |= DATA_FORMAT_A1_RGB5_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_A2B10G10R10_UNORM_PACK32)
-							srgb.firstSet |= DATA_FORMAT_A2_BGR10_UNORM_PACK32;
+					if (formatData.format == VK_FORMAT_A2B10G10R10_UNORM_PACK32)
+						srgb.firstSet |= DATA_FORMAT_A2_BGR10_UNORM_PACK32;
 
-						if (formatData.format == VK_FORMAT_A2R10G10B10_UNORM_PACK32)
-							srgb.firstSet |= DATA_FORMAT_A2_RGB10_UNORM_PACK32;
+					if (formatData.format == VK_FORMAT_A2R10G10B10_UNORM_PACK32)
+						srgb.firstSet |= DATA_FORMAT_A2_RGB10_UNORM_PACK32;
 
-						if (formatData.format == VK_FORMAT_A8B8G8R8_SNORM_PACK32)
-							srgb.firstSet |= DATA_FORMAT_ABGR8_SNORM_PACK32;
+					if (formatData.format == VK_FORMAT_A8B8G8R8_SNORM_PACK32)
+						srgb.firstSet |= DATA_FORMAT_ABGR8_SNORM_PACK32;
 
-						if (formatData.format == VK_FORMAT_A8B8G8R8_SRGB_PACK32)
-							srgb.firstSet |= DATA_FORMAT_ABGR8_SRGB_PACK32;
+					if (formatData.format == VK_FORMAT_A8B8G8R8_SRGB_PACK32)
+						srgb.firstSet |= DATA_FORMAT_ABGR8_SRGB_PACK32;
 
-						if (formatData.format == VK_FORMAT_A8B8G8R8_UNORM_PACK32)
-							srgb.firstSet |= DATA_FORMAT_ABGR8_UNORM_PACK32;
+					if (formatData.format == VK_FORMAT_A8B8G8R8_UNORM_PACK32)
+						srgb.firstSet |= DATA_FORMAT_ABGR8_UNORM_PACK32;
 
-						if (formatData.format == VK_FORMAT_B10G11R11_UFLOAT_PACK32)
-							srgb.secondSet |= DATA_FORMAT_B10_GR11_UFLOAT_PACK32;
+					if (formatData.format == VK_FORMAT_B10G11R11_UFLOAT_PACK32)
+						srgb.secondSet |= DATA_FORMAT_B10_GR11_UFLOAT_PACK32;
 
-						if (formatData.format == VK_FORMAT_B4G4R4A4_UNORM_PACK16)
-							srgb.secondSet |= DATA_FORMAT_BGRA4_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_B4G4R4A4_UNORM_PACK16)
+						srgb.secondSet |= DATA_FORMAT_BGRA4_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_B5G5R5A1_UNORM_PACK16)
-							srgb.secondSet |= DATA_FORMAT_BGR5_A1_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_B5G5R5A1_UNORM_PACK16)
+						srgb.secondSet |= DATA_FORMAT_BGR5_A1_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_B5G6R5_UNORM_PACK16)
-							srgb.secondSet |= DATA_FORMAT_B5_G6_R5_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_B5G6R5_UNORM_PACK16)
+						srgb.secondSet |= DATA_FORMAT_B5_G6_R5_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_B8G8R8A8_SNORM)
-							srgb.secondSet |= DATA_FORMAT_BGRA8_SNORM;
+					if (formatData.format == VK_FORMAT_B8G8R8A8_SNORM)
+						srgb.secondSet |= DATA_FORMAT_BGRA8_SNORM;
 
-						if (formatData.format == VK_FORMAT_B8G8R8A8_SRGB)
-							srgb.secondSet |= DATA_FORMAT_BGRA8_SRGB;
+					if (formatData.format == VK_FORMAT_B8G8R8A8_SRGB)
+						srgb.secondSet |= DATA_FORMAT_BGRA8_SRGB;
 
-						if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
-							srgb.thirdSet |= DATA_FORMAT_BGRA8_UNORM;
+					if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
+						srgb.thirdSet |= DATA_FORMAT_BGRA8_UNORM;
 
-						if (formatData.format == VK_FORMAT_R16G16B16A16_SFLOAT)
-							srgb.fifthSet |= DATA_FORMAT_RGBA16_SFLOAT;
+					if (formatData.format == VK_FORMAT_R16G16B16A16_SFLOAT)
+						srgb.fifthSet |= DATA_FORMAT_RGBA16_SFLOAT;
 
-						if (formatData.format == VK_FORMAT_R16G16B16A16_SNORM)
-							srgb.fifthSet |= DATA_FORMAT_RGBA16_SNORM;
+					if (formatData.format == VK_FORMAT_R16G16B16A16_SNORM)
+						srgb.fifthSet |= DATA_FORMAT_RGBA16_SNORM;
 
-						if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
-							srgb.fifthSet |= DATA_FORMAT_RGBA16_UNORM;
+					if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
+						srgb.fifthSet |= DATA_FORMAT_RGBA16_UNORM;
 
-						if (formatData.format == VK_FORMAT_R4G4B4A4_UNORM_PACK16)
-							srgb.sixthSet |= DATA_FORMAT_RGBA4_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_R4G4B4A4_UNORM_PACK16)
+						srgb.sixthSet |= DATA_FORMAT_RGBA4_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_R5G5B5A1_UNORM_PACK16)
-							srgb.sixthSet |= DATA_FORMAT_RGB5_A1_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_R5G5B5A1_UNORM_PACK16)
+						srgb.sixthSet |= DATA_FORMAT_RGB5_A1_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_R5G6B5_UNORM_PACK16)
-							srgb.sixthSet |= DATA_FORMAT_R5_G6_B5_UNORM_PACK16;
+					if (formatData.format == VK_FORMAT_R5G6B5_UNORM_PACK16)
+						srgb.sixthSet |= DATA_FORMAT_R5_G6_B5_UNORM_PACK16;
 
-						if (formatData.format == VK_FORMAT_R8_UNORM)
-							srgb.sixthSet |= DATA_FORMAT_R8_UNORM;
+					if (formatData.format == VK_FORMAT_R8_UNORM)
+						srgb.sixthSet |= DATA_FORMAT_R8_UNORM;
 
-						if (formatData.format == VK_FORMAT_R8G8B8A8_SNORM)
-							srgb.seventhSet |= DATA_FORMAT_RGBA8_SNORM;
+					if (formatData.format == VK_FORMAT_R8G8B8A8_SNORM)
+						srgb.seventhSet |= DATA_FORMAT_RGBA8_SNORM;
 
-						if (formatData.format == VK_FORMAT_R8G8B8A8_SRGB)
-							srgb.seventhSet |= DATA_FORMAT_RGBA8_SRGB;
+					if (formatData.format == VK_FORMAT_R8G8B8A8_SRGB)
+						srgb.seventhSet |= DATA_FORMAT_RGBA8_SRGB;
 
-						if (formatData.format == VK_FORMAT_R8G8B8A8_UNORM)
-							srgb.seventhSet |= DATA_FORMAT_RGBA8_UNORM;
-					}
+					if (formatData.format == VK_FORMAT_R8G8B8A8_UNORM)
+						srgb.seventhSet |= DATA_FORMAT_RGBA8_UNORM;
 				}
 			}
 		}
 
+		ret = data;
 		return ret;
 	}
 

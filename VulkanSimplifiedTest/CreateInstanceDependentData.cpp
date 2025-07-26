@@ -15,6 +15,7 @@
 
 #include <VSImageUsageFlags.h>
 #include <VSSurfacePresentModes.h>
+#include <VSSurfaceTransformFlags.h>
 
 #include <VSPhysicalDeviceData.h>
 #include <VSDeviceVulkan10Properties.h>
@@ -70,6 +71,12 @@ static size_t ChooseGPU(VS::Instance& instance)
 			continue;
 
 		if ((deviceSurfaceSupport.surfacePresentModes & VS::PRESENT_MODE_FIFO_STRICT) != VS::PRESENT_MODE_FIFO_STRICT)
+			continue;
+
+		if ((deviceSurfaceSupport.surfaceSupportedTransformations & VS::SURFACE_TRASFORM_IDENTITY) != VS::SURFACE_TRASFORM_IDENTITY)
+			continue;
+
+		if (deviceSurfaceSupport.surfaceDefaultTransformation != VS::SURFACE_TRASFORM_IDENTITY)
 			continue;
 
 		auto& surfaceSupport = deviceSurfaceSupport.surfaceSupportedSwapchainFormats;

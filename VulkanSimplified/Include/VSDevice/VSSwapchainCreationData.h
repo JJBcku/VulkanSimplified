@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../VSCommon/VSSurfacePresentModes.h"
+#include "../VSCommon/VSSurfaceTransformFlags.h"
 #include "../VSCommon/VSDataFormatFlags.h"
 
 #include <vector>
@@ -10,6 +11,7 @@ namespace VulkanSimplified
 {
 	struct SwapchainCreationData
 	{
+		SurfaceTransformFlagBits surfaceTranformMode;
 		SurfacePresentModeBits surfacePresentMode;
 		DataFormatSetIndependentID format;
 

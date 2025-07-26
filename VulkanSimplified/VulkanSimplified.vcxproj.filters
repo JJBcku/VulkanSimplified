@@ -631,6 +631,9 @@
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineCache.cpp">
       <Filter>Source Files\DoNotInclude\VSDevice</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSSurfaceTransformFlagsInternal.cpp">
+      <Filter>Source Files\DoNotInclude\VsCommon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIframework.h">
@@ -1499,6 +1502,15 @@
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSWindowDef.h">
       <Filter>Header Files\Include\VSDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSSurfaceTransformFlagsInternal.h">
+      <Filter>Header Files\DoNotInclude\VSCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlags.h">
+      <Filter>Header Files\Include\VSCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlagsDef.h">
+      <Filter>Header Files\Include\VSCommon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -69,6 +69,7 @@ void CreateDeviceDependentData(VulkanData& data)
 
 	VS::SwapchainCreationData swapchainCreationData;
 
+	swapchainCreationData.surfaceTranformMode = VS::SURFACE_TRASFORM_IDENTITY;
 	swapchainCreationData.surfacePresentMode = VS::PRESENT_MODE_FIFO_STRICT;
 	swapchainCreationData.format = data.instanceDependentData->supportedColorFormat;
 

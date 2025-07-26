@@ -82,6 +82,7 @@ namespace VulkanSimplified
 		VkSurfaceKHR _surface;
 		VkSurfaceCapabilitiesKHR _surfaceCapabilities;
 
+		VkSurfaceTransformFlagBitsKHR _transformMode;
 		VkPresentModeKHR _presentMode;
 		VkFormat _format;
 		VkSwapchainCreateFlagsKHR _swapchainFlags;

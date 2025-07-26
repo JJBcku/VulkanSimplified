@@ -20,6 +20,8 @@ namespace VulkanSimplified
 		maxImageCount = 0;
 
 		surfaceUsageFlags = 0;
+		surfaceSupportedTransformations = 0;
+		surfaceDefaultTransformation = static_cast<SurfaceTransformFlagBits>(0);
 		surfacePresentModes = 0;
 	}
 
