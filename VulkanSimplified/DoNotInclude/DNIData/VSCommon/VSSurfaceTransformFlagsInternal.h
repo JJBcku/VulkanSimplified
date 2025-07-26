@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Include/VSCommon/VSSurfaceTransformFlagsDef.h"
+#include "../../../Include/VSCommon/VSSurfaceTransformFlags.h"
 
 namespace VulkanSimplified
 {

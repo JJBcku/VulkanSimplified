@@ -9,7 +9,6 @@
 
 #include "../../../Include/VSCommon/VSImageUsageFlags.h"
 #include "../../../Include/VSCommon/VSSurfacePresentModes.h"
-#include "../../../Include/VSCommon/VSSurfaceTransformFlags.h"
 
 #include "../../../Include/VSInstance/VSDeviceVulkan10FeatureFlags.h"
 

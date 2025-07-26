@@ -1,8 +1,6 @@
 #include "VSCommonDNIpch.h"
 #include "VSSurfaceTransformFlagsInternal.h"
 
-#include "../../../Include/VSCommon/VSSurfaceTransformFlags.h"
-
 namespace VulkanSimplified
 {
 	VkSurfaceTransformFlagBitsKHR TranslateSurfaceTransformFlag(SurfaceTransformFlagBits transformFlag)
