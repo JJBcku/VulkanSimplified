@@ -33,9 +33,6 @@ namespace VulkanSimplified
 		case VulkanSimplified::SURFACE_TRASFORM_HORIZONTAL_MIRROR_ROTATE_270:
 			ret = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR;
 			break;
-		case VulkanSimplified::SURFACE_TRASFORM_INHERIT:
-			ret = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR;
-			break;
 		default:
 			break;
 		}
@@ -74,7 +71,6 @@ namespace VulkanSimplified
 			ret = SURFACE_TRASFORM_HORIZONTAL_MIRROR_ROTATE_270;
 			break;
 		case VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR:
-			ret = SURFACE_TRASFORM_INHERIT;
 			break;
 		case VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR:
 			break;
