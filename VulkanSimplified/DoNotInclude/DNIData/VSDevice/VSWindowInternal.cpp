@@ -49,10 +49,10 @@ namespace VulkanSimplified
 			flags |= SDL_WINDOW_RESIZABLE;
 			break;
 		case WindowSettings::BORDERLESS:
-			flags |= SDL_WINDOW_BORDERLESS;
+			flags |= SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
 			break;
 		case WindowSettings::FULLSCREEN_NONEXCLUSIVE:
-			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
 			break;
 		default:
 			throw std::runtime_error("WindowInternal::WindowInternal Error: Erroneous window creation settings!");
