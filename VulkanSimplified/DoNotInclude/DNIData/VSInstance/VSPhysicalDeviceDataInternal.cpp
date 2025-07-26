@@ -1492,7 +1492,7 @@ namespace VulkanSimplified
 					if (formatData.format == VK_FORMAT_R16G16B16A16_SNORM)
 						srgb.fifthSet |= DATA_FORMAT_RGBA16_SNORM;
 
-					if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
+					if (formatData.format == VK_FORMAT_R16G16B16A16_UNORM)
 						srgb.fifthSet |= DATA_FORMAT_RGBA16_UNORM;
 
 					if (formatData.format == VK_FORMAT_R4G4B4A4_UNORM_PACK16)
