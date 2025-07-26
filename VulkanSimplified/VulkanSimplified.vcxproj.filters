@@ -634,6 +634,7 @@
     <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSSurfaceTransformFlagsInternal.cpp">
       <Filter>Source Files\DoNotInclude\VsCommon</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSCompositeAlphaFlagsInternal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIframework.h">
@@ -1512,6 +1513,9 @@
     <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlagsDef.h">
       <Filter>Header Files\Include\VSCommon</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSCompositeAlphaFlagsDef.h" />
+    <ClInclude Include="Include\VSCommon\VSCompositeAlphaFlags.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCompositeAlphaFlagsInternal.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

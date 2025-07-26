@@ -34,7 +34,7 @@ namespace VulkanSimplified
 		_surface = VK_NULL_HANDLE;
 		_surfaceCapabilities = {};
 
-
+		_compositeAlphaMode = VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR;
 		_transformMode = VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR;
 		_presentMode = VK_PRESENT_MODE_MAX_ENUM_KHR;
 		_format = VK_FORMAT_MAX_ENUM;
@@ -96,6 +96,7 @@ namespace VulkanSimplified
 				DestroySwapchain();
 		}
 
+		_compositeAlphaMode = TranslateCompositeAlpha(creationData.compositeAlphaMode);
 		_transformMode = TranslateSurfaceTransformFlag(creationData.surfaceTranformMode);
 		_presentMode = TranslateToPresentMode(creationData.surfacePresentMode);
 		_format = TranslateDataFormatToVkFormat(creationData.format);
@@ -221,7 +222,7 @@ namespace VulkanSimplified
 		}
 
 		createInfo.preTransform = _transformMode;
-		createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+		createInfo.compositeAlpha = _compositeAlphaMode;
 		createInfo.presentMode = _presentMode;
 		createInfo.clipped = VK_TRUE;
 

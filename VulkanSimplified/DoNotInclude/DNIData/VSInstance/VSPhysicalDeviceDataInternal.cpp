@@ -7,6 +7,7 @@
 #include "../VSCommon/VSCStringsComparison.h"
 #include "../VSCommon/VSSurfaceTransformFlagsInternal.h"
 
+#include "../../../Include/VSCommon/VSCompositeAlphaFlags.h"
 #include "../../../Include/VSCommon/VSImageUsageFlags.h"
 #include "../../../Include/VSCommon/VSSurfacePresentModes.h"
 
@@ -1360,6 +1361,17 @@ namespace VulkanSimplified
 
 			if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT) == VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT)
 				data.surfaceUsageFlags |= IMAGE_USAGE_INPUT_ATTACHMENT;
+		}
+
+		{
+			if ((surfaceCapabilities.supportedCompositeAlpha & VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR) == VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR)
+				data.surfaceSupportedCompositeAlphaModes |= COMPOSITE_ALPHA_OPAQUE;
+
+			if ((surfaceCapabilities.supportedCompositeAlpha & VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR) == VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR)
+				data.surfaceSupportedCompositeAlphaModes |= COMPOSITE_ALPHA_PRE_MULTIPLIED;
+
+			if ((surfaceCapabilities.supportedCompositeAlpha & VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR) == VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR)
+				data.surfaceSupportedCompositeAlphaModes |= COMPOSITE_ALPHA_POST_MULTIPLIED;
 		}
 
 		{

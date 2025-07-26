@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../VSCommon/VSCompositeAlphaFlagsDef.h"
 #include "../VSCommon/VSImageUsageFlagsDef.h"
 #include "../VSCommon/VSDataFormatFlags.h"
 #include "../VSCommon/VSSurfacePresentModesDef.h"
@@ -28,6 +29,7 @@ namespace VulkanSimplified
 		uint32_t maxImageCount;
 
 		ImageUsageFlags surfaceUsageFlags;
+		CompositeAlphaFlags surfaceSupportedCompositeAlphaModes;
 		SurfaceTransformFlags surfaceSupportedTransformations;
 		SurfaceTransformFlagBits surfaceDefaultTransformation;
 		SurfacePresentModes surfacePresentModes;

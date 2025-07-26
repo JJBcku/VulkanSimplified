@@ -13,6 +13,7 @@
 #include <VSMain.h>
 #include <VSInstance.h>
 
+#include <VSCompositeAlphaFlags.h>
 #include <VSImageUsageFlags.h>
 #include <VSSurfacePresentModes.h>
 #include <VSSurfaceTransformFlags.h>
@@ -68,6 +69,9 @@ static size_t ChooseGPU(VS::Instance& instance)
 		auto& deviceSurfaceSupport = deviceSurfaceSupportOptional.value();
 
 		if ((deviceSurfaceSupport.surfaceUsageFlags & VS::IMAGE_USAGE_TRANSFER_DST) != VS::IMAGE_USAGE_TRANSFER_DST)
+			continue;
+
+		if ((deviceSurfaceSupport.surfaceSupportedCompositeAlphaModes & VS::COMPOSITE_ALPHA_OPAQUE) != VS::COMPOSITE_ALPHA_OPAQUE)
 			continue;
 
 		if ((deviceSurfaceSupport.surfacePresentModes & VS::PRESENT_MODE_FIFO_STRICT) != VS::PRESENT_MODE_FIFO_STRICT)

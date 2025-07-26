@@ -120,6 +120,7 @@
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSAccessFlagsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCommonDNIframework.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCommonDNIpch.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCompositeAlphaFlagsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSCStringsComparison.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSDataFormatFlagsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSCommon\VSDescriptorTypeFlagsInternal.h" />
@@ -202,6 +203,8 @@
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIframework.h" />
     <ClInclude Include="DoNotInclude\ICode\VSCommon\VsCommonIpch.h" />
     <ClInclude Include="Include\VSCommon\VSCompareOperationsTypeDef.h" />
+    <ClInclude Include="Include\VSCommon\VSCompositeAlphaFlags.h" />
+    <ClInclude Include="Include\VSCommon\VSCompositeAlphaFlagsDef.h" />
     <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlags.h" />
     <ClInclude Include="Include\VSCommon\VSSurfaceTransformFlagsDef.h" />
     <ClInclude Include="Include\VSDevice\VSCommandBufferBaseDef.h" />
@@ -424,6 +427,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSCompositeAlphaFlagsInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSCommonDNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSCommon\VSDescriptorTypeFlagsInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSCommonDNIpch.h</PrecompiledHeaderFile>
