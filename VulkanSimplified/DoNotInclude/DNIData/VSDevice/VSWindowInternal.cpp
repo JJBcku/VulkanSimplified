@@ -4,6 +4,7 @@
 #include "../../../Include/VSDevice/VSWindowCreationData.h"
 #include "../../../Include/VSDevice/VSSwapchainCreationData.h"
 
+#include "../VSCommon/VSCompositeAlphaFlagsInternal.h"
 #include "../VSCommon/VSDataFormatFlagsInternal.h"
 #include "../VSCommon/VSSurfaceTransformFlagsInternal.h"
 
@@ -32,6 +33,7 @@ namespace VulkanSimplified
 
 		_surface = VK_NULL_HANDLE;
 		_surfaceCapabilities = {};
+
 
 		_transformMode = VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR;
 		_presentMode = VK_PRESENT_MODE_MAX_ENUM_KHR;
@@ -218,7 +220,7 @@ namespace VulkanSimplified
 			createInfo.pQueueFamilyIndices = _queueFamilies.data();
 		}
 
-		createInfo.preTransform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR;
+		createInfo.preTransform = _transformMode;
 		createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 		createInfo.presentMode = _presentMode;
 		createInfo.clipped = VK_TRUE;
