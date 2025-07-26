@@ -2,7 +2,7 @@
 
 #include <CustomLists/IDObject.h>
 
-#include "../../../Include/VSDevice/VSDescriptorDataListDef.h"
+#include "../../../Include/VSDevice/VSDescriptorDataListsDef.h"
 
 #include <vector>
 #include <stdint.h>

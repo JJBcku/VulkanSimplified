@@ -3,7 +3,7 @@
 #include <CustomLists/IDObject.h>
 
 #include <VSPipelineDataListsDef.h>
-#include <VSDescriptorDataListDef.h>
+#include <VSDescriptorDataListsDef.h>
 
 struct VulkanPipelineData
 {

@@ -2,7 +2,7 @@
 
 #include "../../../Include/VSCommon/VSDescriptorTypeFlagsDef.h"
 
-#include "../../../Include/VSDevice/VSDescriptorDataListDef.h"
+#include "../../../Include/VSDevice/VSDescriptorDataListsDef.h"
 #include "../../../Include/VSDevice/VSImageDataListsDef.h"
 
 #include <CustomLists/UnsortedIDVector.h>

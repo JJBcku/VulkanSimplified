@@ -867,7 +867,7 @@
     <ClInclude Include="Include\VSSharedData\VSDepthUsage.h">
       <Filter>Header Files\Include\VSSharedData</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSDevice\VSDescriptorDataListDef.h">
+    <ClInclude Include="Include\VSDevice\VSDescriptorDataListsDef.h">
       <Filter>Header Files\Include\VSDevice</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSDevice\VSDescriptorDataLists.h">
@@ -1476,6 +1476,14 @@
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSAutoCleanupPipelineCache.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
     </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDeviceCoreDef.h" />
+    <ClInclude Include="Include\VSDevice\VSDeviceMainDef.h" />
+    <ClInclude Include="Include\VSDevice\VSCommandBufferBaseDef.h" />
+    <ClInclude Include="Include\VSDevice\VSPrimaryIRCommandBufferDef.h" />
+    <ClInclude Include="Include\VSDevice\VSPrimaryNIRCommandBufferDef.h" />
+    <ClInclude Include="Include\VSDevice\VSSecondaryIRCommandBufferDef.h" />
+    <ClInclude Include="Include\VSDevice\VSSecondaryNIRCommandBufferDef.h" />
+    <ClInclude Include="Include\VSDevice\VSWindowDef.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

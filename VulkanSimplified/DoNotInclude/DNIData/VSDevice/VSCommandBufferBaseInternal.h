@@ -4,7 +4,7 @@
 
 #include "../../../Include/VSDevice/VSPipelineDataListsDef.h"
 #include "../../../Include/VSDevice/VSDataBufferListsDef.h"
-#include "../../../Include/VSDevice/VSDescriptorDataListDef.h"
+#include "../../../Include/VSDevice/VSDescriptorDataListsDef.h"
 #include "../../../Include/VSDevice/VSImageDataListsDef.h"
 #include "../../../Include/VSDevice/VSSynchronizationDataListsDef.h"
 #include "../../../Include/VSDevice/VSWindowListDef.h"

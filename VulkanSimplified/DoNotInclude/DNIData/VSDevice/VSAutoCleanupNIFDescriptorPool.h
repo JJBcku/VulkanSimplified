@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Include/VSDevice/VSDescriptorDataListDef.h"
+#include "../../../Include/VSDevice/VSDescriptorDataListsDef.h"
 
 #include <CustomLists/UnsortedIDVector.h>
 

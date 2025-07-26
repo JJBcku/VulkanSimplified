@@ -7,6 +7,8 @@
 
 namespace VulkanSimplified
 {
+	class DescriptorDataLists;
+
 	class AutoCleanupDescriptorSetLayout;
 
 	class AutoCleanupNIFDescriptorPool;
