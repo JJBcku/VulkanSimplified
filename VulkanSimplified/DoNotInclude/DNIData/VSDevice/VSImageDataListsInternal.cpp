@@ -37,7 +37,7 @@ namespace VulkanSimplified
 	}
 
 	IDObject<AutoCleanupColorRenderTargetImage> ImageDataListsInternal::AddColorRenderTargetImage(uint32_t width, uint32_t height, DataFormatSetIndependentID format,
-		ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+		ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, bool transient, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
 		VkImageCreateInfo createInfo{};
@@ -55,7 +55,12 @@ namespace VulkanSimplified
 		createInfo.samples = TranslateImageSampleFlagBits(imageSamples);
 		createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
 
-		createInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+		createInfo.usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+
+		if (transient)
+			createInfo.usage |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
+		else
+			createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
 
 		std::vector<uint32_t> queueFamilies;
 
@@ -91,7 +96,7 @@ namespace VulkanSimplified
 	}
 
 	IDObject<AutoCleanupDepthStencilRenderTargetImage> ImageDataListsInternal::AddDepthStencilRenderTargetImage(uint32_t width, uint32_t height,
-		DataFormatSetIndependentID format, ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized,
+		DataFormatSetIndependentID format, ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, bool transient,
 		size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
@@ -110,7 +115,12 @@ namespace VulkanSimplified
 		createInfo.samples = TranslateImageSampleFlagBits(imageSamples);
 		createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
 
-		createInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+		createInfo.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+
+		if (transient)
+			createInfo.usage |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
+		else
+			createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
 
 		std::vector<uint32_t> queueFamilies;
 
@@ -146,7 +156,7 @@ namespace VulkanSimplified
 	}
 
 	IDObject<AutoCleanupResolveRenderTargetImage> ImageDataListsInternal::AddResolveRenderTargetImage(uint32_t width, uint32_t height,
-		DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity,
+		DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, bool transient, size_t initialImageViewListCapacity,
 		size_t addOnReserving)
 	{
 		VkImage image = VK_NULL_HANDLE;
@@ -165,7 +175,12 @@ namespace VulkanSimplified
 		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 		createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
 
-		createInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+		createInfo.usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+
+		if (transient)
+			createInfo.usage |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
+		else
+			createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
 
 		std::vector<uint32_t> queueFamilies;
 

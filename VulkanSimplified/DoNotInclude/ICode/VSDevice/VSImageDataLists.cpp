@@ -17,22 +17,23 @@ namespace VulkanSimplified
 	}
 
 	IDObject<AutoCleanupColorRenderTargetImage> ImageDataLists::AddColorRenderTargetImage(uint32_t width, uint32_t height, DataFormatSetIndependentID format,
-		ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+		ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage, bool preInitialized, bool transient, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
-		return _internal.AddColorRenderTargetImage(width, height, format, imageSamples, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
+		return _internal.AddColorRenderTargetImage(width, height, format, imageSamples, queuesUsingImage, preInitialized, transient, initialImageViewListCapacity, addOnReserving);
 	}
 
 	IDObject<AutoCleanupDepthStencilRenderTargetImage> ImageDataLists::AddDepthStencilRenderTargetImage(uint32_t width, uint32_t height,
 		DataFormatSetIndependentID format, ImageSampleFlagBits imageSamples, const std::vector<size_t>& queuesUsingImage,
-		bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+		bool preInitialized, bool transient, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
-		return _internal.AddDepthStencilRenderTargetImage(width, height, format, imageSamples, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
+		return _internal.AddDepthStencilRenderTargetImage(width, height, format, imageSamples, queuesUsingImage, preInitialized, transient, initialImageViewListCapacity,
+			addOnReserving);
 	}
 
 	IDObject<AutoCleanupResolveRenderTargetImage> ImageDataLists::AddResolveRenderTargetImage(uint32_t width, uint32_t height,
-		DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+		DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, bool transient, size_t initialImageViewListCapacity, size_t addOnReserving)
 	{
-		return _internal.AddResolveRenderTargetImage(width, height, format, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
+		return _internal.AddResolveRenderTargetImage(width, height, format, queuesUsingImage, preInitialized, transient, initialImageViewListCapacity, addOnReserving);
 	}
 
 	IDObject<AutoCleanup2DTexture> ImageDataLists::Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)

@@ -97,8 +97,6 @@ void CreateMemoryData(VulkanData& data)
 	
 	memData.colorRenderTargetImages.reserve(framesInFlight);
 	memData.colorRenderTargetImageViews.reserve(framesInFlight);
-	memData.depthRenderTargetImages.reserve(framesInFlight);
-	memData.depthRenderTargetImageViews.reserve(framesInFlight);
 	memData.framebuffers.reserve(framesInFlight);
 
 	using VS::ImageSampleFlagBits;
@@ -108,29 +106,33 @@ void CreateMemoryData(VulkanData& data)
 		memData.resolveRenderTargetImageViews.reserve(framesInFlight);
 	}
 
+	memData.depthRenderTargetImages = imageList.AddDepthStencilRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedDepthFormat,
+		data.instanceDependentData->maxSamples, {}, false, 1, true, framesInFlight);
+
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedColorFormat,
-			data.instanceDependentData->maxSamples, {}, false, 1, framesInFlight));
-		memData.depthRenderTargetImages.push_back(imageList.AddDepthStencilRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedDepthFormat,
-			data.instanceDependentData->maxSamples, {}, false, 1, framesInFlight));
-
 		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 		{
+			memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedColorFormat,
+				data.instanceDependentData->maxSamples, {}, false, 1, true, framesInFlight));
 			memData.resolveRenderTargetImages.push_back(imageList.AddResolveRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedColorFormat,
-				{}, false, 1, framesInFlight));
+				{}, false, false, 1, framesInFlight));
+		}
+		else
+		{
+			memData.colorRenderTargetImages.push_back(imageList.AddColorRenderTargetImage(swapchainWidth, swapchainHeight, data.instanceDependentData->supportedColorFormat,
+				data.instanceDependentData->maxSamples, {}, false, 1, false, framesInFlight));
 		}
 	}
 
 	VS::MemorySize allocationSize = imageList.GetColorRenderTargetImagesSize(memData.colorRenderTargetImages.back());
-	allocationSize += imageList.GetDepthStencilRenderTargetImagesSize(memData.depthRenderTargetImages.back());
-	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
-		allocationSize += imageList.GetResolveRenderTargetImagesSize(memData.resolveRenderTargetImages.back());
 	allocationSize *= framesInFlight;
+
 	uint32_t memoryTypeMask = imageList.GetColorRenderTargetImagesMemoryTypeMask(memData.colorRenderTargetImages.back());
 
 	std::vector<VS::MemoryTypeProperties> acceptableMemoryTypes;
-	acceptableMemoryTypes.reserve(7);
+	acceptableMemoryTypes.reserve(8);
+	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::LAZILY_ALLOCATED);
 	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL);
 	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_VISIBLE | VS::HOST_CACHED);
 	acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
@@ -139,21 +141,46 @@ void CreateMemoryData(VulkanData& data)
 	acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
 	acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
 
-	memData.imageMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 4);
+	memData.colorMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 0x10);
+
+	allocationSize = imageList.GetDepthStencilRenderTargetImagesSize(memData.depthRenderTargetImages);
+	memoryTypeMask = imageList.GetDepthStencilRenderTargetImagesMemoryTypeMask(memData.depthRenderTargetImages);
+
+	memData.depthMemoryAllocation = memoryList.AllocateMemory(allocationSize, 1, acceptableMemoryTypes, memoryTypeMask, 0x10);
+
+
+	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
+	{
+		allocationSize = imageList.GetResolveRenderTargetImagesSize(memData.resolveRenderTargetImages.back());
+		allocationSize *= framesInFlight;
+
+		memoryTypeMask = imageList.GetResolveRenderTargetImagesMemoryTypeMask(memData.resolveRenderTargetImages.back());
+
+		acceptableMemoryTypes.clear();
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::DEVICE_LOCAL | VS::HOST_COHERENT | VS::HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE | VS::HOST_CACHED);
+		acceptableMemoryTypes.push_back(VS::HOST_COHERENT | VS::HOST_VISIBLE);
+
+		memData.resolveMemoryAllocation = memoryList.AllocateMemory(allocationSize, framesInFlight, acceptableMemoryTypes, memoryTypeMask, 0x10);
+	}
 
 	size_t stagingBufferSize = 0;
 
+	imageList.BindDepthStencilRenderTargetImage(memData.depthRenderTargetImages, memData.depthMemoryAllocation);
+	memData.depthRenderTargetImageViews = (imageList.AddDepthStencilRenderTargetImageView(memData.depthRenderTargetImages));
+
 	for (size_t i = 0; i < framesInFlight; ++i)
 	{
-		imageList.BindColorRenderTargetImage(memData.colorRenderTargetImages[i], memData.imageMemoryAllocation);
+		imageList.BindColorRenderTargetImage(memData.colorRenderTargetImages[i], memData.colorMemoryAllocation);
 		memData.colorRenderTargetImageViews.push_back(imageList.AddColorRenderTargetImageView(memData.colorRenderTargetImages[i]));
-
-		imageList.BindDepthStencilRenderTargetImage(memData.depthRenderTargetImages[i], memData.imageMemoryAllocation);
-		memData.depthRenderTargetImageViews.push_back(imageList.AddDepthStencilRenderTargetImageView(memData.depthRenderTargetImages[i]));
 
 		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 		{
-			imageList.BindResolveRenderTargetImage(memData.resolveRenderTargetImages[i], memData.imageMemoryAllocation);
+			imageList.BindResolveRenderTargetImage(memData.resolveRenderTargetImages[i], memData.resolveMemoryAllocation);
 			memData.resolveRenderTargetImageViews.push_back(imageList.AddResolveRenderTargetImageView(memData.resolveRenderTargetImages[i]));
 		}
 
@@ -170,8 +197,8 @@ void CreateMemoryData(VulkanData& data)
 
 		attachments[0].first = memData.colorRenderTargetImages[i];
 		attachments[0].second = memData.colorRenderTargetImageViews[i];
-		attachments[1].first = memData.depthRenderTargetImages[i];
-		attachments[1].second = memData.depthRenderTargetImageViews[i];
+		attachments[1].first = memData.depthRenderTargetImages;
+		attachments[1].second = memData.depthRenderTargetImageViews;
 
 		if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 		{

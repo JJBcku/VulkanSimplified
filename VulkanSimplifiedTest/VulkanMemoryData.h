@@ -9,11 +9,13 @@
 
 struct VulkanMemoryData
 {
-	VS::MemoryAllocationFullID imageMemoryAllocation;
+	VS::MemoryAllocationFullID colorMemoryAllocation;
+	VS::MemoryAllocationFullID depthMemoryAllocation;
+	VS::MemoryAllocationFullID resolveMemoryAllocation;
 	std::vector<IDObject<VS::AutoCleanupColorRenderTargetImage>> colorRenderTargetImages;
 	std::vector<IDObject<VS::AutoCleanupImageView>> colorRenderTargetImageViews;
-	std::vector<IDObject<VS::AutoCleanupDepthStencilRenderTargetImage>> depthRenderTargetImages;
-	std::vector<IDObject<VS::AutoCleanupImageView>> depthRenderTargetImageViews;
+	IDObject<VS::AutoCleanupDepthStencilRenderTargetImage> depthRenderTargetImages;
+	IDObject<VS::AutoCleanupImageView> depthRenderTargetImageViews;
 	std::vector<IDObject<VS::AutoCleanupResolveRenderTargetImage>> resolveRenderTargetImages;
 	std::vector<IDObject<VS::AutoCleanupImageView>> resolveRenderTargetImageViews;
 

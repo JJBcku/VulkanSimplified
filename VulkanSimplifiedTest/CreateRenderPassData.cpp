@@ -40,7 +40,7 @@ void CreateRenderPassData(VulkanData& data)
 	{
 		renderPassData.renderPassAttachments.push_back(sharedRenderPassData.AddRenderPassAttachment(format, data.instanceDependentData->maxSamples,
 			VS::RenderPassAttachmentLoadOP::CLEAR, VS::RenderPassAttachmentStoreOP::IGNORE, VS::ImageLayoutFlags::UNDEFINED,
-			VS::ImageLayoutFlags::TRANSFER_SOURCE));
+			VS::ImageLayoutFlags::COLOR_ATTACHMENT));
 	}
 	else
 	{
