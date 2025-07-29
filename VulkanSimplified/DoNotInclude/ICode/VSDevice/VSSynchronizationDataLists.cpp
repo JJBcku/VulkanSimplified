@@ -33,4 +33,14 @@ namespace VulkanSimplified
 		return _internal.AddSemaphore(addOnReserving);
 	}
 
+	bool SynchronizationDataLists::RemoveFence(IDObject<AutoCleanupFence> fenceID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveFence(fenceID, throwOnIDNotFound);
+	}
+
+	bool SynchronizationDataLists::RemoveSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID, bool throwOnIDNotFound)
+	{
+		return _internal.RemoveSemaphore(semaphoreID, throwOnIDNotFound);
+	}
+
 }

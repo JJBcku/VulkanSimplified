@@ -100,4 +100,15 @@ namespace VulkanSimplified
 	{
 		return _semaphoreList.GetConstObject(semaphoreID).GetSemaphore();
 	}
+
+	bool SynchronizationDataListsInternal::RemoveFence(IDObject<AutoCleanupFence> fenceID, bool throwOnIDNotFound)
+	{
+		return _fenceList.RemoveObject(fenceID, throwOnIDNotFound);
+	}
+
+	bool SynchronizationDataListsInternal::RemoveSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID, bool throwOnIDNotFound)
+	{
+		return _semaphoreList.RemoveObject(semaphoreID, throwOnIDNotFound);
+	}
+
 }

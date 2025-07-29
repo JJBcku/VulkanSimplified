@@ -38,6 +38,9 @@ namespace VulkanSimplified
 		IDObject<AutoCleanupSemaphore> AddSemaphore(size_t addOnReserving);
 		VkSemaphore GetSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID) const;
 
+		bool RemoveFence(IDObject<AutoCleanupFence> fenceID, bool throwOnIDNotFound);
+		bool RemoveSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID, bool throwOnIDNotFound);
+
 	private:
 		VkDevice _device;
 
