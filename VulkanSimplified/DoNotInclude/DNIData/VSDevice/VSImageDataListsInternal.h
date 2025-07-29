@@ -11,6 +11,8 @@
 
 #include "../../../Include/VSDevice/VSImageDataListsDef.h"
 
+#include <Miscellaneous/Bool64Def.h>
+
 #include <vulkan/vulkan_core.h>
 #include <stdint.h>
 #include <vector>
@@ -158,5 +160,10 @@ namespace VulkanSimplified
 
 		UnsortedIDVector<AutoCleanupFramebuffer> _framebufferList;
 		UnsortedIDVector<AutoCleanupSampler> _samplerList;
+
+		Misc::Bool64Values FormatHasDepthANDStencilComponents(DataFormatSetIndependentID format) const;
+		Misc::Bool64Values FormatHasDepthORStencilComponents(DataFormatSetIndependentID format) const;
+		Misc::Bool64Values FormatHasDepthComponent(DataFormatSetIndependentID format) const;
+		Misc::Bool64Values FormatHasStencilComponent(DataFormatSetIndependentID format) const;
 	};
 }

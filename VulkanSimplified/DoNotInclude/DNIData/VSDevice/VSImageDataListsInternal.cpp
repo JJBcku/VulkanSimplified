@@ -21,6 +21,8 @@
 #include "../VSCommon/VSImageUsageFlagsInternal.h"
 #include "../VSCommon/VSImageSampleFlagsInternal.h"
 
+#include <Miscellaneous/Bool64.h>
+
 namespace VulkanSimplified
 {
 	ImageDataListsInternal::ImageDataListsInternal(const DeviceCoreInternal& deviceCore, const RenderPassListInternal& renderPassData, MemoryObjectsListInternal& memoryList,
@@ -103,6 +105,9 @@ namespace VulkanSimplified
 		VkImageCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
 
+		if (FormatHasDepthORStencilComponents(format) != Misc::BOOL64_TRUE)
+			throw std::runtime_error("ImageDataListsInternal::AddDepthStencilRenderTargetImage Error: Program tried to create depth stencil image with a wrong format!");
+
 		createInfo.imageType = VK_IMAGE_TYPE_2D;
 		createInfo.format = TranslateDataFormatToVkFormat(format);
 
@@ -152,7 +157,7 @@ namespace VulkanSimplified
 			throw std::runtime_error("ImageDataListsInternal::AddDepthStencilRenderTargetImage Error: Program failed to create an image!");
 
 		return _depthStencilRenderTargetList.AddObject(AutoCleanupDepthStencilRenderTargetImage(_device, image, width, height, createInfo.format, createInfo.samples,
-			initialImageViewListCapacity), addOnReserving);
+			FormatHasDepthComponent(format), FormatHasStencilComponent(format), initialImageViewListCapacity), addOnReserving);
 	}
 
 	IDObject<AutoCleanupResolveRenderTargetImage> ImageDataListsInternal::AddResolveRenderTargetImage(uint32_t width, uint32_t height,
@@ -786,6 +791,62 @@ namespace VulkanSimplified
 		}
 
 		return ret;
+	}
+
+	Misc::Bool64Values ImageDataListsInternal::FormatHasDepthANDStencilComponents(DataFormatSetIndependentID format) const
+	{
+		if (FormatHasDepthComponent(format) != Misc::BOOL64_TRUE)
+			return Misc::BOOL64_FALSE;
+
+		return FormatHasStencilComponent(format);
+	}
+
+	Misc::Bool64Values ImageDataListsInternal::FormatHasDepthORStencilComponents(DataFormatSetIndependentID format) const
+	{
+		if (FormatHasDepthComponent(format) == Misc::BOOL64_TRUE)
+			return Misc::BOOL64_TRUE;
+
+		return FormatHasStencilComponent(format);
+	}
+
+	Misc::Bool64Values ImageDataListsInternal::FormatHasDepthComponent(DataFormatSetIndependentID format) const
+	{
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D16_UNORM))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D16_UNORM_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D24_UNORM_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D32_SFLOAT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D32_SFLOAT_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_X8D24_UNORM_PACK32))
+			return Misc::BOOL64_TRUE;
+
+		return Misc::BOOL64_FALSE;
+	}
+
+	Misc::Bool64Values ImageDataListsInternal::FormatHasStencilComponent(DataFormatSetIndependentID format) const
+	{
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D16_UNORM_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D24_UNORM_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_D32_SFLOAT_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		if (format == DataFormatSetIndependentID(DATA_FORMAT_S8_UINT))
+			return Misc::BOOL64_TRUE;
+
+		return Misc::BOOL64_FALSE;
 	}
 
 }
