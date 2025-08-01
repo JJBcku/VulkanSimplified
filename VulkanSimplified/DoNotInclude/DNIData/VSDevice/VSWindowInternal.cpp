@@ -304,7 +304,7 @@ namespace VulkanSimplified
 			_quit = true;
 			break;
 		default:
-			break;
+			return true;
 		}
 
 		return false;
