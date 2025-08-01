@@ -277,30 +277,30 @@ namespace VulkanSimplified
 
 		switch (event.event)
 		{
-		case SDL_WINDOWEVENT_SHOWN:
+		case SDL_DATA_WINDOWEVENT_SHOWN:
 			_hidden = false;
 			break;
-		case SDL_WINDOWEVENT_HIDDEN:
+		case SDL_DATA_WINDOWEVENT_HIDDEN:
 			_hidden = true;
 			break;
-		case SDL_WINDOWEVENT_RESIZED:
+		case SDL_DATA_WINDOWEVENT_RESIZED:
 			if (_swapchain != VK_NULL_HANDLE)
 				ReCreateSwapchain();
 			break;
-		case SDL_WINDOWEVENT_SIZE_CHANGED:
+		case SDL_DATA_WINDOWEVENT_SIZE_CHANGED:
 			if (_swapchain != VK_NULL_HANDLE)
 				ReCreateSwapchain();
 			break;
-		case SDL_WINDOWEVENT_MINIMIZED:
+		case SDL_DATA_WINDOWEVENT_MINIMIZED:
 			_minimized = true;
 			break;
-		case SDL_WINDOWEVENT_MAXIMIZED:
+		case SDL_DATA_WINDOWEVENT_MAXIMIZED:
 			_minimized = false;
 			break;
-		case SDL_WINDOWEVENT_RESTORED:
+		case SDL_DATA_WINDOWEVENT_RESTORED:
 			_minimized = false;
 			break;
-		case SDL_WINDOWEVENT_CLOSE:
+		case SDL_DATA_WINDOWEVENT_CLOSE:
 			_quit = true;
 			break;
 		default:
