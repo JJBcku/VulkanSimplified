@@ -197,6 +197,8 @@ namespace VulkanSimplified
 
 	void WindowInternal::ReCreateSwapchain()
 	{
+		vkDeviceWaitIdle(_device);
+
 		DestroySwapchain();
 
 		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_physicalDevice, _surface, &_surfaceCapabilities);
