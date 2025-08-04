@@ -48,4 +48,9 @@ namespace VulkanSimplified
 		return _internal.GetHeight();
 	}
 
+	void Window::SetFullscreen(Misc::Bool64Values newFullscreenValue)
+	{
+		_internal.SetFullscreen(newFullscreenValue);
+	}
+
 }

@@ -14,6 +14,8 @@
 
 #include "../VSMain/EventHandler/SdlEventHandlerInternal.h"
 
+#include <Miscellaneous/Bool64.h>
+
 namespace VulkanSimplified
 {
 	WindowInternal::WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
@@ -45,18 +47,24 @@ namespace VulkanSimplified
 
 		Uint32 flags = SDL_WINDOW_VULKAN;
 
+		_isBorderlessNoFullscreen = Misc::BOOL64_FALSE;
+
 		switch (creationData.settings)
 		{
 		case WindowSettings::STANDARD:
 			break;
 		case WindowSettings::RESIZABLE:
 			flags |= SDL_WINDOW_RESIZABLE;
+			_isFullscreen = Misc::BOOL64_FALSE;
 			break;
 		case WindowSettings::BORDERLESS:
 			flags |= SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
+			_isBorderlessNoFullscreen = Misc::BOOL64_TRUE;
+			_isFullscreen = Misc::BOOL64_FALSE;
 			break;
 		case WindowSettings::FULLSCREEN_NONEXCLUSIVE:
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
+			_isFullscreen = Misc::BOOL64_TRUE;
 			break;
 		default:
 			throw std::runtime_error("WindowInternal::WindowInternal Error: Erroneous window creation settings!");
@@ -168,6 +176,32 @@ namespace VulkanSimplified
 	uint32_t WindowInternal::GetHeight() const
 	{
 		return _surfaceCapabilities.currentExtent.height;
+	}
+
+	void WindowInternal::SetFullscreen(Misc::Bool64Values newFullscreenValue)
+	{
+		if (_isFullscreen == newFullscreenValue)
+			return;
+
+		vkDeviceWaitIdle(_device);
+
+		if (newFullscreenValue == Misc::BOOL64_TRUE)
+		{
+			if (_isBorderlessNoFullscreen == Misc::BOOL64_FALSE)
+				SDL_SetWindowResizable(_window, SDL_TRUE);
+			SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		}
+		else if (newFullscreenValue == Misc::BOOL64_FALSE)
+		{
+			if (_isBorderlessNoFullscreen == Misc::BOOL64_FALSE)
+				SDL_SetWindowResizable(_window, SDL_FALSE);
+			SDL_SetWindowFullscreen(_window, 0);
+		}
+		else
+			throw std::runtime_error("WindowInternal::SetFullscreen Error: Function was given an erroneous new fullscrenn value!");
+
+		_isFullscreen = newFullscreenValue;
+		ReCreateSwapchain();
 	}
 
 	bool WindowInternal::HandleWindowEventStatic(const SdlWindowEventData& event, void* windowptr)

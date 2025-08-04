@@ -4,6 +4,7 @@
 
 #include "../../../Include/VSMain/EventHandler/SdlEventHandlerTypedefs.h"
 
+#include <Miscellaneous/Bool64Def.h>
 #include <CustomLists/IDObject.h>
 
 struct SDL_Window;
@@ -32,7 +33,8 @@ namespace VulkanSimplified
 	class WindowInternal
 	{
 	public:
-		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const WindowCreationData& creationData);
+		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
+			const WindowCreationData& creationData);
 		~WindowInternal();
 
 		WindowInternal(const WindowInternal& rhs) noexcept = delete;
@@ -57,7 +59,7 @@ namespace VulkanSimplified
 		uint32_t GetWidth() const;
 		uint32_t GetHeight() const;
 
-		static bool HandleWindowEventStatic(const SdlWindowEventData& event, void* windowptr);
+		void SetFullscreen(Misc::Bool64Values newFullscreenValue);
 
 	private:
 		SdlEventHandlerInternal& _eventHandler;
@@ -72,6 +74,9 @@ namespace VulkanSimplified
 		bool _quit;
 		bool _bpadding;
 		uint32_t _windowID;
+
+		Misc::Bool64Values _isBorderlessNoFullscreen;
+		Misc::Bool64Values _isFullscreen;
 
 		std::optional<IDObject<std::pair<WindowEventFunction, void*>>> _eventHandlingID;
 
@@ -102,5 +107,6 @@ namespace VulkanSimplified
 		VkPresentModeKHR TranslateToPresentMode(SurfacePresentModeBits presentMode);
 
 		bool HandleWindowEvent(const SdlWindowEventData& event);
+		static bool HandleWindowEventStatic(const SdlWindowEventData& event, void* windowptr);
 	};
 }
