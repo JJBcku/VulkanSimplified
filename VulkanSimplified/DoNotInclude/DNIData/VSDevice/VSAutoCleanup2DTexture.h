@@ -2,6 +2,8 @@
 
 #include "VSAutoCleanupImage.h"
 
+#include <optional>
+
 namespace VulkanSimplified
 {
 	class AutoCleanup2DTexture : public AutoCleanupImage
@@ -18,8 +20,6 @@ namespace VulkanSimplified
 		AutoCleanup2DTexture& operator=(AutoCleanup2DTexture&& rhs) noexcept = default;
 
 		IDObject<AutoCleanupImageView> AddFullImageView(size_t addOnReserving);
-		IDObject<AutoCleanupImageView> AddSingleMipmapImageView(uint32_t mipmap, size_t addOnReserving);
-		IDObject<AutoCleanupImageView> AddRemainingMipmapsImageView(uint32_t startingMipmap, size_t addOnReserving);
-		IDObject<AutoCleanupImageView> AddSelectedMipmapsImageView(uint32_t startingMipmap, uint32_t mipmapCount, size_t addOnReserving);
+		IDObject<AutoCleanupImageView> AddSelectedMipmapsImageView(uint32_t startingMipmap, std::optional<uint32_t> mipmapCount, size_t addOnReserving);
 	};
 }

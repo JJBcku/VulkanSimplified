@@ -10,6 +10,7 @@ namespace VulkanSimplified
 		resolveRenderTargetsListInitialCapacity = 0;
 
 		twoDTexturesListInitialCapacity = 0;
+		twoDArrayTexturesListInitialCapacity = 0;
 
 		framebufferListInitialCapacity = 0;
 		samplerListInitialCapacity = 0;

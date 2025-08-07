@@ -16,6 +16,7 @@
 #include <vulkan/vulkan_core.h>
 #include <stdint.h>
 #include <vector>
+#include <optional>
 
 typedef struct VkDevice_T* VkDevice;
 typedef struct VkImage_T* VkImage;
@@ -57,12 +58,15 @@ namespace VulkanSimplified
 
 		IDObject<AutoCleanup2DTexture> Add2DTextureImage(uint32_t width, uint32_t height, uint32_t mipLevel, DataFormatSetIndependentID format,
 			const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving);
+		IDObject<AutoCleanup2DArrayTexture> Add2DArrayTextureImage(uint32_t width, uint32_t height, uint32_t layerCount, uint32_t mipLevel, DataFormatSetIndependentID format,
+			const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving);
 
 		bool RemoveColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound);
 		bool RemoveDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, bool throwOnIDNotFound);
 		bool RemoveResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID, bool throwOnIDNotFound);
 
 		bool Remove2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, bool throwOnIDNotFound);
+		bool Remove2DArrayTextureImage(IDObject<AutoCleanup2DArrayTexture> imageID, bool throwOnIDNotFound);
 
 		AutoCleanupColorRenderTargetImage& GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID);
 		const AutoCleanupColorRenderTargetImage& GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
@@ -75,6 +79,9 @@ namespace VulkanSimplified
 
 		AutoCleanup2DTexture& Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID);
 		const AutoCleanup2DTexture& Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID) const;
+
+		AutoCleanup2DArrayTexture& Get2DArrayTextureImageInternal(IDObject<AutoCleanup2DArrayTexture> imageID);
+		const AutoCleanup2DArrayTexture& Get2DArrayTextureImageInternal(IDObject<AutoCleanup2DArrayTexture> imageID) const;
 
 		VkImage GetColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const;
 		VkImageView GetColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
@@ -118,21 +125,31 @@ namespace VulkanSimplified
 		MemorySize Get2DTextureImagesSize(IDObject<AutoCleanup2DTexture> imageID) const;
 		MemorySize Get2DTextureImagesRequiredAligment(IDObject<AutoCleanup2DTexture> imageID) const;
 
+		uint32_t Get2DArrayTextureImagesWidth(IDObject<AutoCleanup2DArrayTexture> imageID) const;
+		uint32_t Get2DArrayTextureImagesHeight(IDObject<AutoCleanup2DArrayTexture> imageID) const;
+
+		uint32_t Get2DArrayTextureImagesMemoryTypeMask(IDObject<AutoCleanup2DArrayTexture> imageID) const;
+		MemorySize Get2DArrayTextureImagesSize(IDObject<AutoCleanup2DArrayTexture> imageID) const;
+		MemorySize Get2DArrayTextureImagesRequiredAligment(IDObject<AutoCleanup2DArrayTexture> imageID) const;
+
 		void BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving);
 		void BindDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving);
 		void BindResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving);
 
 		void Bind2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving);
+		void Bind2DArrayTextureImage(IDObject<AutoCleanup2DArrayTexture> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving);
 
 		IDObject<AutoCleanupImageView> AddColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, size_t addOnReserving);
 		IDObject<AutoCleanupImageView> AddDepthStencilRenderTargetImageView(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, size_t addOnReserving);
 		IDObject<AutoCleanupImageView> AddResolveRenderTargetImageView(IDObject<AutoCleanupResolveRenderTargetImage> imageID, size_t addOnReserving);
 
 		IDObject<AutoCleanupImageView> Add2DTextureImageFullView(IDObject<AutoCleanup2DTexture> imageID, size_t addOnReserving);
-		IDObject<AutoCleanupImageView> Add2DTextureImageSingleMipmapView(IDObject<AutoCleanup2DTexture> imageID, uint32_t mipmap, size_t addOnReserving);
-		IDObject<AutoCleanupImageView> Add2DTextureImageRemainingMipmapsView(IDObject<AutoCleanup2DTexture> imageID, uint32_t startingMipmap, size_t addOnReserving);
-		IDObject<AutoCleanupImageView> Add2DTextureImageSelectedMipmapsView(IDObject<AutoCleanup2DTexture> imageID, uint32_t startingMipmap, uint32_t mipmapCount,
+		IDObject<AutoCleanupImageView> Add2DTextureImageSelectedMipmapsView(IDObject<AutoCleanup2DTexture> imageID, uint32_t startingMipmap, std::optional<uint32_t> mipmapCount,
 			size_t addOnReserving);
+
+		IDObject<AutoCleanupImageView> Add2DArrayTextureImageFullView(IDObject<AutoCleanup2DArrayTexture> imageID, size_t addOnReserving);
+		IDObject<AutoCleanupImageView> Add2DArrayTextureImageSelectedLayersAndMipmapsImageView(IDObject<AutoCleanup2DArrayTexture> imageID,
+			uint32_t startingMipmap, std::optional<uint32_t> usedMipmapCount, uint32_t startingLayer, std::optional<uint32_t> usedLayerCount, size_t addOnReserving);
 
 		IDObject<AutoCleanupFramebuffer> AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
 			const std::vector<std::pair<RenderTargetImagesID, IDObject<AutoCleanupImageView>>>& attachmentsList, uint32_t width, uint32_t height,
@@ -157,6 +174,7 @@ namespace VulkanSimplified
 		UnsortedIDVector<AutoCleanupDepthStencilRenderTargetImage> _depthStencilRenderTargetList;
 		UnsortedIDVector<AutoCleanupResolveRenderTargetImage> _resolveRenderTargetList;
 		UnsortedIDVector<AutoCleanup2DTexture> _2dTexturesList;
+		UnsortedIDVector<AutoCleanup2DArrayTexture> _2dArrayTexturesList;
 
 		UnsortedIDVector<AutoCleanupFramebuffer> _framebufferList;
 		UnsortedIDVector<AutoCleanupSampler> _samplerList;

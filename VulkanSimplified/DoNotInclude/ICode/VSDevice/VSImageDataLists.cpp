@@ -41,6 +41,12 @@ namespace VulkanSimplified
 		return _internal.Add2DTextureImage(width, height, mipLevel, format, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
 	}
 
+	IDObject<AutoCleanup2DArrayTexture> ImageDataLists::Add2DArrayTextureImage(uint32_t width, uint32_t height, uint32_t layerCount, uint32_t mipLevel,
+		DataFormatSetIndependentID format, const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserving)
+	{
+		return _internal.Add2DArrayTextureImage(width, height, layerCount, mipLevel, format, queuesUsingImage, preInitialized, initialImageViewListCapacity, addOnReserving);
+	}
+
 	bool ImageDataLists::RemoveColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, bool throwOnIDNotFound)
 	{
 		return _internal.RemoveColorRenderTargetImage(imageID, throwOnIDNotFound);
@@ -59,6 +65,11 @@ namespace VulkanSimplified
 	bool ImageDataLists::Remove2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, bool throwOnIDNotFound)
 	{
 		return _internal.Remove2DTextureImage(imageID, throwOnIDNotFound);
+	}
+
+	bool ImageDataLists::Remove2DArrayTextureImage(IDObject<AutoCleanup2DArrayTexture> imageID, bool throwOnIDNotFound)
+	{
+		return _internal.Remove2DArrayTextureImage(imageID, throwOnIDNotFound);
 	}
 
 	uint32_t ImageDataLists::GetColorRenderTargetImagesWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
@@ -161,6 +172,31 @@ namespace VulkanSimplified
 		return _internal.Get2DTextureImagesRequiredAligment(imageID);
 	}
 
+	uint32_t ImageDataLists::Get2DArrayTextureImagesWidth(IDObject<AutoCleanup2DArrayTexture> imageID) const
+	{
+		return _internal.Get2DArrayTextureImagesWidth(imageID);
+	}
+
+	uint32_t ImageDataLists::Get2DArrayTextureImagesHeight(IDObject<AutoCleanup2DArrayTexture> imageID) const
+	{
+		return _internal.Get2DArrayTextureImagesHeight(imageID);
+	}
+
+	uint32_t ImageDataLists::Get2DArrayTextureImagesMemoryTypeMask(IDObject<AutoCleanup2DArrayTexture> imageID) const
+	{
+		return _internal.Get2DArrayTextureImagesMemoryTypeMask(imageID);
+	}
+
+	MemorySize ImageDataLists::Get2DArrayTextureImagesSize(IDObject<AutoCleanup2DArrayTexture> imageID) const
+	{
+		return _internal.Get2DArrayTextureImagesSize(imageID);
+	}
+
+	MemorySize ImageDataLists::Get2DArrayTextureImagesRequiredAligment(IDObject<AutoCleanup2DArrayTexture> imageID) const
+	{
+		return _internal.Get2DArrayTextureImagesRequiredAligment(imageID);
+	}
+
 	void ImageDataLists::BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, MemoryAllocationFullID allocationID,
 		size_t addOnReserving)
 	{
@@ -182,6 +218,11 @@ namespace VulkanSimplified
 	void ImageDataLists::Bind2DTextureImage(IDObject<AutoCleanup2DTexture> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving)
 	{
 		_internal.Bind2DTextureImage(imageID, allocationID, addOnReserving);
+	}
+
+	void ImageDataLists::Bind2DArrayTextureImage(IDObject<AutoCleanup2DArrayTexture> imageID, MemoryAllocationFullID allocationID, size_t addOnReserving)
+	{
+		_internal.Bind2DArrayTextureImage(imageID, allocationID, addOnReserving);
 	}
 
 	IDObject<AutoCleanupImageView> ImageDataLists::AddColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID,
@@ -208,22 +249,21 @@ namespace VulkanSimplified
 		return _internal.Add2DTextureImageFullView(imageID, addOnReserving);
 	}
 
-	IDObject<AutoCleanupImageView> ImageDataLists::Add2DTextureImageSingleMipmapView(IDObject<AutoCleanup2DTexture> imageID,
-		uint32_t mipmap, size_t addOnReserving)
-	{
-		return _internal.Add2DTextureImageSingleMipmapView(imageID, mipmap, addOnReserving);
-	}
-
-	IDObject<AutoCleanupImageView> ImageDataLists::Add2DTextureImageRemainingMipmapsView(IDObject<AutoCleanup2DTexture> imageID,
-		uint32_t startingMipmap, size_t addOnReserving)
-	{
-		return _internal.Add2DTextureImageRemainingMipmapsView(imageID, startingMipmap, addOnReserving);
-	}
-
 	IDObject<AutoCleanupImageView> ImageDataLists::Add2DTextureImageSelectedMipmapsView(IDObject<AutoCleanup2DTexture> imageID,
-		uint32_t startingMipmap, uint32_t mipmapCount, size_t addOnReserving)
+		uint32_t startingMipmap, std::optional<uint32_t> mipmapCount, size_t addOnReserving)
 	{
 		return _internal.Add2DTextureImageSelectedMipmapsView(imageID, startingMipmap, mipmapCount, addOnReserving);
+	}
+
+	IDObject<AutoCleanupImageView> ImageDataLists::Add2DArrayTextureImageFullView(IDObject<AutoCleanup2DArrayTexture> imageID, size_t addOnReserving)
+	{
+		return _internal.Add2DArrayTextureImageFullView(imageID, addOnReserving);
+	}
+
+	IDObject<AutoCleanupImageView> ImageDataLists::Add2DArrayTextureImageSelectedLayersAndMipmapsImageView(IDObject<AutoCleanup2DArrayTexture> imageID,
+		uint32_t startingMipmap, std::optional<uint32_t> usedMipmapCount, uint32_t startingLayer, std::optional<uint32_t> usedLayerCount, size_t addOnReserving)
+	{
+		return _internal.Add2DArrayTextureImageSelectedLayersAndMipmapsImageView(imageID, startingMipmap, usedMipmapCount, startingLayer, usedLayerCount, addOnReserving);
 	}
 
 	IDObject<AutoCleanupFramebuffer> ImageDataLists::AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,

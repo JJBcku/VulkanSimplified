@@ -26,37 +26,7 @@ namespace VulkanSimplified
 		return AutoCleanupImage::AddImageView({}, range, VK_IMAGE_VIEW_TYPE_2D, addOnReserving);
 	}
 
-	IDObject<AutoCleanupImageView> AutoCleanup2DTexture::AddSingleMipmapImageView(uint32_t mipmap, size_t addOnReserving)
-	{
-		if (mipmap >= GetMipmapLevels())
-			throw std::runtime_error("AutoCleanup2DTexture::AddSelectedMipmapsImageView Error: Program tried to use non-existent starting mipmap!");
-
-		VkImageSubresourceRange range{};
-		range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-		range.baseMipLevel = mipmap;
-		range.levelCount = 1;
-		range.baseArrayLayer = 0;
-		range.layerCount = 1;
-
-		return AutoCleanupImage::AddImageView({}, range, VK_IMAGE_VIEW_TYPE_2D, addOnReserving);
-	}
-
-	IDObject<AutoCleanupImageView> AutoCleanup2DTexture::AddRemainingMipmapsImageView(uint32_t startingMipmap, size_t addOnReserving)
-	{
-		if (startingMipmap >= GetMipmapLevels())
-			throw std::runtime_error("AutoCleanup2DTexture::AddRemainingMipmapsImageView Error: Program tried to use non-existent starting mipmap!");
-
-		VkImageSubresourceRange range{};
-		range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-		range.baseMipLevel = startingMipmap;
-		range.levelCount = VK_REMAINING_MIP_LEVELS;
-		range.baseArrayLayer = 0;
-		range.layerCount = 1;
-
-		return AutoCleanupImage::AddImageView({}, range, VK_IMAGE_VIEW_TYPE_2D, addOnReserving);
-	}
-
-	IDObject<AutoCleanupImageView> AutoCleanup2DTexture::AddSelectedMipmapsImageView(uint32_t startingMipmap, uint32_t mipmapCount, size_t addOnReserving)
+	IDObject<AutoCleanupImageView> AutoCleanup2DTexture::AddSelectedMipmapsImageView(uint32_t startingMipmap, std::optional<uint32_t> mipmapCount, size_t addOnReserving)
 	{
 		uint32_t mipmapAmount = GetMipmapLevels();
 
@@ -69,7 +39,10 @@ namespace VulkanSimplified
 		VkImageSubresourceRange range{};
 		range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 		range.baseMipLevel = startingMipmap;
-		range.levelCount = mipmapCount;
+		if (mipmapCount.has_value())
+			range.levelCount = mipmapCount.value();
+		else
+			range.levelCount = VK_REMAINING_MIP_LEVELS;
 		range.baseArrayLayer = 0;
 		range.layerCount = 1;
 
