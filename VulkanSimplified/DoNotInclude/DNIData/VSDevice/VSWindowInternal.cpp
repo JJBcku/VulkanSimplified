@@ -49,6 +49,8 @@ namespace VulkanSimplified
 
 		_isBorderlessNoFullscreen = Misc::BOOL64_FALSE;
 
+		_isFullscreen = Misc::BOOL64_FALSE;
+
 		switch (creationData.settings)
 		{
 		case WindowSettings::STANDARD:
