@@ -62,6 +62,8 @@ namespace VulkanSimplified
 			inheritanceInfo.framebuffer = _imageList.GetFramebuffer(framebuffer.value());
 		}
 
+		beginInfo.pInheritanceInfo = &inheritanceInfo;
+
 		if (vkBeginCommandBuffer(_buffer, &beginInfo) != VK_SUCCESS)
 			throw std::runtime_error("PrimaryNIRCommandBufferInternal::BeginRecording Error: Program failed to begin a command buffer's recording session!");
 	}
