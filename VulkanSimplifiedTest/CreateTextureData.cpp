@@ -209,7 +209,7 @@ void CreateTextureData(VulkanData& data)
 				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 					VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, {}, {}, { imageMemBTwo });
 
-				imageMemBThree.imageID.texture2DID.baseMipLevel = 0;
+				imageMemBThree.imageID.texture2D.baseMipLevel = 0;
 
 				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 					{}, {}, { imageMemBThree });
@@ -218,7 +218,7 @@ void CreateTextureData(VulkanData& data)
 				{
 					graphicBuffer.BlitDataBetween2DTexturesSimple(texData.textureID, i - 1, texData.textureID, i);
 
-					imageMemBThree.imageID.texture2DID.baseMipLevel = i;
+					imageMemBThree.imageID.texture2D.baseMipLevel = i;
 
 					graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 						{}, {}, { imageMemBThree });
@@ -253,7 +253,7 @@ void CreateTextureData(VulkanData& data)
 
 			graphicBuffer.TransferDataTo2dTextureSimple(stagingBuffer, texData.textureID, 0);
 
-			imageMemBThree.imageID.texture2DID.baseMipLevel = 0;
+			imageMemBThree.imageID.texture2D.baseMipLevel = 0;
 
 			graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 				{}, {}, { imageMemBThree });
@@ -262,7 +262,7 @@ void CreateTextureData(VulkanData& data)
 			{
 				graphicBuffer.BlitDataBetween2DTexturesSimple(texData.textureID, i - 1, texData.textureID, i);
 
-				imageMemBThree.imageID.texture2DID.baseMipLevel = i;
+				imageMemBThree.imageID.texture2D.baseMipLevel = i;
 
 				graphicBuffer.CreatePipelineBarrier(VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER, VS::PipelineStageFlagBits::PIPELINE_STAGE_TRANSFER,
 					{}, {}, { imageMemBThree });
