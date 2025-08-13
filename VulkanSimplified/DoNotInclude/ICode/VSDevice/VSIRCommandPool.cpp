@@ -57,4 +57,9 @@ namespace VulkanSimplified
 		return _internal.PresentSwapchainToQueue(windowID, waitSemaphoreIDs, imageIndex);
 	}
 
+	void IRCommandPool::RecordExecuteSecondaryBufferCommand(IDObject<PrimaryIRPointer> primaryBufferID, const std::vector<IDObject<SecondaryIRPointer>>& secondaryBufferIDs)
+	{
+		_internal.RecordExecuteSecondaryBufferCommand(primaryBufferID, secondaryBufferIDs);
+	}
+
 }
