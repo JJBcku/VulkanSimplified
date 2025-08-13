@@ -2,6 +2,8 @@
 
 #include "VSCommandBufferBaseInternal.h"
 
+#include <optional>
+
 namespace VulkanSimplified
 {
 	class SecondaryNIRCommandBufferInternal : public CommandBufferBaseInternal
@@ -18,5 +20,8 @@ namespace VulkanSimplified
 
 		SecondaryNIRCommandBufferInternal& operator=(const SecondaryNIRCommandBufferInternal&) noexcept = delete;
 		SecondaryNIRCommandBufferInternal& operator=(SecondaryNIRCommandBufferInternal&& rhs) noexcept = delete;
+
+		void BeginRecording(CommandBufferUsage usage, const std::optional<std::pair<IDObject<AutoCleanupRenderPass>, uint32_t>>& renderpass,
+			const std::optional<IDObject<AutoCleanupFramebuffer>>& framebuffer, bool continueRenderPass);
 	};
 }

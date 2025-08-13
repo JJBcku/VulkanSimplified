@@ -17,11 +17,6 @@ namespace VulkanSimplified
 	{
 	}
 
-	void CommandBufferBase::BeginRecording(CommandBufferUsage usage)
-	{
-		_internal.BeginRecording(usage);
-	}
-
 	void CommandBufferBase::EndRecording()
 	{
 		_internal.EndRecording();

@@ -17,6 +17,11 @@ namespace VulkanSimplified
 	{
 	}
 
+	void PrimaryNIRCommandBuffer::BeginRecording(CommandBufferUsage usage)
+	{
+		_internal.BeginRecording(usage);
+	}
+
 	void PrimaryNIRCommandBuffer::BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID,
 		IDObject<AutoCleanupFramebuffer> framebufferID, uint32_t startX, uint32_t startY, uint32_t width, uint32_t height,
 		const std::vector<std::optional<RenderPassClearValueID>>& clearValues, bool usesSecondaryBuffers)

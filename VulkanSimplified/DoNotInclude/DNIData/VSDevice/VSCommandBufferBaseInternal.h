@@ -3,6 +3,7 @@
 #include <CustomLists/IDObjectDef.h>
 
 #include "../../../Include/VSDevice/VSPipelineDataListsDef.h"
+#include "../../../Include/VSDevice/VSRenderPassDataListDef.h"
 #include "../../../Include/VSDevice/VSDataBufferListsDef.h"
 #include "../../../Include/VSDevice/VSDescriptorDataListsDef.h"
 #include "../../../Include/VSDevice/VSImageDataListsDef.h"
@@ -65,7 +66,6 @@ namespace VulkanSimplified
 
 		VkCommandBuffer GetCommandBuffer() const;
 
-		void BeginRecording(CommandBufferUsage usage);
 		void EndRecording();
 
 		void BindGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID);

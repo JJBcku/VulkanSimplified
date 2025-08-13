@@ -60,29 +60,6 @@ namespace VulkanSimplified
 		return _buffer;
 	}
 
-	void CommandBufferBaseInternal::BeginRecording(CommandBufferUsage usage)
-	{
-		VkCommandBufferBeginInfo beginInfo{};
-		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-
-		switch (usage)
-		{
-		case CommandBufferUsage::MULTIPLE_USE_SIMULTANEOUS_USAGE:
-			beginInfo.flags = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
-			break;
-		case CommandBufferUsage::MULTIPLE_USE_NO_SIMULTANEOUS_USAGE:
-			break;
-		case CommandBufferUsage::ONE_USE:
-			beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-			break;
-		default:
-			throw std::runtime_error("CommandBufferBaseInternal::BeginRecording Error: Program was giwen an erroneous command buffer usage value!");
-		}
-
-		if (vkBeginCommandBuffer(_buffer, &beginInfo) != VK_SUCCESS)
-			throw std::runtime_error("CommandBufferBaseInternal::BeginRecording Error: Program failed to begin a command buffer's recording session!");
-	}
-
 	void CommandBufferBaseInternal::EndRecording()
 	{
 		if (vkEndCommandBuffer(_buffer) != VK_SUCCESS)
