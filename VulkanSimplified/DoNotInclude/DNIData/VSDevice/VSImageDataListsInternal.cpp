@@ -529,6 +529,16 @@ namespace VulkanSimplified
 		return _2dTexturesList.GetConstObject(imageID).GetImageView(viewID);
 	}
 
+	VkImage ImageDataListsInternal::Get2DArrayTextureImage(IDObject<AutoCleanup2DArrayTexture> imageID) const
+	{
+		return _2dArrayTexturesList.GetConstObject(imageID).GetImage();
+	}
+
+	VkImageView ImageDataListsInternal::Get2DArrayTextureImageView(IDObject<AutoCleanup2DArrayTexture> imageID, IDObject<AutoCleanupImageView> viewID) const
+	{
+		return _2dArrayTexturesList.GetConstObject(imageID).GetImageView(viewID);
+	}
+
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
 		return _colorRenderTargetList.GetConstObject(imageID).GetWidth();

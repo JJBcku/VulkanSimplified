@@ -411,6 +411,74 @@ namespace VulkanSimplified
 		vkCmdCopyBufferToImage(_buffer, buffer, image, layout, 1, &bufferCopy);
 	}
 
+	void CommandBufferBaseInternal::TransferDataTo2dArrayTextureSingleLayer(IDObject<AutoCleanupStagingBuffer> srcBufferID, size_t bufferOffset, size_t dataSize,
+		IDObject<AutoCleanup2DArrayTexture> dstTextureID, uint32_t startWidth, uint32_t startHeight, uint32_t width, uint32_t height, uint32_t mipLevel, uint32_t layer)
+	{
+		auto& bufferData = _dataBufferList.GetStagingBufferInternal(srcBufferID);
+
+		auto& imageData = _imageList.Get2DArrayTextureImageInternal(dstTextureID);
+
+		VkBuffer buffer = bufferData.GetDataBuffer();
+
+		size_t buffersSize = bufferData.GetBuffersSize();
+
+		if (bufferOffset >= buffersSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous buffer offset value!");
+
+		if (dataSize > buffersSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous data size value!");
+
+		if (bufferOffset + dataSize > buffersSize)
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous total buffer reading size value!");
+
+		VkImage image = imageData.GetImage();
+		VkImageLayout layout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+
+		if (startWidth >= imageData.GetWidth())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous starting width value!");
+
+		if (startHeight >= imageData.GetHeight())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous starting height value!");
+
+		if (width > imageData.GetWidth())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give too big data width value!");
+
+		if (height > imageData.GetHeight())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give too big data height value!");
+
+		if (startWidth + width > imageData.GetWidth())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give too big total width value!");
+
+		if (startHeight + height > imageData.GetHeight())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give too big total height value!");
+
+		if (mipLevel >= imageData.GetMipmapLevels())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous mipmap level value!");
+
+		if (layer >= imageData.GetDepth())
+			throw std::runtime_error("CommandBufferBaseInternal::TransferDataTo2dArrayTextureSimple Error: Program was give an erroneous layer value!");
+
+		VkBufferImageCopy bufferCopy{};
+		bufferCopy.bufferOffset = bufferOffset;
+		bufferCopy.bufferRowLength = 0;
+		bufferCopy.bufferImageHeight = 0;
+
+		bufferCopy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		bufferCopy.imageSubresource.baseArrayLayer = layer;
+		bufferCopy.imageSubresource.layerCount = 1;
+		bufferCopy.imageSubresource.mipLevel = mipLevel;
+
+		bufferCopy.imageOffset.x = static_cast<int32_t>(startWidth);
+		bufferCopy.imageOffset.y = static_cast<int32_t>(startHeight);
+		bufferCopy.imageOffset.z = 0;
+
+		bufferCopy.imageExtent.width = width;
+		bufferCopy.imageExtent.height = height;
+		bufferCopy.imageExtent.depth = 1;
+
+		vkCmdCopyBufferToImage(_buffer, buffer, image, layout, 1, &bufferCopy);
+	}
+
 	void CommandBufferBaseInternal::BlitDataBetween2DTexturesSimple(IDObject<AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel,
 		IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel)
 	{

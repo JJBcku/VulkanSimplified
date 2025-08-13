@@ -90,6 +90,12 @@ namespace VulkanSimplified
 		_internal.TransferDataTo2dTextureSimple(srcBufferID, dstTextureID, mipLevel);
 	}
 
+	void CommandBufferBase::TransferDataTo2dArrayTextureSingleLayer(IDObject<AutoCleanupStagingBuffer> srcBufferID, size_t bufferOffset, size_t dataSize,
+		IDObject<AutoCleanup2DArrayTexture> dstTextureID, uint32_t startWidth, uint32_t startHeight, uint32_t width, uint32_t height, uint32_t mipLevel, uint32_t layer)
+	{
+		_internal.TransferDataTo2dArrayTextureSingleLayer(srcBufferID, bufferOffset, dataSize, dstTextureID, startWidth, startHeight, width, height, mipLevel, layer);
+	}
+
 	void CommandBufferBase::BlitDataBetween2DTexturesSimple(IDObject<AutoCleanup2DTexture> srcTexureID, uint32_t srcMipLevel,
 		IDObject<AutoCleanup2DTexture> dstTextureID, uint32_t dstMipLevel)
 	{
