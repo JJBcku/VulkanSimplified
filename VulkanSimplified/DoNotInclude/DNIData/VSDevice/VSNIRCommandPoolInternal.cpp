@@ -156,4 +156,23 @@ namespace VulkanSimplified
 
 		return result == VK_SUCCESS;
 	}
+
+	void NIRCommandPoolInternal::RecordExecuteSecondaryBufferCommand(IDObject<PrimaryNIRPointer> primaryBufferID, const std::vector<IDObject<SecondaryNIRPointer>>& secondaryBufferIDs)
+	{
+		auto primary = _primaryBufferList.GetConstObject(primaryBufferID)->GetCommandBuffer();
+
+		if (secondaryBufferIDs.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("NIRCommandPoolInternal::RecordExecuteSecondaryBufferComman Error: secondary buffer id list overflowed!");
+
+		std::vector<VkCommandBuffer> secondaryBuffersList;
+		secondaryBuffersList.reserve(secondaryBufferIDs.size());
+
+		for (size_t i = 0; i < secondaryBufferIDs.size(); ++i)
+		{
+			secondaryBuffersList.push_back(_secondaryBufferList.GetConstObject(secondaryBufferIDs[i])->GetCommandBuffer());
+		}
+
+		vkCmdExecuteCommands(primary, static_cast<uint32_t>(secondaryBuffersList.size()), secondaryBuffersList.data());
+	}
+
 }
