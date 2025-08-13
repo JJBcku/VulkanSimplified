@@ -162,7 +162,7 @@ void CreateTextureData(VulkanData& data)
 		imageMemBThree.oldLayout = VS::ImageLayoutFlags::TRANSFER_DESTINATION;
 		imageMemBThree.newLayout = VS::ImageLayoutFlags::TRANSFER_SOURCE;
 		imageMemBThree.imageID = VS::ImagesGenericID(texData.textureID);
-		imageMemBThree.imageID.texture2DID.mipLevelCount = 1;
+		imageMemBThree.imageID.texture2D.mipLevelCount = 1;
 
 		imageMemBFour.srcAccess = VS::AccessFlagBits::ACCESS_TRANSFER_WRITE;
 		imageMemBFour.dstAccess = VS::AccessFlagBits::ACCESS_MEMORY_READ;

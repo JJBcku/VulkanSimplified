@@ -27,6 +27,7 @@
 
 #include "VSAutoCleanupColorRenderTargetImage.h"
 #include "VSAutoCleanup2DTexture.h"
+#include "VSAutoCleanup2DArrayTexture.h"
 
 #include "VSAutoCleanupStagingBuffer.h"
 
@@ -561,7 +562,7 @@ namespace VulkanSimplified
 			switch (inData.imageID.type)
 			{
 			case ImagesIDType::COLOR_RENDER_TARGET:
-				imagePtr = &_imageList.GetColorRenderTargetImageInternal(inData.imageID.colorRenderTargetID.ID);
+				imagePtr = &_imageList.GetColorRenderTargetImageInternal(inData.imageID.colorRenderTarget.ID);
 				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 				outData.subresourceRange.baseArrayLayer = 0;
 				outData.subresourceRange.baseMipLevel = 0;
@@ -569,22 +570,52 @@ namespace VulkanSimplified
 				outData.subresourceRange.levelCount = 1;
 				break;
 			case ImagesIDType::TEXTURE_2D:
-				imagePtr = &_imageList.Get2DTextureImageInternal(inData.imageID.texture2DID.ID);
+				imagePtr = &_imageList.Get2DTextureImageInternal(inData.imageID.texture2D.ID);
 				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 				outData.subresourceRange.baseArrayLayer = 0;
-				outData.subresourceRange.baseMipLevel = inData.imageID.texture2DID.baseMipLevel;
+				outData.subresourceRange.baseMipLevel = inData.imageID.texture2D.baseMipLevel;
 				outData.subresourceRange.layerCount = 1;
 
-				if (!inData.imageID.texture2DID.mipLevelCount.has_value())
+				if (!inData.imageID.texture2D.mipLevelCount.has_value())
 					outData.subresourceRange.levelCount = imagePtr->GetMipmapLevels();
 				else
 				{
-					outData.subresourceRange.levelCount = inData.imageID.texture2DID.mipLevelCount.value();
+					outData.subresourceRange.levelCount = inData.imageID.texture2D.mipLevelCount.value();
 
 					uint32_t totalMipmaps = outData.subresourceRange.baseMipLevel + outData.subresourceRange.levelCount;
 
 					if (totalMipmaps > imagePtr->GetMipmapLevels())
 						throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Total sum of base mip level and used levels count must be equal or less than 2D textures mipmap amount!");
+				}
+				break;
+			case ImagesIDType::TEXTURE_2D_ARRAY:
+				imagePtr = &_imageList.Get2DArrayTextureImageInternal(inData.imageID.textureArray2D.ID);
+				outData.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+				outData.subresourceRange.baseArrayLayer = inData.imageID.textureArray2D.baseArrayLayer;
+				outData.subresourceRange.baseMipLevel = inData.imageID.textureArray2D.baseMipLevel;
+
+				if (!inData.imageID.textureArray2D.mipLevelCount.has_value())
+					outData.subresourceRange.levelCount = imagePtr->GetMipmapLevels();
+				else
+				{
+					outData.subresourceRange.levelCount = inData.imageID.texture2D.mipLevelCount.value();
+
+					uint32_t totalMipmaps = outData.subresourceRange.baseMipLevel + outData.subresourceRange.levelCount;
+
+					if (totalMipmaps > imagePtr->GetMipmapLevels())
+						throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Total sum of base mip level and used levels count must be equal or less than 2D textures mipmap amount!");
+				}
+
+				if (!inData.imageID.textureArray2D.arrayLayersCount.has_value())
+					outData.subresourceRange.layerCount = imagePtr->GetDepth();
+				else
+				{
+					outData.subresourceRange.layerCount = inData.imageID.textureArray2D.arrayLayersCount.value();
+
+					uint32_t totalLayers = outData.subresourceRange.baseArrayLayer + outData.subresourceRange.layerCount;
+
+					if (totalLayers > imagePtr->GetDepth())
+						throw std::runtime_error("CommandBufferBaseInternal::CreatePipelineBarrier Error: Total sum of base array layer and used layers count must be equal or less than 2D array textures layers amount!");
 				}
 				break;
 			case ImagesIDType::UNKNOWN:
