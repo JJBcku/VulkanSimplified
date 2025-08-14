@@ -74,7 +74,6 @@ namespace VulkanSimplified
 		const SharedDataMainListInternal& _sharedDataMain;
 
 		std::unique_ptr<DeviceCoreInternal> _core;
-		std::unique_ptr<WindowListInternal> _windowList;
 		std::unique_ptr<ShaderListsInternal> _shaderLists;
 		std::unique_ptr<RenderPassListInternal> _renderPassList;
 
@@ -86,6 +85,7 @@ namespace VulkanSimplified
 		std::unique_ptr<PipelineDataListsInternal> _pipelineDataLists;
 		std::unique_ptr<SynchronizationDataListsInternal> _synchroDataLists;
 
+		std::unique_ptr<WindowListInternal> _windowList;
 		std::unique_ptr<CommandPoolMainListInternal> _commandPoolMainList;
 	};
 }

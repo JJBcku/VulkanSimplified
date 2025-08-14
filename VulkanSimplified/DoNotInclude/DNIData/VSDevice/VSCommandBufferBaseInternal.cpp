@@ -81,23 +81,6 @@ namespace VulkanSimplified
 		vkCmdDrawIndexed(_buffer, indexCount, instanceCount, firstIndex, firstVertexOffset, firstInstance);
 	}
 
-	bool CommandBufferBaseInternal::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
-		uint32_t& returnIndex, IDObject<WindowPointer> windowID)
-	{
-		auto& window = _windowList.GetWindow(windowID);
-
-		VkSemaphore semaphore = VK_NULL_HANDLE;
-		VkFence fence = VK_NULL_HANDLE;
-
-		if (semaphoreID.has_value())
-			semaphore = _synchronizationList.GetSemaphore(semaphoreID.value());
-
-		if (fenceID.has_value())
-			fence = _synchronizationList.GetFence(fenceID.value());
-
-		return window.AcquireNextImage(_device, timeout, semaphore, fence, returnIndex);
-	}
-
 	void CommandBufferBaseInternal::TransferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID, IDObject<AutoCleanupVertexBuffer> dstBufferID,
 		const DataBuffersCopyRegionData& copyRegion)
 	{

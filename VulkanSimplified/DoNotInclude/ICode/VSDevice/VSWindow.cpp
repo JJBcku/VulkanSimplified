@@ -18,6 +18,11 @@ namespace VulkanSimplified
 		_internal.CreateSwapchain(creationData, throwOnSwapchainExist);
 	}
 
+	bool Window::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID, uint32_t& returnIndex)
+	{
+		return _internal.AcquireNextImage(timeout, semaphoreID, fenceID, returnIndex);
+	}
+
 	size_t Window::GetSwapchainImageAmount() const
 	{
 		return _internal.GetSwapchainImageAmount();

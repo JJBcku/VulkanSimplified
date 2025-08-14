@@ -37,12 +37,6 @@ namespace VulkanSimplified
 		_internal.DrawIndexed(indexCount, instanceCount, firstIndex, firstVertexOffset, firstInstance);
 	}
 
-	bool CommandBufferBase::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID,
-		std::optional<IDObject<AutoCleanupFence>> fenceID, uint32_t& returnIndex, IDObject<WindowPointer> windowID)
-	{
-		return _internal.AcquireNextImage(timeout, semaphoreID, fenceID, returnIndex, windowID);
-	}
-
 	void CommandBufferBase::TransferDataToVertexBuffer(IDObject<AutoCleanupStagingBuffer> srcBufferID,
 		IDObject<AutoCleanupVertexBuffer> dstBufferID, const DataBuffersCopyRegionData& copyRegion)
 	{

@@ -26,22 +26,27 @@ namespace VulkanSimplified
 {
 	DeviceMainInternal::DeviceMainInternal(SdlEventHandlerInternal& eventHandler, const SharedDataMainListInternal& sharedDataMain, VkInstance instance,
 		const LogicalDeviceInternalCreationData& creationData, const PhysicalDeviceDataInternal& physicalDeviceData,
-		const DeviceInitialCapacitiesList& initialCapacities) : _eventHandler(eventHandler), _sharedDataMain(sharedDataMain),
-		_core(std::make_unique<DeviceCoreInternal>(instance, creationData, physicalDeviceData)),
-		_windowList(std::make_unique<WindowListInternal>(_eventHandler, *_core, instance, _core->GetDevicesPhysicalData().GetPhysicalDevice(), _core->GetDevice(),
-			initialCapacities.windowList)), _shaderLists(std::make_unique<ShaderListsInternal>(_core->GetDevice(), initialCapacities.shaderLists)),
-		_renderPassList(std::make_unique<RenderPassListInternal>(_sharedDataMain.GetSharedRenderPassDataList(), _core->GetDevice(), initialCapacities.renderPassLists)),
-		_memoryObjectsList(std::make_unique<MemoryObjectsListInternal>(_core->GetDevice(), _core->GetDevicesPhysicalData().GetAvailableMemoryDataList(),
-			initialCapacities.memoryObjectsList)),
-		_dataBufferLists(std::make_unique<DataBufferListsInternal>(*_core, *_memoryObjectsList, _core->GetDevice(), initialCapacities.dataBufferLists)),
-		_imageDataLists(std::make_unique<ImageDataListsInternal>(*_core, *_renderPassList, *_memoryObjectsList, _core->GetDevice(), initialCapacities.imageLists)),
-		_descriptorLists(std::make_unique<DescriptorDataListsInternal>(_sharedDataMain.GetSharedDescriptorDataList(), *_dataBufferLists, *_imageDataLists, _core->GetDevice(),
-			initialCapacities.descriptorLists)),
-		_pipelineDataLists(std::make_unique<PipelineDataListsInternal>(sharedDataMain.GetPipelineDataList(), *_descriptorLists, *_shaderLists, *_renderPassList, _core->GetDevice(),
-			initialCapacities.pipelineDataLists)), _synchroDataLists(std::make_unique<SynchronizationDataListsInternal>(_core->GetDevice(), initialCapacities.synchronizationLists)),
-		_commandPoolMainList(std::make_unique<CommandPoolMainListInternal>(*_core, *_renderPassList, _sharedDataMain.GetSharedRenderPassDataList(), *_pipelineDataLists,
-			*_synchroDataLists, *_imageDataLists, *_dataBufferLists, *_windowList, *_descriptorLists, initialCapacities.commandPoolMainList))
+		const DeviceInitialCapacitiesList& initialCapacities) : _eventHandler(eventHandler), _sharedDataMain(sharedDataMain)
 	{
+		_core = std::make_unique<DeviceCoreInternal>(instance, creationData, physicalDeviceData);
+		_shaderLists = std::make_unique<ShaderListsInternal>(_core->GetDevice(), initialCapacities.shaderLists);
+		_renderPassList = std::make_unique<RenderPassListInternal>(_sharedDataMain.GetSharedRenderPassDataList(), _core->GetDevice(), initialCapacities.renderPassLists);
+
+		_memoryObjectsList = std::make_unique<MemoryObjectsListInternal>(_core->GetDevice(), _core->GetDevicesPhysicalData().GetAvailableMemoryDataList(),
+			initialCapacities.memoryObjectsList);
+		_dataBufferLists = std::make_unique<DataBufferListsInternal>(*_core, *_memoryObjectsList, _core->GetDevice(), initialCapacities.dataBufferLists);
+		_imageDataLists = std::make_unique<ImageDataListsInternal>(*_core, *_renderPassList, *_memoryObjectsList, _core->GetDevice(), initialCapacities.imageLists);
+
+		_descriptorLists = std::make_unique<DescriptorDataListsInternal>(_sharedDataMain.GetSharedDescriptorDataList(), *_dataBufferLists, *_imageDataLists, _core->GetDevice(),
+			initialCapacities.descriptorLists);
+		_pipelineDataLists = std::make_unique<PipelineDataListsInternal>(sharedDataMain.GetPipelineDataList(), *_descriptorLists, *_shaderLists, *_renderPassList, _core->GetDevice(),
+			initialCapacities.pipelineDataLists);
+		_synchroDataLists = std::make_unique<SynchronizationDataListsInternal>(_core->GetDevice(), initialCapacities.synchronizationLists);
+
+		_windowList = std::make_unique<WindowListInternal>(_eventHandler, *_core, *_synchroDataLists, instance, _core->GetDevicesPhysicalData().GetPhysicalDevice(), _core->GetDevice(),
+			initialCapacities.windowList);
+		_commandPoolMainList = std::make_unique<CommandPoolMainListInternal>(*_core, *_renderPassList, _sharedDataMain.GetSharedRenderPassDataList(), *_pipelineDataLists,
+			*_synchroDataLists, *_imageDataLists, *_dataBufferLists, *_windowList, *_descriptorLists, initialCapacities.commandPoolMainList);
 	}
 
 	DeviceMainInternal::~DeviceMainInternal()

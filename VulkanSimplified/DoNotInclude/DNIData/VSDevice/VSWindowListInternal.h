@@ -17,14 +17,15 @@ namespace VulkanSimplified
 namespace VulkanSimplified
 {
 	class DeviceCoreInternal;
+	class SynchronizationDataListsInternal;
 	class WindowInternal;
 	class SdlEventHandlerInternal;
 
 	class WindowListInternal
 	{
 	public:
-		WindowListInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-			const WindowListInitialCapacities& initalCapacities);
+		WindowListInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, SynchronizationDataListsInternal& synchroList,
+			VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const WindowListInitialCapacities& initalCapacities);
 		~WindowListInternal();
 
 		IDObject<WindowPointer> CreateWindow(const WindowCreationData& creationData, size_t addOnReserving);
@@ -36,6 +37,7 @@ namespace VulkanSimplified
 	private:
 		SdlEventHandlerInternal& _eventHandler;
 		DeviceCoreInternal& _core;
+		SynchronizationDataListsInternal& _synchroList;
 
 		VkInstance _instance;
 		VkPhysicalDevice _physicalDevice;

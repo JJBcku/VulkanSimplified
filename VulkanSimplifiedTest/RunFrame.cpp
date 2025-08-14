@@ -23,6 +23,8 @@
 #include <VSDataBufferLists.h>
 #include <VSSynchronizationDataLists.h>
 #include <VSCommandPoolMainList.h>
+#include <VSWindowList.h>
+#include <VSWindow.h>
 
 #include <VSCommandPoolQFGroupList.h>
 #include <VSIRCommandPool.h>
@@ -69,6 +71,9 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	auto dataBufferLists = deviceMain.GetDataBufferLists();
 	auto synchroList = deviceMain.GetSynchronizationDataLists();
 
+	auto windowList = deviceMain.GetWindowList();
+	auto window = windowList.GetWindow(data.deviceDependentData->windowID);
+
 	auto mainPoolList = deviceMain.GetCommandPoolMainList();
 	auto graphicQf = mainPoolList.GetQueueFamiliesPoolGroup(data.commandBufferData->graphicGroup);
 	auto graphicPool = graphicQf.GetCommandPoolWithIndividualReset(data.commandBufferData->graphicPool);
@@ -91,8 +96,8 @@ void RunFrame(VulkanData& data, uint32_t frameIndex)
 	synchroList.ResetFences({ data.synchronizationData->inFlightFences[frameIndex] });
 
 	uint32_t imageIndice = 0;
-	graphicCommandBuffer.AcquireNextImage(std::numeric_limits<uint64_t>::max(), data.synchronizationData->imageAvailableSemaphores[frameIndex], {},
-		imageIndice, data.deviceDependentData->windowID);
+	window.AcquireNextImage(std::numeric_limits<uint64_t>::max(), data.synchronizationData->imageAvailableSemaphores[frameIndex], {},
+		imageIndice);
 
 	const VS::DataBuffersCopyRegionData& vertexCopyRegion = data.frameData->vertexCopyRegion;
 	const VS::DataBuffersCopyRegionData& indexCopyRegion = data.frameData->indexCopyRegion;

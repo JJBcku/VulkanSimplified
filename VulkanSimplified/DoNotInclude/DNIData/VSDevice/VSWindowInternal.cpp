@@ -9,6 +9,7 @@
 #include "../VSCommon/VSSurfaceTransformFlagsInternal.h"
 
 #include "VSDeviceCoreInternal.h"
+#include "VSSynchronizationDataListsInternal.h"
 
 #include "../../../Include/VSMain/EventHandler/SdlWindowEventData.h"
 
@@ -18,8 +19,9 @@
 
 namespace VulkanSimplified
 {
-	WindowInternal::WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-		const WindowCreationData& creationData) : _eventHandler(eventHandler), _core(core)
+	WindowInternal::WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, SynchronizationDataListsInternal& synchroList,
+		VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const WindowCreationData& creationData) :
+		_eventHandler(eventHandler), _core(core), _synchroList(synchroList)
 	{
 		_instance = instance;
 		_physicalDevice = physicalDevice;
@@ -121,10 +123,17 @@ namespace VulkanSimplified
 		ReCreateSwapchain();
 	}
 
-	bool WindowInternal::AcquireNextImage(VkDevice device, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t& returnIndex)
+	bool WindowInternal::AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
+		uint32_t& returnIndex)
 	{
-		if (device != _device)
-			throw std::runtime_error("WindowInternal::AcquireNextImage Error: Program tried to used different device than swapchain was created with!");
+		VkSemaphore semaphore = VK_NULL_HANDLE;
+		VkFence fence = VK_NULL_HANDLE;
+
+		if (semaphoreID.has_value())
+			semaphore = _synchroList.GetSemaphore(semaphoreID.value());
+
+		if (fenceID.has_value())
+			fence = _synchroList.GetFence(fenceID.value());
 
 		VkResult result = vkAcquireNextImageKHR(_device, _swapchain, timeout, semaphore, fence, &returnIndex);
 

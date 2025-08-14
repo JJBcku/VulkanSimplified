@@ -4,6 +4,8 @@
 
 #include "../../../Include/VSMain/EventHandler/SdlEventHandlerTypedefs.h"
 
+#include "../../../Include/VSDevice/VSSynchronizationDataListsDef.h"
+
 #include <Miscellaneous/Bool64Def.h>
 #include <CustomLists/IDObject.h>
 
@@ -17,24 +19,22 @@ struct SDL_Window;
 
 namespace VulkanSimplified
 {
+	class DeviceCoreInternal;
+	class SdlEventHandlerInternal;
+	class SynchronizationDataListsInternal;
+
 	struct WindowCreationData;
 	struct SwapchainCreationData;
 
 	enum SurfacePresentModeBits : SurfacePresentModes;
 
 	struct SdlWindowEventData;
-}
-
-namespace VulkanSimplified
-{
-	class DeviceCoreInternal;
-	class SdlEventHandlerInternal;
 
 	class WindowInternal
 	{
 	public:
-		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device,
-			const WindowCreationData& creationData);
+		WindowInternal(SdlEventHandlerInternal& eventHandler, DeviceCoreInternal& core, SynchronizationDataListsInternal& synchroList,
+			VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const WindowCreationData& creationData);
 		~WindowInternal();
 
 		WindowInternal(const WindowInternal& rhs) noexcept = delete;
@@ -45,7 +45,8 @@ namespace VulkanSimplified
 
 		void CreateSwapchain(const SwapchainCreationData& creationData, bool throwOnSwapchainExist);
 
-		bool AcquireNextImage(VkDevice device, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t& returnIndex);
+		bool AcquireNextImage(uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
+			uint32_t& returnIndex);
 
 		VkSwapchainKHR GetSwapchain() const;
 
@@ -64,6 +65,7 @@ namespace VulkanSimplified
 	private:
 		SdlEventHandlerInternal& _eventHandler;
 		DeviceCoreInternal& _core;
+		SynchronizationDataListsInternal& _synchroList;
 
 		VkInstance _instance;
 		VkPhysicalDevice _physicalDevice;
