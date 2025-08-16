@@ -181,6 +181,43 @@ namespace VulkanSimplified
 		return ret;
 	}
 
+	VkDescriptorPool AutoCleanupIFDescriptorPool::GetDescriptorPool() const
+	{
+		return _pool;
+	}
+
+	std::vector<bool> AutoCleanupIFDescriptorPool::FreeDescriptorSets(const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetsIDs, bool throwOnIDNotFound)
+	{
+		std::vector<bool> ret;
+		ret.resize(descriptorSetsIDs.size(), false);
+
+		if (descriptorSetsIDs.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("AutoCleanupIFDescriptorPool::FreeDescriptorSets Error: Descriptor set ID list overflowed!");
+
+		std::vector<VkDescriptorSet> descriptorSetList;
+		descriptorSetList.reserve(descriptorSetsIDs.size());
+
+		for (size_t i = 0; i < descriptorSetsIDs.size(); ++i)
+		{
+			bool found = _descriptorSetList.CheckForID(descriptorSetsIDs[i]);
+
+			if (found)
+			{
+				descriptorSetList.push_back(_descriptorSetList.GetConstObject(descriptorSetsIDs[i]).GetDescriptorSet());
+				_descriptorSetList.RemoveObject(descriptorSetsIDs[i], true);
+				ret[i] = true;
+			}
+			else if (!throwOnIDNotFound)
+			{
+				ret[i] = false;
+			}
+			else
+				throw std::runtime_error("AutoCleanupIFDescriptorPool::FreeDescriptorSets Error: Program tried to free non-existent descriptor set!");
+		}
+
+		return ret;
+	}
+
 	void AutoCleanupIFDescriptorPool::DestroyDescriptorPool() noexcept
 	{
 		if (_pool != VK_NULL_HANDLE)

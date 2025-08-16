@@ -182,6 +182,11 @@ namespace VulkanSimplified
 		return ret;
 	}
 
+	VkDescriptorPool AutoCleanupNIFDescriptorPool::GetDescriptorPool() const
+	{
+		return _pool;
+	}
+
 	void AutoCleanupNIFDescriptorPool::DestroyDescriptorPool() noexcept
 	{
 		if (_pool != VK_NULL_HANDLE)

@@ -50,6 +50,16 @@ namespace VulkanSimplified
 		_internal.WriteNIFDescriptorSetCombined2DArrayTextureSamplerBindings(descriptorPoolID, writeDataList);
 	}
 
+	void DescriptorDataLists::ResetNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID)
+	{
+		_internal.ResetNIFDescriptorPool(descriptorPoolID);
+	}
+
+	bool DescriptorDataLists::DeleteNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID, bool throwOnIDNotFound)
+	{
+		return _internal.DeleteNIFDescriptorPool(descriptorPoolID, throwOnIDNotFound);
+	}
+
 	IDObject<AutoCleanupIFDescriptorPool> DescriptorDataLists::AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 		const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
 	{
@@ -79,6 +89,22 @@ namespace VulkanSimplified
 		const std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteData>& writeDataList)
 	{
 		_internal.WriteIFDescriptorSetCombined2DArrayTextureSamplerBindings(descriptorPoolID, writeDataList);
+	}
+
+	std::vector<bool> DescriptorDataLists::FreeDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetsIDs, bool throwOnIDNotFound)
+	{
+		return _internal.FreeDescriptorSets(descriptorPoolID, descriptorSetsIDs, throwOnIDNotFound);
+	}
+
+	void DescriptorDataLists::ResetIFDescriptorPool(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID)
+	{
+		_internal.ResetIFDescriptorPool(descriptorPoolID);
+	}
+
+	bool DescriptorDataLists::DeleteIFDescriptorPool(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, bool throwOnIDNotFound)
+	{
+		return _internal.DeleteIFDescriptorPool(descriptorPoolID, throwOnIDNotFound);
 	}
 
 }

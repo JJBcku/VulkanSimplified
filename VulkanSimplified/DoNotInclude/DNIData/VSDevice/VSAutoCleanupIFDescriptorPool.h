@@ -37,6 +37,10 @@ namespace VulkanSimplified
 		VkDescriptorSet GetDescriptorSet(IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
 		std::vector<VkDescriptorSet> GetDescriptorSetList(const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
 
+		VkDescriptorPool GetDescriptorPool() const;
+
+		std::vector<bool> FreeDescriptorSets(const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetsIDs, bool throwOnIDNotFound);
+
 	private:
 		VkDevice _device;
 		VkDescriptorPool _pool;

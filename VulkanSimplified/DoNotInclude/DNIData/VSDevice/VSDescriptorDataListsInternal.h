@@ -62,6 +62,10 @@ namespace VulkanSimplified
 		std::vector<VkDescriptorSet> GetNIFDescriptorSetList(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
 
+		void ResetNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID);
+
+		bool DeleteNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID, bool throwOnIDNotFound);
+
 		IDObject<AutoCleanupIFDescriptorPool> AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 			const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving);
 
@@ -79,6 +83,11 @@ namespace VulkanSimplified
 			IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
 		std::vector<VkDescriptorSet> GetIFDescriptorSetList(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 			const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
+
+		std::vector<bool> FreeDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetsIDs, bool throwOnIDNotFound);
+		void ResetIFDescriptorPool(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID);
+
+		bool DeleteIFDescriptorPool(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, bool throwOnIDNotFound);
 
 	private:
 		const SharedDescriptorDataListInternal& _sharedDescriptorData;

@@ -339,6 +339,21 @@ namespace VulkanSimplified
 		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
 	}
 
+	void DescriptorDataListsInternal::ResetNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID)
+	{
+		auto& descriptorPoolData = _NIFDescriptorPools.GetObject(descriptorPoolID);
+
+		VkDescriptorPool descriptorPool = descriptorPoolData.GetDescriptorPool();
+
+		if (vkResetDescriptorPool(_device, descriptorPool, 0) != VK_SUCCESS)
+			throw std::runtime_error("DescriptorDataListsInternal::ResetNIFDescriptorPool Error: Program failed to reset the descriptor pool!");
+	}
+
+	bool DescriptorDataListsInternal::DeleteNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID, bool throwOnIDNotFound)
+	{
+		return _NIFDescriptorPools.RemoveObject(descriptorPoolID, throwOnIDNotFound);
+	}
+
 	IDObject<AutoCleanupIFDescriptorPool> DescriptorDataListsInternal::AddIndividualFreeingDescriptorPool(uint32_t maxTotalSetCount,
 		const std::vector<std::pair<DescriptorTypeFlagBits, uint32_t>>& maxTypeCountsList, size_t addOnReserving)
 	{
@@ -573,6 +588,27 @@ namespace VulkanSimplified
 		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const
 	{
 		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
+	}
+
+	std::vector<bool> DescriptorDataListsInternal::FreeDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetsIDs, bool throwOnIDNotFound)
+	{
+		return _IFDescriptorPools.GetObject(descriptorPoolID).FreeDescriptorSets(descriptorSetsIDs, throwOnIDNotFound);
+	}
+
+	void DescriptorDataListsInternal::ResetIFDescriptorPool(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID)
+	{
+		auto& descriptorPoolData = _IFDescriptorPools.GetObject(descriptorPoolID);
+
+		VkDescriptorPool descriptorPool = descriptorPoolData.GetDescriptorPool();
+
+		if (vkResetDescriptorPool(_device, descriptorPool, 0) != VK_SUCCESS)
+			throw std::runtime_error("DescriptorDataListsInternal::ResetIFDescriptorPool Error: Program failed to reset the descriptor pool!");
+	}
+
+	bool DescriptorDataListsInternal::DeleteIFDescriptorPool(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID, bool throwOnIDNotFound)
+	{
+		return _IFDescriptorPools.RemoveObject(descriptorPoolID, throwOnIDNotFound);
 	}
 	
 }
