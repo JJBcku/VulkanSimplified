@@ -17,6 +17,7 @@ namespace VulkanSimplified
 
 	struct DescriptorSetUniformBufferBindingWriteData;
 	struct DescriptorSetCombined2DTextureSamplerWriteData;
+	struct DescriptorSetCombined2DArrayTextureSamplerWriteData;
 }
 
 typedef struct VkDevice_T* VkDevice;
@@ -53,6 +54,8 @@ namespace VulkanSimplified
 			const std::vector<DescriptorSetUniformBufferBindingWriteData>& writeDataList);
 		void WriteNIFDescriptorSetCombined2DTextureSamplerBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			const std::vector<DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList);
+		void WriteNIFDescriptorSetCombined2DArrayTextureSamplerBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+			const std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteData>& writeDataList);
 
 		VkDescriptorSet GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 			IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
@@ -69,6 +72,8 @@ namespace VulkanSimplified
 			const std::vector<DescriptorSetUniformBufferBindingWriteData>& writeDataList);
 		void WriteIFDescriptorSetCombined2DTextureSamplerBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 			const std::vector<DescriptorSetCombined2DTextureSamplerWriteData>& writeDataList);
+		void WriteIFDescriptorSetCombined2DArrayTextureSamplerBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+			const std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteData>& writeDataList);
 
 		VkDescriptorSet GetIFDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 			IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;

@@ -161,6 +161,7 @@
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSCommandPoolQFGroupListInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDataBufferListsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDescriptorDataListsInternal.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetUniformBufferBindingWriteDataInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDeviceCoreInternal.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Include\VSDevice\VSCommandBufferBaseDef.h" />
     <ClInclude Include="Include\VSDevice\VSCommandBufferUsageDef.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorPoolGenericID.h" />
+    <ClInclude Include="Include\VSDevice\VSDescriptorSetCombined2DArrayTextureSamplerWriteData.h" />
     <ClInclude Include="Include\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteData.h" />
     <ClInclude Include="DoNotInclude\ICode\VSDevice\VSDeviceIframework.h" />
     <ClInclude Include="DoNotInclude\ICode\VSDevice\VSDeviceIpch.h" />
@@ -271,6 +273,7 @@
     <ClInclude Include="Include\VSDevice\VSIRCommandPoolDef.h" />
     <ClInclude Include="Include\VSDevice\VSNIRCommandPool.h" />
     <ClInclude Include="Include\VSDevice\VSNIRCommandPoolDef.h" />
+    <ClInclude Include="Include\VSDevice\VSOptionalSamplerDef.h" />
     <ClInclude Include="Include\VSDevice\VSPrimaryIRCommandBufferDef.h" />
     <ClInclude Include="Include\VSDevice\VSPrimaryNIRCommandBufferDef.h" />
     <ClInclude Include="Include\VSDevice\VSQueueOwnershipTransferData.h" />
@@ -656,6 +659,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceDNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceDNIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceDNIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceDNIpch.h</PrecompiledHeaderFile>
@@ -981,6 +990,12 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSDevice\VSDescriptorPoolGenericID.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\ICode\VSDevice\VSDescriptorSetCombined2DArrayTextureSamplerWriteData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSDeviceIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSDeviceIpch.h</PrecompiledHeaderFile>

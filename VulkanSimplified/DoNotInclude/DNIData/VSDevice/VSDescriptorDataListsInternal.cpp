@@ -18,9 +18,11 @@
 
 #include "../../../Include/VSDevice/VSDescriptorSetUniformBufferBindingWriteData.h"
 #include "../../../Include/VSDevice/VSDescriptorSetCombined2DTextureSamplerWriteData.h"
+#include "../../../Include/VSDevice/VSDescriptorSetCombined2DArrayTextureSamplerWriteData.h"
 
 #include "VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 #include "VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
+#include "VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.h"
 
 namespace VulkanSimplified
 {
@@ -232,7 +234,7 @@ namespace VulkanSimplified
 			outData.startArrayIndex = inData.startArrayIndex;
 
 			if (inData.imageDataList.size() > std::numeric_limits<uint32_t>::max())
-				throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DTextureSamplerBindings Error: image data list overflowed");
+				throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DTextureSamplerBindings Error: Image data list overflowed");
 
 			outData.imageInfo.resize(inData.imageDataList.size());
 
@@ -266,6 +268,63 @@ namespace VulkanSimplified
 		}
 
 		pool.WriteDescriptorSetCombined2DTextureSamplerBindings(writeInternalData);
+	}
+
+	void DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DArrayTextureSamplerBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		const std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteData>& writeDataList)
+	{
+		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DArrayTextureSamplerBindings Error: Write data list overflowed!");
+
+		std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal> writeInternalData;
+		writeInternalData.resize(writeDataList.size());
+
+		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
+
+		for (size_t i = 0; i < writeDataList.size(); ++i)
+		{
+			const auto& inData = writeDataList[i];
+			auto& outData = writeInternalData[i];
+
+			outData.descriptorSetID = inData.descriptorSetID;
+			outData.binding = inData.binding;
+			outData.startArrayIndex = inData.startArrayIndex;
+
+			if (inData.imageDataList.size() > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetCombined2DArrayTextureSamplerBindings Error: Image data list overflowed");
+
+			outData.imageInfo.resize(inData.imageDataList.size());
+
+			for (size_t j = 0; j < inData.imageDataList.size(); ++j)
+			{
+				auto& imageInfo = outData.imageInfo[j];
+
+				const Optional2DArrayTextureView& viewID = inData.imageDataList[j].first.first;
+				const OptionalSampler& samplerID = inData.imageDataList[j].first.second;
+
+				if (samplerID.has_value())
+				{
+					imageInfo.sampler = _imageList.GetSampler(samplerID.value());
+				}
+				else
+				{
+					imageInfo.sampler = VK_NULL_HANDLE;
+				}
+
+				if (viewID.has_value())
+				{
+					imageInfo.imageView = _imageList.Get2DArrayTextureImageView(viewID.value().first, viewID.value().second);
+				}
+				else
+				{
+					imageInfo.imageView = VK_NULL_HANDLE;
+				}
+
+				imageInfo.imageLayout = TranslateImageLayout(inData.imageDataList[j].second);
+			}
+		}
+
+		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
 	}
 
 	VkDescriptorSet DescriptorDataListsInternal::GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
@@ -445,6 +504,63 @@ namespace VulkanSimplified
 		}
 
 		pool.WriteDescriptorSetCombined2DTextureSamplerBindings(writeInternalData);
+	}
+
+	void DescriptorDataListsInternal::WriteIFDescriptorSetCombined2DArrayTextureSamplerBindings(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
+		const std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteData>& writeDataList)
+	{
+		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetCombined2DArrayTextureSamplerBindings Error: Write data list overflowed!");
+
+		std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal> writeInternalData;
+		writeInternalData.resize(writeDataList.size());
+
+		auto& pool = _IFDescriptorPools.GetObject(descriptorPoolID);
+
+		for (size_t i = 0; i < writeDataList.size(); ++i)
+		{
+			const auto& inData = writeDataList[i];
+			auto& outData = writeInternalData[i];
+
+			outData.descriptorSetID = inData.descriptorSetID;
+			outData.binding = inData.binding;
+			outData.startArrayIndex = inData.startArrayIndex;
+
+			if (inData.imageDataList.size() > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetCombined2DArrayTextureSamplerBindings Error: image data list overflowed");
+
+			outData.imageInfo.resize(inData.imageDataList.size());
+
+			for (size_t j = 0; j < inData.imageDataList.size(); ++j)
+			{
+				auto& imageInfo = outData.imageInfo[j];
+
+				const Optional2DArrayTextureView& viewID = inData.imageDataList[j].first.first;
+				const OptionalSampler& samplerID = inData.imageDataList[j].first.second;
+
+				if (samplerID.has_value())
+				{
+					imageInfo.sampler = _imageList.GetSampler(samplerID.value());
+				}
+				else
+				{
+					imageInfo.sampler = VK_NULL_HANDLE;
+				}
+
+				if (viewID.has_value())
+				{
+					imageInfo.imageView = _imageList.Get2DArrayTextureImageView(viewID.value().first, viewID.value().second);
+				}
+				else
+				{
+					imageInfo.imageView = VK_NULL_HANDLE;
+				}
+
+				imageInfo.imageLayout = TranslateImageLayout(inData.imageDataList[j].second);
+			}
+		}
+
+		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
 	}
 
 	VkDescriptorSet DescriptorDataListsInternal::GetIFDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,

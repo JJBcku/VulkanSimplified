@@ -14,6 +14,7 @@ namespace VulkanSimplified
 {
 	struct DescriptorSetUniformBufferBindingWriteDataInternal;
 	struct DescriptorSetCombined2DTextureSamplerWriteDataInternal;
+	struct DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal;
 
 	class AutoCleanupIFDescriptorPool
 	{
@@ -31,6 +32,7 @@ namespace VulkanSimplified
 
 		void WriteUniformBufferDescriptorSetBindings(const std::vector<DescriptorSetUniformBufferBindingWriteDataInternal>& uniformBuffer);
 		void WriteDescriptorSetCombined2DTextureSamplerBindings(const std::vector<DescriptorSetCombined2DTextureSamplerWriteDataInternal>& combined2DTextureSamplers);
+		void WriteDescriptorSetCombined2DArrayTextureSamplerBindings(const std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal>& combined2DArrayTextureSamplers);
 
 		VkDescriptorSet GetDescriptorSet(IDObject<AutoCleanupDescriptorSet> descriptorSetID) const;
 		std::vector<VkDescriptorSet> GetDescriptorSetList(const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const;
