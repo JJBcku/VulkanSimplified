@@ -6,6 +6,7 @@
 #include "VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 #include "VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 #include "VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.h"
+#include "VSDescriptorSetInputAttachmentWriteDataInternal.h"
 
 namespace VulkanSimplified
 {
@@ -164,7 +165,7 @@ namespace VulkanSimplified
 		vkUpdateDescriptorSets(_device, static_cast<uint32_t>(descriptorWriteDataList.size()), descriptorWriteDataList.data(), 0, nullptr);
 	}
 
-	void AutoCleanupNIFDescriptorPool::WriteDescriptorSetInputAttachmentBindings(const std::vector<DescriptorSetCombined2DTextureSamplerWriteDataInternal> inputImages)
+	void AutoCleanupNIFDescriptorPool::WriteDescriptorSetInputAttachmentBindings(const std::vector<DescriptorSetInputAttachmentWriteDataInternal> inputImages)
 	{
 		if (inputImages.empty())
 			return;

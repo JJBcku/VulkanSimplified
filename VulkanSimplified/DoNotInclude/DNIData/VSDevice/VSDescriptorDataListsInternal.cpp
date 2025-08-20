@@ -335,7 +335,7 @@ namespace VulkanSimplified
 		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetInputAttachmentBindings Error: Write data list overflowed!");
 
-		std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal> writeInternalData;
+		std::vector<DescriptorSetInputAttachmentWriteDataInternal> writeInternalData;
 		writeInternalData.resize(writeDataList.size());
 
 		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
@@ -392,7 +392,7 @@ namespace VulkanSimplified
 			}
 		}
 
-		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
+		pool.WriteDescriptorSetInputAttachmentBindings(writeInternalData);
 	}
 
 	VkDescriptorSet DescriptorDataListsInternal::GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
@@ -652,7 +652,7 @@ namespace VulkanSimplified
 		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetInputAttachmentBindings Error: Write data list overflowed!");
 
-		std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal> writeInternalData;
+		std::vector<DescriptorSetInputAttachmentWriteDataInternal> writeInternalData;
 		writeInternalData.resize(writeDataList.size());
 
 		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
@@ -709,7 +709,7 @@ namespace VulkanSimplified
 			}
 		}
 
-		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
+		pool.WriteDescriptorSetInputAttachmentBindings(writeInternalData);
 	}
 
 	VkDescriptorSet DescriptorDataListsInternal::GetIFDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,

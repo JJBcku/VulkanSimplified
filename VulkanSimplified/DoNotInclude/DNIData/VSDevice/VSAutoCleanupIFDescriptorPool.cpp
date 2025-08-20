@@ -165,7 +165,7 @@ namespace VulkanSimplified
 		vkUpdateDescriptorSets(_device, static_cast<uint32_t>(descriptorWriteDataList.size()), descriptorWriteDataList.data(), 0, nullptr);
 	}
 
-	void AutoCleanupIFDescriptorPool::WriteDescriptorSetInputAttachmentBindings(const std::vector<DescriptorSetCombined2DTextureSamplerWriteDataInternal> inputImages)
+	void AutoCleanupIFDescriptorPool::WriteDescriptorSetInputAttachmentBindings(const std::vector<DescriptorSetInputAttachmentWriteDataInternal> inputImages)
 	{
 		if (inputImages.empty())
 			return;
