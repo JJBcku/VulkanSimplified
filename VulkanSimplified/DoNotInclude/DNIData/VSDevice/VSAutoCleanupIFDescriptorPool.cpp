@@ -7,6 +7,8 @@
 #include "VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 #include "VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.h"
 
+#include "VSDescriptorSetInputAttachmentWriteDataInternal.h"
+
 namespace VulkanSimplified
 {
 	AutoCleanupIFDescriptorPool::AutoCleanupIFDescriptorPool(VkDevice device, VkDescriptorPool pool, uint32_t maxTotalSetCount) :
@@ -156,6 +158,32 @@ namespace VulkanSimplified
 			writeData.dstArrayElement = inData.startArrayIndex;
 			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
 			writeData.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+
+			writeData.pImageInfo = inData.imageInfo.data();
+		}
+
+		vkUpdateDescriptorSets(_device, static_cast<uint32_t>(descriptorWriteDataList.size()), descriptorWriteDataList.data(), 0, nullptr);
+	}
+
+	void AutoCleanupIFDescriptorPool::WriteDescriptorSetInputAttachmentBindings(const std::vector<DescriptorSetCombined2DTextureSamplerWriteDataInternal> inputImages)
+	{
+		if (inputImages.empty())
+			return;
+
+		std::vector<VkWriteDescriptorSet> descriptorWriteDataList;
+		descriptorWriteDataList.resize(inputImages.size());
+
+		for (size_t i = 0; i < inputImages.size(); ++i)
+		{
+			auto& inData = inputImages[i];
+			auto& writeData = descriptorWriteDataList[i];
+
+			writeData.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+			writeData.dstSet = _descriptorSetList.GetConstObject(inData.descriptorSetID).GetDescriptorSet();
+			writeData.dstBinding = inData.binding;
+			writeData.dstArrayElement = inData.startArrayIndex;
+			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
+			writeData.descriptorType = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;
 
 			writeData.pImageInfo = inData.imageInfo.data();
 		}

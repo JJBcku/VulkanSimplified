@@ -643,6 +643,15 @@
     <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.cpp">
       <Filter>Source Files\DoNotInclude\VSDevice</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetInputAttachmentWriteDataInternal.cpp">
+      <Filter>Source Files\DoNotInclude\VSDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\ICode\VSDevice\VSDescriptorSetInputAttachmentWriteData.cpp">
+      <Filter>Source Files\Include\VSDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\ICode\VSCommon\VSImageViewGenericID.cpp">
+      <Filter>Source Files\Include\VSCommon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIframework.h">
@@ -1537,6 +1546,15 @@
       <Filter>Header Files\Include\VSDevice</Filter>
     </ClInclude>
     <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.h">
+      <Filter>Header Files\DoNotInclude\VSDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSCommon\VSImageViewGenericID.h">
+      <Filter>Header Files\Include\VSCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VSDevice\VSDescriptorSetInputAttachmentWriteData.h">
+      <Filter>Header Files\Include\VSDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="DoNotInclude\DNIData\VSDevice\VSDescriptorSetInputAttachmentWriteDataInternal.h">
       <Filter>Header Files\DoNotInclude\VSDevice</Filter>
     </ClInclude>
   </ItemGroup>

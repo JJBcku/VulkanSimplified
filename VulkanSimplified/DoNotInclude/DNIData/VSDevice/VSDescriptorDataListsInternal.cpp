@@ -19,10 +19,12 @@
 #include "../../../Include/VSDevice/VSDescriptorSetUniformBufferBindingWriteData.h"
 #include "../../../Include/VSDevice/VSDescriptorSetCombined2DTextureSamplerWriteData.h"
 #include "../../../Include/VSDevice/VSDescriptorSetCombined2DArrayTextureSamplerWriteData.h"
+#include "../../../Include/VSDevice/VSDescriptorSetInputAttachmentWriteData.h"
 
 #include "VSDescriptorSetUniformBufferBindingWriteDataInternal.h"
 #include "VSDescriptorSetCombined2DTextureSamplerWriteDataInternal.h"
 #include "VSDescriptorSetCombined2DArrayTextureSamplerWriteDataInternal.h"
+#include "VSDescriptorSetInputAttachmentWriteDataInternal.h"
 
 namespace VulkanSimplified
 {
@@ -327,6 +329,72 @@ namespace VulkanSimplified
 		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
 	}
 
+	void DescriptorDataListsInternal::WriteNIFDescriptorSetInputAttachmentBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		const std::vector<DescriptorSetInputAttachmentWriteData>& writeDataList)
+	{
+		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetInputAttachmentBindings Error: Write data list overflowed!");
+
+		std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal> writeInternalData;
+		writeInternalData.resize(writeDataList.size());
+
+		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
+
+		for (size_t i = 0; i < writeDataList.size(); ++i)
+		{
+			const auto& inData = writeDataList[i];
+			auto& outData = writeInternalData[i];
+
+			outData.descriptorSetID = inData.descriptorSetID;
+			outData.binding = inData.binding;
+			outData.startArrayIndex = inData.startArrayIndex;
+
+			if (inData.imageDataList.size() > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetInputAttachmentBindings Error: Image data list overflowed");
+
+			outData.imageInfo.resize(inData.imageDataList.size());
+
+			for (size_t j = 0; j < inData.imageDataList.size(); ++j)
+			{
+				auto& imageInfo = outData.imageInfo[j];
+				imageInfo.sampler = VK_NULL_HANDLE;
+
+				if (inData.imageDataList[j].first.has_value())
+				{
+					auto& imageViewID = inData.imageDataList[j].first.value();
+					auto& type = imageViewID.IDType;
+
+					switch (type)
+					{
+					case ImageViewIDType::COLOR:
+						imageInfo.imageView = _imageList.GetColorRenderTargetImageView(imageViewID.colorViewID.imageID, imageViewID.colorViewID.viewID);
+						break;
+					case ImageViewIDType::DEPTH_STENCIL:
+						imageInfo.imageView = _imageList.GetDepthStencilRenderTargetImageView(imageViewID.depthStencilViewID.imageID, imageViewID.depthStencilViewID.viewID);
+						break;
+					case ImageViewIDType::TEXTURE_2D:
+						imageInfo.imageView = _imageList.Get2DTextureImageView(imageViewID.texture2DViewID.imageID, imageViewID.texture2DViewID.viewID);
+						break;
+					case ImageViewIDType::ARRAY_TEXTURE_2D:
+						imageInfo.imageView = _imageList.Get2DArrayTextureImageView(imageViewID.texture2DArrayViewID.imageID, imageViewID.texture2DArrayViewID.viewID);
+						break;
+					case ImageViewIDType::NONE:
+					default:
+						throw std::runtime_error("DescriptorDataListsInternal::WriteNIFDescriptorSetInputAttachmentBindings Error: Function was give an erroneous image view ID type!");
+					}
+				}
+				else
+				{
+					imageInfo.imageView = VK_NULL_HANDLE;
+				}
+
+				imageInfo.imageLayout = TranslateImageLayout(inData.imageDataList[j].second);
+			}
+		}
+
+		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
+	}
+
 	VkDescriptorSet DescriptorDataListsInternal::GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 		IDObject<AutoCleanupDescriptorSet> descriptorSetID) const
 	{
@@ -565,6 +633,72 @@ namespace VulkanSimplified
 				if (viewID.has_value())
 				{
 					imageInfo.imageView = _imageList.Get2DArrayTextureImageView(viewID.value().first, viewID.value().second);
+				}
+				else
+				{
+					imageInfo.imageView = VK_NULL_HANDLE;
+				}
+
+				imageInfo.imageLayout = TranslateImageLayout(inData.imageDataList[j].second);
+			}
+		}
+
+		pool.WriteDescriptorSetCombined2DArrayTextureSamplerBindings(writeInternalData);
+	}
+
+	void DescriptorDataListsInternal::WriteIFDescriptorSetInputAttachmentBindings(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
+		const std::vector<DescriptorSetInputAttachmentWriteData>& writeDataList)
+	{
+		if (writeDataList.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetInputAttachmentBindings Error: Write data list overflowed!");
+
+		std::vector<DescriptorSetCombined2DArrayTextureSamplerWriteDataInternal> writeInternalData;
+		writeInternalData.resize(writeDataList.size());
+
+		auto& pool = _NIFDescriptorPools.GetObject(descriptorPoolID);
+
+		for (size_t i = 0; i < writeDataList.size(); ++i)
+		{
+			const auto& inData = writeDataList[i];
+			auto& outData = writeInternalData[i];
+
+			outData.descriptorSetID = inData.descriptorSetID;
+			outData.binding = inData.binding;
+			outData.startArrayIndex = inData.startArrayIndex;
+
+			if (inData.imageDataList.size() > std::numeric_limits<uint32_t>::max())
+				throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetInputAttachmentBindings Error: Image data list overflowed");
+
+			outData.imageInfo.resize(inData.imageDataList.size());
+
+			for (size_t j = 0; j < inData.imageDataList.size(); ++j)
+			{
+				auto& imageInfo = outData.imageInfo[j];
+				imageInfo.sampler = VK_NULL_HANDLE;
+
+				if (inData.imageDataList[j].first.has_value())
+				{
+					auto& imageViewID = inData.imageDataList[j].first.value();
+					auto& type = imageViewID.IDType;
+
+					switch (type)
+					{
+					case ImageViewIDType::COLOR:
+						imageInfo.imageView = _imageList.GetColorRenderTargetImageView(imageViewID.colorViewID.imageID, imageViewID.colorViewID.viewID);
+						break;
+					case ImageViewIDType::DEPTH_STENCIL:
+						imageInfo.imageView = _imageList.GetDepthStencilRenderTargetImageView(imageViewID.depthStencilViewID.imageID, imageViewID.depthStencilViewID.viewID);
+						break;
+					case ImageViewIDType::TEXTURE_2D:
+						imageInfo.imageView = _imageList.Get2DTextureImageView(imageViewID.texture2DViewID.imageID, imageViewID.texture2DViewID.viewID);
+						break;
+					case ImageViewIDType::ARRAY_TEXTURE_2D:
+						imageInfo.imageView = _imageList.Get2DArrayTextureImageView(imageViewID.texture2DArrayViewID.imageID, imageViewID.texture2DArrayViewID.viewID);
+						break;
+					case ImageViewIDType::NONE:
+					default:
+						throw std::runtime_error("DescriptorDataListsInternal::WriteIFDescriptorSetInputAttachmentBindings Error: Function was give an erroneous image view ID type!");
+					}
 				}
 				else
 				{
