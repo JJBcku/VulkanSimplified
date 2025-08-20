@@ -183,7 +183,7 @@ namespace VulkanSimplified
 			writeData.dstBinding = inData.binding;
 			writeData.dstArrayElement = inData.startArrayIndex;
 			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
-			writeData.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+			writeData.descriptorType = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT;
 
 			writeData.pImageInfo = inData.imageInfo.data();
 		}
