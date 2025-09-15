@@ -1,7 +1,7 @@
 #include "VSDeviceDNIpch.h"
 #include "VSDeviceCoreInternal.h"
 
-#include "../VSInstance/VsLogicalDeviceInternalCreationData.h"
+#include "../VSInstance/VSLogicalDeviceInternalCreationData.h"
 
 namespace VulkanSimplified
 {

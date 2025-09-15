@@ -16,7 +16,7 @@
 #include "VSSynchronizationDataListsInternal.h"
 #include "VSCommandPoolMainListInternal.h"
 
-#include "../VSInstance/VsLogicalDeviceInternalCreationData.h"
+#include "../VSInstance/VSLogicalDeviceInternalCreationData.h"
 
 #include "../../../Include/VSDevice/VSDeviceInitialCapacitiesList.h"
 

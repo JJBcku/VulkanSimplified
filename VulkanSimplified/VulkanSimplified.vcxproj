@@ -192,7 +192,7 @@
     <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceInternalCreationData.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceDNIframework.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSInstanceDNIpch.h" />
-    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VsLogicalDeviceInternalCreationData.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSLogicalDeviceInternalCreationData.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSPhysicalDeviceDataInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIframework.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSMain\EventHandler\SdlEhDNIpch.h" />
@@ -1648,7 +1648,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSInstanceDNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSInstance\VsLogicalDeviceInternalCreationData.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSInstance\VSLogicalDeviceInternalCreationData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSInstanceDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSInstanceDNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSInstanceDNIpch.h</PrecompiledHeaderFile>

@@ -364,7 +364,7 @@
     <ClCompile Include="DoNotInclude\ICode\VSInstance\VSLogicalDeviceCreateInfo.cpp">
       <Filter>Source Files\Include\VSInstance</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSInstance\VsLogicalDeviceInternalCreationData.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSInstance\VSLogicalDeviceInternalCreationData.cpp">
       <Filter>Source Files\DoNotInclude\VSInstance</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSMain\VSMain.cpp">
@@ -1080,7 +1080,7 @@
     <ClInclude Include="Include\VSInstance\VSLogicalDeviceCreateInfo.h">
       <Filter>Header Files\Include\VSInstance</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VsLogicalDeviceInternalCreationData.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSInstance\VSLogicalDeviceInternalCreationData.h">
       <Filter>Header Files\DoNotInclude\VSInstance</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSMain\VSMain.h">

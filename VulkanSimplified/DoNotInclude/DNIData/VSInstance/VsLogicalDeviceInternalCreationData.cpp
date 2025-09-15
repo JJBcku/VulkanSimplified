@@ -1,5 +1,5 @@
 #include "VSInstanceDNIpch.h"
-#include "VsLogicalDeviceInternalCreationData.h"
+#include "VSLogicalDeviceInternalCreationData.h"
 
 namespace VulkanSimplified
 {

@@ -8,7 +8,7 @@
 #include "../VSDevice/VSDeviceMainInternal.h"
 
 #include "../../../Include/VSInstance/VSLogicalDeviceCreateInfo.h"
-#include "VsLogicalDeviceInternalCreationData.h"
+#include "VSLogicalDeviceInternalCreationData.h"
 
 #include "../../../Include/VSDevice/VSDeviceInitialCapacitiesList.h"
 
