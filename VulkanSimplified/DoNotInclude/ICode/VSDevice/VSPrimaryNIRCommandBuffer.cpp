@@ -34,6 +34,11 @@ namespace VulkanSimplified
 		_internal.EndRenderPass();
 	}
 
+	void PrimaryNIRCommandBuffer::BeginNextSubpass(bool usesSecondaryBuffers)
+	{
+		_internal.BeginNextSubpass(usesSecondaryBuffers);
+	}
+
 	void PrimaryNIRCommandBuffer::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<QueueOwnershipTransferData> queueOwnershipTransferData,
 		uint32_t imagesIndex)
 	{

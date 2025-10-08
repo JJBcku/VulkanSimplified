@@ -37,6 +37,8 @@ namespace VulkanSimplified
 			uint32_t width, uint32_t height, const std::vector<std::optional<RenderPassClearValueID>>& clearValues, bool usesSecondaryBuffers);
 		void EndRenderPass();
 
+		void BeginNextSubpass(bool usesSecondaryBuffers);
+
 		void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID,
 			std::optional<QueueOwnershipTransferData> queueOwnershipTransferData, uint32_t imagesIndex);
 		void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID,
