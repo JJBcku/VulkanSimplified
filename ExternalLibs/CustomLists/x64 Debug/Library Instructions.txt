@@ -1,0 +1,1 @@
+Copy CustomLists projects x64 Debug .lib and .pdb files to this folder
