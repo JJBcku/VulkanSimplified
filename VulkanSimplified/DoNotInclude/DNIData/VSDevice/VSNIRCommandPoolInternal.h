@@ -23,7 +23,7 @@ namespace VulkanSimplified
 	class SynchronizationDataListsInternal;
 	class DescriptorDataListsInternal;
 
-	class SharedRenderPassDataListInternal;
+	class SharedRenderPassDataListsInternal;
 
 	class PrimaryNIRCommandBufferInternal;
 	class SecondaryNIRCommandBufferInternal;
@@ -31,7 +31,7 @@ namespace VulkanSimplified
 	class NIRCommandPoolInternal
 	{
 	public:
-		NIRCommandPoolInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData, const SharedRenderPassDataListInternal& sharedRenderPassData,
+		NIRCommandPoolInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData, const SharedRenderPassDataListsInternal& sharedRenderPassData,
 			const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList, ImageDataListsInternal& imageList,
 			DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList, VkDevice device, VkCommandPool commandPool, 
 			VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
@@ -62,7 +62,7 @@ namespace VulkanSimplified
 		const DeviceCoreInternal& _core;
 
 		const RenderPassListInternal& _deviceRenderPassData;
-		const SharedRenderPassDataListInternal& _sharedRenderPassData;
+		const SharedRenderPassDataListsInternal& _sharedRenderPassData;
 
 		const PipelineDataListsInternal& _devicePipelineData;
 		const SynchronizationDataListsInternal& _synchronizationList;

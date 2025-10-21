@@ -10,8 +10,8 @@ namespace VulkanSimplified
 namespace VulkanSimplified
 {
 	class SharedDescriptorDataListInternal;
-	class SharedRenderPassDataListInternal;
-	class SharedPipelineDataListInternal;
+	class SharedRenderPassDataListsInternal;
+	class SharedPipelineDataListsInternal;
 
 	class SharedDataMainListInternal
 	{
@@ -20,16 +20,16 @@ namespace VulkanSimplified
 		~SharedDataMainListInternal();
 
 		SharedDescriptorDataListInternal& GetSharedDescriptorDataList();
-		SharedRenderPassDataListInternal& GetSharedRenderPassDataList();
-		SharedPipelineDataListInternal& GetPipelineDataList();
+		SharedRenderPassDataListsInternal& GetSharedRenderPassDataLists();
+		SharedPipelineDataListsInternal& GetPipelineDataLists();
 
 		const SharedDescriptorDataListInternal& GetSharedDescriptorDataList() const;
-		const SharedRenderPassDataListInternal& GetSharedRenderPassDataList() const;
-		const SharedPipelineDataListInternal& GetPipelineDataList() const;
+		const SharedRenderPassDataListsInternal& GetSharedRenderPassDataLists() const;
+		const SharedPipelineDataListsInternal& GetPipelineDataLists() const;
 
 	private:
 		std::unique_ptr<SharedDescriptorDataListInternal> _descriptorData;
-		std::unique_ptr<SharedRenderPassDataListInternal> _renderPassData;
-		std::unique_ptr<SharedPipelineDataListInternal> _pipelineData;
+		std::unique_ptr<SharedRenderPassDataListsInternal> _renderPassData;
+		std::unique_ptr<SharedPipelineDataListsInternal> _pipelineData;
 	};
 }

@@ -17,7 +17,7 @@ namespace VulkanSimplified
 
 namespace VulkanSimplified
 {
-	class SharedRenderPassDataListInternal;
+	class SharedRenderPassDataListsInternal;
 
 	class AutoCleanupRenderPass;
 
@@ -27,7 +27,7 @@ namespace VulkanSimplified
 	class RenderPassListInternal
 	{
 	public:
-		RenderPassListInternal(const SharedRenderPassDataListInternal& sharedRenderPassData, VkDevice device,
+		RenderPassListInternal(const SharedRenderPassDataListsInternal& sharedRenderPassData, VkDevice device,
 			const RenderPassDataListsInitialCapacities& initialCapacities);
 		~RenderPassListInternal();
 
@@ -42,7 +42,7 @@ namespace VulkanSimplified
 		VkRenderPass GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const;
 
 	private:
-		const SharedRenderPassDataListInternal& _sharedRenderPassData;
+		const SharedRenderPassDataListsInternal& _sharedRenderPassData;
 
 		VkDevice _device;
 

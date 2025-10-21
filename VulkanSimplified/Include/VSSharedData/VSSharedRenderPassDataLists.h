@@ -8,14 +8,14 @@
 #include "../VSCommon/VSPipelineStageFlagsDef.h"
 #include "../VSCommon/VSRenderPassAttachmentOPDef.h"
 
-#include "VSSharedRenderPassDataListDef.h"
+#include "VSSharedRenderPassDataListsDef.h"
 
 #include <stdint.h>
 #include <limits>
 
 namespace VulkanSimplified
 {
-	class SharedRenderPassDataListInternal;
+	class SharedRenderPassDataListsInternal;
 }
 
 namespace VulkanSimplified
@@ -29,11 +29,11 @@ namespace VulkanSimplified
 
 	constexpr uint32_t externalSubpass = std::numeric_limits<uint32_t>::max();
 
-	class SharedRenderPassDataList
+	class SharedRenderPassDataLists
 	{
 	public:
-		SharedRenderPassDataList(SharedRenderPassDataListInternal& ref);
-		~SharedRenderPassDataList();
+		SharedRenderPassDataLists(SharedRenderPassDataListsInternal& ref);
+		~SharedRenderPassDataLists();
 
 		IDObject<RenderPassAttachmentData> AddRenderPassAttachment(DataFormatSetIndependentID format, ImageSampleFlagBits samples,
 			RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP, ImageLayoutFlags initialLayout,
@@ -70,6 +70,6 @@ namespace VulkanSimplified
 		IDObject<RenderPassDepthStencilClearValues> AddUniqueDepthStencilClearValue(float depth, uint32_t stencil, size_t addOnReserving = 0);
 
 	private:
-		SharedRenderPassDataListInternal& _internal;
+		SharedRenderPassDataListsInternal& _internal;
 	};
 }

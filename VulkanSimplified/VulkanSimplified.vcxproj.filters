@@ -550,7 +550,7 @@
     <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedDNIpch.cpp">
       <Filter>Source Files\DoNotInclude\VSSharedData</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataListInternal.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataListsInternal.cpp">
       <Filter>Source Files\DoNotInclude\VSSharedData</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedPipelineDataLists.cpp">
@@ -559,10 +559,10 @@
     <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedPipelineDataListsCapacities.cpp">
       <Filter>Source Files\Include\VSSharedData</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataInternal.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataListsInternal.cpp">
       <Filter>Source Files\DoNotInclude\VSSharedData</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedRenderPassDataList.cpp">
+    <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedRenderPassDataLists.cpp">
       <Filter>Source Files\Include\VSSharedData</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedRenderPassDataListsCapacities.cpp">
@@ -1362,13 +1362,13 @@
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataListsInternal.h">
       <Filter>Header Files\DoNotInclude\VSSharedData</Filter>
     </ClInclude>
-    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataInternal.h">
+    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataListsInternal.h">
       <Filter>Header Files\DoNotInclude\VSSharedData</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataList.h">
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataLists.h">
       <Filter>Header Files\Include\VSSharedData</Filter>
     </ClInclude>
-    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListDef.h">
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsDef.h">
       <Filter>Header Files\Include\VSSharedData</Filter>
     </ClInclude>
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.h">

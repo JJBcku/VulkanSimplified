@@ -45,11 +45,11 @@ namespace VulkanSimplified
 
 	struct RenderPassDepthStencilClearValues;
 
-	class SharedRenderPassDataListInternal
+	class SharedRenderPassDataListsInternal
 	{
 	public:
-		SharedRenderPassDataListInternal(const SharedRenderPassDataListsCapacities& initialCapacities);
-		~SharedRenderPassDataListInternal();
+		SharedRenderPassDataListsInternal(const SharedRenderPassDataListsCapacities& initialCapacities);
+		~SharedRenderPassDataListsInternal();
 
 		IDObject<RenderPassAttachmentData> AddRenderPassAttachment(DataFormatSetIndependentID format, ImageSampleFlagBits samples,
 			RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP, ImageLayoutFlags initialLayout,

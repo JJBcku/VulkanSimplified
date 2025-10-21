@@ -2,12 +2,12 @@
 #include "../../../Include/VSSharedData/VSSharedDataMainList.h"
 
 #include "../../../Include/VSSharedData/VSSharedDescriptorDataList.h"
-#include "../../../Include/VSSharedData/VSSharedRenderPassDataList.h"
+#include "../../../Include/VSSharedData/VSSharedRenderPassDataLists.h"
 #include "../../../Include/VSSharedData/VSSharedPipelineDataLists.h"
 
 #include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedDataMainListInternal.h"
 #include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedDescriptorDataListInternal.h"
-#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedRenderPassDataInternal.h"
+#include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedRenderPassDataListsInternal.h"
 #include "../../../DoNotInclude/DNIData/VSSharedData/VSSharedPipelineDataListsInternal.h"
 
 namespace VulkanSimplified
@@ -25,14 +25,14 @@ namespace VulkanSimplified
 		return _internal.GetSharedDescriptorDataList();
 	}
 
-	SharedRenderPassDataList SharedDataMainList::GetSharedRenderPassDataList()
+	SharedRenderPassDataLists SharedDataMainList::GetSharedRenderPassDataLists()
 	{
-		return _internal.GetSharedRenderPassDataList();
+		return _internal.GetSharedRenderPassDataLists();
 	}
 
-	SharedPipelineDataList SharedDataMainList::GetSharedPipelineDataListss()
+	SharedPipelineDataList SharedDataMainList::GetSharedPipelineDataLists()
 	{
-		return _internal.GetPipelineDataList();
+		return _internal.GetPipelineDataLists();
 	}
 
 	const SharedDescriptorDataList SharedDataMainList::GetSharedDescriptorDataList() const
@@ -40,14 +40,14 @@ namespace VulkanSimplified
 		return _internal.GetSharedDescriptorDataList();
 	}
 
-	const SharedRenderPassDataList SharedDataMainList::GetSharedRenderPassDataList() const
+	const SharedRenderPassDataLists SharedDataMainList::GetSharedRenderPassDataLists() const
 	{
-		return _internal.GetSharedRenderPassDataList();
+		return _internal.GetSharedRenderPassDataLists();
 	}
 
-	const SharedPipelineDataList SharedDataMainList::GetSharedPipelineDataListss() const
+	const SharedPipelineDataList SharedDataMainList::GetSharedPipelineDataLists() const
 	{
-		return _internal.GetPipelineDataList();
+		return _internal.GetPipelineDataLists();
 	}
 
 }

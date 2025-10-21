@@ -17,7 +17,7 @@
 
 namespace VulkanSimplified
 {
-    PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListInternal& pipelineData, const DescriptorDataListsInternal& descriptorData,
+    PipelineDataListsInternal::PipelineDataListsInternal(const SharedPipelineDataListsInternal& pipelineData, const DescriptorDataListsInternal& descriptorData,
         const ShaderListsInternal& shaderList,  const RenderPassListInternal& renderPassList, VkDevice device,
         const PipelineDataListsInitialCapacities& initialCapacities) : _pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList),
         _renderPassList(renderPassList), _device(device), _pipelineHeader(), _pipelineCacheList(initialCapacities.pipelineCacheListInitialCapacity),

@@ -34,7 +34,7 @@ void CreateSharedData(VulkanData& data)
 	auto& sharedDataList = *data.sharedData;
 
 	auto sharedData = data.basicData->vsmain->GetSharedDataMainList();
-	auto pipelineData = sharedData.GetSharedPipelineDataListss();
+	auto pipelineData = sharedData.GetSharedPipelineDataLists();
 	auto descriptorData = sharedData.GetSharedDescriptorDataList();
 
 	sharedDataList.fragmentShaderData = pipelineData.AddSharedShaderPipelineData("main", VS::SHADER_TYPE_FRAGMENT);

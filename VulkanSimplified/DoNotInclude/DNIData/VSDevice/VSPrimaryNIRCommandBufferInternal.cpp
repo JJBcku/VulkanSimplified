@@ -14,14 +14,14 @@
 
 #include "../../../Include/VSSharedData/VSRenderPassClearValueID.h"
 
-#include "../VSSharedData/VSSharedRenderPassDataInternal.h"
+#include "../VSSharedData/VSSharedRenderPassDataListsInternal.h"
 
 #include "../../../Include/VSDevice/VSQueueOwnershipTransferData.h"
 
 namespace VulkanSimplified
 {
 	PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const DeviceCoreInternal& core, const RenderPassListInternal& deviceRenderPassData,
-		const SharedRenderPassDataListInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
+		const SharedRenderPassDataListsInternal& sharedRenderPassData, const PipelineDataListsInternal& devicePipelineData, const SynchronizationDataListsInternal& synchronizationList,
 		ImageDataListsInternal& imageList, DataBufferListsInternal& dataBufferList, WindowListInternal& windowList, DescriptorDataListsInternal& descriptorDataList,
 		VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
 		CommandBufferBaseInternal(core, deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, dataBufferList, windowList,

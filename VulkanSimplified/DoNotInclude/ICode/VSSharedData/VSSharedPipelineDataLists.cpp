@@ -8,7 +8,7 @@
 
 namespace VulkanSimplified
 {
-	SharedPipelineDataList::SharedPipelineDataList(SharedPipelineDataListInternal& ref) : _internal(ref)
+	SharedPipelineDataList::SharedPipelineDataList(SharedPipelineDataListsInternal& ref) : _internal(ref)
 	{
 	}
 

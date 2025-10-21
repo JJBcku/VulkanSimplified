@@ -30,7 +30,7 @@ namespace VulkanSimplified
 	{
 		_core = std::make_unique<DeviceCoreInternal>(instance, creationData, physicalDeviceData);
 		_shaderLists = std::make_unique<ShaderListsInternal>(_core->GetDevice(), initialCapacities.shaderLists);
-		_renderPassList = std::make_unique<RenderPassListInternal>(_sharedDataMain.GetSharedRenderPassDataList(), _core->GetDevice(), initialCapacities.renderPassLists);
+		_renderPassList = std::make_unique<RenderPassListInternal>(_sharedDataMain.GetSharedRenderPassDataLists(), _core->GetDevice(), initialCapacities.renderPassLists);
 
 		_memoryObjectsList = std::make_unique<MemoryObjectsListInternal>(_core->GetDevice(), _core->GetDevicesPhysicalData().GetAvailableMemoryDataList(),
 			initialCapacities.memoryObjectsList);
@@ -39,13 +39,13 @@ namespace VulkanSimplified
 
 		_descriptorLists = std::make_unique<DescriptorDataListsInternal>(_sharedDataMain.GetSharedDescriptorDataList(), *_dataBufferLists, *_imageDataLists, _core->GetDevice(),
 			initialCapacities.descriptorLists);
-		_pipelineDataLists = std::make_unique<PipelineDataListsInternal>(sharedDataMain.GetPipelineDataList(), *_descriptorLists, *_shaderLists, *_renderPassList, _core->GetDevice(),
+		_pipelineDataLists = std::make_unique<PipelineDataListsInternal>(sharedDataMain.GetPipelineDataLists(), *_descriptorLists, *_shaderLists, *_renderPassList, _core->GetDevice(),
 			initialCapacities.pipelineDataLists);
 		_synchroDataLists = std::make_unique<SynchronizationDataListsInternal>(_core->GetDevice(), initialCapacities.synchronizationLists);
 
 		_windowList = std::make_unique<WindowListInternal>(_eventHandler, *_core, *_synchroDataLists, instance, _core->GetDevicesPhysicalData().GetPhysicalDevice(), _core->GetDevice(),
 			initialCapacities.windowList);
-		_commandPoolMainList = std::make_unique<CommandPoolMainListInternal>(*_core, *_renderPassList, _sharedDataMain.GetSharedRenderPassDataList(), *_pipelineDataLists,
+		_commandPoolMainList = std::make_unique<CommandPoolMainListInternal>(*_core, *_renderPassList, _sharedDataMain.GetSharedRenderPassDataLists(), *_pipelineDataLists,
 			*_synchroDataLists, *_imageDataLists, *_dataBufferLists, *_windowList, *_descriptorLists, initialCapacities.commandPoolMainList);
 	}
 

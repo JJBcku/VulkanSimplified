@@ -1,5 +1,5 @@
 #include "VSSharedDNIpch.h"
-#include "VSSharedRenderPassDataInternal.h"
+#include "VSSharedRenderPassDataListsInternal.h"
 
 #include "../../../Include/VSSharedData/VSSharedRenderPassDataListsCapacities.h"
 
@@ -21,7 +21,7 @@
 
 namespace VulkanSimplified
 {
-	SharedRenderPassDataListInternal::SharedRenderPassDataListInternal(const SharedRenderPassDataListsCapacities& initialCapacities) :
+	SharedRenderPassDataListsInternal::SharedRenderPassDataListsInternal(const SharedRenderPassDataListsCapacities& initialCapacities) :
 		_attachmentData(initialCapacities.sharedRenderPassAttachmentsInitialCapacity), _attachmentReferenceData(initialCapacities.sharedRenderPassReferencesInitialCapacity),
 		_subpassDependencies(initialCapacities.sharedSubpassDependenciesInitialCapacity), _doubleClearValues(initialCapacities.doubleColorClearValueInitialCapacity),
 		_int64ClearValues(initialCapacities.int64ColorClearValueInitialCapacity), _uint64ClearValues(initialCapacities.uint64ColorClearValueInitialCapacity),
@@ -30,11 +30,11 @@ namespace VulkanSimplified
 	{
 	}
 
-	SharedRenderPassDataListInternal::~SharedRenderPassDataListInternal()
+	SharedRenderPassDataListsInternal::~SharedRenderPassDataListsInternal()
 	{
 	}
 
-	IDObject<RenderPassAttachmentData> SharedRenderPassDataListInternal::AddRenderPassAttachment(DataFormatSetIndependentID format,
+	IDObject<RenderPassAttachmentData> SharedRenderPassDataListsInternal::AddRenderPassAttachment(DataFormatSetIndependentID format,
 		ImageSampleFlagBits samples, RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP,
 		ImageLayoutFlags initialLayout, ImageLayoutFlags finalLayout, size_t addOnReserving)
 	{
@@ -66,7 +66,7 @@ namespace VulkanSimplified
 			add.samples = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddRenderPassAttachment Error: Program was given an erroneous sample count value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddRenderPassAttachment Error: Program was given an erroneous sample count value!");
 		}
 
 		switch (loadOP)
@@ -81,7 +81,7 @@ namespace VulkanSimplified
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_LOAD;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddRenderPassAttachment Error: Program was given an erroneous load operation value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddRenderPassAttachment Error: Program was given an erroneous load operation value!");
 		}
 
 		switch (storeOP)
@@ -93,7 +93,7 @@ namespace VulkanSimplified
 			add.storeOP = VK_ATTACHMENT_STORE_OP_STORE;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddRenderPassAttachment Error: Program was given an erroneous store operation value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddRenderPassAttachment Error: Program was given an erroneous store operation value!");
 		}
 
 		switch (initialLayout)
@@ -126,7 +126,7 @@ namespace VulkanSimplified
 			add.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddRenderPassAttachment Error: Program was given an erroneous initial layout value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddRenderPassAttachment Error: Program was given an erroneous initial layout value!");
 		}
 
 		switch (finalLayout)
@@ -159,13 +159,13 @@ namespace VulkanSimplified
 			add.finalLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddRenderPassAttachment Error: Program was given an erroneous final layout value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddRenderPassAttachment Error: Program was given an erroneous final layout value!");
 		}
 
 		return _attachmentData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<RenderPassAttachmentData> SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment(DataFormatSetIndependentID format,
+	IDObject<RenderPassAttachmentData> SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachment(DataFormatSetIndependentID format,
 		ImageSampleFlagBits samples, RenderPassAttachmentLoadOP loadOP, RenderPassAttachmentStoreOP storeOP,
 		ImageLayoutFlags initialLayout, ImageLayoutFlags finalLayout, size_t addOnReserving)
 	{
@@ -197,7 +197,7 @@ namespace VulkanSimplified
 			add.samples = VK_SAMPLE_COUNT_1_BIT;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous sample count value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous sample count value!");
 		}
 
 		switch (loadOP)
@@ -212,7 +212,7 @@ namespace VulkanSimplified
 			add.loadOP = VK_ATTACHMENT_LOAD_OP_LOAD;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous load operation value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous load operation value!");
 		}
 
 		switch (storeOP)
@@ -224,7 +224,7 @@ namespace VulkanSimplified
 			add.storeOP = VK_ATTACHMENT_STORE_OP_STORE;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous store operation value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous store operation value!");
 		}
 
 		switch (initialLayout)
@@ -257,7 +257,7 @@ namespace VulkanSimplified
 			add.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous initial layout value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous initial layout value!");
 		}
 
 		switch (finalLayout)
@@ -290,13 +290,13 @@ namespace VulkanSimplified
 			add.finalLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous final layout value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachment Error: Program was given an erroneous final layout value!");
 		}
 
 		return _attachmentData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<RenderPassAttachmentReference> SharedRenderPassDataListInternal::AddRenderPassAttachmentReference(uint32_t attachmentIndex,
+	IDObject<RenderPassAttachmentReference> SharedRenderPassDataListsInternal::AddRenderPassAttachmentReference(uint32_t attachmentIndex,
 		ImageLayoutFlags subpassUsedAttachmentLayout, size_t addOnReserving)
 	{
 		RenderPassAttachmentReference add;
@@ -332,13 +332,13 @@ namespace VulkanSimplified
 			add.attachmentLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddRenderPassAttachment Error: Program was given an erroneous subpasses used attachment layout value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddRenderPassAttachment Error: Program was given an erroneous subpasses used attachment layout value!");
 		}
 
 		return _attachmentReferenceData.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<RenderPassAttachmentReference> SharedRenderPassDataListInternal::AddUniqueRenderPassAttachmentReference(uint32_t attachmentIndex,
+	IDObject<RenderPassAttachmentReference> SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachmentReference(uint32_t attachmentIndex,
 		ImageLayoutFlags subpassUsedAttachmentLayout, size_t addOnReserving)
 	{
 		RenderPassAttachmentReference add;
@@ -374,13 +374,13 @@ namespace VulkanSimplified
 			add.attachmentLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::AddUniqueRenderPassAttachmentReference Error: Program was given an erroneous subpasses used attachment layout value!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::AddUniqueRenderPassAttachmentReference Error: Program was given an erroneous subpasses used attachment layout value!");
 		}
 
 		return _attachmentReferenceData.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<SubpassDependencyData> SharedRenderPassDataListInternal::AddSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass,
+	IDObject<SubpassDependencyData> SharedRenderPassDataListsInternal::AddSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass,
 		PipelineStageFlags srcStageFlags, PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags,
 		AccessFlags dstAccessFlags, size_t addOnReserving)
 	{
@@ -398,7 +398,7 @@ namespace VulkanSimplified
 		return _subpassDependencies.AddObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<SubpassDependencyData> SharedRenderPassDataListInternal::AddUniqueSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass,
+	IDObject<SubpassDependencyData> SharedRenderPassDataListsInternal::AddUniqueSubpassDependency(uint32_t srcSubpass, uint32_t dstSubpass,
 		PipelineStageFlags srcStageFlags, PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags,
 		AccessFlags dstAccessFlags, size_t addOnReserving)
 	{
@@ -416,7 +416,7 @@ namespace VulkanSimplified
 		return _subpassDependencies.AddUniqueObject(std::move(add), addOnReserving);
 	}
 
-	IDObject<RenderPassDoubleColorClearValues> SharedRenderPassDataListInternal::AddDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserving)
+	IDObject<RenderPassDoubleColorClearValues> SharedRenderPassDataListsInternal::AddDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserving)
 	{
 		RenderPassDoubleColorClearValues add{};
 
@@ -428,7 +428,7 @@ namespace VulkanSimplified
 		return _doubleClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassDoubleColorClearValues> SharedRenderPassDataListInternal::AddUniqueDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserving)
+	IDObject<RenderPassDoubleColorClearValues> SharedRenderPassDataListsInternal::AddUniqueDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserving)
 	{
 		RenderPassDoubleColorClearValues add{};
 
@@ -440,7 +440,7 @@ namespace VulkanSimplified
 		return _doubleClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassInt64ColorClearValues> SharedRenderPassDataListInternal::AddInt64ColorClearValue(int64_t r, int64_t g, int64_t b, int64_t a, size_t addOnReserving)
+	IDObject<RenderPassInt64ColorClearValues> SharedRenderPassDataListsInternal::AddInt64ColorClearValue(int64_t r, int64_t g, int64_t b, int64_t a, size_t addOnReserving)
 	{
 		RenderPassInt64ColorClearValues add{};
 
@@ -452,7 +452,7 @@ namespace VulkanSimplified
 		return _int64ClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassInt64ColorClearValues> SharedRenderPassDataListInternal::AddUniqueInt64ColorClearValue(int64_t r, int64_t g, int64_t b, int64_t a, size_t addOnReserving)
+	IDObject<RenderPassInt64ColorClearValues> SharedRenderPassDataListsInternal::AddUniqueInt64ColorClearValue(int64_t r, int64_t g, int64_t b, int64_t a, size_t addOnReserving)
 	{
 		RenderPassInt64ColorClearValues add{};
 
@@ -464,7 +464,7 @@ namespace VulkanSimplified
 		return _int64ClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassUInt64ColorClearValues> SharedRenderPassDataListInternal::AddUInt64ColorClearValue(uint64_t r, uint64_t g, uint64_t b, uint64_t a, size_t addOnReserving)
+	IDObject<RenderPassUInt64ColorClearValues> SharedRenderPassDataListsInternal::AddUInt64ColorClearValue(uint64_t r, uint64_t g, uint64_t b, uint64_t a, size_t addOnReserving)
 	{
 		RenderPassUInt64ColorClearValues add{};
 
@@ -476,7 +476,7 @@ namespace VulkanSimplified
 		return _uint64ClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassUInt64ColorClearValues> SharedRenderPassDataListInternal::AddUniqueUInt64ColorClearValue(uint64_t r, uint64_t g, uint64_t b, uint64_t a, size_t addOnReserving)
+	IDObject<RenderPassUInt64ColorClearValues> SharedRenderPassDataListsInternal::AddUniqueUInt64ColorClearValue(uint64_t r, uint64_t g, uint64_t b, uint64_t a, size_t addOnReserving)
 	{
 		RenderPassUInt64ColorClearValues add{};
 
@@ -488,7 +488,7 @@ namespace VulkanSimplified
 		return _uint64ClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassFloatColorClearValues> SharedRenderPassDataListInternal::AddFloatColorClearValue(float r, float g, float b, float a, size_t addOnReserving)
+	IDObject<RenderPassFloatColorClearValues> SharedRenderPassDataListsInternal::AddFloatColorClearValue(float r, float g, float b, float a, size_t addOnReserving)
 	{
 		RenderPassFloatColorClearValues add{};
 
@@ -500,7 +500,7 @@ namespace VulkanSimplified
 		return _floatClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassFloatColorClearValues> SharedRenderPassDataListInternal::AddUniqueFloatColorClearValue(float r, float g, float b, float a, size_t addOnReserving)
+	IDObject<RenderPassFloatColorClearValues> SharedRenderPassDataListsInternal::AddUniqueFloatColorClearValue(float r, float g, float b, float a, size_t addOnReserving)
 	{
 		RenderPassFloatColorClearValues add{};
 
@@ -512,7 +512,7 @@ namespace VulkanSimplified
 		return _floatClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassIntColorClearValues> SharedRenderPassDataListInternal::AddIntColorClearValue(int32_t r, int32_t g, int32_t b, int32_t a, size_t addOnReserving)
+	IDObject<RenderPassIntColorClearValues> SharedRenderPassDataListsInternal::AddIntColorClearValue(int32_t r, int32_t g, int32_t b, int32_t a, size_t addOnReserving)
 	{
 		RenderPassIntColorClearValues add{};
 
@@ -524,7 +524,7 @@ namespace VulkanSimplified
 		return _intClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassIntColorClearValues> SharedRenderPassDataListInternal::AddUniqueIntColorClearValue(int32_t r, int32_t g, int32_t b, int32_t a, size_t addOnReserving)
+	IDObject<RenderPassIntColorClearValues> SharedRenderPassDataListsInternal::AddUniqueIntColorClearValue(int32_t r, int32_t g, int32_t b, int32_t a, size_t addOnReserving)
 	{
 		RenderPassIntColorClearValues add{};
 
@@ -536,7 +536,7 @@ namespace VulkanSimplified
 		return _intClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassUIntColorClearValues> SharedRenderPassDataListInternal::AddUIntColorClearValue(uint32_t r, uint32_t g, uint32_t b, uint32_t a, size_t addOnReserving)
+	IDObject<RenderPassUIntColorClearValues> SharedRenderPassDataListsInternal::AddUIntColorClearValue(uint32_t r, uint32_t g, uint32_t b, uint32_t a, size_t addOnReserving)
 	{
 		RenderPassUIntColorClearValues add{};
 
@@ -548,7 +548,7 @@ namespace VulkanSimplified
 		return _uintClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassUIntColorClearValues> SharedRenderPassDataListInternal::AddUniqueUIntColorClearValue(uint32_t r, uint32_t g, uint32_t b, uint32_t a, size_t addOnReserving)
+	IDObject<RenderPassUIntColorClearValues> SharedRenderPassDataListsInternal::AddUniqueUIntColorClearValue(uint32_t r, uint32_t g, uint32_t b, uint32_t a, size_t addOnReserving)
 	{
 		RenderPassUIntColorClearValues add{};
 
@@ -560,7 +560,7 @@ namespace VulkanSimplified
 		return _uintClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassDepthStencilClearValues> SharedRenderPassDataListInternal::AddDepthStencilClearValue(float depth, uint32_t stencil, size_t addOnReserving)
+	IDObject<RenderPassDepthStencilClearValues> SharedRenderPassDataListsInternal::AddDepthStencilClearValue(float depth, uint32_t stencil, size_t addOnReserving)
 	{
 		RenderPassDepthStencilClearValues add{};
 		add.d = depth;
@@ -569,7 +569,7 @@ namespace VulkanSimplified
 		return _depthClearValues.AddObject(add, addOnReserving);
 	}
 
-	IDObject<RenderPassDepthStencilClearValues> SharedRenderPassDataListInternal::AddUniqueDepthStencilClearValue(float depth, uint32_t stencil, size_t addOnReserving)
+	IDObject<RenderPassDepthStencilClearValues> SharedRenderPassDataListsInternal::AddUniqueDepthStencilClearValue(float depth, uint32_t stencil, size_t addOnReserving)
 	{
 		RenderPassDepthStencilClearValues add{};
 		add.d = depth;
@@ -578,7 +578,7 @@ namespace VulkanSimplified
 		return _depthClearValues.AddUniqueObject(add, addOnReserving);
 	}
 
-	std::vector<VkAttachmentDescription> SharedRenderPassDataListInternal::GetRenderPassAttachmentDescriptors(const std::vector<IDObject<RenderPassAttachmentData>> attachmentIDs) const
+	std::vector<VkAttachmentDescription> SharedRenderPassDataListsInternal::GetRenderPassAttachmentDescriptors(const std::vector<IDObject<RenderPassAttachmentData>> attachmentIDs) const
 	{
 		assert(!attachmentIDs.empty());
 
@@ -606,7 +606,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	std::vector<VkAttachmentReference> SharedRenderPassDataListInternal::GetRenderPassAttachmentReferences(const std::vector<std::optional<IDObject<RenderPassAttachmentReference>>>& referenceIDs) const
+	std::vector<VkAttachmentReference> SharedRenderPassDataListsInternal::GetRenderPassAttachmentReferences(const std::vector<std::optional<IDObject<RenderPassAttachmentReference>>>& referenceIDs) const
 	{
 		std::vector<VkAttachmentReference> ret;
 		ret.reserve(referenceIDs.size());
@@ -634,7 +634,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	VkAttachmentReference SharedRenderPassDataListInternal::GetRenderPassAttachmentReference(const std::optional<IDObject<RenderPassAttachmentReference>>& referenceID) const
+	VkAttachmentReference SharedRenderPassDataListsInternal::GetRenderPassAttachmentReference(const std::optional<IDObject<RenderPassAttachmentReference>>& referenceID) const
 	{
 		VkAttachmentReference ret{};
 
@@ -654,7 +654,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	std::vector<VkSubpassDependency> SharedRenderPassDataListInternal::GetSubpassDependencies(const std::vector<IDObject<SubpassDependencyData>>& dependencyIDs) const
+	std::vector<VkSubpassDependency> SharedRenderPassDataListsInternal::GetSubpassDependencies(const std::vector<IDObject<SubpassDependencyData>>& dependencyIDs) const
 	{
 		std::vector<VkSubpassDependency> ret;
 		ret.reserve(dependencyIDs.size());
@@ -677,7 +677,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	std::pair<VkClearValue, std::optional<VkClearValue>> SharedRenderPassDataListInternal::GetClearValue(RenderPassClearValueID valueID) const
+	std::pair<VkClearValue, std::optional<VkClearValue>> SharedRenderPassDataListsInternal::GetClearValue(RenderPassClearValueID valueID) const
 	{
 		std::pair<VkClearValue, std::optional<VkClearValue>> ret;
 
@@ -713,13 +713,13 @@ namespace VulkanSimplified
 			ret.first = GetDepthStencilClearValue(valueID.depthStencilID.ID);
 			break;
 		default:
-			throw std::runtime_error("SharedRenderPassDataListInternal::GetClearValue Error: Program was given an erroneous type of value's id!");
+			throw std::runtime_error("SharedRenderPassDataListsInternal::GetClearValue Error: Program was given an erroneous type of value's id!");
 		}
 
 		return ret;
 	}
 
-	std::pair<VkClearValue, VkClearValue> SharedRenderPassDataListInternal::GetDoubleColorClearValue(IDObject<RenderPassDoubleColorClearValues> valueID) const
+	std::pair<VkClearValue, VkClearValue> SharedRenderPassDataListsInternal::GetDoubleColorClearValue(IDObject<RenderPassDoubleColorClearValues> valueID) const
 	{
 		std::pair<VkClearValue, VkClearValue> ret;
 
@@ -731,7 +731,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	std::pair<VkClearValue, VkClearValue> SharedRenderPassDataListInternal::GetInt64ColorClearValue(IDObject<RenderPassInt64ColorClearValues> valueID) const
+	std::pair<VkClearValue, VkClearValue> SharedRenderPassDataListsInternal::GetInt64ColorClearValue(IDObject<RenderPassInt64ColorClearValues> valueID) const
 	{
 		std::pair<VkClearValue, VkClearValue> ret;
 
@@ -743,7 +743,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	std::pair<VkClearValue, VkClearValue> SharedRenderPassDataListInternal::GetUInt64ColorClearValue(IDObject<RenderPassUInt64ColorClearValues> valueID) const
+	std::pair<VkClearValue, VkClearValue> SharedRenderPassDataListsInternal::GetUInt64ColorClearValue(IDObject<RenderPassUInt64ColorClearValues> valueID) const
 	{
 		std::pair<VkClearValue, VkClearValue> ret;
 
@@ -755,7 +755,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	VkClearValue SharedRenderPassDataListInternal::GetFloatColorClearValue(IDObject<RenderPassFloatColorClearValues> valueID) const
+	VkClearValue SharedRenderPassDataListsInternal::GetFloatColorClearValue(IDObject<RenderPassFloatColorClearValues> valueID) const
 	{
 		VkClearValue ret{};
 
@@ -769,7 +769,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	VkClearValue SharedRenderPassDataListInternal::GetIntColorClearValue(IDObject<RenderPassIntColorClearValues> valueID) const
+	VkClearValue SharedRenderPassDataListsInternal::GetIntColorClearValue(IDObject<RenderPassIntColorClearValues> valueID) const
 	{
 		VkClearValue ret{};
 
@@ -783,7 +783,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	VkClearValue SharedRenderPassDataListInternal::GetUIntColorClearValue(IDObject<RenderPassUIntColorClearValues> valueID) const
+	VkClearValue SharedRenderPassDataListsInternal::GetUIntColorClearValue(IDObject<RenderPassUIntColorClearValues> valueID) const
 	{
 		VkClearValue ret{};
 
@@ -797,7 +797,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	VkClearValue SharedRenderPassDataListInternal::GetDepthStencilClearValue(IDObject<RenderPassDepthStencilClearValues> valueID) const
+	VkClearValue SharedRenderPassDataListsInternal::GetDepthStencilClearValue(IDObject<RenderPassDepthStencilClearValues> valueID) const
 	{
 		VkClearValue ret{};
 
@@ -809,7 +809,7 @@ namespace VulkanSimplified
 		return ret;
 	}
 
-	VkAccessFlags SharedRenderPassDataListInternal::CompileAccessFlags(AccessFlags accessFlags)
+	VkAccessFlags SharedRenderPassDataListsInternal::CompileAccessFlags(AccessFlags accessFlags)
 	{
 		VkAccessFlags ret = 0;
 

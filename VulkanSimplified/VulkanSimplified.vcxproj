@@ -230,7 +230,7 @@
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSRenderPassAttachmentData.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSRenderPassAttachmentReference.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSRenderPassClearValues.h" />
-    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataInternal.h" />
+    <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataListsInternal.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSubpassDependencyData.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSPushConstantData.h" />
     <ClInclude Include="DoNotInclude\DNIData\VSSharedData\VSSharedDescriptorDataListInternal.h" />
@@ -357,8 +357,8 @@
     <ClInclude Include="DoNotInclude\ICode\VSSharedData\VSSharedIframework.h" />
     <ClInclude Include="DoNotInclude\ICode\VSSharedData\VSSharedIpch.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedPipelineDataListsDef.h" />
-    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataList.h" />
-    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListDef.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataLists.h" />
+    <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsDef.h" />
     <ClInclude Include="Include\VSSharedData\VSSharedRenderPassDataListsCapacities.h" />
     <ClInclude Include="Include\VSSharedData\VSVertexBindingInputRate.h" />
     <ClInclude Include="Include\VSDevice\VSShaderLists.h" />
@@ -840,7 +840,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedDNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataInternal.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedRenderPassDataListsInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedDNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedDNIpch.h</PrecompiledHeaderFile>
@@ -1264,7 +1264,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedDNIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataListInternal.cpp">
+    <ClCompile Include="DoNotInclude\DNIData\VSSharedData\VSSharedPipelineDataListsInternal.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedDNIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedDNIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedDNIpch.h</PrecompiledHeaderFile>
@@ -1730,7 +1730,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedRenderPassDataList.cpp">
+    <ClCompile Include="DoNotInclude\ICode\VSSharedData\VSSharedRenderPassDataLists.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSSharedIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)VSSharedIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSSharedIpch.h</PrecompiledHeaderFile>

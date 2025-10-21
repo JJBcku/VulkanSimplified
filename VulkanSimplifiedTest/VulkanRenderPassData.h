@@ -1,7 +1,7 @@
 #pragma once
 
 #include <CustomLists/IDObject.h>
-#include <VSSharedRenderPassDataListDef.h>
+#include <VSSharedRenderPassDataListsDef.h>
 #include <VSRenderPassDataListDef.h>
 #include <VSRenderPassClearValueID.h>
 

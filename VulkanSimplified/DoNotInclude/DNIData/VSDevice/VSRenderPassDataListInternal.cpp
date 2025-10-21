@@ -3,7 +3,7 @@
 
 #include "VSAutoCleanupRenderPass.h"
 
-#include "../VSSharedData/VSSharedRenderPassDataInternal.h"
+#include "../VSSharedData/VSSharedRenderPassDataListsInternal.h"
 
 #include "../../../Include/VSDevice/VSRenderPassListInitialCapacities.h"
 #include "../../../Include/VSDevice/VSSubpassCreationDataWithoutResolving.h"
@@ -11,7 +11,7 @@
 
 namespace VulkanSimplified
 {
-	RenderPassListInternal::RenderPassListInternal(const SharedRenderPassDataListInternal& sharedRenderPassData, VkDevice device,
+	RenderPassListInternal::RenderPassListInternal(const SharedRenderPassDataListsInternal& sharedRenderPassData, VkDevice device,
 		const RenderPassDataListsInitialCapacities& initialCapacities) : _sharedRenderPassData(sharedRenderPassData), _device(device),
 		_renderPassList(initialCapacities.renderPassListInitialCapacity)
 	{
