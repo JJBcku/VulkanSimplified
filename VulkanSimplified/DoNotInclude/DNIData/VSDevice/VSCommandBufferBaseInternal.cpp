@@ -30,6 +30,7 @@
 #include "VSAutoCleanup2DArrayTexture.h"
 
 #include "VSAutoCleanupStagingBuffer.h"
+#include "../../../Include/VSCommon/VSShaderTypeFlags.h"
 
 namespace VulkanSimplified
 {
@@ -736,10 +737,16 @@ namespace VulkanSimplified
 			descriptorSetList.data(), static_cast<uint32_t>(dynamicOffsetList.size()), dynamicOffsetList.data());
 	}
 
-	void CommandBufferBaseInternal::PushConstants(IDObject<AutoCleanupPipelineLayout> layoutID, PipelineStageFlags stages, uint32_t offset, const std::vector<unsigned char>& data)
+	void CommandBufferBaseInternal::PushConstants(IDObject<AutoCleanupPipelineLayout> layoutID, ShaderTypeFlags stages, uint32_t offset, const std::vector<unsigned char>& data)
 	{
 		VkPipelineLayout layout = _devicePipelineData.GetPipelineLayout(layoutID);
-		VkPipelineStageFlags stageList = TranslateStageFlags(stages);
+		VkShaderStageFlags stageList = 0;
+
+		if ((stages & ShaderTypeFlagBit::SHADER_TYPE_FRAGMENT) == ShaderTypeFlagBit::SHADER_TYPE_FRAGMENT)
+			stageList = stageList | VK_SHADER_STAGE_FRAGMENT_BIT;
+
+		if ((stages & ShaderTypeFlagBit::SHADER_TYPE_VERTEX) == ShaderTypeFlagBit::SHADER_TYPE_VERTEX)
+			stageList = stageList | VK_SHADER_STAGE_VERTEX_BIT;
 
 		if (stageList == 0)
 			throw std::runtime_error("CommandBufferBaseInternal::PushConstants Error: Program cannot update push constants for no stage!");
