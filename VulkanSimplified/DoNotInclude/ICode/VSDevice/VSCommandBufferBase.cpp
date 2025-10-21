@@ -115,4 +115,9 @@ namespace VulkanSimplified
 		_internal.BindDescriptorSetsToGraphicsPipeline(pipelineLayoutID, firstSet, descriptorPoolID, descriptorSetIDList, dynamicOffsetList);
 	}
 
+	void CommandBufferBase::PushConstants(IDObject<AutoCleanupPipelineLayout> layoutID, PipelineStageFlags stages, uint32_t offset, const std::vector<unsigned char>& data)
+	{
+		_internal.PushConstants(layoutID, stages, offset, data);
+	}
+
 }

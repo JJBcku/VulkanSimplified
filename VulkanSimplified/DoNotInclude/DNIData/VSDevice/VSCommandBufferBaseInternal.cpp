@@ -736,4 +736,24 @@ namespace VulkanSimplified
 			descriptorSetList.data(), static_cast<uint32_t>(dynamicOffsetList.size()), dynamicOffsetList.data());
 	}
 
+	void CommandBufferBaseInternal::PushConstants(IDObject<AutoCleanupPipelineLayout> layoutID, PipelineStageFlags stages, uint32_t offset, const std::vector<unsigned char>& data)
+	{
+		VkPipelineLayout layout = _devicePipelineData.GetPipelineLayout(layoutID);
+		VkPipelineStageFlags stageList = TranslateStageFlags(stages);
+
+		if (stageList == 0)
+			throw std::runtime_error("CommandBufferBaseInternal::PushConstants Error: Program cannot update push constants for no stage!");
+
+		if (data.empty())
+			throw std::runtime_error("CommandBufferBaseInternal::PushConstants Error: Program cannot update push constants with no data!");
+
+		if (data.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::PushConstants Error: Written data size overflowed!");
+
+		if (static_cast<unsigned long long>(offset) + data.size() > std::numeric_limits<uint32_t>::max())
+			throw std::runtime_error("CommandBufferBaseInternal::PushConstants Error: Total size overflowed!");
+
+		vkCmdPushConstants(_buffer, layout, stageList, offset, static_cast<uint32_t>(data.size()), data.data());
+	}
+
 }
