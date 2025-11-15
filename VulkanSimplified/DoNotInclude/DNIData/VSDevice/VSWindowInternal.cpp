@@ -62,12 +62,12 @@ namespace VulkanSimplified
 			_isFullscreen = Misc::BOOL64_FALSE;
 			break;
 		case WindowSettings::BORDERLESS:
-			flags |= SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
+			flags |= SDL_WINDOW_BORDERLESS;
 			_isBorderlessNoFullscreen = Misc::BOOL64_TRUE;
 			_isFullscreen = Misc::BOOL64_FALSE;
 			break;
 		case WindowSettings::FULLSCREEN_NONEXCLUSIVE:
-			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS | SDL_WINDOW_RESIZABLE;
+			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS;
 			_isFullscreen = Misc::BOOL64_TRUE;
 			break;
 		default:
@@ -198,14 +198,10 @@ namespace VulkanSimplified
 
 		if (newFullscreenValue == Misc::BOOL64_TRUE)
 		{
-			if (_isBorderlessNoFullscreen == Misc::BOOL64_FALSE)
-				SDL_SetWindowResizable(_window, SDL_TRUE);
 			SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 		}
 		else if (newFullscreenValue == Misc::BOOL64_FALSE)
 		{
-			if (_isBorderlessNoFullscreen == Misc::BOOL64_FALSE)
-				SDL_SetWindowResizable(_window, SDL_FALSE);
 			SDL_SetWindowFullscreen(_window, 0);
 		}
 		else
