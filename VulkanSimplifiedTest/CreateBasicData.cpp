@@ -61,7 +61,11 @@ void CreateBasicData(VulkanData& data, MainSettings& settings)
 #if defined(_DEBUG) || defined(DEBUG)
 	instanceInit.appVariantName = "x64 Debug";
 #else
+#if defined(DEBUG_UTILS)
+	instanceInit.appVariantName = "x64 RelWithDebugUtils";
+#else
 	instanceInit.appVariantName = "x64 Release";
+#endif
 #endif
 
 	instanceInit.engineName = "Vulkan Simplified";
