@@ -319,7 +319,7 @@ public:
 
 				if (_list[i] == IDList[j].GetObjectID())
 				{
-					ret[i] = _list[i].GetConstObject();
+					ret[j] = _list[i].GetConstObject();
 					foundIDs++;
 
 					if (foundIDs >= IDList.size())
@@ -392,7 +392,7 @@ public:
 			{
 				if (_list[i] == IDList[j].GetObjectID())
 				{
-					ret[i] = _list[i].GetConstObject();
+					ret[j] = _list[i].GetConstObject();
 					foundIDs++;
 
 					if (foundIDs >= IDList.size())
