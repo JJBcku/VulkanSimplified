@@ -306,7 +306,9 @@ public:
 	std::vector<std::optional<T>> GetObjectOptionalList(const std::vector<IDObject<T>>& IDList) const
 	{
 		std::vector<std::optional<T>> ret;
-		ret.reserve(IDList.size());
+		ret.resize(IDList.size());
+
+		size_t foundIDs = 0;
 
 		for (size_t i = 0; i < _list.size(); ++i)
 		{
@@ -317,14 +319,15 @@ public:
 
 				if (_list[i] == IDList[j].GetObjectID())
 				{
-					ret.push_back(_list[i].GetObjectOptionalCopy());
+					ret[i] = _list[i].GetConstObject();
+					foundIDs++;
 
-					if (ret.size() >= IDList.size())
+					if (foundIDs >= IDList.size())
 						break;
 				}
 			}
 
-			if (ret.size() >= IDList.size())
+			if (foundIDs >= IDList.size())
 				break;
 		}
 
@@ -397,7 +400,7 @@ public:
 				}
 			}
 
-			if (ret.size() >= IDList.size())
+			if (foundIDs >= IDList.size())
 				break;
 		}
 
