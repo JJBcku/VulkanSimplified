@@ -373,7 +373,7 @@ public:
 	std::vector<T> GetObjectList(const std::vector<IDObject<T>>& IDList) const
 	{
 		std::vector<T> ret;
-		ret.reserve(IDList.size());
+		ret.resize(IDList.size());
 
 		for (size_t i = 0; i < _list.size(); ++i)
 		{
@@ -384,7 +384,7 @@ public:
 
 				if (_list[i] == IDList[j].GetObjectID())
 				{
-					ret.push_back(_list[i].GetObjectCopy());
+					ret[i] = _list[i].GetObjectCopy();
 
 					if (ret.size() >= IDList.size())
 						break;
