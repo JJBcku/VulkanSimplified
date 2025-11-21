@@ -148,7 +148,6 @@ void CreateMemoryData(VulkanData& data)
 
 	memData.depthMemoryAllocation = memoryList.AllocateMemory(allocationSize, 1, acceptableMemoryTypes, memoryTypeMask, 0x10);
 
-
 	if (data.instanceDependentData->maxSamples != ImageSampleFlagBits::SAMPLE_1)
 	{
 		allocationSize = imageList.GetResolveRenderTargetImagesSize(memData.resolveRenderTargetImages.back());
