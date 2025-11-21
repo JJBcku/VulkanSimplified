@@ -375,18 +375,24 @@ public:
 		std::vector<T> ret;
 		ret.resize(IDList.size());
 
+		size_t foundIDs = 0;
+
+		for (size_t j = 0; j < IDList.size(); ++j)
+		{
+			if (IDList[j].GetVectorID() != _vectorID)
+				throw std::runtime_error("UnsortedIDVector::GetObjectList Error: Program tried to user an ID from another instance of this list!");
+		}
+
 		for (size_t i = 0; i < _list.size(); ++i)
 		{
 			for (size_t j = 0; j < IDList.size(); ++j)
 			{
-				if (IDList[j].GetVectorID() != _vectorID)
-					throw std::runtime_error("UnsortedIDVector::GetObjectList Error: Program tried to user an ID from another instance of this list!");
-
 				if (_list[i] == IDList[j].GetObjectID())
 				{
-					ret[i] = _list[i].GetObjectCopy();
+					ret[i] = _list[i].GetConstObject();
+					foundIDs++;
 
-					if (ret.size() >= IDList.size())
+					if (foundIDs >= IDList.size())
 						break;
 				}
 			}
