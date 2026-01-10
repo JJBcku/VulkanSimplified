@@ -60,14 +60,14 @@ namespace VulkanSimplified
 
 	VkDeviceMemory MemoryTypeInternalData::GetMemory(IDObject<MemoryAllocationData> memoryId) const
 	{
-		return _allocationsList.GetConstObject(memoryId).GetMemory();
+		return _allocationsList.GetObject(memoryId).GetMemory();
 	}
 
 	bool MemoryTypeInternalData::FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnIDNotFound, bool throwOnSuballocationsNotEmpty)
 	{
 		if (_allocationsList.CheckForID(memoryId))
 		{
-			if (throwOnSuballocationsNotEmpty && !_allocationsList.GetConstObject(memoryId).SuballocationListEmpty())
+			if (throwOnSuballocationsNotEmpty && !_allocationsList.GetObject(memoryId).SuballocationListEmpty())
 				throw std::runtime_error("MemoryTypeInternalData::FreeMemory Error: Program tried to delete suballocated memory!");
 
 			return _allocationsList.RemoveObject(memoryId, true);
@@ -95,7 +95,7 @@ namespace VulkanSimplified
 
 	size_t MemoryTypeInternalData::GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const
 	{
-		return _allocationsList.GetConstObject(allocationID).GetTotalSize();
+		return _allocationsList.GetObject(allocationID).GetTotalSize();
 	}
 
 	size_t MemoryTypeInternalData::BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, MemorySize size, MemorySize aligment,

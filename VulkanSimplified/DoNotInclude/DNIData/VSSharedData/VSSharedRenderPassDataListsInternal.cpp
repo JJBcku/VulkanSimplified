@@ -617,7 +617,7 @@ namespace VulkanSimplified
 
 			if (ID.has_value())
 			{
-				auto& reference = _attachmentReferenceData.GetConstObject(ID.value());
+				auto& reference = _attachmentReferenceData.GetObject(ID.value());
 
 				add.attachment = reference.attachmentIndex;
 				add.layout = reference.attachmentLayout;
@@ -640,7 +640,7 @@ namespace VulkanSimplified
 
 		if (referenceID.has_value())
 		{
-			auto& reference = _attachmentReferenceData.GetConstObject(referenceID.value());
+			auto& reference = _attachmentReferenceData.GetObject(referenceID.value());
 
 			ret.attachment = reference.attachmentIndex;
 			ret.layout = reference.attachmentLayout;
@@ -723,7 +723,7 @@ namespace VulkanSimplified
 	{
 		std::pair<VkClearValue, VkClearValue> ret;
 
-		auto& data = _doubleClearValues.GetConstObject(valueID);
+		auto& data = _doubleClearValues.GetObject(valueID);
 
 		std::memcpy(&ret.first.color, &data.r, sizeof(double) << 1);
 		std::memcpy(&ret.second.color, &data.b, sizeof(double) << 1);
@@ -735,7 +735,7 @@ namespace VulkanSimplified
 	{
 		std::pair<VkClearValue, VkClearValue> ret;
 
-		auto& data = _int64ClearValues.GetConstObject(valueID);
+		auto& data = _int64ClearValues.GetObject(valueID);
 
 		std::memcpy(&ret.first.color, &data.r, sizeof(int64_t) << 1);
 		std::memcpy(&ret.second.color, &data.b, sizeof(int64_t) << 1);
@@ -747,7 +747,7 @@ namespace VulkanSimplified
 	{
 		std::pair<VkClearValue, VkClearValue> ret;
 
-		auto& data = _uint64ClearValues.GetConstObject(valueID);
+		auto& data = _uint64ClearValues.GetObject(valueID);
 
 		std::memcpy(&ret.first.color, &data.r, sizeof(uint64_t) << 1);
 		std::memcpy(&ret.second.color, &data.b, sizeof(uint64_t) << 1);
@@ -759,7 +759,7 @@ namespace VulkanSimplified
 	{
 		VkClearValue ret{};
 
-		auto& data = _floatClearValues.GetConstObject(valueID);
+		auto& data = _floatClearValues.GetObject(valueID);
 
 		ret.color.float32[0] = data.r;
 		ret.color.float32[1] = data.g;
@@ -773,7 +773,7 @@ namespace VulkanSimplified
 	{
 		VkClearValue ret{};
 
-		auto& data = _intClearValues.GetConstObject(valueID);
+		auto& data = _intClearValues.GetObject(valueID);
 
 		ret.color.int32[0] = data.r;
 		ret.color.int32[1] = data.g;
@@ -787,7 +787,7 @@ namespace VulkanSimplified
 	{
 		VkClearValue ret{};
 
-		auto& data = _uintClearValues.GetConstObject(valueID);
+		auto& data = _uintClearValues.GetObject(valueID);
 
 		ret.color.uint32[0] = data.r;
 		ret.color.uint32[1] = data.g;
@@ -801,7 +801,7 @@ namespace VulkanSimplified
 	{
 		VkClearValue ret{};
 
-		auto& data = _depthClearValues.GetConstObject(valueID);
+		auto& data = _depthClearValues.GetObject(valueID);
 
 		ret.depthStencil.depth = data.d;
 		ret.depthStencil.stencil = data.s;

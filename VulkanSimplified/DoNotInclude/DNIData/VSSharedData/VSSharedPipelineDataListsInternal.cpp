@@ -819,7 +819,7 @@ namespace VulkanSimplified
 
 	SharedShaderPipelineData SharedPipelineDataListsInternal::GetSharedShaderPipelineData(const IDObject<SharedShaderPipelineData>& shaderID) const
 	{
-		return _shaderPipelineData.GetObjectCopy(shaderID);
+		return _shaderPipelineData.GetObject(shaderID);
 	}
 
 	std::vector<VertexAttributeDescriptionData> SharedPipelineDataListsInternal::GetVertexAttributeDescriptionData(const std::vector<IDObject<VertexAttributeDescriptionData>>& attributeIDs) const
@@ -834,14 +834,14 @@ namespace VulkanSimplified
 
 	VertexInputSharedPipelineData SharedPipelineDataListsInternal::GetVertexInputSharedPipelineData(IDObject<VertexInputSharedPipelineData> vertexDataIDs) const
 	{
-		return _vertexInputData.GetConstObject(vertexDataIDs);
+		return _vertexInputData.GetObject(vertexDataIDs);
 	}
 
 	VkViewport SharedPipelineDataListsInternal::GetViewports(const IDObject<PipelineViewportData>& viewportID) const
 	{
 		VkViewport ret{};
 
-		auto& data = _pipelineViewportData.GetConstObject(viewportID);
+		auto& data = _pipelineViewportData.GetObject(viewportID);
 
 		ret.x = data.startX;
 		ret.y = data.startY;
@@ -857,7 +857,7 @@ namespace VulkanSimplified
 	{
 		VkRect2D ret{};
 
-		auto& data = _pipelineScissorData.GetConstObject(scissorID);
+		auto& data = _pipelineScissorData.GetObject(scissorID);
 
 		ret.extent.width = data.width;
 		ret.extent.height = data.height;
@@ -873,7 +873,7 @@ namespace VulkanSimplified
 
 		ret.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
 
-		auto& data = _pipelineInputAssemblyData.GetConstObject(assemblyID);
+		auto& data = _pipelineInputAssemblyData.GetObject(assemblyID);
 
 		ret.topology = data.topology;
 		ret.primitiveRestartEnable = data.primitiveRestartEnable;
@@ -889,7 +889,7 @@ namespace VulkanSimplified
 		ret.rasterizerDiscardEnable = VK_FALSE;
 		ret.lineWidth = 1.0f;
 
-		auto& data = _pipelineRasterizationData.GetConstObject(rasterizationID);
+		auto& data = _pipelineRasterizationData.GetObject(rasterizationID);
 
 		ret.polygonMode = data.polygonMode;
 		ret.cullMode = data.cullMode;
@@ -904,7 +904,7 @@ namespace VulkanSimplified
 		VkPipelineMultisampleStateCreateInfo ret{};
 		ret.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
 
-		auto& data = _pipelineMultisampleData.GetConstObject(multisamplingID);
+		auto& data = _pipelineMultisampleData.GetObject(multisamplingID);
 
 		ret.rasterizationSamples = data.sampleCount;
 		ret.sampleShadingEnable = data.sampleShadingEnable;
@@ -918,7 +918,7 @@ namespace VulkanSimplified
 		VkPipelineDepthStencilStateCreateInfo ret{};
 		ret.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
 
-		auto& data = _pipelineDepthStencilStateData.GetConstObject(depthStencilID);
+		auto& data = _pipelineDepthStencilStateData.GetObject(depthStencilID);
 
 		ret.depthTestEnable = data.depthTestEnable;
 		ret.depthWriteEnable = data.depthWriteEnable;

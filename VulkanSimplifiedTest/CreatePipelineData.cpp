@@ -38,7 +38,9 @@ void CreatePipelineData(VulkanData& data)
 	data.pipelineData->pipelineLayout = devicePipelineDataList.AddPipelineLayout(layoutData);
 
 	{
-		VS::GraphicsPipelineCreationData pipelineData;
+		std::vector<VS::GraphicsPipelineCreationData> pipelineDataList;
+		pipelineDataList.resize(1);
+		auto& pipelineData = pipelineDataList[0];
 
 		pipelineData.shaderStages.reserve(2);
 		VS::ShaderStageData stageData;
@@ -71,7 +73,7 @@ void CreatePipelineData(VulkanData& data)
 		pipelineData.subpassIndex = 0;
 		pipelineData.pipelineDerrivationData.settings = VS::PipelineDerrivationSettings::DO_NOT_DERRIVE;
 
-		auto pipelineIDs = devicePipelineDataList.AddGraphicPipelines({ pipelineData });
+		auto pipelineIDs = devicePipelineDataList.AddGraphicPipelines(pipelineDataList);
 		data.pipelineData->pipeline = pipelineIDs[0];
 	}
 }

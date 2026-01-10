@@ -618,7 +618,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _quitEventFunctions.GetConstObject(current++);
+			auto& functiondata = _quitEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -639,7 +639,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _appTerminatingEventFunctions.GetConstObject(current++);
+			auto& functiondata = _appTerminatingEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -660,7 +660,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _appLowMemoryEventFunctions.GetConstObject(current++);
+			auto& functiondata = _appLowMemoryEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -681,7 +681,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _appWillEnterBackgroundEventFunctions.GetConstObject(current++);
+			auto& functiondata = _appWillEnterBackgroundEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -702,7 +702,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _appDidEnterBackgroundEventFunctions.GetConstObject(current++);
+			auto& functiondata = _appDidEnterBackgroundEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -723,7 +723,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _appWillEnterForegroundEventFunctions.GetConstObject(current++);
+			auto& functiondata = _appWillEnterForegroundEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -744,7 +744,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _appDidEnterForegroundEventFunctions.GetConstObject(current++);
+			auto& functiondata = _appDidEnterForegroundEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -765,7 +765,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _localeChangedEventFunctions.GetConstObject(current++);
+			auto& functiondata = _localeChangedEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -813,7 +813,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _displayEventFunctions.GetConstObject(current++);
+			auto& functiondata = _displayEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -842,7 +842,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _windowEventFunctions.GetConstObject(current++);
+			auto& functiondata = _windowEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -875,7 +875,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _keyboardEventFunctions.GetConstObject(current++);
+			auto& functiondata = _keyboardEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -896,7 +896,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _keymapChangedEventFunctions.GetConstObject(current++);
+			auto& functiondata = _keymapChangedEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -922,7 +922,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _textEditingEventFunctions.GetConstObject(current++);
+			auto& functiondata = _textEditingEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -947,7 +947,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _textEditingExtendedEventFunctions.GetConstObject(current++);
+			auto& functiondata = _textEditingExtendedEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -971,7 +971,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _textInputEventFunctions.GetConstObject(current++);
+			auto& functiondata = _textInputEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -999,7 +999,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _mouseMotionEventFunctions.GetConstObject(current++);
+			auto& functiondata = _mouseMotionEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1028,7 +1028,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _mouseButtonEventFunctions.GetConstObject(current++);
+			auto& functiondata = _mouseButtonEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1058,7 +1058,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _mouseWheelEventFunctions.GetConstObject(current++);
+			auto& functiondata = _mouseWheelEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1086,7 +1086,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _joyAxisEventFunctions.GetConstObject(current++);
+			auto& functiondata = _joyAxisEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1114,7 +1114,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _joyBallEventFunctions.GetConstObject(current++);
+			auto& functiondata = _joyBallEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1141,7 +1141,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _joyHatEventFunctions.GetConstObject(current++);
+			auto& functiondata = _joyHatEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1168,7 +1168,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _joyButtonEventFunctions.GetConstObject(current++);
+			auto& functiondata = _joyButtonEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1196,7 +1196,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _joyDeviceEventFunctions.GetConstObject(current++);
+			auto& functiondata = _joyDeviceEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1219,7 +1219,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _joyBatteryEventFunctions.GetConstObject(current++);
+			auto& functiondata = _joyBatteryEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1247,7 +1247,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerAxisEventFunctions.GetConstObject(current++);
+			auto& functiondata = _controllerAxisEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1274,7 +1274,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerButtonEventFunctions.GetConstObject(current++);
+			auto& functiondata = _controllerButtonEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1311,7 +1311,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerDeviceEventFunctions.GetConstObject(current++);
+			auto& functiondata = _controllerDeviceEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1354,7 +1354,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerTouchpadEventFunctions.GetConstObject(current++);
+			auto& functiondata = _controllerTouchpadEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1381,7 +1381,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerSensorEventFunctions.GetConstObject(current++);
+			auto& functiondata = _controllerSensorEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1412,7 +1412,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _audioDeviceEventFunctions.GetConstObject(current++);
+			auto& functiondata = _audioDeviceEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1457,7 +1457,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _touchFingerEventFunctions.GetConstObject(current++);
+			auto& functiondata = _touchFingerEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1487,7 +1487,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _multiGestureEventFunctions.GetConstObject(current++);
+			auto& functiondata = _multiGestureEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1520,7 +1520,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _dollarGestureEventFunctions.GetConstObject(current++);
+			auto& functiondata = _dollarGestureEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1541,7 +1541,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _clipboardEventFunctions.GetConstObject(current++);
+			auto& functiondata = _clipboardEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1584,7 +1584,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _dropEventFunctions.GetConstObject(current++);
+			auto& functiondata = _dropEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1616,7 +1616,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _sensorEventFunctions.GetConstObject(current++);
+			auto& functiondata = _sensorEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1642,7 +1642,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _userEventFunctions.GetConstObject(current++);
+			auto& functiondata = _userEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1663,7 +1663,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _renderTargetsResetEventFunctions.GetConstObject(current++);
+			auto& functiondata = _renderTargetsResetEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1684,7 +1684,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _renderDeviceResetEventFunctions.GetConstObject(current++);
+			auto& functiondata = _renderDeviceResetEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}

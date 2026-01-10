@@ -99,7 +99,7 @@ namespace VulkanSimplified
 
 		for (auto& ID : layoutIDs)
 		{
-			auto& descriptor = _descriptorSetLayouts.GetConstObject(ID);
+			auto& descriptor = _descriptorSetLayouts.GetObject(ID);
 			ret.push_back(descriptor.GetDescriptorSetLayout());
 		}
 
@@ -398,13 +398,13 @@ namespace VulkanSimplified
 	VkDescriptorSet DescriptorDataListsInternal::GetNIFDescriptorSet(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 		IDObject<AutoCleanupDescriptorSet> descriptorSetID) const
 	{
-		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSet(descriptorSetID);
+		return _NIFDescriptorPools.GetObject(descriptorPoolID).GetDescriptorSet(descriptorSetID);
 	}
 
 	std::vector<VkDescriptorSet> DescriptorDataListsInternal::GetNIFDescriptorSetList(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID,
 		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const
 	{
-		return _NIFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
+		return _NIFDescriptorPools.GetObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
 	}
 
 	void DescriptorDataListsInternal::ResetNIFDescriptorPool(IDObject<AutoCleanupNIFDescriptorPool> descriptorPoolID)
@@ -715,13 +715,13 @@ namespace VulkanSimplified
 	VkDescriptorSet DescriptorDataListsInternal::GetIFDescriptorSet(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 		IDObject<AutoCleanupDescriptorSet> descriptorSetID) const
 	{
-		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSet(descriptorSetID);
+		return _IFDescriptorPools.GetObject(descriptorPoolID).GetDescriptorSet(descriptorSetID);
 	}
 
 	std::vector<VkDescriptorSet> DescriptorDataListsInternal::GetIFDescriptorSetList(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,
 		const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const
 	{
-		return _IFDescriptorPools.GetConstObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
+		return _IFDescriptorPools.GetObject(descriptorPoolID).GetDescriptorSetList(descriptorSetIDs);
 	}
 
 	std::vector<bool> DescriptorDataListsInternal::FreeDescriptorSets(IDObject<AutoCleanupIFDescriptorPool> descriptorPoolID,

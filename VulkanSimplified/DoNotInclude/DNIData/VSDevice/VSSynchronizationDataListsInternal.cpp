@@ -35,7 +35,7 @@ namespace VulkanSimplified
 
 	VkFence SynchronizationDataListsInternal::GetFence(IDObject<AutoCleanupFence> fenceIDs) const
 	{
-		return _fenceList.GetConstObject(fenceIDs).GetFence();
+		return _fenceList.GetObject(fenceIDs).GetFence();
 	}
 
 	bool SynchronizationDataListsInternal::WaitOnFences(const std::vector<IDObject<AutoCleanupFence>>& fenceIDs, bool waitForAll, uint64_t timeout) const
@@ -98,7 +98,7 @@ namespace VulkanSimplified
 
 	VkSemaphore SynchronizationDataListsInternal::GetSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID) const
 	{
-		return _semaphoreList.GetConstObject(semaphoreID).GetSemaphore();
+		return _semaphoreList.GetObject(semaphoreID).GetSemaphore();
 	}
 
 	bool SynchronizationDataListsInternal::RemoveFence(IDObject<AutoCleanupFence> fenceID, bool throwOnIDNotFound)

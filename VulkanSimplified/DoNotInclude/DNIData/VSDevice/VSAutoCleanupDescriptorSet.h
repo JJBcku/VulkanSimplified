@@ -10,11 +10,11 @@ namespace VulkanSimplified
 		AutoCleanupDescriptorSet(VkDescriptorSet set);
 		~AutoCleanupDescriptorSet();
 
-		AutoCleanupDescriptorSet(const AutoCleanupDescriptorSet& rhs) noexcept = default;
-		AutoCleanupDescriptorSet(AutoCleanupDescriptorSet&& rhs) noexcept = default;
+		AutoCleanupDescriptorSet(const AutoCleanupDescriptorSet& rhs) noexcept = delete;
+		AutoCleanupDescriptorSet(AutoCleanupDescriptorSet&& rhs) noexcept;
 
-		AutoCleanupDescriptorSet& operator=(const AutoCleanupDescriptorSet& rhs) noexcept = default;
-		AutoCleanupDescriptorSet& operator=(AutoCleanupDescriptorSet&& rhs) noexcept = default;
+		AutoCleanupDescriptorSet& operator=(const AutoCleanupDescriptorSet& rhs) noexcept = delete;
+		AutoCleanupDescriptorSet& operator=(AutoCleanupDescriptorSet&& rhs) noexcept;
 
 		VkDescriptorSet GetDescriptorSet() const;
 

@@ -367,7 +367,7 @@ namespace VulkanSimplified
 		VkPipelineCache cache = VK_NULL_HANDLE;
 
 		if (pipelineCacheID.has_value())
-			cache = _pipelineCacheList.GetConstObject(pipelineCacheID.value()).GetPipelineCache();
+			cache = _pipelineCacheList.GetObject(pipelineCacheID.value()).GetPipelineCache();
 
 		if (vkCreateGraphicsPipelines(_device, cache, static_cast<uint32_t>(createInfoList.size()), createInfoList.data(), nullptr, pipelineList.data()) != VK_SUCCESS)
 			throw std::runtime_error("DevicePipelineDataInternal::AddGraphicPipelines Error: Program failed to create the pipelines!");
@@ -384,7 +384,7 @@ namespace VulkanSimplified
 	{
 		size_t ret = 0;
 
-		VkPipelineCache cache = _pipelineCacheList.GetConstObject(cacheID).GetPipelineCache();
+		VkPipelineCache cache = _pipelineCacheList.GetObject(cacheID).GetPipelineCache();
 
 		if (vkGetPipelineCacheData(_device, cache, &ret, nullptr) != VK_SUCCESS)
 			throw std::runtime_error("PipelineDataListsInternal::GetPipelineCacheSize Error: Program failed to get pipeline cache's size!");
@@ -399,7 +399,7 @@ namespace VulkanSimplified
 		size_t size = GetPipelineCacheSize(cacheID);
 		ret.resize(size);
 
-		VkPipelineCache cache = _pipelineCacheList.GetConstObject(cacheID).GetPipelineCache();
+		VkPipelineCache cache = _pipelineCacheList.GetObject(cacheID).GetPipelineCache();
 		if (vkGetPipelineCacheData(_device, cache, &size, ret.data()) != VK_SUCCESS)
 			throw std::runtime_error("PipelineDataListsInternal::GetPipelineCacheData Error: Program failed to get pipeline cache's data!");
 
@@ -408,12 +408,12 @@ namespace VulkanSimplified
 
 	VkPipelineLayout PipelineDataListsInternal::GetPipelineLayout(IDObject<AutoCleanupPipelineLayout> layoutID) const
 	{
-		return _pipelineLayoutList.GetConstObject(layoutID).GetPipelineLayout();
+		return _pipelineLayoutList.GetObject(layoutID).GetPipelineLayout();
 	}
 
 	VkPipeline PipelineDataListsInternal::GetGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID) const
 	{
-		return _graphicPipelineList.GetConstObject(pipelineID).GetPipeline();
+		return _graphicPipelineList.GetObject(pipelineID).GetPipeline();
 	}
 
 }

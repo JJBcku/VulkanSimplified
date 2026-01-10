@@ -90,7 +90,7 @@ namespace VulkanSimplified
 			auto& bufferData = descriptorBufferDataLists[i];
 
 			writeData.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-			writeData.dstSet = _descriptorSetList.GetConstObject(inData.descriptorSetID).GetDescriptorSet();
+			writeData.dstSet = _descriptorSetList.GetObject(inData.descriptorSetID).GetDescriptorSet();
 			writeData.dstBinding = inData.binding;
 			writeData.dstArrayElement = inData.startArrayIndex;
 			writeData.descriptorCount = static_cast<uint32_t>(inData.bufferList.size());
@@ -126,7 +126,7 @@ namespace VulkanSimplified
 			auto& writeData = descriptorWriteDataList[i];
 
 			writeData.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-			writeData.dstSet = _descriptorSetList.GetConstObject(inData.descriptorSetID).GetDescriptorSet();
+			writeData.dstSet = _descriptorSetList.GetObject(inData.descriptorSetID).GetDescriptorSet();
 			writeData.dstBinding = inData.binding;
 			writeData.dstArrayElement = inData.startArrayIndex;
 			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
@@ -153,7 +153,7 @@ namespace VulkanSimplified
 			auto& writeData = descriptorWriteDataList[i];
 
 			writeData.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-			writeData.dstSet = _descriptorSetList.GetConstObject(inData.descriptorSetID).GetDescriptorSet();
+			writeData.dstSet = _descriptorSetList.GetObject(inData.descriptorSetID).GetDescriptorSet();
 			writeData.dstBinding = inData.binding;
 			writeData.dstArrayElement = inData.startArrayIndex;
 			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
@@ -179,7 +179,7 @@ namespace VulkanSimplified
 			auto& writeData = descriptorWriteDataList[i];
 
 			writeData.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-			writeData.dstSet = _descriptorSetList.GetConstObject(inData.descriptorSetID).GetDescriptorSet();
+			writeData.dstSet = _descriptorSetList.GetObject(inData.descriptorSetID).GetDescriptorSet();
 			writeData.dstBinding = inData.binding;
 			writeData.dstArrayElement = inData.startArrayIndex;
 			writeData.descriptorCount = static_cast<uint32_t>(inData.imageInfo.size());
@@ -193,7 +193,7 @@ namespace VulkanSimplified
 
 	VkDescriptorSet AutoCleanupIFDescriptorPool::GetDescriptorSet(IDObject<AutoCleanupDescriptorSet> descriptorSetID) const
 	{
-		return _descriptorSetList.GetConstObject(descriptorSetID).GetDescriptorSet();
+		return _descriptorSetList.GetObject(descriptorSetID).GetDescriptorSet();
 	}
 
 	std::vector<VkDescriptorSet> AutoCleanupIFDescriptorPool::GetDescriptorSetList(const std::vector<IDObject<AutoCleanupDescriptorSet>>& descriptorSetIDs) const
@@ -231,7 +231,7 @@ namespace VulkanSimplified
 
 			if (found)
 			{
-				descriptorSetList.push_back(_descriptorSetList.GetConstObject(descriptorSetsIDs[i]).GetDescriptorSet());
+				descriptorSetList.push_back(_descriptorSetList.GetObject(descriptorSetsIDs[i]).GetDescriptorSet());
 				_descriptorSetList.RemoveObject(descriptorSetsIDs[i], true);
 				ret[i] = true;
 			}

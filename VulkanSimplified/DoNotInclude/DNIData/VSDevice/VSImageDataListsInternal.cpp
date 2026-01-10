@@ -446,7 +446,7 @@ namespace VulkanSimplified
 
 	const AutoCleanupColorRenderTargetImage& ImageDataListsInternal::GetColorRenderTargetImageInternal(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID);
+		return _colorRenderTargetList.GetObject(imageID);
 	}
 
 	AutoCleanupDepthStencilRenderTargetImage& ImageDataListsInternal::GetDepthStencilRenderTargetImageInternal(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID)
@@ -456,7 +456,7 @@ namespace VulkanSimplified
 
 	const AutoCleanupDepthStencilRenderTargetImage& ImageDataListsInternal::GetDepthStencilRenderTargetImageInternal(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID);
+		return _depthStencilRenderTargetList.GetObject(imageID);
 	}
 
 	AutoCleanupResolveRenderTargetImage& ImageDataListsInternal::GetResolveRenderTargetImageInternal(IDObject<AutoCleanupResolveRenderTargetImage> imageID)
@@ -466,7 +466,7 @@ namespace VulkanSimplified
 
 	const AutoCleanupResolveRenderTargetImage& ImageDataListsInternal::GetResolveRenderTargetImageInternal(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID);
+		return _resolveRenderTargetList.GetObject(imageID);
 	}
 
 	AutoCleanup2DTexture& ImageDataListsInternal::Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID)
@@ -476,7 +476,7 @@ namespace VulkanSimplified
 
 	const AutoCleanup2DTexture& ImageDataListsInternal::Get2DTextureImageInternal(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID);
+		return _2dTexturesList.GetObject(imageID);
 	}
 
 	AutoCleanup2DArrayTexture& ImageDataListsInternal::Get2DArrayTextureImageInternal(IDObject<AutoCleanup2DArrayTexture> imageID)
@@ -486,187 +486,187 @@ namespace VulkanSimplified
 
 	const AutoCleanup2DArrayTexture& ImageDataListsInternal::Get2DArrayTextureImageInternal(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID);
+		return _2dArrayTexturesList.GetObject(imageID);
 	}
 
 	VkImage ImageDataListsInternal::GetColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetImage();
+		return _colorRenderTargetList.GetObject(imageID).GetImage();
 	}
 
 	VkImageView ImageDataListsInternal::GetColorRenderTargetImageView(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
+		return _colorRenderTargetList.GetObject(imageID).GetImageView(viewID);
 	}
 
 	VkImage ImageDataListsInternal::GetDepthStencilRenderTargetImage(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImage();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetImage();
 	}
 
 	VkImageView ImageDataListsInternal::GetDepthStencilRenderTargetImageView(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
+		return _depthStencilRenderTargetList.GetObject(imageID).GetImageView(viewID);
 	}
 
 	VkImage ImageDataListsInternal::GetResolveRenderTargetImage(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetImage();
+		return _resolveRenderTargetList.GetObject(imageID).GetImage();
 	}
 
 	VkImageView ImageDataListsInternal::GetResolveRenderTargetImageView(IDObject<AutoCleanupResolveRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetImageView(viewID);
+		return _resolveRenderTargetList.GetObject(imageID).GetImageView(viewID);
 	}
 
 	VkImage ImageDataListsInternal::Get2DTextureImage(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetImage();
+		return _2dTexturesList.GetObject(imageID).GetImage();
 	}
 
 	VkImageView ImageDataListsInternal::Get2DTextureImageView(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetImageView(viewID);
+		return _2dTexturesList.GetObject(imageID).GetImageView(viewID);
 	}
 
 	VkImage ImageDataListsInternal::Get2DArrayTextureImage(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetImage();
+		return _2dArrayTexturesList.GetObject(imageID).GetImage();
 	}
 
 	VkImageView ImageDataListsInternal::Get2DArrayTextureImageView(IDObject<AutoCleanup2DArrayTexture> imageID, IDObject<AutoCleanupImageView> viewID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetImageView(viewID);
+		return _2dArrayTexturesList.GetObject(imageID).GetImageView(viewID);
 	}
 
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesWidth(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetWidth();
+		return _colorRenderTargetList.GetObject(imageID).GetWidth();
 	}
 
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesHeight(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetHeight();
+		return _colorRenderTargetList.GetObject(imageID).GetHeight();
 	}
 
 	uint32_t ImageDataListsInternal::GetColorRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
+		return _colorRenderTargetList.GetObject(imageID).GetImagesMemoryTypeMask();
 	}
 
 	MemorySize ImageDataListsInternal::GetColorRenderTargetImagesSize(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetImagesSize();
+		return _colorRenderTargetList.GetObject(imageID).GetImagesSize();
 	}
 
 	MemorySize ImageDataListsInternal::GetColorRenderTargetImagesRequiredAligment(IDObject<AutoCleanupColorRenderTargetImage> imageID) const
 	{
-		return _colorRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
+		return _colorRenderTargetList.GetObject(imageID).GetImagesRequiredAligment();
 	}
 
 	uint32_t ImageDataListsInternal::GetDepthStencilRenderTargetImagesWidth(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetWidth();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetWidth();
 	}
 
 	uint32_t ImageDataListsInternal::GetDepthStencilRenderTargetImagesHeight(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetHeight();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetHeight();
 	}
 
 	uint32_t ImageDataListsInternal::GetDepthStencilRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetImagesMemoryTypeMask();
 	}
 
 	MemorySize ImageDataListsInternal::GetDepthStencilRenderTargetImagesSize(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImagesSize();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetImagesSize();
 	}
 
 	MemorySize ImageDataListsInternal::GetDepthStencilRenderTargetImagesRequiredAligment(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetImagesRequiredAligment();
 	}
 
 	VkSampleCountFlagBits ImageDataListsInternal::GetDepthStencilRenderTargetSampleCount(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID) const
 	{
-		return _depthStencilRenderTargetList.GetConstObject(imageID).GetSampleCount();
+		return _depthStencilRenderTargetList.GetObject(imageID).GetSampleCount();
 	}
 
 	uint32_t ImageDataListsInternal::GetResolveRenderTargetImagesWidth(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetWidth();
+		return _resolveRenderTargetList.GetObject(imageID).GetWidth();
 	}
 
 	uint32_t ImageDataListsInternal::GetResolveRenderTargetImagesHeight(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetHeight();
+		return _resolveRenderTargetList.GetObject(imageID).GetHeight();
 	}
 
 	uint32_t ImageDataListsInternal::GetResolveRenderTargetImagesMemoryTypeMask(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesMemoryTypeMask();
+		return _resolveRenderTargetList.GetObject(imageID).GetImagesMemoryTypeMask();
 	}
 
 	MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesSize(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesSize();
+		return _resolveRenderTargetList.GetObject(imageID).GetImagesSize();
 	}
 
 	MemorySize ImageDataListsInternal::GetResolveRenderTargetImagesRequiredAligment(IDObject<AutoCleanupResolveRenderTargetImage> imageID) const
 	{
-		return _resolveRenderTargetList.GetConstObject(imageID).GetImagesRequiredAligment();
+		return _resolveRenderTargetList.GetObject(imageID).GetImagesRequiredAligment();
 	}
 
 	uint32_t ImageDataListsInternal::Get2DTextureImagesWidth(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetWidth();
+		return _2dTexturesList.GetObject(imageID).GetWidth();
 	}
 
 	uint32_t ImageDataListsInternal::Get2DTextureImagesHeight(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetHeight();
+		return _2dTexturesList.GetObject(imageID).GetHeight();
 	}
 
 	uint32_t ImageDataListsInternal::Get2DTextureImagesMemoryTypeMask(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetImagesMemoryTypeMask();
+		return _2dTexturesList.GetObject(imageID).GetImagesMemoryTypeMask();
 	}
 
 	MemorySize ImageDataListsInternal::Get2DTextureImagesSize(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetImagesSize();
+		return _2dTexturesList.GetObject(imageID).GetImagesSize();
 	}
 
 	MemorySize ImageDataListsInternal::Get2DTextureImagesRequiredAligment(IDObject<AutoCleanup2DTexture> imageID) const
 	{
-		return _2dTexturesList.GetConstObject(imageID).GetImagesRequiredAligment();
+		return _2dTexturesList.GetObject(imageID).GetImagesRequiredAligment();
 	}
 
 	uint32_t ImageDataListsInternal::Get2DArrayTextureImagesWidth(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetWidth();
+		return _2dArrayTexturesList.GetObject(imageID).GetWidth();
 	}
 
 	uint32_t ImageDataListsInternal::Get2DArrayTextureImagesHeight(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetHeight();
+		return _2dArrayTexturesList.GetObject(imageID).GetHeight();
 	}
 
 	uint32_t ImageDataListsInternal::Get2DArrayTextureImagesMemoryTypeMask(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetImagesMemoryTypeMask();
+		return _2dArrayTexturesList.GetObject(imageID).GetImagesMemoryTypeMask();
 	}
 
 	MemorySize ImageDataListsInternal::Get2DArrayTextureImagesSize(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetImagesSize();
+		return _2dArrayTexturesList.GetObject(imageID).GetImagesSize();
 	}
 
 	MemorySize ImageDataListsInternal::Get2DArrayTextureImagesRequiredAligment(IDObject<AutoCleanup2DArrayTexture> imageID) const
 	{
-		return _2dArrayTexturesList.GetConstObject(imageID).GetImagesRequiredAligment();
+		return _2dArrayTexturesList.GetObject(imageID).GetImagesRequiredAligment();
 	}
 
 	void ImageDataListsInternal::BindColorRenderTargetImage(IDObject<AutoCleanupColorRenderTargetImage> imageID, MemoryAllocationFullID allocationID,
@@ -909,12 +909,12 @@ namespace VulkanSimplified
 
 	VkFramebuffer ImageDataListsInternal::GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const
 	{
-		return _framebufferList.GetConstObject(framebufferID).GetFramebuffer();
+		return _framebufferList.GetObject(framebufferID).GetFramebuffer();
 	}
 
 	VkSampler ImageDataListsInternal::GetSampler(IDObject<AutoCleanupSampler> samplerID) const
 	{
-		return _samplerList.GetConstObject(samplerID).GetSampler();
+		return _samplerList.GetObject(samplerID).GetSampler();
 	}
 
 	std::vector<VkSampler> ImageDataListsInternal::GetSamplerList(std::vector<IDObject<AutoCleanupSampler>> samplerIDs) const

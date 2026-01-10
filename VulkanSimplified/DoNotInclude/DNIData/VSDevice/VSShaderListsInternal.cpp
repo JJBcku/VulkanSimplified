@@ -81,12 +81,12 @@ namespace VulkanSimplified
 
 	VkShaderModule ShaderListsInternal::GetFragmentShader(IDObject<AutoCleanupFragmentShaderModule> shaderID) const
 	{
-		return _fragmentShaders.GetConstObject(shaderID).GetShaderModule();
+		return _fragmentShaders.GetObject(shaderID).GetShaderModule();
 	}
 
 	VkShaderModule ShaderListsInternal::GetVertexShader(IDObject<AutoCleanupVertexShaderModule> shaderID) const
 	{
-		return _vertexShaders.GetConstObject(shaderID).GetShaderModule();
+		return _vertexShaders.GetObject(shaderID).GetShaderModule();
 	}
 
 }

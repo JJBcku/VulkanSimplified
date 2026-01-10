@@ -197,7 +197,7 @@ namespace VulkanSimplified
 
 	VkRenderPass RenderPassListInternal::GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const
 	{
-		return _renderPassList.GetConstObject(renderPassID).GetRenderPass();
+		return _renderPassList.GetObject(renderPassID).GetRenderPass();
 	}
 
 }

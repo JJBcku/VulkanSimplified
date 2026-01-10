@@ -35,7 +35,7 @@ namespace VulkanSimplified
 
 	const CommandPoolQFGroupListInternal& CommandPoolMainListInternal::GetQueueFamiliesPoolGroup(IDObject<CommandPoolQFGroupPointer> qfGroupID) const
 	{
-		return *_qfGroupList.GetConstObject(qfGroupID);
+		return *_qfGroupList.GetObject(qfGroupID);
 	}
 
 }

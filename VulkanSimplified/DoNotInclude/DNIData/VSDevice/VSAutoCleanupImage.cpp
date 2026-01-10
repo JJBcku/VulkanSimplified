@@ -13,7 +13,7 @@ namespace VulkanSimplified
 
 	VkImageView AutoCleanupImage::GetImageView(IDObject<AutoCleanupImageView> imageViewID) const
 	{
-		return _imageViews.GetConstObject(imageViewID).GetImageView();
+		return _imageViews.GetObject(imageViewID).GetImageView();
 	}
 
 	uint32_t AutoCleanupImage::GetWidth() const

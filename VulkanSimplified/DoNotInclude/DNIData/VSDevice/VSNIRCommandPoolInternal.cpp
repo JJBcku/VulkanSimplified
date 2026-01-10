@@ -108,12 +108,12 @@ namespace VulkanSimplified
 
 	const PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBuffer(IDObject<PrimaryNIRPointer> bufferID) const
 	{
-		return *_primaryBufferList.GetConstObject(bufferID);
+		return *_primaryBufferList.GetObject(bufferID);
 	}
 
 	const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBuffer(IDObject<SecondaryNIRPointer> bufferID) const
 	{
-		return *_secondaryBufferList.GetConstObject(bufferID);
+		return *_secondaryBufferList.GetObject(bufferID);
 	}
 
 	void NIRCommandPoolInternal::ResetCommandPool(bool freeResources)
@@ -159,7 +159,7 @@ namespace VulkanSimplified
 
 	void NIRCommandPoolInternal::RecordExecuteSecondaryBufferCommand(IDObject<PrimaryNIRPointer> primaryBufferID, const std::vector<IDObject<SecondaryNIRPointer>>& secondaryBufferIDs)
 	{
-		auto primary = _primaryBufferList.GetConstObject(primaryBufferID)->GetCommandBuffer();
+		auto primary = _primaryBufferList.GetObject(primaryBufferID)->GetCommandBuffer();
 
 		if (secondaryBufferIDs.size() > std::numeric_limits<uint32_t>::max())
 			throw std::runtime_error("NIRCommandPoolInternal::RecordExecuteSecondaryBufferComman Error: secondary buffer id list overflowed!");
@@ -169,7 +169,7 @@ namespace VulkanSimplified
 
 		for (size_t i = 0; i < secondaryBufferIDs.size(); ++i)
 		{
-			secondaryBuffersList.push_back(_secondaryBufferList.GetConstObject(secondaryBufferIDs[i])->GetCommandBuffer());
+			secondaryBuffersList.push_back(_secondaryBufferList.GetObject(secondaryBufferIDs[i])->GetCommandBuffer());
 		}
 
 		vkCmdExecuteCommands(primary, static_cast<uint32_t>(secondaryBuffersList.size()), secondaryBuffersList.data());

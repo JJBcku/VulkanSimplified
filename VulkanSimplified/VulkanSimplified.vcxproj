@@ -90,7 +90,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2d.lib;vulkan-1.lib;CustomLists.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2d.lib;vulkan-1.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>"$(SolutionDir)\ExternalLibs\CustomLists\x64 Debug";$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -126,7 +126,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;vulkan-1.lib;CustomLists.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;vulkan-1.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>"$(SolutionDir)\ExternalLibs\CustomLists\x64 Release";$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
@@ -162,7 +162,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;vulkan-1.lib;CustomLists.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;vulkan-1.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>"$(SolutionDir)\ExternalLibs\CustomLists\x64 Release";$(VULKAN_SDK)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>

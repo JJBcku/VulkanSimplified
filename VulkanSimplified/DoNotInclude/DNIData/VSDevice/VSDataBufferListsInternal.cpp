@@ -239,42 +239,42 @@ namespace VulkanSimplified
 
 	VkBuffer DataBufferListsInternal::GetVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
-		return _vertexBuffers.GetConstObject(bufferID).GetDataBuffer();
+		return _vertexBuffers.GetObject(bufferID).GetDataBuffer();
 	}
 
 	VkBuffer DataBufferListsInternal::GetStagingBuffer(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
-		return _stagingBuffers.GetConstObject(bufferID).GetDataBuffer();
+		return _stagingBuffers.GetObject(bufferID).GetDataBuffer();
 	}
 
 	VkBuffer DataBufferListsInternal::GetIndexBuffer(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
-		return _indexBuffers.GetConstObject(bufferID).GetDataBuffer();
+		return _indexBuffers.GetObject(bufferID).GetDataBuffer();
 	}
 
 	VkBuffer DataBufferListsInternal::GetUniformBuffer(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
-		return _uniformBuffers.GetConstObject(bufferID).GetDataBuffer();
+		return _uniformBuffers.GetObject(bufferID).GetDataBuffer();
 	}
 
 	const AutoCleanupVertexBuffer& DataBufferListsInternal::GetVertexBufferInternal(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
-		return _vertexBuffers.GetConstObject(bufferID);
+		return _vertexBuffers.GetObject(bufferID);
 	}
 
 	const AutoCleanupStagingBuffer& DataBufferListsInternal::GetStagingBufferInternal(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
-		return _stagingBuffers.GetConstObject(bufferID);
+		return _stagingBuffers.GetObject(bufferID);
 	}
 
 	const AutoCleanupIndexBuffer& DataBufferListsInternal::GetIndexBufferInternal(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
-		return _indexBuffers.GetConstObject(bufferID);
+		return _indexBuffers.GetObject(bufferID);
 	}
 
 	const AutoCleanupUniformBuffer& DataBufferListsInternal::GetUniformBufferInternal(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
-		return _uniformBuffers.GetConstObject(bufferID);
+		return _uniformBuffers.GetObject(bufferID);
 	}
 
 	bool DataBufferListsInternal::RemoveVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, bool throwOnIDNotFound)
@@ -363,62 +363,62 @@ namespace VulkanSimplified
 
 	uint32_t DataBufferListsInternal::GetVertexBuffersMemoryTypeMask(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
-		return _vertexBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
+		return _vertexBuffers.GetObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
 	MemorySize DataBufferListsInternal::GetVertexBuffersSize(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
-		return _vertexBuffers.GetConstObject(bufferID).GetBuffersSize();
+		return _vertexBuffers.GetObject(bufferID).GetBuffersSize();
 	}
 
 	MemorySize DataBufferListsInternal::GetVertexBuffersRequiredAligment(IDObject<AutoCleanupVertexBuffer> bufferID) const
 	{
-		return _vertexBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
+		return _vertexBuffers.GetObject(bufferID).GetBuffersRequiredAligment();
 	}
 
 	uint32_t DataBufferListsInternal::GetStagingBuffersMemoryTypeMask(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
-		return _stagingBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
+		return _stagingBuffers.GetObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
 	MemorySize DataBufferListsInternal::GetStagingBuffersSize(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
-		return _stagingBuffers.GetConstObject(bufferID).GetBuffersSize();
+		return _stagingBuffers.GetObject(bufferID).GetBuffersSize();
 	}
 
 	MemorySize DataBufferListsInternal::GetStagingBuffersRequiredAligment(IDObject<AutoCleanupStagingBuffer> bufferID) const
 	{
-		return _stagingBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
+		return _stagingBuffers.GetObject(bufferID).GetBuffersRequiredAligment();
 	}
 
 	uint32_t DataBufferListsInternal::GetIndexBuffersMemoryTypeMask(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
-		return _indexBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
+		return _indexBuffers.GetObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
 	MemorySize DataBufferListsInternal::GetIndexBuffersSize(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
-		return _indexBuffers.GetConstObject(bufferID).GetBuffersSize();
+		return _indexBuffers.GetObject(bufferID).GetBuffersSize();
 	}
 
 	MemorySize DataBufferListsInternal::GetIndexBuffersRequiredAligment(IDObject<AutoCleanupIndexBuffer> bufferID) const
 	{
-		return _indexBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
+		return _indexBuffers.GetObject(bufferID).GetBuffersRequiredAligment();
 	}
 
 	uint32_t DataBufferListsInternal::GetUniformBuffersMemoryTypeMask(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
-		return _uniformBuffers.GetConstObject(bufferID).GetBuffersMemoryTypeMask();
+		return _uniformBuffers.GetObject(bufferID).GetBuffersMemoryTypeMask();
 	}
 
 	MemorySize DataBufferListsInternal::GetUniformBuffersSize(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
-		return _uniformBuffers.GetConstObject(bufferID).GetBuffersSize();
+		return _uniformBuffers.GetObject(bufferID).GetBuffersSize();
 	}
 
 	MemorySize DataBufferListsInternal::GetUniformBuffersRequiredAligment(IDObject<AutoCleanupUniformBuffer> bufferID) const
 	{
-		return _uniformBuffers.GetConstObject(bufferID).GetBuffersRequiredAligment();
+		return _uniformBuffers.GetObject(bufferID).GetBuffersRequiredAligment();
 	}
 
 	void DataBufferListsInternal::WriteToVertexBuffer(IDObject<AutoCleanupVertexBuffer> bufferID, MemorySize writeOffset, const unsigned char& writeData,

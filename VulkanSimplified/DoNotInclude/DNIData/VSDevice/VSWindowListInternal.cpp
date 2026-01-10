@@ -30,7 +30,7 @@ namespace VulkanSimplified
 
 	const WindowInternal& WindowListInternal::GetWindow(IDObject<WindowPointer> windowID) const
 	{
-		return *_windowList.GetConstObject(windowID);
+		return *_windowList.GetObject(windowID);
 	}
 
 }
