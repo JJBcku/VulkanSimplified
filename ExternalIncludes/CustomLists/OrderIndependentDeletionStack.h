@@ -104,7 +104,7 @@ public:
 		}
 	}
 
-	bool RemoveObject(IDObject<T> objectID, bool throwOnIDNotFound) noexcept(std::is_nothrow_destructible_v<T>)
+	bool RemoveObject(IDObject<T> objectID, bool throwOnIDNotFound)
 	{
 		if (objectID.GetVectorID() != _vectorID)
 			throw std::runtime_error("OrderIndependentDeletionStack RemoveObject Error: Program tried to user an ID from another instance of this list!");
