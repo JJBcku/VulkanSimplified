@@ -29,8 +29,11 @@ public:
 
 	CommonVectorObject(const CommonVectorObject<T>& other) noexcept(std::is_nothrow_copy_constructible_v<IDSubobject<T>> && std::is_nothrow_copy_constructible_v<std::optional<T>>)
 		: _objectID(other._objectID), _object(other._object) {};
-	CommonVectorObject(CommonVectorObject<T>&& other) noexcept(std::is_nothrow_move_constructible_v<IDSubobject<T>> && std::is_nothrow_move_constructible_v<std::optional<T>>)
-		: _objectID(std::move(other._objectID)), _object(std::move(other._object)) {};
+	CommonVectorObject(CommonVectorObject<T>&& other) noexcept(std::is_nothrow_move_constructible_v<IDSubobject<T>>&& std::is_nothrow_move_constructible_v<std::optional<T>>)
+		: _objectID(std::move(other._objectID)), _object(std::move(other._object))
+	{
+		other._objectID = IDSubobject<T>();
+	}
 
 	CommonVectorObject<T>& operator=(const CommonVectorObject<T>& other)
 		noexcept(std::is_nothrow_copy_assignable_v<IDSubobject<T>>&& std::is_nothrow_copy_assignable_v<std::optional<T>>)
@@ -46,6 +49,8 @@ public:
 	{
 		_objectID = std::move(other._objectID);
 		_object = std::move(other._object);
+
+		other._objectID = IDSubobject<T>();
 
 		return *this;
 	}

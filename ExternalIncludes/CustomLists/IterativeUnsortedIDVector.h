@@ -12,7 +12,7 @@ public:
 	IterativeUnsortedIDVector(IterativeUnsortedIDVector<T>&& rhs) noexcept(std::is_nothrow_move_constructible_v<UnsortedIDVector<T>>) : UnsortedIDVector<T>(std::move(rhs)) {};
 
 	IterativeUnsortedIDVector& operator=(const IterativeUnsortedIDVector<T>&) noexcept = delete;
-	IterativeUnsortedIDVector& operator=(IterativeUnsortedIDVector<T>&&) noexcept = delete;
+	IterativeUnsortedIDVector& operator=(IterativeUnsortedIDVector<T>&&) noexcept = default;
 
 	T& GetObject(size_t index)
 	{

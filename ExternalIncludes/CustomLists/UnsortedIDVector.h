@@ -38,12 +38,29 @@ public:
 		std::is_nothrow_destructible_v<decltype(_IDList)>) {};
 
 	UnsortedIDVector(const UnsortedIDVector<T>& rhs) = delete;
-	UnsortedIDVector(UnsortedIDVector<T>&& rhs) noexcept(std::is_nothrow_move_constructible_v<IDType> && std::is_nothrow_move_constructible_v<decltype(_list)> 
-		&& std::is_nothrow_move_constructible_v<decltype(_deletedList)> && std::is_nothrow_move_constructible_v<decltype(_IDList)>)
-		: _nextID(std::move(rhs._nextID)), _vectorID(std::move(rhs._vectorID)), _list(std::move(rhs._list)), _deletedList(std::move(rhs._deletedList)), _IDList(std::move(rhs._IDList)) {};
+	UnsortedIDVector(UnsortedIDVector<T>&& rhs) noexcept(std::is_nothrow_move_constructible_v<IDType>&& std::is_nothrow_move_constructible_v<decltype(_list)>
+		&& std::is_nothrow_move_constructible_v<decltype(_deletedList)>&& std::is_nothrow_move_constructible_v<decltype(_IDList)>)
+		: _nextID(std::move(rhs._nextID)), _vectorID(std::move(rhs._vectorID)), _list(std::move(rhs._list)), _deletedList(std::move(rhs._deletedList)), _IDList(std::move(rhs._IDList))
+	{
+		rhs._vectorID = GetNextVectorID();
+		rhs._nextID = std::numeric_limits<IDType>::lowest();
+	}
 
 	UnsortedIDVector<T>& operator=(const UnsortedIDVector<T>&) = delete;
-	UnsortedIDVector<T>& operator=(UnsortedIDVector<T>&& rhs) = delete;
+	UnsortedIDVector<T>& operator=(UnsortedIDVector<T>&& rhs)
+	{
+		_nextID = std::move(rhs._nextID);
+		_vectorID = std::move(rhs._vectorID);
+
+		_list = std::move(rhs._list);
+		_deletedList = std::move(rhs._deletedList);
+		_IDList = std::move(rhs._IDList);
+
+		rhs._vectorID = GetNextVectorID();
+		rhs._nextID = std::numeric_limits<IDType>::lowest();
+
+		return *this;
+	}
 
 	IDObject<T> AddUniqueObject(const T& value, size_t addOnReserve)
 	{

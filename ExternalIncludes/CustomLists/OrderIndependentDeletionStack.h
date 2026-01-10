@@ -37,7 +37,15 @@ public:
 	}
 
 	OrderIndependentDeletionStack(const OrderIndependentDeletionStack<T>&) = delete;
-	OrderIndependentDeletionStack(OrderIndependentDeletionStack<T>&& rhs) noexcept(std::is_nothrow_move_constructible_v<decltype(_list)>)
+	OrderIndependentDeletionStack(OrderIndependentDeletionStack<T>&& rhs) noexcept(std::is_nothrow_move_constructible_v<decltype(_list)>) : _nextID(std::move(rhs._nextID)),
+		_vectorID(std::move(rhs._vectorID)), _list(std::move(rhs._list)), _deletedList(std::move(rhs._deletedList)), _additionOrder(std::move(rhs._additionOrder))
+	{
+		rhs._nextID = std::numeric_limits<IDType>::lowest();
+		rhs._vectorID = GetNextVectorID();
+	}
+
+	OrderIndependentDeletionStack& operator=(const OrderIndependentDeletionStack<T>&) noexcept = delete;
+	OrderIndependentDeletionStack& operator=(OrderIndependentDeletionStack<T>&& rhs) noexcept
 	{
 		_nextID = std::move(rhs._nextID);
 		_vectorID = std::move(rhs._vectorID);
@@ -45,10 +53,12 @@ public:
 		_list = std::move(rhs._list);
 		_deletedList = std::move(rhs._deletedList);
 		_additionOrder = std::move(rhs._additionOrder);
-	}
 
-	OrderIndependentDeletionStack& operator=(const OrderIndependentDeletionStack<T>&) noexcept = delete;
-	OrderIndependentDeletionStack& operator=(OrderIndependentDeletionStack<T>&&) noexcept = delete;
+		rhs._nextID = std::numeric_limits<IDType>::lowest();
+		rhs._vectorID = GetNextVectorID();
+
+		return *this;
+	}
 
 	IDObject<T> AddObject(const T& value, size_t addOnReserve)
 	{
