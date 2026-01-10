@@ -1,1 +1,0 @@
-Copy CustomLists projects x64 Release .lib and .pdb files to this folder
