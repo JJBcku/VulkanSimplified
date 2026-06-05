@@ -23,7 +23,7 @@ namespace VulkanSimplified
 		~ImagesMemoryBarrierData();
 
 		ImagesMemoryBarrierData(const ImagesMemoryBarrierData&) noexcept = default;
-		ImagesMemoryBarrierData(ImagesMemoryBarrierData&&) noexcept = delete;
+		ImagesMemoryBarrierData(ImagesMemoryBarrierData&&) noexcept = default;
 
 		ImagesMemoryBarrierData& operator=(const ImagesMemoryBarrierData&) noexcept = default;
 	};
