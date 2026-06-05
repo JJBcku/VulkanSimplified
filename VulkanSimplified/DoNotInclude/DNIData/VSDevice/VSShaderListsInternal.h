@@ -22,6 +22,10 @@ namespace VulkanSimplified
 		ShaderListsInternal(VkDevice device, const ShaderListsInitialCapacitiesList& initialCapacities);
 		~ShaderListsInternal();
 
+		ShaderListsInternal(const ShaderListsInternal&) noexcept = delete;
+
+		ShaderListsInternal& operator=(const ShaderListsInternal&) noexcept = delete;
+
 		IDObject<AutoCleanupFragmentShaderModule> CreateFragmentShaderModule(const char& data, size_t dataSize, size_t addOnReservation);
 		IDObject<AutoCleanupVertexShaderModule> CreateVertexShaderModule(const char& data, size_t dataSize, size_t addOnReservation);
 

@@ -58,6 +58,7 @@ namespace VulkanSimplified
 		uint32_t _heapIndex;
 		uint32_t _typeIndex;
 		MemoryTypeProperties _properties;
+		uint32_t _padding;
 
 		UnsortedIDVector<MemoryAllocationData> _allocationsList;
 	};

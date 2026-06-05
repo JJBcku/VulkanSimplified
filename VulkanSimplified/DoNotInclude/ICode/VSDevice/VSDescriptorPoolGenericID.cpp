@@ -8,16 +8,12 @@ namespace VulkanSimplified
 		type = DescriptorPoolIDType::UNKNOWN;
 	}
 
-	DescriptorPoolGenericID::DescriptorPoolGenericID(IDObject<AutoCleanupNIFDescriptorPool> ID) noexcept
+	DescriptorPoolGenericID::DescriptorPoolGenericID(const IDObject<AutoCleanupNIFDescriptorPool>& ID) noexcept : NifID(ID)
 	{
-		NifID.type = DescriptorPoolIDType::NIF;
-		NifID.ID = ID;
 	}
 
-	DescriptorPoolGenericID::DescriptorPoolGenericID(IDObject<AutoCleanupIFDescriptorPool> ID) noexcept
+	DescriptorPoolGenericID::DescriptorPoolGenericID(const IDObject<AutoCleanupIFDescriptorPool>& ID) noexcept : IfID(ID)
 	{
-		IfID.type = DescriptorPoolIDType::IF;
-		IfID.ID = ID;
 	}
 
 	DescriptorPoolGenericID::DescriptorPoolGenericID(const DescriptorPoolGenericID& rhs) noexcept
@@ -46,6 +42,16 @@ namespace VulkanSimplified
 		std::memcpy(this, &rhs, sizeof(DescriptorPoolGenericID));
 		rhs.type = DescriptorPoolIDType::UNKNOWN;
 		return *this;
+	}
+
+	DescriptorPoolGenericID::NifID::NifID(const IDObject<AutoCleanupNIFDescriptorPool>& ID) noexcept : ID(ID)
+	{
+		type = DescriptorPoolIDType::NIF;
+	}
+
+	DescriptorPoolGenericID::IfID::IfID(const IDObject<AutoCleanupIFDescriptorPool>& ID) noexcept : ID(ID)
+	{
+		type = DescriptorPoolIDType::IF;
 	}
 
 }

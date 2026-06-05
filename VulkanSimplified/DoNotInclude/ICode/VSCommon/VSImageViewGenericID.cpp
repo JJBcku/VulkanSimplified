@@ -8,32 +8,23 @@ namespace VulkanSimplified
 		IDType = ImageViewIDType::NONE;
 	}
 
-	ImageViewGenericID::ImageViewGenericID(IDObject<AutoCleanupColorRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) noexcept
+	ImageViewGenericID::ImageViewGenericID(const IDObject<AutoCleanupColorRenderTargetImage>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept :
+		colorViewID(imageID, viewID)
 	{
-		colorViewID.IDType = ImageViewIDType::COLOR;
-		colorViewID.imageID = imageID;
-		colorViewID.viewID = viewID;
 	}
 
-	ImageViewGenericID::ImageViewGenericID(IDObject<AutoCleanupDepthStencilRenderTargetImage> imageID, IDObject<AutoCleanupImageView> viewID) noexcept
+	ImageViewGenericID::ImageViewGenericID(const IDObject<AutoCleanupDepthStencilRenderTargetImage>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept :
+		depthStencilViewID(imageID, viewID)
 	{
-		depthStencilViewID.IDType = ImageViewIDType::DEPTH_STENCIL;
-		depthStencilViewID.imageID = imageID;
-		depthStencilViewID.viewID = viewID;
 	}
 
-	ImageViewGenericID::ImageViewGenericID(IDObject<AutoCleanup2DTexture> imageID, IDObject<AutoCleanupImageView> viewID) noexcept
+	ImageViewGenericID::ImageViewGenericID(const IDObject<AutoCleanup2DTexture>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept : texture2DViewID(imageID, viewID)
 	{
-		texture2DViewID.IDType = ImageViewIDType::TEXTURE_2D;
-		texture2DViewID.imageID = imageID;
-		texture2DViewID.viewID = viewID;
 	}
 
-	ImageViewGenericID::ImageViewGenericID(IDObject<AutoCleanup2DArrayTexture> imageID, IDObject<AutoCleanupImageView> viewID) noexcept
+	ImageViewGenericID::ImageViewGenericID(const IDObject<AutoCleanup2DArrayTexture>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept :
+		texture2DArrayViewID(imageID, viewID)
 	{
-		texture2DArrayViewID.IDType = ImageViewIDType::ARRAY_TEXTURE_2D;
-		texture2DArrayViewID.imageID = imageID;
-		texture2DArrayViewID.viewID = viewID;
 	}
 
 	ImageViewGenericID::ImageViewGenericID(const ImageViewGenericID& rhs) noexcept
@@ -62,6 +53,30 @@ namespace VulkanSimplified
 		std::memcpy(this, &rhs, sizeof(ImageViewGenericID));
 		rhs.IDType = ImageViewIDType::NONE;
 		return *this;
+	}
+
+	ImageViewGenericID::ImageColorViewID::ImageColorViewID(const IDObject<AutoCleanupColorRenderTargetImage>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept :
+		imageID(imageID), viewID(viewID)
+	{
+		IDType = ImageViewIDType::COLOR;
+	}
+
+	ImageViewGenericID::ImageDepthStencilViewID::ImageDepthStencilViewID(const IDObject<AutoCleanupDepthStencilRenderTargetImage>& imageID,
+		const IDObject<AutoCleanupImageView>& viewID) noexcept : imageID(imageID), viewID(viewID)
+	{
+		IDType = ImageViewIDType::DEPTH_STENCIL;
+	}
+
+	ImageViewGenericID::Texture2DViewID::Texture2DViewID(const IDObject<AutoCleanup2DTexture>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept :
+		imageID(imageID), viewID(viewID)
+	{
+		IDType = ImageViewIDType::TEXTURE_2D;
+	}
+
+	ImageViewGenericID::Texture2DArrayViewID::Texture2DArrayViewID(const IDObject<AutoCleanup2DArrayTexture>& imageID, const IDObject<AutoCleanupImageView>& viewID) noexcept :
+		imageID(imageID), viewID(viewID)
+	{
+		IDType = ImageViewIDType::ARRAY_TEXTURE_2D;
 	}
 
 }

@@ -95,6 +95,7 @@ namespace VulkanSimplified
 		VkFormat _format;
 		VkSwapchainCreateFlagsKHR _swapchainFlags;
 		uint32_t _imageAmount;
+		uint32_t _imageAmountPadding;
 
 		std::vector<uint32_t> _queueFamilies;
 

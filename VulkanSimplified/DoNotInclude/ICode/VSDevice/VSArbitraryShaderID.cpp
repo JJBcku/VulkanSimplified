@@ -8,16 +8,12 @@ namespace VulkanSimplified
 		type = static_cast<ShaderTypeFlagBit>(0);
 	}
 
-	ArbitraryShaderID::ArbitraryShaderID(IDObject<AutoCleanupFragmentShaderModule> fragmentShaderID) noexcept
+	ArbitraryShaderID::ArbitraryShaderID(const IDObject<AutoCleanupFragmentShaderModule>& fragmentShaderID) noexcept : fragmentShader(fragmentShaderID)
 	{
-		type = SHADER_TYPE_FRAGMENT;
-		fragmentShader.fragmentShaderID = fragmentShaderID;
 	}
 
-	ArbitraryShaderID::ArbitraryShaderID(IDObject<AutoCleanupVertexShaderModule> vertexShaderID) noexcept
+	ArbitraryShaderID::ArbitraryShaderID(const IDObject<AutoCleanupVertexShaderModule>& vertexShaderID) noexcept : vertexShader(vertexShaderID)
 	{
-		type = SHADER_TYPE_VERTEX;
-		vertexShader.vertexShaderID = vertexShaderID;
 	}
 
 	ArbitraryShaderID::ArbitraryShaderID(const ArbitraryShaderID& rhs) noexcept
@@ -46,6 +42,16 @@ namespace VulkanSimplified
 		std::memcpy(this, &rhs, sizeof(ArbitraryShaderID));
 		rhs.type = static_cast<ShaderTypeFlagBit>(0);
 		return *this;
+	}
+
+	ArbitraryShaderID::FragmentShaderID::FragmentShaderID(const IDObject<AutoCleanupFragmentShaderModule>& fragmentShaderID) noexcept : fragmentShaderID(fragmentShaderID)
+	{
+		type = SHADER_TYPE_FRAGMENT;
+	}
+
+	ArbitraryShaderID::VertexShaderID::VertexShaderID(const IDObject<AutoCleanupVertexShaderModule>& vertexShaderID) noexcept : vertexShaderID(vertexShaderID)
+	{
+		type = SHADER_TYPE_VERTEX;
 	}
 
 }

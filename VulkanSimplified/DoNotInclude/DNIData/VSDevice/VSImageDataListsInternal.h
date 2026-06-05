@@ -45,6 +45,8 @@ namespace VulkanSimplified
 			const ImageDataListsInitialCapacities& initialCapacities);
 		~ImageDataListsInternal();
 
+		ImageDataListsInternal(const ImageDataListsInternal&) noexcept = delete;
+
 		ImageDataListsInternal& operator=(const ImageDataListsInternal&) noexcept = delete;
 
 		IDObject<AutoCleanupColorRenderTargetImage> AddColorRenderTargetImage(uint32_t width, uint32_t height, DataFormatSetIndependentID format,

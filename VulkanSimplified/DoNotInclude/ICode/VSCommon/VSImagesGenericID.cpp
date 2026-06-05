@@ -8,31 +8,16 @@ namespace VulkanSimplified
 		type = ImagesIDType::UNKNOWN;
 	}
 
-	ImagesGenericID::ImagesGenericID(IDObject<AutoCleanupColorRenderTargetImage> ID) noexcept
+	ImagesGenericID::ImagesGenericID(const IDObject<AutoCleanupColorRenderTargetImage>& ID) noexcept : colorRenderTarget(ID)
 	{
-		colorRenderTarget.type = ImagesIDType::COLOR_RENDER_TARGET;
-		colorRenderTarget.ID = ID;
 	}
 
-	ImagesGenericID::ImagesGenericID(IDObject<AutoCleanup2DTexture> ID) noexcept
+	ImagesGenericID::ImagesGenericID(const IDObject<AutoCleanup2DTexture>& ID) noexcept : texture2D(ID)
 	{
-		texture2D.type = ImagesIDType::TEXTURE_2D;
-		texture2D.ID = ID;
-
-		texture2D.baseMipLevel = 0;
-		texture2D.mipLevelCount = {};
 	}
 
-	ImagesGenericID::ImagesGenericID(IDObject<AutoCleanup2DArrayTexture> ID) noexcept
+	ImagesGenericID::ImagesGenericID(const IDObject<AutoCleanup2DArrayTexture>& ID) noexcept : textureArray2D(ID)
 	{
-		textureArray2D.type = ImagesIDType::TEXTURE_2D_ARRAY;
-		textureArray2D.ID = ID;
-
-		textureArray2D.baseMipLevel = 0;
-		textureArray2D.mipLevelCount = {};
-
-		textureArray2D.baseArrayLayer = 0;
-		textureArray2D.arrayLayersCount = {};
 	}
 
 	ImagesGenericID::ImagesGenericID(const ImagesGenericID& rhs) noexcept
@@ -61,6 +46,31 @@ namespace VulkanSimplified
 		std::memcpy(this, &rhs, sizeof(ImagesGenericID));
 		rhs.type = ImagesIDType::UNKNOWN;
 		return *this;
+	}
+
+	ImagesGenericID::ImagesColorRenderTargetID::ImagesColorRenderTargetID(const IDObject<AutoCleanupColorRenderTargetImage>& ID) noexcept : ID(ID)
+	{
+		type = ImagesIDType::COLOR_RENDER_TARGET;
+	}
+
+	ImagesGenericID::ImagesTexture2DID::ImagesTexture2DID(const IDObject<AutoCleanup2DTexture>& ID) noexcept : ID(ID)
+	{
+		type = ImagesIDType::TEXTURE_2D;
+
+		baseMipLevel = 0;
+		mipLevelPadding = 0;
+		mipLevelCount = {};
+	}
+
+	ImagesGenericID::ImagesTexture2DArrayID::ImagesTexture2DArrayID(const IDObject<AutoCleanup2DArrayTexture>& ID) noexcept : ID(ID)
+	{
+		type = ImagesIDType::TEXTURE_2D_ARRAY;
+
+		baseMipLevel = 0;
+		mipLevelCount = {};
+
+		baseArrayLayer = 0;
+		arrayLayersCount = {};
 	}
 
 }

@@ -12,4 +12,9 @@ namespace VulkanSimplified
 		oldLayout = ImageLayoutFlags::UNDEFINED;
 		newLayout = ImageLayoutFlags::UNDEFINED;
 	}
+
+	ImagesMemoryBarrierData::~ImagesMemoryBarrierData()
+	{
+	}
+
 }

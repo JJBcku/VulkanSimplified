@@ -44,6 +44,7 @@ namespace VulkanSimplified
 		_format = VK_FORMAT_MAX_ENUM;
 		_swapchainFlags = VK_SWAPCHAIN_CREATE_FLAG_BITS_MAX_ENUM_KHR;
 		_imageAmount = 0;
+		_imageAmountPadding = 0;
 
 		_swapchain = VK_NULL_HANDLE;
 

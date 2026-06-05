@@ -119,6 +119,14 @@ namespace VulkanSimplified
 		settings = PipelineDerrivationSettings::DO_NOT_DERRIVE;
 	}
 
+	GraphicsPipelineDerrivationData::GraphicsPipelineDerrivationData(const IDObject<AutoCleanupGraphicsPipeline>& ID) noexcept : pipelineID(ID)
+	{
+	}
+
+	GraphicsPipelineDerrivationData::GraphicsPipelineDerrivationData(size_t index) noexcept : pipelineIndex(index)
+	{
+	}
+
 	GraphicsPipelineDerrivationData::GraphicsPipelineDerrivationData(const GraphicsPipelineDerrivationData& rhs) noexcept
 	{
 		std::memcpy(this, &rhs, sizeof(GraphicsPipelineDerrivationData));
@@ -146,6 +154,16 @@ namespace VulkanSimplified
 		std::memcpy(this, &rhs, sizeof(GraphicsPipelineDerrivationData));
 		rhs.settings = PipelineDerrivationSettings::DO_NOT_DERRIVE;
 		return *this;
+	}
+
+	GraphicsPipelineDerrivationData::IDDerrivationData::IDDerrivationData(const IDObject<AutoCleanupGraphicsPipeline>& ID) noexcept : ID(ID)
+	{
+		settings = PipelineDerrivationSettings::PIPELINE_ID;
+	}
+
+	GraphicsPipelineDerrivationData::IndexDerrivationData::IndexDerrivationData(size_t index) noexcept : index(index)
+	{
+		settings = PipelineDerrivationSettings::PIPELINE_INDEX;
 	}
 
 	GraphicsPipelineCreationData::GraphicsPipelineCreationData() noexcept

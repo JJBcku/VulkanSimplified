@@ -34,6 +34,10 @@ namespace VulkanSimplified
 			const RenderPassListInternal& renderPassList, VkDevice device, const PipelineDataListsInitialCapacities& initialCapacities);
 		~PipelineDataListsInternal();
 
+		PipelineDataListsInternal(const PipelineDataListsInternal&) noexcept = delete;
+
+		PipelineDataListsInternal& operator=(const PipelineDataListsInternal&) noexcept = delete;
+
 		std::optional<IDObject<AutoCleanupPipelineCache>> AddPipelineCache(const std::vector<unsigned char>& initialData, size_t addOnReserving);
 
 		IDObject<AutoCleanupPipelineLayout> AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserving);

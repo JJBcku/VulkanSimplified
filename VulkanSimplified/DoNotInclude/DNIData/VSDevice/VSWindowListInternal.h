@@ -28,6 +28,10 @@ namespace VulkanSimplified
 			VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device, const WindowListInitialCapacities& initalCapacities);
 		~WindowListInternal();
 
+		WindowListInternal(const WindowListInternal&) noexcept = delete;
+
+		WindowListInternal& operator=(const WindowListInternal&) noexcept = delete;
+
 		IDObject<WindowPointer> CreateWindow(const WindowCreationData& creationData, size_t addOnReserving);
 
 		WindowInternal& GetWindow(IDObject<WindowPointer> windowID);

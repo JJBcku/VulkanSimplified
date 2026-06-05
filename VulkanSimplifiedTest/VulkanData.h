@@ -32,6 +32,10 @@ struct VulkanData
 	std::unique_ptr<VulkanFrameData> frameData;
 	std::unique_ptr<VulkanTextureData> textureData;
 
+	VulkanData(const VulkanData&) noexcept = delete;
+
+	VulkanData& operator=(const VulkanData&) noexcept = delete;
+
 	VulkanData();
 	~VulkanData();
 };

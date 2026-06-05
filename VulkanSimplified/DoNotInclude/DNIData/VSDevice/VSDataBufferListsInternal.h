@@ -30,6 +30,10 @@ namespace VulkanSimplified
 			const DataBufferListsInitialCapacities& initialCapacities);
 		~DataBufferListsInternal();
 
+		DataBufferListsInternal(const DataBufferListsInternal&) noexcept = delete;
+
+		DataBufferListsInternal& operator=(const DataBufferListsInternal&) noexcept = delete;
+
 		IDObject<AutoCleanupVertexBuffer> AddVertexBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
 		IDObject<AutoCleanupStagingBuffer> AddStagingBuffer(MemorySize size, const std::vector<size_t>& queuesUsingBuffer, size_t addOnReserving);
 		IDObject<AutoCleanupIndexBuffer> AddIndexBuffer(size_t indicesCount, IndexType indexType, const std::vector<size_t>& queuesUsingBuffer,

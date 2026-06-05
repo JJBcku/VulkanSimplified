@@ -8,22 +8,16 @@ namespace VulkanSimplified
 		type = ImageIDType::UNKNOWN;
 	}
 
-	RenderTargetImagesID::RenderTargetImagesID(const IDObject<AutoCleanupColorRenderTargetImage>& ID) noexcept
+	RenderTargetImagesID::RenderTargetImagesID(const IDObject<AutoCleanupColorRenderTargetImage>& ID) noexcept : colorRenderTarget(ID)
 	{
-		colorRenderTarget.type = ImageIDType::COLOR_RENDER_TARGET;
-		colorRenderTarget.ID = ID;
 	}
 
-	RenderTargetImagesID::RenderTargetImagesID(const IDObject<AutoCleanupDepthStencilRenderTargetImage>& ID) noexcept
+	RenderTargetImagesID::RenderTargetImagesID(const IDObject<AutoCleanupDepthStencilRenderTargetImage>& ID) noexcept : depthStencilRenderTarget(ID)
 	{
-		depthStencilRenderTarget.type = ImageIDType::DEPTH_STENCIL_RENDER_TARGET;
-		depthStencilRenderTarget.ID = ID;
 	}
 
-	RenderTargetImagesID::RenderTargetImagesID(const IDObject<AutoCleanupResolveRenderTargetImage>& ID) noexcept
+	RenderTargetImagesID::RenderTargetImagesID(const IDObject<AutoCleanupResolveRenderTargetImage>& ID) noexcept : resolveRenderTarget(ID)
 	{
-		resolveRenderTarget.type = ImageIDType::RESOLVE_RENDER_TARGET;
-		resolveRenderTarget.ID = ID;
 	}
 
 	RenderTargetImagesID::RenderTargetImagesID(const RenderTargetImagesID& rhs) noexcept
@@ -41,4 +35,20 @@ namespace VulkanSimplified
 
 		return *this;
 	}
+
+	RenderTargetImagesID::ColorRenderTargetID::ColorRenderTargetID(const IDObject<AutoCleanupColorRenderTargetImage>& ID) noexcept : ID(ID)
+	{
+		type = ImageIDType::COLOR_RENDER_TARGET;
+	}
+
+	RenderTargetImagesID::DepthStencilRenderTargetID::DepthStencilRenderTargetID(const IDObject<AutoCleanupDepthStencilRenderTargetImage>& ID) noexcept : ID(ID)
+	{
+		type = ImageIDType::DEPTH_STENCIL_RENDER_TARGET;
+	}
+
+	RenderTargetImagesID::ResolveRenderTargetID::ResolveRenderTargetID(const IDObject<AutoCleanupResolveRenderTargetImage>& ID) noexcept : ID(ID)
+	{
+		type = ImageIDType::RESOLVE_RENDER_TARGET;
+	}
+
 }

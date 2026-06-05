@@ -39,6 +39,10 @@ namespace VulkanSimplified
 			const DeviceInitialCapacitiesList& initialCapacities);
 		~DeviceMainInternal();
 
+		DeviceMainInternal(const DeviceMainInternal&) noexcept = delete;
+
+		DeviceMainInternal& operator=(const DeviceMainInternal&) noexcept = delete;
+
 		DeviceCoreInternal& GetDeviceCore();
 		WindowListInternal& GetWindowList();
 		ShaderListsInternal& GetShaderLists();

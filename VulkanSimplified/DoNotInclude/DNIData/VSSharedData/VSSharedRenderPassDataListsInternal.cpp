@@ -703,11 +703,11 @@ namespace VulkanSimplified
 		case RenderPassClearValueIDType::COLOR_FLOAT:
 			ret.first = GetFloatColorClearValue(valueID.floatColorID.ID);
 			break;
-		case RenderPassClearValueIDType::COLOR_INT:
-			ret.first = GetIntColorClearValue(valueID.intColorID.ID);
+		case RenderPassClearValueIDType::COLOR_INT32:
+			ret.first = GetIntColorClearValue(valueID.int32ColorID.ID);
 			break;
-		case RenderPassClearValueIDType::COLOR_UINT:
-			ret.first = GetUIntColorClearValue(valueID.uintColorID.ID);
+		case RenderPassClearValueIDType::COLOR_UINT32:
+			ret.first = GetUIntColorClearValue(valueID.uint32ColorID.ID);
 			break;
 		case RenderPassClearValueIDType::DEPTH_STENCIL:
 			ret.first = GetDepthStencilClearValue(valueID.depthStencilID.ID);

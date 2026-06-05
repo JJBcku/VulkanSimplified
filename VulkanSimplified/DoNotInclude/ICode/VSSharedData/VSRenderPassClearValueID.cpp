@@ -8,46 +8,32 @@ namespace VulkanSimplified
 		type = static_cast<RenderPassClearValueIDType>(std::numeric_limits<uint64_t>::max());
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassDoubleColorClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassDoubleColorClearValues>& ID) noexcept : doubleColorID(ID)
 	{
-		doubleColorID.type = RenderPassClearValueIDType::COLOR_DOUBLE;
-		doubleColorID.ID = ID;
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassInt64ColorClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassInt64ColorClearValues>& ID) noexcept : int64ColorID(ID)
 	{
-		int64ColorID.type = RenderPassClearValueIDType::COLOR_INT64;
-		int64ColorID.ID = ID;
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassUInt64ColorClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassUInt64ColorClearValues>& ID) noexcept : uint64ColorID(ID)
 	{
-		uint64ColorID.type = RenderPassClearValueIDType::COLOR_UINT64;
-		uint64ColorID.ID = ID;
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassFloatColorClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassFloatColorClearValues>& ID) noexcept : floatColorID(ID)
 	{
-		floatColorID.type = RenderPassClearValueIDType::COLOR_FLOAT;
-		floatColorID.ID = ID;
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassIntColorClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassIntColorClearValues>& ID) noexcept : int32ColorID(ID)
 	{
-		intColorID.type = RenderPassClearValueIDType::COLOR_INT;
-		intColorID.ID = ID;
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassUIntColorClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassUIntColorClearValues>& ID) noexcept : uint32ColorID(ID)
 	{
-		uintColorID.type = RenderPassClearValueIDType::COLOR_UINT;
-		uintColorID.ID = ID;
 	}
 
-	RenderPassClearValueID::RenderPassClearValueID(IDObject<RenderPassDepthStencilClearValues> ID) noexcept
+	RenderPassClearValueID::RenderPassClearValueID(const IDObject<RenderPassDepthStencilClearValues>& ID) noexcept : depthStencilID(ID)
 	{
-		depthStencilID.type = RenderPassClearValueIDType::DEPTH_STENCIL;
-		depthStencilID.ID = ID;
 	}
 
 	RenderPassClearValueID::RenderPassClearValueID(const RenderPassClearValueID& rhs) noexcept
@@ -64,6 +50,41 @@ namespace VulkanSimplified
 		std::memcpy(this, &rhs, sizeof(rhs));
 
 		return *this;
+	}
+
+	RenderPassClearValueID::DoubleColorID::DoubleColorID(const IDObject<RenderPassDoubleColorClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::COLOR_DOUBLE;
+	}
+
+	RenderPassClearValueID::Int64ColorID::Int64ColorID(const IDObject<RenderPassInt64ColorClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::COLOR_INT64;
+	}
+
+	RenderPassClearValueID::Uint64ColorID::Uint64ColorID(const IDObject<RenderPassUInt64ColorClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::COLOR_UINT64;
+	}
+
+	RenderPassClearValueID::FloatColorID::FloatColorID(const IDObject<RenderPassFloatColorClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::COLOR_FLOAT;
+	}
+
+	RenderPassClearValueID::Int32ColorID::Int32ColorID(const IDObject<RenderPassIntColorClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::COLOR_INT32;
+	}
+
+	RenderPassClearValueID::Uint32ColorID::Uint32ColorID(const IDObject<RenderPassUIntColorClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::COLOR_UINT32;
+	}
+
+	RenderPassClearValueID::DepthStencilID::DepthStencilID(const IDObject<RenderPassDepthStencilClearValues>& ID) noexcept : ID(ID)
+	{
+		type = RenderPassClearValueIDType::DEPTH_STENCIL;
 	}
 
 }

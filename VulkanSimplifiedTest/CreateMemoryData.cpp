@@ -55,14 +55,14 @@ void LoadModel()
 			VertexData add{};
 
 			add.position = {
-			attrib.vertices[3 * index.vertex_index + 0],
-			attrib.vertices[3 * index.vertex_index + 1],
-			attrib.vertices[3 * index.vertex_index + 2],
+			attrib.vertices[static_cast<size_t>(3 * index.vertex_index + 0)],
+			attrib.vertices[static_cast<size_t>(3 * index.vertex_index + 1)],
+			attrib.vertices[static_cast<size_t>(3 * index.vertex_index + 2)],
 			1.0f };
 
 			add.textureCoordinates = {
-				attrib.texcoords[2 * index.texcoord_index + 0],
-				1.0f - attrib.texcoords[2 * index.texcoord_index + 1] };
+				attrib.texcoords[static_cast<size_t>(2 * index.texcoord_index + 0)],
+				1.0f - attrib.texcoords[static_cast<size_t>(2 * index.texcoord_index + 1)] };
 
 			bool found = false;
 

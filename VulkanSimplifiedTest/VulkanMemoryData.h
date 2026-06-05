@@ -37,5 +37,8 @@ struct VulkanMemoryData
 	bool indexMemoryMapped = false;
 	bool uniformMemoryMapped = false;
 
+	bool padding1 = false;
+	uint32_t padding2 = 0;
+
 	VulkanMemoryData() = default;
 };

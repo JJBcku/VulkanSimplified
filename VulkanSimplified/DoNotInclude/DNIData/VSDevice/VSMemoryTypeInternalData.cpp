@@ -6,7 +6,7 @@
 namespace VulkanSimplified
 {
 	MemoryTypeInternalData::MemoryTypeInternalData(VkDevice device, uint32_t heapIndex, const MemoryTypeData& memoryData,
-		size_t reservedAllocation) : _device(device), _heapIndex(heapIndex), _typeIndex(memoryData.memoryIndex), _properties(memoryData.properties),
+		size_t reservedAllocation) : _device(device), _heapIndex(heapIndex), _typeIndex(memoryData.memoryIndex), _properties(memoryData.properties), _padding(0),
 		_allocationsList(reservedAllocation)
 	{
 	}
@@ -16,12 +16,13 @@ namespace VulkanSimplified
 	}
 
 	MemoryTypeInternalData::MemoryTypeInternalData(MemoryTypeInternalData&& rhs) noexcept : _device(rhs._device), _heapIndex(rhs._heapIndex), _typeIndex(rhs._typeIndex),
-		_properties(rhs._properties), _allocationsList(std::move(rhs._allocationsList))
+		_properties(rhs._properties), _padding(0), _allocationsList(std::move(rhs._allocationsList))
 	{
 		rhs._device = VK_NULL_HANDLE;
 		rhs._heapIndex = std::numeric_limits<uint32_t>::max();
 		rhs._typeIndex = std::numeric_limits<uint32_t>::max();
 		rhs._properties = std::numeric_limits<MemoryTypeProperties>::max();
+		rhs._padding = 0;
 	}
 
 	MemoryTypeInternalData& MemoryTypeInternalData::operator=(MemoryTypeInternalData&& rhs) noexcept
@@ -30,12 +31,14 @@ namespace VulkanSimplified
 		_heapIndex = rhs._heapIndex;
 		_typeIndex = rhs._typeIndex;
 		_properties = rhs._properties;
+		_padding = 0;
 		_allocationsList = std::move(rhs._allocationsList);
 
 		rhs._device = VK_NULL_HANDLE;
 		rhs._heapIndex = std::numeric_limits<uint32_t>::max();
 		rhs._typeIndex = std::numeric_limits<uint32_t>::max();
 		rhs._properties = std::numeric_limits<MemoryTypeProperties>::max();
+		rhs._padding = 0;
 		return *this;
 	}
 

@@ -14,7 +14,4 @@ namespace VulkanSimplified
 		std::memset(pipelineCacheUUID.data(), 0, pipelineCacheUUID.size() * sizeof(pipelineCacheUUID[0]));
 	}
 
-	DeviceVulkan10Properties::~DeviceVulkan10Properties()
-	{
-	}
 }

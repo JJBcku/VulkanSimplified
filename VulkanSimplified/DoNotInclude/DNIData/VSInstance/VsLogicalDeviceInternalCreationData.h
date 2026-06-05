@@ -18,6 +18,7 @@ namespace VulkanSimplified
 		uint32_t padding;
 
 		VkPhysicalDeviceFeatures features;
+		uint32_t featurePadding;
 		std::vector<const char*> enabledExtensionsList;
 
 		DeviceVulkan10FeatureFlags vulkan10EnabledFeatures;

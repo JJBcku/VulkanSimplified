@@ -20,5 +20,11 @@ namespace VulkanSimplified
 		ImagesGenericID imageID;
 
 		ImagesMemoryBarrierData();
+		~ImagesMemoryBarrierData();
+
+		ImagesMemoryBarrierData(const ImagesMemoryBarrierData&) noexcept = default;
+		ImagesMemoryBarrierData(ImagesMemoryBarrierData&&) noexcept = delete;
+
+		ImagesMemoryBarrierData& operator=(const ImagesMemoryBarrierData&) noexcept = default;
 	};
 }

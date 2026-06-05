@@ -41,6 +41,10 @@ namespace VulkanSimplified
 			const ImageDataListsInternal& imageList, VkDevice device, const DescriptorListsInitialCapacities& initialCapacities);
 		~DescriptorDataListsInternal();
 
+		DescriptorDataListsInternal(const DescriptorDataListsInternal&) noexcept = delete;
+
+		DescriptorDataListsInternal& operator=(const DescriptorDataListsInternal&) noexcept = delete;
+
 		IDObject<AutoCleanupDescriptorSetLayout> AddDescriptorSetLayout(uint32_t firstBinding,
 			const std::vector<DescriptorSetBindingFullData>& descriptorSetLayoutBindings, size_t addOnReserving);
 

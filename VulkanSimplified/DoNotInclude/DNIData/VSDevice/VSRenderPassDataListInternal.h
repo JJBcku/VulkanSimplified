@@ -31,6 +31,10 @@ namespace VulkanSimplified
 			const RenderPassDataListsInitialCapacities& initialCapacities);
 		~RenderPassListInternal();
 
+		RenderPassListInternal(const RenderPassListInternal&) noexcept = delete;
+
+		RenderPassListInternal& operator=(const RenderPassListInternal&) noexcept = delete;
+
 		IDObject<AutoCleanupRenderPass> AddRenderPassWithoutResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
 			const std::vector<SubpassCreationDataWithoutResolving>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies,
 			size_t addOnReserving);

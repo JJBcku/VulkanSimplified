@@ -37,6 +37,10 @@ namespace VulkanSimplified
 		SharedPipelineDataListsInternal(const SharedPipelineDataListsssCapacities& initialCapacities);
 		~SharedPipelineDataListsInternal();
 
+		SharedPipelineDataListsInternal(const SharedPipelineDataListsInternal&) noexcept = delete;
+
+		SharedPipelineDataListsInternal& operator=(const SharedPipelineDataListsInternal&) noexcept = delete;
+
 		IDObject<ShaderSpecializationElement> AddShaderSpecializationElement(uint32_t constantID, uint32_t dataOffset, size_t dataSize, size_t addOnReserving);
 		IDObject<SharedShaderPipelineData> AddSharedShaderPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserving);
 

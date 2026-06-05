@@ -9,6 +9,7 @@ namespace VulkanSimplified
 		padding = 0;
 
 		features = {};
+		featurePadding = 0;
 
 		vulkan10EnabledFeatures = 0;
 	}
