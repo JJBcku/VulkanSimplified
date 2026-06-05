@@ -83,6 +83,7 @@
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -117,6 +118,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -153,6 +155,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>
