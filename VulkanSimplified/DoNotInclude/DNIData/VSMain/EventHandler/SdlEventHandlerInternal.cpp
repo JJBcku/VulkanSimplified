@@ -32,19 +32,18 @@ namespace VulkanSimplified
 		_localeChangedEventFunctions(initData.localeChangedEventFunctionListInitialCapacity), _displayEventFunctions(initData.displayEventFunctionListInitialCapacity),
 		_windowEventFunctions(initData.windowEventFunctionListInitialCapacity), _keyboardEventFunctions(initData.keyboardEventFunctionListInitialCapacity),
 		_keymapChangedEventFunctions(initData.keymapChangeEventFunctionListInitialCapacity), _textEditingEventFunctions(initData.textEditingEventFunctionListInitialCapacity),
-		_textEditingExtendedEventFunctions(initData.textEditingExtendedEventFunctionListInitialCapacity), _textInputEventFunctions(initData.textInputEventFunctionListInitialCapacity),
-		_mouseMotionEventFunctions(initData.mouseMotionEventFunctionListInitialCapacity), _mouseButtonEventFunctions(initData.mouseButtonEventFunctionListInitialCapacity),
-		_mouseWheelEventFunctions(initData.mouseWheelEventFunctionListInitialCapacity), _joyAxisEventFunctions(initData.joyAxisEventFunctionListInitialCapacity),
-		_joyBallEventFunctions(initData.joyBallEventFunctionListInitialCapacity), _joyHatEventFunctions(initData.joyHatEventFunctionListInitialCapacity),
-		_joyButtonEventFunctions(initData.joyButtonEventFunctionListInitialCapacity), _joyDeviceEventFunctions(initData.joyDeviceEventFunctionListInitialCapacity),
-		_joyBatteryEventFunctions(initData.joyBatteryEventFunctionListInitialCapacity), _controllerAxisEventFunctions(initData.controllerAxisEventFunctionListInitialCapacity),
-		_controllerButtonEventFunctions(initData.controllerButtonEventFunctionListInitialCapacity), _controllerDeviceEventFunctions(initData.controllerDeviceEventFunctionListInitialCapacity),
-		_controllerTouchpadEventFunctions(initData.controllerTouchpadEventFunctionListInitialCapacity), _controllerSensorEventFunctions(initData.controllerSensorEventFunctionListInitialCapacity),
-		_audioDeviceEventFunctions(initData.audioDeviceEventFunctionListInitialCapacity), _touchFingerEventFunctions(initData.touchFingerEventFunctionListInitialCapacity),
-		_multiGestureEventFunctions(initData.multiGestureEventFunctionListInitialCapacity), _dollarGestureEventFunctions(initData.dollarGestureEventFunctionListInitialCapacity),
-		_clipboardEventFunctions(initData.clipboardEventFunctionListInitialCapacity), _dropEventFunctions(initData.dropEventFunctionListInitialCapacity),
-		_sensorEventFunctions(initData.sensorEventFunctionListInitialCapacity), _userEventFunctions(initData.userEventFunctionListInitialCapacity),
-		_renderTargetsResetEventFunctions(initData.renderTargetsResetEventFunctionListInitialCapacity),
+		_textInputEventFunctions(initData.textInputEventFunctionListInitialCapacity), _mouseMotionEventFunctions(initData.mouseMotionEventFunctionListInitialCapacity),
+		_mouseButtonEventFunctions(initData.mouseButtonEventFunctionListInitialCapacity), _mouseWheelEventFunctions(initData.mouseWheelEventFunctionListInitialCapacity),
+		_joyAxisEventFunctions(initData.joyAxisEventFunctionListInitialCapacity), _joyBallEventFunctions(initData.joyBallEventFunctionListInitialCapacity),
+		_joyHatEventFunctions(initData.joyHatEventFunctionListInitialCapacity), _joyButtonEventFunctions(initData.joyButtonEventFunctionListInitialCapacity),
+		_joyDeviceEventFunctions(initData.joyDeviceEventFunctionListInitialCapacity), _joyBatteryEventFunctions(initData.joyBatteryEventFunctionListInitialCapacity),
+		_gamepadAxisEventFunctions(initData.controllerAxisEventFunctionListInitialCapacity),
+		_gamepadButtonEventFunctions(initData.controllerButtonEventFunctionListInitialCapacity), _gamepadDeviceEventFunctions(initData.controllerDeviceEventFunctionListInitialCapacity),
+		_gamepadTouchpadEventFunctions(initData.controllerTouchpadEventFunctionListInitialCapacity),
+		_gamepadSensorEventFunctions(initData.controllerSensorEventFunctionListInitialCapacity), _audioDeviceEventFunctions(initData.audioDeviceEventFunctionListInitialCapacity),
+		_touchFingerEventFunctions(initData.touchFingerEventFunctionListInitialCapacity), _clipboardEventFunctions(initData.clipboardEventFunctionListInitialCapacity),
+		_dropEventFunctions(initData.dropEventFunctionListInitialCapacity), _sensorEventFunctions(initData.sensorEventFunctionListInitialCapacity),
+		_userEventFunctions(initData.userEventFunctionListInitialCapacity), _renderTargetsResetEventFunctions(initData.renderTargetsResetEventFunctionListInitialCapacity),
 		_renderDeviceResetEventFunctions(initData.renderDeviceResetEventFunctionListInitialCapacity)
 	{
 	}
@@ -57,7 +56,7 @@ namespace VulkanSimplified
 	{
 		SDL_Event event{};
 
-		while (SDL_PollEvent(&event) > 0)
+		while (SDL_PollEvent(&event))
 		{
 			HandleEvent(event);
 		}
@@ -128,11 +127,6 @@ namespace VulkanSimplified
 		return _textEditingEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<TextEditingExtendedEventFunction, void*>> SdlEventHandlerInternal::RegisterTextEditingExtendedEventCallback(TextEditingExtendedEventFunction function, void* data, size_t add)
-	{
-		return _textEditingExtendedEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
 	IDObject<std::pair<TextInputEventFunction, void*>> SdlEventHandlerInternal::RegisterTextInputEventCallback(TextInputEventFunction function, void* data, size_t add)
 	{
 		return _textInputEventFunctions.AddObject(std::pair(function, data), add);
@@ -183,29 +177,29 @@ namespace VulkanSimplified
 		return _joyBatteryEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<ControllerAxisEventFunction, void*>> SdlEventHandlerInternal::RegisterControllerAxisEventCallback(ControllerAxisEventFunction function, void* data, size_t add)
+	IDObject<std::pair<GamepadAxisEventFunction, void*>> SdlEventHandlerInternal::RegisterGamepadAxisEventCallback(GamepadAxisEventFunction function, void* data, size_t add)
 	{
-		return _controllerAxisEventFunctions.AddObject(std::pair(function, data), add);
+		return _gamepadAxisEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<ControllerButtonEventFunction, void*>> SdlEventHandlerInternal::RegisterControllerButtonEventCallback(ControllerButtonEventFunction function, void* data, size_t add)
+	IDObject<std::pair<GamepadButtonEventFunction, void*>> SdlEventHandlerInternal::RegisterGamepadButtonEventCallback(GamepadButtonEventFunction function, void* data, size_t add)
 	{
-		return _controllerButtonEventFunctions.AddObject(std::pair(function, data), add);
+		return _gamepadButtonEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<ControllerDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterControllerDeviceEventCallback(ControllerDeviceEventFunction function, void* data, size_t add)
+	IDObject<std::pair<GamepadDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterGamepadDeviceEventCallback(GamepadDeviceEventFunction function, void* data, size_t add)
 	{
-		return _controllerDeviceEventFunctions.AddObject(std::pair(function, data), add);
+		return _gamepadDeviceEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<ControllerTouchpadEventFunction, void*>> SdlEventHandlerInternal::RegisterControllerTouchpadEventCallback(ControllerTouchpadEventFunction function, void* data, size_t add)
+	IDObject<std::pair<GamepadTouchpadEventFunction, void*>> SdlEventHandlerInternal::RegisterGamepadTouchpadEventCallback(GamepadTouchpadEventFunction function, void* data, size_t add)
 	{
-		return _controllerTouchpadEventFunctions.AddObject(std::pair(function, data), add);
+		return _gamepadTouchpadEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<ControllerSensorEventFunction, void*>> SdlEventHandlerInternal::RegisterControllerSensorEventCallback(ControllerSensorEventFunction function, void* data, size_t add)
+	IDObject<std::pair<GamepadSensorEventFunction, void*>> SdlEventHandlerInternal::RegisterGamepadSensorEventCallback(GamepadSensorEventFunction function, void* data, size_t add)
 	{
-		return _controllerSensorEventFunctions.AddObject(std::pair(function, data), add);
+		return _gamepadSensorEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<AudioDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterAudioDeviceEventCallback(AudioDeviceEventFunction function, void* data, size_t add)
@@ -216,16 +210,6 @@ namespace VulkanSimplified
 	IDObject<std::pair<TouchFingerEventFunction, void*>> SdlEventHandlerInternal::RegisterTouchFingerEventCallback(TouchFingerEventFunction function, void* data, size_t add)
 	{
 		return _touchFingerEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
-	IDObject<std::pair<MultiGestureEventFunction, void*>> SdlEventHandlerInternal::RegisterMultiGestureEventCallback(MultiGestureEventFunction function, void* data, size_t add)
-	{
-		return _multiGestureEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
-	IDObject<std::pair<DollarGestureEventFunction, void*>> SdlEventHandlerInternal::RegisterDollarGestureEventCallback(DollarGestureEventFunction function, void* data, size_t add)
-	{
-		return _dollarGestureEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<ClipboardEventFunction, void*>> SdlEventHandlerInternal::RegisterClipboardEventCallback(ClipboardEventFunction function, void* data, size_t add)
@@ -323,11 +307,6 @@ namespace VulkanSimplified
 		return _textEditingEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterTextEditingExtendedEventCallback(IDObject<std::pair<TextEditingExtendedEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _textEditingExtendedEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
 	bool SdlEventHandlerInternal::UnRegisterTextInputEventCallback(IDObject<std::pair<TextInputEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _textInputEventFunctions.RemoveObject(ID, throwOnIDNotFound);
@@ -378,29 +357,29 @@ namespace VulkanSimplified
 		return _joyBatteryEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterControllerAxisEventCallback(IDObject<std::pair<ControllerAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterGamepadAxisEventCallback(IDObject<std::pair<GamepadAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _controllerAxisEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _gamepadAxisEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterControllerButtonEventCallback(IDObject<std::pair<ControllerButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterGamepadButtonEventCallback(IDObject<std::pair<GamepadButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _controllerButtonEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _gamepadButtonEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterControllerDeviceEventCallback(IDObject<std::pair<ControllerDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterGamepadDeviceEventCallback(IDObject<std::pair<GamepadDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _controllerDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _gamepadDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterControllerTouchpadEventCallback(IDObject<std::pair<ControllerTouchpadEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterGamepadTouchpadEventCallback(IDObject<std::pair<GamepadTouchpadEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _controllerTouchpadEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _gamepadTouchpadEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterControllerSensorEventCallback(IDObject<std::pair<ControllerSensorEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterGamepadSensorEventCallback(IDObject<std::pair<GamepadSensorEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _controllerSensorEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _gamepadSensorEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -411,16 +390,6 @@ namespace VulkanSimplified
 	bool SdlEventHandlerInternal::UnRegisterTouchFingerEventCallback(IDObject<std::pair<TouchFingerEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _touchFingerEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
-	bool SdlEventHandlerInternal::UnRegisterMultiGestureEventCallback(IDObject<std::pair<MultiGestureEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _multiGestureEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
-	bool SdlEventHandlerInternal::UnRegisterDollarGestureEventCallback(IDObject<std::pair<DollarGestureEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _dollarGestureEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterClipboardEventCallback(IDObject<std::pair<ClipboardEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -459,144 +428,171 @@ namespace VulkanSimplified
 
 		switch (type)
 		{
-		case SDL_FIRSTEVENT:
+		case SDL_EVENT_FIRST:
 			break;
-		case SDL_QUIT:
+		case SDL_EVENT_QUIT:
 			HandleQuitEvent(event);
 			break;
-		case SDL_APP_TERMINATING:
+		case SDL_EVENT_TERMINATING:
 			HandleAppTerminatingEvent(event);
 			break;
-		case SDL_APP_LOWMEMORY:
+		case SDL_EVENT_LOW_MEMORY:
 			HandleAppLowMemoryEvent(event);
 			break;
-		case SDL_APP_WILLENTERBACKGROUND:
+		case SDL_EVENT_WILL_ENTER_BACKGROUND:
 			HandleAppWillEnterBackgroundEvent(event);
 			break;
-		case SDL_APP_DIDENTERBACKGROUND:
+		case SDL_EVENT_DID_ENTER_BACKGROUND:
 			HandleAppDidEnterBackgroundEvent(event);
 			break;
-		case SDL_APP_WILLENTERFOREGROUND:
+		case SDL_EVENT_WILL_ENTER_FOREGROUND:
 			HandleAppWillEnterForegroundEvent(event);
 			break;
-		case SDL_APP_DIDENTERFOREGROUND:
+		case SDL_EVENT_DID_ENTER_FOREGROUND:
 			HandleAppDidEnterForegroundEvent(event);
 			break;
-		case SDL_LOCALECHANGED:
+		case SDL_EVENT_LOCALE_CHANGED:
 			HandleLocaleChangeEvent(event);
 			break;
-		case SDL_DISPLAYEVENT:
+		case SDL_EVENT_DISPLAY_ORIENTATION:
+		case SDL_EVENT_DISPLAY_ADDED:
+		case SDL_EVENT_DISPLAY_REMOVED:
+		case SDL_EVENT_DISPLAY_MOVED:
+		case SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED:
+		case SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED:
+		case SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED:
+		case SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED:
 			HandleDisplayEvent(event);
 			break;
-		case SDL_WINDOWEVENT:
+		case SDL_EVENT_WINDOW_SHOWN:
+		case SDL_EVENT_WINDOW_HIDDEN:
+		case SDL_EVENT_WINDOW_EXPOSED:
+		case SDL_EVENT_WINDOW_MOVED:
+		case SDL_EVENT_WINDOW_RESIZED:
+		case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
+		case SDL_EVENT_WINDOW_METAL_VIEW_RESIZED:
+		case SDL_EVENT_WINDOW_MINIMIZED:
+		case SDL_EVENT_WINDOW_MAXIMIZED:
+		case SDL_EVENT_WINDOW_RESTORED:
+		case SDL_EVENT_WINDOW_MOUSE_ENTER:
+		case SDL_EVENT_WINDOW_MOUSE_LEAVE:
+		case SDL_EVENT_WINDOW_FOCUS_GAINED:
+		case SDL_EVENT_WINDOW_FOCUS_LOST:
+		case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
+		case SDL_EVENT_WINDOW_HIT_TEST:
+		case SDL_EVENT_WINDOW_ICCPROF_CHANGED:
+		case SDL_EVENT_WINDOW_DISPLAY_CHANGED:
+		case SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED:
+		case SDL_EVENT_WINDOW_SAFE_AREA_CHANGED:
+		case SDL_EVENT_WINDOW_OCCLUDED:
+		case SDL_EVENT_WINDOW_ENTER_FULLSCREEN:
+		case SDL_EVENT_WINDOW_LEAVE_FULLSCREEN:
+		case SDL_EVENT_WINDOW_DESTROYED:
+		case SDL_EVENT_WINDOW_HDR_STATE_CHANGED:
 			HandleWindowEvent(event);
 			break;
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
+		case SDL_EVENT_KEY_DOWN:
+		case SDL_EVENT_KEY_UP:
 			HandleKeyboardEvent(event);
 			break;
-		case SDL_TEXTEDITING:
+		case SDL_EVENT_TEXT_EDITING:
 			HandleTextEditingEvent(event);
 			break;
-		case SDL_TEXTINPUT:
+		case SDL_EVENT_TEXT_INPUT:
 			HandleTextInputEvent(event);
 			break;
-		case SDL_KEYMAPCHANGED:
+		case SDL_EVENT_KEYMAP_CHANGED:
 			HandleKeymapChangedEvent(event);
 			break;
-		case SDL_TEXTEDITING_EXT:
-			HandleTextEditingExtendedEvent(event);
-			break;
-		case SDL_MOUSEMOTION:
+		case SDL_EVENT_MOUSE_MOTION:
 			HandleMouseMotionEvent(event);
 			break;
-		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEBUTTONUP:
+		case SDL_EVENT_MOUSE_BUTTON_DOWN:
+		case SDL_EVENT_MOUSE_BUTTON_UP:
 			HandleMouseButtonEvent(event);
 			break;
-		case SDL_MOUSEWHEEL:
+		case SDL_EVENT_MOUSE_WHEEL:
 			HandleMouseWheelEvent(event);
 			break;
-		case SDL_JOYAXISMOTION:
+		case SDL_EVENT_JOYSTICK_AXIS_MOTION:
 			HandleJoyAxisEvent(event);
 			break;
-		case SDL_JOYBALLMOTION:
+		case SDL_EVENT_JOYSTICK_BALL_MOTION:
 			HandleJoyBallEvent(event);
 			break;
-		case SDL_JOYHATMOTION:
+		case SDL_EVENT_JOYSTICK_HAT_MOTION:
 			HandleJoyHatEvent(event);
 			break;
-		case SDL_JOYBUTTONDOWN:
-		case SDL_JOYBUTTONUP:
+		case SDL_EVENT_JOYSTICK_BUTTON_DOWN:
+		case SDL_EVENT_JOYSTICK_BUTTON_UP:
 			HandleJoyButtonEvent(event);
 			break;
-		case SDL_JOYDEVICEADDED:
-		case SDL_JOYDEVICEREMOVED:
+		case SDL_EVENT_JOYSTICK_ADDED:
+		case SDL_EVENT_JOYSTICK_REMOVED:
+		case SDL_EVENT_JOYSTICK_UPDATE_COMPLETE:
 			HandleJoyDeviceEvent(event);
 			break;
-		case SDL_JOYBATTERYUPDATED:
+		case SDL_EVENT_JOYSTICK_BATTERY_UPDATED:
 			HandleJoyBatteryEvent(event);
 			break;
-		case SDL_CONTROLLERAXISMOTION:
-			HandleControllerAxisEvent(event);
+		case SDL_EVENT_GAMEPAD_AXIS_MOTION:
+			HandleGamepadAxisEvent(event);
 			break;
-		case SDL_CONTROLLERBUTTONDOWN:
-		case SDL_CONTROLLERBUTTONUP:
-			HandleControllerButtonEvent(event);
+		case SDL_EVENT_GAMEPAD_BUTTON_DOWN:
+		case SDL_EVENT_GAMEPAD_BUTTON_UP:
+			HandleGamepadButtonEvent(event);
 			break;
-		case SDL_CONTROLLERDEVICEADDED:
-		case SDL_CONTROLLERDEVICEREMOVED:
-		case SDL_CONTROLLERDEVICEREMAPPED:
-			HandleControllerDeviceEvent(event);
+		case SDL_EVENT_GAMEPAD_ADDED:
+		case SDL_EVENT_GAMEPAD_REMOVED:
+		case SDL_EVENT_GAMEPAD_REMAPPED:
+		case SDL_EVENT_GAMEPAD_UPDATE_COMPLETE:
+		case SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED:
+			HandleGamepadDeviceEvent(event);
 			break;
-		case SDL_CONTROLLERTOUCHPADDOWN:
-		case SDL_CONTROLLERTOUCHPADMOTION:
-		case SDL_CONTROLLERTOUCHPADUP:
-			HandleControllerTouchpadEvent(event);
+		case SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN:
+		case SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION:
+		case SDL_EVENT_GAMEPAD_TOUCHPAD_UP:
+			HandleGamepadTouchpadEvent(event);
 			break;
-		case SDL_CONTROLLERSENSORUPDATE:
-			HandleControllerSensorEvent(event);
+		case SDL_EVENT_GAMEPAD_SENSOR_UPDATE:
+			HandleGamepadSensorEvent(event);
 			break;
-		case SDL_FINGERDOWN:
-		case SDL_FINGERUP:
-		case SDL_FINGERMOTION:
+		case SDL_EVENT_FINGER_DOWN:
+		case SDL_EVENT_FINGER_UP:
+		case SDL_EVENT_FINGER_MOTION:
+		case SDL_EVENT_FINGER_CANCELED:
 			HandleTouchFingerEvent(event);
 			break;
-		case SDL_DOLLARGESTURE:
-		case SDL_DOLLARRECORD:
-			HandleDollarGestureEvent(event);
-			break;
-		case SDL_MULTIGESTURE:
-			HandleMultiGestureEvent(event);
-			break;
-		case SDL_CLIPBOARDUPDATE:
+		case SDL_EVENT_CLIPBOARD_UPDATE:
 			HandleClipboardEvent(event);
 			break;
-		case SDL_DROPFILE:
-		case SDL_DROPTEXT:
-		case SDL_DROPBEGIN:
-		case SDL_DROPCOMPLETE:
+		case SDL_EVENT_DROP_FILE:
+		case SDL_EVENT_DROP_TEXT:
+		case SDL_EVENT_DROP_BEGIN:
+		case SDL_EVENT_DROP_COMPLETE:
+		case SDL_EVENT_DROP_POSITION:
 			HandleDropEvent(event);
 			break;
-		case SDL_AUDIODEVICEADDED:
-		case SDL_AUDIODEVICEREMOVED:
+		case SDL_EVENT_AUDIO_DEVICE_ADDED:
+		case SDL_EVENT_AUDIO_DEVICE_REMOVED:
+		case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
 			HandleAudioDeviceEvent(event);
 			break;
-		case SDL_SENSORUPDATE:
+		case SDL_EVENT_SENSOR_UPDATE:
 			HandleSensorEvent(event);
 			break;
-		case SDL_RENDER_TARGETS_RESET:
+		case SDL_EVENT_RENDER_TARGETS_RESET:
 			HandleRenderTargetsResetEvent(event);
 			break;
-		case SDL_RENDER_DEVICE_RESET:
+		case SDL_EVENT_RENDER_DEVICE_RESET:
 			HandleRenderDeviceResetEvent(event);
 			break;
-		case SDL_POLLSENTINEL:
+		case SDL_EVENT_RENDER_DEVICE_LOST:
 			break;
-		case SDL_USEREVENT:
+		case SDL_EVENT_USER:
 			HandleUserEvent(event);
 			break;
-		case SDL_LASTEVENT:
+		case SDL_EVENT_LAST:
 			break;
 		default:
 			break;
@@ -605,7 +601,11 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleQuitEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_QUIT)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleQuitEvent Error: Wrong event type was passed to this function!");
+
 		SdlQuitEventData eventData;
+		eventData.reserved = event.quit.reserved;
 		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _quitEventFunctions.GetUsedSize();
@@ -626,8 +626,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleAppTerminatingEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_TERMINATING)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAppTerminatingEvent Error: Wrong event type was passed to this function!");
+
 		SdlAppTerminatingEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _appTerminatingEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -647,8 +651,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleAppLowMemoryEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_LOW_MEMORY)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAppLowMemoryEvent Error: Wrong event type was passed to this function!");
+
 		SdlAppLowMemoryEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _appLowMemoryEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -668,8 +676,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleAppWillEnterBackgroundEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_WILL_ENTER_BACKGROUND)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAppWillEnterBackgroundEvent Error: Wrong event type was passed to this function!");
+
 		SdlAppWillEnterBackgroundEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _appWillEnterBackgroundEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -689,8 +701,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleAppDidEnterBackgroundEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_DID_ENTER_BACKGROUND)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAppDidEnterBackgroundEvent Error: Wrong event type was passed to this function!");
+
 		SdlAppDidEnterBackgroundEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _appDidEnterBackgroundEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -710,8 +726,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleAppWillEnterForegroundEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_WILL_ENTER_FOREGROUND)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAppWillEnterForegroundEvent Error: Wrong event type was passed to this function!");
+
 		SdlAppWillEnterForegroundEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _appWillEnterForegroundEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -731,8 +751,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleAppDidEnterForegroundEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_DID_ENTER_FOREGROUND)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAppDidEnterForegroundEvent Error: Wrong event type was passed to this function!");
+
 		SdlAppDidEnterForegroundEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _appDidEnterForegroundEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -752,8 +776,12 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleLocaleChangeEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_LOCALE_CHANGED)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleLocaleChangeEvent Error: Wrong event type was passed to this function!");
+
 		SdlLocaleChangeEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
 
 		auto size = _localeChangedEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -773,35 +801,16 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleDisplayEvent(const SDL_Event& event)
 	{
+		if (event.type > SDL_EVENT_DISPLAY_LAST || event.type < SDL_EVENT_DISPLAY_FIRST)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleDisplayEvent Error: Wrong event type was passed to this function!");
+
 		SdlDisplayEventData eventData;
 		eventData.timestamp = event.display.timestamp;
-		eventData.display = event.display.display;
-
-		switch (event.display.event)
-		{
-		case SDL_DisplayEventID::SDL_DISPLAYEVENT_NONE:
-			eventData.event = SDL_DATA_DISPLAYEVENT_NONE;
-			break;
-		case SDL_DisplayEventID::SDL_DISPLAYEVENT_ORIENTATION:
-			eventData.event = SDL_DATA_DISPLAYEVENT_ORIENTATION;
-			break;
-		case SDL_DisplayEventID::SDL_DISPLAYEVENT_CONNECTED:
-			eventData.event = SDL_DATA_DISPLAYEVENT_CONNECTED;
-			break;
-		case SDL_DisplayEventID::SDL_DISPLAYEVENT_DISCONNECTED:
-			eventData.event = SDL_DATA_DISPLAYEVENT_DISCONNECTED;
-			break;
-		case SDL_DisplayEventID::SDL_DISPLAYEVENT_MOVED:
-			eventData.event = SDL_DATA_DISPLAYEVENT_MOVED;
-			break;
-		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleDisplayEvent Error: Wrong display event subtype was passed to the function!");
-		}
-
-		eventData.padding1 = event.display.padding1;
-		eventData.padding2 = event.display.padding2;
-		eventData.padding3 = event.display.padding3;
+		eventData.reserved = event.display.reserved;
+		eventData.display = event.display.displayID;
+		eventData.event = static_cast<uint32_t>(event.display.type - SDL_EVENT_DISPLAY_FIRST);
 		eventData.data1 = event.display.data1;
+		eventData.data2 = event.display.data2;
 
 		auto size = _displayEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -821,13 +830,14 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleWindowEvent(const SDL_Event& event)
 	{
+		if (event.type > SDL_EVENT_WINDOW_LAST || event.type < SDL_EVENT_WINDOW_FIRST)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleWindowEvent Error: Wrong event type was passed to this function!");
+
 		SdlWindowEventData eventData;
 		eventData.timestamp = event.window.timestamp;
+		eventData.reserved = event.window.reserved;
 		eventData.windowID = event.window.windowID;
-		eventData.event = event.window.event;
-		eventData.padding1 = event.window.padding1;
-		eventData.padding2 = event.window.padding2;
-		eventData.padding3 = event.window.padding3;
+		eventData.event = static_cast<uint32_t>(event.window.type - SDL_EVENT_WINDOW_FIRST);
 		eventData.data1 = event.window.data1;
 		eventData.data2 = event.window.data2;
 		eventData.padding = 0;
@@ -850,20 +860,21 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleKeyboardEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_KEY_UP && event.type != SDL_EVENT_KEY_DOWN)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleKeyboardEvent Error: Wrong event type was passed to this function!");
+
 		SdlKeyboardEventData eventData;
 		eventData.timestamp = event.key.timestamp;
+		eventData.reserved = event.key.reserved;
 		eventData.windowID = event.key.windowID;
-		eventData.state = event.key.state;
-		eventData.repeat = event.key.repeat;
-		eventData.padding2 = event.key.padding2;
-		eventData.padding3 = event.key.padding3;
-		eventData.padding = 0;
+		eventData.keyboardID = event.key.which;
 
-		eventData.keysym.scancode = static_cast<SdlScancode>(event.key.keysym.scancode);
-		eventData.keysym.sym = static_cast<SdlKeycode>(event.key.keysym.sym);
-		eventData.keysym.mod = event.key.keysym.mod;
-		eventData.keysym.padding = 0;
-		eventData.keysym.unused = event.key.keysym.unused;
+		eventData.keysym.scancode = static_cast<SdlScancode>(event.key.scancode);
+		eventData.keysym.keycode = static_cast<SdlKeycode>(event.key.key);
+		eventData.keysym.mod = event.key.mod;
+		eventData.keysym.rawData = event.key.raw;
+		eventData.down = event.key.down;
+		eventData.repeat = event.key.repeat;
 
 		auto size = _keyboardEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -883,7 +894,11 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleKeymapChangedEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_KEYMAP_CHANGED)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleKeymapChangedEvent Error: Wrong event type was passed to this function!");
+
 		SdlKeymapChangedEventData eventData;
+		eventData.reserved = event.common.reserved;
 		eventData.timestamp = event.common.timestamp;
 
 		auto size = _keymapChangedEventFunctions.GetUsedSize();
@@ -904,11 +919,14 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleTextEditingEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_TEXT_EDITING)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleTextEditingEvent Error: Wrong event type was passed to this function!");
+
 		SdlTextEditingEventData eventData;
+		eventData.reserved = event.edit.reserved;
 		eventData.timestamp = event.edit.timestamp;
 		eventData.windowID = event.edit.windowID;
-		for (size_t i = 0; i < SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE; i++)
-			eventData.text[i] = event.edit.text[i];
+		eventData.text = event.edit.text;
 		eventData.start = event.edit.start;
 		eventData.length = event.edit.length;
 
@@ -928,38 +946,16 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleTextEditingExtendedEvent(const SDL_Event& event)
-	{
-		SdlTextEditingExtendedEventData eventData;
-		eventData.timestamp = event.editExt.timestamp;
-		eventData.windowID = event.editExt.windowID;
-		eventData.text = event.editExt.text;
-		eventData.start = event.editExt.start;
-		eventData.length = event.editExt.length;
-
-		auto size = _textEditingExtendedEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _textEditingExtendedEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
 	void SdlEventHandlerInternal::HandleTextInputEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_TEXT_INPUT)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleTextInputEvent Error: Wrong event type was passed to this function!");
+
 		SdlTextInputEventData eventData;
 		eventData.timestamp = event.text.timestamp;
+		eventData.reserved = event.text.reserved;
 		eventData.windowID = event.text.windowID;
-		for (size_t i = 0; i < SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE; i++)
-			eventData.text[i] = event.text.text[i];
+		eventData.text = event.text.text;
 
 		auto size = _textInputEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -979,10 +975,14 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleMouseMotionEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_MOUSE_MOTION)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleMouseMotionEvent Error: Wrong event type was passed to this function!");
+
 		SdlMouseMotionEventData eventData;
 		eventData.timestamp = event.motion.timestamp;
+		eventData.reserved = event.motion.reserved;
 		eventData.windowID = event.motion.windowID;
-		eventData.which = event.motion.which;
+		eventData.mouseID = event.motion.which;
 		eventData.state = event.motion.state;
 		eventData.x = event.motion.x;
 		eventData.y = event.motion.y;
@@ -1007,14 +1007,17 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleMouseButtonEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_MOUSE_BUTTON_DOWN && event.type != SDL_EVENT_MOUSE_BUTTON_UP)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleMouseButtonEvent Error: Wrong event type was passed to this function!");
+
 		SdlMouseButtonEventData eventData;
 		eventData.timestamp = event.button.timestamp;
+		eventData.reserved = event.button.reserved;
 		eventData.windowID = event.button.windowID;
-		eventData.which = event.button.which;
+		eventData.mouseID = event.button.which;
 		eventData.button = event.button.button;
-		eventData.state = event.button.state;
+		eventData.down = event.button.down;
 		eventData.clicks = event.button.clicks;
-		eventData.padding1 = event.button.padding1;
 		eventData.x = event.button.x;
 		eventData.y = event.button.y;
 
@@ -1036,17 +1039,21 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleMouseWheelEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_MOUSE_WHEEL)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleMouseWheelEvent Error: Wrong event type was passed to this function!");
+
 		SdlMouseWheelEventData eventData;
+		eventData.reserved = event.wheel.reserved;
 		eventData.timestamp = event.wheel.timestamp;
 		eventData.windowID = event.wheel.windowID;
-		eventData.which = event.wheel.which;
+		eventData.mouseID = event.wheel.which;
 		eventData.x = event.wheel.x;
 		eventData.y = event.wheel.y;
 		eventData.direction = event.wheel.direction;
-		eventData.preciseX = event.wheel.preciseX;
-		eventData.preciseY = event.wheel.preciseY;
-		eventData.mouseX = event.wheel.mouseX;
-		eventData.mouseY = event.wheel.mouseY;
+		eventData.mouse_x = event.wheel.mouse_x;
+		eventData.mouse_y = event.wheel.mouse_y;
+		eventData.int_x = event.wheel.integer_x;
+		eventData.int_y = event.wheel.integer_y;
 
 		auto size = _mouseWheelEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1066,15 +1073,19 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleJoyAxisEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_JOYSTICK_AXIS_MOTION)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyAxisEvent Error: Wrong event type was passed to this function!");
+
 		SdlJoyAxisEventData eventData;
+		eventData.reserved = event.jaxis.reserved;
 		eventData.timestamp = event.jaxis.timestamp;
-		eventData.which = event.jaxis.which;
+		eventData.joystickID = event.jaxis.which;
 		eventData.axis = event.jaxis.axis;
 		eventData.padding1 = event.jaxis.padding1;
 		eventData.padding2 = event.jaxis.padding2;
 		eventData.padding3 = event.jaxis.padding3;
 		eventData.value = event.jaxis.value;
-		eventData.padding4 = 0;
+		eventData.padding4 = event.jaxis.padding4;
 
 		auto size = _joyAxisEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1094,9 +1105,13 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleJoyBallEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_JOYSTICK_BALL_MOTION)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyBallEvent Error: Wrong event type was passed to this function!");
+
 		SdlJoyBallEventData eventData;
 		eventData.timestamp = event.jball.timestamp;
-		eventData.which = event.jball.which;
+		eventData.reserved = event.jball.reserved;
+		eventData.joystickID = event.jball.which;
 		eventData.ball = event.jball.ball;
 		eventData.padding1 = event.jball.padding1;
 		eventData.padding2 = event.jball.padding2;
@@ -1122,14 +1137,17 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleJoyHatEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_JOYSTICK_HAT_MOTION)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyHatEvent Error: Wrong event type was passed to this function!");
+
 		SdlJoyHatEventData eventData;
 		eventData.timestamp = event.jhat.timestamp;
-		eventData.which = event.jhat.which;
+		eventData.reserved = event.jhat.reserved;
+		eventData.joystickID = event.jhat.which;
 		eventData.hat = event.jhat.hat;
 		eventData.value = event.jhat.value;
 		eventData.padding1 = event.jhat.padding1;
 		eventData.padding2 = event.jhat.padding2;
-		eventData.padding3 = 0;
 
 		auto size = _joyHatEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1149,14 +1167,17 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleJoyButtonEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_JOYSTICK_BUTTON_DOWN && event.type != SDL_EVENT_JOYSTICK_BUTTON_UP)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyButtonEvent Error: Wrong event type was passed to this function!");
+
 		SdlJoyButtonEventData eventData;
 		eventData.timestamp = event.jbutton.timestamp;
-		eventData.which = event.jbutton.which;
+		eventData.reserved = event.jbutton.reserved;
+		eventData.joystickID = event.jbutton.which;
 		eventData.button = event.jbutton.button;
-		eventData.state = event.jbutton.state;
+		eventData.down = event.jbutton.down;
 		eventData.padding1 = event.jbutton.padding1;
 		eventData.padding2 = event.jbutton.padding2;
-		eventData.padding3 = 0;
 
 		auto size = _joyButtonEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1178,13 +1199,24 @@ namespace VulkanSimplified
 	{
 		SdlJoyDeviceEventData eventData;
 
-		if (event.type == static_cast<uint32_t>(SDL_EventType::SDL_JOYDEVICEADDED))
-			eventData.type = 1;
+		if (event.type == SDL_EVENT_JOYSTICK_ADDED)
+		{
+			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_ADDED;
+		}
+		else if (event.type == SDL_EVENT_JOYSTICK_REMOVED)
+		{
+			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_REMOVED;
+		}
+		else if (event.type == SDL_EVENT_JOYSTICK_UPDATE_COMPLETE)
+		{
+			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UPDATE_COMPLETE;
+		}
 		else
-			eventData.type = 0;
+			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyDeviceEvent Error: Wrong event type was passed to this function!");
 
 		eventData.timestamp = event.jdevice.timestamp;
-		eventData.which = event.jdevice.which;
+		eventData.reserved = event.jdevice.reserved;
+		eventData.joystickID = event.jdevice.which;
 
 		auto size = _joyDeviceEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1204,10 +1236,15 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleJoyBatteryEvent(const SDL_Event& event)
 	{
+		if (event.type != SDL_EVENT_JOYSTICK_BATTERY_UPDATED)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyBatteryEvent Error: Wrong event type was passed to this function!");
+
 		SdlJoyBatteryEventData eventData;
 		eventData.timestamp = event.jbattery.timestamp;
-		eventData.which = event.jbattery.which;
-		eventData.level = static_cast<SdlJoystickPowerLevel>(event.jbattery.level);
+		eventData.reserved = event.jbattery.reserved;
+		eventData.joystickID = event.jbattery.which;
+		eventData.powerState = static_cast<SdlJoystickPowerState>(event.jbattery.state);
+		eventData.powerPercentage = event.jbattery.percent;
 
 		auto size = _joyBatteryEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1225,19 +1262,23 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleControllerAxisEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleGamepadAxisEvent(const SDL_Event& event)
 	{
-		SdlControllerAxisEventData eventData;
-		eventData.timestamp = event.caxis.timestamp;
-		eventData.which = event.caxis.which;
-		eventData.axis = event.caxis.axis;
-		eventData.padding1 = event.caxis.padding1;
-		eventData.padding2 = event.caxis.padding2;
-		eventData.padding3 = event.caxis.padding3;
-		eventData.value = event.caxis.value;
+		if (event.type != SDL_EVENT_GAMEPAD_AXIS_MOTION)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadAxisEvent Error: Wrong event type was passed to this function!");
+
+		SdlGamepadAxisEventData eventData;
+		eventData.timestamp = event.gaxis.timestamp;
+		eventData.reserved = event.gaxis.reserved;
+		eventData.which = event.gaxis.which;
+		eventData.axis = event.gaxis.axis;
+		eventData.padding1 = event.gaxis.padding1;
+		eventData.padding2 = event.gaxis.padding2;
+		eventData.padding3 = event.gaxis.padding3;
+		eventData.value = event.gaxis.value;
 		eventData.padding4 = 0;
 
-		auto size = _controllerAxisEventFunctions.GetUsedSize();
+		auto size = _gamepadAxisEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1247,24 +1288,27 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerAxisEventFunctions.GetObject(current++);
+			auto& functiondata = _gamepadAxisEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleControllerButtonEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleGamepadButtonEvent(const SDL_Event& event)
 	{
-		SdlControllerButtonEventData eventData;
-		eventData.timestamp = event.cbutton.timestamp;
-		eventData.which = event.cbutton.which;
-		eventData.button = event.cbutton.button;
-		eventData.state = event.cbutton.state;
-		eventData.padding1 = event.cbutton.padding1;
-		eventData.padding2 = event.cbutton.padding2;
-		eventData.padding3 = 0;
+		if (event.type != SDL_EVENT_GAMEPAD_BUTTON_DOWN && event.type != SDL_EVENT_GAMEPAD_BUTTON_UP)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadButtonEvent Error: Wrong event type was passed to this function!");
 
-		auto size = _controllerButtonEventFunctions.GetUsedSize();
+		SdlGamepadButtonEventData eventData;
+		eventData.timestamp = event.gbutton.timestamp;
+		eventData.reserved = event.gbutton.reserved;
+		eventData.which = event.gbutton.which;
+		eventData.button = event.gbutton.button;
+		eventData.down = event.gbutton.down;
+		eventData.padding1 = event.gbutton.padding1;
+		eventData.padding2 = event.gbutton.padding2;
+
+		auto size = _gamepadButtonEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1274,34 +1318,40 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerButtonEventFunctions.GetObject(current++);
+			auto& functiondata = _gamepadButtonEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleControllerDeviceEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleGamepadDeviceEvent(const SDL_Event& event)
 	{
-		SdlControllerDeviceEventData eventData;
+		SdlGamepadDeviceEventData eventData;
 		switch (event.type)
 		{
-		case SDL_CONTROLLERDEVICEADDED:
-			eventData.type = SdlControllerDeviceEventType::DEVICE_ADDED;
+		case SDL_EVENT_GAMEPAD_ADDED:
+			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_ADDED;
 			break;
-		case SDL_CONTROLLERDEVICEREMOVED:
-			eventData.type = SdlControllerDeviceEventType::DEVICE_REMOVED;
+		case SDL_EVENT_GAMEPAD_REMOVED:
+			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_REMOVED;
 			break;
-		case SDL_CONTROLLERDEVICEREMAPPED:
-			eventData.type = SdlControllerDeviceEventType::DEVICE_REMMAPED;
+		case SDL_EVENT_GAMEPAD_REMAPPED:
+			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_REMAPPED;
+			break;
+		case SDL_EVENT_GAMEPAD_UPDATE_COMPLETE:
+			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_UPDATE_COMPLETE;
+			break;
+		case SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED:
+			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_STEAM_HANDLE_UPDATED;
 			break;
 		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleControllerDeviceEvent error: Wrong event type was passed to the function!");
+			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadDeviceEvent Error: Wrong event type was passed to this function!");
 		}
-		eventData.timestamp = event.cdevice.timestamp;
-		eventData.which = event.cdevice.which;
-		eventData.padding = 0;
+		eventData.timestamp = event.gdevice.timestamp;
+		eventData.reserved = event.gdevice.reserved;
+		eventData.which = event.gdevice.which;
 
-		auto size = _controllerDeviceEventFunctions.GetUsedSize();
+		auto size = _gamepadDeviceEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1311,40 +1361,41 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerDeviceEventFunctions.GetObject(current++);
+			auto& functiondata = _gamepadDeviceEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleControllerTouchpadEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleGamepadTouchpadEvent(const SDL_Event& event)
 	{
-		SdlControllerTouchpadEventData eventData;
+		SdlGamepadTouchpadEventData eventData;
 
 		switch (event.type)
 		{
-		case SDL_CONTROLLERTOUCHPADDOWN:
-			eventData.type = SdlControllerTouchpadEventType::TOUCHPAD_DOWN;
+		case SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN:
+			eventData.type = SdlGamepadTouchpadEventType::TOUCHPAD_DOWN;
 			break;
-		case SDL_CONTROLLERTOUCHPADMOTION:
-			eventData.type = SdlControllerTouchpadEventType::TOUCHPAD_MOTION;
+		case SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION:
+			eventData.type = SdlGamepadTouchpadEventType::TOUCHPAD_MOTION;
 			break;
-		case SDL_CONTROLLERTOUCHPADUP:
-			eventData.type = SdlControllerTouchpadEventType::TOUCHPAD_DOWN;
+		case SDL_EVENT_GAMEPAD_TOUCHPAD_UP:
+			eventData.type = SdlGamepadTouchpadEventType::TOUCHPAD_UP;
 			break;
 		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleControllerTouchpadEvent Error: Wrong event type was passed to the function!");
+			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadTouchpadEvent Error: Wrong event type was passed to this function!");
 		}
 
-		eventData.timestamp = event.ctouchpad.timestamp;
-		eventData.which = event.ctouchpad.which;
-		eventData.touchpad = event.ctouchpad.touchpad;
-		eventData.finger = event.ctouchpad.finger;
-		eventData.x = event.ctouchpad.x;
-		eventData.y = event.ctouchpad.y;
-		eventData.pressure = event.ctouchpad.pressure;
+		eventData.timestamp = event.gtouchpad.timestamp;
+		eventData.reserved = event.gtouchpad.reserved;
+		eventData.which = event.gtouchpad.which;
+		eventData.touchpad = event.gtouchpad.touchpad;
+		eventData.finger = event.gtouchpad.finger;
+		eventData.x = event.gtouchpad.x;
+		eventData.y = event.gtouchpad.y;
+		eventData.pressure = event.gtouchpad.pressure;
 
-		auto size = _controllerTouchpadEventFunctions.GetUsedSize();
+		auto size = _gamepadTouchpadEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1354,24 +1405,28 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerTouchpadEventFunctions.GetObject(current++);
+			auto& functiondata = _gamepadTouchpadEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleControllerSensorEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleGamepadSensorEvent(const SDL_Event& event)
 	{
-		SdlControllerSensorEventData eventData;
-		eventData.timestamp = event.csensor.timestamp;
-		eventData.which = event.csensor.which;
-		eventData.sensor = event.csensor.sensor;
-		eventData.data[0] = event.csensor.data[0];
-		eventData.data[1] = event.csensor.data[1];
-		eventData.data[2] = event.csensor.data[2];
-		eventData.timestamp_us = event.csensor.timestamp_us;
+		if (event.type != SDL_EVENT_GAMEPAD_SENSOR_UPDATE)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadSensorEvent Error: Wrong event type was passed to this function!");
 
-		auto size = _controllerSensorEventFunctions.GetUsedSize();
+		SdlGamepadSensorEventData eventData;
+		eventData.timestamp = event.gsensor.timestamp;
+		eventData.reserved = event.gsensor.reserved;
+		eventData.which = event.gsensor.which;
+		eventData.sensor = event.gsensor.sensor;
+		eventData.data[0] = event.gsensor.data[0];
+		eventData.data[1] = event.gsensor.data[1];
+		eventData.data[2] = event.gsensor.data[2];
+		eventData.sensor_timestamp = event.gsensor.sensor_timestamp;
+
+		auto size = _gamepadSensorEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1381,7 +1436,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _controllerSensorEventFunctions.GetObject(current++);
+			auto& functiondata = _gamepadSensorEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1390,14 +1445,25 @@ namespace VulkanSimplified
 	void SdlEventHandlerInternal::HandleAudioDeviceEvent(const SDL_Event& event)
 	{
 		SdlAudioDeviceEventData eventData;
-		if (event.type == SDL_AUDIODEVICEADDED)
-			eventData.type = 1;
-		else
-			eventData.type = 0;
 
+		switch (event.type)
+		{
+		case SDL_EVENT_AUDIO_DEVICE_ADDED:
+			eventData.type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_ADDED;
+			break;
+		case SDL_EVENT_AUDIO_DEVICE_REMOVED:
+			eventData.type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_REMOVED;
+			break;
+		case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
+			eventData.type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_FORMAT_CHANGED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAudioDeviceEvent Error: Wrong event type was passed to this function!");
+		}
+		eventData.reserved = event.adevice.reserved;
 		eventData.timestamp = event.adevice.timestamp;
 		eventData.which = event.adevice.which;
-		eventData.iscapture = event.adevice.iscapture;
+		eventData.recording = event.adevice.recording;
 		eventData.padding1 = event.adevice.padding1;
 		eventData.padding2 = event.adevice.padding2;
 		eventData.padding3 = event.adevice.padding3;
@@ -1424,22 +1490,25 @@ namespace VulkanSimplified
 
 		switch (event.type)
 		{
-		case SDL_FINGERDOWN:
+		case SDL_EVENT_FINGER_DOWN:
 			eventData.type = SdlTouchFingerEventType::FINGER_DOWN;
 			break;
-		case SDL_FINGERUP:
+		case SDL_EVENT_FINGER_UP:
 			eventData.type = SdlTouchFingerEventType::FINGER_UP;
 			break;
-		case SDL_FINGERMOTION:
+		case SDL_EVENT_FINGER_MOTION:
 			eventData.type = SdlTouchFingerEventType::FINGER_MOTION;
 			break;
+		case SDL_EVENT_FINGER_CANCELED:
+			eventData.type = SdlTouchFingerEventType::FINGER_CANCELLED;
+			break;
 		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleTouchFingerEvent Error: Wrong event type was passed to the function!");
+			throw std::runtime_error("SdlEventHandlerInternal::HandleTouchFingerEvent Error: Wrong event type was passed to this function!");
 		}
-
+		eventData.reserved = event.tfinger.reserved;
 		eventData.timestamp = event.tfinger.timestamp;
-		eventData.touchId = event.tfinger.touchId;
-		eventData.fingerId = event.tfinger.fingerId;
+		eventData.touchId = event.tfinger.touchID;
+		eventData.fingerId = event.tfinger.fingerID;
 		eventData.x = event.tfinger.x;
 		eventData.y = event.tfinger.y;
 		eventData.dx = event.tfinger.dx;
@@ -1463,73 +1532,14 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleMultiGestureEvent(const SDL_Event& event)
-	{
-		SdlMultiGestureEventData eventData;
-		eventData.timestamp = event.mgesture.timestamp;
-		eventData.padding2 = 0;
-		eventData.touchId = event.mgesture.touchId;
-		eventData.dTheta = event.mgesture.dTheta;
-		eventData.dDist = event.mgesture.dDist;
-		eventData.x = event.mgesture.x;
-		eventData.y = event.mgesture.y;
-		eventData.numFingers = event.mgesture.numFingers;
-		eventData.padding = event.mgesture.padding;
-		eventData.padding3 = 0;
-
-		auto size = _multiGestureEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _multiGestureEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
-	void SdlEventHandlerInternal::HandleDollarGestureEvent(const SDL_Event& event)
-	{
-		SdlDollarGestureEventData eventData;
-
-		if (event.type == SDL_DOLLARGESTURE)
-			eventData.type = 1;
-		else
-			eventData.type = 0;
-
-		eventData.timestamp = event.dgesture.timestamp;
-		eventData.touchId = event.dgesture.touchId;
-		eventData.gestureId = event.dgesture.gestureId;
-		eventData.numFingers = event.dgesture.numFingers;
-		eventData.error = event.dgesture.error;
-		eventData.x = event.dgesture.x;
-		eventData.y = event.dgesture.y;
-
-		auto size = _dollarGestureEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _dollarGestureEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
 	void SdlEventHandlerInternal::HandleClipboardEvent(const SDL_Event& event)
 	{
 		SdlClipboardEventData eventData;
-		eventData.timestamp = event.common.timestamp;
+		eventData.timestamp = event.clipboard.timestamp;
+		eventData.reserved = event.clipboard.reserved;
+		eventData.owner = event.clipboard.owner;
+		eventData.mime_types_number = event.clipboard.num_mime_types;
+		eventData.mime_types = event.clipboard.mime_types;
 
 		auto size = _clipboardEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1553,26 +1563,31 @@ namespace VulkanSimplified
 
 		switch (event.type)
 		{
-		case SDL_DROPBEGIN:
+		case SDL_EVENT_DROP_BEGIN:
 			eventData.type = SdlDropEventType::DROPEVENT_BEGIN;
 			break;
-		case SDL_DROPFILE:
+		case SDL_EVENT_DROP_FILE:
 			eventData.type = SdlDropEventType::DROPEVENT_FILE;
 			break;
-		case SDL_DROPTEXT:
+		case SDL_EVENT_DROP_TEXT:
 			eventData.type = SdlDropEventType::DROPEVENT_TEXT;
 			break;
-		case SDL_DROPCOMPLETE:
+		case SDL_EVENT_DROP_COMPLETE:
 			eventData.type = SdlDropEventType::DROPEVENT_COMPLETE;
+			break;
+		case SDL_EVENT_DROP_POSITION:
+			eventData.type = SdlDropEventType::DROPEVENT_POSITION;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleDropEvent Error: Wrong event type was passed to the function!");
 		}
-
+		eventData.reserved = event.drop.reserved;
 		eventData.timestamp = event.drop.timestamp;
-		eventData.file = event.drop.file;
 		eventData.windowID = event.drop.windowID;
-		eventData.padding = 0;
+		eventData.x = event.drop.x;
+		eventData.y = event.drop.y;
+		eventData.source = event.drop.source;
+		eventData.data = event.drop.data;
 
 		auto size = _dropEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1588,15 +1603,13 @@ namespace VulkanSimplified
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
-
-		if (eventData.file != nullptr)
-			SDL_free(eventData.file);
 	}
 
 	void SdlEventHandlerInternal::HandleSensorEvent(const SDL_Event& event)
 	{
 		SdlSensorEventData eventData;
 		eventData.timestamp = event.sensor.timestamp;
+		eventData.reserved = event.sensor.reserved;
 		eventData.which = event.sensor.which;
 		eventData.data[0] = event.sensor.data[0];
 		eventData.data[1] = event.sensor.data[1];
@@ -1604,7 +1617,7 @@ namespace VulkanSimplified
 		eventData.data[3] = event.sensor.data[3];
 		eventData.data[4] = event.sensor.data[4];
 		eventData.data[5] = event.sensor.data[5];
-		eventData.timestamp_us = event.sensor.timestamp_us;
+		eventData.sensor_timestamp = event.sensor.sensor_timestamp;
 
 		auto size = _sensorEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1626,9 +1639,9 @@ namespace VulkanSimplified
 	{
 		SdlUserEventData eventData;
 		eventData.timestamp = event.user.timestamp;
+		eventData.reserved = event.user.reserved;
 		eventData.windowID = event.user.windowID;
 		eventData.code = event.user.code;
-		eventData.padding = 0;
 		eventData.data1 = event.user.data1;
 		eventData.data2 = event.user.data2;
 
@@ -1651,6 +1664,7 @@ namespace VulkanSimplified
 	void SdlEventHandlerInternal::HandleRenderTargetsResetEvent(const SDL_Event& event)
 	{
 		SdlRenderTargetsResetEventData eventData;
+		eventData.reserved = event.common.reserved;
 		eventData.timestamp = event.common.timestamp;
 
 		auto size = _renderTargetsResetEventFunctions.GetUsedSize();
@@ -1672,6 +1686,7 @@ namespace VulkanSimplified
 	void SdlEventHandlerInternal::HandleRenderDeviceResetEvent(const SDL_Event& event)
 	{
 		SdlRenderDeviceResetEventData eventData;
+		eventData.reserved = event.common.reserved;
 		eventData.timestamp = event.common.timestamp;
 
 		auto size = _renderDeviceResetEventFunctions.GetUsedSize();

@@ -68,7 +68,7 @@ namespace VulkanSimplified
 			_isFullscreen = Misc::BOOL64_FALSE;
 			break;
 		case WindowSettings::FULLSCREEN_NONEXCLUSIVE:
-			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS;
+			flags |= SDL_WINDOW_BORDERLESS;
 			_isFullscreen = Misc::BOOL64_TRUE;
 			break;
 		default:
@@ -77,8 +77,7 @@ namespace VulkanSimplified
 
 		_aspectRatio = static_cast<double>(creationData.width) / static_cast<double>(creationData.height);
 
-		_window = SDL_CreateWindow(_windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(creationData.width), static_cast<int>(creationData.height),
-			flags);
+		_window = SDL_CreateWindow(_windowTitle.c_str(), static_cast<int>(creationData.width), static_cast<int>(creationData.height), flags);
 
 		if (_window == nullptr)
 			throw std::runtime_error(SDL_GetError());
@@ -88,7 +87,10 @@ namespace VulkanSimplified
 		if (_windowID == 0)
 			throw std::runtime_error(SDL_GetError());
 
-		if (SDL_Vulkan_CreateSurface(_window, _instance, &_surface) != SDL_TRUE)
+		if (!SDL_Vulkan_CreateSurface(_window, _instance, nullptr, &_surface))
+			throw std::runtime_error(SDL_GetError());
+
+		if (_isFullscreen == Misc::BOOL64_TRUE && (!SDL_SetWindowFullscreenMode(_window, nullptr) || !SDL_SetWindowFullscreen(_window, true)))
 			throw std::runtime_error(SDL_GetError());
 
 		_eventHandlingID = _eventHandler.RegisterWindowEventCallback(WindowInternal::HandleWindowEventStatic, this, 0);
@@ -199,11 +201,11 @@ namespace VulkanSimplified
 
 		if (newFullscreenValue == Misc::BOOL64_TRUE)
 		{
-			SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			SDL_SetWindowFullscreen(_window, true);
 		}
 		else if (newFullscreenValue == Misc::BOOL64_FALSE)
 		{
-			SDL_SetWindowFullscreen(_window, 0);
+			SDL_SetWindowFullscreen(_window, false);
 		}
 		else
 			throw std::runtime_error("WindowInternal::SetFullscreen Error: Function was given an erroneous new fullscrenn value!");
@@ -331,7 +333,7 @@ namespace VulkanSimplified
 			if (_swapchain != VK_NULL_HANDLE)
 				ReCreateSwapchain();
 			break;
-		case SDL_DATA_WINDOWEVENT_SIZE_CHANGED:
+		case SDL_DATA_WINDOWEVENT_PIXEL_SIZE_CHANGED:
 			if (_swapchain != VK_NULL_HANDLE)
 				ReCreateSwapchain();
 			break;
@@ -344,7 +346,7 @@ namespace VulkanSimplified
 		case SDL_DATA_WINDOWEVENT_RESTORED:
 			_minimized = false;
 			break;
-		case SDL_DATA_WINDOWEVENT_CLOSE:
+		case SDL_DATA_WINDOWEVENT_CLOSE_REQUESTED:
 			_quit = true;
 			break;
 		default:

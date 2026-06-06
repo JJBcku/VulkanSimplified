@@ -5,6 +5,7 @@ namespace VulkanSimplified
 {
 	SdlRenderTargetsResetEventData::SdlRenderTargetsResetEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 
@@ -14,6 +15,7 @@ namespace VulkanSimplified
 
 	SdlRenderDeviceResetEventData::SdlRenderDeviceResetEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 

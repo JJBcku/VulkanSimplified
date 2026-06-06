@@ -5,10 +5,11 @@ namespace VulkanSimplified
 {
 	SdlAudioDeviceEventData::SdlAudioDeviceEventData()
 	{
-		type = 0;
+		type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_UNKNOWN;
+		reserved = 0;
 		timestamp = 0;
 		which = 0;
-		iscapture = 0;
+		recording = false;
 		padding1 = 0;
 		padding2 = 0;
 		padding3 = 0;

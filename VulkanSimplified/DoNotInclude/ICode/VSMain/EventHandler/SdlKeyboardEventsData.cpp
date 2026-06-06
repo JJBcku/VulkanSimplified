@@ -6,24 +6,24 @@ namespace VulkanSimplified
 	SdlKeysymData::SdlKeysymData()
 	{
 		scancode = static_cast<SdlScancode>(0);
-		sym = static_cast<SdlKeycode>(0);
+		keycode = static_cast<SdlKeycode>(0);
 		mod = 0;
+		rawData = 0;
 		padding = 0;
-		unused = 0;
 	}
 
 	SdlKeysymData::~SdlKeysymData()
 	{
 	}
 
-	SdlKeyboardEventData::SdlKeyboardEventData()
+	SdlKeyboardEventData::SdlKeyboardEventData() : keysym()
 	{
 		timestamp = 0;
+		reserved = 0;
 		windowID = 0;
-		state = 0;
-		repeat = 0;
-		padding2 = 0;
-		padding3 = 0;
+		keyboardID = 0;
+		down = false;
+		repeat = false;
 		padding = 0;
 	}
 
@@ -33,6 +33,7 @@ namespace VulkanSimplified
 
 	SdlKeymapChangedEventData::SdlKeymapChangedEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 

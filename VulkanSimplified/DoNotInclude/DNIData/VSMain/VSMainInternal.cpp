@@ -33,18 +33,16 @@ namespace VulkanSimplified
 		{
 			uint32_t size = 0;
 
-			auto res = SDL_Vulkan_GetInstanceExtensions(nullptr, &size, nullptr);
+			auto copiedListPointer = SDL_Vulkan_GetInstanceExtensions(&size);
 
-			if (res == SDL_FALSE)
+			if (copiedListPointer == nullptr)
 				throw std::runtime_error(SDL_GetError());
 
 			if (size > 0)
 			{
-				_sdlRequired.resize(size);
-				res = SDL_Vulkan_GetInstanceExtensions(nullptr, &size, _sdlRequired.data());
-
-				if (res == SDL_FALSE)
-					throw std::runtime_error(SDL_GetError());
+				_sdlRequired.reserve(size);
+				for (size_t i = 0; i < size; ++i)
+					_sdlRequired.push_back(copiedListPointer[i]);
 			}
 		}
 

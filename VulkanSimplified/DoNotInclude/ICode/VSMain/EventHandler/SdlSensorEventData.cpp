@@ -6,6 +6,7 @@ namespace VulkanSimplified
 	SdlSensorEventData::SdlSensorEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		which = 0;
 		data[0] = 0;
 		data[1] = 0;
@@ -13,7 +14,7 @@ namespace VulkanSimplified
 		data[3] = 0;
 		data[4] = 0;
 		data[5] = 0;
-		timestamp_us = 0;
+		sensor_timestamp = 0;
 	}
 
 	SdlSensorEventData::~SdlSensorEventData()

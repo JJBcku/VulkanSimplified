@@ -5,10 +5,11 @@ namespace VulkanSimplified
 {
 	SdlTextEditingEventData::SdlTextEditingEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 		windowID = 0;
-		for (size_t i = 0; i < SDL_DATA_TEXTEDITINGEVENT_TEXT_SIZE; i++)
-			text[i] = 0;
+		padding = 0;
+		text = nullptr;
 		start = 0;
 		length = 0;
 	}
@@ -17,25 +18,12 @@ namespace VulkanSimplified
 	{
 	}
 
-	SdlTextEditingExtendedEventData::SdlTextEditingExtendedEventData()
-	{
-		timestamp = 0;
-		windowID = 0;
-		text = nullptr;
-		start = 0;
-		length = 0;
-	}
-
-	SdlTextEditingExtendedEventData::~SdlTextEditingExtendedEventData()
-	{
-	}
-
 	SdlTextInputEventData::SdlTextInputEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		windowID = 0;
-		for (size_t i = 0; i < SDL_DATA_TEXTINPUTEVENT_TEXT_SIZE; i++)
-			text[i] = 0;
+		text = nullptr;
 	}
 
 	SdlTextInputEventData::~SdlTextInputEventData()

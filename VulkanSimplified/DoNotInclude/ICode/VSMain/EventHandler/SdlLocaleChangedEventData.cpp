@@ -5,6 +5,7 @@ namespace VulkanSimplified
 {
 	SdlLocaleChangeEventData::SdlLocaleChangeEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 

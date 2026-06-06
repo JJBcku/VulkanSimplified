@@ -128,14 +128,14 @@ namespace VulkanSimplified
 
 			if (_enabledExtensionPacksList.sdlRequiredExtensions)
 			{
-				Uint32 windowFlags = SDL_WINDOW_VULKAN | SDL_WINDOW_HIDDEN | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS;
+				Uint32 windowFlags = SDL_WINDOW_VULKAN | SDL_WINDOW_HIDDEN | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_BORDERLESS;
 
-				testWindow = SDL_CreateWindow("Device Enumeration Window!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 800, windowFlags);
+				testWindow = SDL_CreateWindow("Device Enumeration Window!", 600, 800, windowFlags);
 
 				if (testWindow == nullptr)
 					throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to create a window!");
 
-				if (SDL_Vulkan_CreateSurface(testWindow, _instance, &testSurface) != SDL_TRUE)
+				if (!SDL_Vulkan_CreateSurface(testWindow, _instance, nullptr, &testSurface))
 					throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to create a window's surface!");
 			}
 

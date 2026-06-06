@@ -5,6 +5,7 @@ namespace VulkanSimplified
 {
 	SdlAppTerminatingEventData::SdlAppTerminatingEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 
@@ -14,6 +15,7 @@ namespace VulkanSimplified
 
 	SdlAppLowMemoryEventData::SdlAppLowMemoryEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 
@@ -23,6 +25,7 @@ namespace VulkanSimplified
 
 	SdlAppWillEnterBackgroundEventData::SdlAppWillEnterBackgroundEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 
@@ -32,6 +35,7 @@ namespace VulkanSimplified
 
 	SdlAppDidEnterBackgroundEventData::SdlAppDidEnterBackgroundEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 
@@ -41,6 +45,7 @@ namespace VulkanSimplified
 
 	SdlAppWillEnterForegroundEventData::SdlAppWillEnterForegroundEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 
@@ -50,6 +55,7 @@ namespace VulkanSimplified
 
 	SdlAppDidEnterForegroundEventData::SdlAppDidEnterForegroundEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 

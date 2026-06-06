@@ -3,9 +3,10 @@
 
 namespace VulkanSimplified
 {
-	SdlControllerAxisEventData::SdlControllerAxisEventData()
+	SdlGamepadAxisEventData::SdlGamepadAxisEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		which = 0;
 		axis = 0;
 		padding1 = 0;
@@ -15,41 +16,43 @@ namespace VulkanSimplified
 		padding4 = 0;
 	}
 
-	SdlControllerAxisEventData::~SdlControllerAxisEventData()
+	SdlGamepadAxisEventData::~SdlGamepadAxisEventData()
 	{
 	}
 
-	SdlControllerButtonEventData::SdlControllerButtonEventData()
+	SdlGamepadButtonEventData::SdlGamepadButtonEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		which = 0;
 		button = 0;
-		state = 0;
+		down = false;
 		padding1 = 0;
 		padding2 = 0;
 		padding3 = 0;
 	}
 
-	SdlControllerButtonEventData::~SdlControllerButtonEventData()
+	SdlGamepadButtonEventData::~SdlGamepadButtonEventData()
 	{
 	}
 
-	SdlControllerDeviceEventData::SdlControllerDeviceEventData()
+	SdlGamepadDeviceEventData::SdlGamepadDeviceEventData()
 	{
-		type = static_cast<SdlControllerDeviceEventType>(std::numeric_limits<uint32_t>::max());
+		type = SdlGamepadDeviceSubEventType::DEVICE_UNKNOWN;
+		reserved = 0;
 		timestamp = 0;
 		which = 0;
 		padding = 0;
 	}
 
-	SdlControllerDeviceEventData::~SdlControllerDeviceEventData()
+	SdlGamepadDeviceEventData::~SdlGamepadDeviceEventData()
 	{
 	}
 
-	SdlControllerTouchpadEventData::SdlControllerTouchpadEventData()
+	SdlGamepadTouchpadEventData::SdlGamepadTouchpadEventData()
 	{
-		type = static_cast<SdlControllerTouchpadEventType>(std::numeric_limits<uint32_t>::max());
-
+		type = SdlGamepadTouchpadEventType::TOUCHPAD_UNKNOWN;
+		reserved = 0;
 		timestamp = 0;
 		which = 0;
 		touchpad = 0;
@@ -59,22 +62,23 @@ namespace VulkanSimplified
 		pressure = 0;
 	}
 
-	SdlControllerTouchpadEventData::~SdlControllerTouchpadEventData()
+	SdlGamepadTouchpadEventData::~SdlGamepadTouchpadEventData()
 	{
 	}
 
-	SdlControllerSensorEventData::SdlControllerSensorEventData()
+	SdlGamepadSensorEventData::SdlGamepadSensorEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		which = 0;
 		sensor = 0;
 		data[0] = 0;
 		data[1] = 0;
 		data[2] = 0;
-		timestamp_us = 0;
+		sensor_timestamp = 0;
 	}
 
-	SdlControllerSensorEventData::~SdlControllerSensorEventData()
+	SdlGamepadSensorEventData::~SdlGamepadSensorEventData()
 	{
 	}
 }

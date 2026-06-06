@@ -5,6 +5,7 @@ namespace VulkanSimplified
 {
 	SdlQuitEventData::SdlQuitEventData()
 	{
+		reserved = 0;
 		timestamp = 0;
 	}
 

@@ -6,13 +6,14 @@ namespace VulkanSimplified
 	SdlMouseMotionEventData::SdlMouseMotionEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		windowID = 0;
-		which = 0;
+		mouseID = 0;
 		state = 0;
-		x = 0;
-		y = 0;
-		xrel = 0;
-		yrel = 0;
+		x = 0.0f;
+		y = 0.0f;
+		xrel = 0.0f;
+		yrel = 0.0f;
 	}
 
 	SdlMouseMotionEventData::~SdlMouseMotionEventData()
@@ -22,14 +23,15 @@ namespace VulkanSimplified
 	SdlMouseButtonEventData::SdlMouseButtonEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		windowID = 0;
-		which = 0;
+		mouseID = 0;
 		button = 0;
-		state = 0;
+		down = false;
 		clicks = 0;
-		padding1 = 0;
-		x = 0;
-		y = 0;
+		padding = 0;
+		x = 0.0f;
+		y = 0.0f;
 	}
 
 	SdlMouseButtonEventData::~SdlMouseButtonEventData()
@@ -39,15 +41,16 @@ namespace VulkanSimplified
 	SdlMouseWheelEventData::SdlMouseWheelEventData()
 	{
 		timestamp = 0;
+		reserved = 0;
 		windowID = 0;
-		which = 0;
-		x = 0;
-		y = 0;
+		mouseID = 0;
+		x = 0.0f;
+		y = 0.0f;
 		direction = 0;
-		preciseX = 0;
-		preciseY = 0;
-		mouseX = 0;
-		mouseY = 0;
+		mouse_x = 0.0f;
+		mouse_y = 0.0f;
+		int_x = 0;
+		int_y = 0;
 	}
 
 	SdlMouseWheelEventData::~SdlMouseWheelEventData()

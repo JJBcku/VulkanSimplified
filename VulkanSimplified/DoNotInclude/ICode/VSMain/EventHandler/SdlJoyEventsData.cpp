@@ -6,7 +6,8 @@ namespace VulkanSimplified
 	SdlJoyAxisEventData::SdlJoyAxisEventData()
 	{
 		timestamp = 0;
-		which = 0;
+		reserved = 0;
+		joystickID = 0;
 		axis = 0;
 		padding1 = 0;
 		padding2 = 0;
@@ -22,7 +23,8 @@ namespace VulkanSimplified
 	SdlJoyBallEventData::SdlJoyBallEventData()
 	{
 		timestamp = 0;
-		which = 0;
+		reserved = 0;
+		joystickID = 0;
 		ball = 0;
 		padding1 = 0;
 		padding2 = 0;
@@ -38,7 +40,8 @@ namespace VulkanSimplified
 	SdlJoyHatEventData::SdlJoyHatEventData()
 	{
 		timestamp = 0;
-		which = 0;
+		reserved = 0;
+		joystickID = 0;
 		hat = 0;
 		value = 0;
 		padding1 = 0;
@@ -53,9 +56,10 @@ namespace VulkanSimplified
 	SdlJoyButtonEventData::SdlJoyButtonEventData()
 	{
 		timestamp = 0;
-		which = 0;
+		reserved = 0;
+		joystickID = 0;
 		button = 0;
-		state = 0;
+		down = false;
 		padding1 = 0;
 		padding2 = 0;
 		padding3 = 0;
@@ -63,9 +67,10 @@ namespace VulkanSimplified
 
 	SdlJoyDeviceEventData::SdlJoyDeviceEventData()
 	{
-		type = 0;
+		type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UNKNOWN;
 		timestamp = 0;
-		which = 0;
+		reserved = 0;
+		joystickID = 0;
 	}
 
 	SdlJoyDeviceEventData::~SdlJoyDeviceEventData()
@@ -75,8 +80,10 @@ namespace VulkanSimplified
 	SdlJoyBatteryEventData::SdlJoyBatteryEventData()
 	{
 		timestamp = 0;
-		which = 0;
-		level = static_cast<SdlJoystickPowerLevel>(0);
+		reserved = 0;
+		joystickID = 0;
+		powerState = SDL_DATA_JOYSTICK_POWER_ERROR;
+		powerPercentage = 0;
 	}
 
 	SdlJoyBatteryEventData::~SdlJoyBatteryEventData()
