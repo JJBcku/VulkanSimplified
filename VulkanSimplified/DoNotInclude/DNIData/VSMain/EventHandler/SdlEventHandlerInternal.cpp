@@ -37,10 +37,9 @@ namespace VulkanSimplified
 		_joyAxisEventFunctions(initData.joyAxisEventFunctionListInitialCapacity), _joyBallEventFunctions(initData.joyBallEventFunctionListInitialCapacity),
 		_joyHatEventFunctions(initData.joyHatEventFunctionListInitialCapacity), _joyButtonEventFunctions(initData.joyButtonEventFunctionListInitialCapacity),
 		_joyDeviceEventFunctions(initData.joyDeviceEventFunctionListInitialCapacity), _joyBatteryEventFunctions(initData.joyBatteryEventFunctionListInitialCapacity),
-		_gamepadAxisEventFunctions(initData.controllerAxisEventFunctionListInitialCapacity),
-		_gamepadButtonEventFunctions(initData.controllerButtonEventFunctionListInitialCapacity), _gamepadDeviceEventFunctions(initData.controllerDeviceEventFunctionListInitialCapacity),
-		_gamepadTouchpadEventFunctions(initData.controllerTouchpadEventFunctionListInitialCapacity),
-		_gamepadSensorEventFunctions(initData.controllerSensorEventFunctionListInitialCapacity), _audioDeviceEventFunctions(initData.audioDeviceEventFunctionListInitialCapacity),
+		_gamepadAxisEventFunctions(initData.gamepadAxisEventFunctionListInitialCapacity), _gamepadButtonEventFunctions(initData.gamepadButtonEventFunctionListInitialCapacity),
+		_gamepadDeviceEventFunctions(initData.gamepadDeviceEventFunctionListInitialCapacity), _gamepadTouchpadEventFunctions(initData.gamepadTouchpadEventFunctionListInitialCapacity),
+		_gamepadSensorEventFunctions(initData.gamepadSensorEventFunctionListInitialCapacity), _audioDeviceEventFunctions(initData.audioDeviceEventFunctionListInitialCapacity),
 		_touchFingerEventFunctions(initData.touchFingerEventFunctionListInitialCapacity), _clipboardEventFunctions(initData.clipboardEventFunctionListInitialCapacity),
 		_dropEventFunctions(initData.dropEventFunctionListInitialCapacity), _sensorEventFunctions(initData.sensorEventFunctionListInitialCapacity),
 		_userEventFunctions(initData.userEventFunctionListInitialCapacity), _renderTargetsResetEventFunctions(initData.renderTargetsResetEventFunctionListInitialCapacity),
@@ -801,14 +800,41 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleDisplayEvent(const SDL_Event& event)
 	{
-		if (event.type > SDL_EVENT_DISPLAY_LAST || event.type < SDL_EVENT_DISPLAY_FIRST)
-			throw std::runtime_error("SdlEventHandlerInternal::HandleDisplayEvent Error: Wrong event type was passed to this function!");
-
 		SdlDisplayEventData eventData;
 		eventData.timestamp = event.display.timestamp;
 		eventData.reserved = event.display.reserved;
 		eventData.display = event.display.displayID;
-		eventData.event = static_cast<uint32_t>(event.display.type - SDL_EVENT_DISPLAY_FIRST);
+
+		switch (event.type)
+		{
+		case SDL_EVENT_DISPLAY_ORIENTATION:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_ORIENTATION;
+			break;
+		case SDL_EVENT_DISPLAY_ADDED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_ADDED;
+			break;
+		case SDL_EVENT_DISPLAY_REMOVED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_REMOVED;
+			break;
+		case SDL_EVENT_DISPLAY_MOVED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_MOVED;
+			break;
+		case SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_DESKTOP_MODE_CHANGED;
+			break;
+		case SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_CURRENT_MODE_CHANGED;
+			break;
+		case SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_CONTENT_SCALE_CHANGED;
+			break;
+		case SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED:
+			eventData.event = SdlDisplayEventID::SDL_DATA_DISPLAYEVENT_USABLE_BOUNDS_CHANGED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleDisplayEvent Error: Wrong event type was passed to this function!");
+		}
+
 		eventData.data1 = event.display.data1;
 		eventData.data2 = event.display.data2;
 
@@ -830,17 +856,92 @@ namespace VulkanSimplified
 
 	void SdlEventHandlerInternal::HandleWindowEvent(const SDL_Event& event)
 	{
-		if (event.type > SDL_EVENT_WINDOW_LAST || event.type < SDL_EVENT_WINDOW_FIRST)
-			throw std::runtime_error("SdlEventHandlerInternal::HandleWindowEvent Error: Wrong event type was passed to this function!");
-
 		SdlWindowEventData eventData;
 		eventData.timestamp = event.window.timestamp;
 		eventData.reserved = event.window.reserved;
 		eventData.windowID = event.window.windowID;
-		eventData.event = static_cast<uint32_t>(event.window.type - SDL_EVENT_WINDOW_FIRST);
+		switch (event.type)
+		{
+		case SDL_EVENT_WINDOW_SHOWN:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_SHOWN;
+			break;
+		case SDL_EVENT_WINDOW_HIDDEN:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HIDDEN;
+			break;
+		case SDL_EVENT_WINDOW_EXPOSED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_EXPOSED;
+			break;
+		case SDL_EVENT_WINDOW_MOVED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOVED;
+			break;
+		case SDL_EVENT_WINDOW_RESIZED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_RESIZED;
+			break;
+		case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_PIXEL_SIZE_CHANGED;
+			break;
+		case SDL_EVENT_WINDOW_METAL_VIEW_RESIZED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_METAL_VIEW_RESIZED;
+			break;
+		case SDL_EVENT_WINDOW_MINIMIZED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MINIMIZED;
+			break;
+		case SDL_EVENT_WINDOW_MAXIMIZED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MAXIMIZED;
+			break;
+		case SDL_EVENT_WINDOW_RESTORED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_RESTORED;
+			break;
+		case SDL_EVENT_WINDOW_MOUSE_ENTER:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOUSE_ENTER;
+			break;
+		case SDL_EVENT_WINDOW_MOUSE_LEAVE:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOUSE_LEAVE;
+			break;
+		case SDL_EVENT_WINDOW_FOCUS_GAINED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_FOCUS_GAINED;
+			break;
+		case SDL_EVENT_WINDOW_FOCUS_LOST:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_FOCUS_LOST;
+			break;
+		case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_CLOSE_REQUESTED;
+			break;
+		case SDL_EVENT_WINDOW_HIT_TEST:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HIT_TEST;
+			break;
+		case SDL_EVENT_WINDOW_ICCPROF_CHANGED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_ICCPROF_CHANGED;
+			break;
+		case SDL_EVENT_WINDOW_DISPLAY_CHANGED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_DISPLAY_CHANGED;
+			break;
+		case SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_DISPLAY_SCALE_CHANGED;
+			break;
+		case SDL_EVENT_WINDOW_SAFE_AREA_CHANGED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_SAFE_AREA_CHANGED;
+			break;
+		case SDL_EVENT_WINDOW_OCCLUDED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_OCCLUDED;
+			break;
+		case SDL_EVENT_WINDOW_ENTER_FULLSCREEN:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_ENTER_FULLSCREEN;
+			break;
+		case SDL_EVENT_WINDOW_LEAVE_FULLSCREEN:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_LEAVE_FULLSCREEN;
+			break;
+		case SDL_EVENT_WINDOW_DESTROYED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_WINDOW_DESTROYED;
+			break;
+		case SDL_EVENT_WINDOW_HDR_STATE_CHANGED:
+			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HDR_STATE_CHANGED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleWindowEvent Error: Wrong event type was passed to this function!");
+		}
 		eventData.data1 = event.window.data1;
 		eventData.data2 = event.window.data2;
-		eventData.padding = 0;
 
 		auto size = _windowEventFunctions.GetUsedSize();
 		size_t current = 0;
@@ -1199,20 +1300,20 @@ namespace VulkanSimplified
 	{
 		SdlJoyDeviceEventData eventData;
 
-		if (event.type == SDL_EVENT_JOYSTICK_ADDED)
+		switch (event.type)
 		{
+		case SDL_EVENT_JOYSTICK_ADDED:
 			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_ADDED;
-		}
-		else if (event.type == SDL_EVENT_JOYSTICK_REMOVED)
-		{
+			break;
+		case SDL_EVENT_JOYSTICK_REMOVED:
 			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_REMOVED;
-		}
-		else if (event.type == SDL_EVENT_JOYSTICK_UPDATE_COMPLETE)
-		{
+			break;
+		case SDL_EVENT_JOYSTICK_UPDATE_COMPLETE:
 			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UPDATE_COMPLETE;
-		}
-		else
+			break;
+		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyDeviceEvent Error: Wrong event type was passed to this function!");
+		}
 
 		eventData.timestamp = event.jdevice.timestamp;
 		eventData.reserved = event.jdevice.reserved;

@@ -5,7 +5,7 @@ namespace VulkanSimplified
 {
 	SdlAudioDeviceEventData::SdlAudioDeviceEventData()
 	{
-		type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_UNKNOWN;
+		type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		which = 0;

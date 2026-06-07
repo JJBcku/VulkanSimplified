@@ -21,7 +21,6 @@ namespace VulkanSimplified
 		size_t keyboardEventFunctionListInitialCapacity;
 		size_t keymapChangeEventFunctionListInitialCapacity;
 		size_t textEditingEventFunctionListInitialCapacity;
-		size_t textEditingExtendedEventFunctionListInitialCapacity;
 		size_t textInputEventFunctionListInitialCapacity;
 
 		size_t mouseMotionEventFunctionListInitialCapacity;
@@ -35,16 +34,14 @@ namespace VulkanSimplified
 		size_t joyDeviceEventFunctionListInitialCapacity;
 		size_t joyBatteryEventFunctionListInitialCapacity;
 
-		size_t controllerAxisEventFunctionListInitialCapacity;
-		size_t controllerButtonEventFunctionListInitialCapacity;
-		size_t controllerDeviceEventFunctionListInitialCapacity;
-		size_t controllerTouchpadEventFunctionListInitialCapacity;
-		size_t controllerSensorEventFunctionListInitialCapacity;
+		size_t gamepadAxisEventFunctionListInitialCapacity;
+		size_t gamepadButtonEventFunctionListInitialCapacity;
+		size_t gamepadDeviceEventFunctionListInitialCapacity;
+		size_t gamepadTouchpadEventFunctionListInitialCapacity;
+		size_t gamepadSensorEventFunctionListInitialCapacity;
 
 		size_t audioDeviceEventFunctionListInitialCapacity;
 		size_t touchFingerEventFunctionListInitialCapacity;
-		size_t multiGestureEventFunctionListInitialCapacity;
-		size_t dollarGestureEventFunctionListInitialCapacity;
 		size_t clipboardEventFunctionListInitialCapacity;
 
 		size_t dropEventFunctionListInitialCapacity;

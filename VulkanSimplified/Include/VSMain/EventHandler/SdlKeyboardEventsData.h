@@ -708,9 +708,9 @@ namespace VulkanSimplified
 
     struct SdlKeysymData
     {
-        SdlScancode scancode;      /**< SDL physical key code - see ::SDL_Scancode for details */
-        SdlKeycode keycode;            /**< SDL virtual key code - see ::SDL_Keycode for details */
-        uint16_t mod;                 /**< current key modifiers */
+        SdlScancode scancode;           /**< SDL physical key code - see ::SDL_Scancode for details */
+        SdlKeycode keycode;             /**< SDL virtual key code - see ::SDL_Keycode for details */
+        uint16_t mod;                   /**< current key modifiers */
         uint16_t rawData;
         uint32_t padding;
 
@@ -720,11 +720,11 @@ namespace VulkanSimplified
 
     struct SdlKeyboardEventData
     {
-        uint64_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
+        uint64_t timestamp;     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t reserved;
-        uint32_t windowID;    /**< The window with keyboard focus, if any */
+        uint32_t windowID;      /**< The window with keyboard focus, if any */
         uint32_t keyboardID;    /**< keyboard ID */
-        SdlKeysymData keysym;  /**< The key that was pressed or released */
+        SdlKeysymData keysym;   /**< The key that was pressed or released */
         bool down;
         bool repeat;
         uint16_t padding;

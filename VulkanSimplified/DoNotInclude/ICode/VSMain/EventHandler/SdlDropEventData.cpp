@@ -5,7 +5,7 @@ namespace VulkanSimplified
 {
 	SdlDropEventData::SdlDropEventData()
 	{
-		type = static_cast<SdlDropEventType>(std::numeric_limits<uint32_t>::max());
+		type = SdlDropEventType::DROPEVENT_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		windowID = 0;

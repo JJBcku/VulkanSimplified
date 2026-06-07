@@ -4,18 +4,18 @@
 
 namespace VulkanSimplified
 {
-    enum SdlAudioDeviceEventSubtype : uint32_t
+    enum class SdlAudioDeviceEventSubtype : uint32_t
     {
-        AUDIO_DEVICE_EVENT_ADDED = 0,
-        AUDIO_DEVICE_EVENT_REMOVED = 1,
-        AUDIO_DEVICE_EVENT_FORMAT_CHANGED = 2,
+        AUDIO_DEVICE_EVENT_UNSET = 0,
 
-        AUDIO_DEVICE_EVENT_UNKNOWN = std::numeric_limits<uint32_t>::max()
+        AUDIO_DEVICE_EVENT_ADDED = 1,
+        AUDIO_DEVICE_EVENT_REMOVED = 2,
+        AUDIO_DEVICE_EVENT_FORMAT_CHANGED = 4,
     };
 
     struct SdlAudioDeviceEventData
     {
-        SdlAudioDeviceEventSubtype type;        /**< 1 if device was added, or 0 if it was removed */
+        SdlAudioDeviceEventSubtype type;
         uint32_t reserved;
         uint64_t timestamp;                     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t which;                         /**< The audio device index for the ADDED event (valid until next SDL_GetNumAudioDevices() call), SDL_AudioDeviceID for the REMOVED event */

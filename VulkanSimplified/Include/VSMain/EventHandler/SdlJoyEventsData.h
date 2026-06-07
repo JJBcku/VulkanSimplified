@@ -86,15 +86,15 @@ namespace VulkanSimplified
 
     enum SdlJoystickDeviceSubtypes : uint64_t
     {
-        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UNKNOWN,
-        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_ADDED,
-        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_REMOVED,
-        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UPDATE_COMPLETE,
+        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UNKNOWN = 0,
+        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_ADDED = 1,
+        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_REMOVED = 2,
+        SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UPDATE_COMPLETE = 4,
     };
 
     struct SdlJoyDeviceEventData
     {
-        SdlJoystickDeviceSubtypes type;         /**< 1 for device added or 0 for device removed */
+        SdlJoystickDeviceSubtypes type;
         uint64_t timestamp;                     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t reserved;
         uint32_t joystickID;                     /**< The joystick device index for the ADDED event, instance id for the REMOVED event */

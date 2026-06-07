@@ -5,7 +5,7 @@ namespace VulkanSimplified
 {
 	SdlTouchFingerEventData::SdlTouchFingerEventData()
 	{
-		type = SdlTouchFingerEventType::FINGER_UNKNOWN;
+		type = SdlTouchFingerEventType::FINGER_UNSET;
 
 		timestamp = 0;
 		touchId = 0;

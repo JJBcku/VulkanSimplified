@@ -22,7 +22,6 @@ namespace VulkanSimplified
 		keyboardEventFunctionListInitialCapacity = commonReserveSize;
 		keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
 		textEditingEventFunctionListInitialCapacity = commonReserveSize;
-		textEditingExtendedEventFunctionListInitialCapacity = commonReserveSize;
 		textInputEventFunctionListInitialCapacity = commonReserveSize;
 
 		mouseMotionEventFunctionListInitialCapacity = commonReserveSize;
@@ -36,16 +35,14 @@ namespace VulkanSimplified
 		joyDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		joyBatteryEventFunctionListInitialCapacity = commonReserveSize;
 
-		controllerAxisEventFunctionListInitialCapacity = commonReserveSize;
-		controllerButtonEventFunctionListInitialCapacity = commonReserveSize;
-		controllerDeviceEventFunctionListInitialCapacity = commonReserveSize;
-		controllerTouchpadEventFunctionListInitialCapacity = commonReserveSize;
-		controllerSensorEventFunctionListInitialCapacity = commonReserveSize;
+		gamepadAxisEventFunctionListInitialCapacity = commonReserveSize;
+		gamepadButtonEventFunctionListInitialCapacity = commonReserveSize;
+		gamepadDeviceEventFunctionListInitialCapacity = commonReserveSize;
+		gamepadTouchpadEventFunctionListInitialCapacity = commonReserveSize;
+		gamepadSensorEventFunctionListInitialCapacity = commonReserveSize;
 
 		audioDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		touchFingerEventFunctionListInitialCapacity = commonReserveSize;
-		multiGestureEventFunctionListInitialCapacity = commonReserveSize;
-		dollarGestureEventFunctionListInitialCapacity = commonReserveSize;
 		clipboardEventFunctionListInitialCapacity = commonReserveSize;
 
 		dropEventFunctionListInitialCapacity = commonReserveSize;

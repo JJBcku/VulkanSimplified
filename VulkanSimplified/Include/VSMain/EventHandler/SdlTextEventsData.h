@@ -25,7 +25,7 @@ namespace VulkanSimplified
         uint64_t timestamp;                         /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t reserved;
         uint32_t windowID;                          /**< The window with keyboard focus, if any */
-        const char* text;  /**< The input text */
+        const char* text;                           /**< The input text */
 
         SdlTextInputEventData();
         ~SdlTextInputEventData();

@@ -106,8 +106,8 @@ namespace VulkanSimplified
         bool down;
         uint8_t clicks;         /**< 1 for single-click, 2 for double-click, etc. */
         uint8_t padding;
-        float x;              /**< X coordinate, relative to window */
-        float y;              /**< Y coordinate, relative to window */
+        float x;                /**< X coordinate, relative to window */
+        float y;                /**< Y coordinate, relative to window */
 
         SdlMouseButtonEventData();
         ~SdlMouseButtonEventData();
@@ -121,17 +121,17 @@ namespace VulkanSimplified
 
     struct SdlMouseWheelEventData
     {
-        uint64_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
+        uint64_t timestamp;     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t reserved;
-        uint32_t windowID;    /**< The window with mouse focus, if any */
+        uint32_t windowID;      /**< The window with mouse focus, if any */
         uint32_t mouseID;       /**< The mouse instance id, or SDL_DATA_TOUCH_MOUSEID */
-        float x;           /**< The amount scrolled horizontally, positive to the right and negative to the left */
-        float y;           /**< The amount scrolled vertically, positive away from the user and negative toward the user */
-        uint32_t direction;   /**< Set to one of the SDL_MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
-        float mouse_x;     /**< The amount scrolled horizontally, positive to the right and negative to the left, with float precision (added in 2.0.18) */
-        float mouse_y;     /**< The amount scrolled vertically, positive away from the user and negative toward the user, with float precision (added in 2.0.18) */
-        int32_t int_x;      /**< X coordinate, relative to window */
-        int32_t int_y;      /**< Y coordinate, relative to window */
+        float x;                /**< The amount scrolled horizontally, positive to the right and negative to the left */
+        float y;                /**< The amount scrolled vertically, positive away from the user and negative toward the user */
+        uint32_t direction;     /**< Set to one of the SDL_MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
+        float mouse_x;          /**< The amount scrolled horizontally, positive to the right and negative to the left, with float precision (added in 2.0.18) */
+        float mouse_y;          /**< The amount scrolled vertically, positive away from the user and negative toward the user, with float precision (added in 2.0.18) */
+        int32_t int_x;          /**< X coordinate, relative to window */
+        int32_t int_y;          /**< Y coordinate, relative to window */
 
         SdlMouseWheelEventData();
         ~SdlMouseWheelEventData();

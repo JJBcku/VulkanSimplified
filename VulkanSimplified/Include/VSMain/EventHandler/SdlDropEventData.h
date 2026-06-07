@@ -6,13 +6,13 @@ namespace VulkanSimplified
 {
 	enum class SdlDropEventType : uint32_t
 	{
-		DROPEVENT_BEGIN = 0,
-		DROPEVENT_FILE = 1,
-		DROPEVENT_TEXT = 2,
-		DROPEVENT_COMPLETE = 4,
-		DROPEVENT_POSITION = 8,
+		DROPEVENT_UNSET = 0x0,
 
-		DROPEVENT_UNKNOWN = std::numeric_limits<uint32_t>::max()
+		DROPEVENT_BEGIN = 0x01,
+		DROPEVENT_FILE = 0x02,
+		DROPEVENT_TEXT = 0x04,
+		DROPEVENT_COMPLETE = 0x08,
+		DROPEVENT_POSITION = 0x10,
 	};
 
 	struct SdlDropEventData
