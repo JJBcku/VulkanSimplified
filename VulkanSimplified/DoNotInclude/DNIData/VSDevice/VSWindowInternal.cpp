@@ -323,32 +323,50 @@ namespace VulkanSimplified
 
 		switch (event.event)
 		{
-		case SDL_DATA_WINDOWEVENT_SHOWN:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_SHOWN:
 			_hidden = false;
 			break;
-		case SDL_DATA_WINDOWEVENT_HIDDEN:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HIDDEN:
 			_hidden = true;
 			break;
-		case SDL_DATA_WINDOWEVENT_RESIZED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_RESIZED:
 			if (_swapchain != VK_NULL_HANDLE)
 				ReCreateSwapchain();
 			break;
-		case SDL_DATA_WINDOWEVENT_PIXEL_SIZE_CHANGED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_PIXEL_SIZE_CHANGED:
 			if (_swapchain != VK_NULL_HANDLE)
 				ReCreateSwapchain();
 			break;
-		case SDL_DATA_WINDOWEVENT_MINIMIZED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MINIMIZED:
 			_minimized = true;
 			break;
-		case SDL_DATA_WINDOWEVENT_MAXIMIZED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MAXIMIZED:
 			_minimized = false;
 			break;
-		case SDL_DATA_WINDOWEVENT_RESTORED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_RESTORED:
 			_minimized = false;
 			break;
-		case SDL_DATA_WINDOWEVENT_CLOSE_REQUESTED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_CLOSE_REQUESTED:
 			_quit = true;
 			break;
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_UNSET:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_EXPOSED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOVED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_METAL_VIEW_RESIZED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOUSE_ENTER:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOUSE_LEAVE:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_FOCUS_GAINED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_FOCUS_LOST:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HIT_TEST:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_ICCPROF_CHANGED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_DISPLAY_CHANGED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_DISPLAY_SCALE_CHANGED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_SAFE_AREA_CHANGED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_OCCLUDED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_ENTER_FULLSCREEN:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_LEAVE_FULLSCREEN:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_WINDOW_DESTROYED:
+		case SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HDR_STATE_CHANGED:
 		default:
 			return true;
 		}
