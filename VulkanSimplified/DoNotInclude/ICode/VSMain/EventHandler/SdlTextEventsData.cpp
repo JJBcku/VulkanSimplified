@@ -29,4 +29,24 @@ namespace VulkanSimplified
 	SdlTextInputEventData::~SdlTextInputEventData()
 	{
 	}
+
+	SdlTextEditingCandidatesEventData::SdlTextEditingCandidatesEventData()
+	{
+		timestamp = 0;
+		reserved = 0;
+		windowID = 0;
+		candidates = nullptr;
+		num_candidates = 0;
+		selected_candidate = 0;
+		horizontal = false;
+		padding1 = 0;
+		padding2 = 0;
+		padding3 = 0;
+		padding4 = 0;
+	}
+
+	SdlTextEditingCandidatesEventData::~SdlTextEditingCandidatesEventData()
+	{
+	}
+
 }

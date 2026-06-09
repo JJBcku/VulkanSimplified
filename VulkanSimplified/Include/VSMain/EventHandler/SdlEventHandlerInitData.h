@@ -18,11 +18,14 @@ namespace VulkanSimplified
 		size_t displayEventFunctionListInitialCapacity;
 		size_t windowEventFunctionListInitialCapacity;
 
+		size_t keyboardDeviceEventFunctionListInitialCapacity;
 		size_t keyboardEventFunctionListInitialCapacity;
 		size_t keymapChangeEventFunctionListInitialCapacity;
 		size_t textEditingEventFunctionListInitialCapacity;
+		size_t textEditingCandidatesEventFunctionListInitialCapacity;
 		size_t textInputEventFunctionListInitialCapacity;
 
+		size_t mouseDeviceEventFunctionListInitialCapacity;
 		size_t mouseMotionEventFunctionListInitialCapacity;
 		size_t mouseButtonEventFunctionListInitialCapacity;
 		size_t mouseWheelEventFunctionListInitialCapacity;
@@ -42,11 +45,19 @@ namespace VulkanSimplified
 
 		size_t audioDeviceEventFunctionListInitialCapacity;
 		size_t touchFingerEventFunctionListInitialCapacity;
+		size_t touchPinchEventFunctionListInitialCapacity;
+		size_t cameraEventFunctionListInitialCapacity;
 		size_t clipboardEventFunctionListInitialCapacity;
 
 		size_t dropEventFunctionListInitialCapacity;
 		size_t sensorEventFunctionListInitialCapacity;
 		size_t userEventFunctionListInitialCapacity;
+
+		size_t penAxisEventFunctionListInitialCapacity;
+		size_t penButtonEventFunctionListInitialCapacity;
+		size_t penMotionEventFunctionListInitialCapacity;
+		size_t penTouchEventFunctionListInitialCapacity;
+		size_t penProximityEventFunctionListInitialCapacity;
 
 		size_t renderTargetsResetEventFunctionListInitialCapacity;
 		size_t renderDeviceResetEventFunctionListInitialCapacity;

@@ -19,11 +19,14 @@ namespace VulkanSimplified
 		displayEventFunctionListInitialCapacity = commonReserveSize;
 		windowEventFunctionListInitialCapacity = commonReserveSize;
 
+		keyboardDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		keyboardEventFunctionListInitialCapacity = commonReserveSize;
 		keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
 		textEditingEventFunctionListInitialCapacity = commonReserveSize;
+		textEditingCandidatesEventFunctionListInitialCapacity = commonReserveSize;
 		textInputEventFunctionListInitialCapacity = commonReserveSize;
 
+		mouseDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		mouseMotionEventFunctionListInitialCapacity = commonReserveSize;
 		mouseButtonEventFunctionListInitialCapacity = commonReserveSize;
 		mouseWheelEventFunctionListInitialCapacity = commonReserveSize;
@@ -43,11 +46,19 @@ namespace VulkanSimplified
 
 		audioDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		touchFingerEventFunctionListInitialCapacity = commonReserveSize;
+		touchPinchEventFunctionListInitialCapacity = commonReserveSize;
+		cameraEventFunctionListInitialCapacity = commonReserveSize;
 		clipboardEventFunctionListInitialCapacity = commonReserveSize;
 
 		dropEventFunctionListInitialCapacity = commonReserveSize;
 		sensorEventFunctionListInitialCapacity = commonReserveSize;
 		userEventFunctionListInitialCapacity = commonReserveSize;
+
+		penAxisEventFunctionListInitialCapacity = commonReserveSize;
+		penButtonEventFunctionListInitialCapacity = commonReserveSize;
+		penMotionEventFunctionListInitialCapacity = commonReserveSize;
+		penTouchEventFunctionListInitialCapacity = commonReserveSize;
+		penProximityEventFunctionListInitialCapacity = commonReserveSize;
 
 		renderTargetsResetEventFunctionListInitialCapacity = commonReserveSize;
 		renderDeviceResetEventFunctionListInitialCapacity = commonReserveSize;

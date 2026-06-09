@@ -39,11 +39,14 @@ namespace VulkanSimplified
 		IDObject<std::pair<DisplayEventFunction, void*>> RegisterDisplayEventCallback(DisplayEventFunction function, void* data, size_t add);
 		IDObject<std::pair<WindowEventFunction, void*>> RegisterWindowEventCallback(WindowEventFunction function, void* data, size_t add);
 
+		IDObject<std::pair<KeyboardDeviceEventFunction, void*>> RegisterKeyboardDeviceEventCallback(KeyboardDeviceEventFunction function, void* data, size_t add);
 		IDObject<std::pair<KeyboardEventFunction, void*>> RegisterKeyboardEventCallback(KeyboardEventFunction function, void* data, size_t add);
 		IDObject<std::pair<KeymapChangeEventFunction, void*>> RegisterKeymapChangingEventCallback(KeymapChangeEventFunction function, void* data, size_t add);
+		IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> RegisterTextCandidatesEditingEventCallback(TextEditingCandidatesEventFunction function, void* data, size_t add);
 		IDObject<std::pair<TextEditingEventFunction, void*>> RegisterTextEditingEventCallback(TextEditingEventFunction function, void* data, size_t add);
 		IDObject<std::pair<TextInputEventFunction, void*>> RegisterTextInputEventCallback(TextInputEventFunction function, void* data, size_t add);
 
+		IDObject<std::pair<MouseDeviceEventFunction, void*>> RegisterMouseDeviceEventCallback(MouseDeviceEventFunction function, void* data, size_t add);
 		IDObject<std::pair<MouseMotionEventFunction, void*>> RegisterMouseMotionEventCallback(MouseMotionEventFunction function, void* data, size_t add);
 		IDObject<std::pair<MouseButtonEventFunction, void*>> RegisterMouseButtonEventCallback(MouseButtonEventFunction function, void* data, size_t add);
 		IDObject<std::pair<MouseWheelEventFunction, void*>> RegisterMouseWheelEventCallback(MouseWheelEventFunction function, void* data, size_t add);
@@ -63,11 +66,19 @@ namespace VulkanSimplified
 
 		IDObject<std::pair<AudioDeviceEventFunction, void*>> RegisterAudioDeviceEventCallback(AudioDeviceEventFunction function, void* data, size_t add);
 		IDObject<std::pair<TouchFingerEventFunction, void*>> RegisterTouchFingerEventCallback(TouchFingerEventFunction function, void* data, size_t add);
+		IDObject<std::pair<TouchPinchEventFunction, void*>> RegisterPinchFingerEventCallback(TouchPinchEventFunction function, void* data, size_t add);
+		IDObject<std::pair<CameraEventFunction, void*>> RegisterCameraEventCallback(CameraEventFunction function, void* data, size_t add);
 		IDObject<std::pair<ClipboardEventFunction, void*>> RegisterClipboardEventCallback(ClipboardEventFunction function, void* data, size_t add);
 
 		IDObject<std::pair<DropEventFunction, void*>> RegisterDropEventCallback(DropEventFunction function, void* data, size_t add);
 		IDObject<std::pair<SensorEventFunction, void*>> RegisterSensorEventCallback(SensorEventFunction function, void* data, size_t add);
 		IDObject<std::pair<UserEventFunction, void*>> RegisterUserEventCallback(UserEventFunction function, void* data, size_t add);
+
+		IDObject<std::pair<PenAxisEventFunction, void*>> RegisterPenAxisEventCallback(PenAxisEventFunction function, void* data, size_t add);
+		IDObject<std::pair<PenButtonEventFunction, void*>> RegisterPenButtonEventCallback(PenButtonEventFunction function, void* data, size_t add);
+		IDObject<std::pair<PenMotionEventFunction, void*>> RegisterPenMotionEventCallback(PenMotionEventFunction function, void* data, size_t add);
+		IDObject<std::pair<PenTouchEventFunction, void*>> RegisterPenTouchEventCallback(PenTouchEventFunction function, void* data, size_t add);
+		IDObject<std::pair<PenProximityEventFunction, void*>> RegisterPenProximityEventCallback(PenProximityEventFunction function, void* data, size_t add);
 
 		IDObject<std::pair<RenderTargetsResetEventFunction, void*>> RegisterRenderTargetsResetEventCallback(RenderTargetsResetEventFunction function, void* data, size_t add);
 		IDObject<std::pair<RenderDeviceResetEventFunction, void*>> RegisterRenderDeviceResetEventCallback(RenderDeviceResetEventFunction function, void* data, size_t add);
@@ -86,11 +97,15 @@ namespace VulkanSimplified
 		bool UnRegisterDisplayEventCallback(IDObject<std::pair<DisplayEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterWindowEventCallback(IDObject<std::pair<WindowEventFunction, void*>> ID, bool throwOnIDNotFound);
 
+		bool UnRegisterKeyboardDeviceEventCallback(IDObject<std::pair<KeyboardDeviceEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterKeyboardEventCallback(IDObject<std::pair<KeyboardEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound);
+
 		bool UnRegisterTextEditingEventCallback(IDObject<std::pair<TextEditingEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterTextCandidatesEditingEventCallback(IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterTextInputEventCallback(IDObject<std::pair<TextInputEventFunction, void*>> ID, bool throwOnIDNotFound);
 
+		bool UnRegisterMouseDeviceEventCallback(IDObject<std::pair<MouseDeviceEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterMouseMotionEventCallback(IDObject<std::pair<MouseMotionEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterMouseButtonEventCallback(IDObject<std::pair<MouseButtonEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterMouseWheelEventCallback(IDObject<std::pair<MouseWheelEventFunction, void*>> ID, bool throwOnIDNotFound);
@@ -110,11 +125,19 @@ namespace VulkanSimplified
 
 		bool UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterTouchFingerEventCallback(IDObject<std::pair<TouchFingerEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterTouchPinchEventCallback(IDObject<std::pair<TouchPinchEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterCameraEventCallback(IDObject<std::pair<CameraEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterClipboardEventCallback(IDObject<std::pair<ClipboardEventFunction, void*>> ID, bool throwOnIDNotFound);
 
 		bool UnRegisterDropEventCallback(IDObject<std::pair<DropEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterSensorEventCallback(IDObject<std::pair<SensorEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterUserEventCallback(IDObject<std::pair<UserEventFunction, void*>> ID, bool throwOnIDNotFound);
+
+		bool UnRegisterPenAxisEventCallback(IDObject<std::pair<PenAxisEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterPenButtonEventCallback(IDObject<std::pair<PenButtonEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterPenMotionEventCallback(IDObject<std::pair<PenMotionEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterPenTouchEventCallback(IDObject<std::pair<PenTouchEventFunction, void*>> ID, bool throwOnIDNotFound);
+		bool UnRegisterPenProximityEventCallback(IDObject<std::pair<PenProximityEventFunction, void*>> ID, bool throwOnIDNotFound);
 
 		bool UnRegisterRenderTargetsResetEventCallback(IDObject<std::pair<RenderTargetsResetEventFunction, void*>> ID, bool throwOnIDNotFound);
 		bool UnRegisterRenderDeviceResetEventCallback(IDObject<std::pair<RenderDeviceResetEventFunction, void*>> ID, bool throwOnIDNotFound);
@@ -134,11 +157,15 @@ namespace VulkanSimplified
 		OrderIndependentDeletionStack<std::pair<DisplayEventFunction, void*>> _displayEventFunctions;
 		OrderIndependentDeletionStack<std::pair<WindowEventFunction, void*>> _windowEventFunctions;
 
+		OrderIndependentDeletionStack<std::pair<KeyboardDeviceEventFunction, void*>> _keyboardDeviceEventFunctions;
 		OrderIndependentDeletionStack<std::pair<KeyboardEventFunction, void*>> _keyboardEventFunctions;
 		OrderIndependentDeletionStack<std::pair<KeymapChangeEventFunction, void*>> _keymapChangedEventFunctions;
+
 		OrderIndependentDeletionStack<std::pair<TextEditingEventFunction, void*>> _textEditingEventFunctions;
+		OrderIndependentDeletionStack<std::pair<TextEditingCandidatesEventFunction, void*>> _textEditingCandidatesEventFunctions;
 		OrderIndependentDeletionStack<std::pair<TextInputEventFunction, void*>> _textInputEventFunctions;
 
+		OrderIndependentDeletionStack<std::pair<MouseDeviceEventFunction, void*>> _mouseDeviceEventFunctions;
 		OrderIndependentDeletionStack<std::pair<MouseMotionEventFunction, void*>> _mouseMotionEventFunctions;
 		OrderIndependentDeletionStack<std::pair<MouseButtonEventFunction, void*>> _mouseButtonEventFunctions;
 		OrderIndependentDeletionStack<std::pair<MouseWheelEventFunction, void*>> _mouseWheelEventFunctions;
@@ -158,11 +185,19 @@ namespace VulkanSimplified
 
 		OrderIndependentDeletionStack<std::pair<AudioDeviceEventFunction, void*>> _audioDeviceEventFunctions;
 		OrderIndependentDeletionStack<std::pair<TouchFingerEventFunction, void*>> _touchFingerEventFunctions;
+		OrderIndependentDeletionStack<std::pair<TouchPinchEventFunction, void*>> _touchPinchEventFunctions;
+		OrderIndependentDeletionStack<std::pair<CameraEventFunction, void*>> _cameraEventFunctions;
 		OrderIndependentDeletionStack<std::pair<ClipboardEventFunction, void*>> _clipboardEventFunctions;
 
 		OrderIndependentDeletionStack<std::pair<DropEventFunction, void*>> _dropEventFunctions;
 		OrderIndependentDeletionStack<std::pair<SensorEventFunction, void*>> _sensorEventFunctions;
 		OrderIndependentDeletionStack<std::pair<UserEventFunction, void*>> _userEventFunctions;
+
+		OrderIndependentDeletionStack<std::pair<PenAxisEventFunction, void*>> _penAxisEventFunctions;
+		OrderIndependentDeletionStack<std::pair<PenButtonEventFunction, void*>> _penButtonEventFunctions;
+		OrderIndependentDeletionStack<std::pair<PenMotionEventFunction, void*>> _penMotionEventFunctions;
+		OrderIndependentDeletionStack<std::pair<PenTouchEventFunction, void*>> _penTouchEventFunctions;
+		OrderIndependentDeletionStack<std::pair<PenProximityEventFunction, void*>> _penProximityEventFunctions;
 
 		OrderIndependentDeletionStack<std::pair<RenderTargetsResetEventFunction, void*>> _renderTargetsResetEventFunctions;
 		OrderIndependentDeletionStack<std::pair<RenderDeviceResetEventFunction, void*>> _renderDeviceResetEventFunctions;
@@ -183,11 +218,14 @@ namespace VulkanSimplified
 		void HandleDisplayEvent(const SDL_Event& event);
 		void HandleWindowEvent(const SDL_Event& event);
 
+		void HandleKeyboardDeviceEvent(const SDL_Event& event);
 		void HandleKeyboardEvent(const SDL_Event& event);
 		void HandleKeymapChangedEvent(const SDL_Event& event);
 		void HandleTextEditingEvent(const SDL_Event& event);
+		void HandleTextEditingCandidatesEvent(const SDL_Event& event);
 		void HandleTextInputEvent(const SDL_Event& event);
 
+		void HandleMouseDeviceEvent(const SDL_Event& event);
 		void HandleMouseMotionEvent(const SDL_Event& event);
 		void HandleMouseButtonEvent(const SDL_Event& event);
 		void HandleMouseWheelEvent(const SDL_Event& event);
@@ -207,11 +245,19 @@ namespace VulkanSimplified
 
 		void HandleAudioDeviceEvent(const SDL_Event& event);
 		void HandleTouchFingerEvent(const SDL_Event& event);
+		void HandleTouchPinchEvent(const SDL_Event& event);
+		void HandleCameraEvent(const SDL_Event& event);
 		void HandleClipboardEvent(const SDL_Event& event);
 
 		void HandleDropEvent(const SDL_Event& event);
 		void HandleSensorEvent(const SDL_Event& event);
 		void HandleUserEvent(const SDL_Event& event);
+
+		void HandlePenAxisEvent(const SDL_Event& event);
+		void HandlePenButtonEvent(const SDL_Event& event);
+		void HandlePenMotionEvent(const SDL_Event& event);
+		void HandlePenTouchEvent(const SDL_Event& event);
+		void HandlePenProximityEvent(const SDL_Event& event);
 
 		void HandleRenderTargetsResetEvent(const SDL_Event& event);
 		void HandleRenderDeviceResetEvent(const SDL_Event& event);

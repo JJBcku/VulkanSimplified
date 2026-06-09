@@ -56,4 +56,18 @@ namespace VulkanSimplified
 	SdlMouseWheelEventData::~SdlMouseWheelEventData()
 	{
 	}
+
+	SdlMouseDeviceEventData::SdlMouseDeviceEventData()
+	{
+		type = SdlMouseDeviceEventType::MOUSE_DEVICE_UNSET;
+		reserved = 0;
+		timestamp = 0;
+		mouseID = 0;
+		padding = 0;
+	}
+
+	SdlMouseDeviceEventData::~SdlMouseDeviceEventData()
+	{
+	}
+
 }

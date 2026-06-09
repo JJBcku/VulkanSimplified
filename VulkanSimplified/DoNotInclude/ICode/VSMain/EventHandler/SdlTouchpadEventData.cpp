@@ -6,7 +6,7 @@ namespace VulkanSimplified
 	SdlTouchFingerEventData::SdlTouchFingerEventData()
 	{
 		type = SdlTouchFingerEventType::FINGER_UNSET;
-
+		reserved = 0;
 		timestamp = 0;
 		touchId = 0;
 		fingerId = 0;
@@ -19,6 +19,19 @@ namespace VulkanSimplified
 	}
 
 	SdlTouchFingerEventData::~SdlTouchFingerEventData()
+	{
+	}
+
+	SdlTouchPinchEventData::SdlTouchPinchEventData()
+	{
+		type = SdlTouchPinchEventType::PINCH_UNSET;
+		reserved = 0;
+		timestamp = 0;
+		scale = 0.0f;
+		windowID = 0;
+	}
+
+	SdlTouchPinchEventData::~SdlTouchPinchEventData()
 	{
 	}
 

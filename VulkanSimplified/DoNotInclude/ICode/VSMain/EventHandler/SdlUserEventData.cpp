@@ -5,11 +5,11 @@ namespace VulkanSimplified
 {
 	SdlUserEventData::SdlUserEventData()
 	{
-		timestamp = 0;
+		eventTypeCode = 0;
 		reserved = 0;
+		timestamp = 0;
 		windowID = 0;
 		code = 0;
-		padding = 0;
 		data1 = nullptr;
 		data2 = nullptr;
 	}

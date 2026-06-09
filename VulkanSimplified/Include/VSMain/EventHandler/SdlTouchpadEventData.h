@@ -31,4 +31,25 @@ namespace VulkanSimplified
         SdlTouchFingerEventData();
         ~SdlTouchFingerEventData();
     };
+
+    enum class SdlTouchPinchEventType : uint32_t
+    {
+        PINCH_UNSET = 0x0,
+
+        PINCH_BEGIN = 0x1,
+        PINCH_UPDATE = 0x2,
+        PINCH_END = 0x4,
+    };
+
+    struct SdlTouchPinchEventData
+    {
+        SdlTouchPinchEventType type;
+        uint32_t reserved;
+        uint64_t timestamp;         /**< In nanoseconds, populated using SDL_GetTicksNS() */
+        float scale;                /**< The scale change since the last SDL_EVENT_PINCH_UPDATE. Scale < 1 is "zoom out". Scale > 1 is "zoom in". */
+        uint32_t windowID;          /**< The window underneath the finger, if any */
+
+        SdlTouchPinchEventData();
+        ~SdlTouchPinchEventData();
+    };
 }

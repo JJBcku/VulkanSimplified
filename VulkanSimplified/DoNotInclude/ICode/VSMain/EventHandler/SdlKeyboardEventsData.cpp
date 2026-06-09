@@ -40,4 +40,18 @@ namespace VulkanSimplified
 	SdlKeymapChangedEventData::~SdlKeymapChangedEventData()
 	{
 	}
+
+	SdlKeyboardDeviceEvent::SdlKeyboardDeviceEvent()
+	{
+		type = SdlKeyboardDeviceSubEventType::KEYBOARD_DEVICE_UNSET;
+		reserved = 0;
+		timestamp = 0;
+		keyboardID = 0;
+		padding = 0;
+	}
+
+	SdlKeyboardDeviceEvent::~SdlKeyboardDeviceEvent()
+	{
+	}
+
 }

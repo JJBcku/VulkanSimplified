@@ -741,4 +741,24 @@ namespace VulkanSimplified
         SdlKeymapChangedEventData();
         ~SdlKeymapChangedEventData();
     };
+
+    enum class SdlKeyboardDeviceSubEventType : uint32_t
+    {
+        KEYBOARD_DEVICE_UNSET = 0x0,
+
+        KEYBOARD_DEVICE_ADDED = 0x1,
+        KEYBOARD_DEVICE_REMOWED = 0x2,
+    };
+
+    struct SdlKeyboardDeviceEvent
+    {
+        SdlKeyboardDeviceSubEventType type;
+        uint32_t reserved;
+        uint64_t timestamp;     /**< In nanoseconds, populated using SDL_GetTicksNS() */
+        uint32_t keyboardID;    /**< The keyboard instance id */
+        uint32_t padding;
+
+        SdlKeyboardDeviceEvent();
+        ~SdlKeyboardDeviceEvent();
+    };
 }
