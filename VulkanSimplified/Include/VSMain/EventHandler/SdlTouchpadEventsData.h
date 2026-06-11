@@ -16,7 +16,7 @@ namespace VulkanSimplified
 
     struct SdlTouchFingerEventData
     {
-        SdlTouchFingerEventType type;
+        SdlTouchFingerEventType subtype;
         uint32_t reserved;
         uint64_t timestamp;     /**< In milliseconds, populated using SDL_GetTicks() */
         uint64_t touchId;       /**< The touch device id */
@@ -43,7 +43,7 @@ namespace VulkanSimplified
 
     struct SdlTouchPinchEventData
     {
-        SdlTouchPinchEventType type;
+        SdlTouchPinchEventType subtype;
         uint32_t reserved;
         uint64_t timestamp;         /**< In nanoseconds, populated using SDL_GetTicksNS() */
         float scale;                /**< The scale change since the last SDL_EVENT_PINCH_UPDATE. Scale < 1 is "zoom out". Scale > 1 is "zoom in". */

@@ -21,4 +21,13 @@ namespace VulkanSimplified
 		SdlRenderDeviceResetEventData();
 		~SdlRenderDeviceResetEventData();
 	};
+
+	struct SdlRenderDeviceLostEventData
+	{
+		uint64_t reserved;
+		uint64_t timestamp;
+
+		SdlRenderDeviceLostEventData();
+		~SdlRenderDeviceLostEventData();
+	};
 }

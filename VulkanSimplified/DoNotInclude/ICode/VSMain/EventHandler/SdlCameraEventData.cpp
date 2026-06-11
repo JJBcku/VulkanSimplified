@@ -5,7 +5,7 @@ namespace VulkanSimplified
 {
 	SdlCameraEventData::SdlCameraEventData()
 	{
-		eventSubtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_UNSET;
+		subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_UNSET;
 		timestamp = 0;
 		reserved = 0;
 		cameraID = 0;

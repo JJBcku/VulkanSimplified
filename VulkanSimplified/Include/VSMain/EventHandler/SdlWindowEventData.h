@@ -4,7 +4,7 @@
 
 namespace VulkanSimplified
 {
-    enum class SdlWindowSubEventID : uint32_t
+    enum class SdlWindowEventSubType : uint32_t
     {
         SDL_DATA_WINDOWEVENT_UNSET = 0x0000000,
 
@@ -44,7 +44,7 @@ namespace VulkanSimplified
         uint64_t timestamp;                 /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t reserved;    
         uint32_t windowID;                  /**< The associated window */
-        SdlWindowSubEventID event;          /**< Event ID */
+        SdlWindowEventSubType subtype;      
         int32_t data1;                      /**< event dependent data */
         int32_t data2;                      /**< event dependent data */
         int32_t padding;                    /**< event dependent data */

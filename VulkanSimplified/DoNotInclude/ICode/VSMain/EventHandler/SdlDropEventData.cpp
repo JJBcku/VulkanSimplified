@@ -5,7 +5,7 @@ namespace VulkanSimplified
 {
 	SdlDropEventData::SdlDropEventData()
 	{
-		type = SdlDropEventType::DROPEVENT_UNSET;
+		subtype = SdlDropEventType::DROPEVENT_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		windowID = 0;

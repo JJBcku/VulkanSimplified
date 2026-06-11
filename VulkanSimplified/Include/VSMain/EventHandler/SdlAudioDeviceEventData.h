@@ -15,7 +15,7 @@ namespace VulkanSimplified
 
     struct SdlAudioDeviceEventData
     {
-        SdlAudioDeviceEventSubtype type;
+        SdlAudioDeviceEventSubtype subtype;
         uint32_t reserved;
         uint64_t timestamp;                     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t which;                         /**< The audio device index for the ADDED event (valid until next SDL_GetNumAudioDevices() call), SDL_AudioDeviceID for the REMOVED event */

@@ -14,6 +14,7 @@ namespace VulkanSimplified
 		size_t appDidEnterForegroundEventFunctionListInitialCapacity;
 
 		size_t localeChangedEventFunctionListInitialCapacity;
+		size_t systemThemeChangeEventFunctionListInitialCapacity;
 
 		size_t displayEventFunctionListInitialCapacity;
 		size_t windowEventFunctionListInitialCapacity;
@@ -21,6 +22,7 @@ namespace VulkanSimplified
 		size_t keyboardDeviceEventFunctionListInitialCapacity;
 		size_t keyboardEventFunctionListInitialCapacity;
 		size_t keymapChangeEventFunctionListInitialCapacity;
+		size_t screenKeyboardEventFunctionListInitialCapacity;
 		size_t textEditingEventFunctionListInitialCapacity;
 		size_t textEditingCandidatesEventFunctionListInitialCapacity;
 		size_t textInputEventFunctionListInitialCapacity;
@@ -61,6 +63,7 @@ namespace VulkanSimplified
 
 		size_t renderTargetsResetEventFunctionListInitialCapacity;
 		size_t renderDeviceResetEventFunctionListInitialCapacity;
+		size_t renderDeviceLostEventFunctionListInitialCapacity;
 
 		SdlEventHandlerInitData(size_t commonReserveSize = 0);
 	};

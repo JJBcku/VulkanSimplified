@@ -17,10 +17,11 @@
 #include "../../../../Include/VSMain/EventHandler/SdlQuitEventData.h"
 #include "../../../../Include/VSMain/EventHandler/SdlRenderEventsData.h"
 #include "../../../../Include/VSMain/EventHandler/SdlSensorEventData.h"
+#include "../../../../Include/VSMain/EventHandler/SdlSystemThemeChangeEventData.h"
 #include "../../../../Include/VSMain/EventHandler/SdlTextEventsData.h"
-#include "../../../../Include/VSMain/EventHandler/SdlTouchpadEventData.h"
+#include "../../../../Include/VSMain/EventHandler/SdlTouchpadEventsData.h"
 #include "../../../../Include/VSMain/EventHandler/SdlUserEventData.h"
-#include "../../../../Include/VSMain/EventHandler/SdlPenEventData.h"
+#include "../../../../Include/VSMain/EventHandler/SdlPenEventsData.h"
 #include "../../../../Include/VSMain/EventHandler/SdlWindowEventData.h"
 
 namespace VulkanSimplified
@@ -31,27 +32,48 @@ namespace VulkanSimplified
 		_appDidEnterBackgroundEventFunctions(initData.appDidEnterBackgroundEventFunctionListInitialCapacity),
 		_appWillEnterForegroundEventFunctions(initData.appWillEnterForegroundEventFunctionListInitialCapacity),
 		_appDidEnterForegroundEventFunctions(initData.appDidEnterForegroundEventFunctionListInitialCapacity),
-		_localeChangedEventFunctions(initData.localeChangedEventFunctionListInitialCapacity), _displayEventFunctions(initData.displayEventFunctionListInitialCapacity),
-		_windowEventFunctions(initData.windowEventFunctionListInitialCapacity), _keyboardDeviceEventFunctions(initData.keyboardDeviceEventFunctionListInitialCapacity),
-		_keyboardEventFunctions(initData.keyboardEventFunctionListInitialCapacity),  _keymapChangedEventFunctions(initData.keymapChangeEventFunctionListInitialCapacity),
+		_localeChangedEventFunctions(initData.localeChangedEventFunctionListInitialCapacity),
+		_systemThemeChangeEventFunctions(initData.systemThemeChangeEventFunctionListInitialCapacity),
+		_displayEventFunctions(initData.displayEventFunctionListInitialCapacity),
+		_windowEventFunctions(initData.windowEventFunctionListInitialCapacity),
+		_keyboardEventFunctions(initData.keyboardEventFunctionListInitialCapacity),
 		_textEditingEventFunctions(initData.textEditingEventFunctionListInitialCapacity),
-		_textEditingCandidatesEventFunctions(initData.textEditingCandidatesEventFunctionListInitialCapacity), _textInputEventFunctions(initData.textInputEventFunctionListInitialCapacity),
-		_mouseDeviceEventFunctions(initData.mouseDeviceEventFunctionListInitialCapacity), _mouseMotionEventFunctions(initData.mouseMotionEventFunctionListInitialCapacity),
-		_mouseButtonEventFunctions(initData.mouseButtonEventFunctionListInitialCapacity), _mouseWheelEventFunctions(initData.mouseWheelEventFunctionListInitialCapacity),
-		_joyAxisEventFunctions(initData.joyAxisEventFunctionListInitialCapacity), _joyBallEventFunctions(initData.joyBallEventFunctionListInitialCapacity),
-		_joyHatEventFunctions(initData.joyHatEventFunctionListInitialCapacity), _joyButtonEventFunctions(initData.joyButtonEventFunctionListInitialCapacity),
-		_joyDeviceEventFunctions(initData.joyDeviceEventFunctionListInitialCapacity), _joyBatteryEventFunctions(initData.joyBatteryEventFunctionListInitialCapacity),
-		_gamepadAxisEventFunctions(initData.gamepadAxisEventFunctionListInitialCapacity), _gamepadButtonEventFunctions(initData.gamepadButtonEventFunctionListInitialCapacity),
-		_gamepadDeviceEventFunctions(initData.gamepadDeviceEventFunctionListInitialCapacity), _gamepadTouchpadEventFunctions(initData.gamepadTouchpadEventFunctionListInitialCapacity),
-		_gamepadSensorEventFunctions(initData.gamepadSensorEventFunctionListInitialCapacity), _audioDeviceEventFunctions(initData.audioDeviceEventFunctionListInitialCapacity),
-		_touchFingerEventFunctions(initData.touchFingerEventFunctionListInitialCapacity), _touchPinchEventFunctions(initData.touchPinchEventFunctionListInitialCapacity),
-		_cameraEventFunctions(initData.cameraEventFunctionListInitialCapacity), _clipboardEventFunctions(initData.clipboardEventFunctionListInitialCapacity),
-		_dropEventFunctions(initData.dropEventFunctionListInitialCapacity), _sensorEventFunctions(initData.sensorEventFunctionListInitialCapacity),
-		_userEventFunctions(initData.userEventFunctionListInitialCapacity), _penAxisEventFunctions(initData.penAxisEventFunctionListInitialCapacity),
-		_penButtonEventFunctions(initData.penButtonEventFunctionListInitialCapacity), _penMotionEventFunctions(initData.penMotionEventFunctionListInitialCapacity),
-		_penTouchEventFunctions(initData.penTouchEventFunctionListInitialCapacity), _penProximityEventFunctions(initData.penProximityEventFunctionListInitialCapacity),
+		_keymapChangedEventFunctions(initData.keymapChangeEventFunctionListInitialCapacity),
+		_textInputEventFunctions(initData.textInputEventFunctionListInitialCapacity),
+		_keyboardDeviceEventFunctions(initData.keyboardDeviceEventFunctionListInitialCapacity),
+		_textEditingCandidatesEventFunctions(initData.textEditingCandidatesEventFunctionListInitialCapacity),
+		_screenKeyboardEventFunctions(initData.screenKeyboardEventFunctionListInitialCapacity),
+		_mouseMotionEventFunctions(initData.mouseMotionEventFunctionListInitialCapacity),
+		_mouseButtonEventFunctions(initData.mouseButtonEventFunctionListInitialCapacity),
+		_mouseWheelEventFunctions(initData.mouseWheelEventFunctionListInitialCapacity),
+		_mouseDeviceEventFunctions(initData.mouseDeviceEventFunctionListInitialCapacity),
+		_joyAxisEventFunctions(initData.joyAxisEventFunctionListInitialCapacity),
+		_joyBallEventFunctions(initData.joyBallEventFunctionListInitialCapacity),
+		_joyHatEventFunctions(initData.joyHatEventFunctionListInitialCapacity),
+		_joyButtonEventFunctions(initData.joyButtonEventFunctionListInitialCapacity),
+		_joyDeviceEventFunctions(initData.joyDeviceEventFunctionListInitialCapacity),
+		_joyBatteryEventFunctions(initData.joyBatteryEventFunctionListInitialCapacity),
+		_gamepadAxisEventFunctions(initData.gamepadAxisEventFunctionListInitialCapacity),
+		_gamepadButtonEventFunctions(initData.gamepadButtonEventFunctionListInitialCapacity),
+		_gamepadDeviceEventFunctions(initData.gamepadDeviceEventFunctionListInitialCapacity),
+		_gamepadTouchpadEventFunctions(initData.gamepadTouchpadEventFunctionListInitialCapacity),
+		_gamepadSensorEventFunctions(initData.gamepadSensorEventFunctionListInitialCapacity),
+		_touchFingerEventFunctions(initData.touchFingerEventFunctionListInitialCapacity),
+		_touchPinchEventFunctions(initData.touchPinchEventFunctionListInitialCapacity),
+		_clipboardEventFunctions(initData.clipboardEventFunctionListInitialCapacity),
+		_dropEventFunctions(initData.dropEventFunctionListInitialCapacity),
+		_audioDeviceEventFunctions(initData.audioDeviceEventFunctionListInitialCapacity),
+		_sensorEventFunctions(initData.sensorEventFunctionListInitialCapacity),
+		_penProximityEventFunctions(initData.penProximityEventFunctionListInitialCapacity),
+		_penTouchEventFunctions(initData.penTouchEventFunctionListInitialCapacity),
+		_penButtonEventFunctions(initData.penButtonEventFunctionListInitialCapacity),
+		_penMotionEventFunctions(initData.penMotionEventFunctionListInitialCapacity),
+		_penAxisEventFunctions(initData.penAxisEventFunctionListInitialCapacity),
+		_cameraEventFunctions(initData.cameraEventFunctionListInitialCapacity),
 		_renderTargetsResetEventFunctions(initData.renderTargetsResetEventFunctionListInitialCapacity),
-		_renderDeviceResetEventFunctions(initData.renderDeviceResetEventFunctionListInitialCapacity)
+		_renderDeviceResetEventFunctions(initData.renderDeviceResetEventFunctionListInitialCapacity),
+		_renderDeviceLostEventFunctions(initData.renderDeviceLostEventFunctionListInitialCapacity),
+		_userEventFunctions(initData.userEventFunctionListInitialCapacity)
 	{
 	}
 
@@ -109,6 +131,11 @@ namespace VulkanSimplified
 		return _localeChangedEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
+	IDObject<std::pair<SystemThemeChangeEventFunction, void*>> SdlEventHandlerInternal::RegisterSystemThemeChangeEventCallback(SystemThemeChangeEventFunction function, void* data, size_t add)
+	{
+		return _systemThemeChangeEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
 	IDObject<std::pair<DisplayEventFunction, void*>> SdlEventHandlerInternal::RegisterDisplayEventCallback(DisplayEventFunction function, void* data, size_t add)
 	{
 		return _displayEventFunctions.AddObject(std::pair(function, data), add);
@@ -132,6 +159,11 @@ namespace VulkanSimplified
 	IDObject<std::pair<KeymapChangeEventFunction, void*>> SdlEventHandlerInternal::RegisterKeymapChangingEventCallback(KeymapChangeEventFunction function, void* data, size_t add)
 	{
 		return _keymapChangedEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
+	IDObject<std::pair<ScreenKeyboardEventFunction, void*>> SdlEventHandlerInternal::RegisterScreenKeyboardEventCallback(ScreenKeyboardEventFunction function, void* data, size_t add)
+	{
+		return _screenKeyboardEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> SdlEventHandlerInternal::RegisterTextCandidatesEditingEventCallback(TextEditingCandidatesEventFunction function,
@@ -300,6 +332,11 @@ namespace VulkanSimplified
 		return _renderDeviceResetEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
+	IDObject<std::pair<RenderDeviceLostEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderDeviceLostEventCallback(RenderDeviceLostEventFunction function, void* data, size_t add)
+	{
+		return _renderDeviceLostEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
 	bool SdlEventHandlerInternal::UnRegisterQuitEventCallback(IDObject<std::pair<QuitEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _quitEventFunctions.RemoveObject(ID, throwOnIDNotFound);
@@ -340,6 +377,11 @@ namespace VulkanSimplified
 		return _localeChangedEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
+	bool SdlEventHandlerInternal::UnRegisterSystemThemeChangeEventCallback(IDObject<std::pair<SystemThemeChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _systemThemeChangeEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
 	bool SdlEventHandlerInternal::UnRegisterDisplayEventCallback(IDObject<std::pair<DisplayEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _displayEventFunctions.RemoveObject(ID, throwOnIDNotFound);
@@ -363,6 +405,11 @@ namespace VulkanSimplified
 	bool SdlEventHandlerInternal::UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _keymapChangedEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandlerInternal::UnRegisterScreenKeyboardEventCallback(IDObject<std::pair<ScreenKeyboardEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _screenKeyboardEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterTextEditingEventCallback(IDObject<std::pair<TextEditingEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -530,6 +577,11 @@ namespace VulkanSimplified
 		return _renderDeviceResetEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
+	bool SdlEventHandlerInternal::UnRegisterRenderDeviceLostEventCallback(IDObject<std::pair<RenderDeviceLostEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _renderDeviceLostEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
 	void SdlEventHandlerInternal::HandleEvent(const SDL_Event& event)
 	{
 		auto& type = event.type;
@@ -561,6 +613,9 @@ namespace VulkanSimplified
 			break;
 		case SDL_EVENT_LOCALE_CHANGED:
 			HandleLocaleChangeEvent(event);
+			break;
+		case  SDL_EVENT_SYSTEM_THEME_CHANGED:
+			HandleSystemThemeChangeEvent(event);
 			break;
 		case SDL_EVENT_DISPLAY_ORIENTATION:
 		case SDL_EVENT_DISPLAY_ADDED:
@@ -606,9 +661,6 @@ namespace VulkanSimplified
 		case SDL_EVENT_TEXT_EDITING:
 			HandleTextEditingEvent(event);
 			break;
-		case SDL_EVENT_TEXT_EDITING_CANDIDATES:
-			HandleTextEditingCandidatesEvent(event);
-			break;
 		case SDL_EVENT_TEXT_INPUT:
 			HandleTextInputEvent(event);
 			break;
@@ -618,6 +670,13 @@ namespace VulkanSimplified
 		case SDL_EVENT_KEYBOARD_ADDED:
 		case SDL_EVENT_KEYBOARD_REMOVED:
 			HandleKeyboardDeviceEvent(event);
+			break;
+		case SDL_EVENT_TEXT_EDITING_CANDIDATES:
+			HandleTextEditingCandidatesEvent(event);
+			break;
+		case SDL_EVENT_SCREEN_KEYBOARD_SHOWN:
+		case SDL_EVENT_SCREEN_KEYBOARD_HIDDEN:
+			HandleScreenKeyboardEvent(event);
 			break;
 		case SDL_EVENT_MOUSE_ADDED:
 		case SDL_EVENT_MOUSE_REMOVED:
@@ -943,6 +1002,31 @@ namespace VulkanSimplified
 		}
 	}
 
+	void SdlEventHandlerInternal::HandleSystemThemeChangeEvent(const SDL_Event& event)
+	{
+		if (event.type != SDL_EVENT_SYSTEM_THEME_CHANGED)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleSystemThemeChangeEvent Error: Wrong event type was passed to this function!");
+
+		SdlSystemThemeChangeEventData eventData;
+		eventData.reserved = event.quit.reserved;
+		eventData.timestamp = event.quit.timestamp;
+
+		auto size = _systemThemeChangeEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _systemThemeChangeEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
 	void SdlEventHandlerInternal::HandleDisplayEvent(const SDL_Event& event)
 	{
 		SdlDisplayEventData eventData;
@@ -1008,79 +1092,79 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_WINDOW_SHOWN:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_SHOWN;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_SHOWN;
 			break;
 		case SDL_EVENT_WINDOW_HIDDEN:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HIDDEN;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_HIDDEN;
 			break;
 		case SDL_EVENT_WINDOW_EXPOSED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_EXPOSED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_EXPOSED;
 			break;
 		case SDL_EVENT_WINDOW_MOVED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOVED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_MOVED;
 			break;
 		case SDL_EVENT_WINDOW_RESIZED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_RESIZED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_RESIZED;
 			break;
 		case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_PIXEL_SIZE_CHANGED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_PIXEL_SIZE_CHANGED;
 			break;
 		case SDL_EVENT_WINDOW_METAL_VIEW_RESIZED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_METAL_VIEW_RESIZED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_METAL_VIEW_RESIZED;
 			break;
 		case SDL_EVENT_WINDOW_MINIMIZED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MINIMIZED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_MINIMIZED;
 			break;
 		case SDL_EVENT_WINDOW_MAXIMIZED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MAXIMIZED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_MAXIMIZED;
 			break;
 		case SDL_EVENT_WINDOW_RESTORED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_RESTORED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_RESTORED;
 			break;
 		case SDL_EVENT_WINDOW_MOUSE_ENTER:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOUSE_ENTER;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_MOUSE_ENTER;
 			break;
 		case SDL_EVENT_WINDOW_MOUSE_LEAVE:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_MOUSE_LEAVE;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_MOUSE_LEAVE;
 			break;
 		case SDL_EVENT_WINDOW_FOCUS_GAINED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_FOCUS_GAINED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_FOCUS_GAINED;
 			break;
 		case SDL_EVENT_WINDOW_FOCUS_LOST:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_FOCUS_LOST;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_FOCUS_LOST;
 			break;
 		case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_CLOSE_REQUESTED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_CLOSE_REQUESTED;
 			break;
 		case SDL_EVENT_WINDOW_HIT_TEST:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HIT_TEST;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_HIT_TEST;
 			break;
 		case SDL_EVENT_WINDOW_ICCPROF_CHANGED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_ICCPROF_CHANGED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_ICCPROF_CHANGED;
 			break;
 		case SDL_EVENT_WINDOW_DISPLAY_CHANGED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_DISPLAY_CHANGED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_DISPLAY_CHANGED;
 			break;
 		case SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_DISPLAY_SCALE_CHANGED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_DISPLAY_SCALE_CHANGED;
 			break;
 		case SDL_EVENT_WINDOW_SAFE_AREA_CHANGED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_SAFE_AREA_CHANGED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_SAFE_AREA_CHANGED;
 			break;
 		case SDL_EVENT_WINDOW_OCCLUDED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_OCCLUDED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_OCCLUDED;
 			break;
 		case SDL_EVENT_WINDOW_ENTER_FULLSCREEN:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_ENTER_FULLSCREEN;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_ENTER_FULLSCREEN;
 			break;
 		case SDL_EVENT_WINDOW_LEAVE_FULLSCREEN:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_LEAVE_FULLSCREEN;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_LEAVE_FULLSCREEN;
 			break;
 		case SDL_EVENT_WINDOW_DESTROYED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_WINDOW_DESTROYED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_WINDOW_DESTROYED;
 			break;
 		case SDL_EVENT_WINDOW_HDR_STATE_CHANGED:
-			eventData.event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_HDR_STATE_CHANGED;
+			eventData.subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_HDR_STATE_CHANGED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleWindowEvent Error: Wrong event type was passed to this function!");
@@ -1111,10 +1195,10 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_KEYBOARD_ADDED:
-			eventData.type = SdlKeyboardDeviceSubEventType::KEYBOARD_DEVICE_ADDED;
+			eventData.subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_ADDED;
 			break;
 		case SDL_EVENT_KEYBOARD_REMOVED:
-			eventData.type = SdlKeyboardDeviceSubEventType::KEYBOARD_DEVICE_REMOWED;
+			eventData.subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_REMOWED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleKeyboardDeviceEvent Error: Wrong event type was passed to this function!");
@@ -1194,6 +1278,39 @@ namespace VulkanSimplified
 				break;
 
 			auto& functiondata = _keymapChangedEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
+	void SdlEventHandlerInternal::HandleScreenKeyboardEvent(const SDL_Event& event)
+	{
+		SdlScreenKeyboardEventData eventData;
+		switch (event.type)
+		{
+		case SDL_EVENT_SCREEN_KEYBOARD_SHOWN:
+			eventData.subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_SHOWN;
+			break;
+		case SDL_EVENT_SCREEN_KEYBOARD_HIDDEN:
+			eventData.subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_HIDDEN;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleScreenKeyboardEvent Error: Wrong event type was passed to this function!");
+		}
+		eventData.reserved = event.common.reserved;
+		eventData.timestamp = event.common.timestamp;
+
+		auto size = _screenKeyboardEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _screenKeyboardEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1295,10 +1412,10 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_MOUSE_ADDED:
-			eventData.type = SdlMouseDeviceEventType::MOUSE_DEVICE_ADDED;
+			eventData.subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_ADDED;
 			break;
 		case SDL_EVENT_MOUSE_REMOVED:
-			eventData.type = SdlMouseDeviceEventType::MOUSE_DEVICE_REMOVED;
+			eventData.subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_REMOVED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleMouseDeviceEvent Error: Wrong event type was passed to this function!");
@@ -1553,13 +1670,13 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_JOYSTICK_ADDED:
-			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_ADDED;
+			eventData.subtype = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_ADDED;
 			break;
 		case SDL_EVENT_JOYSTICK_REMOVED:
-			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_REMOVED;
+			eventData.subtype = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_REMOVED;
 			break;
 		case SDL_EVENT_JOYSTICK_UPDATE_COMPLETE:
-			eventData.type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UPDATE_COMPLETE;
+			eventData.subtype = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UPDATE_COMPLETE;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleJoyDeviceEvent Error: Wrong event type was passed to this function!");
@@ -1681,19 +1798,19 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_GAMEPAD_ADDED:
-			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_ADDED;
+			eventData.subtype = SdlGamepadDeviceSubEventType::DEVICE_ADDED;
 			break;
 		case SDL_EVENT_GAMEPAD_REMOVED:
-			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_REMOVED;
+			eventData.subtype = SdlGamepadDeviceSubEventType::DEVICE_REMOVED;
 			break;
 		case SDL_EVENT_GAMEPAD_REMAPPED:
-			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_REMAPPED;
+			eventData.subtype = SdlGamepadDeviceSubEventType::DEVICE_REMAPPED;
 			break;
 		case SDL_EVENT_GAMEPAD_UPDATE_COMPLETE:
-			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_UPDATE_COMPLETE;
+			eventData.subtype = SdlGamepadDeviceSubEventType::DEVICE_UPDATE_COMPLETE;
 			break;
 		case SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED:
-			eventData.type = SdlGamepadDeviceSubEventType::DEVICE_STEAM_HANDLE_UPDATED;
+			eventData.subtype = SdlGamepadDeviceSubEventType::DEVICE_STEAM_HANDLE_UPDATED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadDeviceEvent Error: Wrong event type was passed to this function!");
@@ -1725,13 +1842,13 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN:
-			eventData.type = SdlGamepadTouchpadEventType::TOUCHPAD_DOWN;
+			eventData.subtype = SdlGamepadTouchpadEventType::TOUCHPAD_DOWN;
 			break;
 		case SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION:
-			eventData.type = SdlGamepadTouchpadEventType::TOUCHPAD_MOTION;
+			eventData.subtype = SdlGamepadTouchpadEventType::TOUCHPAD_MOTION;
 			break;
 		case SDL_EVENT_GAMEPAD_TOUCHPAD_UP:
-			eventData.type = SdlGamepadTouchpadEventType::TOUCHPAD_UP;
+			eventData.subtype = SdlGamepadTouchpadEventType::TOUCHPAD_UP;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleGamepadTouchpadEvent Error: Wrong event type was passed to this function!");
@@ -1800,13 +1917,13 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_AUDIO_DEVICE_ADDED:
-			eventData.type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_ADDED;
+			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_ADDED;
 			break;
 		case SDL_EVENT_AUDIO_DEVICE_REMOVED:
-			eventData.type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_REMOVED;
+			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_REMOVED;
 			break;
 		case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
-			eventData.type = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_FORMAT_CHANGED;
+			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_FORMAT_CHANGED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleAudioDeviceEvent Error: Wrong event type was passed to this function!");
@@ -1842,16 +1959,16 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_FINGER_DOWN:
-			eventData.type = SdlTouchFingerEventType::FINGER_DOWN;
+			eventData.subtype = SdlTouchFingerEventType::FINGER_DOWN;
 			break;
 		case SDL_EVENT_FINGER_UP:
-			eventData.type = SdlTouchFingerEventType::FINGER_UP;
+			eventData.subtype = SdlTouchFingerEventType::FINGER_UP;
 			break;
 		case SDL_EVENT_FINGER_MOTION:
-			eventData.type = SdlTouchFingerEventType::FINGER_MOTION;
+			eventData.subtype = SdlTouchFingerEventType::FINGER_MOTION;
 			break;
 		case SDL_EVENT_FINGER_CANCELED:
-			eventData.type = SdlTouchFingerEventType::FINGER_CANCELLED;
+			eventData.subtype = SdlTouchFingerEventType::FINGER_CANCELLED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleTouchFingerEvent Error: Wrong event type was passed to this function!");
@@ -1890,13 +2007,13 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_PINCH_BEGIN:
-			eventData.type = SdlTouchPinchEventType::PINCH_BEGIN;
+			eventData.subtype = SdlTouchPinchEventType::PINCH_BEGIN;
 			break;
 		case SDL_EVENT_PINCH_UPDATE:
-			eventData.type = SdlTouchPinchEventType::PINCH_UPDATE;
+			eventData.subtype = SdlTouchPinchEventType::PINCH_UPDATE;
 			break;
 		case SDL_EVENT_PINCH_END:
-			eventData.type = SdlTouchPinchEventType::PINCH_END;
+			eventData.subtype = SdlTouchPinchEventType::PINCH_END;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleTouchPinchEvent Error: Wrong event type was passed to this function!");
@@ -1930,16 +2047,16 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_CAMERA_DEVICE_ADDED:
-			eventData.eventSubtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_ADDED;
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_ADDED;
 			break;
 		case SDL_EVENT_CAMERA_DEVICE_REMOVED:
-			eventData.eventSubtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_REMOVED;
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_REMOVED;
 			break;
 		case SDL_EVENT_CAMERA_DEVICE_APPROVED:
-			eventData.eventSubtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_APPROVED;
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_APPROVED;
 			break;
 		case SDL_EVENT_CAMERA_DEVICE_DENIED:
-			eventData.eventSubtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_DENIED;
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_DENIED;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleCameraEvent Error: Wrong event type was passed to this function!");
@@ -1997,19 +2114,19 @@ namespace VulkanSimplified
 		switch (event.type)
 		{
 		case SDL_EVENT_DROP_BEGIN:
-			eventData.type = SdlDropEventType::DROPEVENT_BEGIN;
+			eventData.subtype = SdlDropEventType::DROPEVENT_BEGIN;
 			break;
 		case SDL_EVENT_DROP_FILE:
-			eventData.type = SdlDropEventType::DROPEVENT_FILE;
+			eventData.subtype = SdlDropEventType::DROPEVENT_FILE;
 			break;
 		case SDL_EVENT_DROP_TEXT:
-			eventData.type = SdlDropEventType::DROPEVENT_TEXT;
+			eventData.subtype = SdlDropEventType::DROPEVENT_TEXT;
 			break;
 		case SDL_EVENT_DROP_COMPLETE:
-			eventData.type = SdlDropEventType::DROPEVENT_COMPLETE;
+			eventData.subtype = SdlDropEventType::DROPEVENT_COMPLETE;
 			break;
 		case SDL_EVENT_DROP_POSITION:
-			eventData.type = SdlDropEventType::DROPEVENT_POSITION;
+			eventData.subtype = SdlDropEventType::DROPEVENT_POSITION;
 			break;
 		default:
 			throw std::runtime_error("SdlEventHandlerInternal::HandleDropEvent Error: Wrong event type was passed to the function!");
@@ -2077,7 +2194,7 @@ namespace VulkanSimplified
 			throw std::runtime_error("SdlEventHandlerInternal::HandleUserEvent Error: Wrong event type was passed to this function!");
 
 		SdlUserEventData eventData;
-		eventData.eventTypeCode = event.type;
+		eventData.userEventType = event.type;
 		eventData.reserved = event.user.reserved;
 		eventData.timestamp = event.user.timestamp;
 		eventData.windowID = event.user.windowID;
@@ -2327,4 +2444,30 @@ namespace VulkanSimplified
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
+
+	void SdlEventHandlerInternal::HandleRenderDeviceLostEvent(const SDL_Event& event)
+	{
+		if (event.type != SDL_EVENT_RENDER_DEVICE_LOST)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleRenderDeviceLostEvent Error: Wrong event type was passed to this function!");
+
+		SdlRenderDeviceLostEventData eventData;
+		eventData.reserved = event.common.reserved;
+		eventData.timestamp = event.common.timestamp;
+
+		auto size = _renderDeviceLostEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _renderDeviceLostEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
 }

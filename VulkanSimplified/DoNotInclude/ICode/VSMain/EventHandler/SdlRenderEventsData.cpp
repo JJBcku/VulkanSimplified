@@ -22,4 +22,15 @@ namespace VulkanSimplified
 	SdlRenderDeviceResetEventData::~SdlRenderDeviceResetEventData()
 	{
 	}
+
+	SdlRenderDeviceLostEventData::SdlRenderDeviceLostEventData()
+	{
+		reserved = 0;
+		timestamp = 0;
+	}
+
+	SdlRenderDeviceLostEventData::~SdlRenderDeviceLostEventData()
+	{
+	}
+
 }

@@ -1,11 +1,11 @@
 #include "SdlEhIpch.h"
-#include "../../../../Include/VSMain/EventHandler/SdlTouchpadEventData.h"
+#include "../../../../Include/VSMain/EventHandler/SdlTouchpadEventsData.h"
 
 namespace VulkanSimplified
 {
 	SdlTouchFingerEventData::SdlTouchFingerEventData()
 	{
-		type = SdlTouchFingerEventType::FINGER_UNSET;
+		subtype = SdlTouchFingerEventType::FINGER_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		touchId = 0;
@@ -24,7 +24,7 @@ namespace VulkanSimplified
 
 	SdlTouchPinchEventData::SdlTouchPinchEventData()
 	{
-		type = SdlTouchPinchEventType::PINCH_UNSET;
+		subtype = SdlTouchPinchEventType::PINCH_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		scale = 0.0f;

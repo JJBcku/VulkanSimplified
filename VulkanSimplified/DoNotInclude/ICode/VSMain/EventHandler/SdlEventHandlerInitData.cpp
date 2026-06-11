@@ -15,6 +15,7 @@ namespace VulkanSimplified
 		appDidEnterForegroundEventFunctionListInitialCapacity = commonReserveSize;
 
 		localeChangedEventFunctionListInitialCapacity = commonReserveSize;
+		systemThemeChangeEventFunctionListInitialCapacity = commonReserveSize;
 
 		displayEventFunctionListInitialCapacity = commonReserveSize;
 		windowEventFunctionListInitialCapacity = commonReserveSize;
@@ -22,6 +23,7 @@ namespace VulkanSimplified
 		keyboardDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		keyboardEventFunctionListInitialCapacity = commonReserveSize;
 		keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
+		screenKeyboardEventFunctionListInitialCapacity = commonReserveSize;
 		textEditingEventFunctionListInitialCapacity = commonReserveSize;
 		textEditingCandidatesEventFunctionListInitialCapacity = commonReserveSize;
 		textInputEventFunctionListInitialCapacity = commonReserveSize;
@@ -62,5 +64,6 @@ namespace VulkanSimplified
 
 		renderTargetsResetEventFunctionListInitialCapacity = commonReserveSize;
 		renderDeviceResetEventFunctionListInitialCapacity = commonReserveSize;
+		renderDeviceLostEventFunctionListInitialCapacity = commonReserveSize;
 	}
 }

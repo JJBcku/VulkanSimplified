@@ -16,7 +16,7 @@ namespace VulkanSimplified
 
 	struct SdlCameraEventData
 	{
-		SdlCameraDeviceEventSubtype eventSubtype;
+		SdlCameraDeviceEventSubtype subtype;
 		uint64_t timestamp;								/**< In nanoseconds, populated using SDL_GetTicksNS() */
 		uint32_t reserved;
 		uint32_t cameraID;								/**< SDL_CameraID for the device being added or removed or changing */

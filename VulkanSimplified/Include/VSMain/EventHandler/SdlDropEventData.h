@@ -17,7 +17,7 @@ namespace VulkanSimplified
 
 	struct SdlDropEventData
 	{
-		SdlDropEventType type;
+		SdlDropEventType subtype;
 		uint32_t reserved;
 		uint64_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
 		uint32_t windowID;    /**< The window that was dropped on, if any */

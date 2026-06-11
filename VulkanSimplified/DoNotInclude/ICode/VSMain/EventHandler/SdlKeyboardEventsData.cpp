@@ -43,7 +43,7 @@ namespace VulkanSimplified
 
 	SdlKeyboardDeviceEvent::SdlKeyboardDeviceEvent()
 	{
-		type = SdlKeyboardDeviceSubEventType::KEYBOARD_DEVICE_UNSET;
+		subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		keyboardID = 0;
@@ -51,6 +51,17 @@ namespace VulkanSimplified
 	}
 
 	SdlKeyboardDeviceEvent::~SdlKeyboardDeviceEvent()
+	{
+	}
+
+	SdlScreenKeyboardEventData::SdlScreenKeyboardEventData()
+	{
+		subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_UNSET;
+		reserved = 0;
+		timestamp = 0;
+	}
+
+	SdlScreenKeyboardEventData::~SdlScreenKeyboardEventData()
 	{
 	}
 

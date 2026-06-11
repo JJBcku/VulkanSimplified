@@ -137,7 +137,7 @@ namespace VulkanSimplified
         ~SdlMouseWheelEventData();
     };
 
-    enum class SdlMouseDeviceEventType : uint32_t
+    enum class SdlMouseDeviceEventSubType : uint32_t
     {
         MOUSE_DEVICE_UNSET = 0x0,
 
@@ -147,7 +147,7 @@ namespace VulkanSimplified
 
     struct SdlMouseDeviceEventData
     {
-        SdlMouseDeviceEventType type;
+        SdlMouseDeviceEventSubType subtype;
         uint32_t reserved;
         uint64_t timestamp;     /**< In nanoseconds, populated using SDL_GetTicksNS() */
         uint32_t mouseID;       /**< The mouse instance id */

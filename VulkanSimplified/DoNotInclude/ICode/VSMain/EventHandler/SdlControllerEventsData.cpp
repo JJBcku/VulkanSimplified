@@ -38,7 +38,7 @@ namespace VulkanSimplified
 
 	SdlGamepadDeviceEventData::SdlGamepadDeviceEventData()
 	{
-		type = SdlGamepadDeviceSubEventType::DEVICE_UNKNOWN;
+		subtype = SdlGamepadDeviceSubEventType::DEVICE_UNKNOWN;
 		reserved = 0;
 		timestamp = 0;
 		which = 0;
@@ -51,7 +51,7 @@ namespace VulkanSimplified
 
 	SdlGamepadTouchpadEventData::SdlGamepadTouchpadEventData()
 	{
-		type = SdlGamepadTouchpadEventType::TOUCHPAD_UNKNOWN;
+		subtype = SdlGamepadTouchpadEventType::TOUCHPAD_UNKNOWN;
 		reserved = 0;
 		timestamp = 0;
 		which = 0;

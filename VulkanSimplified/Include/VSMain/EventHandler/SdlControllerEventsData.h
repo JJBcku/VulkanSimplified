@@ -86,7 +86,7 @@ namespace VulkanSimplified
 
     struct SdlGamepadDeviceEventData
     {
-        SdlGamepadDeviceSubEventType type;
+        SdlGamepadDeviceSubEventType subtype;
         uint32_t reserved;
         uint64_t timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t which;       /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
@@ -107,7 +107,7 @@ namespace VulkanSimplified
 
     struct SdlGamepadTouchpadEventData
     {
-        SdlGamepadTouchpadEventType type;
+        SdlGamepadTouchpadEventType subtype;
         uint32_t reserved;
         uint64_t timestamp;     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t which;         /**< The joystick instance id */

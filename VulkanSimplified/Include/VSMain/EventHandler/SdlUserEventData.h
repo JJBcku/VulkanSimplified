@@ -6,7 +6,7 @@ namespace VulkanSimplified
 {
     struct SdlUserEventData
     {
-        uint32_t eventTypeCode;
+        uint32_t userEventType;
         uint32_t reserved;
         uint64_t timestamp;     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t windowID;      /**< The associated window if any */

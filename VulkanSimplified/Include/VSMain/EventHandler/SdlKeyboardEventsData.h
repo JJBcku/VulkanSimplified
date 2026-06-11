@@ -742,7 +742,7 @@ namespace VulkanSimplified
         ~SdlKeymapChangedEventData();
     };
 
-    enum class SdlKeyboardDeviceSubEventType : uint32_t
+    enum class SdlKeyboardDeviceEventSubType : uint32_t
     {
         KEYBOARD_DEVICE_UNSET = 0x0,
 
@@ -752,7 +752,7 @@ namespace VulkanSimplified
 
     struct SdlKeyboardDeviceEvent
     {
-        SdlKeyboardDeviceSubEventType type;
+        SdlKeyboardDeviceEventSubType subtype;
         uint32_t reserved;
         uint64_t timestamp;     /**< In nanoseconds, populated using SDL_GetTicksNS() */
         uint32_t keyboardID;    /**< The keyboard instance id */
@@ -760,5 +760,23 @@ namespace VulkanSimplified
 
         SdlKeyboardDeviceEvent();
         ~SdlKeyboardDeviceEvent();
+    };
+
+    enum class SdlScreenKeyboardEventSubtype : uint32_t
+    {
+        SCREEN_KEYBOARD_UNSET = 0x0,
+
+        SCREEN_KEYBOARD_SHOWN = 0x1,
+        SCREEN_KEYBOARD_HIDDEN = 0x2,
+    };
+
+    struct SdlScreenKeyboardEventData
+    {
+        SdlScreenKeyboardEventSubtype subtype;
+        uint32_t reserved;
+        uint64_t timestamp;
+
+        SdlScreenKeyboardEventData();
+        ~SdlScreenKeyboardEventData();
     };
 }

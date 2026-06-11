@@ -94,7 +94,7 @@ namespace VulkanSimplified
 
     struct SdlJoyDeviceEventData
     {
-        SdlJoystickDeviceSubtypes type;
+        SdlJoystickDeviceSubtypes subtype;
         uint64_t timestamp;                     /**< In milliseconds, populated using SDL_GetTicks() */
         uint32_t reserved;
         uint32_t joystickID;                     /**< The joystick device index for the ADDED event, instance id for the REMOVED event */

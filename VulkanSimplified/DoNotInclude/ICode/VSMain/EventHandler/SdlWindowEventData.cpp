@@ -8,7 +8,7 @@ namespace VulkanSimplified
 		timestamp = 0;
 		reserved = 0;
 		windowID = 0;
-		event = SdlWindowSubEventID::SDL_DATA_WINDOWEVENT_UNSET;
+		subtype = SdlWindowEventSubType::SDL_DATA_WINDOWEVENT_UNSET;
 		data1 = 0;
 		data2 = 0;
 		padding = 0;

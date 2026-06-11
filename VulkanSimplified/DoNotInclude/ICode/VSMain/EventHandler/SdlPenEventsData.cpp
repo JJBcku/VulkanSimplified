@@ -1,5 +1,5 @@
 #include "SdlEhIpch.h"
-#include "../../../../Include/VSMain/EventHandler/SdlPenEventData.h"
+#include "../../../../Include/VSMain/EventHandler/SdlPenEventsData.h"
 
 namespace VulkanSimplified
 {

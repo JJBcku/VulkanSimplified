@@ -67,7 +67,7 @@ namespace VulkanSimplified
 
 	SdlJoyDeviceEventData::SdlJoyDeviceEventData()
 	{
-		type = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UNKNOWN;
+		subtype = SDL_JOYSTICK_DEVICE_SUBEVENT_DEVICE_UNKNOWN;
 		timestamp = 0;
 		reserved = 0;
 		joystickID = 0;

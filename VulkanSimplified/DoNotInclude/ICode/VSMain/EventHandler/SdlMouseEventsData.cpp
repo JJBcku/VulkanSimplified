@@ -59,7 +59,7 @@ namespace VulkanSimplified
 
 	SdlMouseDeviceEventData::SdlMouseDeviceEventData()
 	{
-		type = SdlMouseDeviceEventType::MOUSE_DEVICE_UNSET;
+		subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_UNSET;
 		reserved = 0;
 		timestamp = 0;
 		mouseID = 0;

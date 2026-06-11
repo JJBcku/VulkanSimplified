@@ -39,8 +39,10 @@ namespace VulkanSimplified
 	struct SdlKeyboardDeviceEvent;
 	struct SdlKeyboardEventData;
 	struct SdlKeymapChangedEventData;
+	struct SdlScreenKeyboardEventData;
 
 	struct SdlLocaleChangeEventData;
+	struct SdlSystemThemeChangeEventData;
 
 	struct SdlMouseDeviceEventData;
 	struct SdlMouseMotionEventData;
@@ -51,6 +53,7 @@ namespace VulkanSimplified
 
 	struct SdlRenderTargetsResetEventData;
 	struct SdlRenderDeviceResetEventData;
+	struct SdlRenderDeviceLostEventData;
 
 	struct SdlSensorEventData;
 
@@ -103,8 +106,10 @@ namespace VulkanSimplified
 	typedef std::function<bool(const SdlKeyboardDeviceEvent&, void*)> KeyboardDeviceEventFunction;
 	typedef std::function<bool(const SdlKeyboardEventData&, void*)> KeyboardEventFunction;
 	typedef std::function<bool(const SdlKeymapChangedEventData&, void*)> KeymapChangeEventFunction;
+	typedef std::function<bool(const SdlScreenKeyboardEventData&, void*)> ScreenKeyboardEventFunction;
 
 	typedef std::function<bool(const SdlLocaleChangeEventData&, void*)> LocaleChangedEventFunction;
+	typedef std::function<bool(const SdlSystemThemeChangeEventData&, void*)> SystemThemeChangeEventFunction;
 
 	typedef std::function<bool(const SdlMouseDeviceEventData&, void*)> MouseDeviceEventFunction;
 	typedef std::function<bool(const SdlMouseMotionEventData&, void*)> MouseMotionEventFunction;
@@ -115,6 +120,7 @@ namespace VulkanSimplified
 
 	typedef std::function<bool(const SdlRenderTargetsResetEventData&, void*)> RenderTargetsResetEventFunction;
 	typedef std::function<bool(const SdlRenderDeviceResetEventData&, void*)> RenderDeviceResetEventFunction;
+	typedef std::function<bool(const SdlRenderDeviceLostEventData&, void*)> RenderDeviceLostEventFunction;
 
 	typedef std::function<bool(const SdlSensorEventData&, void*)> SensorEventFunction;
 

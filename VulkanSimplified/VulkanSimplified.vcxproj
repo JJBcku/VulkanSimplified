@@ -384,7 +384,8 @@
     <ClInclude Include="DoNotInclude\ICode\VSMain\EventHandler\SdlEhIpch.h" />
     <ClInclude Include="Include\VSDevice\VSWindowDef.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlCameraEventData.h" />
-    <ClInclude Include="Include\VSMain\EventHandler\SdlPenEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlPenEventsData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlSystemThemeChangeEventData.h" />
     <ClInclude Include="Include\VSMain\VSMainDef.h" />
     <ClInclude Include="DoNotInclude\ICode\VSMain\VSMainIframework.h" />
     <ClInclude Include="DoNotInclude\ICode\VSMain\VSMainIpch.h" />
@@ -469,7 +470,7 @@
     <ClInclude Include="Include\VSMain\EventHandler\SdlRenderEventsData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlSensorEventData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlTextEventsData.h" />
-    <ClInclude Include="Include\VSMain\EventHandler\SdlTouchpadEventData.h" />
+    <ClInclude Include="Include\VSMain\EventHandler\SdlTouchpadEventsData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlUserEventData.h" />
     <ClInclude Include="Include\VSMain\EventHandler\SdlWindowEventData.h" />
     <ClInclude Include="Include\VSMain\VSInstanceExtensionPacksList.h" />
@@ -1530,7 +1531,15 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebugUtils|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\ICode\VSMain\EventHandler\SdlPenEventData.cpp">
+    <ClCompile Include="DoNotInclude\ICode\VSMain\EventHandler\SdlPenEventsData.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebugUtils|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebugUtils|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\ICode\VSMain\EventHandler\SdlSystemThemeChangeEventData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
@@ -2013,7 +2022,7 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebugUtils|x64'">$(IntDir)SdlEhIpch.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\ICode\VSMain\EventHandler\SdlTouchpadEventData.cpp">
+    <ClCompile Include="DoNotInclude\ICode\VSMain\EventHandler\SdlTouchpadEventsData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebugUtils|x64'">SdlEhIpch.h</PrecompiledHeaderFile>
