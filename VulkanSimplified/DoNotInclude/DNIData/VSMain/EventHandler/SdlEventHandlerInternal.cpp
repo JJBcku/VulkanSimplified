@@ -38,8 +38,8 @@ namespace VulkanSimplified
 		_windowEventFunctions(initData.windowEventFunctionListInitialCapacity),
 		_keyboardEventFunctions(initData.keyboardEventFunctionListInitialCapacity),
 		_textEditingEventFunctions(initData.textEditingEventFunctionListInitialCapacity),
-		_keymapChangedEventFunctions(initData.keymapChangeEventFunctionListInitialCapacity),
 		_textInputEventFunctions(initData.textInputEventFunctionListInitialCapacity),
+		_keymapChangedEventFunctions(initData.keymapChangeEventFunctionListInitialCapacity),
 		_keyboardDeviceEventFunctions(initData.keyboardDeviceEventFunctionListInitialCapacity),
 		_textEditingCandidatesEventFunctions(initData.textEditingCandidatesEventFunctionListInitialCapacity),
 		_screenKeyboardEventFunctions(initData.screenKeyboardEventFunctionListInitialCapacity),
@@ -106,22 +106,26 @@ namespace VulkanSimplified
 		return _appLowMemoryEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<AppWillEnterBackgroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppWillEnterBackgroundWarningEventCallback(AppWillEnterBackgroundEventFunction function, void* data, size_t add)
+	IDObject<std::pair<AppWillEnterBackgroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppWillEnterBackgroundWarningEventCallback(AppWillEnterBackgroundEventFunction function,
+		void* data, size_t add)
 	{
 		return _appWillEnterBackgroundEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<AppDidEnterBackgroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppDidEnterBackgroundEventCallback(AppDidEnterBackgroundEventFunction function, void* data, size_t add)
+	IDObject<std::pair<AppDidEnterBackgroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppDidEnterBackgroundEventCallback(AppDidEnterBackgroundEventFunction function,
+		void* data, size_t add)
 	{
 		return _appDidEnterBackgroundEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<AppWillEnterForegroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppWillEnterForegroundWarningEventCallback(AppWillEnterForegroundEventFunction function, void* data, size_t add)
+	IDObject<std::pair<AppWillEnterForegroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppWillEnterForegroundWarningEventCallback(AppWillEnterForegroundEventFunction function,
+		void* data, size_t add)
 	{
 		return _appWillEnterForegroundEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<AppDidEnterForegroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppDidEnterForegroundEventCallback(AppDidEnterForegroundEventFunction function, void* data, size_t add)
+	IDObject<std::pair<AppDidEnterForegroundEventFunction, void*>> SdlEventHandlerInternal::RegisterAppDidEnterForegroundEventCallback(AppDidEnterForegroundEventFunction function,
+		void* data, size_t add)
 	{
 		return _appDidEnterForegroundEventFunctions.AddObject(std::pair(function, data), add);
 	}
@@ -131,7 +135,8 @@ namespace VulkanSimplified
 		return _localeChangedEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<SystemThemeChangeEventFunction, void*>> SdlEventHandlerInternal::RegisterSystemThemeChangeEventCallback(SystemThemeChangeEventFunction function, void* data, size_t add)
+	IDObject<std::pair<SystemThemeChangeEventFunction, void*>> SdlEventHandlerInternal::RegisterSystemThemeChangeEventCallback(SystemThemeChangeEventFunction function,
+		void* data, size_t add)
 	{
 		return _systemThemeChangeEventFunctions.AddObject(std::pair(function, data), add);
 	}
@@ -146,30 +151,9 @@ namespace VulkanSimplified
 		return _windowEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<KeyboardDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterKeyboardDeviceEventCallback(KeyboardDeviceEventFunction function, void* data, size_t add)
-	{
-		return _keyboardDeviceEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
 	IDObject<std::pair<KeyboardEventFunction, void*>> SdlEventHandlerInternal::RegisterKeyboardEventCallback(KeyboardEventFunction function, void* data, size_t add)
 	{
 		return _keyboardEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
-	IDObject<std::pair<KeymapChangeEventFunction, void*>> SdlEventHandlerInternal::RegisterKeymapChangingEventCallback(KeymapChangeEventFunction function, void* data, size_t add)
-	{
-		return _keymapChangedEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
-	IDObject<std::pair<ScreenKeyboardEventFunction, void*>> SdlEventHandlerInternal::RegisterScreenKeyboardEventCallback(ScreenKeyboardEventFunction function, void* data, size_t add)
-	{
-		return _screenKeyboardEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
-	IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> SdlEventHandlerInternal::RegisterTextCandidatesEditingEventCallback(TextEditingCandidatesEventFunction function,
-		void* data, size_t add)
-	{
-		return _textEditingCandidatesEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<TextEditingEventFunction, void*>> SdlEventHandlerInternal::RegisterTextEditingEventCallback(TextEditingEventFunction function, void* data, size_t add)
@@ -182,9 +166,25 @@ namespace VulkanSimplified
 		return _textInputEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<MouseDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterMouseDeviceEventCallback(MouseDeviceEventFunction function, void* data, size_t add)
+	IDObject<std::pair<KeymapChangeEventFunction, void*>> SdlEventHandlerInternal::RegisterKeymapChangingEventCallback(KeymapChangeEventFunction function, void* data, size_t add)
 	{
-		return _mouseDeviceEventFunctions.AddObject(std::pair(function, data), add);
+		return _keymapChangedEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
+	IDObject<std::pair<KeyboardDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterKeyboardDeviceEventCallback(KeyboardDeviceEventFunction function, void* data, size_t add)
+	{
+		return _keyboardDeviceEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
+	IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> SdlEventHandlerInternal::RegisterTextCandidatesEditingEventCallback(TextEditingCandidatesEventFunction function,
+		void* data, size_t add)
+	{
+		return _textEditingCandidatesEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
+	IDObject<std::pair<ScreenKeyboardEventFunction, void*>> SdlEventHandlerInternal::RegisterScreenKeyboardEventCallback(ScreenKeyboardEventFunction function, void* data, size_t add)
+	{
+		return _screenKeyboardEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<MouseMotionEventFunction, void*>> SdlEventHandlerInternal::RegisterMouseMotionEventCallback(MouseMotionEventFunction function, void* data, size_t add)
@@ -200,6 +200,11 @@ namespace VulkanSimplified
 	IDObject<std::pair<MouseWheelEventFunction, void*>> SdlEventHandlerInternal::RegisterMouseWheelEventCallback(MouseWheelEventFunction function, void* data, size_t add)
 	{
 		return _mouseWheelEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
+	IDObject<std::pair<MouseDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterMouseDeviceEventCallback(MouseDeviceEventFunction function, void* data, size_t add)
+	{
+		return _mouseDeviceEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<JoyAxisEventFunction, void*>> SdlEventHandlerInternal::RegisterJoystickAxisEventCallback(JoyAxisEventFunction function, void* data, size_t add)
@@ -257,11 +262,6 @@ namespace VulkanSimplified
 		return _gamepadSensorEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<AudioDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterAudioDeviceEventCallback(AudioDeviceEventFunction function, void* data, size_t add)
-	{
-		return _audioDeviceEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
 	IDObject<std::pair<TouchFingerEventFunction, void*>> SdlEventHandlerInternal::RegisterTouchFingerEventCallback(TouchFingerEventFunction function, void* data, size_t add)
 	{
 		return _touchFingerEventFunctions.AddObject(std::pair(function, data), add);
@@ -270,11 +270,6 @@ namespace VulkanSimplified
 	IDObject<std::pair<TouchPinchEventFunction, void*>> SdlEventHandlerInternal::RegisterPinchFingerEventCallback(TouchPinchEventFunction function, void* data, size_t add)
 	{
 		return _touchPinchEventFunctions.AddObject(std::pair(function, data), add);
-	}
-
-	IDObject<std::pair<CameraEventFunction, void*>> SdlEventHandlerInternal::RegisterCameraEventCallback(CameraEventFunction function, void* data, size_t add)
-	{
-		return _cameraEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<ClipboardEventFunction, void*>> SdlEventHandlerInternal::RegisterClipboardEventCallback(ClipboardEventFunction function, void* data, size_t add)
@@ -287,19 +282,24 @@ namespace VulkanSimplified
 		return _dropEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
+	IDObject<std::pair<AudioDeviceEventFunction, void*>> SdlEventHandlerInternal::RegisterAudioDeviceEventCallback(AudioDeviceEventFunction function, void* data, size_t add)
+	{
+		return _audioDeviceEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
 	IDObject<std::pair<SensorEventFunction, void*>> SdlEventHandlerInternal::RegisterSensorEventCallback(SensorEventFunction function, void* data, size_t add)
 	{
 		return _sensorEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<UserEventFunction, void*>> SdlEventHandlerInternal::RegisterUserEventCallback(UserEventFunction function, void* data, size_t add)
+	IDObject<std::pair<PenProximityEventFunction, void*>> SdlEventHandlerInternal::RegisterPenProximityEventCallback(PenProximityEventFunction function, void* data, size_t add)
 	{
-		return _userEventFunctions.AddObject(std::pair(function, data), add);
+		return _penProximityEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<PenAxisEventFunction, void*>> SdlEventHandlerInternal::RegisterPenAxisEventCallback(PenAxisEventFunction function, void* data, size_t add)
+	IDObject<std::pair<PenTouchEventFunction, void*>> SdlEventHandlerInternal::RegisterPenTouchEventCallback(PenTouchEventFunction function, void* data, size_t add)
 	{
-		return _penAxisEventFunctions.AddObject(std::pair(function, data), add);
+		return _penTouchEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	IDObject<std::pair<PenButtonEventFunction, void*>> SdlEventHandlerInternal::RegisterPenButtonEventCallback(PenButtonEventFunction function, void* data, size_t add)
@@ -312,29 +312,37 @@ namespace VulkanSimplified
 		return _penMotionEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<PenTouchEventFunction, void*>> SdlEventHandlerInternal::RegisterPenTouchEventCallback(PenTouchEventFunction function, void* data, size_t add)
+	IDObject<std::pair<PenAxisEventFunction, void*>> SdlEventHandlerInternal::RegisterPenAxisEventCallback(PenAxisEventFunction function, void* data, size_t add)
 	{
-		return _penTouchEventFunctions.AddObject(std::pair(function, data), add);
+		return _penAxisEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<PenProximityEventFunction, void*>> SdlEventHandlerInternal::RegisterPenProximityEventCallback(PenProximityEventFunction function, void* data, size_t add)
+	IDObject<std::pair<CameraEventFunction, void*>> SdlEventHandlerInternal::RegisterCameraEventCallback(CameraEventFunction function, void* data, size_t add)
 	{
-		return _penProximityEventFunctions.AddObject(std::pair(function, data), add);
+		return _cameraEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<RenderTargetsResetEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderTargetsResetEventCallback(RenderTargetsResetEventFunction function, void* data, size_t add)
+	IDObject<std::pair<RenderTargetsResetEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderTargetsResetEventCallback(RenderTargetsResetEventFunction function,
+		void* data, size_t add)
 	{
 		return _renderTargetsResetEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<RenderDeviceResetEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderDeviceResetEventCallback(RenderDeviceResetEventFunction function, void* data, size_t add)
+	IDObject<std::pair<RenderDeviceResetEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderDeviceResetEventCallback(RenderDeviceResetEventFunction function,
+		void* data, size_t add)
 	{
 		return _renderDeviceResetEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
-	IDObject<std::pair<RenderDeviceLostEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderDeviceLostEventCallback(RenderDeviceLostEventFunction function, void* data, size_t add)
+	IDObject<std::pair<RenderDeviceLostEventFunction, void*>> SdlEventHandlerInternal::RegisterRenderDeviceLostEventCallback(RenderDeviceLostEventFunction function,
+		void* data, size_t add)
 	{
 		return _renderDeviceLostEventFunctions.AddObject(std::pair(function, data), add);
+	}
+
+	IDObject<std::pair<UserEventFunction, void*>> SdlEventHandlerInternal::RegisterUserEventCallback(UserEventFunction function, void* data, size_t add)
+	{
+		return _userEventFunctions.AddObject(std::pair(function, data), add);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterQuitEventCallback(IDObject<std::pair<QuitEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -392,24 +400,9 @@ namespace VulkanSimplified
 		return _windowEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterKeyboardDeviceEventCallback(IDObject<std::pair<KeyboardDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _keyboardDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
 	bool SdlEventHandlerInternal::UnRegisterKeyboardEventCallback(IDObject<std::pair<KeyboardEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _keyboardEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
-	bool SdlEventHandlerInternal::UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _keymapChangedEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
-	bool SdlEventHandlerInternal::UnRegisterScreenKeyboardEventCallback(IDObject<std::pair<ScreenKeyboardEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _screenKeyboardEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterTextEditingEventCallback(IDObject<std::pair<TextEditingEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -417,19 +410,29 @@ namespace VulkanSimplified
 		return _textEditingEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterTextCandidatesEditingEventCallback(IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _textEditingCandidatesEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
 	bool SdlEventHandlerInternal::UnRegisterTextInputEventCallback(IDObject<std::pair<TextInputEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _textInputEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterMouseDeviceEventCallback(IDObject<std::pair<MouseDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _mouseDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _keymapChangedEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandlerInternal::UnRegisterKeyboardDeviceEventCallback(IDObject<std::pair<KeyboardDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _keyboardDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandlerInternal::UnRegisterTextCandidatesEditingEventCallback(IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _textEditingCandidatesEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandlerInternal::UnRegisterScreenKeyboardEventCallback(IDObject<std::pair<ScreenKeyboardEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _screenKeyboardEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterMouseMotionEventCallback(IDObject<std::pair<MouseMotionEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -445,6 +448,11 @@ namespace VulkanSimplified
 	bool SdlEventHandlerInternal::UnRegisterMouseWheelEventCallback(IDObject<std::pair<MouseWheelEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _mouseWheelEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandlerInternal::UnRegisterMouseDeviceEventCallback(IDObject<std::pair<MouseDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _mouseDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterJoyAxisEventCallback(IDObject<std::pair<JoyAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -502,11 +510,6 @@ namespace VulkanSimplified
 		return _gamepadSensorEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _audioDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
 	bool SdlEventHandlerInternal::UnRegisterTouchFingerEventCallback(IDObject<std::pair<TouchFingerEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _touchFingerEventFunctions.RemoveObject(ID, throwOnIDNotFound);
@@ -515,11 +518,6 @@ namespace VulkanSimplified
 	bool SdlEventHandlerInternal::UnRegisterTouchPinchEventCallback(IDObject<std::pair<TouchPinchEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _touchPinchEventFunctions.RemoveObject(ID, throwOnIDNotFound);
-	}
-
-	bool SdlEventHandlerInternal::UnRegisterCameraEventCallback(IDObject<std::pair<CameraEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _cameraEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterClipboardEventCallback(IDObject<std::pair<ClipboardEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -532,19 +530,24 @@ namespace VulkanSimplified
 		return _dropEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
+	bool SdlEventHandlerInternal::UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _audioDeviceEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
 	bool SdlEventHandlerInternal::UnRegisterSensorEventCallback(IDObject<std::pair<SensorEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _sensorEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterUserEventCallback(IDObject<std::pair<UserEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterPenProximityEventCallback(IDObject<std::pair<PenProximityEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _userEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _penProximityEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterPenAxisEventCallback(IDObject<std::pair<PenAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterPenTouchEventCallback(IDObject<std::pair<PenTouchEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _penAxisEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _penTouchEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterPenButtonEventCallback(IDObject<std::pair<PenButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -557,14 +560,14 @@ namespace VulkanSimplified
 		return _penMotionEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterPenTouchEventCallback(IDObject<std::pair<PenTouchEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterPenAxisEventCallback(IDObject<std::pair<PenAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _penTouchEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _penAxisEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandlerInternal::UnRegisterPenProximityEventCallback(IDObject<std::pair<PenProximityEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandlerInternal::UnRegisterCameraEventCallback(IDObject<std::pair<CameraEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _penProximityEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+		return _cameraEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandlerInternal::UnRegisterRenderTargetsResetEventCallback(IDObject<std::pair<RenderTargetsResetEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -582,11 +585,20 @@ namespace VulkanSimplified
 		return _renderDeviceLostEventFunctions.RemoveObject(ID, throwOnIDNotFound);
 	}
 
+	bool SdlEventHandlerInternal::UnRegisterUserEventCallback(IDObject<std::pair<UserEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _userEventFunctions.RemoveObject(ID, throwOnIDNotFound);
+	}
+
 	void SdlEventHandlerInternal::HandleEvent(const SDL_Event& event)
 	{
-		auto& type = event.type;
+		if (event.type >= SDL_EVENT_USER && event.type <= SDL_EVENT_LAST)
+		{
+			HandleUserEvent(event);
+			return;
+		}
 
-		switch (type)
+		switch (event.type)
 		{
 		case SDL_EVENT_FIRST:
 			break;
@@ -791,6 +803,7 @@ namespace VulkanSimplified
 			HandleRenderDeviceResetEvent(event);
 			break;
 		case SDL_EVENT_RENDER_DEVICE_LOST:
+			HandleRenderDeviceLostEvent(event);
 			break;
 		case SDL_EVENT_USER:
 			HandleUserEvent(event);
@@ -1188,42 +1201,6 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleKeyboardDeviceEvent(const SDL_Event& event)
-	{
-		SdlKeyboardDeviceEvent eventData;
-
-		switch (event.type)
-		{
-		case SDL_EVENT_KEYBOARD_ADDED:
-			eventData.subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_ADDED;
-			break;
-		case SDL_EVENT_KEYBOARD_REMOVED:
-			eventData.subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_REMOWED;
-			break;
-		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleKeyboardDeviceEvent Error: Wrong event type was passed to this function!");
-		}
-
-		eventData.reserved = event.kdevice.reserved;
-		eventData.timestamp = event.kdevice.timestamp;
-		eventData.keyboardID = event.kdevice.which;
-
-		auto size = _keyboardDeviceEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _keyboardDeviceEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
 	void SdlEventHandlerInternal::HandleKeyboardEvent(const SDL_Event& event)
 	{
 		if (event.type != SDL_EVENT_KEY_UP && event.type != SDL_EVENT_KEY_DOWN)
@@ -1258,6 +1235,62 @@ namespace VulkanSimplified
 		}
 	}
 
+	void SdlEventHandlerInternal::HandleTextEditingEvent(const SDL_Event& event)
+	{
+		if (event.type != SDL_EVENT_TEXT_EDITING)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleTextEditingEvent Error: Wrong event type was passed to this function!");
+
+		SdlTextEditingEventData eventData;
+		eventData.reserved = event.edit.reserved;
+		eventData.timestamp = event.edit.timestamp;
+		eventData.windowID = event.edit.windowID;
+		eventData.text = event.edit.text;
+		eventData.start = event.edit.start;
+		eventData.length = event.edit.length;
+
+		auto size = _textEditingEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _textEditingEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
+	void SdlEventHandlerInternal::HandleTextInputEvent(const SDL_Event& event)
+	{
+		if (event.type != SDL_EVENT_TEXT_INPUT)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleTextInputEvent Error: Wrong event type was passed to this function!");
+
+		SdlTextInputEventData eventData;
+		eventData.timestamp = event.text.timestamp;
+		eventData.reserved = event.text.reserved;
+		eventData.windowID = event.text.windowID;
+		eventData.text = event.text.text;
+
+		auto size = _textInputEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _textInputEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
 	void SdlEventHandlerInternal::HandleKeymapChangedEvent(const SDL_Event& event)
 	{
 		if (event.type != SDL_EVENT_KEYMAP_CHANGED)
@@ -1283,24 +1316,27 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleScreenKeyboardEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleKeyboardDeviceEvent(const SDL_Event& event)
 	{
-		SdlScreenKeyboardEventData eventData;
+		SdlKeyboardDeviceEvent eventData;
+
 		switch (event.type)
 		{
-		case SDL_EVENT_SCREEN_KEYBOARD_SHOWN:
-			eventData.subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_SHOWN;
+		case SDL_EVENT_KEYBOARD_ADDED:
+			eventData.subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_ADDED;
 			break;
-		case SDL_EVENT_SCREEN_KEYBOARD_HIDDEN:
-			eventData.subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_HIDDEN;
+		case SDL_EVENT_KEYBOARD_REMOVED:
+			eventData.subtype = SdlKeyboardDeviceEventSubType::KEYBOARD_DEVICE_REMOWED;
 			break;
 		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleScreenKeyboardEvent Error: Wrong event type was passed to this function!");
+			throw std::runtime_error("SdlEventHandlerInternal::HandleKeyboardDeviceEvent Error: Wrong event type was passed to this function!");
 		}
-		eventData.reserved = event.common.reserved;
-		eventData.timestamp = event.common.timestamp;
 
-		auto size = _screenKeyboardEventFunctions.GetUsedSize();
+		eventData.reserved = event.kdevice.reserved;
+		eventData.timestamp = event.kdevice.timestamp;
+		eventData.keyboardID = event.kdevice.which;
+
+		auto size = _keyboardDeviceEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1310,36 +1346,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _screenKeyboardEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
-	void SdlEventHandlerInternal::HandleTextEditingEvent(const SDL_Event& event)
-	{
-		if (event.type != SDL_EVENT_TEXT_EDITING)
-			throw std::runtime_error("SdlEventHandlerInternal::HandleTextEditingEvent Error: Wrong event type was passed to this function!");
-
-		SdlTextEditingEventData eventData;
-		eventData.reserved = event.edit.reserved;
-		eventData.timestamp = event.edit.timestamp;
-		eventData.windowID = event.edit.windowID;
-		eventData.text = event.edit.text;
-		eventData.start = event.edit.start;
-		eventData.length = event.edit.length;
-
-		auto size = _textEditingEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _textEditingEventFunctions.GetObject(current++);
+			auto& functiondata = _keyboardDeviceEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1378,54 +1385,24 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleTextInputEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleScreenKeyboardEvent(const SDL_Event& event)
 	{
-		if (event.type != SDL_EVENT_TEXT_INPUT)
-			throw std::runtime_error("SdlEventHandlerInternal::HandleTextInputEvent Error: Wrong event type was passed to this function!");
-
-		SdlTextInputEventData eventData;
-		eventData.timestamp = event.text.timestamp;
-		eventData.reserved = event.text.reserved;
-		eventData.windowID = event.text.windowID;
-		eventData.text = event.text.text;
-
-		auto size = _textInputEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _textInputEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
-	void SdlEventHandlerInternal::HandleMouseDeviceEvent(const SDL_Event& event)
-	{
-		SdlMouseDeviceEventData eventData;
-
+		SdlScreenKeyboardEventData eventData;
 		switch (event.type)
 		{
-		case SDL_EVENT_MOUSE_ADDED:
-			eventData.subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_ADDED;
+		case SDL_EVENT_SCREEN_KEYBOARD_SHOWN:
+			eventData.subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_SHOWN;
 			break;
-		case SDL_EVENT_MOUSE_REMOVED:
-			eventData.subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_REMOVED;
+		case SDL_EVENT_SCREEN_KEYBOARD_HIDDEN:
+			eventData.subtype = SdlScreenKeyboardEventSubtype::SCREEN_KEYBOARD_HIDDEN;
 			break;
 		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleMouseDeviceEvent Error: Wrong event type was passed to this function!");
+			throw std::runtime_error("SdlEventHandlerInternal::HandleScreenKeyboardEvent Error: Wrong event type was passed to this function!");
 		}
+		eventData.reserved = event.common.reserved;
+		eventData.timestamp = event.common.timestamp;
 
-		eventData.reserved = event.mdevice.reserved;
-		eventData.timestamp = event.mdevice.timestamp;
-		eventData.mouseID = event.mdevice.which;
-
-		auto size = _mouseDeviceEventFunctions.GetUsedSize();
+		auto size = _screenKeyboardEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -1435,7 +1412,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _mouseDeviceEventFunctions.GetObject(current++);
+			auto& functiondata = _screenKeyboardEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1534,6 +1511,42 @@ namespace VulkanSimplified
 				break;
 
 			auto& functiondata = _mouseWheelEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
+	void SdlEventHandlerInternal::HandleMouseDeviceEvent(const SDL_Event& event)
+	{
+		SdlMouseDeviceEventData eventData;
+
+		switch (event.type)
+		{
+		case SDL_EVENT_MOUSE_ADDED:
+			eventData.subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_ADDED;
+			break;
+		case SDL_EVENT_MOUSE_REMOVED:
+			eventData.subtype = SdlMouseDeviceEventSubType::MOUSE_DEVICE_REMOVED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleMouseDeviceEvent Error: Wrong event type was passed to this function!");
+		}
+
+		eventData.reserved = event.mdevice.reserved;
+		eventData.timestamp = event.mdevice.timestamp;
+		eventData.mouseID = event.mdevice.which;
+
+		auto size = _mouseDeviceEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _mouseDeviceEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -1910,48 +1923,6 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleAudioDeviceEvent(const SDL_Event& event)
-	{
-		SdlAudioDeviceEventData eventData;
-
-		switch (event.type)
-		{
-		case SDL_EVENT_AUDIO_DEVICE_ADDED:
-			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_ADDED;
-			break;
-		case SDL_EVENT_AUDIO_DEVICE_REMOVED:
-			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_REMOVED;
-			break;
-		case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
-			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_FORMAT_CHANGED;
-			break;
-		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleAudioDeviceEvent Error: Wrong event type was passed to this function!");
-		}
-		eventData.reserved = event.adevice.reserved;
-		eventData.timestamp = event.adevice.timestamp;
-		eventData.which = event.adevice.which;
-		eventData.recording = event.adevice.recording;
-		eventData.padding1 = event.adevice.padding1;
-		eventData.padding2 = event.adevice.padding2;
-		eventData.padding3 = event.adevice.padding3;
-
-		auto size = _audioDeviceEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _audioDeviceEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
 	void SdlEventHandlerInternal::HandleTouchFingerEvent(const SDL_Event& event)
 	{
 		SdlTouchFingerEventData eventData;
@@ -2040,48 +2011,6 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleCameraEvent(const SDL_Event& event)
-	{
-		SdlCameraEventData eventData;
-
-		switch (event.type)
-		{
-		case SDL_EVENT_CAMERA_DEVICE_ADDED:
-			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_ADDED;
-			break;
-		case SDL_EVENT_CAMERA_DEVICE_REMOVED:
-			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_REMOVED;
-			break;
-		case SDL_EVENT_CAMERA_DEVICE_APPROVED:
-			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_APPROVED;
-			break;
-		case SDL_EVENT_CAMERA_DEVICE_DENIED:
-			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_DENIED;
-			break;
-		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandleCameraEvent Error: Wrong event type was passed to this function!");
-		}
-
-		eventData.timestamp = event.cdevice.timestamp;
-		eventData.reserved = event.cdevice.reserved;
-		eventData.cameraID = event.cdevice.which;
-
-		auto size = _cameraEventFunctions.GetUsedSize();
-		size_t current = 0;
-
-		bool fallthrough = true;
-
-		while (fallthrough)
-		{
-			if (current == size)
-				break;
-
-			auto& functiondata = _cameraEventFunctions.GetObject(current++);
-
-			fallthrough = functiondata.first(eventData, functiondata.second);
-		}
-	}
-
 	void SdlEventHandlerInternal::HandleClipboardEvent(const SDL_Event& event)
 	{
 		SdlClipboardEventData eventData;
@@ -2155,6 +2084,48 @@ namespace VulkanSimplified
 		}
 	}
 
+	void SdlEventHandlerInternal::HandleAudioDeviceEvent(const SDL_Event& event)
+	{
+		SdlAudioDeviceEventData eventData;
+
+		switch (event.type)
+		{
+		case SDL_EVENT_AUDIO_DEVICE_ADDED:
+			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_ADDED;
+			break;
+		case SDL_EVENT_AUDIO_DEVICE_REMOVED:
+			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_REMOVED;
+			break;
+		case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
+			eventData.subtype = SdlAudioDeviceEventSubtype::AUDIO_DEVICE_EVENT_FORMAT_CHANGED;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandleAudioDeviceEvent Error: Wrong event type was passed to this function!");
+		}
+		eventData.reserved = event.adevice.reserved;
+		eventData.timestamp = event.adevice.timestamp;
+		eventData.which = event.adevice.which;
+		eventData.recording = event.adevice.recording;
+		eventData.padding1 = event.adevice.padding1;
+		eventData.padding2 = event.adevice.padding2;
+		eventData.padding3 = event.adevice.padding3;
+
+		auto size = _audioDeviceEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _audioDeviceEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
 	void SdlEventHandlerInternal::HandleSensorEvent(const SDL_Event& event)
 	{
 		if (event.type != SDL_EVENT_SENSOR_UPDATE)
@@ -2188,21 +2159,26 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandleUserEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandlePenProximityEvent(const SDL_Event& event)
 	{
-		if (event.type < SDL_EVENT_USER || event.type >= SDL_EVENT_LAST)
-			throw std::runtime_error("SdlEventHandlerInternal::HandleUserEvent Error: Wrong event type was passed to this function!");
+		SdlPenProximityEventData eventData;
+		switch (event.type)
+		{
+		case SDL_EVENT_PEN_PROXIMITY_IN:
+			eventData.subtype = SdlPenProximityEventSubtype::PEN_PROXIMITY_IN;
+			break;
+		case SDL_EVENT_PEN_PROXIMITY_OUT:
+			eventData.subtype = SdlPenProximityEventSubtype::PEN_PROXIMITY_OUT;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandlePenProximityEvent Error: Wrong event type was passed to this function!");
+		}
+		eventData.reserved = event.pproximity.reserved;
+		eventData.timestamp = event.pproximity.timestamp;
+		eventData.windowID = event.pproximity.windowID;
+		eventData.penID = event.pproximity.which;
 
-		SdlUserEventData eventData;
-		eventData.userEventType = event.type;
-		eventData.reserved = event.user.reserved;
-		eventData.timestamp = event.user.timestamp;
-		eventData.windowID = event.user.windowID;
-		eventData.code = event.user.code;
-		eventData.data1 = event.user.data1;
-		eventData.data2 = event.user.data2;
-
-		auto size = _userEventFunctions.GetUsedSize();
+		auto size = _penProximityEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -2212,29 +2188,37 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _userEventFunctions.GetObject(current++);
+			auto& functiondata = _penProximityEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandlePenAxisEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandlePenTouchEvent(const SDL_Event& event)
 	{
-		if (event.type != SDL_EVENT_PEN_AXIS)
-			throw std::runtime_error("SdlEventHandlerInternal::HandlePenAxisEvent Error: Wrong event type was passed to this function!");
+		SdlPenTouchEventData eventData;
+		switch (event.type)
+		{
+		case SDL_EVENT_PEN_DOWN:
+			eventData.subtype = SdlPenTouchEventSubtype::PEN_TOUCH_DOWN;
+			break;
+		case SDL_EVENT_PEN_UP:
+			eventData.subtype = SdlPenTouchEventSubtype::PEN_TOUCH_UP;
+			break;
+		default:
+			throw std::runtime_error("SdlEventHandlerInternal::HandlePenTouchEvent Error: Wrong event type was passed to this function!");
+		}
+		eventData.reserved = event.ptouch.reserved;
+		eventData.timestamp = event.ptouch.timestamp;
+		eventData.windowID = event.ptouch.windowID;
+		eventData.penID = event.ptouch.which;
+		eventData.pen_state = event.ptouch.pen_state;
+		eventData.x = event.ptouch.x;
+		eventData.y = event.ptouch.y;
+		eventData.eraser = event.ptouch.eraser;
+		eventData.down = event.ptouch.down;
 
-		SdlPenAxisEventData eventData;
-		eventData.timestamp = event.paxis.timestamp;
-		eventData.reserved = event.paxis.reserved;
-		eventData.windowID = event.paxis.windowID;
-		eventData.penID = event.paxis.which;
-		eventData.pen_state = event.paxis.pen_state;
-		eventData.x = event.paxis.x;
-		eventData.y = event.paxis.y;
-		eventData.axis = event.paxis.axis;
-		eventData.value = event.paxis.value;
-
-		auto size = _penAxisEventFunctions.GetUsedSize();
+		auto size = _penTouchEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -2244,7 +2228,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _penAxisEventFunctions.GetObject(current++);
+			auto& functiondata = _penTouchEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -2320,31 +2304,23 @@ namespace VulkanSimplified
 		}
 	}
 
-	void SdlEventHandlerInternal::HandlePenTouchEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandlePenAxisEvent(const SDL_Event& event)
 	{
-		SdlPenTouchEventData eventData;
-		switch (event.type)
-		{
-		case SDL_EVENT_PEN_DOWN:
-			eventData.subtype = SdlPenTouchEventSubtype::PEN_TOUCH_DOWN;
-			break;
-		case SDL_EVENT_PEN_UP:
-			eventData.subtype = SdlPenTouchEventSubtype::PEN_TOUCH_UP;
-			break;
-		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandlePenTouchEvent Error: Wrong event type was passed to this function!");
-		}
-		eventData.reserved = event.ptouch.reserved;
-		eventData.timestamp = event.ptouch.timestamp;
-		eventData.windowID = event.ptouch.windowID;
-		eventData.penID = event.ptouch.which;
-		eventData.pen_state = event.ptouch.pen_state;
-		eventData.x = event.ptouch.x;
-		eventData.y = event.ptouch.y;
-		eventData.eraser = event.ptouch.eraser;
-		eventData.down = event.ptouch.down;
+		if (event.type != SDL_EVENT_PEN_AXIS)
+			throw std::runtime_error("SdlEventHandlerInternal::HandlePenAxisEvent Error: Wrong event type was passed to this function!");
 
-		auto size = _penTouchEventFunctions.GetUsedSize();
+		SdlPenAxisEventData eventData;
+		eventData.timestamp = event.paxis.timestamp;
+		eventData.reserved = event.paxis.reserved;
+		eventData.windowID = event.paxis.windowID;
+		eventData.penID = event.paxis.which;
+		eventData.pen_state = event.paxis.pen_state;
+		eventData.x = event.paxis.x;
+		eventData.y = event.paxis.y;
+		eventData.axis = event.paxis.axis;
+		eventData.value = event.paxis.value;
+
+		auto size = _penAxisEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -2354,32 +2330,39 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _penTouchEventFunctions.GetObject(current++);
+			auto& functiondata = _penAxisEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
 	}
 
-	void SdlEventHandlerInternal::HandlePenProximityEvent(const SDL_Event& event)
+	void SdlEventHandlerInternal::HandleCameraEvent(const SDL_Event& event)
 	{
-		SdlPenProximityEventData eventData;
+		SdlCameraEventData eventData;
+
 		switch (event.type)
 		{
-		case SDL_EVENT_PEN_PROXIMITY_IN:
-			eventData.subtype = SdlPenProximityEventSubtype::PEN_PROXIMITY_IN;
+		case SDL_EVENT_CAMERA_DEVICE_ADDED:
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_ADDED;
 			break;
-		case SDL_EVENT_PEN_PROXIMITY_OUT:
-			eventData.subtype = SdlPenProximityEventSubtype::PEN_PROXIMITY_OUT;
+		case SDL_EVENT_CAMERA_DEVICE_REMOVED:
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_REMOVED;
+			break;
+		case SDL_EVENT_CAMERA_DEVICE_APPROVED:
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_APPROVED;
+			break;
+		case SDL_EVENT_CAMERA_DEVICE_DENIED:
+			eventData.subtype = SdlCameraDeviceEventSubtype::CAMERA_DEVICE_EVENT_DENIED;
 			break;
 		default:
-			throw std::runtime_error("SdlEventHandlerInternal::HandlePenProximityEvent Error: Wrong event type was passed to this function!");
+			throw std::runtime_error("SdlEventHandlerInternal::HandleCameraEvent Error: Wrong event type was passed to this function!");
 		}
-		eventData.reserved = event.pproximity.reserved;
-		eventData.timestamp = event.pproximity.timestamp;
-		eventData.windowID = event.pproximity.windowID;
-		eventData.penID = event.pproximity.which;
 
-		auto size = _penProximityEventFunctions.GetUsedSize();
+		eventData.timestamp = event.cdevice.timestamp;
+		eventData.reserved = event.cdevice.reserved;
+		eventData.cameraID = event.cdevice.which;
+
+		auto size = _cameraEventFunctions.GetUsedSize();
 		size_t current = 0;
 
 		bool fallthrough = true;
@@ -2389,7 +2372,7 @@ namespace VulkanSimplified
 			if (current == size)
 				break;
 
-			auto& functiondata = _penProximityEventFunctions.GetObject(current++);
+			auto& functiondata = _cameraEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
@@ -2465,6 +2448,36 @@ namespace VulkanSimplified
 				break;
 
 			auto& functiondata = _renderDeviceLostEventFunctions.GetObject(current++);
+
+			fallthrough = functiondata.first(eventData, functiondata.second);
+		}
+	}
+
+	void SdlEventHandlerInternal::HandleUserEvent(const SDL_Event& event)
+	{
+		if (event.type < SDL_EVENT_USER || event.type > SDL_EVENT_LAST)
+			throw std::runtime_error("SdlEventHandlerInternal::HandleUserEvent Error: Wrong event type was passed to this function!");
+
+		SdlUserEventData eventData;
+		eventData.userEventType = event.type;
+		eventData.reserved = event.user.reserved;
+		eventData.timestamp = event.user.timestamp;
+		eventData.windowID = event.user.windowID;
+		eventData.code = event.user.code;
+		eventData.data1 = event.user.data1;
+		eventData.data2 = event.user.data2;
+
+		auto size = _userEventFunctions.GetUsedSize();
+		size_t current = 0;
+
+		bool fallthrough = true;
+
+		while (fallthrough)
+		{
+			if (current == size)
+				break;
+
+			auto& functiondata = _userEventFunctions.GetObject(current++);
 
 			fallthrough = functiondata.first(eventData, functiondata.second);
 		}
