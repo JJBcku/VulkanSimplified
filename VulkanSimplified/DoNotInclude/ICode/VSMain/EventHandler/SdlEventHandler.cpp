@@ -76,11 +76,6 @@ namespace VulkanSimplified
 		return _internal.RegisterKeyboardEventCallback(function, data, add);
 	}
 
-	IDObject<std::pair<KeymapChangeEventFunction, void*>> SdlEventHandler::RegisterKeymapChangingEventCallback(KeymapChangeEventFunction function, void* data, size_t add)
-	{
-		return _internal.RegisterKeymapChangingEventCallback(function, data, add);
-	}
-
 	IDObject<std::pair<TextEditingEventFunction, void*>> SdlEventHandler::RegisterTextEditingEventCallback(TextEditingEventFunction function, void* data, size_t add)
 	{
 		return _internal.RegisterTextEditingEventCallback(function, data, add);
@@ -89,6 +84,26 @@ namespace VulkanSimplified
 	IDObject<std::pair<TextInputEventFunction, void*>> SdlEventHandler::RegisterTextInputEventCallback(TextInputEventFunction function, void* data, size_t add)
 	{
 		return _internal.RegisterTextInputEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<KeymapChangeEventFunction, void*>> SdlEventHandler::RegisterKeymapChangingEventCallback(KeymapChangeEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterKeymapChangingEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<KeyboardDeviceEventFunction, void*>> SdlEventHandler::RegisterKeyboardDeviceEventCallback(KeyboardDeviceEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterKeyboardDeviceEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<TextEditingCandidatesEventFunction, void*>> SdlEventHandler::RegisterTextCandidatesEditingEventCallback(TextEditingCandidatesEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterTextCandidatesEditingEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<ScreenKeyboardEventFunction, void*>> SdlEventHandler::RegisterScreenKeyboardEventCallback(ScreenKeyboardEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterScreenKeyboardEventCallback(function, data, add);
 	}
 
 	IDObject<std::pair<MouseMotionEventFunction, void*>> SdlEventHandler::RegisterMouseMotionEventCallback(MouseMotionEventFunction function, void* data, size_t add)
@@ -104,6 +119,11 @@ namespace VulkanSimplified
 	IDObject<std::pair<MouseWheelEventFunction, void*>> SdlEventHandler::RegisterMouseWheelEventCallback(MouseWheelEventFunction function, void* data, size_t add)
 	{
 		return _internal.RegisterMouseWheelEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<MouseDeviceEventFunction, void*>> SdlEventHandler::RegisterMouseDeviceEventCallback(MouseDeviceEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterMouseDeviceEventCallback(function, data, add);
 	}
 
 	IDObject<std::pair<JoyAxisEventFunction, void*>> SdlEventHandler::RegisterJoystickAxisEventCallback(JoyAxisEventFunction function, void* data, size_t add)
@@ -161,14 +181,14 @@ namespace VulkanSimplified
 		return _internal.RegisterGamepadSensorEventCallback(function, data, add);
 	}
 
-	IDObject<std::pair<AudioDeviceEventFunction, void*>> SdlEventHandler::RegisterAudioDeviceEventCallback(AudioDeviceEventFunction function, void* data, size_t add)
-	{
-		return _internal.RegisterAudioDeviceEventCallback(function, data, add);
-	}
-
 	IDObject<std::pair<TouchFingerEventFunction, void*>> SdlEventHandler::RegisterTouchFingerEventCallback(TouchFingerEventFunction function, void* data, size_t add)
 	{
 		return _internal.RegisterTouchFingerEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<TouchPinchEventFunction, void*>> SdlEventHandler::RegisterPinchFingerEventCallback(TouchPinchEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterPinchFingerEventCallback(function, data, add);
 	}
 
 	IDObject<std::pair<ClipboardEventFunction, void*>> SdlEventHandler::RegisterClipboardEventCallback(ClipboardEventFunction function, void* data, size_t add)
@@ -181,14 +201,44 @@ namespace VulkanSimplified
 		return _internal.RegisterDropEventCallback(function, data, add);
 	}
 
+	IDObject<std::pair<AudioDeviceEventFunction, void*>> SdlEventHandler::RegisterAudioDeviceEventCallback(AudioDeviceEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterAudioDeviceEventCallback(function, data, add);
+	}
+
 	IDObject<std::pair<SensorEventFunction, void*>> SdlEventHandler::RegisterSensorEventCallback(SensorEventFunction function, void* data, size_t add)
 	{
 		return _internal.RegisterSensorEventCallback(function, data, add);
 	}
 
-	IDObject<std::pair<UserEventFunction, void*>> SdlEventHandler::RegisterUserEventCallback(UserEventFunction function, void* data, size_t add)
+	IDObject<std::pair<PenProximityEventFunction, void*>> SdlEventHandler::RegisterPenProximityEventCallback(PenProximityEventFunction function, void* data, size_t add)
 	{
-		return _internal.RegisterUserEventCallback(function, data, add);
+		return _internal.RegisterPenProximityEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<PenTouchEventFunction, void*>> SdlEventHandler::RegisterPenTouchEventCallback(PenTouchEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterPenTouchEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<PenButtonEventFunction, void*>> SdlEventHandler::RegisterPenButtonEventCallback(PenButtonEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterPenButtonEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<PenMotionEventFunction, void*>> SdlEventHandler::RegisterPenMotionEventCallback(PenMotionEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterPenMotionEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<PenAxisEventFunction, void*>> SdlEventHandler::RegisterPenAxisEventCallback(PenAxisEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterPenAxisEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<CameraEventFunction, void*>> SdlEventHandler::RegisterCameraEventCallback(CameraEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterCameraEventCallback(function, data, add);
 	}
 
 	IDObject<std::pair<RenderTargetsResetEventFunction, void*>> SdlEventHandler::RegisterRenderTargetsResetEventCallback(RenderTargetsResetEventFunction function, void* data, size_t add)
@@ -199,6 +249,16 @@ namespace VulkanSimplified
 	IDObject<std::pair<RenderDeviceResetEventFunction, void*>> SdlEventHandler::RegisterRenderDeviceResetEventCallback(RenderDeviceResetEventFunction function, void* data, size_t add)
 	{
 		return _internal.RegisterRenderDeviceResetEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<RenderDeviceLostEventFunction, void*>> SdlEventHandler::RegisterRenderDeviceLostEventCallback(RenderDeviceLostEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterRenderDeviceLostEventCallback(function, data, add);
+	}
+
+	IDObject<std::pair<UserEventFunction, void*>> SdlEventHandler::RegisterUserEventCallback(UserEventFunction function, void* data, size_t add)
+	{
+		return _internal.RegisterUserEventCallback(function, data, add);
 	}
 
 	bool SdlEventHandler::UnRegisterQuitEventCallback(IDObject<std::pair<QuitEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -256,11 +316,6 @@ namespace VulkanSimplified
 		return _internal.UnRegisterKeyboardEventCallback(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandler::UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _internal.UnRegisterKeymapChangeEventCallback(ID, throwOnIDNotFound);
-	}
-
 	bool SdlEventHandler::UnRegisterTextEditingEventCallback(IDObject<std::pair<TextEditingEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _internal.UnRegisterTextEditingEventCallback(ID, throwOnIDNotFound);
@@ -269,6 +324,11 @@ namespace VulkanSimplified
 	bool SdlEventHandler::UnRegisterTextInputEventCallback(IDObject<std::pair<TextInputEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _internal.UnRegisterTextInputEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterKeymapChangeEventCallback(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandler::UnRegisterMouseMotionEventCallback(IDObject<std::pair<MouseMotionEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -284,6 +344,11 @@ namespace VulkanSimplified
 	bool SdlEventHandler::UnRegisterMouseWheelEventCallback(IDObject<std::pair<MouseWheelEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _internal.UnRegisterMouseWheelEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterMouseDeviceEventCallback(IDObject<std::pair<MouseDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterMouseDeviceEventCallback(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandler::UnRegisterJoyAxisEventCallback(IDObject<std::pair<JoyAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -341,14 +406,14 @@ namespace VulkanSimplified
 		return _internal.UnRegisterGamepadSensorEventCallback(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandler::UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
-	{
-		return _internal.UnRegisterAudioDeviceEventCallback(ID, throwOnIDNotFound);
-	}
-
 	bool SdlEventHandler::UnRegisterTouchFingerEventCallback(IDObject<std::pair<TouchFingerEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _internal.UnRegisterTouchFingerEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterTouchPinchEventCallback(IDObject<std::pair<TouchPinchEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterTouchPinchEventCallback(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandler::UnRegisterClipboardEventCallback(IDObject<std::pair<ClipboardEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -361,14 +426,44 @@ namespace VulkanSimplified
 		return _internal.UnRegisterDropEventCallback(ID, throwOnIDNotFound);
 	}
 
+	bool SdlEventHandler::UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterAudioDeviceEventCallback(ID, throwOnIDNotFound);
+	}
+
 	bool SdlEventHandler::UnRegisterSensorEventCallback(IDObject<std::pair<SensorEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _internal.UnRegisterSensorEventCallback(ID, throwOnIDNotFound);
 	}
 
-	bool SdlEventHandler::UnRegisterUserEventCallback(IDObject<std::pair<UserEventFunction, void*>> ID, bool throwOnIDNotFound)
+	bool SdlEventHandler::UnRegisterPenProximityEventCallback(IDObject<std::pair<PenProximityEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
-		return _internal.UnRegisterUserEventCallback(ID, throwOnIDNotFound);
+		return _internal.UnRegisterPenProximityEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterPenTouchEventCallback(IDObject<std::pair<PenTouchEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterPenTouchEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterPenButtonEventCallback(IDObject<std::pair<PenButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterPenButtonEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterPenMotionEventCallback(IDObject<std::pair<PenMotionEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterPenMotionEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterPenAxisEventCallback(IDObject<std::pair<PenAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterPenAxisEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterCameraEventCallback(IDObject<std::pair<CameraEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterCameraEventCallback(ID, throwOnIDNotFound);
 	}
 
 	bool SdlEventHandler::UnRegisterRenderTargetsResetEventCallback(IDObject<std::pair<RenderTargetsResetEventFunction, void*>> ID, bool throwOnIDNotFound)
@@ -379,5 +474,15 @@ namespace VulkanSimplified
 	bool SdlEventHandler::UnRegisterRenderDeviceResetEventCallback(IDObject<std::pair<RenderDeviceResetEventFunction, void*>> ID, bool throwOnIDNotFound)
 	{
 		return _internal.UnRegisterRenderDeviceResetEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterRenderDeviceLostEventCallback(IDObject<std::pair<RenderDeviceLostEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterRenderDeviceLostEventCallback(ID, throwOnIDNotFound);
+	}
+
+	bool SdlEventHandler::UnRegisterUserEventCallback(IDObject<std::pair<UserEventFunction, void*>> ID, bool throwOnIDNotFound)
+	{
+		return _internal.UnRegisterUserEventCallback(ID, throwOnIDNotFound);
 	}
 }
