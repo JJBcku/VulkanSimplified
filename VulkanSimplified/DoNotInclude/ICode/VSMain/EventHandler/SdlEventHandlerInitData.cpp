@@ -20,18 +20,19 @@ namespace VulkanSimplified
 		displayEventFunctionListInitialCapacity = commonReserveSize;
 		windowEventFunctionListInitialCapacity = commonReserveSize;
 
-		keyboardDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		keyboardEventFunctionListInitialCapacity = commonReserveSize;
-		keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
-		screenKeyboardEventFunctionListInitialCapacity = commonReserveSize;
 		textEditingEventFunctionListInitialCapacity = commonReserveSize;
-		textEditingCandidatesEventFunctionListInitialCapacity = commonReserveSize;
 		textInputEventFunctionListInitialCapacity = commonReserveSize;
+		keymapChangeEventFunctionListInitialCapacity = commonReserveSize;
 
-		mouseDeviceEventFunctionListInitialCapacity = commonReserveSize;
+		keyboardDeviceEventFunctionListInitialCapacity = commonReserveSize;
+		textEditingCandidatesEventFunctionListInitialCapacity = commonReserveSize;
+		screenKeyboardEventFunctionListInitialCapacity = commonReserveSize;
+
 		mouseMotionEventFunctionListInitialCapacity = commonReserveSize;
 		mouseButtonEventFunctionListInitialCapacity = commonReserveSize;
 		mouseWheelEventFunctionListInitialCapacity = commonReserveSize;
+		mouseDeviceEventFunctionListInitialCapacity = commonReserveSize;
 
 		joyAxisEventFunctionListInitialCapacity = commonReserveSize;
 		joyBallEventFunctionListInitialCapacity = commonReserveSize;
@@ -46,24 +47,25 @@ namespace VulkanSimplified
 		gamepadTouchpadEventFunctionListInitialCapacity = commonReserveSize;
 		gamepadSensorEventFunctionListInitialCapacity = commonReserveSize;
 
-		audioDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		touchFingerEventFunctionListInitialCapacity = commonReserveSize;
 		touchPinchEventFunctionListInitialCapacity = commonReserveSize;
-		cameraEventFunctionListInitialCapacity = commonReserveSize;
 		clipboardEventFunctionListInitialCapacity = commonReserveSize;
 
 		dropEventFunctionListInitialCapacity = commonReserveSize;
+		audioDeviceEventFunctionListInitialCapacity = commonReserveSize;
 		sensorEventFunctionListInitialCapacity = commonReserveSize;
-		userEventFunctionListInitialCapacity = commonReserveSize;
 
-		penAxisEventFunctionListInitialCapacity = commonReserveSize;
+		penProximityEventFunctionListInitialCapacity = commonReserveSize;
+		penTouchEventFunctionListInitialCapacity = commonReserveSize;
 		penButtonEventFunctionListInitialCapacity = commonReserveSize;
 		penMotionEventFunctionListInitialCapacity = commonReserveSize;
-		penTouchEventFunctionListInitialCapacity = commonReserveSize;
-		penProximityEventFunctionListInitialCapacity = commonReserveSize;
+		penAxisEventFunctionListInitialCapacity = commonReserveSize;
 
+		cameraEventFunctionListInitialCapacity = commonReserveSize;
 		renderTargetsResetEventFunctionListInitialCapacity = commonReserveSize;
 		renderDeviceResetEventFunctionListInitialCapacity = commonReserveSize;
 		renderDeviceLostEventFunctionListInitialCapacity = commonReserveSize;
+
+		userEventFunctionListInitialCapacity = commonReserveSize;
 	}
 }

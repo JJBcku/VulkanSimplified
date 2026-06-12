@@ -19,18 +19,19 @@ namespace VulkanSimplified
 		size_t displayEventFunctionListInitialCapacity;
 		size_t windowEventFunctionListInitialCapacity;
 
-		size_t keyboardDeviceEventFunctionListInitialCapacity;
 		size_t keyboardEventFunctionListInitialCapacity;
-		size_t keymapChangeEventFunctionListInitialCapacity;
-		size_t screenKeyboardEventFunctionListInitialCapacity;
 		size_t textEditingEventFunctionListInitialCapacity;
-		size_t textEditingCandidatesEventFunctionListInitialCapacity;
 		size_t textInputEventFunctionListInitialCapacity;
+		size_t keymapChangeEventFunctionListInitialCapacity;
 
-		size_t mouseDeviceEventFunctionListInitialCapacity;
+		size_t keyboardDeviceEventFunctionListInitialCapacity;
+		size_t textEditingCandidatesEventFunctionListInitialCapacity;
+		size_t screenKeyboardEventFunctionListInitialCapacity;
+
 		size_t mouseMotionEventFunctionListInitialCapacity;
 		size_t mouseButtonEventFunctionListInitialCapacity;
 		size_t mouseWheelEventFunctionListInitialCapacity;
+		size_t mouseDeviceEventFunctionListInitialCapacity;
 
 		size_t joyAxisEventFunctionListInitialCapacity;
 		size_t joyBallEventFunctionListInitialCapacity;
@@ -45,25 +46,26 @@ namespace VulkanSimplified
 		size_t gamepadTouchpadEventFunctionListInitialCapacity;
 		size_t gamepadSensorEventFunctionListInitialCapacity;
 
-		size_t audioDeviceEventFunctionListInitialCapacity;
 		size_t touchFingerEventFunctionListInitialCapacity;
 		size_t touchPinchEventFunctionListInitialCapacity;
-		size_t cameraEventFunctionListInitialCapacity;
 		size_t clipboardEventFunctionListInitialCapacity;
 
 		size_t dropEventFunctionListInitialCapacity;
+		size_t audioDeviceEventFunctionListInitialCapacity;
 		size_t sensorEventFunctionListInitialCapacity;
-		size_t userEventFunctionListInitialCapacity;
 
-		size_t penAxisEventFunctionListInitialCapacity;
+		size_t penProximityEventFunctionListInitialCapacity;
+		size_t penTouchEventFunctionListInitialCapacity;
 		size_t penButtonEventFunctionListInitialCapacity;
 		size_t penMotionEventFunctionListInitialCapacity;
-		size_t penTouchEventFunctionListInitialCapacity;
-		size_t penProximityEventFunctionListInitialCapacity;
+		size_t penAxisEventFunctionListInitialCapacity;
 
+		size_t cameraEventFunctionListInitialCapacity;
 		size_t renderTargetsResetEventFunctionListInitialCapacity;
 		size_t renderDeviceResetEventFunctionListInitialCapacity;
 		size_t renderDeviceLostEventFunctionListInitialCapacity;
+
+		size_t userEventFunctionListInitialCapacity;
 
 		SdlEventHandlerInitData(size_t commonReserveSize = 0);
 	};
